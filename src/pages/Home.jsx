@@ -23,11 +23,12 @@ const EDITORIAL_PHOTOS = [
   { src: '/bridal.jpg',     label: 'Bridal' },
   { src: '/glow.jpg',       label: 'Glow' },
   { src: '/pedicure.jpg',   label: 'Pedicure' },
+  { src: '/massage.jpg',    label: 'Massage' },
   { src: '/hairdo.jpg',     label: 'Hair' },
   { src: '/bridal2.jpg',    label: 'Bridal Look' },
   { src: '/facial.jpg',     label: 'Facial' },
+  { src: '/wax2.jpg',       label: 'Waxing' },
   { src: '/glow3.jpg',      label: 'Radiance' },
-  { src: '/glow2.png',      label: 'Beauty' },
 ]
 
 /* ─── Hero — video background ─────────────────────────────────── */
@@ -35,14 +36,20 @@ function Hero() {
   const { scrollY } = useScroll()
   const textY    = useTransform(scrollY, [0, 500], [0, -50])
   const overlayO = useTransform(scrollY, [0, 400], [0.55, 0.8])
+  const videoRef = useRef(null)
+
+  useEffect(() => {
+    if (videoRef.current) videoRef.current.playbackRate = 0.65
+  }, [])
 
   return (
     <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#0d0609]">
 
       {/* Video background */}
       <video
+        ref={videoRef}
         autoPlay muted loop playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover object-[50%_30%]"
         poster="/glow.jpg"
       >
         <source src="/hero2.mp4" type="video/mp4" />
@@ -154,12 +161,12 @@ function StatsStrip() {
 
 /* ─── Editorial photo slideshow (auto-scrolling strip) ─────────── */
 function EditorialSlideshow() {
-  const photos = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
+  const photos = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
   return (
     <section className="bg-white py-2 overflow-hidden border-y border-[#e4ddd7]">
-      <div className="flex w-max" style={{ animation: 'marquee 35s linear infinite' }}>
+      <div className="flex w-max" style={{ animation: 'marquee 55s linear infinite' }}>
         {photos.map((p, i) => (
-          <div key={i} className="relative shrink-0 w-[260px] md:w-[320px] aspect-[3/4] mx-1.5 overflow-hidden group">
+          <div key={i} className="relative shrink-0 w-[220px] sm:w-[280px] md:w-[320px] aspect-[3/4] mx-1.5 overflow-hidden group">
             <img src={p.src} alt={p.label} loading="lazy" decoding="async"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
@@ -305,53 +312,70 @@ function TrustPillars() {
 /* ─── Testimonials ─────────────────────────────────────────────── */
 function TestimonialsPreview() {
   return (
-    <section className="bg-white py-14 md:py-20 px-5 md:px-10">
+    <section className="py-16 md:py-24 px-5 md:px-10" style={{ background: 'linear-gradient(160deg, #f8f4f0 0%, #fdf9f6 60%, #f5ede8 100%)' }}>
       <div className="max-w-screen-xl mx-auto">
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-12 border-b border-[#e4ddd7] pb-8">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-            <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— Client love</p>
-            <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight">
-              What our<br className="hidden md:block" /> clients say
+        {/* Header */}
+        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }} transition={{ duration: 0.8 }}
+          className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div>
+            <p className="text-stone text-[10px] tracking-[0.3em] uppercase font-['Inter'] mb-3">— Client love</p>
+            <h2 className="font-['Unbounded'] font-bold leading-tight text-ink"
+              style={{ fontSize: 'clamp(1.6rem, 4vw, 2.8rem)' }}>
+              What our clients say
             </h2>
-          </motion.div>
-          <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-            className="text-stone text-sm font-light max-w-xs font-['Inter']">
-            17 years of trust, built one client at a time.
-          </motion.p>
+          </div>
+          <p className="text-stone text-sm font-light max-w-[260px] font-['Inter'] leading-relaxed">
+            17 years of trust, built<br className="hidden md:block" /> one client at a time.
+          </p>
+        </motion.div>
+
+        {/* Decorative quote mark */}
+        <div className="mb-8 select-none pointer-events-none"
+          aria-hidden="true"
+          style={{ fontFamily: 'Georgia, serif', fontSize: 'clamp(5rem, 14vw, 9rem)', lineHeight: 0.8, color: 'rgba(139,109,89,0.10)', letterSpacing: '-0.04em' }}>
+          &ldquo;
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5">
           {FB_POSTS.map((post, i) => (
             <motion.div key={i}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }} transition={{ delay: i * 0.08, duration: 0.6 }}
-              className="overflow-x-auto">
-              <iframe
-                src={post.src}
-                width="500"
-                height={post.height}
-                style={{ border: 'none', overflow: 'hidden', display: 'block' }}
-                scrolling="no"
-                frameBorder="0"
-                allowFullScreen
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                title={`Client review on Facebook — post ${i + 1}`}
-                loading="lazy"
-              />
+              initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.65 }}
+              className="bg-white border border-[#e8e0d9] shadow-[0_2px_16px_rgba(0,0,0,0.05)] overflow-hidden">
+              {/* Card top accent bar */}
+              <div className="h-0.5 w-full bg-gradient-to-r from-[#c9a98a] via-[#e4ddd7] to-transparent" />
+              {/* Iframe wrapper — scrollable on very small screens */}
+              <div className="overflow-x-auto overflow-y-hidden">
+                <iframe
+                  src={post.src}
+                  width="500"
+                  height={post.height}
+                  style={{ border: 'none', overflow: 'hidden', display: 'block', minWidth: '280px' }}
+                  scrolling="no"
+                  frameBorder="0"
+                  allowFullScreen
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  title={`Client review on Facebook — post ${i + 1}`}
+                  loading="lazy"
+                />
+              </div>
             </motion.div>
           ))}
         </div>
 
+        {/* Footer links */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="mt-10 pt-6 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-center gap-4 justify-center">
+          className="mt-12 pt-8 border-t border-[#e4ddd7]/60 flex flex-col sm:flex-row items-center gap-4 justify-center">
           <a href="https://g.page/r/CRCiNE2kpFvlEBM/review" target="_blank" rel="noreferrer"
-            className="inline-flex items-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
+            className="inline-flex items-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors duration-200">
             Leave us a Google review <ArrowUpRight className="w-3 h-3" />
           </a>
           <span className="hidden sm:block text-[#e4ddd7]">&middot;</span>
           <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
-            className="inline-flex items-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
+            className="inline-flex items-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors duration-200">
             Follow us on Facebook <ArrowUpRight className="w-3 h-3" />
           </a>
         </motion.div>
