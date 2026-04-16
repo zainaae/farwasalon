@@ -2,8 +2,10 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
-import { Navbar, Footer, ParticleField, AnimatedNumber, StickyWA, usePageMeta } from '../shared.jsx'
+import { Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta } from '../shared.jsx'
 import { WA_DEFAULT, SERVICES } from '../data.js'
+
+const CATEGORY_COUNT = Object.keys(SERVICES).length
 
 /* ─── Real Facebook review posts ───────────────────────────────── */
 const FB_POSTS = [
@@ -15,176 +17,55 @@ const FB_POSTS = [
   { src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ffarwasalon%2Fposts%2F1158674182945883&show_text=true&width=500', height: 285 },
 ]
 
-const CATEGORY_COUNT = Object.keys(SERVICES).length
+/* ─── Editorial slideshow photos (auto-scrolling strip) ────────── */
+const EDITORIAL_PHOTOS = [
+  { src: '/threading.jpg',  label: 'Threading' },
+  { src: '/bridal.jpg',     label: 'Bridal' },
+  { src: '/glow.jpg',       label: 'Glow' },
+  { src: '/pedicure.jpg',   label: 'Pedicure' },
+  { src: '/hairdo.jpg',     label: 'Hair' },
+  { src: '/bridal2.jpg',    label: 'Bridal Look' },
+  { src: '/facial.jpg',     label: 'Facial' },
+  { src: '/glow3.jpg',      label: 'Radiance' },
+  { src: '/glow2.png',      label: 'Beauty' },
+]
 
-/* ─── WebGL animated hero background ──────────────────────────── */
-const VERT = `attribute vec2 a_pos; void main(){ gl_Position=vec4(a_pos,0.,1.); }`
-
-const FRAG = `
-precision highp float;
-uniform float u_t;
-uniform vec2  u_r;
-uniform vec2  u_m;
-
-vec3 mod289v3(vec3 x){return x-floor(x*(1./289.))*289.;}
-vec2 mod289v2(vec2 x){return x-floor(x*(1./289.))*289.;}
-vec3 permute(vec3 x){return mod289v3(((x*34.)+1.)*x);}
-float snoise(vec2 v){
-  const vec4 C=vec4(.211324865,.366025404,-.577350269,.024390244);
-  vec2 i=floor(v+dot(v,C.yy));
-  vec2 x0=v-i+dot(i,C.xx);
-  vec2 i1=(x0.x>x0.y)?vec2(1.,0.):vec2(0.,1.);
-  vec4 x12=x0.xyxy+C.xxzz; x12.xy-=i1;
-  i=mod289v2(i);
-  vec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));
-  vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);
-  m=m*m; m=m*m;
-  vec3 x=2.*fract(p*C.www)-1.;
-  vec3 h=abs(x)-.5;
-  vec3 ox=floor(x+.5);
-  vec3 a0=x-ox;
-  m*=1.79284291-.85373472*(a0*a0+h*h);
-  vec3 g;
-  g.x=a0.x*x0.x+h.x*x0.y;
-  g.yz=a0.yz*x12.xz+h.yz*x12.yw;
-  return 130.*dot(m,g);
-}
-
-void main(){
-  vec2 uv=gl_FragCoord.xy/u_r;
-  uv.y=1.-uv.y;
-  vec2 mu=u_m/u_r;
-
-  float t=u_t*.07;
-  vec2 shift=mix(vec2(0.),mu-.5,0.08);
-
-  float n1=snoise((uv+shift)*2.2+vec2(t, t*.65))*.5+.5;
-  float n2=snoise((uv+shift)*3.8+vec2(-t*.8,t*.45))*.5+.5;
-  float n3=snoise((uv+shift)*1.6+vec2(t*.35,-t*.55))*.5+.5;
-  float n4=snoise((uv+shift)*5.0+vec2(t*.2, t*.9))*.5+.5;
-
-  /* brand palette */
-  vec3 ink  =vec3(.05,.03,.04);
-  vec3 mauve=vec3(.40,.20,.27);
-  vec3 rose =vec3(.68,.40,.47);
-  vec3 nude =vec3(.87,.70,.63);
-  vec3 cream=vec3(.96,.90,.85);
-
-  vec3 col=mix(ink,mauve,n1*.9);
-  col=mix(col,rose,(n2*n3)*.65);
-  col=mix(col,nude,n4*.18);
-  col=mix(col,cream,pow(n3*n4,.5)*.08);
-
-  /* vignette — keeps edges dark so text stays readable */
-  vec2 vig=uv-.5;
-  col*=1.-dot(vig,vig)*1.35;
-
-  gl_FragColor=vec4(col,1.);
-}
-`
-
-function GlowBg() {
-  const ref = useRef(null)
-  useEffect(() => {
-    const canvas = ref.current
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
-    if (!gl) return
-
-    let W = 0, H = 0
-    const resize = () => {
-      W = canvas.offsetWidth; H = canvas.offsetHeight
-      canvas.width = W; canvas.height = H
-      gl.viewport(0, 0, W, H)
-    }
-    resize()
-    const ro = new ResizeObserver(resize)
-    ro.observe(canvas)
-
-    const compile = (type, src) => {
-      const s = gl.createShader(type)
-      gl.shaderSource(s, src); gl.compileShader(s); return s
-    }
-    const prog = gl.createProgram()
-    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT))
-    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG))
-    gl.linkProgram(prog); gl.useProgram(prog)
-
-    const buf = gl.createBuffer()
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf)
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW)
-    const pos = gl.getAttribLocation(prog, 'a_pos')
-    gl.enableVertexAttribArray(pos)
-    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0)
-
-    const uT = gl.getUniformLocation(prog, 'u_t')
-    const uR = gl.getUniformLocation(prog, 'u_r')
-    const uM = gl.getUniformLocation(prog, 'u_m')
-
-    let mx = W / 2, my = H / 2
-    const onMove = e => { mx = e.clientX; my = e.clientY }
-    window.addEventListener('mousemove', onMove, { passive: true })
-
-    const t0 = performance.now()
-    let raf = null
-    let visible = true
-    let docVisible = !document.hidden
-    const draw = () => {
-      if (!visible || !docVisible) { raf = null; return }
-      gl.uniform1f(uT, (performance.now() - t0) / 1000)
-      gl.uniform2f(uR, W, H)
-      gl.uniform2f(uM, mx, my)
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
-      raf = requestAnimationFrame(draw)
-    }
-    const start = () => { if (raf == null) draw() }
-
-    /* Pause when hero scrolls off-screen */
-    const io = new IntersectionObserver(entries => {
-      visible = entries[0].isIntersecting
-      if (visible) start()
-    }, { threshold: 0 })
-    io.observe(canvas)
-
-    /* Pause when tab hidden */
-    const onVis = () => { docVisible = !document.hidden; if (docVisible) start() }
-    document.addEventListener('visibilitychange', onVis)
-
-    start()
-
-    return () => {
-      if (raf != null) cancelAnimationFrame(raf)
-      io.disconnect()
-      ro.disconnect()
-      window.removeEventListener('mousemove', onMove)
-      document.removeEventListener('visibilitychange', onVis)
-    }
-  }, [])
-  return <canvas ref={ref} className="absolute inset-0 w-full h-full" style={{ display:'block' }} />
-}
-
-/* ─── Hero ─────────────────────────────────────────────────────── */
+/* ─── Hero — video background ─────────────────────────────────── */
 function Hero() {
   const { scrollY } = useScroll()
-  const textY = useTransform(scrollY, [0, 400], [0, -40])
+  const textY    = useTransform(scrollY, [0, 500], [0, -50])
+  const overlayO = useTransform(scrollY, [0, 400], [0.55, 0.8])
 
   return (
     <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#0d0609]">
-      {/* Animated WebGL background */}
-      <GlowBg />
 
-      {/* Film grain overlay */}
-      <div className="absolute inset-0 pointer-events-none z-[1]"
+      {/* Video background */}
+      <video
+        autoPlay muted loop playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        poster="/glow.jpg"
+      >
+        <source src="/hero2.mp4" type="video/mp4" />
+      </video>
+
+      {/* Dark gradient overlay for text readability */}
+      <motion.div className="absolute inset-0 z-[1]"
+        style={{
+          opacity: overlayO,
+          background: 'linear-gradient(to top, rgba(13,6,9,0.92) 0%, rgba(13,6,9,0.5) 40%, rgba(13,6,9,0.25) 70%, rgba(13,6,9,0.4) 100%)',
+        }} />
+
+      {/* Film grain */}
+      <div className="absolute inset-0 pointer-events-none z-[2]"
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          backgroundSize: '180px', opacity: 0.055, mixBlendMode: 'overlay' }} />
+          backgroundSize: '180px', opacity: 0.06, mixBlendMode: 'overlay' }} />
 
-      {/* Warm particles on top */}
-      <div className="absolute inset-0 z-[2]"><ParticleField /></div>
-
+      {/* Hero text */}
       <motion.div style={{ y: textY }} className="absolute bottom-8 md:bottom-10 left-5 md:left-10 right-5 z-10">
         <div className="overflow-hidden mb-2">
           <motion.p initial={{ y: '100%' }} animate={{ y: 0 }} transition={{ delay: 0.1, duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="text-white/50 text-[10px] tracking-[0.28em] uppercase font-['Inter']">
-            Est. 2008 · PECHS Block 2, Karachi
+            Est. 2008 &middot; PECHS Block 2, Karachi
           </motion.p>
         </div>
         <div className="overflow-hidden mb-1">
@@ -213,7 +94,7 @@ function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator — desktop only */}
+      {/* Scroll indicator */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2, duration: 1 }}
         className="hidden md:flex absolute bottom-10 right-10 z-10 flex-col items-center gap-1.5">
         <div className="w-px h-10 bg-white/25 relative overflow-hidden">
@@ -271,6 +152,27 @@ function StatsStrip() {
   )
 }
 
+/* ─── Editorial photo slideshow (auto-scrolling strip) ─────────── */
+function EditorialSlideshow() {
+  const photos = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
+  return (
+    <section className="bg-white py-2 overflow-hidden border-y border-[#e4ddd7]">
+      <div className="flex w-max" style={{ animation: 'marquee 35s linear infinite' }}>
+        {photos.map((p, i) => (
+          <div key={i} className="relative shrink-0 w-[260px] md:w-[320px] aspect-[3/4] mx-1.5 overflow-hidden group">
+            <img src={p.src} alt={p.label} loading="lazy" decoding="async"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
+            <span className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
+              {p.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 /* ─── Marquee ──────────────────────────────────────────────────── */
 function Marquee() {
   const items = ['Hair','·','Bridal','·','Facials','·','Nails','·','Threading','·','Hot Wax','·','Massage','·','Eyebrow Tattoo','·']
@@ -285,7 +187,7 @@ function Marquee() {
   )
 }
 
-/* ─── Featured services — Lunaria editorial style ──────────────── */
+/* ─── Featured services — editorial style ────────────────────── */
 function FeaturedServices() {
   const categories = Object.keys(SERVICES)
 
@@ -310,22 +212,14 @@ function FeaturedServices() {
         {/* Two-column editorial layout */}
         <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-start">
 
-          {/* Left — single editorial portrait */}
+          {/* Left — editorial video */}
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[3/4] hidden md:block sticky top-24">
-            <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&auto=format&fit=crop&q=85"
-              alt="Farwa Beauty Salon"
-              loading="lazy"
-              decoding="async"
-              width="900"
-              height="1200"
+            <video autoPlay muted loop playsInline
               className="w-full h-full object-cover object-center"
-            />
-            {/* Subtle film grain */}
-            <div className="absolute inset-0 pointer-events-none"
-              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-                backgroundSize: '180px', opacity: 0.06, mixBlendMode: 'overlay' }} />
+              poster="/bridal.jpg">
+              <source src="/ct.mp4" type="video/mp4" />
+            </video>
             <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-ink/60 to-transparent">
               <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter']">Farwa Beauty Salon</p>
               <p className="text-white font-['Syne'] font-bold text-sm">PECHS Block 2, Karachi</p>
@@ -334,17 +228,11 @@ function FeaturedServices() {
 
           {/* Right — numbered category list */}
           <div>
-            {/* Mobile portrait (shown only on mobile) */}
             <div className="relative overflow-hidden aspect-[16/9] mb-8 md:hidden">
-              <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&auto=format&fit=crop&q=85"
-                alt="Farwa Beauty Salon"
-                loading="lazy"
-                decoding="async"
-                width="900"
-                height="506"
-                className="w-full h-full object-cover"
-              />
+              <video autoPlay muted loop playsInline
+                className="w-full h-full object-cover" poster="/bridal.jpg">
+                <source src="/ct.mp4" type="video/mp4" />
+              </video>
             </div>
 
             <div className="divide-y divide-[#e4ddd7] border-t border-[#e4ddd7]">
@@ -420,7 +308,6 @@ function TestimonialsPreview() {
     <section className="bg-white py-14 md:py-20 px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto">
 
-        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-12 border-b border-[#e4ddd7] pb-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— Client love</p>
@@ -434,7 +321,6 @@ function TestimonialsPreview() {
           </motion.p>
         </div>
 
-        {/* Facebook post embeds — 2 cols on lg+ */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
           {FB_POSTS.map((post, i) => (
             <motion.div key={i}
@@ -457,14 +343,13 @@ function TestimonialsPreview() {
           ))}
         </div>
 
-        {/* Leave a review CTA */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="mt-10 pt-6 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-center gap-4 justify-center">
           <a href="https://g.page/r/CRCiNE2kpFvlEBM/review" target="_blank" rel="noreferrer"
             className="inline-flex items-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
             Leave us a Google review <ArrowUpRight className="w-3 h-3" />
           </a>
-          <span className="hidden sm:block text-[#e4ddd7]">·</span>
+          <span className="hidden sm:block text-[#e4ddd7]">&middot;</span>
           <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
             className="inline-flex items-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
             Follow us on Facebook <ArrowUpRight className="w-3 h-3" />
@@ -514,6 +399,7 @@ export default function Home() {
       <Navbar transparent />
       <Hero />
       <StatsStrip />
+      <EditorialSlideshow />
       <Marquee />
       <FeaturedServices />
       <TrustPillars />
