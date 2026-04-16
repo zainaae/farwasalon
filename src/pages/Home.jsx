@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import { Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta } from '../shared.jsx'
 import { WA_DEFAULT, SERVICES } from '../data.js'
@@ -17,73 +17,38 @@ const FB_POSTS = [
   { src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ffarwasalon%2Fposts%2F1158674182945883&show_text=true&width=500', height: 285 },
 ]
 
-/* ─── Hero slideshow images ──────────────────────────────────────
-   Large beauty portraits that crossfade — Lunaria editorial feel.
-   Each has a Ken Burns (slow zoom) during its display time.       */
-const HERO_SLIDES = [
-  { src: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1600&auto=format&fit=crop&q=80', alt: 'Glamour beauty portrait' },
-  { src: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=1600&auto=format&fit=crop&q=80', alt: 'Bridal makeup look' },
-  { src: 'https://images.unsplash.com/photo-1560066984-138daaa7e3b8?w=1600&auto=format&fit=crop&q=80', alt: 'Professional hair styling' },
-  { src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1600&auto=format&fit=crop&q=80', alt: 'Luxurious facial treatment' },
-  { src: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&auto=format&fit=crop&q=80', alt: 'Beautiful hair colour result' },
-]
-
 /* ─── Editorial slideshow photos (auto-scrolling strip) ────────── */
 const EDITORIAL_PHOTOS = [
-  { src: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&auto=format&fit=crop&q=80', label: 'Brow Shaping' },
-  { src: 'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&auto=format&fit=crop&q=80', label: 'Manicure' },
-  { src: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=600&auto=format&fit=crop&q=80', label: 'Bridal' },
-  { src: 'https://images.unsplash.com/photo-1552693673-1bf958298935?w=600&auto=format&fit=crop&q=80', label: 'Relaxation' },
-  { src: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80', label: 'Hair' },
-  { src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&auto=format&fit=crop&q=80', label: 'Nails' },
-  { src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop&q=80', label: 'Facial' },
-  { src: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&auto=format&fit=crop&q=80', label: 'Glow' },
+  { src: '/threading.jpg',  label: 'Threading' },
+  { src: '/bridal.jpg',     label: 'Bridal' },
+  { src: '/glow.jpg',       label: 'Glow' },
+  { src: '/pedicure.jpg',   label: 'Pedicure' },
+  { src: '/hairdo.jpg',     label: 'Hair' },
+  { src: '/bridal2.jpg',    label: 'Bridal Look' },
+  { src: '/facial.jpg',     label: 'Facial' },
+  { src: '/glow3.jpg',      label: 'Radiance' },
+  { src: '/glow2.png',      label: 'Beauty' },
 ]
 
-/* ─── Hero ─────────────────────────────────────────────────────── */
+/* ─── Hero — video background ─────────────────────────────────── */
 function Hero() {
-  const [current, setCurrent] = useState(0)
   const { scrollY } = useScroll()
   const textY    = useTransform(scrollY, [0, 500], [0, -50])
   const overlayO = useTransform(scrollY, [0, 400], [0.55, 0.8])
 
-  /* Auto-advance every 5.5 s */
-  useEffect(() => {
-    const id = setInterval(() => setCurrent(p => (p + 1) % HERO_SLIDES.length), 5500)
-    return () => clearInterval(id)
-  }, [])
-
-  /* Preload next image so transition is seamless */
-  useEffect(() => {
-    const next = (current + 1) % HERO_SLIDES.length
-    const img = new Image()
-    img.src = HERO_SLIDES[next].src
-  }, [current])
-
   return (
     <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#0d0609]">
 
-      {/* Slideshow — crossfade with Ken Burns zoom */}
-      {HERO_SLIDES.map((slide, i) => (
-        <div key={i}
-          className="absolute inset-0 w-full h-full transition-opacity duration-[1800ms] ease-in-out"
-          style={{ opacity: i === current ? 1 : 0 }}>
-          <img
-            src={slide.src}
-            alt={slide.alt}
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{
-              transform: i === current ? 'scale(1.08)' : 'scale(1)',
-              transition: 'transform 6s ease-out',
-            }}
-            loading={i === 0 ? 'eager' : 'lazy'}
-            decoding="async"
-            fetchPriority={i === 0 ? 'high' : undefined}
-          />
-        </div>
-      ))}
+      {/* Video background */}
+      <video
+        autoPlay muted loop playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        poster="/glow.jpg"
+      >
+        <source src="/hero2.mp4" type="video/mp4" />
+      </video>
 
-      {/* Dark gradient overlay for text */}
+      {/* Dark gradient overlay for text readability */}
       <motion.div className="absolute inset-0 z-[1]"
         style={{
           opacity: overlayO,
@@ -95,17 +60,8 @@ function Hero() {
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           backgroundSize: '180px', opacity: 0.06, mixBlendMode: 'overlay' }} />
 
-      {/* Slide indicators */}
-      <div className="absolute bottom-8 right-5 md:right-10 z-10 flex items-center gap-2">
-        {HERO_SLIDES.map((_, i) => (
-          <button key={i} onClick={() => setCurrent(i)}
-            aria-label={`Go to slide ${i + 1}`}
-            className={`w-8 h-[2px] transition-all duration-500 ${i === current ? 'bg-white' : 'bg-white/25 hover:bg-white/50'}`} />
-        ))}
-      </div>
-
       {/* Hero text */}
-      <motion.div style={{ y: textY }} className="absolute bottom-8 md:bottom-10 left-5 md:left-10 right-24 z-10">
+      <motion.div style={{ y: textY }} className="absolute bottom-8 md:bottom-10 left-5 md:left-10 right-5 z-10">
         <div className="overflow-hidden mb-2">
           <motion.p initial={{ y: '100%' }} animate={{ y: 0 }} transition={{ delay: 0.1, duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="text-white/50 text-[10px] tracking-[0.28em] uppercase font-['Inter']">
@@ -256,18 +212,14 @@ function FeaturedServices() {
         {/* Two-column editorial layout */}
         <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-start">
 
-          {/* Left — editorial portrait */}
+          {/* Left — editorial video */}
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[3/4] hidden md:block sticky top-24">
-            <img
-              src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=900&auto=format&fit=crop&q=85"
-              alt="Farwa Beauty Salon"
-              loading="lazy" decoding="async" width="900" height="1200"
+            <video autoPlay muted loop playsInline
               className="w-full h-full object-cover object-center"
-            />
-            <div className="absolute inset-0 pointer-events-none"
-              style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-                backgroundSize: '180px', opacity: 0.06, mixBlendMode: 'overlay' }} />
+              poster="/bridal.jpg">
+              <source src="/ct.mp4" type="video/mp4" />
+            </video>
             <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-ink/60 to-transparent">
               <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter']">Farwa Beauty Salon</p>
               <p className="text-white font-['Syne'] font-bold text-sm">PECHS Block 2, Karachi</p>
@@ -277,12 +229,10 @@ function FeaturedServices() {
           {/* Right — numbered category list */}
           <div>
             <div className="relative overflow-hidden aspect-[16/9] mb-8 md:hidden">
-              <img
-                src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=900&auto=format&fit=crop&q=85"
-                alt="Farwa Beauty Salon"
-                loading="lazy" decoding="async" width="900" height="506"
-                className="w-full h-full object-cover"
-              />
+              <video autoPlay muted loop playsInline
+                className="w-full h-full object-cover" poster="/bridal.jpg">
+                <source src="/ct.mp4" type="video/mp4" />
+              </video>
             </div>
 
             <div className="divide-y divide-[#e4ddd7] border-t border-[#e4ddd7]">
