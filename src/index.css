@@ -138,3 +138,76 @@
   display: flex; align-items: center; justify-content: center;
   padding: 24px;
 }
+
+/* ── Skip-to-content link (a11y) ── */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 12px;
+  z-index: 300;
+  background: #0d0d0d;
+  color: #fff;
+  padding: 10px 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 600;
+  transition: top 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+.skip-link:focus-visible {
+  top: 12px;
+  outline: 2px solid #c9a98a;
+  outline-offset: 2px;
+}
+
+/* ── Global focus-visible ring ── */
+*:focus { outline: none; }
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #c9a98a;
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* ── Responsive FB iframe card ── */
+.fb-embed-frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+.fb-embed-frame iframe {
+  transform-origin: top left;
+  display: block;
+  border: 0;
+}
+
+/* ── Prevent video controls interception ── */
+video[aria-hidden="true"] { pointer-events: none; }
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee-track,
+  [style*="animation: marquee"] { animation: none !important; }
+  video { playback-rate: 1 !important; }
+}
+
+/* ── Breakpoint-safe touch target (WCAG 2.5.5) ── */
+@media (max-width: 640px) {
+  .tap-safe {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}

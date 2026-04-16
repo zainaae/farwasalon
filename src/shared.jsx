@@ -5,6 +5,54 @@ import { X, Menu, ArrowUpRight } from 'lucide-react'
 import Core from 'smooothy'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, SERVICES, ALL_SERVICES, CATEGORIES } from './data.js'
 
+/* ─── Skip-to-content link (keyboard a11y) ─────────────────────── */
+export function SkipLink() {
+  return (
+    <a href="#main" className="skip-link">
+      Skip to content
+    </a>
+  )
+}
+
+/* ─── Responsive Facebook post embed (scales iframe to container) ── */
+export function FbEmbed({ src, height = 200, title, reviewerName }) {
+  const wrapRef = useRef(null)
+  const [scale,  setScale]  = useState(1)
+  const [ready,  setReady]  = useState(false)
+  useEffect(() => {
+    const el = wrapRef.current
+    if (!el) return
+    const compute = () => {
+      const w = el.offsetWidth
+      if (w > 0) {
+        setScale(Math.min(1, w / 500))
+        setReady(true)
+      }
+    }
+    compute()
+    const ro = new ResizeObserver(compute)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+  return (
+    <div ref={wrapRef} className="fb-embed-frame"
+      style={{ height: ready ? height * scale : height }}>
+      <iframe
+        src={src}
+        width="500"
+        height={height}
+        style={{ transform: `scale(${scale})`, width: '500px' }}
+        scrolling="no"
+        frameBorder="0"
+        allowFullScreen
+        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        title={title || (reviewerName ? `Review by ${reviewerName} on Facebook` : 'Facebook review')}
+        loading="lazy"
+      />
+    </div>
+  )
+}
+
 /* ─── Per-page document title + description hook ─────────────── */
 export function usePageMeta({ title, description }) {
   useEffect(() => {
