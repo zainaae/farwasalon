@@ -17,149 +17,252 @@ const FB_POSTS = [
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 
-/* ─── WebGL animated hero background ──────────────────────────── */
-const VERT = `attribute vec2 a_pos; void main(){ gl_Position=vec4(a_pos,0.,1.); }`
+/* ─── Three.js "Silk Curtain Opening" hero background ────────── */
 
-const FRAG = `
-precision highp float;
-uniform float u_t;
-uniform vec2  u_r;
-uniform vec2  u_m;
-
-vec3 mod289v3(vec3 x){return x-floor(x*(1./289.))*289.;}
-vec2 mod289v2(vec2 x){return x-floor(x*(1./289.))*289.;}
-vec3 permute(vec3 x){return mod289v3(((x*34.)+1.)*x);}
-float snoise(vec2 v){
-  const vec4 C=vec4(.211324865,.366025404,-.577350269,.024390244);
-  vec2 i=floor(v+dot(v,C.yy));
-  vec2 x0=v-i+dot(i,C.xx);
-  vec2 i1=(x0.x>x0.y)?vec2(1.,0.):vec2(0.,1.);
-  vec4 x12=x0.xyxy+C.xxzz; x12.xy-=i1;
-  i=mod289v2(i);
-  vec3 p=permute(permute(i.y+vec3(0.,i1.y,1.))+i.x+vec3(0.,i1.x,1.));
-  vec3 m=max(.5-vec3(dot(x0,x0),dot(x12.xy,x12.xy),dot(x12.zw,x12.zw)),0.);
-  m=m*m; m=m*m;
-  vec3 x=2.*fract(p*C.www)-1.;
-  vec3 h=abs(x)-.5;
-  vec3 ox=floor(x+.5);
-  vec3 a0=x-ox;
-  m*=1.79284291-.85373472*(a0*a0+h*h);
-  vec3 g;
-  g.x=a0.x*x0.x+h.x*x0.y;
-  g.yz=a0.yz*x12.xz+h.yz*x12.yw;
-  return 130.*dot(m,g);
-}
-
-void main(){
-  vec2 uv=gl_FragCoord.xy/u_r;
-  uv.y=1.-uv.y;
-  vec2 mu=u_m/u_r;
-
-  float t=u_t*.07;
-  vec2 shift=mix(vec2(0.),mu-.5,0.08);
-
-  float n1=snoise((uv+shift)*2.2+vec2(t, t*.65))*.5+.5;
-  float n2=snoise((uv+shift)*3.8+vec2(-t*.8,t*.45))*.5+.5;
-  float n3=snoise((uv+shift)*1.6+vec2(t*.35,-t*.55))*.5+.5;
-  float n4=snoise((uv+shift)*5.0+vec2(t*.2, t*.9))*.5+.5;
-
-  /* brand palette */
-  vec3 ink  =vec3(.05,.03,.04);
-  vec3 mauve=vec3(.40,.20,.27);
-  vec3 rose =vec3(.68,.40,.47);
-  vec3 nude =vec3(.87,.70,.63);
-  vec3 cream=vec3(.96,.90,.85);
-
-  vec3 col=mix(ink,mauve,n1*.9);
-  col=mix(col,rose,(n2*n3)*.65);
-  col=mix(col,nude,n4*.18);
-  col=mix(col,cream,pow(n3*n4,.5)*.08);
-
-  /* vignette — keeps edges dark so text stays readable */
-  vec2 vig=uv-.5;
-  col*=1.-dot(vig,vig)*1.35;
-
-  gl_FragColor=vec4(col,1.);
-}
+/* Custom shader: each particle is a soft glowing circle with per-vertex
+   colour and alpha.  We keep the particle visually rich without needing
+   a texture load (saves one network request and avoids flicker). */
+const PARTICLE_VERT = `
+  attribute float aAlpha;
+  attribute float aSize;
+  varying float vAlpha;
+  varying vec3  vColor;
+  void main(){
+    vAlpha = aAlpha;
+    vColor = color;                              /* vertexColors */
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    gl_PointSize = aSize * (280.0 / -mv.z);
+    gl_Position  = projectionMatrix * mv;
+  }
+`
+const PARTICLE_FRAG = `
+  varying float vAlpha;
+  varying vec3  vColor;
+  void main(){
+    float d = length(gl_PointCoord - vec2(0.5));
+    if(d > 0.5) discard;
+    float glow = 1.0 - d * 2.0;
+    glow = pow(glow, 1.6);                       /* soft falloff */
+    gl_FragColor = vec4(vColor, glow * vAlpha);
+  }
 `
 
 function GlowBg() {
-  const ref = useRef(null)
+  const mountRef = useRef(null)
+
   useEffect(() => {
-    const canvas = ref.current
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
-    if (!gl) return
+    const el = mountRef.current
+    if (!el) return
+    let dead = false
+    let teardown = null
 
-    let W = 0, H = 0
-    const resize = () => {
-      W = canvas.offsetWidth; H = canvas.offsetHeight
-      canvas.width = W; canvas.height = H
-      gl.viewport(0, 0, W, H)
+    import('three').then(THREE => {
+    if (dead) return
+
+    /* ---- renderer ---- */
+    let W = el.clientWidth  || window.innerWidth
+    let H = el.clientHeight || window.innerHeight
+    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false })
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
+    renderer.setSize(W, H)
+    renderer.setClearColor(0x0d0609, 1)
+    el.appendChild(renderer.domElement)
+    renderer.domElement.style.display = 'block'
+
+    /* ---- scene + camera ---- */
+    const scene  = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(60, W / H, 0.1, 100)
+    camera.position.z = 5
+
+    /* Compute world-space extents visible at z = 0 so particles
+       fill the screen regardless of viewport size. */
+    const vFov  = (60 * Math.PI) / 180
+    const viewH = 2 * Math.tan(vFov / 2) * camera.position.z
+    const viewW = viewH * (W / H)
+
+    /* ---- particles ---- */
+    const COUNT = 2800
+    const positions = new Float32Array(COUNT * 3)
+    const initPos   = new Float32Array(COUNT * 3)
+    const colors    = new Float32Array(COUNT * 3)
+    const alphas    = new Float32Array(COUNT)
+    const sizes     = new Float32Array(COUNT)
+    /* per-particle flags */
+    const side      = new Float32Array(COUNT)      /* -1 left, +1 right */
+    const isAmbient = new Uint8Array(COUNT)         /* 1 = stays after open */
+
+    const palette = [
+      [0.40, 0.20, 0.27],   /* mauve         */
+      [0.55, 0.28, 0.35],   /* dusty rose    */
+      [0.68, 0.40, 0.47],   /* rose          */
+      [0.87, 0.70, 0.63],   /* nude          */
+      [0.96, 0.90, 0.85],   /* cream         */
+      [0.30, 0.12, 0.18],   /* deep burgundy */
+    ]
+
+    for (let i = 0; i < COUNT; i++) {
+      const x = (Math.random() - 0.5) * viewW * 1.3
+      const y = (Math.random() - 0.5) * viewH * 1.4
+      const z = (Math.random() - 0.5) * 2.5
+
+      positions[i*3]   = x
+      positions[i*3+1] = y
+      positions[i*3+2] = z
+      initPos[i*3]     = x
+      initPos[i*3+1]   = y
+      initPos[i*3+2]   = z
+
+      side[i]      = x < 0 ? -1 : 1
+      isAmbient[i] = Math.random() < 0.25 ? 1 : 0   /* 25 % stay */
+
+      const c = palette[Math.floor(Math.random() * palette.length)]
+      colors[i*3]   = c[0]
+      colors[i*3+1] = c[1]
+      colors[i*3+2] = c[2]
+
+      alphas[i] = 0                                   /* fade in on start */
+      sizes[i]  = 0.04 + Math.random() * 0.09
     }
-    resize()
-    const ro = new ResizeObserver(resize)
-    ro.observe(canvas)
 
-    const compile = (type, src) => {
-      const s = gl.createShader(type)
-      gl.shaderSource(s, src); gl.compileShader(s); return s
+    const geo = new THREE.BufferGeometry()
+    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+    geo.setAttribute('color',    new THREE.BufferAttribute(colors, 3))
+    geo.setAttribute('aAlpha',   new THREE.BufferAttribute(alphas, 1))
+    geo.setAttribute('aSize',    new THREE.BufferAttribute(sizes, 1))
+
+    const mat = new THREE.ShaderMaterial({
+      vertexShader:   PARTICLE_VERT,
+      fragmentShader: PARTICLE_FRAG,
+      vertexColors:   true,
+      transparent:    true,
+      blending:       THREE.AdditiveBlending,
+      depthWrite:     false,
+    })
+
+    const points = new THREE.Points(geo, mat)
+    scene.add(points)
+
+    /* ---- mouse ---- */
+    let mx = 0, my = 0
+    const onMouse = e => {
+      mx = (e.clientX / window.innerWidth)  * 2 - 1
+      my = -(e.clientY / window.innerHeight) * 2 + 1
     }
-    const prog = gl.createProgram()
-    gl.attachShader(prog, compile(gl.VERTEX_SHADER, VERT))
-    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, FRAG))
-    gl.linkProgram(prog); gl.useProgram(prog)
+    window.addEventListener('mousemove', onMouse, { passive: true })
 
-    const buf = gl.createBuffer()
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf)
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW)
-    const pos = gl.getAttribLocation(prog, 'a_pos')
-    gl.enableVertexAttribArray(pos)
-    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0)
-
-    const uT = gl.getUniformLocation(prog, 'u_t')
-    const uR = gl.getUniformLocation(prog, 'u_r')
-    const uM = gl.getUniformLocation(prog, 'u_m')
-
-    let mx = W / 2, my = H / 2
-    const onMove = e => { mx = e.clientX; my = e.clientY }
-    window.addEventListener('mousemove', onMove, { passive: true })
-
-    const t0 = performance.now()
-    let raf = null
-    let visible = true
+    /* ---- animation state ---- */
+    const FADE_IN  = 0.8          /* seconds to fade particles in       */
+    const OPEN_DUR = 2.8          /* seconds for curtain to part        */
+    const OPEN_DELAY = 0.5        /* seconds before opening begins      */
+    let elapsed    = 0
+    let lastNow    = performance.now()
+    let raf        = null
+    let visible    = true
     let docVisible = !document.hidden
-    const draw = () => {
-      if (!visible || !docVisible) { raf = null; return }
-      gl.uniform1f(uT, (performance.now() - t0) / 1000)
-      gl.uniform2f(uR, W, H)
-      gl.uniform2f(uM, mx, my)
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
-      raf = requestAnimationFrame(draw)
-    }
-    const start = () => { if (raf == null) draw() }
 
-    /* Pause when hero scrolls off-screen */
+    /* easeInOutQuart */
+    const ease = t => t < 0.5 ? 8*t*t*t*t : 1 - Math.pow(-2*t + 2, 4) / 2
+
+    const tick = () => {
+      raf = requestAnimationFrame(tick)
+      if (!visible || !docVisible) return
+      const now = performance.now()
+      const dt  = Math.min((now - lastNow) / 1000, 0.06)
+      lastNow   = now
+      elapsed  += dt
+
+      /* ---- opening progress ---- */
+      const openT = Math.max(0, Math.min((elapsed - OPEN_DELAY) / OPEN_DUR, 1))
+      const openE = ease(openT)
+
+      const pos = geo.attributes.position.array
+      const alp = geo.attributes.aAlpha.array
+
+      for (let i = 0; i < COUNT; i++) {
+        const ix = i * 3
+
+        /* fade in */
+        const fadeTarget = Math.min(elapsed / FADE_IN, 1)
+
+        if (isAmbient[i]) {
+          /* ambient particle: gentle float, stays visible */
+          const t2 = elapsed * 0.25
+          pos[ix]   = initPos[ix]   + Math.sin(t2 + i * 0.37) * 0.12
+          pos[ix+1] = initPos[ix+1] + Math.cos(t2 * 0.7 + i * 0.23) * 0.08
+          pos[ix+2] = initPos[ix+2] + Math.sin(t2 * 0.5 + i * 0.51) * 0.06
+          alp[i] = fadeTarget * 0.35        /* subtle — background shimmer */
+        } else {
+          /* curtain particle: sweep outward and fade */
+          const sweep = side[i] * openE * viewW * 0.85
+          const drift = Math.sin(elapsed * 0.3 + i * 0.11) * 0.04
+
+          pos[ix]   += (initPos[ix] + sweep - pos[ix]) * 0.045 + drift
+          pos[ix+1] += (initPos[ix+1] - pos[ix+1]) * 0.03
+              + Math.cos(elapsed * 0.2 + i * 0.17) * 0.003
+          pos[ix+2] = initPos[ix+2]
+              + Math.sin(elapsed * 0.4 + i * 0.29) * 0.15 * openE
+
+          /* fade out as they sweep to edges */
+          const edgeFade = 1 - Math.min(Math.abs(pos[ix]) / (viewW * 0.7), 1)
+          alp[i] = fadeTarget * (0.7 + Math.random() * 0.05) * Math.max(edgeFade, 0)
+        }
+      }
+
+      geo.attributes.position.needsUpdate = true
+      geo.attributes.aAlpha.needsUpdate   = true
+
+      /* mouse parallax on entire system */
+      points.rotation.y += (mx * 0.04 - points.rotation.y) * 0.04
+      points.rotation.x += (-my * 0.025 - points.rotation.x) * 0.04
+
+      renderer.render(scene, camera)
+    }
+
+    const start = () => { if (raf == null) { lastNow = performance.now(); tick() } }
+
+    /* pause when off-screen */
     const io = new IntersectionObserver(entries => {
       visible = entries[0].isIntersecting
       if (visible) start()
     }, { threshold: 0 })
-    io.observe(canvas)
+    io.observe(el)
 
-    /* Pause when tab hidden */
+    /* pause when tab hidden */
     const onVis = () => { docVisible = !document.hidden; if (docVisible) start() }
     document.addEventListener('visibilitychange', onVis)
 
+    /* resize */
+    const onResize = () => {
+      W = el.clientWidth; H = el.clientHeight
+      camera.aspect = W / H
+      camera.updateProjectionMatrix()
+      renderer.setSize(W, H)
+    }
+    window.addEventListener('resize', onResize)
+
     start()
 
-    return () => {
-      if (raf != null) cancelAnimationFrame(raf)
+    teardown = () => {
+      if (raf) cancelAnimationFrame(raf)
       io.disconnect()
-      ro.disconnect()
-      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('mousemove', onMouse)
+      window.removeEventListener('resize', onResize)
       document.removeEventListener('visibilitychange', onVis)
+      if (el.contains(renderer.domElement)) el.removeChild(renderer.domElement)
+      geo.dispose()
+      mat.dispose()
+      renderer.dispose()
+    }
+
+    }) /* end import('three').then */
+
+    return () => {
+      dead = true
+      if (teardown) teardown()
     }
   }, [])
-  return <canvas ref={ref} className="absolute inset-0 w-full h-full" style={{ display:'block' }} />
+
+  return <div ref={mountRef} className="absolute inset-0 w-full h-full" />
 }
 
 /* ─── Hero ─────────────────────────────────────────────────────── */
@@ -314,7 +417,7 @@ function FeaturedServices() {
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[3/4] hidden md:block sticky top-24">
             <img
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&auto=format&fit=crop&q=85"
+              src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=900&auto=format&fit=crop&q=85"
               alt="Farwa Beauty Salon"
               loading="lazy"
               decoding="async"
@@ -337,7 +440,7 @@ function FeaturedServices() {
             {/* Mobile portrait (shown only on mobile) */}
             <div className="relative overflow-hidden aspect-[16/9] mb-8 md:hidden">
               <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&auto=format&fit=crop&q=85"
+                src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=900&auto=format&fit=crop&q=85"
                 alt="Farwa Beauty Salon"
                 loading="lazy"
                 decoding="async"

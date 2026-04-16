@@ -198,14 +198,16 @@ export const CAT_META = {
 }
 
 export const GALLERY_PHOTOS = [
-  { src: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&auto=format&fit=crop', label: 'Makeup' },
-  { src: 'https://images.unsplash.com/photo-1560066984-138daaa7e3b8?w=600&auto=format&fit=crop', label: 'Hair' },
-  { src: 'https://images.unsplash.com/photo-1583795484071-3c453e3a7c71?w=600&auto=format&fit=crop', label: 'Bridal' },
-  { src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop', label: 'Skincare' },
-  { src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&auto=format&fit=crop', label: 'Nails' },
-  { src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&auto=format&fit=crop', label: 'Bridal' },
-  { src: 'https://images.unsplash.com/photo-1552693673-1bf958298935?w=600&auto=format&fit=crop', label: 'Facial' },
-  { src: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&auto=format&fit=crop', label: 'Threading' },
+  { src: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=800&auto=format&fit=crop&q=80', label: 'Eyebrow Shaping' },
+  { src: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&auto=format&fit=crop&q=80', label: 'Hair Styling' },
+  { src: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=800&auto=format&fit=crop&q=80', label: 'Bridal Makeup' },
+  { src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&auto=format&fit=crop&q=80', label: 'Facial Treatment' },
+  { src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&auto=format&fit=crop&q=80', label: 'Nail Art' },
+  { src: 'https://images.unsplash.com/photo-1560066984-138daaa7e3b8?w=800&auto=format&fit=crop&q=80', label: 'Hair Colour' },
+  { src: 'https://images.unsplash.com/photo-1633681926035-ec1ac984418a?w=800&auto=format&fit=crop&q=80', label: 'Mehndi Look' },
+  { src: 'https://images.unsplash.com/photo-1552693673-1bf958298935?w=800&auto=format&fit=crop&q=80', label: 'Relaxation' },
+  { src: 'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=800&auto=format&fit=crop&q=80', label: 'Manicure' },
+  { src: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=800&auto=format&fit=crop&q=80', label: 'Skin Polish' },
 ]
 
 /*
