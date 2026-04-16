@@ -182,19 +182,19 @@ export const ALL_SERVICES = Object.values(SERVICES).flat()
 export const CATEGORIES   = ['All', ...Object.keys(SERVICES)]
 
 export const CAT_META = {
-  'Threading':       { img: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&auto=format&fit=crop',  desc: 'Precision threading for brows, lips, and full face — quick, clean, and perfectly shaped every time.' },
-  'Hot Wax':         { img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=900&auto=format&fit=crop', desc: 'Hot wax for sensitive areas — gentle, effective, and long-lasting results.' },
-  'Cold Wax':        { img: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=900&auto=format&fit=crop', desc: 'Smooth, hair-free skin with our cold wax formulation — perfect for arms, legs, and body.' },
-  'Oil Wax':         { img: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=900&auto=format&fit=crop', desc: 'Nourishing oil wax for a smooth finish that conditions your skin while removing hair.' },
-  'Bleach & Polish': { img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=900&auto=format&fit=crop', desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
-  'Massage':         { img: 'https://images.unsplash.com/photo-1552693673-1bf958298935?w=900&auto=format&fit=crop', desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
-  'Hair Treatments': { img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&auto=format&fit=crop', desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
-  'Cleansing':       { img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=900&auto=format&fit=crop', desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
-  'Facials':         { img: 'https://images.unsplash.com/photo-1552693673-1bf958298935?w=900&auto=format&fit=crop', desc: 'A full range of facials — from everyday glow to premium whitening and anti-ageing treatments.' },
-  'Nails':           { img: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=900&auto=format&fit=crop', desc: 'Manicures, pedicures, nail art, and extensions — for hands and feet that make a statement.' },
-  'Bridal':          { img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=900&auto=format&fit=crop', desc: 'Complete wedding packages — from trials to the big day. We make every bride feel extraordinary.' },
-  'Hair':            { img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&auto=format&fit=crop',  desc: 'Cuts, colour, blowdrys, and styling for every hair type and texture.' },
-  'Eyebrow Tattoo':  { img: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=900&auto=format&fit=crop', desc: 'Semi-permanent brow definition — microblading, powder brows, and combination brows.' },
+  'Threading':       { img: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=900&auto=format&fit=crop&q=80',  desc: 'Precision threading for brows, lips, and full face — quick, clean, and perfectly shaped every time.' },
+  'Hot Wax':         { img: 'https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=900&auto=format&fit=crop&q=80', desc: 'Hot wax for sensitive areas — gentle, effective, and long-lasting results.' },
+  'Cold Wax':        { img: 'https://images.unsplash.com/photo-1599351431613-18ef1fdd27e1?w=900&auto=format&fit=crop&q=80', desc: 'Smooth, hair-free skin with our cold wax formulation — perfect for arms, legs, and body.' },
+  'Oil Wax':         { img: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?w=900&auto=format&fit=crop&q=80', desc: 'Nourishing oil wax for a smooth finish that conditions your skin while removing hair.' },
+  'Bleach & Polish': { img: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=900&auto=format&fit=crop&q=80', desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
+  'Massage':         { img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=900&auto=format&fit=crop&q=80', desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
+  'Hair Treatments': { img: 'https://images.unsplash.com/photo-1562322140-8baeececf08b?w=900&auto=format&fit=crop&q=80', desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
+  'Cleansing':       { img: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=900&auto=format&fit=crop&q=80', desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
+  'Facials':         { img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=900&auto=format&fit=crop&q=80', desc: 'A full range of facials — from everyday glow to premium whitening and anti-ageing treatments.' },
+  'Nails':           { img: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=900&auto=format&fit=crop&q=80', desc: 'Manicures, pedicures, nail art, and extensions — for hands and feet that make a statement.' },
+  'Bridal':          { img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=900&auto=format&fit=crop&q=80', desc: 'Complete wedding packages — from trials to the big day. We make every bride feel extraordinary.' },
+  'Hair':            { img: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&auto=format&fit=crop&q=80',  desc: 'Cuts, colour, blowdrys, and styling for every hair type and texture.' },
+  'Eyebrow Tattoo':  { img: 'https://images.unsplash.com/photo-1633681926035-ec1ac984418a?w=900&auto=format&fit=crop&q=80', desc: 'Semi-permanent brow definition — microblading, powder brows, and combination brows.' },
 }
 
 export const GALLERY_PHOTOS = [

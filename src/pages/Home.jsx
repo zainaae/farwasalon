@@ -1,9 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
-import { Navbar, Footer, ParticleField, AnimatedNumber, StickyWA, usePageMeta } from '../shared.jsx'
+import { Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta } from '../shared.jsx'
 import { WA_DEFAULT, SERVICES } from '../data.js'
+
+const CATEGORY_COUNT = Object.keys(SERVICES).length
 
 /* ─── Real Facebook review posts ───────────────────────────────── */
 const FB_POSTS = [
@@ -15,279 +17,99 @@ const FB_POSTS = [
   { src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ffarwasalon%2Fposts%2F1158674182945883&show_text=true&width=500', height: 285 },
 ]
 
-const CATEGORY_COUNT = Object.keys(SERVICES).length
+/* ─── Hero slideshow images ──────────────────────────────────────
+   Large beauty portraits that crossfade — Lunaria editorial feel.
+   Each has a Ken Burns (slow zoom) during its display time.       */
+const HERO_SLIDES = [
+  { src: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1600&auto=format&fit=crop&q=80', alt: 'Glamour beauty portrait' },
+  { src: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=1600&auto=format&fit=crop&q=80', alt: 'Bridal makeup look' },
+  { src: 'https://images.unsplash.com/photo-1560066984-138daaa7e3b8?w=1600&auto=format&fit=crop&q=80', alt: 'Professional hair styling' },
+  { src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1600&auto=format&fit=crop&q=80', alt: 'Luxurious facial treatment' },
+  { src: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&auto=format&fit=crop&q=80', alt: 'Beautiful hair colour result' },
+]
 
-/* ─── Three.js "Silk Curtain Opening" hero background ────────── */
-
-/* Custom shader: each particle is a soft glowing circle with per-vertex
-   colour and alpha.  We keep the particle visually rich without needing
-   a texture load (saves one network request and avoids flicker). */
-const PARTICLE_VERT = `
-  attribute float aAlpha;
-  attribute float aSize;
-  varying float vAlpha;
-  varying vec3  vColor;
-  void main(){
-    vAlpha = aAlpha;
-    vColor = color;                              /* vertexColors */
-    vec4 mv = modelViewMatrix * vec4(position, 1.0);
-    gl_PointSize = aSize * (280.0 / -mv.z);
-    gl_Position  = projectionMatrix * mv;
-  }
-`
-const PARTICLE_FRAG = `
-  varying float vAlpha;
-  varying vec3  vColor;
-  void main(){
-    float d = length(gl_PointCoord - vec2(0.5));
-    if(d > 0.5) discard;
-    float glow = 1.0 - d * 2.0;
-    glow = pow(glow, 1.6);                       /* soft falloff */
-    gl_FragColor = vec4(vColor, glow * vAlpha);
-  }
-`
-
-function GlowBg() {
-  const mountRef = useRef(null)
-
-  useEffect(() => {
-    const el = mountRef.current
-    if (!el) return
-    let dead = false
-    let teardown = null
-
-    import('three').then(THREE => {
-    if (dead) return
-
-    /* ---- renderer ---- */
-    let W = el.clientWidth  || window.innerWidth
-    let H = el.clientHeight || window.innerHeight
-    const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false })
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
-    renderer.setSize(W, H)
-    renderer.setClearColor(0x0d0609, 1)
-    el.appendChild(renderer.domElement)
-    renderer.domElement.style.display = 'block'
-
-    /* ---- scene + camera ---- */
-    const scene  = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(60, W / H, 0.1, 100)
-    camera.position.z = 5
-
-    /* Compute world-space extents visible at z = 0 so particles
-       fill the screen regardless of viewport size. */
-    const vFov  = (60 * Math.PI) / 180
-    const viewH = 2 * Math.tan(vFov / 2) * camera.position.z
-    const viewW = viewH * (W / H)
-
-    /* ---- particles ---- */
-    const COUNT = 2800
-    const positions = new Float32Array(COUNT * 3)
-    const initPos   = new Float32Array(COUNT * 3)
-    const colors    = new Float32Array(COUNT * 3)
-    const alphas    = new Float32Array(COUNT)
-    const sizes     = new Float32Array(COUNT)
-    /* per-particle flags */
-    const side      = new Float32Array(COUNT)      /* -1 left, +1 right */
-    const isAmbient = new Uint8Array(COUNT)         /* 1 = stays after open */
-
-    const palette = [
-      [0.40, 0.20, 0.27],   /* mauve         */
-      [0.55, 0.28, 0.35],   /* dusty rose    */
-      [0.68, 0.40, 0.47],   /* rose          */
-      [0.87, 0.70, 0.63],   /* nude          */
-      [0.96, 0.90, 0.85],   /* cream         */
-      [0.30, 0.12, 0.18],   /* deep burgundy */
-    ]
-
-    for (let i = 0; i < COUNT; i++) {
-      const x = (Math.random() - 0.5) * viewW * 1.3
-      const y = (Math.random() - 0.5) * viewH * 1.4
-      const z = (Math.random() - 0.5) * 2.5
-
-      positions[i*3]   = x
-      positions[i*3+1] = y
-      positions[i*3+2] = z
-      initPos[i*3]     = x
-      initPos[i*3+1]   = y
-      initPos[i*3+2]   = z
-
-      side[i]      = x < 0 ? -1 : 1
-      isAmbient[i] = Math.random() < 0.25 ? 1 : 0   /* 25 % stay */
-
-      const c = palette[Math.floor(Math.random() * palette.length)]
-      colors[i*3]   = c[0]
-      colors[i*3+1] = c[1]
-      colors[i*3+2] = c[2]
-
-      alphas[i] = 0                                   /* fade in on start */
-      sizes[i]  = 0.04 + Math.random() * 0.09
-    }
-
-    const geo = new THREE.BufferGeometry()
-    geo.setAttribute('position', new THREE.BufferAttribute(positions, 3))
-    geo.setAttribute('color',    new THREE.BufferAttribute(colors, 3))
-    geo.setAttribute('aAlpha',   new THREE.BufferAttribute(alphas, 1))
-    geo.setAttribute('aSize',    new THREE.BufferAttribute(sizes, 1))
-
-    const mat = new THREE.ShaderMaterial({
-      vertexShader:   PARTICLE_VERT,
-      fragmentShader: PARTICLE_FRAG,
-      vertexColors:   true,
-      transparent:    true,
-      blending:       THREE.AdditiveBlending,
-      depthWrite:     false,
-    })
-
-    const points = new THREE.Points(geo, mat)
-    scene.add(points)
-
-    /* ---- mouse ---- */
-    let mx = 0, my = 0
-    const onMouse = e => {
-      mx = (e.clientX / window.innerWidth)  * 2 - 1
-      my = -(e.clientY / window.innerHeight) * 2 + 1
-    }
-    window.addEventListener('mousemove', onMouse, { passive: true })
-
-    /* ---- animation state ---- */
-    const FADE_IN  = 0.8          /* seconds to fade particles in       */
-    const OPEN_DUR = 2.8          /* seconds for curtain to part        */
-    const OPEN_DELAY = 0.5        /* seconds before opening begins      */
-    let elapsed    = 0
-    let lastNow    = performance.now()
-    let raf        = null
-    let visible    = true
-    let docVisible = !document.hidden
-
-    /* easeInOutQuart */
-    const ease = t => t < 0.5 ? 8*t*t*t*t : 1 - Math.pow(-2*t + 2, 4) / 2
-
-    const tick = () => {
-      raf = requestAnimationFrame(tick)
-      if (!visible || !docVisible) return
-      const now = performance.now()
-      const dt  = Math.min((now - lastNow) / 1000, 0.06)
-      lastNow   = now
-      elapsed  += dt
-
-      /* ---- opening progress ---- */
-      const openT = Math.max(0, Math.min((elapsed - OPEN_DELAY) / OPEN_DUR, 1))
-      const openE = ease(openT)
-
-      const pos = geo.attributes.position.array
-      const alp = geo.attributes.aAlpha.array
-
-      for (let i = 0; i < COUNT; i++) {
-        const ix = i * 3
-
-        /* fade in */
-        const fadeTarget = Math.min(elapsed / FADE_IN, 1)
-
-        if (isAmbient[i]) {
-          /* ambient particle: gentle float, stays visible */
-          const t2 = elapsed * 0.25
-          pos[ix]   = initPos[ix]   + Math.sin(t2 + i * 0.37) * 0.12
-          pos[ix+1] = initPos[ix+1] + Math.cos(t2 * 0.7 + i * 0.23) * 0.08
-          pos[ix+2] = initPos[ix+2] + Math.sin(t2 * 0.5 + i * 0.51) * 0.06
-          alp[i] = fadeTarget * 0.35        /* subtle — background shimmer */
-        } else {
-          /* curtain particle: sweep outward and fade */
-          const sweep = side[i] * openE * viewW * 0.85
-          const drift = Math.sin(elapsed * 0.3 + i * 0.11) * 0.04
-
-          pos[ix]   += (initPos[ix] + sweep - pos[ix]) * 0.045 + drift
-          pos[ix+1] += (initPos[ix+1] - pos[ix+1]) * 0.03
-              + Math.cos(elapsed * 0.2 + i * 0.17) * 0.003
-          pos[ix+2] = initPos[ix+2]
-              + Math.sin(elapsed * 0.4 + i * 0.29) * 0.15 * openE
-
-          /* fade out as they sweep to edges */
-          const edgeFade = 1 - Math.min(Math.abs(pos[ix]) / (viewW * 0.7), 1)
-          alp[i] = fadeTarget * (0.7 + Math.random() * 0.05) * Math.max(edgeFade, 0)
-        }
-      }
-
-      geo.attributes.position.needsUpdate = true
-      geo.attributes.aAlpha.needsUpdate   = true
-
-      /* mouse parallax on entire system */
-      points.rotation.y += (mx * 0.04 - points.rotation.y) * 0.04
-      points.rotation.x += (-my * 0.025 - points.rotation.x) * 0.04
-
-      renderer.render(scene, camera)
-    }
-
-    const start = () => { if (raf == null) { lastNow = performance.now(); tick() } }
-
-    /* pause when off-screen */
-    const io = new IntersectionObserver(entries => {
-      visible = entries[0].isIntersecting
-      if (visible) start()
-    }, { threshold: 0 })
-    io.observe(el)
-
-    /* pause when tab hidden */
-    const onVis = () => { docVisible = !document.hidden; if (docVisible) start() }
-    document.addEventListener('visibilitychange', onVis)
-
-    /* resize */
-    const onResize = () => {
-      W = el.clientWidth; H = el.clientHeight
-      camera.aspect = W / H
-      camera.updateProjectionMatrix()
-      renderer.setSize(W, H)
-    }
-    window.addEventListener('resize', onResize)
-
-    start()
-
-    teardown = () => {
-      if (raf) cancelAnimationFrame(raf)
-      io.disconnect()
-      window.removeEventListener('mousemove', onMouse)
-      window.removeEventListener('resize', onResize)
-      document.removeEventListener('visibilitychange', onVis)
-      if (el.contains(renderer.domElement)) el.removeChild(renderer.domElement)
-      geo.dispose()
-      mat.dispose()
-      renderer.dispose()
-    }
-
-    }) /* end import('three').then */
-
-    return () => {
-      dead = true
-      if (teardown) teardown()
-    }
-  }, [])
-
-  return <div ref={mountRef} className="absolute inset-0 w-full h-full" />
-}
+/* ─── Editorial slideshow photos (auto-scrolling strip) ────────── */
+const EDITORIAL_PHOTOS = [
+  { src: 'https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=600&auto=format&fit=crop&q=80', label: 'Brow Shaping' },
+  { src: 'https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&auto=format&fit=crop&q=80', label: 'Manicure' },
+  { src: 'https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=600&auto=format&fit=crop&q=80', label: 'Bridal' },
+  { src: 'https://images.unsplash.com/photo-1552693673-1bf958298935?w=600&auto=format&fit=crop&q=80', label: 'Relaxation' },
+  { src: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&auto=format&fit=crop&q=80', label: 'Hair' },
+  { src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&auto=format&fit=crop&q=80', label: 'Nails' },
+  { src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=600&auto=format&fit=crop&q=80', label: 'Facial' },
+  { src: 'https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=600&auto=format&fit=crop&q=80', label: 'Glow' },
+]
 
 /* ─── Hero ─────────────────────────────────────────────────────── */
 function Hero() {
+  const [current, setCurrent] = useState(0)
   const { scrollY } = useScroll()
-  const textY = useTransform(scrollY, [0, 400], [0, -40])
+  const textY    = useTransform(scrollY, [0, 500], [0, -50])
+  const overlayO = useTransform(scrollY, [0, 400], [0.55, 0.8])
+
+  /* Auto-advance every 5.5 s */
+  useEffect(() => {
+    const id = setInterval(() => setCurrent(p => (p + 1) % HERO_SLIDES.length), 5500)
+    return () => clearInterval(id)
+  }, [])
+
+  /* Preload next image so transition is seamless */
+  useEffect(() => {
+    const next = (current + 1) % HERO_SLIDES.length
+    const img = new Image()
+    img.src = HERO_SLIDES[next].src
+  }, [current])
 
   return (
     <section className="relative w-full h-screen min-h-[600px] overflow-hidden bg-[#0d0609]">
-      {/* Animated WebGL background */}
-      <GlowBg />
 
-      {/* Film grain overlay */}
-      <div className="absolute inset-0 pointer-events-none z-[1]"
+      {/* Slideshow — crossfade with Ken Burns zoom */}
+      {HERO_SLIDES.map((slide, i) => (
+        <div key={i}
+          className="absolute inset-0 w-full h-full transition-opacity duration-[1800ms] ease-in-out"
+          style={{ opacity: i === current ? 1 : 0 }}>
+          <img
+            src={slide.src}
+            alt={slide.alt}
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              transform: i === current ? 'scale(1.08)' : 'scale(1)',
+              transition: 'transform 6s ease-out',
+            }}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+            fetchPriority={i === 0 ? 'high' : undefined}
+          />
+        </div>
+      ))}
+
+      {/* Dark gradient overlay for text */}
+      <motion.div className="absolute inset-0 z-[1]"
+        style={{
+          opacity: overlayO,
+          background: 'linear-gradient(to top, rgba(13,6,9,0.92) 0%, rgba(13,6,9,0.5) 40%, rgba(13,6,9,0.25) 70%, rgba(13,6,9,0.4) 100%)',
+        }} />
+
+      {/* Film grain */}
+      <div className="absolute inset-0 pointer-events-none z-[2]"
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
-          backgroundSize: '180px', opacity: 0.055, mixBlendMode: 'overlay' }} />
+          backgroundSize: '180px', opacity: 0.06, mixBlendMode: 'overlay' }} />
 
-      {/* Warm particles on top */}
-      <div className="absolute inset-0 z-[2]"><ParticleField /></div>
+      {/* Slide indicators */}
+      <div className="absolute bottom-8 right-5 md:right-10 z-10 flex items-center gap-2">
+        {HERO_SLIDES.map((_, i) => (
+          <button key={i} onClick={() => setCurrent(i)}
+            aria-label={`Go to slide ${i + 1}`}
+            className={`w-8 h-[2px] transition-all duration-500 ${i === current ? 'bg-white' : 'bg-white/25 hover:bg-white/50'}`} />
+        ))}
+      </div>
 
-      <motion.div style={{ y: textY }} className="absolute bottom-8 md:bottom-10 left-5 md:left-10 right-5 z-10">
+      {/* Hero text */}
+      <motion.div style={{ y: textY }} className="absolute bottom-8 md:bottom-10 left-5 md:left-10 right-24 z-10">
         <div className="overflow-hidden mb-2">
           <motion.p initial={{ y: '100%' }} animate={{ y: 0 }} transition={{ delay: 0.1, duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="text-white/50 text-[10px] tracking-[0.28em] uppercase font-['Inter']">
-            Est. 2008 · PECHS Block 2, Karachi
+            Est. 2008 &middot; PECHS Block 2, Karachi
           </motion.p>
         </div>
         <div className="overflow-hidden mb-1">
@@ -316,7 +138,7 @@ function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator — desktop only */}
+      {/* Scroll indicator */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.2, duration: 1 }}
         className="hidden md:flex absolute bottom-10 right-10 z-10 flex-col items-center gap-1.5">
         <div className="w-px h-10 bg-white/25 relative overflow-hidden">
@@ -374,6 +196,27 @@ function StatsStrip() {
   )
 }
 
+/* ─── Editorial photo slideshow (auto-scrolling strip) ─────────── */
+function EditorialSlideshow() {
+  const photos = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
+  return (
+    <section className="bg-white py-2 overflow-hidden border-y border-[#e4ddd7]">
+      <div className="flex w-max" style={{ animation: 'marquee 35s linear infinite' }}>
+        {photos.map((p, i) => (
+          <div key={i} className="relative shrink-0 w-[260px] md:w-[320px] aspect-[3/4] mx-1.5 overflow-hidden group">
+            <img src={p.src} alt={p.label} loading="lazy" decoding="async"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
+            <span className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
+              {p.label}
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
+
 /* ─── Marquee ──────────────────────────────────────────────────── */
 function Marquee() {
   const items = ['Hair','·','Bridal','·','Facials','·','Nails','·','Threading','·','Hot Wax','·','Massage','·','Eyebrow Tattoo','·']
@@ -388,7 +231,7 @@ function Marquee() {
   )
 }
 
-/* ─── Featured services — Lunaria editorial style ──────────────── */
+/* ─── Featured services — editorial style ────────────────────── */
 function FeaturedServices() {
   const categories = Object.keys(SERVICES)
 
@@ -413,19 +256,15 @@ function FeaturedServices() {
         {/* Two-column editorial layout */}
         <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-start">
 
-          {/* Left — single editorial portrait */}
+          {/* Left — editorial portrait */}
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[3/4] hidden md:block sticky top-24">
             <img
               src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=900&auto=format&fit=crop&q=85"
               alt="Farwa Beauty Salon"
-              loading="lazy"
-              decoding="async"
-              width="900"
-              height="1200"
+              loading="lazy" decoding="async" width="900" height="1200"
               className="w-full h-full object-cover object-center"
             />
-            {/* Subtle film grain */}
             <div className="absolute inset-0 pointer-events-none"
               style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
                 backgroundSize: '180px', opacity: 0.06, mixBlendMode: 'overlay' }} />
@@ -437,15 +276,11 @@ function FeaturedServices() {
 
           {/* Right — numbered category list */}
           <div>
-            {/* Mobile portrait (shown only on mobile) */}
             <div className="relative overflow-hidden aspect-[16/9] mb-8 md:hidden">
               <img
                 src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=900&auto=format&fit=crop&q=85"
                 alt="Farwa Beauty Salon"
-                loading="lazy"
-                decoding="async"
-                width="900"
-                height="506"
+                loading="lazy" decoding="async" width="900" height="506"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -523,7 +358,6 @@ function TestimonialsPreview() {
     <section className="bg-white py-14 md:py-20 px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto">
 
-        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 md:mb-12 border-b border-[#e4ddd7] pb-8">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— Client love</p>
@@ -537,7 +371,6 @@ function TestimonialsPreview() {
           </motion.p>
         </div>
 
-        {/* Facebook post embeds — 2 cols on lg+ */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
           {FB_POSTS.map((post, i) => (
             <motion.div key={i}
@@ -560,14 +393,13 @@ function TestimonialsPreview() {
           ))}
         </div>
 
-        {/* Leave a review CTA */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="mt-10 pt-6 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-center gap-4 justify-center">
           <a href="https://g.page/r/CRCiNE2kpFvlEBM/review" target="_blank" rel="noreferrer"
             className="inline-flex items-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
             Leave us a Google review <ArrowUpRight className="w-3 h-3" />
           </a>
-          <span className="hidden sm:block text-[#e4ddd7]">·</span>
+          <span className="hidden sm:block text-[#e4ddd7]">&middot;</span>
           <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
             className="inline-flex items-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
             Follow us on Facebook <ArrowUpRight className="w-3 h-3" />
@@ -617,6 +449,7 @@ export default function Home() {
       <Navbar transparent />
       <Hero />
       <StatsStrip />
+      <EditorialSlideshow />
       <Marquee />
       <FeaturedServices />
       <TrustPillars />
