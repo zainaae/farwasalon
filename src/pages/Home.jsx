@@ -256,25 +256,27 @@ function EditorialSlideshow() {
   return (
     <section className="bg-white border-y border-[#e4ddd7] overflow-hidden" aria-label="Editorial photo showcase">
 
-      {/* ── Mobile: scroll-snap single-card swipe ── */}
-      <div className="md:hidden snap-x-row snap-center-child flex overflow-x-auto py-3 gap-2.5 px-4">
-        {EDITORIAL_PHOTOS.map((p, i) => (
-          <figure key={i}
-            className="relative shrink-0 overflow-hidden rounded-none"
-            style={{ width: 'min(72vw, 260px)', height: 'min(96vw, 346px)' }}>
-            <img src={p.src} alt={p.label} loading="lazy" decoding="async"
-              className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-            <figcaption className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-              <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
-                {p.label}
-              </span>
-              <span className="text-white/40 text-[9px] font-['Inter'] tabular-nums">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-            </figcaption>
-          </figure>
-        ))}
+      {/* ── Mobile: auto-scrolling marquee (infinite, seamless) ── */}
+      <div className="md:hidden py-3 overflow-hidden">
+        <div className="flex w-max" style={{ animation: 'marquee 45s linear infinite' }}>
+          {doubled.map((p, i) => (
+            <figure key={i}
+              className="relative shrink-0 overflow-hidden mx-1.25"
+              style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)', marginLeft: 5, marginRight: 5 }}>
+              <img src={p.src} alt={p.label} loading="lazy" decoding="async"
+                className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+              <figcaption className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+                <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
+                  {p.label}
+                </span>
+                <span className="text-white/40 text-[9px] font-['Inter'] tabular-nums">
+                  {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
+                </span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
 
       {/* ── Desktop: auto-scrolling marquee ── */}
