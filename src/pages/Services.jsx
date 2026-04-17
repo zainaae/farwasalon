@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, ChevronLeft } from 'lucide-react'
-import { Navbar, Footer, StickyWA, ServiceModal, waLink, usePageMeta } from '../shared.jsx'
-import { WA_DEFAULT, SERVICES, CAT_META } from '../data.js'
+import { Navbar, Footer, StickyWA, ServiceModal, usePageMeta, useBooking } from '../shared.jsx'
+import { SERVICES, CAT_META } from '../data.js'
 
 /* Category images for categories without explicit images */
 const CAT_IMAGES = {
@@ -64,6 +64,7 @@ function CategoryGrid({ onSelect }) {
 /* ─── Category detail ──────────────────────────────────────────── */
 function CategoryDetail({ category, onBack }) {
   const [modal, setModal] = useState(null)
+  const booking  = useBooking()
   const services = SERVICES[category] || []
   const meta     = getCatMeta(category)
   const canOpen  = s => !!(s.desc || (Array.isArray(s.includes) && s.includes.length))
@@ -112,11 +113,12 @@ function CategoryDetail({ category, onBack }) {
                   </p>
                 </div>
               )}
-              <a href={waLink(s.name)} target="_blank" rel="noreferrer"
-                aria-label={`Book ${s.name} on WhatsApp`}
-                className="shrink-0 inline-flex items-center gap-1.5 bg-ink text-white text-[10px] tracking-[0.12em] uppercase font-medium font-['Inter'] px-3.5 md:px-4 py-2.5 hover:bg-stone transition-colors duration-200">
+              <button
+                onClick={() => booking.open(category)}
+                aria-label={`Book ${s.name}`}
+                className="tap-safe shrink-0 inline-flex items-center gap-1.5 bg-ink text-white text-[10px] tracking-[0.12em] uppercase font-medium font-['Inter'] px-3.5 md:px-4 py-2.5 hover:bg-stone transition-colors duration-200">
                 Book <ArrowUpRight className="w-3 h-3" />
-              </a>
+              </button>
             </motion.li>
           )
         })}
@@ -124,10 +126,10 @@ function CategoryDetail({ category, onBack }) {
 
       {/* Footer CTA */}
       <div className="mt-8 pt-6 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-start sm:items-center gap-4">
-        <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
-          className="inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors duration-300">
-          Book Any Service on WhatsApp <ArrowUpRight className="w-4 h-4" />
-        </a>
+        <button onClick={() => booking.open(category)}
+          className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors duration-300">
+          Book a {category} Service <ArrowUpRight className="w-4 h-4" />
+        </button>
         <button onClick={onBack}
           className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
           ← Back to all categories

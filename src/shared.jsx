@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Calendar, Clock, Sparkles } from 'lucide-react'
+import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, SERVICES, ALL_SERVICES, CATEGORIES } from './data.js'
 
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
@@ -229,6 +229,100 @@ export function SmoothyGallery({ photos }) {
   )
 }
 
+/* ─── Visual month calendar (used inside BookingSheet) ─────────── */
+function MonthCalendar({ value, onChange }) {
+  const todayRef = useRef((() => { const d = new Date(); d.setHours(0,0,0,0); return d })())
+  const [yr, setYr] = useState(() => todayRef.current.getFullYear())
+  const [mo, setMo] = useState(() => todayRef.current.getMonth())
+
+  const firstWeekday = new Date(yr, mo, 1).getDay()
+  const daysInMonth  = new Date(yr, mo + 1, 0).getDate()
+  const monthLabel   = new Date(yr, mo).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
+  const todayStr     = todayRef.current.toISOString().slice(0, 10)
+
+  const prev = () => { const d = new Date(yr, mo - 1); setYr(d.getFullYear()); setMo(d.getMonth()) }
+  const next = () => { const d = new Date(yr, mo + 1); setYr(d.getFullYear()); setMo(d.getMonth()) }
+  const canPrev = new Date(yr, mo) > new Date(todayRef.current.getFullYear(), todayRef.current.getMonth())
+
+  const strFor   = (day) => new Date(yr, mo, day).toISOString().slice(0, 10)
+  const dayOfWk  = (day) => new Date(yr, mo, day).getDay()
+  const isPast   = (day) => { const d = new Date(yr, mo, day); d.setHours(0,0,0,0); return d < todayRef.current }
+  const isClosed = (day) => dayOfWk(day) === 0  // Sunday
+  const isSel    = (day) => value === strFor(day)
+  const isToday  = (day) => strFor(day) === todayStr
+
+  /* Cells: leading nulls + day numbers */
+  const cells = [...Array(firstWeekday).fill(null), ...Array.from({ length: daysInMonth }, (_, i) => i + 1)]
+
+  return (
+    <div>
+      {/* Month nav */}
+      <div className="flex items-center justify-between mb-3">
+        <button type="button" onClick={prev} disabled={!canPrev}
+          className="w-9 h-9 flex items-center justify-center text-stone hover:text-ink disabled:opacity-25 transition-colors"
+          aria-label="Previous month">
+          <ChevronLeft className="w-4 h-4" />
+        </button>
+        <span className="font-['Syne'] font-bold text-sm text-ink">{monthLabel}</span>
+        <button type="button" onClick={next}
+          className="w-9 h-9 flex items-center justify-center text-stone hover:text-ink transition-colors"
+          aria-label="Next month">
+          <ChevronRight className="w-4 h-4" />
+        </button>
+      </div>
+
+      {/* Weekday labels */}
+      <div className="grid grid-cols-7 mb-1">
+        {['Su','Mo','Tu','We','Th','Fr','Sa'].map((d, i) => (
+          <div key={d}
+            className={`text-center text-[9px] tracking-wide uppercase font-['Inter'] py-1.5 ${i === 0 ? 'text-stone/30' : 'text-stone'}`}>
+            {d}
+          </div>
+        ))}
+      </div>
+
+      {/* Day grid */}
+      <div className="grid grid-cols-7 gap-0.5">
+        {cells.map((day, i) => {
+          if (!day) return <div key={`e-${i}`} />
+          const disabled = isPast(day) || isClosed(day)
+          const sel      = isSel(day)
+          const today    = isToday(day)
+          return (
+            <button key={day} type="button"
+              onClick={() => !disabled && onChange(strFor(day))}
+              disabled={disabled}
+              aria-label={disabled ? undefined : strFor(day)}
+              aria-pressed={sel}
+              className={[
+                'aspect-square flex items-center justify-center text-[12px] font-[\'Inter\'] transition-all duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#c9a98a]',
+                disabled
+                  ? 'text-stone/20 cursor-not-allowed'
+                  : 'hover:bg-[#f0ebe6] cursor-pointer text-ink',
+                sel
+                  ? '!bg-ink !text-white font-bold'
+                  : '',
+                today && !sel
+                  ? 'border border-[#c9a98a]'
+                  : '',
+              ].filter(Boolean).join(' ')}
+            >
+              {day}
+            </button>
+          )
+        })}
+      </div>
+
+      <p className="text-[9px] text-stone/45 font-['Inter'] mt-3 flex items-center gap-3">
+        <span className="inline-flex items-center gap-1">
+          <span className="inline-block w-3 h-3 border border-[#c9a98a]" aria-hidden="true" /> Today
+        </span>
+        <span className="text-stone/25">Su = Closed</span>
+      </p>
+    </div>
+  )
+}
+
 /* ─── Smart Booking Sheet — 3-step flow → pre-filled WhatsApp ── */
 export function BookingSheet({ open, onClose, initialCategory = null }) {
   const [step, setStep] = useState(0)
@@ -346,42 +440,19 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
 
               {step === 1 && (
                 <div>
-                  <p className="text-stone text-sm font-['Inter'] font-light mb-4">Booking for <span className="text-ink font-medium">{svc}</span></p>
-                  <div className="grid grid-cols-2 gap-2.5 mb-5">
-                    {[
-                      { label: 'Today', offset: 0 },
-                      { label: 'Tomorrow', offset: 1 },
-                      { label: 'This weekend', offset: 'wk' },
-                      { label: 'Next week', offset: 7 },
-                    ].map(o => (
-                      <button key={o.label} onClick={() => {
-                        const d = new Date()
-                        if (o.offset === 'wk') {
-                          const day = d.getDay()
-                          const add = day >= 6 ? 7 : 6 - day
-                          d.setDate(d.getDate() + add)
-                        } else {
-                          d.setDate(d.getDate() + o.offset)
-                        }
-                        setDate(d.toISOString().slice(0,10))
-                        setStep(2)
-                      }}
-                        className="tap-safe p-3.5 border border-[#e4ddd7] hover:border-ink hover:bg-mist transition-all text-left">
-                        <Calendar className="w-3.5 h-3.5 text-stone mb-2" />
-                        <p className="font-['Syne'] font-bold text-[13px] text-ink uppercase">{o.label}</p>
-                      </button>
-                    ))}
-                  </div>
-                  <label className="block">
-                    <span className="text-[10px] tracking-[0.18em] uppercase text-stone font-['Inter']">Or pick a specific date</span>
-                    <input type="date" min={today} value={date}
-                      onChange={e => setDate(e.target.value)}
-                      className="mt-2 w-full border border-[#e4ddd7] px-4 py-3 text-sm font-['Inter'] focus:outline-none focus:border-ink transition-colors" />
-                  </label>
-                  <div className="flex justify-end gap-2 mt-5">
-                    <button onClick={() => setStep(0)} className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink">Back</button>
-                    <button disabled={!date} onClick={() => setStep(2)}
-                      className="tap-safe bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Next</button>
+                  <p className="text-stone text-sm font-['Inter'] font-light mb-5">
+                    Booking for <span className="text-ink font-medium">{svc}</span>
+                  </p>
+                  {/* Visual month calendar — tap a date to auto-advance */}
+                  <MonthCalendar
+                    value={date}
+                    onChange={(d) => { setDate(d); setStep(2) }}
+                  />
+                  <div className="flex justify-start gap-2 mt-5 pt-4 border-t border-[#e4ddd7]">
+                    <button onClick={() => setStep(0)}
+                      className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink transition-colors">
+                      ← Back
+                    </button>
                   </div>
                 </div>
               )}

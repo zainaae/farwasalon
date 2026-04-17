@@ -6,7 +6,7 @@ import {
   Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta,
   FbEmbed, SkipLink, WordmarkDivider, useBooking, useNextSlot,
 } from '../shared.jsx'
-import { SERVICES } from '../data.js'
+import { SERVICES, CAT_META } from '../data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 
@@ -28,20 +28,20 @@ const FEATURED_REVIEW = {
   link: 'https://www.facebook.com/tathirabid/posts/pfbid02J73qHitLiSYbpvJPJEYvNfBHyjSfKEhWL1hS6VbMupr15TzuPuGtXNTKBDMuvRyKl',
 }
 
-/* ─── Editorial slideshow — ONE photo per category (12 unique) ── */
+/* ─── Editorial slideshow — visual rhythm: face ↔ technique ↔ product ── */
 const EDITORIAL_PHOTOS = [
-  { src: '/bridal.jpg',     label: 'Bridal' },
-  { src: '/glow.jpg',       label: 'Bleach & Polish' },
-  { src: '/glow2.png',      label: 'Facials' },
-  { src: '/facial.jpg',     label: 'Cleansing' },
-  { src: '/threading.jpg',  label: 'Threading' },
-  { src: '/waxing.png',     label: 'Hot Wax' },
-  { src: '/wax2.jpg',       label: 'Cold Wax' },
-  { src: '/glow3.jpg',      label: 'Oil Wax' },
-  { src: '/massage.jpg',    label: 'Massage' },
-  { src: '/hairdo.jpg',     label: 'Hair' },
-  { src: '/pedicure.jpg',   label: 'Nails' },
-  { src: '/bridal2.jpg',    label: 'Hair Treatments' },
+  { src: '/bridal.jpg',    label: 'Bridal' },
+  { src: '/waxing.png',    label: 'Hot Wax' },
+  { src: '/glow2.png',     label: 'Facials' },
+  { src: '/pedicure.jpg',  label: 'Nails' },
+  { src: '/threading.jpg', label: 'Threading' },
+  { src: '/hairdo.jpg',    label: 'Hair' },
+  { src: '/glow.jpg',      label: 'Bleach & Polish' },
+  { src: '/massage.jpg',   label: 'Massage' },
+  { src: '/facial.jpg',    label: 'Cleansing' },
+  { src: '/wax2.jpg',      label: 'Cold Wax' },
+  { src: '/bridal2.jpg',   label: 'Hair Treatments' },
+  { src: '/glow3.jpg',     label: 'Radiance' },
 ]
 
 /* ─── Hero — thesis copy + kinetic reveal + calmer video ──────── */
@@ -110,7 +110,7 @@ function Hero() {
       {/* Hero content */}
       <motion.div
         style={{ y: textY }}
-        className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-10 md:pb-14">
+        className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-20 sm:pb-12 md:pb-14">
         <div className="max-w-screen-2xl mx-auto">
           {/* Eyebrow */}
           <div className="overflow-hidden mb-4 md:mb-6">
@@ -246,30 +246,63 @@ function StatsStrip() {
   )
 }
 
-/* ─── Editorial photo slideshow (one per category) ──────────── */
+/* ─── Editorial photo slideshow ─────────────────────────────────
+   Desktop: auto-scrolling marquee with 320px-wide cards
+   Mobile:  scroll-snap horizontal strip — full-bleed, swipe-friendly ── */
 function EditorialSlideshow() {
-  const photos = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
+  const doubled = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
+
   return (
-    <section className="bg-white py-2 overflow-hidden border-y border-[#e4ddd7]" aria-label="Editorial photo showcase">
-      <div className="flex w-max" style={{ animation: 'marquee 60s linear infinite' }}>
-        {photos.map((p, i) => (
-          <div key={i} className="relative shrink-0 w-[160px] xs:w-[180px] sm:w-[220px] md:w-[280px] lg:w-[320px] aspect-[3/4] mx-1 sm:mx-1.5 overflow-hidden group">
-            <img src={p.src} alt={p.label} loading="lazy" decoding="async" width="320" height="427"
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
-            <span className="absolute bottom-3 left-3 text-white text-[9px] sm:text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
-              {p.label}
-            </span>
-          </div>
+    <section className="bg-white border-y border-[#e4ddd7] overflow-hidden" aria-label="Editorial photo showcase">
+
+      {/* ── Mobile: scroll-snap single-card swipe ── */}
+      <div className="md:hidden snap-x-row snap-center-child flex overflow-x-auto py-3 gap-2.5 px-4">
+        {EDITORIAL_PHOTOS.map((p, i) => (
+          <figure key={i}
+            className="relative shrink-0 overflow-hidden rounded-none"
+            style={{ width: 'min(72vw, 260px)', height: 'min(96vw, 346px)' }}>
+            <img src={p.src} alt={p.label} loading="lazy" decoding="async"
+              className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+            <figcaption className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+              <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
+                {p.label}
+              </span>
+              <span className="text-white/40 text-[9px] font-['Inter'] tabular-nums">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+            </figcaption>
+          </figure>
         ))}
       </div>
+
+      {/* ── Desktop: auto-scrolling marquee ── */}
+      <div className="hidden md:block py-2">
+        <div className="flex w-max" style={{ animation: 'marquee 65s linear infinite' }}>
+          {doubled.map((p, i) => (
+            <div key={i} className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group cursor-default">
+              <img src={p.src} alt={p.label} loading="lazy" decoding="async" width="330" height="440"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
+              <span className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
+                {p.label}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
     </section>
   )
 }
 
-/* ─── Featured services ────────────────────────────────────── */
+/* ─── Featured services — hover-image left panel on desktop ──── */
 function FeaturedServices() {
-  const categories = Object.keys(SERVICES)
+  const categories  = Object.keys(SERVICES)
+  const [hovered, setHovered] = useState(null)
+
+  /* Active image: hovered category's image, fallback to video */
+  const activeImg = hovered ? CAT_META[hovered]?.img : null
 
   return (
     <section className="bg-white py-14 md:py-24 px-4 sm:px-5 md:px-10 border-t border-[#e4ddd7]">
@@ -292,22 +325,43 @@ function FeaturedServices() {
         {/* Two-column editorial layout */}
         <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-start">
 
-          {/* Left — editorial video */}
+          {/* Left — image/video panel, cross-fades on hover */}
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-            className="relative overflow-hidden aspect-[3/4] hidden md:block sticky top-24">
+            className="relative overflow-hidden aspect-[3/4] hidden md:block sticky top-24 bg-[#0d0609]">
+
+            {/* Video base layer (always mounted, shown when no hover) */}
             <video autoPlay muted loop playsInline
-              className="w-full h-full object-cover object-center"
+              className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
+              style={{ opacity: activeImg ? 0 : 1 }}
               poster="/bridal.jpg">
               <source src="/ct.mp4" type="video/mp4" />
             </video>
-            <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-ink/70 to-transparent">
-              <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter']">Farwa Beauty Salon</p>
-              <p className="text-white font-['Syne'] font-bold text-sm">PECHS Block 2, Karachi</p>
+
+            {/* Category image cross-fade layer */}
+            {categories.map(cat => (
+              <img key={cat}
+                src={CAT_META[cat]?.img}
+                alt={cat}
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-400 pointer-events-none"
+                style={{ opacity: hovered === cat ? 1 : 0 }}
+                aria-hidden="true"
+                loading="eager"
+              />
+            ))}
+
+            <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-ink/80 to-transparent z-10">
+              <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-all duration-300">
+                {hovered ?? 'Farwa Beauty Salon'}
+              </p>
+              <p className="text-white font-['Syne'] font-bold text-sm transition-all duration-300">
+                {hovered ? `${SERVICES[hovered]?.length} services` : 'PECHS Block 2, Karachi'}
+              </p>
             </div>
           </motion.div>
 
           {/* Right — numbered category list */}
           <div>
+            {/* Mobile video */}
             <div className="relative overflow-hidden aspect-[16/9] mb-8 md:hidden">
               <video autoPlay muted loop playsInline
                 className="w-full h-full object-cover" poster="/bridal.jpg">
@@ -321,6 +375,8 @@ function FeaturedServices() {
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}>
                   <Link to="/services"
+                    onMouseEnter={() => setHovered(cat)}
+                    onMouseLeave={() => setHovered(null)}
                     className="group flex items-center justify-between py-4 md:py-5 gap-4">
                     <div className="flex items-center gap-4 min-w-0">
                       <span className="font-['Unbounded'] text-[10px] text-stone/40 shrink-0 w-5 tabular-nums">
