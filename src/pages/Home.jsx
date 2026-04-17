@@ -365,9 +365,9 @@ function FeaturedServices() {
           {/* Right — numbered category list */}
           <div>
             {/* Mobile video */}
-            <div className="relative overflow-hidden aspect-[16/9] mb-8 md:hidden">
+            <div className="relative overflow-hidden mb-8 md:hidden" style={{ aspectRatio: '4/3' }}>
               <video autoPlay muted loop playsInline
-                className="w-full h-full object-cover" poster="/bridal.jpg">
+                className="absolute inset-0 w-full h-full object-cover object-center" poster="/bridal.jpg">
                 <source src="/ct.mp4" type="video/mp4" />
               </video>
             </div>
