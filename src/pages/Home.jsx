@@ -41,7 +41,7 @@ const EDITORIAL_PHOTOS = [
   { src: '/massage.jpg',        label: 'Massage' },
   { src: '/cleansing.jpg',      label: 'Cleansing' },
   { src: '/wax2.jpg',           label: 'Cold Wax' },
-  { src: '/bridal2.jpg',        label: 'Hair Treatments' },
+  { src: '/hairtreatment.jpg',  label: 'Hair Treatments' },
   { src: '/glow.jpg',           label: 'Bleach & Polish' },
 ]
 

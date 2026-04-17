@@ -184,8 +184,7 @@ export const CATEGORIES   = ['All', ...Object.keys(SERVICES)]
 /*
  * CAT_META — one unique image per category, carefully mapped so no two
  * adjacent categories in the services grid share an asset.
- * Intentional family-share (replace when a dedicated asset arrives):
- *   Hair + Hair Treatments → hairdo.jpg (hair family)
+ * All 13 categories now have unique dedicated images.
  */
 export const CAT_META = {
   'Threading':       { img: '/threading.jpg',  desc: 'Precision threading for brows, lips, and full face — quick, clean, and perfectly shaped every time.' },
@@ -194,7 +193,7 @@ export const CAT_META = {
   'Oil Wax':         { img: '/oilwax.png',     desc: 'Nourishing oil wax for a smooth finish that conditions your skin while removing hair.' },
   'Bleach & Polish': { img: '/glow.jpg',       desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
   'Massage':         { img: '/massage.jpg',    desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
-  'Hair Treatments': { img: '/hairdo.jpg',     desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
+  'Hair Treatments': { img: '/hairtreatment.jpg', desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
   'Cleansing':       { img: '/cleansing.jpg',      video: '/cleansing.mp4',      desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
   'Facials':         { img: '/glow2.png',                                        desc: 'A full range of facials — from everyday glow to premium whitening and anti-ageing treatments.' },
   'Nails':           { img: '/pedicure.jpg',       video: '/nails.mp4',          desc: 'Manicures, pedicures, nail art, and extensions — for hands and feet that make a statement.' },
