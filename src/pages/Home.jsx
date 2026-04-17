@@ -444,87 +444,117 @@ function TrustPillars() {
 /* ─── Testimonials — featured-quote hero + refined FB grid ──── */
 function TestimonialsPreview() {
   return (
-    <section className="relative py-16 sm:py-20 md:py-28 px-4 sm:px-5 md:px-10 overflow-hidden bg-ink">
-      {/* Warm ambient glow */}
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,169,138,0.12) 0%, rgba(13,13,13,0) 60%)' }} />
+    <section className="relative py-16 sm:py-20 md:py-28 overflow-hidden bg-ink">
+      {/* Ambient glow top + bottom */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden
+        style={{ background: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(201,169,138,0.10) 0%, transparent 65%), radial-gradient(ellipse 50% 30% at 50% 100%, rgba(201,169,138,0.06) 0%, transparent 60%)' }} />
 
-      <div className="relative max-w-screen-xl mx-auto">
-        {/* Header — centered editorial */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+      <div className="relative max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
+
+        {/* ── Header ── */}
+        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl mx-auto mb-14 md:mb-20">
-          <p className="text-[#c9a98a] text-[10px] sm:text-[11px] tracking-[0.32em] uppercase font-['Inter'] mb-5">
-            &mdash; Verified client love
-          </p>
-          <h2 className="font-['Unbounded'] font-bold text-white leading-[0.95] mb-5"
-            style={{ fontSize: 'clamp(2rem, 6vw, 4.25rem)', letterSpacing: '-0.025em' }}>
-            Five stars,<br />
-            <span className="font-['Syne'] italic font-extralight text-[#c9a98a]">a thousand times over.</span>
-          </h2>
-          <div className="flex items-center justify-center gap-3 text-white/55 text-xs sm:text-sm font-['Inter'] font-light">
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 md:mb-20">
+          <div>
+            <p className="text-[#c9a98a] text-[10px] tracking-[0.32em] uppercase font-['Inter'] mb-4">
+              &mdash; Verified client love
+            </p>
+            <h2 className="font-['Unbounded'] font-bold text-white leading-[0.95]"
+              style={{ fontSize: 'clamp(1.9rem, 5vw, 3.75rem)', letterSpacing: '-0.025em' }}>
+              Five stars,<br />
+              <span className="font-['Syne'] italic font-extralight text-[#c9a98a]">a thousand times over.</span>
+            </h2>
+          </div>
+          <div className="flex items-center gap-2.5 shrink-0 pb-1">
             <div className="flex gap-0.5 text-[#c9a98a]" aria-label="5 out of 5 stars">
-              {[...Array(5)].map((_, s) => <Star key={s} className="w-3.5 h-3.5 fill-current" />)}
+              {[...Array(5)].map((_, s) => <Star key={s} className="w-3 h-3 fill-current" />)}
             </div>
-            <span className="text-white/30">·</span>
-            <span>Hundreds of reviews across Facebook &amp; Google</span>
+            <span className="text-white/40 text-[11px] font-['Inter']">Hundreds of reviews · Facebook &amp; Google</span>
           </div>
         </motion.div>
 
-        {/* Featured pull-quote — hero review */}
-        <motion.figure
-          initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
+        {/* ── Featured pull-quote ── */}
+        <motion.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-          className="relative max-w-4xl mx-auto mb-14 md:mb-20 px-2 md:px-8">
-          <Quote className="absolute -top-3 -left-1 md:-top-5 md:-left-5 w-9 h-9 md:w-14 md:h-14 text-[#c9a98a]/30 rotate-180" aria-hidden="true" />
-          <blockquote className="font-['Syne'] italic font-light text-white leading-[1.35] text-center"
-            style={{ fontSize: 'clamp(1.25rem, 3.2vw, 2.25rem)' }}>
+          className="relative border border-[#c9a98a]/15 bg-[#0d0b0b] px-6 py-10 md:px-14 md:py-14 mb-3 md:mb-4">
+          <Quote className="absolute top-6 left-6 md:top-8 md:left-10 w-7 h-7 md:w-10 md:h-10 text-[#c9a98a]/20 rotate-180" aria-hidden="true" />
+          <blockquote className="font-['Syne'] italic font-light text-white/90 leading-[1.4] text-center max-w-3xl mx-auto"
+            style={{ fontSize: 'clamp(1.1rem, 2.8vw, 1.85rem)' }}>
             {FEATURED_REVIEW.quote}
           </blockquote>
-          <p className="text-white/45 text-center text-sm md:text-base font-light mt-5 md:mt-6 font-['Inter']">
+          <p className="text-white/35 text-center text-sm font-light mt-5 font-['Inter']">
             {FEATURED_REVIEW.translation}
           </p>
-          <figcaption className="flex items-center justify-center gap-3 mt-7 md:mt-8">
-            <span className="h-px w-8 bg-[#c9a98a]/50" aria-hidden="true" />
-            <span className="text-[#c9a98a] text-[11px] tracking-[0.3em] uppercase font-['Inter'] font-medium">
+          <figcaption className="flex items-center justify-center gap-3 mt-7">
+            <span className="h-px w-6 bg-[#c9a98a]/40" aria-hidden="true" />
+            <span className="text-[#c9a98a] text-[10px] tracking-[0.3em] uppercase font-['Inter'] font-medium">
               {FEATURED_REVIEW.name}
             </span>
             <a href={FEATURED_REVIEW.link} target="_blank" rel="noreferrer"
-              className="text-white/40 hover:text-white/80 text-[10px] tracking-[0.22em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
-              View on FB <ArrowUpRight className="w-3 h-3" />
+              className="text-white/30 hover:text-[#c9a98a] text-[9px] tracking-[0.2em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
+              FB <ArrowUpRight className="w-2.5 h-2.5" />
             </a>
           </figcaption>
         </motion.figure>
 
-        {/* Refined review grid */}
-        <div className="mb-14 md:mb-16">
-          <p className="text-white/30 text-[10px] tracking-[0.32em] uppercase font-['Inter'] text-center mb-6 md:mb-8">
-            — More reviews, straight from Facebook
+        {/* ── Embed cards — horizontal scroll mobile, 3-col desktop ── */}
+        <div className="mb-12 md:mb-14">
+          <p className="text-white/20 text-[9px] tracking-[0.32em] uppercase font-['Inter'] mb-5 md:mb-6 px-0.5">
+            — Direct from Facebook
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5">
+
+          {/* Mobile: horizontal scroll */}
+          <div className="md:hidden flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
             {FB_POSTS.map((post, i) => (
-              <motion.article key={post.name}
-                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.06, duration: 0.7, ease: [0.16,1,0.3,1] }}
-                className="group bg-[#fbf8f4] border border-[#c9a98a]/10 overflow-hidden flex flex-col">
-                <header className="flex items-center justify-between px-4 md:px-5 py-3.5 border-b border-[#e4ddd7]">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#c9a98a] to-[#8b6d59] flex items-center justify-center shrink-0">
-                      <span className="text-white font-['Syne'] font-bold text-[11px] tracking-wider">{post.initials}</span>
+              <article key={post.name}
+                className="shrink-0 snap-start w-[85vw] max-w-[320px] bg-[#100e0e] border border-[#c9a98a]/12 flex flex-col overflow-hidden">
+                <header className="flex items-center justify-between px-4 py-3 border-b border-white/5">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#c9a98a] to-[#7a5c48] flex items-center justify-center shrink-0">
+                      <span className="text-white font-['Syne'] font-bold text-[10px]">{post.initials}</span>
                     </div>
                     <div className="min-w-0">
-                      <p className="font-['Syne'] font-bold text-[13px] text-ink truncate">{post.name}</p>
-                      <div className="flex items-center gap-1 text-[#c9a98a]" aria-label="5 stars">
+                      <p className="font-['Syne'] font-semibold text-[12px] text-white/90 truncate">{post.name}</p>
+                      <div className="flex gap-0.5 text-[#c9a98a]">
+                        {[...Array(5)].map((_, s) => <Star key={s} className="w-2 h-2 fill-current" />)}
+                      </div>
+                    </div>
+                  </div>
+                  <a href={post.link} target="_blank" rel="noreferrer"
+                    aria-label={`View ${post.name}'s review`}
+                    className="text-white/25 hover:text-[#c9a98a] transition-colors">
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </a>
+                </header>
+                <FbEmbed src={post.src} height={post.height} reviewerName={post.name} />
+              </article>
+            ))}
+          </div>
+
+          {/* Desktop: 3-col grid */}
+          <div className="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-3">
+            {FB_POSTS.map((post, i) => (
+              <motion.article key={post.name}
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}
+                className="group bg-[#100e0e] border border-[#c9a98a]/12 hover:border-[#c9a98a]/30 transition-colors duration-300 flex flex-col overflow-hidden">
+                <header className="flex items-center justify-between px-5 py-3.5 border-b border-white/5">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="w-9 h-9 bg-gradient-to-br from-[#c9a98a] to-[#7a5c48] flex items-center justify-center shrink-0">
+                      <span className="text-white font-['Syne'] font-bold text-[11px]">{post.initials}</span>
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-['Syne'] font-semibold text-[13px] text-white/90 truncate">{post.name}</p>
+                      <div className="flex gap-0.5 text-[#c9a98a]">
                         {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
                       </div>
                     </div>
                   </div>
                   <a href={post.link} target="_blank" rel="noreferrer"
                     aria-label={`View ${post.name}'s review on Facebook`}
-                    className="shrink-0 inline-flex items-center gap-1 text-stone group-hover:text-ink text-[9px] tracking-[0.14em] uppercase font-medium font-['Inter'] transition-colors">
-                    View <ArrowUpRight className="w-3 h-3" />
+                    className="shrink-0 text-white/25 group-hover:text-[#c9a98a] transition-colors">
+                    <ArrowUpRight className="w-4 h-4" />
                   </a>
                 </header>
                 <FbEmbed src={post.src} height={post.height} reviewerName={post.name} />
@@ -533,19 +563,19 @@ function TestimonialsPreview() {
           </div>
         </div>
 
-        {/* Footer */}
+        {/* ── Footer CTA ── */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="pt-8 md:pt-10 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <p className="text-white/50 text-sm font-light font-['Inter']">
+          className="pt-8 border-t border-white/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+          <p className="text-white/40 text-[11px] font-light font-['Inter'] tracking-wide">
             Loved your visit? Help us spread the word.
           </p>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
             <a href="https://g.page/r/CRCiNE2kpFvlEBM/review" target="_blank" rel="noreferrer"
-              className="tap-safe inline-flex items-center justify-center gap-1.5 bg-white text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-[#c9a98a] hover:text-white transition-colors duration-300">
+              className="tap-safe inline-flex items-center justify-center gap-1.5 bg-white text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3 hover:bg-[#c9a98a] hover:text-white transition-colors duration-300">
               Write a Google review <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
             <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
-              className="tap-safe link-underline text-white/60 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors inline-flex items-center justify-center gap-1.5">
+              className="tap-safe inline-flex items-center justify-center gap-1.5 text-white/50 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors border border-white/10 hover:border-white/30 px-6 py-3">
               Follow on Facebook <ArrowUpRight className="w-3 h-3" />
             </a>
           </div>
