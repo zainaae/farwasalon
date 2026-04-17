@@ -154,7 +154,7 @@ export default function Services() {
     <div className="bg-white overflow-x-hidden">
       <Navbar />
       <div className="pt-16 md:pt-[68px]">
-        <div className="max-w-screen-xl mx-auto px-5 md:px-10 py-14 md:py-20 min-h-screen">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
           <AnimatePresence mode="wait">
             {selected ? (
               <motion.div key={selected} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>

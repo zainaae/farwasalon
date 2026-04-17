@@ -35,6 +35,9 @@
 
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     margin: 0;
     background: #ffffff;
@@ -47,6 +50,22 @@
     overflow-x: hidden;
   }
 }
+
+/* ── Urdu Nastaliq ── */
+.font-nastaliq {
+  font-family: 'Noto Nastaliq Urdu', serif;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+/* ── Horizontal scroll-snap ── */
+.snap-x-row {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.snap-x-row::-webkit-scrollbar { display: none; }
+.snap-center-child > * { scroll-snap-align: center; scroll-snap-stop: always; }
 
 /* ── Colour utilities ── */
 @layer utilities {

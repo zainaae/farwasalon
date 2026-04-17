@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Check, ArrowUpRight, MapPin, Phone, Clock } from 'lucide-react'
-import { Navbar, Footer, IgIcon, StickyWA, usePageMeta } from '../shared.jsx'
+import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles } from 'lucide-react'
+import { Navbar, Footer, IgIcon, StickyWA, usePageMeta, useBooking, useNextSlot } from '../shared.jsx'
 import { WA_NUMBER, WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES } from '../data.js'
 
 export default function Contact() {
@@ -9,6 +9,8 @@ export default function Contact() {
   const [service, setService] = useState('')
   const [date,    setDate]    = useState('')
   const [time,    setTime]    = useState('')
+  const booking = useBooking()
+  const slot    = useNextSlot()
 
   usePageMeta({
     title: 'Book an Appointment — Farwa Beauty Salon, Karachi',
@@ -27,7 +29,7 @@ export default function Contact() {
       <div className="pt-16 md:pt-[68px]">
 
         {/* Header */}
-        <section className="bg-white py-14 md:py-20 px-5 md:px-10 border-b border-[#e4ddd7]">
+        <section className="bg-white py-14 md:py-20 px-4 sm:px-5 md:px-10 border-b border-[#e4ddd7]">
           <div className="max-w-screen-xl mx-auto">
             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
               className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">— Ready?</motion.p>
@@ -37,11 +39,23 @@ export default function Contact() {
                 BOOK YOUR<br />APPOINTMENT
               </motion.h1>
             </div>
+            {/* Live slot pill + 3-tap sheet shortcut */}
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}
+              className="mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
+              <span className="inline-flex items-center gap-2 border border-[#e4ddd7] px-3 py-2 text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone">
+                <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#6b9b5f]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
+                Next slot <span className="text-ink font-medium ml-1">{slot.label}</span>
+              </span>
+              <button onClick={() => booking.open()}
+                className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-5 py-2.5 hover:bg-stone transition-colors">
+                <Sparkles className="w-3 h-3" /> Quick 3-tap booking
+              </button>
+            </motion.div>
           </div>
         </section>
 
         {/* Main grid */}
-        <section className="py-14 md:py-20 px-5 md:px-10">
+        <section className="py-14 md:py-20 px-4 sm:px-5 md:px-10">
           <div className="max-w-screen-xl mx-auto grid md:grid-cols-[1.2fr_1fr] gap-14 md:gap-20">
 
             {/* Contact info */}

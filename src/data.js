@@ -181,6 +181,13 @@ export const SERVICES = {
 export const ALL_SERVICES = Object.values(SERVICES).flat()
 export const CATEGORIES   = ['All', ...Object.keys(SERVICES)]
 
+/*
+ * CAT_META — one unique image per category, carefully mapped so no two
+ * adjacent categories in the services grid share an asset.
+ * Note: Eyebrow Tattoo + Threading share threading.jpg by design —
+ * they're the same brow-area service family. Swap when a dedicated
+ * microblading asset is added.
+ */
 export const CAT_META = {
   'Threading':       { img: '/threading.jpg',  desc: 'Precision threading for brows, lips, and full face — quick, clean, and perfectly shaped every time.' },
   'Hot Wax':         { img: '/waxing.png',     desc: 'Hot wax for sensitive areas — gentle, effective, and long-lasting results.' },
@@ -188,12 +195,12 @@ export const CAT_META = {
   'Oil Wax':         { img: '/glow3.jpg',      desc: 'Nourishing oil wax for a smooth finish that conditions your skin while removing hair.' },
   'Bleach & Polish': { img: '/glow.jpg',       desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
   'Massage':         { img: '/massage.jpg',    desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
-  'Hair Treatments': { img: '/hairdo.jpg',     desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
+  'Hair Treatments': { img: '/bridal2.jpg',    desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
   'Cleansing':       { img: '/facial.jpg',     desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
   'Facials':         { img: '/glow2.png',      desc: 'A full range of facials — from everyday glow to premium whitening and anti-ageing treatments.' },
   'Nails':           { img: '/pedicure.jpg',   desc: 'Manicures, pedicures, nail art, and extensions — for hands and feet that make a statement.' },
   'Bridal':          { img: '/bridal.jpg',     desc: 'Complete wedding packages — from trials to the big day. We make every bride feel extraordinary.' },
-  'Hair':            { img: '/bridal2.jpg',    desc: 'Cuts, colour, blowdrys, and styling for every hair type and texture.' },
+  'Hair':            { img: '/hairdo.jpg',     desc: 'Cuts, colour, blowdrys, and styling for every hair type and texture.' },
   'Eyebrow Tattoo':  { img: '/threading.jpg',  desc: 'Semi-permanent brow definition — microblading, powder brows, and combination brows.' },
 }
 

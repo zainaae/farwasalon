@@ -1,10 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-dom'
-import { useEffect, lazy, Suspense } from 'react'
-import Lenis from 'lenis'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
+import { useEffect, useState, lazy, Suspense } from 'react'
 
 const Home     = lazy(() => import('./pages/Home'))
 const Services = lazy(() => import('./pages/Services'))
@@ -12,25 +7,28 @@ const Gallery  = lazy(() => import('./pages/Gallery'))
 const About    = lazy(() => import('./pages/About'))
 const Contact  = lazy(() => import('./pages/Contact'))
 
-/* ─── Single global Lenis instance — created once, lives for app lifetime ── */
-function SmoothScroll() {
+/* ─── Champagne scroll progress bar — fixed top of viewport ───── */
+function ScrollProgress() {
+  const [p, setP] = useState(0)
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.15,
-      easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    })
-    lenis.on('scroll', ScrollTrigger.update)
-    const tick = time => lenis.raf(time * 1000)
-    gsap.ticker.add(tick)
-    gsap.ticker.lagSmoothing(0)
+    const fn = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setP(max > 0 ? Math.min(1, window.scrollY / max) : 0)
+    }
+    fn()
+    window.addEventListener('scroll', fn, { passive: true })
+    window.addEventListener('resize', fn, { passive: true })
     return () => {
-      gsap.ticker.remove(tick)
-      lenis.destroy()
-      ScrollTrigger.getAll().forEach(t => t.kill())
+      window.removeEventListener('scroll', fn)
+      window.removeEventListener('resize', fn)
     }
   }, [])
-  return null
+  return (
+    <div aria-hidden="true" className="fixed top-0 left-0 right-0 z-[110] h-[2px] bg-transparent pointer-events-none">
+      <div className="h-full origin-left bg-gradient-to-r from-[#c9a98a] via-[#e4c7a8] to-[#c9a98a]"
+        style={{ transform: `scaleX(${p})`, transition: 'transform 0.08s linear' }} />
+    </div>
+  )
 }
 
 function ScrollToTop() {
@@ -63,21 +61,25 @@ function NotFound() {
   )
 }
 
+import { BookingProvider } from './shared.jsx'
+
 export default function App() {
   return (
     <BrowserRouter>
-      <SmoothScroll />
-      <ScrollToTop />
-      <Suspense fallback={<PageFallback />}>
-        <Routes>
-          <Route path="/"         element={<Home />}     />
-          <Route path="/services" element={<Services />} />
-          <Route path="/gallery"  element={<Gallery />}  />
-          <Route path="/about"    element={<About />}    />
-          <Route path="/contact"  element={<Contact />}  />
-          <Route path="*"         element={<NotFound />} />
-        </Routes>
-      </Suspense>
+      <BookingProvider>
+        <ScrollProgress />
+        <ScrollToTop />
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            <Route path="/"         element={<Home />}     />
+            <Route path="/services" element={<Services />} />
+            <Route path="/gallery"  element={<Gallery />}  />
+            <Route path="/about"    element={<About />}    />
+            <Route path="/contact"  element={<Contact />}  />
+            <Route path="*"         element={<NotFound />} />
+          </Routes>
+        </Suspense>
+      </BookingProvider>
     </BrowserRouter>
   )
 }

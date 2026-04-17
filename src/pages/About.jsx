@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta } from '../shared.jsx'
-import { WA_DEFAULT, SERVICES } from '../data.js'
+import { Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta, useBooking } from '../shared.jsx'
+import { SERVICES } from '../data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 
 export default function About() {
+  const booking = useBooking()
   usePageMeta({
     title: 'Our Story — Farwa Beauty Salon, Karachi',
     description: 'From a single chair in 2008 to a full-service beauty home in PECHS Block 2, Karachi — meet Farwa and the story behind 17+ years of beauty.',
@@ -18,7 +19,7 @@ export default function About() {
       <div className="pt-16 md:pt-[68px]">
 
         {/* Page header */}
-        <section className="bg-white py-16 md:py-20 px-5 md:px-10 border-b border-[#e4ddd7]">
+        <section className="bg-white py-16 md:py-20 px-4 sm:px-5 md:px-10 border-b border-[#e4ddd7]">
           <div className="max-w-screen-xl mx-auto">
             <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
               className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">— Est. 2008 · PECHS Block 2, Karachi</motion.p>
@@ -32,7 +33,7 @@ export default function About() {
         </section>
 
         {/* Stats */}
-        <section className="bg-white py-12 md:py-16 px-5 md:px-10">
+        <section className="bg-white py-12 md:py-16 px-4 sm:px-5 md:px-10">
           <div className="max-w-screen-xl mx-auto">
             <div className="grid grid-cols-3 gap-8 border-b border-[#e4ddd7] pb-12">
               {[
@@ -52,7 +53,7 @@ export default function About() {
         </section>
 
         {/* Founder story */}
-        <section className="bg-mist py-16 md:py-24 px-5 md:px-10">
+        <section className="bg-mist py-16 md:py-24 px-4 sm:px-5 md:px-10">
           <div className="max-w-screen-xl mx-auto">
             <div className="grid md:grid-cols-[1fr_1.4fr] gap-12 md:gap-20 items-start">
               <div>
@@ -119,7 +120,7 @@ export default function About() {
         </section>
 
         {/* Trust pillars */}
-        <section className="bg-ink py-16 md:py-20 px-5 md:px-10">
+        <section className="bg-ink py-16 md:py-20 px-4 sm:px-5 md:px-10">
           <div className="max-w-screen-xl mx-auto">
             <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">
               — Why choose Farwa
@@ -142,18 +143,18 @@ export default function About() {
         </section>
 
         {/* CTA */}
-        <section className="bg-white py-16 md:py-20 px-5 md:px-10">
+        <section className="bg-white py-16 md:py-20 px-4 sm:px-5 md:px-10">
           <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <motion.h2 initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
               className="font-['Unbounded'] font-bold text-xl md:text-2xl text-ink">
               Come in and experience it yourself.
             </motion.h2>
             <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
-              className="flex items-center gap-4">
-              <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
-                className="inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3.5 hover:bg-stone transition-colors duration-300">
-                Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
+              className="flex flex-wrap items-center gap-4">
+              <button onClick={() => booking.open()}
+                className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3.5 hover:bg-stone transition-colors duration-300">
+                Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
               <Link to="/services" className="link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
                 Our Services
               </Link>

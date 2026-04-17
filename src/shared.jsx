@@ -1,9 +1,37 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useCallback } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Menu, ArrowUpRight } from 'lucide-react'
-import Core from 'smooothy'
+import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Calendar, Clock, Sparkles } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, SERVICES, ALL_SERVICES, CATEGORIES } from './data.js'
+
+/* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
+export function useNextSlot() {
+  const [slot, setSlot] = useState(() => computeNextSlot())
+  useEffect(() => {
+    const id = setInterval(() => setSlot(computeNextSlot()), 60_000)
+    return () => clearInterval(id)
+  }, [])
+  return slot
+}
+function computeNextSlot() {
+  const now  = new Date()
+  const day  = now.getDay() // 0 Sun..6 Sat
+  const hr   = now.getHours()
+  const isOpen = day !== 0 && hr >= 11 && hr < 19
+  if (isOpen) {
+    // Round up to next half hour
+    const min = now.getMinutes()
+    let h = hr, m = min < 30 ? 30 : 0
+    if (min >= 30) h = Math.min(18, hr + 1)
+    const suffix = h >= 12 ? 'pm' : 'am'
+    const h12 = h > 12 ? h - 12 : (h === 0 ? 12 : h)
+    return { label: `Today · ${h12}:${String(m).padStart(2,'0')}${suffix}`, open: true }
+  }
+  if (day === 0) return { label: 'Tomorrow · 11:00am', open: false } // Sunday closed → Monday
+  if (day === 6 && hr >= 19) return { label: 'Monday · 11:00am', open: false }
+  if (hr < 11) return { label: 'Today · 11:00am', open: false }
+  return { label: 'Tomorrow · 11:00am', open: false }
+}
 
 /* ─── Skip-to-content link (keyboard a11y) ─────────────────────── */
 export function SkipLink() {
@@ -113,96 +141,327 @@ export function AnimatedNumber({ display, final }) {
   return <span ref={ref}>{shown}</span>
 }
 
-/* ─── Particle field ───────────────────────────────────────────── */
-export function ParticleField() {
-  const canvasRef = useRef(null)
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    let raf
-    const COLORS = ['#e8ddd5','#f8f5f1','#d4c4b8','#ffffff','#c8b8ac']
-    const resize = () => {
-      canvas.width  = canvas.offsetWidth  * window.devicePixelRatio
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
-    }
-    resize()
-    const ro = new ResizeObserver(resize)
-    ro.observe(canvas)
-    const W = () => canvas.offsetWidth, H = () => canvas.offsetHeight
-    const particles = Array.from({ length: 55 }, () => ({
-      x: Math.random(), y: Math.random(),
-      r: Math.random() * 2.2 + 0.4,
-      vx: (Math.random() - 0.5) * 0.00018,
-      vy: (Math.random() - 0.5) * 0.00018,
-      opacity: Math.random() * 0.45 + 0.08,
-      color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      pulse: Math.random() * Math.PI * 2,
-      pulseSpeed: Math.random() * 0.008 + 0.003,
-    }))
-    let visible = true
-    let docVisible = !document.hidden
-    const animate = () => {
-      if (!visible || !docVisible) { raf = null; return }
-      const w = W(), h = H()
-      ctx.clearRect(0, 0, w, h)
-      particles.forEach(p => {
-        p.x += p.vx; p.y += p.vy
-        if (p.x < 0) p.x = 1; if (p.x > 1) p.x = 0
-        if (p.y < 0) p.y = 1; if (p.y > 1) p.y = 0
-        p.pulse += p.pulseSpeed
-        ctx.beginPath()
-        ctx.arc(p.x * w, p.y * h, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = p.color
-        ctx.globalAlpha = p.opacity * (0.7 + 0.3 * Math.sin(p.pulse))
-        ctx.fill()
-      })
-      ctx.globalAlpha = 1
-      raf = requestAnimationFrame(animate)
-    }
-    const start = () => { if (raf == null) animate() }
-    const io = new IntersectionObserver(entries => {
-      visible = entries[0].isIntersecting
-      if (visible) start()
-    }, { threshold: 0 })
-    io.observe(canvas)
-    const onVis = () => { docVisible = !document.hidden; if (docVisible) start() }
-    document.addEventListener('visibilitychange', onVis)
-    start()
-    return () => {
-      if (raf != null) cancelAnimationFrame(raf)
-      io.disconnect()
-      ro.disconnect()
-      document.removeEventListener('visibilitychange', onVis)
-    }
+/* ─── Native scroll-snap gallery (replaces smooothy) ───────────── */
+export function SmoothyGallery({ photos }) {
+  const scrollerRef = useRef(null)
+  const [idx, setIdx] = useState(0)
+  const count = photos.length
+
+  const scrollTo = useCallback((n) => {
+    const el = scrollerRef.current
+    if (!el) return
+    const child = el.children[n]
+    if (!child) return
+    const left = child.offsetLeft - (el.clientWidth - child.clientWidth) / 2
+    el.scrollTo({ left, behavior: 'smooth' })
+    setIdx(n)
   }, [])
-  return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" style={{ mixBlendMode: 'screen', opacity: 0.6 }} />
+
+  const onScroll = useCallback(() => {
+    const el = scrollerRef.current
+    if (!el) return
+    const center = el.scrollLeft + el.clientWidth / 2
+    let best = 0, bestDist = Infinity
+    for (let i = 0; i < el.children.length; i++) {
+      const c = el.children[i]
+      const cCenter = c.offsetLeft + c.clientWidth / 2
+      const d = Math.abs(cCenter - center)
+      if (d < bestDist) { bestDist = d; best = i }
+    }
+    setIdx(best)
+  }, [])
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'ArrowRight') scrollTo(Math.min(count - 1, idx + 1))
+      if (e.key === 'ArrowLeft')  scrollTo(Math.max(0, idx - 1))
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [idx, count, scrollTo])
+
+  return (
+    <div className="relative">
+      <div
+        ref={scrollerRef}
+        onScroll={onScroll}
+        className="snap-x-row snap-center-child flex overflow-x-auto gap-3 md:gap-4 px-[max(1rem,calc(50vw-200px))] md:px-[max(2.5rem,calc(50vw-220px))] pb-2"
+        role="region" aria-label="Salon photo gallery"
+      >
+        {photos.map((p, i) => (
+          <figure key={i} className="relative shrink-0 overflow-hidden bg-[#0d0609]"
+            style={{ width: 'clamp(260px,36vw,420px)', height: 'clamp(340px,50vw,560px)' }}>
+            <img src={p.src} alt={p.label} loading="lazy" decoding="async" draggable={false}
+              className="w-full h-full object-cover select-none" />
+            <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-ink/70 via-ink/30 to-transparent">
+              <p className="text-white text-[10px] tracking-[0.22em] uppercase font-['Inter']">{p.label}</p>
+              <p className="text-white/50 text-[10px] font-['Inter'] mt-0.5 tabular-nums">{String(i + 1).padStart(2,'0')} / {String(count).padStart(2,'0')}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+
+      {/* Prev/next controls (desktop) */}
+      <div className="hidden md:flex absolute top-1/2 left-5 -translate-y-1/2 z-10">
+        <button onClick={() => scrollTo(Math.max(0, idx - 1))} aria-label="Previous photo"
+          disabled={idx === 0}
+          className="w-11 h-11 bg-white/90 text-ink flex items-center justify-center hover:bg-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed shadow-lg">
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+      </div>
+      <div className="hidden md:flex absolute top-1/2 right-5 -translate-y-1/2 z-10">
+        <button onClick={() => scrollTo(Math.min(count - 1, idx + 1))} aria-label="Next photo"
+          disabled={idx === count - 1}
+          className="w-11 h-11 bg-white/90 text-ink flex items-center justify-center hover:bg-white transition-colors disabled:opacity-30 disabled:cursor-not-allowed shadow-lg">
+          <ChevronRight className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Progress dots */}
+      <div className="flex items-center justify-center gap-1.5 mt-5" role="tablist" aria-label="Gallery pagination">
+        {photos.map((_, i) => (
+          <button key={i} onClick={() => scrollTo(i)}
+            role="tab" aria-selected={idx === i} aria-label={`Go to photo ${i + 1}`}
+            className={`h-[2px] transition-all duration-300 ${idx === i ? 'w-8 bg-ink' : 'w-3 bg-stone/30 hover:bg-stone/60'}`} />
+        ))}
+      </div>
+    </div>
+  )
 }
 
-/* ─── Smooothy gallery ─────────────────────────────────────────── */
-export function SmoothyGallery({ photos }) {
-  const wrapperRef = useRef(null)
+/* ─── Smart Booking Sheet — 3-step flow → pre-filled WhatsApp ── */
+export function BookingSheet({ open, onClose, initialCategory = null }) {
+  const [step, setStep] = useState(0)
+  const [cat,  setCat]  = useState(initialCategory)
+  const [svc,  setSvc]  = useState('')
+  const [date, setDate] = useState('')
+  const [time, setTime] = useState('')
+
+  // Reset on close
   useEffect(() => {
-    const el = wrapperRef.current
-    if (!el) return
-    let raf
-    const slider = new Core(el, { infinite: true, snap: false, lerpFactor: 0.08 })
-    const tick = () => { slider.update(); raf = requestAnimationFrame(tick) }
-    raf = requestAnimationFrame(tick)
-    return () => { cancelAnimationFrame(raf); slider.destroy?.() }
-  }, [])
+    if (!open) {
+      const t = setTimeout(() => {
+        setStep(0); setCat(initialCategory); setSvc(''); setDate(''); setTime('')
+      }, 350)
+      return () => clearTimeout(t)
+    }
+  }, [open, initialCategory])
+
+  useEffect(() => {
+    if (!open) return
+    document.body.style.overflow = 'hidden'
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', onKey)
+    return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey) }
+  }, [open, onClose])
+
+  const handleBook = () => {
+    const chosenSvc = svc || cat || 'a service'
+    const lines = [
+      `Hi! I'd like to book an appointment at Farwa Beauty Salon.`,
+      ``,
+      `Service: ${chosenSvc}`,
+      date ? `Preferred date: ${date}` : '',
+      time ? `Preferred time: ${time}` : '',
+    ].filter(Boolean).join('\n')
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines)}`
+    window.open(url, '_blank', 'noopener,noreferrer')
+    onClose()
+  }
+
+  const timeOptions = ['11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM']
+  const today = new Date().toISOString().slice(0,10)
+
   return (
-    <div ref={wrapperRef} className="flex overflow-x-hidden cursor-grab active:cursor-grabbing select-none" style={{ userSelect: 'none' }}>
-      {photos.map((p, i) => (
-        <div key={i} className="relative shrink-0 overflow-hidden" style={{ width: 'clamp(240px,30vw,380px)', height: 'clamp(300px,40vw,500px)', marginRight: '12px' }}>
-          <img src={p.src} alt={p.label} draggable={false} loading="lazy" decoding="async" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E")`, backgroundSize: '180px 180px', opacity: 0.06, mixBlendMode: 'overlay' }} />
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-ink/60 to-transparent">
-            <p className="text-white text-[10px] tracking-[0.22em] uppercase font-['Inter']">{p.label}</p>
-          </div>
-        </div>
-      ))}
+    <AnimatePresence>
+      {open && (
+        <motion.div className="fixed inset-0 z-[200] flex items-end md:items-center justify-center bg-ink/60 backdrop-blur-sm"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="booking-title">
+          <motion.div
+            initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
+            transition={{ type: 'spring', stiffness: 320, damping: 34 }}
+            onClick={e => e.stopPropagation()}
+            className="bg-white w-full md:max-w-xl md:mx-4 md:rounded-none flex flex-col max-h-[92vh]">
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 md:px-7 py-4 border-b border-[#e4ddd7]">
+              <div>
+                <p className="text-stone text-[10px] tracking-[0.24em] uppercase font-['Inter']">Step {step + 1} of 3</p>
+                <h2 id="booking-title" className="font-['Unbounded'] font-bold text-ink text-base md:text-lg mt-0.5">
+                  {step === 0 && 'Choose a service'}
+                  {step === 1 && 'Pick a date'}
+                  {step === 2 && 'Pick a time'}
+                </h2>
+              </div>
+              <button onClick={onClose} aria-label="Close booking"
+                className="tap-safe text-stone hover:text-ink transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Progress */}
+            <div className="h-[2px] bg-[#e4ddd7] w-full">
+              <div className="h-full bg-gradient-to-r from-[#c9a98a] to-[#8b6d59] transition-all duration-400"
+                style={{ width: `${((step + 1) / 3) * 100}%` }} />
+            </div>
+
+            {/* Body */}
+            <div className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6">
+              {step === 0 && (
+                <div>
+                  {!cat ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                      {Object.keys(SERVICES).map(c => (
+                        <button key={c} onClick={() => setCat(c)}
+                          className="tap-safe p-3 border border-[#e4ddd7] hover:border-ink hover:bg-mist transition-all text-left">
+                          <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight">{c}</p>
+                          <p className="text-stone text-[10px] font-['Inter'] mt-1">{SERVICES[c].length} services</p>
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <div>
+                      <button onClick={() => setCat(null)}
+                        className="mb-4 inline-flex items-center gap-1.5 text-stone text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
+                        <ChevronLeft className="w-3 h-3" /> All categories
+                      </button>
+                      <p className="text-stone text-[10px] tracking-[0.22em] uppercase font-['Inter'] mb-3">{cat}</p>
+                      <div className="flex flex-col divide-y divide-[#e4ddd7]">
+                        {SERVICES[cat].map(s => (
+                          <button key={s.id} onClick={() => { setSvc(s.name); setStep(1) }}
+                            className="tap-safe flex items-center justify-between py-3.5 text-left hover:pl-2 transition-all">
+                            <span className="font-['Syne'] font-bold text-[13px] text-ink uppercase">{s.name}</span>
+                            <ArrowUpRight className="w-4 h-4 text-stone/40" />
+                          </button>
+                        ))}
+                      </div>
+                      <button onClick={() => { setSvc(cat); setStep(1) }}
+                        className="mt-4 text-stone text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
+                        Not sure yet · continue with &ldquo;{cat}&rdquo; →
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {step === 1 && (
+                <div>
+                  <p className="text-stone text-sm font-['Inter'] font-light mb-4">Booking for <span className="text-ink font-medium">{svc}</span></p>
+                  <div className="grid grid-cols-2 gap-2.5 mb-5">
+                    {[
+                      { label: 'Today', offset: 0 },
+                      { label: 'Tomorrow', offset: 1 },
+                      { label: 'This weekend', offset: 'wk' },
+                      { label: 'Next week', offset: 7 },
+                    ].map(o => (
+                      <button key={o.label} onClick={() => {
+                        const d = new Date()
+                        if (o.offset === 'wk') {
+                          const day = d.getDay()
+                          const add = day >= 6 ? 7 : 6 - day
+                          d.setDate(d.getDate() + add)
+                        } else {
+                          d.setDate(d.getDate() + o.offset)
+                        }
+                        setDate(d.toISOString().slice(0,10))
+                        setStep(2)
+                      }}
+                        className="tap-safe p-3.5 border border-[#e4ddd7] hover:border-ink hover:bg-mist transition-all text-left">
+                        <Calendar className="w-3.5 h-3.5 text-stone mb-2" />
+                        <p className="font-['Syne'] font-bold text-[13px] text-ink uppercase">{o.label}</p>
+                      </button>
+                    ))}
+                  </div>
+                  <label className="block">
+                    <span className="text-[10px] tracking-[0.18em] uppercase text-stone font-['Inter']">Or pick a specific date</span>
+                    <input type="date" min={today} value={date}
+                      onChange={e => setDate(e.target.value)}
+                      className="mt-2 w-full border border-[#e4ddd7] px-4 py-3 text-sm font-['Inter'] focus:outline-none focus:border-ink transition-colors" />
+                  </label>
+                  <div className="flex justify-end gap-2 mt-5">
+                    <button onClick={() => setStep(0)} className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink">Back</button>
+                    <button disabled={!date} onClick={() => setStep(2)}
+                      className="tap-safe bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors">Next</button>
+                  </div>
+                </div>
+              )}
+
+              {step === 2 && (
+                <div>
+                  <p className="text-stone text-sm font-['Inter'] font-light mb-4">
+                    {svc} &middot; <span className="text-ink font-medium">{new Date(date).toDateString()}</span>
+                  </p>
+                  <div className="grid grid-cols-3 gap-2 mb-5">
+                    {timeOptions.map(t => (
+                      <button key={t} onClick={() => setTime(t)}
+                        className={`tap-safe py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-all ${
+                          time === t
+                            ? 'bg-ink text-white border-ink'
+                            : 'border-[#e4ddd7] text-ink hover:border-ink hover:bg-mist'
+                        }`}>
+                        <Clock className="w-3 h-3 inline mr-1 opacity-60" />{t}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="flex justify-between gap-2 pt-3 border-t border-[#e4ddd7]">
+                    <button onClick={() => setStep(1)} className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink">Back</button>
+                    <button onClick={handleBook} disabled={!time}
+                      className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+                      <Sparkles className="w-3.5 h-3.5" /> Send on WhatsApp
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
+/* ─── Booking context (global access) ──────────────────────────── */
+import { createContext, useContext } from 'react'
+const BookingCtx = createContext({ open: () => {} })
+export function BookingProvider({ children }) {
+  const [state, setState] = useState({ open: false, category: null })
+  const value = {
+    open: (category = null) => setState({ open: true, category }),
+    close: () => setState(s => ({ ...s, open: false })),
+  }
+  return (
+    <BookingCtx.Provider value={value}>
+      {children}
+      <BookingSheet open={state.open} initialCategory={state.category} onClose={value.close} />
+    </BookingCtx.Provider>
+  )
+}
+export function useBooking() { return useContext(BookingCtx) }
+
+/* ─── Urdu Nastaliq signature (cultural touch) ─────────────────── */
+export function UrduSignature({ className = '' }) {
+  return (
+    <span className={`font-nastaliq text-[1.1em] ${className}`} dir="rtl" lang="ur" aria-label="Farwa Beauty Salon in Urdu">
+      فروا بیوٹی سیلون
+    </span>
+  )
+}
+
+/* ─── Kinetic wordmark divider (replaces plain marquee) ────────── */
+export function WordmarkDivider() {
+  return (
+    <div aria-hidden="true" className="bg-white border-y border-[#e4ddd7] overflow-hidden">
+      <div className="max-w-screen-xl mx-auto px-5 md:px-10 py-6 md:py-8 flex items-center gap-5 md:gap-8">
+        <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a98a]/50 to-[#c9a98a]" />
+        <span className="font-['Unbounded'] font-black text-ink tracking-[0.3em] text-[11px] md:text-[13px] shrink-0">
+          F · B · S
+        </span>
+        <span className="hidden sm:inline text-[#c9a98a] text-xs" aria-hidden="true">✦</span>
+        <span className="font-['Syne'] italic font-light text-stone text-[11px] md:text-[13px] shrink-0 tracking-wide">
+          Since 2008
+        </span>
+        <span className="flex-1 h-px bg-gradient-to-l from-transparent via-[#c9a98a]/50 to-[#c9a98a]" />
+      </div>
     </div>
   )
 }
@@ -322,6 +581,7 @@ export function Navbar({ transparent = false }) {
   const [scrolled,   setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const { pathname } = useLocation()
+  const booking = useBooking()
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', fn, { passive: true })
@@ -358,11 +618,11 @@ export function Navbar({ transparent = false }) {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
+          <button onClick={() => booking.open()}
             className={`hidden md:inline-flex items-center gap-1.5 text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-5 py-2.5 transition-all duration-300 ${light ? 'bg-ink text-white hover:bg-stone' : 'bg-white text-ink hover:bg-nude'}`}>
             Book an Appointment
-          </a>
-          <button className={`md:hidden p-1 ${light ? 'text-ink' : 'text-white'}`} onClick={() => setMobileOpen(o => !o)} aria-label="Menu">
+          </button>
+          <button className={`md:hidden p-1 ${light ? 'text-ink' : 'text-white'}`} onClick={() => setMobileOpen(o => !o)} aria-label="Menu" aria-expanded={mobileOpen}>
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
@@ -378,10 +638,10 @@ export function Navbar({ transparent = false }) {
                   {label}
                 </Link>
               ))}
-              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" onClick={() => setMobileOpen(false)}
+              <button onClick={() => { setMobileOpen(false); booking.open() }}
                 className="inline-flex items-center justify-center bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-5 py-3 w-fit mt-1">
-                Book on WhatsApp
-              </a>
+                Book an Appointment
+              </button>
             </div>
           </motion.div>
         )}
@@ -393,20 +653,31 @@ export function Navbar({ transparent = false }) {
 /* ─── Footer ───────────────────────────────────────────────────── */
 export function Footer() {
   const serviceLinks = ['Threading','Bridal','Facials','Nails','Eyebrow Tattoo','Massage']
+  const booking = useBooking()
+  const slot = useNextSlot()
   return (
     <footer className="bg-white">
-      {/* Top bar */}
+      {/* Top bar — logo + Urdu signature + CTA */}
       <div className="border-t border-[#e4ddd7] px-5 md:px-10 py-8 md:py-10">
-        <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-          <Link to="/" className="shrink-0">
-            <img src="/logo.jpg" alt="Farwa Beauty Salon" className="h-10 md:h-12 w-auto"
-              onError={e => { e.currentTarget.style.display='none'; e.currentTarget.nextSibling.style.display='block' }} />
-            <span style={{display:'none'}} className="font-['Unbounded'] font-bold text-sm text-ink">FARWA</span>
-          </Link>
-          <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
-            className="inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3 hover:bg-stone transition-colors duration-300">
-            Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
+        <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="flex items-center gap-5">
+            <Link to="/" className="shrink-0">
+              <img src="/logo.jpg" alt="Farwa Beauty Salon" className="h-10 md:h-12 w-auto"
+                onError={e => { e.currentTarget.style.display='none'; e.currentTarget.nextSibling.style.display='block' }} />
+              <span style={{display:'none'}} className="font-['Unbounded'] font-bold text-sm text-ink">FARWA</span>
+            </Link>
+            <span className="hidden sm:inline h-8 w-px bg-[#e4ddd7]" />
+            <UrduSignature className="hidden sm:inline text-stone/80" />
+          </div>
+          <div className="flex flex-col sm:items-end gap-2">
+            <button onClick={() => booking.open()}
+              className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3 hover:bg-stone transition-colors duration-300">
+              Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
+            <p className="text-stone text-[10px] font-['Inter'] tracking-wide">
+              Next slot <span className="text-ink font-medium">{slot.label}</span>
+            </p>
+          </div>
         </div>
       </div>
       {/* Link grid */}
@@ -446,8 +717,12 @@ export function Footer() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-[#e4ddd7] pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
-            <p className="text-stone text-[11px] font-['Inter']">© {new Date().getFullYear()} Farwa Beauty Salon. All rights reserved.</p>
+          <div className="border-t border-[#e4ddd7] pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
+              <p className="text-stone text-[11px] font-['Inter']">© {new Date().getFullYear()} Farwa Beauty Salon. All rights reserved.</p>
+              <span className="text-[#e4ddd7] hidden sm:inline">·</span>
+              <UrduSignature className="sm:hidden text-stone/70 text-[13px]" />
+            </div>
             <p className="text-stone text-[11px] font-['Inter']">PECHS Block 2, Karachi · Est. 2008</p>
           </div>
         </div>
