@@ -9,6 +9,7 @@ import {
 import { SERVICES, CAT_META } from '../data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
+const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 
 /* ─── Real Facebook review posts (verified public) ────────────── */
 const FB_POSTS = [
@@ -67,10 +68,10 @@ function Hero() {
 
   /* Kinetic thesis — fragments revealed sequentially */
   const thesis = [
-    { text: 'Seventeen years.',                 em: true  },
-    { text: 'A single chair',                   em: false },
-    { text: 'became a home for',                em: false },
-    { text: 'fifty thousand women.',            em: true  },
+    { text: 'Bridal. Hair. Skin.',              em: true  },
+    { text: 'Rubina\u2019s studio',             em: false },
+    { text: 'in PECHS Block 2,',                em: false },
+    { text: 'since 2008.',                      em: true  },
   ]
 
   return (
@@ -212,7 +213,7 @@ function StatsStrip() {
             <motion.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
-              KARACHI'S<br />MOST<br />TRUSTED<br />BEAUTY HOME
+              KARACHI'S<br />MOST<br />TRUSTED<br />BEAUTY STUDIO
             </motion.h2>
           </div>
           <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
@@ -223,9 +224,9 @@ function StatsStrip() {
             </p>
             <div className="grid grid-cols-3 gap-3 sm:gap-4 border-t border-[#e4ddd7] pt-6 sm:pt-7">
               {[
-                { display: '17+',  final: 17,    label: 'Years of expertise' },
-                { display: '50k+', final: 50000, label: 'Happy clients' },
+                { display: '17+',  final: 17,             label: 'Years of expertise' },
                 { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
+                { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services on the menu' },
               ].map(({ display, final, label }) => (
                 <div key={label} className="min-w-0">
                   <p className="font-['Unbounded'] font-bold text-lg sm:text-xl md:text-2xl text-ink mb-1 leading-none">
@@ -585,7 +586,7 @@ function CtaBand() {
 /* ─── Page ─────────────────────────────────────────────────────── */
 export default function Home() {
   usePageMeta({
-    title: 'Farwa Beauty Salon — Karachi\'s trusted beauty home since 2008',
+    title: 'Farwa Beauty Salon — Karachi\'s trusted beauty studio since 2008',
     description: 'Bridal, facials, hair, nails, threading, waxing and more in PECHS Block 2, Karachi. 17+ years of beauty expertise — book directly on WhatsApp.',
   })
   return (

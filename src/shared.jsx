@@ -805,13 +805,17 @@ export function Footer() {
 /* ─── Sticky WhatsApp pill (shown on all pages) ────────────────── */
 export function StickyWA() {
   return (
-    <div className="fixed bottom-5 left-0 right-0 z-50 px-5 flex justify-center md:hidden pointer-events-none">
-      <motion.a href={WA_DEFAULT} target="_blank" rel="noreferrer"
-        className="pointer-events-auto inline-flex items-center gap-2 bg-ink text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 shadow-2xl shadow-ink/30"
-        initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2, duration: 0.6, ease: [0.16,1,0.3,1] }}>
-        Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
-      </motion.a>
-    </div>
+    <>
+      {/* flow spacer so page content never hides behind the fixed pill on mobile */}
+      <div aria-hidden className="h-20 md:hidden" />
+      <div className="fixed bottom-5 left-0 right-0 z-50 px-5 flex justify-center md:hidden pointer-events-none">
+        <motion.a href={WA_DEFAULT} target="_blank" rel="noreferrer"
+          className="pointer-events-auto inline-flex items-center gap-2 bg-ink text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 shadow-2xl shadow-ink/30"
+          initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2, duration: 0.6, ease: [0.16,1,0.3,1] }}>
+          Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
+        </motion.a>
+      </div>
+    </>
   )
 }
 

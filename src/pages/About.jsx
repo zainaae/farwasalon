@@ -5,12 +5,13 @@ import { Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta, useBooking } fro
 import { SERVICES } from '../data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
+const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 
 export default function About() {
   const booking = useBooking()
   usePageMeta({
     title: 'Our Story — Farwa Beauty Salon, Karachi',
-    description: 'From a single chair in 2008 to a full-service beauty home in PECHS Block 2, Karachi — meet Farwa and the story behind 17+ years of beauty.',
+    description: 'From a single chair in 2008 to a full-service studio in PECHS Block 2, Karachi — meet Rubina and the story behind 17+ years at Farwa.',
   })
 
   return (
@@ -37,9 +38,9 @@ export default function About() {
           <div className="max-w-screen-xl mx-auto">
             <div className="grid grid-cols-3 gap-8 border-b border-[#e4ddd7] pb-12">
               {[
-                { display: '17+',  final: 17,    label: 'Years of expertise' },
-                { display: '50k+', final: 50000, label: 'Happy clients' },
+                { display: '17+',  final: 17,             label: 'Years of expertise' },
                 { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
+                { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services on the menu' },
               ].map(({ display, final, label }) => (
                 <motion.div key={label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
                   <p className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink mb-1">
@@ -69,7 +70,7 @@ export default function About() {
                     { year: '2010',  text: 'Expanded to two rooms' },
                     { year: '2014',  text: 'Growing by word of mouth' },
                     { year: '2016',  text: 'Moved to dedicated salon space' },
-                    { year: 'Today', text: 'A full-service beauty home, PECHS Block 2' },
+                    { year: 'Today', text: 'A full-service studio in PECHS Block 2' },
                   ].map((m, i) => (
                     <motion.div key={m.year} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.09 }}
                       className="flex gap-5 items-start">
@@ -88,16 +89,13 @@ export default function About() {
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
                 className="flex flex-col gap-6 pt-2 md:pt-10">
                 <p className="text-ink text-lg md:text-xl font-light leading-relaxed">
-                  "It started in 2008 — a young mother with a spark, a passion for beauty, and a single chair in one room of her home."
+                  "It started in 2008 — a single chair, a steady hand, and a belief that beauty was worth doing well."
                 </p>
                 <p className="text-stone text-sm leading-loose font-light">
-                  What began as a quiet dream quickly grew into something she could no longer contain. That one room became two. The whisper-by-word reputation spread, clients kept returning, and Farwa knew it was time.
+                  Rubina began Farwa as a small home-studio. One room became two. Word spread, clients kept returning, and the craft outgrew the house.
                 </p>
                 <p className="text-stone text-sm leading-loose font-light">
-                  She took the leap — stepping out of her home and into a dedicated salon space entirely her own. Today, Farwa Beauty Salon is not just a business. It is her second home. A place she built from the ground up, grew with, and poured herself into — every corner, every chair, every client.
-                </p>
-                <p className="text-stone text-sm leading-loose font-light">
-                  Over 17 years, more than fifty thousand women have walked in and left feeling more like themselves. That is the only goal that has ever mattered.
+                  She moved into a dedicated salon in PECHS Block 2 and kept expanding the menu — bridal, hair, skin, nails, brows — without letting the chair-side care slip. Seventeen years on, the standard is still set one appointment at a time.
                 </p>
                 <div className="grid grid-cols-1 gap-4 border-t border-[#e4ddd7] pt-8 mt-2">
                   {[
@@ -128,7 +126,7 @@ export default function About() {
             <div className="grid md:grid-cols-3 gap-8 md:gap-12">
               {[
                 { num: '01', title: '17 Years of Expertise',       desc: 'Since 2008, Farwa has been crafting beauty with skill, care, and love for every client who walks through the door.' },
-                { num: '02', title: 'A Space That Feels Like Home', desc: 'Our salon is warm, welcoming, and designed for every woman — a place where you can relax, be yourself, and leave glowing.' },
+                { num: '02', title: 'A Calm, Considered Space',    desc: 'The studio is unhurried by design — quiet rooms, careful lighting, conversations that stay at the chair.' },
                 { num: '03', title: 'Every Woman, Every Look',      desc: 'From a quick brow thread to a full bridal transformation — no request is too big or too small.' },
               ].map((p, i) => (
                 <motion.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}

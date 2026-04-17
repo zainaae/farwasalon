@@ -184,9 +184,8 @@ export const CATEGORIES   = ['All', ...Object.keys(SERVICES)]
 /*
  * CAT_META — one unique image per category, carefully mapped so no two
  * adjacent categories in the services grid share an asset.
- * Note: Eyebrow Tattoo + Threading share threading.jpg by design —
- * they're the same brow-area service family. Swap when a dedicated
- * microblading asset is added.
+ * Intentional family-share (replace when a dedicated asset arrives):
+ *   Hair + Hair Treatments → hairdo.jpg (hair family)
  */
 export const CAT_META = {
   'Threading':       { img: '/threading.jpg',  desc: 'Precision threading for brows, lips, and full face — quick, clean, and perfectly shaped every time.' },
@@ -195,13 +194,13 @@ export const CAT_META = {
   'Oil Wax':         { img: '/glow3.jpg',      desc: 'Nourishing oil wax for a smooth finish that conditions your skin while removing hair.' },
   'Bleach & Polish': { img: '/glow.jpg',       desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
   'Massage':         { img: '/massage.jpg',    desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
-  'Hair Treatments': { img: '/bridal2.jpg',    desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
-  'Cleansing':       { img: '/facial.jpg',     desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
+  'Hair Treatments': { img: '/hairdo.jpg',     desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
+  'Cleansing':       { img: '/cleansing.jpg',  desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
   'Facials':         { img: '/glow2.png',      desc: 'A full range of facials — from everyday glow to premium whitening and anti-ageing treatments.' },
   'Nails':           { img: '/pedicure.jpg',   desc: 'Manicures, pedicures, nail art, and extensions — for hands and feet that make a statement.' },
   'Bridal':          { img: '/bridal.jpg',     desc: 'Complete wedding packages — from trials to the big day. We make every bride feel extraordinary.' },
   'Hair':            { img: '/hairdo.jpg',     desc: 'Cuts, colour, blowdrys, and styling for every hair type and texture.' },
-  'Eyebrow Tattoo':  { img: '/threading.jpg',  desc: 'Semi-permanent brow definition — microblading, powder brows, and combination brows.' },
+  'Eyebrow Tattoo':  { img: '/eyebrowtattoo.jpg', desc: 'Semi-permanent brow definition — microblading, powder brows, and combination brows.' },
 }
 
 export const GALLERY_PHOTOS = [
@@ -233,11 +232,11 @@ export const GALLERY_PHOTOS = [
 export const TESTIMONIALS = [
   { id: 1, source: 'google', stars: 5, date: '2024-08-12',
     name: 'Aisha K.', role: 'Bride', company: 'Full Bridal Package',
-    content: 'Farwa Aapi made my wedding day absolutely perfect. I had been her client for years but nothing prepared me for how beautiful I felt on my nikah. Every girl in Karachi deserves this experience.',
+    content: 'Rubina Aapi made my wedding day absolutely perfect. I had been her client for years but nothing prepared me for how I felt on my nikah. Every bride in Karachi deserves this kind of care.',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face' },
   { id: 2, source: 'google', stars: 5, date: '2024-05-03',
     name: 'Sana R.', role: 'Regular Client', company: 'Since 2019',
-    content: 'I have been coming to Farwa Beauty Salon for over 5 years and I will never go anywhere else. The team genuinely cares, the work is flawless, and it honestly feels like a second home.',
+    content: 'I have been coming to Farwa for over 5 years and I will never go anywhere else. The team genuinely cares, the work is flawless, and the standard never slips — visit after visit.',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face' },
   { id: 3, source: 'facebook', stars: 5, date: '2024-02-18',
     name: 'Mehwish T.', role: 'Monthly Member', company: 'Skincare & Nails',
