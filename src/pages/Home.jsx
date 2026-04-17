@@ -422,7 +422,7 @@ function TrustPillars() {
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           {[
             { num: '01', title: '17 Years of Expertise',        desc: 'Since 2008, Farwa has been crafting beauty with skill, care, and love for every client who walks through the door.' },
-            { num: '02', title: 'A Space That Feels Like Home',  desc: 'Our salon is warm, welcoming, and designed for every woman — a place where you can relax, be yourself, and leave glowing.' },
+            { num: '02', title: 'A Calm, Considered Space',      desc: 'The studio is unhurried by design — quiet rooms, careful lighting, conversations that stay at the chair.' },
             { num: '03', title: 'Every Woman, Every Look',       desc: 'From a quick brow thread to a full bridal transformation — no request is too big or too small.' },
           ].map((p, i) => (
             <motion.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}

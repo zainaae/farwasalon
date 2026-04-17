@@ -191,7 +191,7 @@ export const CAT_META = {
   'Threading':       { img: '/threading.jpg',  desc: 'Precision threading for brows, lips, and full face — quick, clean, and perfectly shaped every time.' },
   'Hot Wax':         { img: '/waxing.png',     desc: 'Hot wax for sensitive areas — gentle, effective, and long-lasting results.' },
   'Cold Wax':        { img: '/wax2.jpg',       desc: 'Smooth, hair-free skin with our cold wax formulation — perfect for arms, legs, and body.' },
-  'Oil Wax':         { img: '/glow3.jpg',      desc: 'Nourishing oil wax for a smooth finish that conditions your skin while removing hair.' },
+  'Oil Wax':         { img: '/oilwax.png',     desc: 'Nourishing oil wax for a smooth finish that conditions your skin while removing hair.' },
   'Bleach & Polish': { img: '/glow.jpg',       desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
   'Massage':         { img: '/massage.jpg',    desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
   'Hair Treatments': { img: '/hairdo.jpg',     desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
