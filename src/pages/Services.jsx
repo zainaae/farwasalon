@@ -4,13 +4,8 @@ import { ArrowUpRight, ChevronRight, ChevronLeft } from 'lucide-react'
 import { Navbar, Footer, StickyWA, ServiceModal, usePageMeta, useBooking } from '../shared.jsx'
 import { SERVICES, CAT_META } from '../data.js'
 
-/* Category images for categories without explicit images */
-const CAT_IMAGES = {
-  ...CAT_META,
-}
-
 function getCatMeta(cat) {
-  return CAT_IMAGES[cat] || { img: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=900&auto=format&fit=crop', desc: 'Expert beauty services tailored just for you.' }
+  return CAT_META[cat] || { img: '/glow.jpg', desc: 'Expert beauty services tailored just for you.' }
 }
 
 /* ─── Category grid ────────────────────────────────────────────── */

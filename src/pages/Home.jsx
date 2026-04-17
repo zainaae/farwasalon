@@ -261,8 +261,8 @@ function EditorialSlideshow() {
         <div className="flex w-max" style={{ animation: 'marquee 45s linear infinite' }}>
           {doubled.map((p, i) => (
             <figure key={i}
-              className="relative shrink-0 overflow-hidden mx-1.25"
-              style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)', marginLeft: 5, marginRight: 5 }}>
+              className="relative shrink-0 overflow-hidden mx-[5px]"
+              style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)' }}>
               <img src={p.src} alt={p.label} loading="lazy" decoding="async"
                 className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
