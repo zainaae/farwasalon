@@ -31,18 +31,18 @@ const FEATURED_REVIEW = {
 
 /* ─── Editorial slideshow — visual rhythm: face ↔ technique ↔ product ── */
 const EDITORIAL_PHOTOS = [
-  { src: '/bridal.jpg',    label: 'Bridal' },
-  { src: '/waxing.png',    label: 'Hot Wax' },
-  { src: '/glow2.png',     label: 'Facials' },
-  { src: '/pedicure.jpg',  label: 'Nails' },
-  { src: '/threading.jpg', label: 'Threading' },
-  { src: '/hairdo.jpg',    label: 'Hair' },
-  { src: '/glow.jpg',      label: 'Bleach & Polish' },
-  { src: '/massage.jpg',   label: 'Massage' },
-  { src: '/facial.jpg',    label: 'Cleansing' },
-  { src: '/wax2.jpg',      label: 'Cold Wax' },
-  { src: '/bridal2.jpg',   label: 'Hair Treatments' },
-  { src: '/glow3.jpg',     label: 'Radiance' },
+  { src: '/bridal.jpg',         label: 'Bridal' },
+  { src: '/eyebrowtattoo.jpg',  label: 'Eyebrow Tattoo' },
+  { src: '/glow2.png',          label: 'Facials' },
+  { src: '/pedicure.jpg',       label: 'Nails' },
+  { src: '/threading.jpg',      label: 'Threading' },
+  { src: '/hairdo.jpg',         label: 'Hair' },
+  { src: '/oilwax.png',         label: 'Oil Wax' },
+  { src: '/massage.jpg',        label: 'Massage' },
+  { src: '/cleansing.jpg',      label: 'Cleansing' },
+  { src: '/wax2.jpg',           label: 'Cold Wax' },
+  { src: '/bridal2.jpg',        label: 'Hair Treatments' },
+  { src: '/glow.jpg',           label: 'Bleach & Polish' },
 ]
 
 /* ─── Hero — thesis copy + kinetic reveal + calmer video ──────── */

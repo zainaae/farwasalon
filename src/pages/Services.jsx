@@ -39,7 +39,12 @@ function CategoryGrid({ onSelect }) {
             <motion.button key={cat} onClick={() => onSelect(cat)}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.05 }}
               className="relative overflow-hidden group text-left" style={{ aspectRatio: '3/4' }}>
-              <img src={meta.img} alt={cat} loading="lazy" decoding="async" width="900" height="1200" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <img src={meta.img} alt={cat} loading="lazy" decoding="async" width="900" height="1200"
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105${meta.video ? ' group-hover:opacity-0' : ''}`} />
+              {meta.video && (
+                <video src={meta.video} autoPlay muted loop playsInline
+                  className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-ink/5" />
               <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/20 transition-colors duration-300" />
               <div className="absolute top-3 right-3">

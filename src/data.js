@@ -195,12 +195,12 @@ export const CAT_META = {
   'Bleach & Polish': { img: '/glow.jpg',       desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
   'Massage':         { img: '/massage.jpg',    desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
   'Hair Treatments': { img: '/hairdo.jpg',     desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
-  'Cleansing':       { img: '/cleansing.jpg',  desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
-  'Facials':         { img: '/glow2.png',      desc: 'A full range of facials — from everyday glow to premium whitening and anti-ageing treatments.' },
-  'Nails':           { img: '/pedicure.jpg',   desc: 'Manicures, pedicures, nail art, and extensions — for hands and feet that make a statement.' },
-  'Bridal':          { img: '/bridal.jpg',     desc: 'Complete wedding packages — from trials to the big day. We make every bride feel extraordinary.' },
-  'Hair':            { img: '/hairdo.jpg',     desc: 'Cuts, colour, blowdrys, and styling for every hair type and texture.' },
-  'Eyebrow Tattoo':  { img: '/eyebrowtattoo.jpg', desc: 'Semi-permanent brow definition — microblading, powder brows, and combination brows.' },
+  'Cleansing':       { img: '/cleansing.jpg',      video: '/cleansing.mp4',      desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
+  'Facials':         { img: '/glow2.png',                                        desc: 'A full range of facials — from everyday glow to premium whitening and anti-ageing treatments.' },
+  'Nails':           { img: '/pedicure.jpg',       video: '/nails.mp4',          desc: 'Manicures, pedicures, nail art, and extensions — for hands and feet that make a statement.' },
+  'Bridal':          { img: '/bridal.jpg',                                        desc: 'Complete wedding packages — from trials to the big day. We make every bride feel extraordinary.' },
+  'Hair':            { img: '/hairdo.jpg',                                        desc: 'Cuts, colour, blowdrys, and styling for every hair type and texture.' },
+  'Eyebrow Tattoo':  { img: '/eyebrowtattoo.jpg',  video: '/eyebrowtattoo.mp4',  desc: 'Semi-permanent brow definition — microblading, powder brows, and combination brows.' },
 }
 
 export const GALLERY_PHOTOS = [
