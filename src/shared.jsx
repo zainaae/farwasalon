@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState, useCallback, createContext, useContext } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles } from 'lucide-react'
-import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, SERVICES, ALL_SERVICES, CATEGORIES } from './data.js'
+import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Check } from 'lucide-react'
+import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES } from './data.js'
 
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
 export function useNextSlot() {
@@ -152,8 +152,8 @@ export function SmoothyGallery({ photos }) {
     if (!el) return
     const child = el.children[n]
     if (!child) return
-    const left = child.offsetLeft - (el.clientWidth - child.clientWidth) / 2
-    el.scrollTo({ left, behavior: 'smooth' })
+    const left = child.offsetLeft + child.offsetWidth / 2 - el.clientWidth / 2
+    el.scrollTo({ left: Math.max(0, left), behavior: 'smooth' })
     setIdx(n)
   }, [])
 
@@ -171,13 +171,11 @@ export function SmoothyGallery({ photos }) {
     setIdx(best)
   }, [])
 
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === 'ArrowRight') scrollTo(Math.min(count - 1, idx + 1))
-      if (e.key === 'ArrowLeft')  scrollTo(Math.max(0, idx - 1))
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+  const onRegionKeyDown = useCallback((e) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
+    e.preventDefault()
+    if (e.key === 'ArrowRight') scrollTo(Math.min(count - 1, idx + 1))
+    else scrollTo(Math.max(0, idx - 1))
   }, [idx, count, scrollTo])
 
   return (
@@ -185,8 +183,12 @@ export function SmoothyGallery({ photos }) {
       <div
         ref={scrollerRef}
         onScroll={onScroll}
-        className="snap-x-row snap-center-child flex overflow-x-auto gap-3 md:gap-4 px-[max(1rem,calc(50vw-200px))] md:px-[max(2.5rem,calc(50vw-220px))] pb-2"
-        role="region" aria-label="Salon photo gallery"
+        onKeyDown={onRegionKeyDown}
+        tabIndex={0}
+        className="snap-x-row snap-center-child flex overflow-x-auto gap-3 md:gap-4 px-[max(1rem,calc(50vw-200px))] md:px-[max(2.5rem,calc(50vw-220px))] pb-2 outline-none focus-visible:ring-2 focus-visible:ring-[#c9a98a] focus-visible:ring-offset-2"
+        role="region"
+        aria-label="Salon photo gallery"
+        aria-describedby="gallery-swipe-hint"
       >
         {photos.map((p, i) => (
           <figure key={i} className="relative shrink-0 overflow-hidden bg-[#0d0609]"
@@ -218,10 +220,10 @@ export function SmoothyGallery({ photos }) {
       </div>
 
       {/* Progress dots */}
-      <div className="flex items-center justify-center gap-1.5 mt-5" role="tablist" aria-label="Gallery pagination">
+      <div className="flex items-center justify-center gap-1.5 mt-5" role="group" aria-label="Choose photo">
         {photos.map((_, i) => (
-          <button key={i} onClick={() => scrollTo(i)}
-            role="tab" aria-selected={idx === i} aria-label={`Go to photo ${i + 1}`}
+          <button key={i} type="button" onClick={() => scrollTo(i)}
+            aria-current={idx === i ? 'true' : undefined} aria-label={`Photo ${i + 1}`}
             className={`h-[2px] transition-all duration-300 ${idx === i ? 'w-8 bg-ink' : 'w-3 bg-stone/30 hover:bg-stone/60'}`} />
         ))}
       </div>
@@ -231,22 +233,26 @@ export function SmoothyGallery({ photos }) {
 
 /* ─── Visual month calendar (used inside BookingSheet) ─────────── */
 function MonthCalendar({ value, onChange }) {
-  const todayRef = useRef((() => { const d = new Date(); d.setHours(0,0,0,0); return d })())
-  const [yr, setYr] = useState(() => todayRef.current.getFullYear())
-  const [mo, setMo] = useState(() => todayRef.current.getMonth())
+  const [todayStart] = useState(() => {
+    const d = new Date()
+    d.setHours(0, 0, 0, 0)
+    return d
+  })
+  const [yr, setYr] = useState(() => todayStart.getFullYear())
+  const [mo, setMo] = useState(() => todayStart.getMonth())
 
   const firstWeekday = new Date(yr, mo, 1).getDay()
   const daysInMonth  = new Date(yr, mo + 1, 0).getDate()
   const monthLabel   = new Date(yr, mo).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
-  const todayStr     = todayRef.current.toISOString().slice(0, 10)
+  const todayStr     = todayStart.toISOString().slice(0, 10)
 
   const prev = () => { const d = new Date(yr, mo - 1); setYr(d.getFullYear()); setMo(d.getMonth()) }
   const next = () => { const d = new Date(yr, mo + 1); setYr(d.getFullYear()); setMo(d.getMonth()) }
-  const canPrev = new Date(yr, mo) > new Date(todayRef.current.getFullYear(), todayRef.current.getMonth())
+  const canPrev = new Date(yr, mo) > new Date(todayStart.getFullYear(), todayStart.getMonth())
 
   const strFor   = (day) => new Date(yr, mo, day).toISOString().slice(0, 10)
   const dayOfWk  = (day) => new Date(yr, mo, day).getDay()
-  const isPast   = (day) => { const d = new Date(yr, mo, day); d.setHours(0,0,0,0); return d < todayRef.current }
+  const isPast   = (day) => { const d = new Date(yr, mo, day); d.setHours(0,0,0,0); return d < todayStart }
   const isClosed = (day) => dayOfWk(day) === 0  // Sunday
   const isSel    = (day) => value === strFor(day)
   const isToday  = (day) => strFor(day) === todayStr
@@ -323,22 +329,60 @@ function MonthCalendar({ value, onChange }) {
   )
 }
 
-/* ─── Smart Booking Sheet — 3-step flow → pre-filled WhatsApp ── */
+function BookingSheetSelectedChips({ picked, onRemove }) {
+  if (picked.length === 0) return null
+  return (
+    <div>
+      <p className="text-stone text-[10px] tracking-[0.22em] uppercase font-['Inter'] mb-2">Selected ({picked.length})</p>
+      <ul className="flex flex-wrap gap-2 mb-4" aria-label="Selected services">
+        {picked.map((p) => (
+          <li key={p.id}>
+            <span className="inline-flex items-center gap-1.5 max-w-full pl-3 pr-1 py-1.5 bg-mist border border-[#e4ddd7] text-[11px] font-['Inter'] text-ink">
+              <span className="truncate font-['Syne'] font-semibold uppercase tracking-tight">{p.name}</span>
+              <button
+                type="button"
+                onClick={() => onRemove(p.id)}
+                className="tap-safe shrink-0 p-1.5 text-stone hover:text-ink rounded-none"
+                aria-label={`Remove ${p.name}`}
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+/* ─── Smart Booking Sheet — multi-service step 1 → date → WhatsApp ── */
 export function BookingSheet({ open, onClose, initialCategory = null }) {
   const [step, setStep] = useState(0)
-  const [cat,  setCat]  = useState(initialCategory)
-  const [svc,  setSvc]  = useState('')
+  const [cat, setCat] = useState(initialCategory)
+  /** @type {{ id: string|number, name: string }[]} */
+  const [picked, setPicked] = useState([])
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
 
-  // Reset on close
+  useEffect(() => {
+    if (!open) return undefined
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- sync category when overlay opens from provider
+    setCat(initialCategory ?? null)
+    return undefined
+  }, [open, initialCategory])
+
   useEffect(() => {
     if (!open) {
       const t = setTimeout(() => {
-        setStep(0); setCat(initialCategory); setSvc(''); setDate(''); setTime('')
+        setStep(0)
+        setCat(initialCategory)
+        setPicked([])
+        setDate('')
+        setTime('')
       }, 350)
       return () => clearTimeout(t)
     }
+    return undefined
   }, [open, initialCategory])
 
   useEffect(() => {
@@ -349,108 +393,182 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
     return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey) }
   }, [open, onClose])
 
+  const toggleService = useCallback((s) => {
+    const id = s.id
+    setPicked((prev) => {
+      const ex = prev.find((p) => p.id === id)
+      if (ex) return prev.filter((p) => p.id !== id)
+      return [...prev, { id, name: s.name }]
+    })
+  }, [])
+
+  const removePick = useCallback((id) => {
+    setPicked((prev) => prev.filter((p) => p.id !== id))
+  }, [])
+
+  const toggleCategoryHint = useCallback(() => {
+    if (!cat) return
+    const id = `__cat__:${cat}`
+    setPicked((prev) => {
+      const ex = prev.find((p) => p.id === id)
+      if (ex) return prev.filter((p) => p.id !== id)
+      return [...prev, { id, name: cat }]
+    })
+  }, [cat])
+
+  const serviceNamesSummary = picked.map((p) => p.name).join(', ')
+
   const handleBook = () => {
-    const chosenSvc = svc || cat || 'a service'
-    const lines = [
-      `Hi! I'd like to book an appointment at Farwa Beauty Salon.`,
-      ``,
-      `Service: ${chosenSvc}`,
-      date ? `Preferred date: ${date}` : '',
-      time ? `Preferred time: ${time}` : '',
-    ].filter(Boolean).join('\n')
-    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines)}`
-    window.open(url, '_blank', 'noopener,noreferrer')
+    const names = picked.map((p) => p.name).filter(Boolean)
+    window.open(waLinkBooking(names, { date, time }), '_blank', 'noopener,noreferrer')
     onClose()
   }
 
-  const timeOptions = ['11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM']
-  const today = new Date().toISOString().slice(0,10)
+  const timeOptions = ['11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM', '7:00 PM']
 
   return (
     <AnimatePresence>
       {open && (
-        <motion.div className="fixed inset-0 z-[200] flex items-end md:items-center justify-center bg-ink/60 backdrop-blur-sm"
+        <motion.div
+          className="fixed inset-0 z-[200] flex items-end md:items-center justify-center bg-ink/[0.62]"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-          onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="booking-title">
+          onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="booking-title"
+        >
           <motion.div
             initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
             transition={{ type: 'spring', stiffness: 320, damping: 34 }}
-            onClick={e => e.stopPropagation()}
-            className="bg-white w-full md:max-w-xl md:mx-4 rounded-t-2xl md:rounded-none flex flex-col max-h-[min(92dvh,calc(100svh-env(safe-area-inset-bottom,0px)))] shadow-[0_-8px_40px_rgba(0,0,0,0.12)] md:shadow-none">
-            {/* Header */}
-            <div className="flex items-center justify-between px-5 md:px-7 py-4 border-b border-[#e4ddd7]">
+            onClick={(e) => e.stopPropagation()}
+            className="bg-white w-full md:max-w-xl md:mx-4 rounded-t-2xl md:rounded-none flex flex-col max-h-[min(92dvh,calc(100svh-env(safe-area-inset-bottom,0px)))] shadow-[0_-8px_40px_rgba(0,0,0,0.12)] md:shadow-none"
+          >
+            <div className="flex items-center justify-between px-5 md:px-7 py-3.5 md:py-4 border-b border-[#e4ddd7]">
               <div>
                 <p className="text-stone text-[10px] tracking-[0.24em] uppercase font-['Inter']">Step {step + 1} of 3</p>
                 <h2 id="booking-title" className="font-['Unbounded'] font-bold text-ink text-base md:text-lg mt-0.5">
-                  {step === 0 && 'Choose a service'}
+                  {step === 0 && 'Choose services'}
                   {step === 1 && 'Pick a date'}
                   {step === 2 && 'Pick a time'}
                 </h2>
               </div>
-              <button onClick={onClose} aria-label="Close booking"
+              <button type="button" onClick={onClose} aria-label="Close booking"
                 className="tap-safe text-stone hover:text-ink transition-colors">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Progress */}
             <div className="h-[2px] bg-[#e4ddd7] w-full">
-              <div className="h-full bg-gradient-to-r from-[#c9a98a] to-[#8b6d59] transition-all duration-400"
-                style={{ width: `${((step + 1) / 3) * 100}%` }} />
+              <div
+                className="h-full bg-gradient-to-r from-[#c9a98a] to-[#8b6d59] transition-all duration-400"
+                style={{ width: `${((step + 1) / 3) * 100}%` }}
+              />
             </div>
 
-            {/* Body */}
-            <div className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6 pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] md:pb-6 overscroll-contain">
+            <div className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6 pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] md:pb-6 overscroll-contain flex flex-col min-h-0">
               {step === 0 && (
-                <div>
+                <>
+                  <BookingSheetSelectedChips picked={picked} onRemove={removePick} />
                   {!cat ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                      {Object.keys(SERVICES).map(c => (
-                        <button key={c} onClick={() => setCat(c)}
-                          className="tap-safe p-3 border border-[#e4ddd7] hover:border-ink hover:bg-mist transition-all text-left">
-                          <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight">{c}</p>
-                          <p className="text-stone text-[10px] font-['Inter'] mt-1">{SERVICES[c].length} services</p>
-                        </button>
-                      ))}
-                    </div>
-                  ) : (
-                    <div>
-                      <button onClick={() => setCat(null)}
-                        className="mb-4 inline-flex items-center gap-1.5 text-stone text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
-                        <ChevronLeft className="w-3 h-3" /> All categories
-                      </button>
-                      <p className="text-stone text-[10px] tracking-[0.22em] uppercase font-['Inter'] mb-3">{cat}</p>
-                      <div className="flex flex-col divide-y divide-[#e4ddd7]">
-                        {SERVICES[cat].map(s => (
-                          <button key={s.id} onClick={() => { setSvc(s.name); setStep(1) }}
-                            className="tap-safe flex items-center justify-between py-3.5 text-left hover:pl-2 transition-all">
-                            <span className="font-['Syne'] font-bold text-[13px] text-ink uppercase">{s.name}</span>
-                            <ArrowUpRight className="w-4 h-4 text-stone/40" />
+                    <div className="flex-1">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                        {Object.keys(SERVICES).map((c) => (
+                          <button
+                            key={c}
+                            type="button"
+                            onClick={() => setCat(c)}
+                            className="tap-safe p-3 border border-[#e4ddd7] hover:border-ink hover:bg-mist transition-all text-left"
+                          >
+                            <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight">{c}</p>
+                            <p className="text-stone text-[10px] font-['Inter'] mt-1">{SERVICES[c].length} services</p>
                           </button>
                         ))}
                       </div>
-                      <button onClick={() => { setSvc(cat); setStep(1) }}
-                        className="mt-4 text-stone text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
-                        Not sure yet · continue with &ldquo;{cat}&rdquo; →
+                    </div>
+                  ) : (
+                    <div className="flex-1 flex flex-col min-h-0">
+                      <button
+                        type="button"
+                        onClick={() => setCat(null)}
+                        className="mb-3 shrink-0 inline-flex items-center gap-1.5 text-stone text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
+                      >
+                        <ChevronLeft className="w-3 h-3" /> Add from another category
+                      </button>
+                      <p className="text-stone text-[10px] tracking-[0.22em] uppercase font-['Inter'] mb-2">{cat}</p>
+                      <p className="text-[11px] text-stone/80 font-['Inter'] font-light mb-3">
+                        Tap to select one or more. Then continue when you&apos;re ready.
+                      </p>
+                      <div className="flex flex-col divide-y divide-[#e4ddd7] border-y border-[#e4ddd7] flex-1 min-h-0 overflow-y-auto overscroll-contain">
+                        {(SERVICES[cat] ?? []).map((s) => {
+                          const sel = picked.some((p) => p.id === s.id)
+                          return (
+                            <button
+                              key={s.id}
+                              type="button"
+                              onClick={() => toggleService(s)}
+                              aria-pressed={sel}
+                              className={`tap-safe flex items-center justify-between gap-3 py-3.5 text-left transition-colors ${
+                                sel ? 'bg-[#faf7f5] pl-2' : 'hover:bg-mist hover:pl-2'
+                              }`}
+                            >
+                              <span className="font-['Syne'] font-bold text-[13px] text-ink uppercase min-w-0">{s.name}</span>
+                              <span
+                                className={`shrink-0 w-8 h-8 flex items-center justify-center border ${
+                                  sel ? 'border-ink bg-ink text-white' : 'border-[#e4ddd7] text-transparent'
+                                }`}
+                                aria-hidden="true"
+                              >
+                                <Check className="w-4 h-4" strokeWidth={2.5} />
+                              </span>
+                            </button>
+                          )
+                        })}
+                      </div>
+                      <button
+                        type="button"
+                        onClick={toggleCategoryHint}
+                        className="mt-4 text-left text-stone text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
+                      >
+                        {cat && picked.some((p) => p.id === `__cat__:${cat}`)
+                          ? `Remove "${cat}" general booking`
+                          : `Not sure which treatment · include "${cat}" as a note`}
                       </button>
                     </div>
                   )}
-                </div>
+
+                  {picked.length > 0 && (
+                    <div className="sticky bottom-0 z-[1] -mx-2 px-2 pt-4 mt-4 border-t border-[#e4ddd7] bg-white shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => setStep(1)}
+                        className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone transition-colors"
+                      >
+                        Continue · {picked.length} service{picked.length === 1 ? '' : 's'}
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
 
               {step === 1 && (
                 <div>
-                  <p className="text-stone text-sm font-['Inter'] font-light mb-5">
-                    Booking for <span className="text-ink font-medium">{svc}</span>
+                  <p className="text-stone text-sm font-['Inter'] font-light mb-2">
+                    <span className="text-ink font-medium">{picked.length}</span>{' '}
+                    service{picked.length === 1 ? '' : 's'} selected
                   </p>
-                  {/* Visual month calendar — tap a date to auto-advance */}
-                  <MonthCalendar
-                    value={date}
-                    onChange={(d) => { setDate(d); setStep(2) }}
-                  />
+                  {picked.length <= 3 ? (
+                    <p className="text-ink text-xs font-['Inter'] mb-5 leading-relaxed">{serviceNamesSummary}</p>
+                  ) : (
+                    <ul className="text-ink text-xs font-['Inter'] mb-5 list-disc pl-5 space-y-1 max-h-[5.5rem] overflow-y-auto">
+                      {picked.map((p) => (
+                        <li key={p.id}>{p.name}</li>
+                      ))}
+                    </ul>
+                  )}
+                  <MonthCalendar value={date} onChange={(d) => { setDate(d); setStep(2) }} />
                   <div className="flex justify-start gap-2 mt-5 pt-4 border-t border-[#e4ddd7]">
-                    <button onClick={() => setStep(0)}
-                      className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink transition-colors">
+                    <button
+                      type="button"
+                      onClick={() => setStep(0)}
+                      className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink transition-colors"
+                    >
                       ← Back
                     </button>
                   </div>
@@ -459,25 +577,41 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
 
               {step === 2 && (
                 <div>
-                  <p className="text-stone text-sm font-['Inter'] font-light mb-4">
-                    {svc} &middot; <span className="text-ink font-medium">{new Date(date).toDateString()}</span>
+                  <p className="text-stone text-sm font-['Inter'] font-light mb-2">
+                    {picked.length} service{picked.length === 1 ? '' : 's'} ·{' '}
+                    <span className="text-ink font-medium">{date ? new Date(`${date}T12:00:00`).toDateString() : ''}</span>
                   </p>
                   <div className="grid grid-cols-2 min-[420px]:grid-cols-3 gap-2 mb-5">
-                    {timeOptions.map(t => (
-                      <button key={t} onClick={() => setTime(t)}
+                    {timeOptions.map((t) => (
+                      <button
+                        key={t}
+                        type="button"
+                        onClick={() => setTime(t)}
                         className={`tap-safe py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-all ${
                           time === t
                             ? 'bg-ink text-white border-ink'
                             : 'border-[#e4ddd7] text-ink hover:border-ink hover:bg-mist'
-                        }`}>
-                        <Clock className="w-3 h-3 inline mr-1 opacity-60" />{t}
+                        }`}
+                      >
+                        <Clock className="w-3 h-3 inline mr-1 opacity-60" aria-hidden="true" />
+                        {t}
                       </button>
                     ))}
                   </div>
                   <div className="flex justify-between gap-2 pt-3 border-t border-[#e4ddd7]">
-                    <button onClick={() => setStep(1)} className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink">Back</button>
-                    <button onClick={handleBook} disabled={!time}
-                      className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
+                    <button
+                      type="button"
+                      onClick={() => setStep(1)}
+                      className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink"
+                    >
+                      Back
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleBook}
+                      disabled={!time}
+                      className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    >
                       <Sparkles className="w-3.5 h-3.5" /> Send on WhatsApp
                     </button>
                   </div>
@@ -492,7 +626,6 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
 }
 
 /* ─── Booking context (global access) ──────────────────────────── */
-import { createContext, useContext } from 'react'
 const BookingCtx = createContext({ open: () => {} })
 export function BookingProvider({ children }) {
   const [state, setState] = useState({ open: false, category: null })
@@ -585,7 +718,7 @@ export function ServiceModal({ service, onClose }) {
           aria-labelledby={titleId}
           aria-describedby={service.desc ? descId : undefined}
           className="bg-white w-[min(100%,calc(100vw-1.5rem))] sm:w-full max-w-lg max-h-[min(85dvh,calc(100dvh-2rem))] overflow-hidden mx-auto"
-          initial={{ opacity: 0, y: 50, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 16 }}
           transition={{ type: 'spring', stiffness: 280, damping: 28 }} onClick={e => e.stopPropagation()}>
           <div className="p-6 md:p-8 flex flex-col max-h-[min(85dvh,calc(100dvh-2rem))] overflow-y-auto overscroll-contain">
             <div className="flex justify-between items-start mb-5">
@@ -629,20 +762,20 @@ function Logo({ light }) {
      (JPG has white background so brightness-0+invert turns it into a flat white blob) */
   if (!light) {
     return (
-      <span className="font-['Unbounded'] font-bold text-[13px] md:text-sm tracking-[0.12em] text-white drop-shadow-sm">
+      <span className="font-['Unbounded'] font-bold text-[12px] md:text-[13px] tracking-[0.12em] text-white">
         FARWA
       </span>
     )
   }
   if (err) {
-    return <span className="font-['Unbounded'] font-bold text-[13px] md:text-sm tracking-[0.12em] text-ink">FARWA</span>
+    return <span className="font-['Unbounded'] font-bold text-[12px] md:text-[13px] tracking-[0.12em] text-ink">FARWA</span>
   }
   return (
     <img
       src="/logo.jpg"
       alt="Farwa Beauty Salon"
       onError={() => setErr(true)}
-      className="h-9 md:h-10 w-auto object-contain transition-opacity duration-300"
+      className="h-8 md:h-[2.125rem] w-auto object-contain transition-opacity duration-300"
     />
   )
 }
@@ -659,7 +792,10 @@ export function Navbar({ transparent = false }) {
     return () => window.removeEventListener('scroll', fn)
   }, [])
   /* Close mobile drawer on route change */
-  useEffect(() => { setMobileOpen(false) }, [pathname])
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- close drawer on navigation
+    setMobileOpen(false)
+  }, [pathname])
   const light = scrolled || !transparent
 
   const navLinks = [
@@ -671,9 +807,18 @@ export function Navbar({ transparent = false }) {
   ]
 
   return (
-    <motion.header initial={{ y: -70, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, ease: [0.16,1,0.3,1] }}
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-400 pt-[env(safe-area-inset-top,0px)] ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_0_#e4ddd7]' : transparent ? '' : 'bg-white'}`}>
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 h-16 md:h-[68px] flex items-center justify-between gap-2 min-w-0">
+    <motion.header
+      layout={false}
+      initial={{ y: -32, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      className={`fixed top-0 left-0 right-0 z-[100] transition-[background-color,box-shadow] duration-300 pt-[env(safe-area-inset-top,0px)] isolate [backface-visibility:hidden] ${
+        scrolled
+          ? 'bg-white shadow-[0_1px_0_0_#e4ddd7]'
+          : transparent ? '' : 'bg-white'
+      }`}
+    >
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 h-[3.375rem] md:h-14 flex items-center justify-between gap-2 min-w-0">
         <Link to="/" className="shrink-0">
           <Logo light={light} />
         </Link>
@@ -689,11 +834,18 @@ export function Navbar({ transparent = false }) {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <button onClick={() => booking.open()}
-            className={`hidden md:inline-flex items-center gap-1.5 text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-5 py-2.5 transition-all duration-300 ${light ? 'bg-ink text-white hover:bg-stone' : 'bg-white text-ink hover:bg-nude'}`}>
+          <button
+            type="button"
+            onClick={() => booking.open()}
+            className={`hidden md:inline-flex items-center gap-1.5 text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-[1.125rem] py-[0.4375rem] transition-colors duration-300 ${light ? 'bg-ink text-white hover:bg-stone' : 'bg-white text-ink hover:bg-nude'}`}>
             Book an Appointment
           </button>
-          <button className={`md:hidden p-1 ${light ? 'text-ink' : 'text-white'}`} onClick={() => setMobileOpen(o => !o)} aria-label="Menu" aria-expanded={mobileOpen}>
+          <button
+            type="button"
+            className={`md:hidden p-2 -m-1 min-w-[44px] min-h-[44px] flex items-center justify-center ${light ? 'text-ink' : 'text-white'}`}
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label={mobileOpen ? 'Close menu' : 'Menu'}
+            aria-expanded={mobileOpen}>
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
@@ -702,14 +854,14 @@ export function Navbar({ transparent = false }) {
         {mobileOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden bg-white border-t border-[#e4ddd7]">
-            <div className="px-5 py-6 flex flex-col gap-5">
+            <div className="px-5 py-5 flex flex-col gap-4">
               {navLinks.map(({ label, to }) => (
                 <Link key={to} to={to} onClick={() => setMobileOpen(false)}
                   className="text-[11px] tracking-[0.18em] uppercase text-stone hover:text-ink font-['Inter']">
                   {label}
                 </Link>
               ))}
-              <button onClick={() => { setMobileOpen(false); booking.open() }}
+              <button type="button" onClick={() => { setMobileOpen(false); booking.open() }}
                 className="inline-flex items-center justify-center bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-5 py-3 w-fit mt-1">
                 Book an Appointment
               </button>
@@ -821,4 +973,4 @@ export function StickyWA() {
 }
 
 /* ─── Page wrapper with Lenis ──────────────────────────────────── */
-export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, SERVICES, ALL_SERVICES, CATEGORIES }
+export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES }

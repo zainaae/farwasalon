@@ -8,6 +8,25 @@ export const waLink = (service = '') =>
     ? `https://wa.me/${WA_NUMBER}?text=Hi%21%20I%27d%20like%20to%20book%20*${encodeURIComponent(service)}*%20at%20Farwa%20Beauty%20Salon.`
     : WA_DEFAULT
 
+/** Pre-filled WhatsApp URL for bookings with one or many service names */
+export function waLinkBooking(names = [], extra = {}) {
+  const trimmed = [...names].map(n => String(n).trim()).filter(Boolean)
+  const { date = '', time = '', name = '' } = extra
+  const header = [`Hi! I'd like to book an appointment at Farwa Beauty Salon.`]
+  const svcBlock =
+    trimmed.length === 0
+      ? []
+      : trimmed.length === 1
+        ? [``, `Service: ${trimmed[0]}`]
+        : [``, `Services:`, ...trimmed.map(s => `• ${s}`)]
+  const meta = []
+  if (name) meta.push(`Name: ${name}`)
+  if (date) meta.push(`Preferred date: ${date}`)
+  if (time) meta.push(`Preferred time: ${time}`)
+  const body = [...header, ...svcBlock, ...(meta.length ? [``, ...meta] : [])].join('\n')
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(body)}`
+}
+
 /* ─── Services ────────────────────────────────────────────────── */
 let _id = 1
 const s = (name, category) => ({ id: _id++, name, category })

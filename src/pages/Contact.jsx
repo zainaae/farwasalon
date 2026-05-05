@@ -1,16 +1,28 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, ChevronDown } from 'lucide-react'
+import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, ChevronDown, X } from 'lucide-react'
 import { Navbar, Footer, IgIcon, StickyWA, usePageMeta, useBooking, useNextSlot } from '../shared.jsx'
-import { WA_NUMBER, WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES } from '../data.js'
+import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking } from '../data.js'
 
 export default function Contact() {
   const [name,    setName]    = useState('')
-  const [service, setService] = useState('')
+  const [picked,  setPicked]  = useState([])
+  const [addNonce, setAddNonce] = useState(0)
   const [date,    setDate]    = useState('')
   const [time,    setTime]    = useState('')
   const booking = useBooking()
   const slot    = useNextSlot()
+
+  const addService = (svcName) => {
+    const n = String(svcName).trim()
+    if (!n) return
+    setPicked((prev) => (prev.includes(n) ? prev : [...prev, n]))
+    setAddNonce((k) => k + 1)
+  }
+
+  const removeService = (svcName) => {
+    setPicked((prev) => prev.filter((s) => s !== svcName))
+  }
 
   usePageMeta({
     title: 'Book an Appointment — Farwa Beauty Salon, Karachi',
@@ -19,14 +31,14 @@ export default function Contact() {
 
   const handleWhatsApp = e => {
     e.preventDefault()
-    const msg = `Hi! I'd like to book an appointment at Farwa Beauty Salon.%0A%0AName: ${encodeURIComponent(name)}%0AService: ${encodeURIComponent(service)}%0APreferred Date: ${encodeURIComponent(date)}%0APreferred Time: ${encodeURIComponent(time)}`
-    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank', 'noopener,noreferrer')
+    if (picked.length === 0) return
+    window.open(waLinkBooking(picked, { name, date, time }), '_blank', 'noopener,noreferrer')
   }
 
   return (
     <div className="bg-white overflow-x-hidden">
       <Navbar />
-      <div className="pt-[calc(4rem+env(safe-area-inset-top,0px))] md:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
+      <div className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
 
         {/* Header */}
         <section className="bg-white py-14 md:py-20 px-4 sm:px-5 md:px-10 border-b border-[#e4ddd7]">
@@ -137,19 +149,44 @@ export default function Contact() {
                   value={name} onChange={e => setName(e.target.value)} required
                   className="border border-[#e4ddd7] text-ink placeholder-stone text-sm font-['Inter'] px-5 py-3.5 focus:outline-none focus:border-ink transition-colors w-full bg-white" />
 
-                <label htmlFor="booking-service" className="sr-only">Service</label>
-                <div className="relative">
-                  <select id="booking-service" name="service" value={service} onChange={e => setService(e.target.value)} required
-                    className="border border-[#e4ddd7] text-stone text-sm font-['Inter'] px-5 py-3.5 pr-10 focus:outline-none focus:border-ink transition-colors appearance-none w-full bg-white">
-                    <option value="" disabled>Select a service</option>
-                    {Object.entries(SERVICES).map(([cat, svcs]) => (
-                      <optgroup key={cat} label={cat}>
-                        {svcs.map(s => <option key={s.id} value={s.name}>{s.name}</option>)}
-                      </optgroup>
-                    ))}
-                  </select>
-                  <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone pointer-events-none" aria-hidden="true" />
-                </div>
+                <fieldset className="border border-[#e4ddd7] bg-white px-5 py-4">
+                  <legend className="text-[11px] font-['Inter'] text-stone px-1">Services (add one or more)</legend>
+                  {picked.length === 0 ? (
+                    <p id="booking-services-hint" className="text-stone text-xs font-light mb-3">Pick from the menu below — you can add multiple.</p>
+                  ) : (
+                    <ul className="flex flex-wrap gap-2 mb-3" aria-label="Services to book">
+                      {picked.map((s) => (
+                        <li key={s}>
+                          <span className="inline-flex items-center gap-1 pl-3 pr-1 py-1 bg-mist border border-[#e4ddd7] text-xs font-['Syne'] font-semibold uppercase text-ink">
+                            <span className="max-w-[14rem] truncate">{s}</span>
+                            <button type="button" className="tap-safe p-1.5 text-stone hover:text-ink" onClick={() => removeService(s)} aria-label={`Remove ${s}`}>
+                              <X className="w-3.5 h-3.5" />
+                            </button>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  <label htmlFor="booking-add-service" className="sr-only">Add a service</label>
+                  <div className="relative">
+                    <select
+                      key={addNonce}
+                      id="booking-add-service"
+                      name="service"
+                      defaultValue=""
+                      aria-describedby={picked.length === 0 ? 'booking-services-hint' : undefined}
+                      onChange={(e) => { const v = e.target.value; if (v) addService(v) }}
+                      className="border border-[#e4ddd7] text-stone text-sm font-['Inter'] px-5 py-3.5 pr-10 focus:outline-none focus:border-ink transition-colors appearance-none w-full bg-white">
+                      <option value="">Add a service…</option>
+                      {Object.entries(SERVICES).map(([cat, svcs]) => (
+                        <optgroup key={cat} label={cat}>
+                          {svcs.map((s) => <option key={s.id} value={s.name}>{s.name}</option>)}
+                        </optgroup>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone pointer-events-none" aria-hidden="true" />
+                  </div>
+                </fieldset>
 
                 <label htmlFor="booking-date" className="sr-only">Preferred date</label>
                 <input id="booking-date" name="date" type="date" value={date} onChange={e => setDate(e.target.value)}
@@ -167,8 +204,8 @@ export default function Contact() {
                   <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone pointer-events-none" aria-hidden="true" />
                 </div>
 
-                <button type="submit"
-                  className="mt-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone active:scale-[0.97] transition-all duration-300 w-full flex items-center justify-center gap-2">
+                <button type="submit" disabled={picked.length === 0}
+                  className="mt-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-300 w-full flex items-center justify-center gap-2">
                   Send on WhatsApp <ArrowUpRight className="w-4 h-4" />
                 </button>
               </form>

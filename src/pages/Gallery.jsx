@@ -13,7 +13,7 @@ export default function Gallery() {
   return (
     <div className="bg-white overflow-x-hidden">
       <Navbar />
-      <div className="pt-[calc(4rem+env(safe-area-inset-top,0px))] md:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
+      <div className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
 
         {/* Header */}
         <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-12 sm:py-16 md:py-20">
@@ -41,7 +41,7 @@ export default function Gallery() {
           <SmoothyGallery photos={GALLERY_PHOTOS} />
         </div>
         <div className="px-4 sm:px-5 md:px-10 mt-4 max-w-screen-xl mx-auto mb-16">
-          <p className="text-stone text-[10px] font-['Inter']">← drag to explore</p>
+          <p id="gallery-swipe-hint" className="text-stone text-[10px] font-['Inter']">Swipe or drag to explore; focus the carousel and use arrow keys.</p>
         </div>
 
         {/* Instagram CTA */}
