@@ -26,7 +26,7 @@ export default function Contact() {
   return (
     <div className="bg-white overflow-x-hidden">
       <Navbar />
-      <div className="pt-16 md:pt-[68px]">
+      <div className="pt-[calc(4rem+env(safe-area-inset-top,0px))] md:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
 
         {/* Header */}
         <section className="bg-white py-14 md:py-20 px-4 sm:px-5 md:px-10 border-b border-[#e4ddd7]">

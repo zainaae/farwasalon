@@ -13,10 +13,10 @@ export default function Gallery() {
   return (
     <div className="bg-white overflow-x-hidden">
       <Navbar />
-      <div className="pt-16 md:pt-[68px]">
+      <div className="pt-[calc(4rem+env(safe-area-inset-top,0px))] md:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
 
         {/* Header */}
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-4 sm:px-5 md:px-10 py-12 sm:py-16 md:py-20">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-12 sm:py-16 md:py-20">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-[#e4ddd7] pb-8 md:pb-10">
             <div>
               <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}

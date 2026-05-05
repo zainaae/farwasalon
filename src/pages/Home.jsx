@@ -103,7 +103,7 @@ function Hero() {
   ]
 
   return (
-    <section className="relative w-full h-[100svh] min-h-[580px] max-h-[1100px] overflow-hidden bg-[#0d0609]">
+    <section className="relative w-full h-[100svh] min-h-[520px] max-h-[1100px] overflow-hidden bg-[#0d0609]">
 
       {/* Background video — less zoom via object-position offset */}
       <video
@@ -139,7 +139,7 @@ function Hero() {
       {/* Hero content */}
       <motion.div
         style={{ y: textY }}
-        className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-20 sm:pb-12 md:pb-14">
+        className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14">
         <div className="max-w-screen-2xl mx-auto">
           {/* Eyebrow */}
           <div className="overflow-hidden mb-4 md:mb-6">
@@ -250,7 +250,7 @@ function StatsStrip() {
             <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
               For over 17 years, Farwa Beauty Salon has been the trusted choice for women across Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
             </p>
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 border-t border-[#e4ddd7] pt-6 sm:pt-7">
+            <div className="grid grid-cols-3 max-[380px]:grid-cols-1 gap-3 sm:gap-4 border-t border-[#e4ddd7] pt-6 sm:pt-7">
               {[
                 { display: '17+',  final: 17,             label: 'Years of expertise' },
                 { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
@@ -351,12 +351,13 @@ function FeaturedServices() {
       <div className="max-w-screen-xl mx-auto">
 
         {/* Header row */}
-        <div className="flex items-end justify-between mb-10 md:mb-14 gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-10 md:mb-14">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— What we do</p>
             <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight">Our Services</h2>
           </motion.div>
-          <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}>
+          <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
+            className="shrink-0 self-start sm:self-auto">
             <Link to="/services"
               className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-all duration-300">
               View All <ArrowUpRight className="w-3 h-3" />
@@ -552,8 +553,8 @@ function TestimonialsPreview() {
         {/* ── Header ── */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14 md:mb-20">
-          <div>
+          className="flex flex-col sm:flex-row sm:items-end md:justify-between gap-6 mb-14 md:mb-20">
+          <div className="min-w-0">
             <p className="text-[#c9a98a] text-[10px] tracking-[0.32em] uppercase font-['Inter'] mb-4">
               &mdash; Verified client love
             </p>
@@ -563,11 +564,13 @@ function TestimonialsPreview() {
               <span className="font-['Syne'] italic font-extralight text-[#c9a98a]">a thousand times over.</span>
             </h2>
           </div>
-          <div className="flex items-center gap-2.5 shrink-0 pb-1">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 shrink-0 pb-1">
             <div className="flex gap-0.5 text-[#c9a98a]" aria-label="5 out of 5 stars">
               {[...Array(5)].map((_, s) => <Star key={s} className="w-3 h-3 fill-current" />)}
             </div>
-            <span className="text-white/40 text-[11px] font-['Inter']">Hundreds of reviews · Facebook &amp; Google</span>
+            <span className="text-white/40 text-[10px] sm:text-[11px] font-['Inter'] leading-snug max-w-[16rem] sm:max-w-none">
+              Hundreds of reviews · Facebook &amp; Google
+            </span>
           </div>
         </motion.div>
 

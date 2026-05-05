@@ -46,7 +46,7 @@ function CategoryGrid({ onSelect }) {
                 <span className="text-[9px] tracking-widest uppercase text-white/50 font-['Inter'] bg-ink/30 backdrop-blur-sm px-2 py-1">{count} services</span>
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-4">
-                <p className="text-white font-['Syne'] font-bold text-sm uppercase leading-tight mb-1">{cat}</p>
+                <p className="text-white font-['Syne'] font-bold text-xs sm:text-sm uppercase leading-tight mb-1 line-clamp-2">{cat}</p>
                 <p className="text-white/50 text-[10px] font-['Inter'] leading-snug hidden md:block line-clamp-2">{meta.desc}</p>
                 <div className="flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   <span className="text-white text-[10px] tracking-widest uppercase font-['Inter']">View services</span>
@@ -155,7 +155,7 @@ export default function Services() {
   return (
     <div className="bg-white overflow-x-hidden">
       <Navbar />
-      <div className="pt-16 md:pt-[68px]">
+      <div className="pt-[calc(4rem+env(safe-area-inset-top,0px))] md:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
           <AnimatePresence mode="wait">
             {selected ? (
