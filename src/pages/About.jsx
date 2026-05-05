@@ -17,7 +17,7 @@ export default function About() {
   return (
     <div className="bg-white overflow-x-hidden">
       <Navbar />
-      <div className="pt-[calc(4rem+env(safe-area-inset-top,0px))] md:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
+      <div className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
 
         {/* Page header */}
         <section className="bg-white py-16 md:py-20 px-4 sm:px-5 md:px-10 border-b border-[#e4ddd7]">

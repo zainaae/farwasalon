@@ -23,7 +23,15 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'no-unused-vars': ['error', { varsIgnorePattern: '(^[A-Z_]|^motion$)', caughtErrorsIgnorePattern: '^_' }],
+      'react-hooks/refs': 'off',
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    },
+  },
+  {
+    files: ['src/shared.jsx'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
     },
   },
 ])

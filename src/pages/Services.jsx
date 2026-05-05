@@ -31,7 +31,7 @@ function CategoryGrid({ onSelect }) {
           const meta = getCatMeta(cat)
           const count = SERVICES[cat].length
           return (
-            <motion.button key={cat} onClick={() => onSelect(cat)}
+            <motion.button type="button" key={cat} onClick={() => onSelect(cat)}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.05 }}
               className="relative overflow-hidden group text-left" style={{ aspectRatio: '3/4' }}>
               <img src={meta.img} alt={cat} loading="lazy" decoding="async" width="900" height="1200"
@@ -155,7 +155,7 @@ export default function Services() {
   return (
     <div className="bg-white overflow-x-hidden">
       <Navbar />
-      <div className="pt-[calc(4rem+env(safe-area-inset-top,0px))] md:pt-[calc(4.25rem+env(safe-area-inset-top,0px))]">
+      <div className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
           <AnimatePresence mode="wait">
             {selected ? (
