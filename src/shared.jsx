@@ -376,7 +376,7 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
             initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
             transition={{ type: 'spring', stiffness: 320, damping: 34 }}
             onClick={e => e.stopPropagation()}
-            className="bg-white w-full md:max-w-xl md:mx-4 md:rounded-none flex flex-col max-h-[92vh]">
+            className="bg-white w-full md:max-w-xl md:mx-4 rounded-t-2xl md:rounded-none flex flex-col max-h-[min(92dvh,calc(100svh-env(safe-area-inset-bottom,0px)))] shadow-[0_-8px_40px_rgba(0,0,0,0.12)] md:shadow-none">
             {/* Header */}
             <div className="flex items-center justify-between px-5 md:px-7 py-4 border-b border-[#e4ddd7]">
               <div>
@@ -400,7 +400,7 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
             </div>
 
             {/* Body */}
-            <div className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6">
+            <div className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6 pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] md:pb-6 overscroll-contain">
               {step === 0 && (
                 <div>
                   {!cat ? (
@@ -462,7 +462,7 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
                   <p className="text-stone text-sm font-['Inter'] font-light mb-4">
                     {svc} &middot; <span className="text-ink font-medium">{new Date(date).toDateString()}</span>
                   </p>
-                  <div className="grid grid-cols-3 gap-2 mb-5">
+                  <div className="grid grid-cols-2 min-[420px]:grid-cols-3 gap-2 mb-5">
                     {timeOptions.map(t => (
                       <button key={t} onClick={() => setTime(t)}
                         className={`tap-safe py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-all ${
@@ -522,7 +522,7 @@ export function UrduSignature({ className = '' }) {
 export function WordmarkDivider() {
   return (
     <div aria-hidden="true" className="bg-white border-y border-[#e4ddd7] overflow-hidden">
-      <div className="max-w-screen-xl mx-auto px-5 md:px-10 py-6 md:py-8 flex items-center gap-5 md:gap-8">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-5 sm:py-6 md:py-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 md:gap-8 text-center sm:text-left">
         <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a98a]/50 to-[#c9a98a]" />
         <span className="font-['Unbounded'] font-black text-ink tracking-[0.3em] text-[11px] md:text-[13px] shrink-0">
           F · B · S
@@ -584,10 +584,10 @@ export function ServiceModal({ service, onClose }) {
           aria-modal="true"
           aria-labelledby={titleId}
           aria-describedby={service.desc ? descId : undefined}
-          className="bg-white w-full max-w-lg overflow-hidden"
+          className="bg-white w-[min(100%,calc(100vw-1.5rem))] sm:w-full max-w-lg max-h-[min(85dvh,calc(100dvh-2rem))] overflow-hidden mx-auto"
           initial={{ opacity: 0, y: 50, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 24 }}
           transition={{ type: 'spring', stiffness: 280, damping: 28 }} onClick={e => e.stopPropagation()}>
-          <div className="p-6 md:p-8 flex flex-col max-h-[85vh] overflow-y-auto">
+          <div className="p-6 md:p-8 flex flex-col max-h-[min(85dvh,calc(100dvh-2rem))] overflow-y-auto overscroll-contain">
             <div className="flex justify-between items-start mb-5">
               <span className="text-[10px] tracking-[0.2em] uppercase text-stone font-['Inter']">{service.category}</span>
               <button onClick={onClose} aria-label="Close dialog"
@@ -672,8 +672,8 @@ export function Navbar({ transparent = false }) {
 
   return (
     <motion.header initial={{ y: -70, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.7, ease: [0.16,1,0.3,1] }}
-      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-400 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_0_#e4ddd7]' : transparent ? '' : 'bg-white'}`}>
-      <div className="max-w-screen-xl mx-auto px-5 md:px-10 h-16 md:h-[68px] flex items-center justify-between">
+      className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-400 pt-[env(safe-area-inset-top,0px)] ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_0_#e4ddd7]' : transparent ? '' : 'bg-white'}`}>
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 h-16 md:h-[68px] flex items-center justify-between gap-2 min-w-0">
         <Link to="/" className="shrink-0">
           <Logo light={light} />
         </Link>
@@ -807,8 +807,9 @@ export function StickyWA() {
   return (
     <>
       {/* flow spacer so page content never hides behind the fixed pill on mobile */}
-      <div aria-hidden className="h-20 md:hidden" />
-      <div className="fixed bottom-5 left-0 right-0 z-50 px-5 flex justify-center md:hidden pointer-events-none">
+      <div aria-hidden className="h-[calc(5rem+env(safe-area-inset-bottom,0px))] md:hidden" />
+      <div className="fixed z-50 left-0 right-0 flex justify-center md:hidden pointer-events-none px-4"
+        style={{ bottom: 'max(1.25rem, env(safe-area-inset-bottom, 0px))' }}>
         <motion.a href={WA_DEFAULT} target="_blank" rel="noreferrer"
           className="pointer-events-auto inline-flex items-center gap-2 bg-ink text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 shadow-2xl shadow-ink/30"
           initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2, duration: 0.6, ease: [0.16,1,0.3,1] }}>
