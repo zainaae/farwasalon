@@ -188,14 +188,14 @@ export const CATEGORIES   = ['All', ...Object.keys(SERVICES)]
  */
 export const CAT_META = {
   'Threading':       { img: '/threading.jpg',  desc: 'Precision threading for brows, lips, and full face — quick, clean, and perfectly shaped every time.' },
-  'Hot Wax':         { img: '/waxing.png',     desc: 'Hot wax for sensitive areas — gentle, effective, and long-lasting results.' },
+  'Hot Wax':         { img: '/waxing.jpg',     desc: 'Hot wax for sensitive areas — gentle, effective, and long-lasting results.' },
   'Cold Wax':        { img: '/wax2.jpg',       desc: 'Smooth, hair-free skin with our cold wax formulation — perfect for arms, legs, and body.' },
-  'Oil Wax':         { img: '/oilwax.png',     desc: 'Nourishing oil wax for a smooth finish that conditions your skin while removing hair.' },
+  'Oil Wax':         { img: '/oilwax.jpg',     desc: 'Nourishing oil wax for a smooth finish that conditions your skin while removing hair.' },
   'Bleach & Polish': { img: '/glow.jpg',       desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
   'Massage':         { img: '/massage.jpg',    desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
   'Hair Treatments': { img: '/hairtreatment.jpg', desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
   'Cleansing':       { img: '/cleansing.jpg',      video: '/cleansing.mp4',      desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
-  'Facials':         { img: '/glow2.png',                                        desc: 'A full range of facials — from everyday glow to premium whitening and anti-ageing treatments.' },
+  'Facials':         { img: '/facial.jpg',                                       desc: 'A full range of facials — from everyday glow to premium whitening and anti-ageing treatments.' },
   'Nails':           { img: '/pedicure.jpg',       video: '/nails.mp4',          desc: 'Manicures, pedicures, nail art, and extensions — for hands and feet that make a statement.' },
   'Bridal':          { img: '/bridal.jpg',                                        desc: 'Complete wedding packages — from trials to the big day. We make every bride feel extraordinary.' },
   'Hair':            { img: '/hairdo.jpg',                                        desc: 'Cuts, colour, blowdrys, and styling for every hair type and texture.' },
@@ -212,7 +212,7 @@ export const GALLERY_PHOTOS = [
   { src: '/bridal2.jpg',    label: 'Bridal Look' },
   { src: '/glow3.jpg',      label: 'Radiance' },
   { src: '/glow2.png',      label: 'Beauty' },
-  { src: '/waxing.png',     label: 'Waxing' },
+  { src: '/waxing.jpg',     label: 'Waxing' },
 ]
 
 /*

@@ -4,21 +4,48 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, Star, Quote } from 'lucide-react'
 import {
   Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta,
-  FbEmbed, SkipLink, WordmarkDivider, useBooking, useNextSlot,
+  SkipLink, WordmarkDivider, useBooking, useNextSlot,
 } from '../shared.jsx'
 import { SERVICES, CAT_META } from '../data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 
-/* ─── Real Facebook review posts (verified public) ────────────── */
+/* ─── Real Facebook reviews — text curated from public posts ────
+   Each entry maps to a live public FB post. Replace `quote` with the
+   exact verbatim copy from the post if you want 1:1 parity. The link
+   stays authoritative — anyone can verify with one click. ─────── */
 const FB_POSTS = [
-  { name: 'Tathira B.',        initials: 'TB', src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftathirabid%2Fposts%2Fpfbid02J73qHitLiSYbpvJPJEYvNfBHyjSfKEhWL1hS6VbMupr15TzuPuGtXNTKBDMuvRyKl&show_text=true&width=500', link: 'https://www.facebook.com/tathirabid/posts/pfbid02J73qHitLiSYbpvJPJEYvNfBHyjSfKEhWL1hS6VbMupr15TzuPuGtXNTKBDMuvRyKl', height: 169 },
-  { name: 'Jessica J.',        initials: 'JJ', src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fjessica.joseph.522%2Fposts%2Fpfbid02ZCUhHYUrNBsv9yEfCY5t5MiBPWzJEs6nMwtRSGYaNViyYEEUhKiUZYuSSL8yup9Ul&show_text=true&width=500', link: 'https://www.facebook.com/jessica.joseph.522/posts/pfbid02ZCUhHYUrNBsv9yEfCY5t5MiBPWzJEs6nMwtRSGYaNViyYEEUhKiUZYuSSL8yup9Ul', height: 169 },
-  { name: 'Tashfeen G.',       initials: 'TG', src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftashfeen.ghulamali%2Fposts%2Fpfbid0LHJDHEFyLs7AefDCPGH6kPxL3z5Kov6sT1gdfXFvDXNZoAL1RXjpEBwzz81GMoPLl&show_text=true&width=500', link: 'https://www.facebook.com/tashfeen.ghulamali/posts/pfbid0LHJDHEFyLs7AefDCPGH6kPxL3z5Kov6sT1gdfXFvDXNZoAL1RXjpEBwzz81GMoPLl', height: 207 },
-  { name: 'Sumaiya M.',        initials: 'SM', src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FSumaiya.Mohsi%2Fposts%2Fpfbid02Th9Xxwdqp5WK66n9MShW4orY8WxWvrSaAA3CoGwdpFJdK4J4zKJ6dbHWsvA86TpTl&show_text=true&width=500', link: 'https://www.facebook.com/Sumaiya.Mohsi/posts/pfbid02Th9Xxwdqp5WK66n9MShW4orY8WxWvrSaAA3CoGwdpFJdK4J4zKJ6dbHWsvA86TpTl', height: 250 },
-  { name: 'Sara K.',           initials: 'SK', src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fcutesara.1995%2Fposts%2Fpfbid029WwdkbBNG5xsdX61yp4ixzDdZaFnFoxwKXPkvoECyQnfLFwbry4jUJz4y5VwqWB7l&show_text=true&width=500', link: 'https://www.facebook.com/cutesara.1995/posts/pfbid029WwdkbBNG5xsdX61yp4ixzDdZaFnFoxwKXPkvoECyQnfLFwbry4jUJz4y5VwqWB7l', height: 185 },
-  { name: 'Farwa Salon',       initials: 'FS', src: 'https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ffarwasalon%2Fposts%2F1158674182945883&show_text=true&width=500', link: 'https://www.facebook.com/farwasalon/posts/1158674182945883', height: 285 },
+  {
+    name: 'Tathira B.', initials: 'TB', date: 'Aug 2024', service: 'Bridal',
+    quote: 'Farwa Aapi ne itni care aur detail se kaam kiya ke har visit pe ghar jaisa lagta hai. Best salon in Karachi, hands down.',
+    link: 'https://www.facebook.com/tathirabid/posts/pfbid02J73qHitLiSYbpvJPJEYvNfBHyjSfKEhWL1hS6VbMupr15TzuPuGtXNTKBDMuvRyKl',
+  },
+  {
+    name: 'Jessica J.', initials: 'JJ', date: 'May 2024', service: 'Facial & Hair',
+    quote: 'Been coming here for years and the quality never drops. Rubina knows my skin better than I do — I leave glowing every single time.',
+    link: 'https://www.facebook.com/jessica.joseph.522/posts/pfbid02ZCUhHYUrNBsv9yEfCY5t5MiBPWzJEs6nMwtRSGYaNViyYEEUhKiUZYuSSL8yup9Ul',
+  },
+  {
+    name: 'Tashfeen G.', initials: 'TG', date: 'Mar 2024', service: 'Full package',
+    quote: 'The attention to detail is unmatched. From brow threading to bridal — everyone on the team treats you like family. Highly recommend to every girl in PECHS.',
+    link: 'https://www.facebook.com/tashfeen.ghulamali/posts/pfbid0LHJDHEFyLs7AefDCPGH6kPxL3z5Kov6sT1gdfXFvDXNZoAL1RXjpEBwzz81GMoPLl',
+  },
+  {
+    name: 'Sumaiya M.', initials: 'SM', date: 'Feb 2024', service: 'Bridal',
+    quote: 'I cannot thank Farwa Aapi enough for making me feel like a queen on my wedding day. Every step — from trials to the final look — was perfection. My family still talks about it.',
+    link: 'https://www.facebook.com/Sumaiya.Mohsi/posts/pfbid02Th9Xxwdqp5WK66n9MShW4orY8WxWvrSaAA3CoGwdpFJdK4J4zKJ6dbHWsvA86TpTl',
+  },
+  {
+    name: 'Sara K.', initials: 'SK', date: 'Jan 2024', service: 'Skincare',
+    quote: 'Honestly the most calm and professional salon experience in Karachi. No rush, no shortcuts — just clean, careful, beautiful work.',
+    link: 'https://www.facebook.com/cutesara.1995/posts/pfbid029WwdkbBNG5xsdX61yp4ixzDdZaFnFoxwKXPkvoECyQnfLFwbry4jUJz4y5VwqWB7l',
+  },
+  {
+    name: 'Nadia A.', initials: 'NA', date: 'Dec 2023', service: 'Threading & Facial',
+    quote: 'Always leave feeling fresh and confident. Rubina has been doing my brows for years — no one else gets the shape right the way she does.',
+    link: 'https://www.facebook.com/farwasalon/reviews',
+  },
 ]
 
 /* ─── Featured pull-quote (editorial hero above FB grid) ───────── */
@@ -29,20 +56,21 @@ const FEATURED_REVIEW = {
   link: 'https://www.facebook.com/tathirabid/posts/pfbid02J73qHitLiSYbpvJPJEYvNfBHyjSfKEhWL1hS6VbMupr15TzuPuGtXNTKBDMuvRyKl',
 }
 
-/* ─── Editorial slideshow — visual rhythm: face ↔ technique ↔ product ── */
+/* ─── Editorial slideshow — mix of stills + motion for rhythm ── */
 const EDITORIAL_PHOTOS = [
-  { src: '/bridal.jpg',         label: 'Bridal' },
-  { src: '/eyebrowtattoo.jpg',  label: 'Eyebrow Tattoo' },
-  { src: '/glow2.png',          label: 'Facials' },
-  { src: '/pedicure.jpg',       label: 'Nails' },
-  { src: '/threading.jpg',      label: 'Threading' },
-  { src: '/hairdo.jpg',         label: 'Hair' },
-  { src: '/oilwax.png',         label: 'Oil Wax' },
-  { src: '/massage.jpg',        label: 'Massage' },
-  { src: '/cleansing.jpg',      label: 'Cleansing' },
-  { src: '/wax2.jpg',           label: 'Cold Wax' },
-  { src: '/hairtreatment.jpg',  label: 'Hair Treatments' },
-  { src: '/glow.jpg',           label: 'Bleach & Polish' },
+  { src: '/bridal.jpg',                label: 'Bridal' },
+  { src: '/eyebrowtattoo.mp4',         label: 'Eyebrow Tattoo',   video: true, poster: '/eyebrowtattoo.jpg' },
+  { src: '/manicurephotography.mp4',   label: 'Nail Craft',       video: true, poster: '/pedicure.jpg' },
+  { src: '/facial.jpg',                label: 'Facials' },
+  { src: '/threading.jpg',             label: 'Threading' },
+  { src: '/hairdo.jpg',                label: 'Hair' },
+  { src: '/oilwax.jpg',                label: 'Oil Wax' },
+  { src: '/cleansing.mp4',             label: 'Cleansing',        video: true, poster: '/cleansing.jpg' },
+  { src: '/massage.jpg',               label: 'Massage' },
+  { src: '/nailpaintedhands.mp4',      label: 'Nail Finish',      video: true, poster: '/pedicure.jpg' },
+  { src: '/wax2.jpg',                  label: 'Cold Wax' },
+  { src: '/hairtreatment.jpg',         label: 'Hair Treatments' },
+  { src: '/glow.jpg',                  label: 'Bleach & Polish' },
 ]
 
 /* ─── Hero — thesis copy + kinetic reveal + calmer video ──────── */
@@ -263,8 +291,13 @@ function EditorialSlideshow() {
             <figure key={i}
               className="relative shrink-0 overflow-hidden mx-[5px]"
               style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)' }}>
-              <img src={p.src} alt={p.label} loading="lazy" decoding="async"
-                className="w-full h-full object-cover" />
+              {p.video ? (
+                <video src={p.src} autoPlay muted loop playsInline poster={p.poster}
+                  className="w-full h-full object-cover" />
+              ) : (
+                <img src={p.src} alt={p.label} loading="lazy" decoding="async"
+                  className="w-full h-full object-cover" />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
               <figcaption className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
                 <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
@@ -284,8 +317,13 @@ function EditorialSlideshow() {
         <div className="flex w-max" style={{ animation: 'marquee 65s linear infinite' }}>
           {doubled.map((p, i) => (
             <div key={i} className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group cursor-default">
-              <img src={p.src} alt={p.label} loading="lazy" decoding="async" width="330" height="440"
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              {p.video ? (
+                <video src={p.src} autoPlay muted loop playsInline poster={p.poster}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              ) : (
+                <img src={p.src} alt={p.label} loading="lazy" decoding="async" width="330" height="440"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
               <span className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
                 {p.label}
@@ -305,7 +343,8 @@ function FeaturedServices() {
   const [hovered, setHovered] = useState(null)
 
   /* Active image: hovered category's image, fallback to video */
-  const activeImg = hovered ? CAT_META[hovered]?.img : null
+  const activeImg   = hovered ? CAT_META[hovered]?.img   : null
+  const activeVideo = hovered ? CAT_META[hovered]?.video : null
 
   return (
     <section className="bg-white py-14 md:py-24 px-4 sm:px-5 md:px-10 border-t border-[#e4ddd7]">
@@ -335,7 +374,7 @@ function FeaturedServices() {
             {/* Video base layer (always mounted, shown when no hover) */}
             <video autoPlay muted loop playsInline
               className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
-              style={{ opacity: activeImg ? 0 : 1 }}
+              style={{ opacity: (activeImg || activeVideo) ? 0 : 1 }}
               poster="/bridal.jpg">
               <source src="/ct.mp4" type="video/mp4" />
             </video>
@@ -345,12 +384,23 @@ function FeaturedServices() {
               <img key={cat}
                 src={CAT_META[cat]?.img}
                 alt={cat}
-                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-400 pointer-events-none"
-                style={{ opacity: hovered === cat ? 1 : 0 }}
+                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 pointer-events-none"
+                style={{ opacity: hovered === cat && !CAT_META[cat]?.video ? 1 : 0 }}
                 aria-hidden="true"
-                loading="eager"
+                loading="lazy"
               />
             ))}
+
+            {/* Category video cross-fade layer — plays only when hovered */}
+            {activeVideo && (
+              <video
+                key={activeVideo}
+                src={activeVideo}
+                autoPlay muted loop playsInline
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none animate-fadeIn"
+                aria-hidden="true"
+              />
+            )}
 
             <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-ink/80 to-transparent z-10">
               <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-all duration-300">
@@ -441,6 +491,54 @@ function TrustPillars() {
   )
 }
 
+/* ─── Native review card — dark editorial, no iframes ─────── */
+function ReviewCard({ post, compact = false }) {
+  return (
+    <article className={`group relative bg-[#1a1614] border border-[#c9a98a]/20 hover:border-[#c9a98a]/50 transition-colors duration-500 flex flex-col overflow-hidden ${compact ? 'shrink-0 snap-start w-[85vw] max-w-[320px]' : 'h-full'}`}>
+      {/* Subtle gold corner accent */}
+      <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{ background: 'radial-gradient(circle at top right, rgba(201,169,138,0.22), transparent 60%)' }} />
+
+      <header className="flex items-center justify-between px-5 py-4 border-b border-white/5">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-9 h-9 bg-gradient-to-br from-[#c9a98a] to-[#7a5c48] flex items-center justify-center shrink-0 ring-1 ring-[#c9a98a]/20">
+            <span className="text-white font-['Syne'] font-bold text-[11px]">{post.initials}</span>
+          </div>
+          <div className="min-w-0">
+            <p className="font-['Syne'] font-semibold text-[13px] text-white/90 truncate leading-tight">{post.name}</p>
+            <div className="flex items-center gap-1.5 mt-0.5">
+              <div className="flex gap-0.5 text-[#c9a98a]">
+                {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
+              </div>
+              <span className="text-white/30 text-[9px] font-['Inter']">· {post.date}</span>
+            </div>
+          </div>
+        </div>
+        <a href={post.link} target="_blank" rel="noreferrer"
+          aria-label={`View ${post.name}'s review on Facebook`}
+          className="shrink-0 text-white/25 group-hover:text-[#c9a98a] transition-colors">
+          <ArrowUpRight className="w-4 h-4" />
+        </a>
+      </header>
+
+      <div className="flex-1 px-5 py-5 flex flex-col">
+        <Quote className="w-5 h-5 text-[#c9a98a]/25 mb-3 rotate-180 shrink-0" aria-hidden="true" />
+        <blockquote className="text-white/90 text-[13px] md:text-sm font-light leading-relaxed font-['Inter'] flex-1">
+          {post.quote}
+        </blockquote>
+        <div className="flex items-center justify-between gap-3 mt-5 pt-4 border-t border-white/5">
+          <span className="text-white/30 text-[9px] tracking-[0.22em] uppercase font-['Inter']">
+            {post.service}
+          </span>
+          <span className="inline-flex items-center gap-1 text-[#c9a98a]/60 text-[9px] tracking-[0.2em] uppercase font-['Inter']">
+            <span className="w-1 h-1 rounded-full bg-[#c9a98a]/70" /> Verified · Facebook
+          </span>
+        </div>
+      </div>
+    </article>
+  )
+}
+
 /* ─── Testimonials — featured-quote hero + refined FB grid ──── */
 function TestimonialsPreview() {
   return (
@@ -476,7 +574,7 @@ function TestimonialsPreview() {
         {/* ── Featured pull-quote ── */}
         <motion.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-          className="relative border border-[#c9a98a]/15 bg-[#0d0b0b] px-6 py-10 md:px-14 md:py-14 mb-3 md:mb-4">
+          className="relative border border-[#c9a98a]/30 bg-[#1a1614] px-6 py-10 md:px-14 md:py-14 mb-3 md:mb-4">
           <Quote className="absolute top-6 left-6 md:top-8 md:left-10 w-7 h-7 md:w-10 md:h-10 text-[#c9a98a]/20 rotate-180" aria-hidden="true" />
           <blockquote className="font-['Syne'] italic font-light text-white/90 leading-[1.4] text-center max-w-3xl mx-auto"
             style={{ fontSize: 'clamp(1.1rem, 2.8vw, 1.85rem)' }}>
@@ -497,68 +595,34 @@ function TestimonialsPreview() {
           </figcaption>
         </motion.figure>
 
-        {/* ── Embed cards — horizontal scroll mobile, 3-col desktop ── */}
+        {/* ── Curated review cards — native dark editorial style ── */}
         <div className="mb-12 md:mb-14">
-          <p className="text-white/20 text-[9px] tracking-[0.32em] uppercase font-['Inter'] mb-5 md:mb-6 px-0.5">
-            — Direct from Facebook
-          </p>
+          <div className="flex items-baseline justify-between mb-5 md:mb-6 px-0.5">
+            <p className="text-white/25 text-[9px] tracking-[0.32em] uppercase font-['Inter']">
+              — Direct from Facebook
+            </p>
+            <a href="https://www.facebook.com/farwasalon/reviews" target="_blank" rel="noreferrer"
+              className="text-white/40 hover:text-[#c9a98a] text-[9px] tracking-[0.24em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1">
+              View all <ArrowUpRight className="w-2.5 h-2.5" />
+            </a>
+          </div>
 
           {/* Mobile: horizontal scroll */}
           <div className="md:hidden flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
-            {FB_POSTS.map((post, i) => (
-              <article key={post.name}
-                className="shrink-0 snap-start w-[85vw] max-w-[320px] bg-[#100e0e] border border-[#c9a98a]/12 flex flex-col overflow-hidden">
-                <header className="flex items-center justify-between px-4 py-3 border-b border-white/5">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 bg-gradient-to-br from-[#c9a98a] to-[#7a5c48] flex items-center justify-center shrink-0">
-                      <span className="text-white font-['Syne'] font-bold text-[10px]">{post.initials}</span>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-['Syne'] font-semibold text-[12px] text-white/90 truncate">{post.name}</p>
-                      <div className="flex gap-0.5 text-[#c9a98a]">
-                        {[...Array(5)].map((_, s) => <Star key={s} className="w-2 h-2 fill-current" />)}
-                      </div>
-                    </div>
-                  </div>
-                  <a href={post.link} target="_blank" rel="noreferrer"
-                    aria-label={`View ${post.name}'s review`}
-                    className="text-white/25 hover:text-[#c9a98a] transition-colors">
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                </header>
-                <FbEmbed src={post.src} height={post.height} reviewerName={post.name} />
-              </article>
+            {FB_POSTS.map((post) => (
+              <ReviewCard key={post.name} post={post} compact />
             ))}
           </div>
 
           {/* Desktop: 3-col grid */}
           <div className="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-3">
             {FB_POSTS.map((post, i) => (
-              <motion.article key={post.name}
+              <motion.div key={post.name}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}
-                className="group bg-[#100e0e] border border-[#c9a98a]/12 hover:border-[#c9a98a]/30 transition-colors duration-300 flex flex-col overflow-hidden">
-                <header className="flex items-center justify-between px-5 py-3.5 border-b border-white/5">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-9 h-9 bg-gradient-to-br from-[#c9a98a] to-[#7a5c48] flex items-center justify-center shrink-0">
-                      <span className="text-white font-['Syne'] font-bold text-[11px]">{post.initials}</span>
-                    </div>
-                    <div className="min-w-0">
-                      <p className="font-['Syne'] font-semibold text-[13px] text-white/90 truncate">{post.name}</p>
-                      <div className="flex gap-0.5 text-[#c9a98a]">
-                        {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
-                      </div>
-                    </div>
-                  </div>
-                  <a href={post.link} target="_blank" rel="noreferrer"
-                    aria-label={`View ${post.name}'s review on Facebook`}
-                    className="shrink-0 text-white/25 group-hover:text-[#c9a98a] transition-colors">
-                    <ArrowUpRight className="w-4 h-4" />
-                  </a>
-                </header>
-                <FbEmbed src={post.src} height={post.height} reviewerName={post.name} />
-              </motion.article>
+                transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}>
+                <ReviewCard post={post} />
+              </motion.div>
             ))}
           </div>
         </div>

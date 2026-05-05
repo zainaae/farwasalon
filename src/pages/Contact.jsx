@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles } from 'lucide-react'
+import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, ChevronDown } from 'lucide-react'
 import { Navbar, Footer, IgIcon, StickyWA, usePageMeta, useBooking, useNextSlot } from '../shared.jsx'
 import { WA_NUMBER, WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES } from '../data.js'
 
@@ -20,7 +20,7 @@ export default function Contact() {
   const handleWhatsApp = e => {
     e.preventDefault()
     const msg = `Hi! I'd like to book an appointment at Farwa Beauty Salon.%0A%0AName: ${encodeURIComponent(name)}%0AService: ${encodeURIComponent(service)}%0APreferred Date: ${encodeURIComponent(date)}%0APreferred Time: ${encodeURIComponent(time)}`
-    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank')
+    window.open(`https://wa.me/${WA_NUMBER}?text=${msg}`, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -138,28 +138,34 @@ export default function Contact() {
                   className="border border-[#e4ddd7] text-ink placeholder-stone text-sm font-['Inter'] px-5 py-3.5 focus:outline-none focus:border-ink transition-colors w-full bg-white" />
 
                 <label htmlFor="booking-service" className="sr-only">Service</label>
-                <select id="booking-service" name="service" value={service} onChange={e => setService(e.target.value)} required
-                  className="border border-[#e4ddd7] text-stone text-sm font-['Inter'] px-5 py-3.5 focus:outline-none focus:border-ink transition-colors appearance-none w-full bg-white">
-                  <option value="" disabled>Select a service</option>
-                  {Object.entries(SERVICES).map(([cat, svcs]) => (
-                    <optgroup key={cat} label={cat}>
-                      {svcs.map(s => <option key={s.id} value={s.name}>{s.name}</option>)}
-                    </optgroup>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select id="booking-service" name="service" value={service} onChange={e => setService(e.target.value)} required
+                    className="border border-[#e4ddd7] text-stone text-sm font-['Inter'] px-5 py-3.5 pr-10 focus:outline-none focus:border-ink transition-colors appearance-none w-full bg-white">
+                    <option value="" disabled>Select a service</option>
+                    {Object.entries(SERVICES).map(([cat, svcs]) => (
+                      <optgroup key={cat} label={cat}>
+                        {svcs.map(s => <option key={s.id} value={s.name}>{s.name}</option>)}
+                      </optgroup>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone pointer-events-none" aria-hidden="true" />
+                </div>
 
                 <label htmlFor="booking-date" className="sr-only">Preferred date</label>
                 <input id="booking-date" name="date" type="date" value={date} onChange={e => setDate(e.target.value)}
                   className="border border-[#e4ddd7] text-stone text-sm font-['Inter'] px-5 py-3.5 focus:outline-none focus:border-ink transition-colors w-full bg-white" />
 
                 <label htmlFor="booking-time" className="sr-only">Preferred time</label>
-                <select id="booking-time" name="time" value={time} onChange={e => setTime(e.target.value)}
-                  className="border border-[#e4ddd7] text-stone text-sm font-['Inter'] px-5 py-3.5 focus:outline-none focus:border-ink transition-colors appearance-none w-full bg-white">
-                  <option value="">Preferred time</option>
-                  {['11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'].map(t => (
-                    <option key={t} value={t}>{t}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select id="booking-time" name="time" value={time} onChange={e => setTime(e.target.value)}
+                    className="border border-[#e4ddd7] text-stone text-sm font-['Inter'] px-5 py-3.5 pr-10 focus:outline-none focus:border-ink transition-colors appearance-none w-full bg-white">
+                    <option value="">Preferred time</option>
+                    {['11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'].map(t => (
+                      <option key={t} value={t}>{t}</option>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone pointer-events-none" aria-hidden="true" />
+                </div>
 
                 <button type="submit"
                   className="mt-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone active:scale-[0.97] transition-all duration-300 w-full flex items-center justify-center gap-2">

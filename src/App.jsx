@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-dom'
-import { useEffect, useState, lazy, Suspense } from 'react'
+import { useEffect, useState, lazy, Suspense, Component } from 'react'
+import { BookingProvider } from './shared.jsx'
 
 const Home     = lazy(() => import('./pages/Home'))
 const Services = lazy(() => import('./pages/Services'))
@@ -61,7 +62,26 @@ function NotFound() {
   )
 }
 
-import { BookingProvider } from './shared.jsx'
+class ErrorBoundary extends Component {
+  constructor(props) { super(props); this.state = { error: null } }
+  static getDerivedStateFromError(error) { return { error } }
+  render() {
+    if (this.state.error) {
+      return (
+        <main className="min-h-screen bg-white flex flex-col items-center justify-center px-6 text-center">
+          <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">— Something went wrong</p>
+          <h1 className="font-['Unbounded'] font-bold text-3xl text-ink mb-4">Unexpected Error</h1>
+          <p className="text-stone max-w-sm mb-8 font-light text-sm">Please refresh the page. If the problem persists, contact us on WhatsApp.</p>
+          <button onClick={() => window.location.reload()}
+            className="bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors">
+            Refresh
+          </button>
+        </main>
+      )
+    }
+    return this.props.children
+  }
+}
 
 export default function App() {
   return (
@@ -69,6 +89,7 @@ export default function App() {
       <BookingProvider>
         <ScrollProgress />
         <ScrollToTop />
+        <ErrorBoundary>
         <Suspense fallback={<PageFallback />}>
           <Routes>
             <Route path="/"         element={<Home />}     />
@@ -79,6 +100,7 @@ export default function App() {
             <Route path="*"         element={<NotFound />} />
           </Routes>
         </Suspense>
+        </ErrorBoundary>
       </BookingProvider>
     </BrowserRouter>
   )
