@@ -67,7 +67,7 @@ const EDITORIAL_PHOTOS = [
   { src: '/nailpaintedhands.mp4',      label: 'Nail Finish',      video: true, poster: '/pedicure.jpg' },
   { src: '/wax2.jpg',                  label: 'Cold Wax' },
   { src: '/hairtreatment.jpg',         label: 'Hair Treatments' },
-  { src: '/glow2.png',                 label: 'Bleach & Polish' },
+  { src: '/glow2.jpg',                 label: 'Bleach & Polish' },
 ]
 
 function Hero() {
@@ -104,7 +104,7 @@ function Hero() {
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ objectPosition: '50% 35%' }}
-        poster="/glow2.png"
+        poster="/glow2.jpg"
         preload="metadata"
       >
         <source src="/hero2.mp4" type="video/mp4" />
@@ -344,7 +344,7 @@ function FeaturedServices() {
               style={{ opacity: (activeImg || activeVideo) ? 0 : 1 }} />
             {categories.map(cat => (
               <Image key={cat}
-                src={CAT_META[cat]?.img || '/glow2.png'}
+                src={CAT_META[cat]?.img || '/glow2.jpg'}
                 alt={cat}
                 width={900}
                 height={1200}

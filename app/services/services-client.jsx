@@ -8,7 +8,7 @@ import { LazyVideo, CAT_SLUGS } from '../../src/shared.jsx'
 import { SERVICES, CAT_META, track } from '../../src/data.js'
 
 function getCatMeta(cat) {
-  return CAT_META[cat] || { img: '/glow2.png', desc: 'Expert beauty services tailored just for you.' }
+  return CAT_META[cat] || { img: '/glow2.jpg', desc: 'Expert beauty services tailored just for you.' }
 }
 
 export default function ServicesClient() {

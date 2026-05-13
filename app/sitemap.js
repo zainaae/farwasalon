@@ -1,4 +1,5 @@
 import { CAT_SLUGS } from '../src/data.js'
+import { BLOG_POSTS } from '../src/blog-data.js'
 
 const BASE = 'https://farwasalon.com'
 
@@ -22,8 +23,7 @@ export default function sitemap() {
     priority: 0.8,
   }))
 
-  const blogSlugs = ['bridal-beauty-timeline', 'skincare-mistakes-karachi-summer', 'threading-vs-waxing', 'make-manicure-last-two-weeks']
-  const blogPages = blogSlugs.map(slug => ({
+  const blogPages = BLOG_POSTS.map(({ slug }) => ({
     url: `${BASE}/blog/${slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly',

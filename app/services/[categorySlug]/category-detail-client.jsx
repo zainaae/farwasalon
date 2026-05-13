@@ -9,7 +9,7 @@ import { ServiceModal, useBooking, formatPrice, formatDuration, CAT_SLUGS } from
 import { SERVICES, CAT_META, CAT_FAQS, slugToCategory } from '../../../src/data.js'
 
 function getCatMeta(cat) {
-  return CAT_META[cat] || { img: '/glow2.png', desc: 'Expert beauty services tailored just for you.' }
+  return CAT_META[cat] || { img: '/glow2.jpg', desc: 'Expert beauty services tailored just for you.' }
 }
 
 function FaqJsonLd({ faqs }) {

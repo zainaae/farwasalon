@@ -310,7 +310,7 @@ export const GALLERY_PHOTOS = [
   { src: '/hairdo.jpg',     label: 'Hair Styling' },
   { src: '/glow3.jpg',      label: 'Facial' },
   { src: '/pedicure.jpg',   label: 'Pedicure' },
-  { src: '/glow2.png',      label: 'Glow' },
+  { src: '/glow2.jpg',      label: 'Glow' },
   { src: '/bridal2.jpg',    label: 'Bridal Look' },
   { src: '/hairtreatment.jpg', label: 'Radiance' },
   { src: '/oilwax.jpg',     label: 'Beauty' },
