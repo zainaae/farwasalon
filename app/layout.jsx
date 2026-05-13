@@ -229,6 +229,9 @@ export const metadata = {
     canonical: '/',
     languages: { 'en-pk': '/' },
   },
+  verification: {
+    google: 'googlefe23fa4cbbf93de2',
+  },
   other: {
     'geo.region': 'PK-SD',
     'geo.placename': 'Karachi',
