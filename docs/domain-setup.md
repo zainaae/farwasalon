@@ -70,12 +70,11 @@ After the domain is live and SSL is working:
 
 ### Code Changes
 
-- [ ] Update `metadataBase` in `app/layout.jsx` back to `https://farwasalon.com`
-- [ ] Update `BASE` in `app/sitemap.js` back to `https://farwasalon.com`
-- [ ] Update sitemap URL in `app/robots.js` back to `https://farwasalon.com/sitemap.xml`
-- [ ] Search codebase for any remaining `farwasalon.vercel.app` references and update them
-
-> Look for `TODO: change back to https://farwasalon.com` comments in the code.
+- [x] Update `metadataBase` in `app/layout.jsx` back to `https://farwasalon.com`
+- [x] Update `BASE` in `app/sitemap.js` back to `https://farwasalon.com`
+- [x] Update sitemap URL in `app/robots.js` back to `https://farwasalon.com/sitemap.xml`
+- [x] Search codebase for any remaining `farwasalon.vercel.app` references and update them
+- [x] Add `www.farwasalon.com` → `farwasalon.com` redirect in `next.config.mjs`
 
 ### Search Engine Submission
 

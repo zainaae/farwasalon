@@ -1,7 +1,6 @@
 import { CAT_SLUGS } from '../src/data.js'
 
-// TODO: change back to https://farwasalon.com once custom domain is connected
-const BASE = 'https://farwasalon.vercel.app'
+const BASE = 'https://farwasalon.com'
 
 export default function sitemap() {
   const staticPages = [
