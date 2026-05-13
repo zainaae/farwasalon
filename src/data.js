@@ -254,7 +254,7 @@ export const CAT_META = {
   'Rica Hot Wax':    { img: '/waxing.jpg',     desc: 'Rica hot wax for face and sensitive areas — gentle, effective, and long-lasting results.' },
   'Honey Wax':       { img: '/wax2.jpg',       desc: 'Smooth, hair-free skin with natural honey wax — perfect for arms, legs, and body.' },
   'Rica Wax':        { img: '/oilwax.jpg',     desc: 'Premium Rica wax for a smooth finish that conditions your skin while removing hair.' },
-  'Bleach & Polish': { img: '/glow2.png',       desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
+  'Bleach & Polish': { img: '/glow2.jpg',       desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
   'Massage':         { img: '/massage.jpg',    desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
   'Hair Treatments': { img: '/hairtreatment.jpg', desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
   'Cleansing':       { img: '/cleansing.jpg',      video: '/cleansing.mp4',      desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
