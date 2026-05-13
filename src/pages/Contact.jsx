@@ -31,11 +31,20 @@ export default function Contact() {
     ogImage: 'https://farwasalon.com/logo.jpg',
   })
 
+  const [submitted, setSubmitted] = useState(false)
+  const [fallbackUrl, setFallbackUrl] = useState(null)
+
   const handleWhatsApp = e => {
     e.preventDefault()
     if (picked.length === 0) return
     track('WhatsAppIntent', { source: 'ContactPage', services: picked.join(', ') })
-    window.open(waLinkBooking(picked, { name, date, time }), '_blank', 'noopener,noreferrer')
+    const url = waLinkBooking(picked, { name, date, time })
+    const w = window.open(url, '_blank', 'noopener,noreferrer')
+    if (w) {
+      setSubmitted(true)
+    } else {
+      setFallbackUrl(url)
+    }
   }
 
   return (
@@ -127,7 +136,7 @@ export default function Contact() {
               <div className="relative overflow-hidden bg-mist border border-[#e4ddd7]" style={{ aspectRatio: '4/3' }}>
                 <iframe
                   title="Farwa Beauty Salon location — PECHS Block 2, Karachi"
-                  src="https://www.google.com/maps?q=PECHS+Block+2,+Karachi&output=embed"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.5!2d67.0513!3d24.8607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sFarwa+Beauty+Salon+PECHS+Block+2+Karachi!5e0!3m2!1sen!2spk!4v1"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   className="absolute inset-0 w-full h-full grayscale-[0.15]"
@@ -214,8 +223,27 @@ export default function Contact() {
                 </button>
               </form>
 
+              {submitted && (
+                <div className="mt-4 p-4 border border-[#9cd48c]/40 bg-[#f4faf2]">
+                  <p className="text-ink text-sm font-['Inter'] font-medium flex items-center gap-2">
+                    <Check className="w-4 h-4 text-[#6b9b5f] shrink-0" /> Message opened in WhatsApp
+                  </p>
+                  <p className="text-stone text-xs font-['Inter'] mt-1">We'll confirm your appointment within a few hours.</p>
+                </div>
+              )}
+
+              {fallbackUrl && (
+                <div className="mt-4 p-4 border border-[#c9a98a]/40 bg-[#faf7f5]">
+                  <p className="text-ink text-sm font-['Inter'] font-medium mb-1">Popup blocked by your browser</p>
+                  <a href={fallbackUrl} target="_blank" rel="noreferrer"
+                    className="text-[#8b6d59] text-sm font-['Inter'] underline hover:text-ink">
+                    Click here to open WhatsApp manually →
+                  </a>
+                </div>
+              )}
+
               <div className="flex flex-wrap gap-x-5 gap-y-2 mt-5">
-                {['No card required','Quick confirmation','Cancel anytime'].map(t => (
+                {['No card required','Quick confirmation'].map(t => (
                   <span key={t} className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">
                     <Check className="w-3 h-3 text-ink/40 shrink-0" /> {t}
                   </span>

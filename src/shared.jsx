@@ -368,7 +368,7 @@ function BookingSheetSelectedChips({ picked, onRemove }) {
 }
 
 /* ─── Smart Booking Sheet — multi-service step 1 → date → WhatsApp ── */
-export function BookingSheet({ open, onClose, initialCategory = null }) {
+export function BookingSheet({ open, onClose, initialCategory = null, initialPicked = null }) {
   const [step, setStep] = useState(0)
   const [cat, setCat] = useState(initialCategory)
   /** @type {{ id: string|number, name: string }[]} */
@@ -382,10 +382,13 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
 
   useEffect(() => {
     if (!open) return undefined
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- sync category when overlay opens from provider
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- sync category/picked when overlay opens from provider
     setCat(initialCategory ?? null)
+    if (initialPicked && initialPicked.length > 0) {
+      setPicked(initialPicked)
+    }
     return undefined
-  }, [open, initialCategory])
+  }, [open, initialCategory, initialPicked])
 
   useEffect(() => {
     if (!open) {
@@ -695,20 +698,24 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
 }
 
 /* ─── Booking context (global access) ──────────────────────────── */
-const BookingCtx = createContext({ open: () => {} })
+const BookingCtx = createContext({ open: () => {}, addService: () => {} })
 export function BookingProvider({ children }) {
-  const [state, setState] = useState({ open: false, category: null })
+  const [state, setState] = useState({ open: false, category: null, initialPicked: null })
   const value = {
     open: (category = null, source = 'unknown') => {
       track('BookingStarted', { source, category: category || 'none' })
-      setState({ open: true, category })
+      setState({ open: true, category, initialPicked: null })
+    },
+    addService: (service, source = 'modal') => {
+      track('BookingStarted', { source, category: service.category || 'none' })
+      setState({ open: true, category: service.category, initialPicked: [{ id: service.id, name: service.name }] })
     },
     close: () => setState(s => ({ ...s, open: false })),
   }
   return (
     <BookingCtx.Provider value={value}>
       {children}
-      <BookingSheet open={state.open} initialCategory={state.category} onClose={value.close} />
+      <BookingSheet open={state.open} initialCategory={state.category} initialPicked={state.initialPicked} onClose={value.close} />
     </BookingCtx.Provider>
   )
 }
@@ -746,6 +753,7 @@ export function WordmarkDivider() {
 export function ServiceModal({ service, onClose }) {
   const dialogRef  = useRef(null)
   const returnRef  = useRef(null)
+  const booking    = useBooking()
   const titleId    = 'svc-modal-title'
   const descId     = 'svc-modal-desc'
 
@@ -826,10 +834,17 @@ export function ServiceModal({ service, onClose }) {
                 </ul>
               </div>
             )}
-            <a href={waLink(service.name)} target="_blank" rel="noreferrer" onClick={onClose}
-              className="mt-auto inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone active:scale-[0.98] transition-all duration-300">
-              Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
+            <div className="mt-auto flex flex-col gap-2">
+              <button type="button"
+                onClick={() => { booking.addService(service, 'modal'); onClose() }}
+                className="inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone active:scale-[0.98] transition-all duration-300">
+                <Sparkles className="w-3.5 h-3.5" /> Add to Booking
+              </button>
+              <a href={waLink(service.name)} target="_blank" rel="noreferrer" onClick={onClose}
+                className="inline-flex items-center justify-center gap-2 border border-[#e4ddd7] text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-all duration-300">
+                Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
           </div>
         </motion.div>
       </motion.div>

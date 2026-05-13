@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation, Link } from 'react-router-dom'
 import { useEffect, useState, lazy, Suspense, Component } from 'react'
+import { MotionConfig } from 'framer-motion'
 import { BookingProvider } from './shared.jsx'
 
 const Home     = lazy(() => import('./pages/Home'))
@@ -50,7 +51,13 @@ function PageFallback() {
 }
 
 function NotFound() {
-  useEffect(() => { document.title = '404 — Farwa Beauty Salon' }, [])
+  useEffect(() => {
+    document.title = '404 — Farwa Beauty Salon'
+    let meta = document.querySelector('meta[name="robots"]')
+    if (!meta) { meta = document.createElement('meta'); meta.name = 'robots'; document.head.appendChild(meta) }
+    meta.content = 'noindex, nofollow'
+    return () => { meta.content = 'index, follow' }
+  }, [])
   return (
     <main className="min-h-screen bg-white flex flex-col items-center justify-center px-6 text-center">
       <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">— 404</p>
@@ -68,6 +75,13 @@ function NotFound() {
 class ErrorBoundary extends Component {
   constructor(props) { super(props); this.state = { error: null } }
   static getDerivedStateFromError(error) { return { error } }
+  componentDidCatch(error, info) {
+    const msg = error?.message ?? 'Unknown error'
+    const stack = (info?.componentStack ?? '').slice(0, 300)
+    if (typeof window !== 'undefined' && window.plausible) {
+      window.plausible('ErrorBoundary', { props: { message: msg, stack } })
+    }
+  }
   render() {
     if (this.state.error) {
       return (
@@ -89,6 +103,7 @@ class ErrorBoundary extends Component {
 export default function App() {
   return (
     <BrowserRouter>
+      <MotionConfig reducedMotion="user">
       <BookingProvider>
         <ScrollProgress />
         <ScrollToTop />
@@ -109,6 +124,7 @@ export default function App() {
         </Suspense>
         </ErrorBoundary>
       </BookingProvider>
+      </MotionConfig>
     </BrowserRouter>
   )
 }
