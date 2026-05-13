@@ -230,7 +230,7 @@ export const metadata = {
     languages: { 'en-pk': '/' },
   },
   verification: {
-    google: 'googlefe23fa4cbbf93de2',
+    google: 'RU3jY_9wI_1x4XXWI13vu6TI2UHxOHCqqVmFSpR42YY',
   },
   other: {
     'geo.region': 'PK-SD',
