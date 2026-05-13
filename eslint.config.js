@@ -29,7 +29,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['src/shared.jsx'],
+    files: ['src/shared.jsx', 'src/pages/Blog.jsx'],
     rules: {
       'react-refresh/only-export-components': 'off',
     },

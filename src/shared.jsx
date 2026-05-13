@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback, createContext, useContext } f
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Check } from 'lucide-react'
-import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, track, CAT_SLUGS } from './data.js'
+import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, track, CAT_SLUGS, CAT_SEO, CAT_FAQS } from './data.js'
 
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
 export function useNextSlot() {
@@ -901,6 +901,7 @@ export function Navbar({ transparent = false }) {
     { label: 'Home',         to: '/' },
     { label: 'Services',     to: '/services' },
     { label: 'Gallery',      to: '/gallery' },
+    { label: 'Blog',         to: '/blog' },
     { label: 'About',        to: '/about' },
     { label: 'Contact',      to: '/contact' },
   ]
@@ -1024,7 +1025,7 @@ export function Footer() {
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Navigate</p>
               <ul className="flex flex-col gap-2.5">
-                {[['Home','/'],['Services','/services'],['Gallery','/gallery'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,to]) => (
+                {[['Home','/'],['Services','/services'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,to]) => (
                   <li key={l}><Link to={to} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{l}</Link></li>
                 ))}
               </ul>
@@ -1117,4 +1118,4 @@ export function LazyVideo({ src, poster, className, ...props }) {
 }
 
 /* ─── Re-exports ───────────────────────────────────────────────── */
-export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, CAT_SLUGS }
+export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, CAT_SLUGS, CAT_SEO, CAT_FAQS }

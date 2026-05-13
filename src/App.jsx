@@ -11,6 +11,7 @@ const Contact  = lazy(() => import('./pages/Contact'))
 const Privacy  = lazy(() => import('./pages/Privacy'))
 const Team     = lazy(() => import('./pages/Team'))
 const FAQ      = lazy(() => import('./pages/FAQ'))
+const Blog     = lazy(() => import('./pages/Blog'))
 
 /* ─── Champagne scroll progress bar — fixed top of viewport ───── */
 function ScrollProgress() {
@@ -119,6 +120,8 @@ export default function App() {
             <Route path="/privacy"                element={<Privacy />}  />
             <Route path="/team"                   element={<Team />}     />
             <Route path="/faq"                    element={<FAQ />}      />
+            <Route path="/blog"                   element={<Blog />}     />
+            <Route path="/blog/:slug"             element={<Blog />}     />
             <Route path="*"                       element={<NotFound />} />
           </Routes>
         </Suspense>

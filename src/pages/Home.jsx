@@ -6,7 +6,7 @@ import {
   Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta,
   SkipLink, WordmarkDivider, useBooking, useNextSlot, LazyVideo, CAT_SLUGS,
 } from '../shared.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE } from '../data.js'
+import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER } from '../data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
@@ -651,6 +651,53 @@ function TestimonialsPreview() {
   )
 }
 
+/* ─── Areas We Serve — local SEO content ────────────────────────── */
+function AreasWeServe() {
+  const areas = [
+    { name: 'PECHS Block 2', detail: 'Our home since 2008 — walk in or book ahead.' },
+    { name: 'Shahrah-e-Faisal', detail: 'Just minutes away via the main arterial road.' },
+    { name: 'Bahadurabad', detail: 'A short drive through PECHS brings you to our door.' },
+    { name: 'Gulshan-e-Iqbal', detail: 'Many of our regular clients travel from Gulshan — and say it\'s worth every minute.' },
+    { name: 'Clifton & Defence', detail: 'We welcome clients from DHA and Clifton for bridal and special occasion bookings.' },
+    { name: 'Tariq Road & SMCHS', detail: 'Our nearest shopping neighbours — stop by before or after your errands.' },
+  ]
+
+  return (
+    <section className="bg-white py-14 md:py-20 px-4 sm:px-5 md:px-10 border-t border-[#e4ddd7]">
+      <div className="max-w-screen-xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— Karachi Beauty Guide</p>
+          <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight mb-3">Areas We Serve</h2>
+          <p className="text-stone text-sm font-light max-w-xl mb-10 leading-relaxed">
+            Located in the heart of PECHS Block 2, Farwa Beauty Salon is easily accessible from across Karachi.
+            Women from neighbouring areas trust us for bridal, facials, hair, nails, and everyday beauty — and have for over {YEARS_ACTIVE} years.
+          </p>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          {areas.map((area, i) => (
+            <motion.div key={area.name}
+              initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.06 }}
+              className="border border-[#e4ddd7] p-5 hover:border-ink transition-colors duration-300">
+              <h3 className="font-['Syne'] font-bold text-sm text-ink mb-1.5">{area.name}</h3>
+              <p className="text-stone text-xs font-light font-['Inter'] leading-relaxed">{area.detail}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-8 pt-6 border-t border-[#e4ddd7]">
+          <p className="text-stone text-xs font-['Inter'] font-light leading-relaxed max-w-2xl">
+            <strong className="text-ink font-medium">Farwa Beauty Salon</strong> · PECHS Block 2, Karachi, Sindh, Pakistan ·
+            WhatsApp <a href={`https://wa.me/${WA_NUMBER}`} className="text-ink hover:underline">+92 322 2782254</a> ·
+            Mon–Sat 11am–7pm · Closed Sunday
+          </p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ─── CTA band ─────────────────────────────────────────────────── */
 function CtaBand() {
   const booking = useBooking()
@@ -700,6 +747,7 @@ export default function Home() {
         <FeaturedServices />
         <TrustPillars />
         <TestimonialsPreview />
+        <AreasWeServe />
         <CtaBand />
       </main>
       <Footer />

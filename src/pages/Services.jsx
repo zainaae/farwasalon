@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, ChevronLeft } from 'lucide-react'
 import { Navbar, Footer, StickyWA, ServiceModal, usePageMeta, useBooking, SkipLink, formatPrice, formatDuration } from '../shared.jsx'
-import { SERVICES, CAT_META, CAT_SLUGS, slugToCategory, track } from '../data.js'
+import { SERVICES, CAT_META, CAT_SLUGS, CAT_SEO, CAT_FAQS, slugToCategory, track } from '../data.js'
 
 function getCatMeta(cat) {
   return CAT_META[cat] || { img: '/glow2.png', desc: 'Expert beauty services tailored just for you.' }
@@ -63,6 +63,34 @@ function CategoryGrid() {
   )
 }
 
+/* ─── JSON-LD helpers ──────────────────────────────────────────── */
+function FaqJsonLd({ faqs }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}
+
+function BreadcrumbJsonLd({ items }) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}
+
 /* ─── Category detail ──────────────────────────────────────────── */
 function CategoryDetail({ category }) {
   const [modal, setModal] = useState(null)
@@ -70,12 +98,21 @@ function CategoryDetail({ category }) {
   const navigate = useNavigate()
   const services = SERVICES[category] || []
   const meta     = getCatMeta(category)
+  const faqs     = CAT_FAQS[category] || []
   const canOpen  = s => !!(s.desc || (Array.isArray(s.includes) && s.includes.length))
   const openFor  = s => { if (canOpen(s)) setModal(s) }
   const onBack   = () => navigate('/services')
+  const slug     = Object.entries(CAT_SLUGS).find(([k]) => k === category)?.[1]
 
   return (
     <div className="max-w-3xl">
+      <BreadcrumbJsonLd items={[
+        { name: 'Home', url: 'https://farwasalon.com/' },
+        { name: 'Services', url: 'https://farwasalon.com/services' },
+        { name: category, url: `https://farwasalon.com/services/${slug}` },
+      ]} />
+      {faqs.length > 0 && <FaqJsonLd faqs={faqs} />}
+
       {/* Back */}
       <motion.button initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}
         onClick={onBack}
@@ -142,6 +179,23 @@ function CategoryDetail({ category }) {
         })}
       </ul>
 
+      {/* FAQ section */}
+      {faqs.length > 0 && (
+        <section className="mt-12 pt-10 border-t border-[#e4ddd7]">
+          <h3 className="font-['Unbounded'] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
+            Frequently Asked Questions
+          </h3>
+          <dl className="divide-y divide-[#e4ddd7]">
+            {faqs.map((faq, i) => (
+              <div key={i} className="py-5">
+                <dt className="font-['Syne'] font-bold text-sm text-ink mb-2">{faq.q}</dt>
+                <dd className="text-stone text-sm font-light leading-relaxed font-['Inter']">{faq.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
+
       {/* Footer CTA */}
       <div className="mt-8 pt-6 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-start sm:items-center gap-4">
         <button onClick={() => booking.open(category)}
@@ -173,7 +227,7 @@ export default function Services() {
       ? `${selected} — Farwa Beauty Salon, Karachi`
       : 'Services — Farwa Beauty Salon, Karachi',
     description: selected
-      ? `${selected} services at Farwa Beauty Salon, PECHS Block 2, Karachi. Book on WhatsApp.`
+      ? (CAT_SEO[selected]?.metaDesc || `${selected} services at Farwa Beauty Salon, PECHS Block 2, Karachi. Book on WhatsApp.`)
       : 'Explore our full menu — bridal packages, facials, hair, nails, threading, waxing, massage and more. Book any service directly on WhatsApp.',
     canonical,
     ogImage: 'https://farwasalon.com/logo.jpg',

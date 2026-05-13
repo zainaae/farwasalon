@@ -1,6 +1,8 @@
 /* ─── Config ─────────────────────────────────────────────────── */
 export const WA_NUMBER  = '923222782254'
-export const MAPS_LINK  = 'https://share.google/DVB5zqvtHKgPA7G6U'
+export const MAPS_LINK  = 'https://www.google.com/maps/place/Farwa+beauty+salon/@24.8797532,67.0584185,17z/data=!3m1!4b1!4m6!3m5!1s0x3eb33f2832975c79:0xe55ba4a44d34a210!8m2!3d24.8797532!4d67.0584185!16s%2Fg%2F11hdrwg03n'
+export const SALON_LAT  = 24.8797532
+export const SALON_LNG  = 67.0584185
 export const IG_LINK    = 'https://www.instagram.com/farwasalon/'
 export const WA_DEFAULT = `https://wa.me/${WA_NUMBER}?text=Hi%21%20I%27d%20like%20to%20book%20an%20appointment%20at%20Farwa%20Beauty%20Salon.`
 export const waLink = (service = '') =>
@@ -261,6 +263,45 @@ export const CAT_META = {
   'Bridal':          { img: '/bridal.jpg',                                        desc: 'Complete wedding packages — from trials to the big day. We make every bride feel extraordinary.' },
   'Hair':            { img: '/hairdo.jpg',                                        desc: 'Cuts, colour, blowdrys, and styling for every hair type and texture.' },
   'Eyebrow Tattoo':  { img: '/eyebrowtattoo.jpg',  video: '/eyebrowtattoo.mp4',  desc: 'Semi-permanent brow definition — microblading, powder brows, and combination brows.' },
+}
+
+/* ─── Unique meta descriptions per service category (SEO) ──── */
+export const CAT_SEO = {
+  'Threading':       { metaDesc: 'Professional eyebrow, lip, and full face threading at Farwa Beauty Salon, PECHS Block 2, Karachi. Precision shaping from Rs 100. Book on WhatsApp.' },
+  'Rica Hot Wax':    { metaDesc: 'Gentle Rica hot wax for face and sensitive areas at Farwa Beauty Salon, Karachi. Smooth, lasting results from Rs 150. PECHS Block 2.' },
+  'Honey Wax':       { metaDesc: 'Natural honey wax for arms, legs, and full body at Farwa Beauty Salon, PECHS Block 2, Karachi. Prices from Rs 400. Book on WhatsApp.' },
+  'Rica Wax':        { metaDesc: 'Premium Rica body wax — arms, legs, underarms, and full body at Farwa Beauty Salon, Karachi. From Rs 600. PECHS Block 2.' },
+  'Bleach & Polish': { metaDesc: 'Face and body bleach, Loreal whitening, diamond polish, and sandal polish at Farwa Beauty Salon, PECHS Block 2, Karachi. From Rs 400.' },
+  'Massage':         { metaDesc: 'Relaxing back, head, and full body massage at Farwa Beauty Salon, PECHS Block 2, Karachi. Sessions from Rs 700. Book on WhatsApp.' },
+  'Hair Treatments': { metaDesc: 'Protein repair, hair fall treatment, dandruff control, and Wellaplex at Farwa Beauty Salon, PECHS Block 2, Karachi. From Rs 2,000.' },
+  'Cleansing':       { metaDesc: 'HD cleansing, acne cleansing, and Janssen whitening deep cleanse at Farwa Beauty Salon, PECHS Block 2, Karachi. From Rs 1,200.' },
+  'Facials':         { metaDesc: 'Professional facials in Karachi — organic, whitening, HD, Janssen, and anti-ageing treatments at Farwa Beauty Salon, PECHS Block 2. From Rs 1,400.' },
+  'Nails':           { metaDesc: 'Manicure, pedicure, French tips, paraffin, and SPA nail treatments at Farwa Beauty Salon, PECHS Block 2, Karachi. From Rs 300.' },
+  'Bridal':          { metaDesc: 'Complete bridal makeup packages in Karachi — trials, engagement looks, mehndi styling at Farwa Beauty Salon, PECHS Block 2. Book on WhatsApp.' },
+  'Hair':            { metaDesc: 'Haircuts, colour, blowdry, and bridal hair styling at Farwa Beauty Salon, PECHS Block 2, Karachi. Expert stylists since 2008.' },
+  'Eyebrow Tattoo':  { metaDesc: 'Microblading, powder brows, and combination brow tattoo at Farwa Beauty Salon, PECHS Block 2, Karachi. Semi-permanent results.' },
+}
+
+/* ─── FAQ content for popular categories (SEO + user value) ──── */
+export const CAT_FAQS = {
+  'Bridal': [
+    { q: 'How far in advance should I book my bridal package?', a: 'We recommend booking at least 2–3 months ahead, especially during wedding season (October–March). This gives time for a trial, skincare prep, and any adjustments to your look.' },
+    { q: 'Do you offer a bridal trial before the wedding day?', a: 'Yes — every bridal booking includes a full trial with hair, makeup, and dupatta draping. You\'ll get reference photos so both you and our team are perfectly aligned for the big day.' },
+    { q: 'Can you do makeup for engagement and mehndi events too?', a: 'Absolutely. We offer dedicated looks for engagement, mehndi/dholki, nikkah, and reception — each styled to match the event\'s mood, your outfit, and your preferences.' },
+    { q: 'What is included in the Full Bridal Package?', a: 'Our signature package includes bridal makeup, hair styling, dupatta draping, a touch-up kit, and event presence so we\'re there for any adjustments throughout the day.' },
+  ],
+  'Facials': [
+    { q: 'How often should I get a facial?', a: 'For best results, we recommend a professional facial every 4–6 weeks. This aligns with your skin\'s natural renewal cycle and helps maintain clear, glowing skin between visits.' },
+    { q: 'Which facial is best for oily or acne-prone skin?', a: 'Our Acne Facial (Rs 1,800) is specifically formulated for congested, oily skin. For deeper issues, HD Cleansing (Rs 1,700) combined with the Acne Facial gives excellent results.' },
+    { q: 'What is the difference between HD Whitening Facial and Janssen Whitening Facial?', a: 'The HD Whitening Facial (Rs 3,000) uses high-definition brightening serums for visible results in one session. The Janssen Whitening Facial (Rs 5,500) uses premium German cosmeceutical products for deeper, longer-lasting brightening — ideal for pigmentation and uneven skin tone.' },
+    { q: 'Are your facials suitable for sensitive skin?', a: 'Yes. We assess every client\'s skin before starting and adjust products accordingly. Our Herbal Organic Facial (Rs 1,600) is specifically designed for sensitive and reactive skin types.' },
+  ],
+  'Threading': [
+    { q: 'Is threading better than waxing for eyebrows?', a: 'For eyebrows, threading offers superior precision — individual hairs can be targeted without affecting surrounding skin. It\'s the gold standard for brow shaping and ideal for sensitive or acne-prone skin.' },
+    { q: 'How long does eyebrow threading take?', a: 'Eyebrow threading at Farwa takes about 10 minutes. A Full Face Threading session takes approximately 25 minutes.' },
+    { q: 'Does threading hurt more than waxing?', a: 'Threading involves a brief, sharp sensation but no heat or chemicals touch your skin. Most clients find it less irritating than waxing, especially for facial areas. Any redness typically fades within 30 minutes.' },
+    { q: 'How often should I get my eyebrows threaded?', a: 'Most clients come every 2–3 weeks to maintain a clean, defined shape. The timing depends on how quickly your hair grows — we\'ll recommend a schedule that works for your growth pattern.' },
+  ],
 }
 
 export const GALLERY_PHOTOS = [
