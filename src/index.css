@@ -223,6 +223,15 @@ textarea:focus-visible,
   border: 0;
 }
 
+/* ── Image quality: high-quality rendering and prevent blurry upscaling ── */
+img {
+  image-rendering: auto;
+  -ms-interpolation-mode: bicubic;
+}
+img[data-max-native] {
+  image-rendering: high-quality;
+}
+
 /* ── Prevent video controls interception ── */
 video[aria-hidden="true"] { pointer-events: none; }
 

@@ -871,6 +871,8 @@ function Logo({ light }) {
     <img
       src="/logo.jpg"
       alt="Farwa Beauty Salon"
+      width="945"
+      height="945"
       onError={() => setErr(true)}
       className="h-8 md:h-[2.125rem] w-auto object-contain transition-opacity duration-300"
     />
@@ -989,7 +991,7 @@ export function Footer() {
         <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
             <Link to="/" className="shrink-0">
-              <img src="/logo.jpg" alt="Farwa Beauty Salon" className="h-10 md:h-12 w-auto"
+              <img src="/logo.jpg" alt="Farwa Beauty Salon" width="945" height="945" loading="lazy" className="h-10 md:h-12 w-auto"
                 onError={e => { e.currentTarget.style.display='none'; e.currentTarget.nextSibling.style.display='block' }} />
               <span style={{display:'none'}} className="font-['Unbounded'] font-bold text-sm text-ink">FARWA</span>
             </Link>

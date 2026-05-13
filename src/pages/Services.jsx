@@ -6,7 +6,7 @@ import { Navbar, Footer, StickyWA, ServiceModal, usePageMeta, useBooking, SkipLi
 import { SERVICES, CAT_META, CAT_SLUGS, slugToCategory, track } from '../data.js'
 
 function getCatMeta(cat) {
-  return CAT_META[cat] || { img: '/glow.jpg', desc: 'Expert beauty services tailored just for you.' }
+  return CAT_META[cat] || { img: '/glow2.png', desc: 'Expert beauty services tailored just for you.' }
 }
 
 /* ─── Category grid ────────────────────────────────────────────── */

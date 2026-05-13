@@ -61,7 +61,7 @@ const EDITORIAL_PHOTOS = [
   { src: '/bridal.jpg',                label: 'Bridal' },
   { src: '/eyebrowtattoo.mp4',         label: 'Eyebrow Tattoo',   video: true, poster: '/eyebrowtattoo.jpg' },
   { src: '/manicurephotography.mp4',   label: 'Nail Craft',       video: true, poster: '/pedicure.jpg' },
-  { src: '/facial.jpg',                label: 'Facials' },
+  { src: '/glow3.jpg',                 label: 'Facials' },
   { src: '/threading.jpg',             label: 'Threading' },
   { src: '/hairdo.jpg',                label: 'Hair' },
   { src: '/oilwax.jpg',                label: 'Oil Wax' },
@@ -70,7 +70,7 @@ const EDITORIAL_PHOTOS = [
   { src: '/nailpaintedhands.mp4',      label: 'Nail Finish',      video: true, poster: '/pedicure.jpg' },
   { src: '/wax2.jpg',                  label: 'Cold Wax' },
   { src: '/hairtreatment.jpg',         label: 'Hair Treatments' },
-  { src: '/glow.jpg',                  label: 'Bleach & Polish' },
+  { src: '/glow2.png',                 label: 'Bleach & Polish' },
 ]
 
 /* ─── Hero — thesis copy + kinetic reveal + calmer video ──────── */
@@ -112,7 +112,7 @@ function Hero() {
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"
         style={{ objectPosition: '50% 35%' }}
-        poster="/glow.jpg"
+        poster="/glow2.png"
         preload="metadata"
       >
         <source src="/hero2.mp4" type="video/mp4" />
@@ -383,6 +383,8 @@ function FeaturedServices() {
               <img key={cat}
                 src={CAT_META[cat]?.img}
                 alt={cat}
+                width="900"
+                height="1200"
                 className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 pointer-events-none"
                 style={{ opacity: hovered === cat && !CAT_META[cat]?.video ? 1 : 0 }}
                 aria-hidden="true"
