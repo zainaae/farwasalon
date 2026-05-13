@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, Star, Quote } from 'lucide-react'
 import {
@@ -269,8 +270,8 @@ function EditorialSlideshow() {
                 <LazyVideo src={p.src} poster={p.poster}
                   className="w-full h-full object-cover" />
               ) : (
-                <img src={p.src} alt={p.label} loading="lazy" decoding="async"
-                  width="230" height="306"
+                <Image src={p.src} alt={p.label} loading="lazy"
+                  width={230} height={306}
                   className="w-full h-full object-cover" />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
@@ -295,7 +296,8 @@ function EditorialSlideshow() {
                 <LazyVideo src={p.src} poster={p.poster}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               ) : (
-                <img src={p.src} alt={p.label} loading="lazy" decoding="async" width="330" height="440"
+                <Image src={p.src} alt={p.label} loading="lazy"
+                  width={330} height={440}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
@@ -341,11 +343,11 @@ function FeaturedServices() {
               className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
               style={{ opacity: (activeImg || activeVideo) ? 0 : 1 }} />
             {categories.map(cat => (
-              <img key={cat}
-                src={CAT_META[cat]?.img}
+              <Image key={cat}
+                src={CAT_META[cat]?.img || '/glow2.png'}
                 alt={cat}
-                width="900"
-                height="1200"
+                width={900}
+                height={1200}
                 className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 pointer-events-none"
                 style={{ opacity: hovered === cat && !CAT_META[cat]?.video ? 1 : 0 }}
                 aria-hidden="true"

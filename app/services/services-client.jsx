@@ -1,6 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import { LazyVideo, CAT_SLUGS } from '../../src/shared.jsx'
@@ -38,7 +39,7 @@ export default function ServicesClient() {
               <motion.button type="button" key={cat} onClick={() => { track('ServiceCategoryView', { category: cat }); router.push(`/services/${CAT_SLUGS[cat]}`) }}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.05 }}
                 className="relative overflow-hidden group text-left" style={{ aspectRatio: '3/4' }}>
-                <img src={meta.img} alt={cat} loading="lazy" decoding="async" width="900" height="1200"
+                <Image src={meta.img} alt={cat} loading="lazy" width={900} height={1200}
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105${meta.video ? ' group-hover:opacity-0' : ''}`} />
                 {meta.video && (
                   <video src={meta.video} autoPlay muted loop playsInline

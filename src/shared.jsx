@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useRef, useState, useCallback, createContext, useContext } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Check } from 'lucide-react'
@@ -206,8 +207,8 @@ export function SmoothyGallery({ photos }) {
         {photos.map((p, i) => (
           <figure key={i} className="relative shrink-0 overflow-hidden bg-[#0d0609]"
             style={{ width: 'clamp(260px,36vw,420px)', height: 'clamp(340px,50vw,560px)' }}>
-            <img src={p.src} alt={p.label} loading="lazy" decoding="async" draggable={false}
-              width="420" height="560"
+            <Image src={p.src} alt={p.label} loading="lazy" draggable={false}
+              width={420} height={560}
               className="w-full h-full object-cover select-none" />
             <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-ink/70 via-ink/30 to-transparent">
               <p className="text-white text-[10px] tracking-[0.22em] uppercase font-['Inter']">{p.label}</p>
@@ -870,11 +871,11 @@ function Logo({ light }) {
     return <span className="font-['Unbounded'] font-bold text-[12px] md:text-[13px] tracking-[0.12em] text-ink">FARWA</span>
   }
   return (
-    <img
+    <Image
       src="/logo.jpg"
       alt="Farwa Beauty Salon"
-      width="945"
-      height="945"
+      width={945}
+      height={945}
       onError={() => setErr(true)}
       className="h-8 md:h-[2.125rem] w-auto object-contain transition-opacity duration-300"
     />
@@ -993,7 +994,7 @@ export function Footer() {
         <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
             <Link href="/" className="shrink-0">
-              <img src="/logo.jpg" alt="Farwa Beauty Salon" width="945" height="945" loading="lazy" className="h-10 md:h-12 w-auto"
+              <Image src="/logo.jpg" alt="Farwa Beauty Salon" width={945} height={945} loading="lazy" className="h-10 md:h-12 w-auto"
                 onError={e => { e.currentTarget.style.display='none'; e.currentTarget.nextSibling.style.display='block' }} />
               <span style={{display:'none'}} className="font-['Unbounded'] font-bold text-sm text-ink">FARWA</span>
             </Link>
