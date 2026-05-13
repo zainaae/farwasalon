@@ -4,9 +4,9 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, Star, Quote } from 'lucide-react'
 import {
   Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta,
-  SkipLink, WordmarkDivider, useBooking, useNextSlot,
+  SkipLink, WordmarkDivider, useBooking, useNextSlot, LazyVideo, CAT_SLUGS,
 } from '../shared.jsx'
-import { SERVICES, CAT_META } from '../data.js'
+import { SERVICES, CAT_META, YEARS_ACTIVE } from '../data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
@@ -248,11 +248,11 @@ function StatsStrip() {
             viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.15 }}
             className="flex flex-col gap-6 sm:gap-7">
             <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
-              For over 17 years, Farwa Beauty Salon has been the trusted choice for women across Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
+              For over {YEARS_ACTIVE} years, Farwa Beauty Salon has been the trusted choice for women across Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
             </p>
             <div className="grid grid-cols-3 max-[380px]:grid-cols-1 gap-3 sm:gap-4 border-t border-[#e4ddd7] pt-6 sm:pt-7">
               {[
-                { display: '17+',  final: 17,             label: 'Years of expertise' },
+                { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
                 { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
                 { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services on the menu' },
               ].map(({ display, final, label }) => (
@@ -292,10 +292,11 @@ function EditorialSlideshow() {
               className="relative shrink-0 overflow-hidden mx-[5px]"
               style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)' }}>
               {p.video ? (
-                <video src={p.src} autoPlay muted loop playsInline poster={p.poster}
+                <LazyVideo src={p.src} poster={p.poster}
                   className="w-full h-full object-cover" />
               ) : (
                 <img src={p.src} alt={p.label} loading="lazy" decoding="async"
+                  width="230" height="306"
                   className="w-full h-full object-cover" />
               )}
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
@@ -318,7 +319,7 @@ function EditorialSlideshow() {
           {doubled.map((p, i) => (
             <div key={i} className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group cursor-default">
               {p.video ? (
-                <video src={p.src} autoPlay muted loop playsInline poster={p.poster}
+                <LazyVideo src={p.src} poster={p.poster}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               ) : (
                 <img src={p.src} alt={p.label} loading="lazy" decoding="async" width="330" height="440"
@@ -373,12 +374,9 @@ function FeaturedServices() {
             className="relative overflow-hidden aspect-[3/4] hidden md:block sticky top-24 bg-[#0d0609]">
 
             {/* Video base layer (always mounted, shown when no hover) */}
-            <video autoPlay muted loop playsInline
+            <LazyVideo src="/ct.mp4" poster="/bridal.jpg"
               className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
-              style={{ opacity: (activeImg || activeVideo) ? 0 : 1 }}
-              poster="/bridal.jpg">
-              <source src="/ct.mp4" type="video/mp4" />
-            </video>
+              style={{ opacity: (activeImg || activeVideo) ? 0 : 1 }} />
 
             {/* Category image cross-fade layer */}
             {categories.map(cat => (
@@ -417,10 +415,8 @@ function FeaturedServices() {
           <div>
             {/* Mobile video */}
             <div className="relative overflow-hidden mb-8 md:hidden" style={{ aspectRatio: '4/3' }}>
-              <video autoPlay muted loop playsInline
-                className="absolute inset-0 w-full h-full object-cover object-center" poster="/bridal.jpg">
-                <source src="/ct.mp4" type="video/mp4" />
-              </video>
+              <LazyVideo src="/ct.mp4" poster="/bridal.jpg"
+                className="absolute inset-0 w-full h-full object-cover object-center" />
             </div>
 
             <div className="divide-y divide-[#e4ddd7] border-t border-[#e4ddd7]">
@@ -428,7 +424,7 @@ function FeaturedServices() {
                 <motion.div key={cat}
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}>
-                  <Link to="/services"
+                  <Link to={`/services/${CAT_SLUGS[cat]}`}
                     onMouseEnter={() => setHovered(cat)}
                     onMouseLeave={() => setHovered(null)}
                     className="group flex items-center justify-between py-4 md:py-5 gap-4">
@@ -474,7 +470,7 @@ function TrustPillars() {
           className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</motion.p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           {[
-            { num: '01', title: '17 Years of Expertise',        desc: 'Since 2008, Farwa has been crafting beauty with skill, care, and love for every client who walks through the door.' },
+            { num: '01', title: `${YEARS_ACTIVE} Years of Expertise`,        desc: 'Since 2008, Farwa has been crafting beauty with skill, care, and love for every client who walks through the door.' },
             { num: '02', title: 'A Calm, Considered Space',      desc: 'The studio is unhurried by design — quiet rooms, careful lighting, conversations that stay at the chair.' },
             { num: '03', title: 'Every Woman, Every Look',       desc: 'From a quick brow thread to a full bridal transformation — no request is too big or too small.' },
           ].map((p, i) => (
@@ -686,7 +682,9 @@ function CtaBand() {
 export default function Home() {
   usePageMeta({
     title: 'Farwa Beauty Salon — Karachi\'s trusted beauty studio since 2008',
-    description: 'Bridal, facials, hair, nails, threading, waxing and more in PECHS Block 2, Karachi. 17+ years of beauty expertise — book directly on WhatsApp.',
+    description: `Bridal, facials, hair, nails, threading, waxing and more in PECHS Block 2, Karachi. ${YEARS_ACTIVE}+ years of beauty expertise — book directly on WhatsApp.`,
+    canonical: 'https://farwasalon.com/',
+    ogImage: 'https://farwasalon.com/logo.jpg',
   })
   return (
     <div className="bg-white overflow-x-hidden">

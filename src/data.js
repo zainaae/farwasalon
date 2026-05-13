@@ -27,170 +27,212 @@ export function waLinkBooking(names = [], extra = {}) {
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(body)}`
 }
 
+/* ─── Founding ─────────────────────────────────────────────────── */
+export const FOUNDING_YEAR = 2008
+export const YEARS_ACTIVE  = new Date().getFullYear() - FOUNDING_YEAR
+
+/* ─── Price / duration formatting ─────────────────────────────── */
+export const formatPrice = (pkr) => {
+  if (pkr == null) return null
+  return pkr >= 1000 ? `Rs ${(pkr / 1000).toFixed(pkr % 1000 ? 1 : 0)}k` : `Rs ${pkr}`
+}
+export const formatDuration = (min) => {
+  if (min == null) return null
+  if (min < 60) return `${min} min`
+  const h = Math.floor(min / 60)
+  const m = min % 60
+  return m ? `${h}h ${m}m` : `${h}h`
+}
+
+/* ─── Analytics helper ────────────────────────────────────────── */
+export function track(event, props) {
+  window.plausible?.(event, { props })
+}
+
+/* ─── Deep-link slugs ─────────────────────────────────────────── */
+export const CAT_SLUGS = {
+  'Threading':       'threading',
+  'Rica Hot Wax':    'rica-hot-wax',
+  'Honey Wax':       'honey-wax',
+  'Rica Wax':        'rica-wax',
+  'Bleach & Polish': 'bleach-polish',
+  'Massage':         'massage',
+  'Hair Treatments': 'hair-treatments',
+  'Cleansing':       'cleansing',
+  'Facials':         'facials',
+  'Nails':           'nails',
+  'Bridal':          'bridal',
+  'Hair':            'hair',
+  'Eyebrow Tattoo':  'eyebrow-tattoo',
+}
+const _slugToCategory = Object.fromEntries(Object.entries(CAT_SLUGS).map(([k, v]) => [v, k]))
+export const slugToCategory = (slug) => _slugToCategory[slug] ?? null
+
 /* ─── Services ────────────────────────────────────────────────── */
 let _id = 1
-const s = (name, category) => ({ id: _id++, name, category })
+const s = (name, category, pricePkr = null, durationMinutes = null) => ({ id: _id++, name, category, pricePkr, durationMinutes })
 
 export const SERVICES = {
 
   'Threading': [
-    s('Eyebrow Threading',        'Threading'),
-    s('Upper Lip Threading',      'Threading'),
-    s('Chin Threading',           'Threading'),
-    s('Forehead Threading',       'Threading'),
-    s('Sideburns Threading',      'Threading'),
-    s('Full Face Threading',      'Threading'),
-    s('Neck Threading',           'Threading'),
+    s('Eyebrow Threading',        'Threading', 200, 10),
+    s('Upper Lip Threading',      'Threading', 150, 5),
+    s('Lower Lip Threading',      'Threading', 100, 5),
+    s('Forehead Threading',       'Threading', 150, 10),
+    s('Chin Threading',           'Threading', 100, 5),
+    s('Sideburns Threading',      'Threading', 250, 10),
+    s('Full Face Threading',      'Threading', 1200, 25),
   ],
 
-  'Hot Wax': [
-    s('Upper Lip Hot Wax',        'Hot Wax'),
-    s('Chin Hot Wax',             'Hot Wax'),
-    s('Underarms Hot Wax',        'Hot Wax'),
-    s('Half Arms Hot Wax',        'Hot Wax'),
-    s('Full Arms Hot Wax',        'Hot Wax'),
-    s('Half Legs Hot Wax',        'Hot Wax'),
-    s('Full Legs Hot Wax',        'Hot Wax'),
-    s('Bikini Hot Wax',           'Hot Wax'),
-    s('Full Body Hot Wax',        'Hot Wax'),
+  'Rica Hot Wax': [
+    s('Eyebrows Rica Wax',        'Rica Hot Wax', 300, 10),
+    s('Nose Rica Wax',            'Rica Hot Wax', 250, 10),
+    s('Upper Lip Rica Wax',       'Rica Hot Wax', 200, 10),
+    s('Lower Lip Rica Wax',       'Rica Hot Wax', 150, 10),
+    s('Forehead Rica Wax',        'Rica Hot Wax', 250, 10),
+    s('Chin Rica Wax',            'Rica Hot Wax', 300, 10),
+    s('Face Sides Rica Wax',      'Rica Hot Wax', 300, 15),
+    s('Back Neck Rica Wax',       'Rica Hot Wax', 500, 15),
+    s('Full Face with Mask',      'Rica Hot Wax', 1200, 30),
   ],
 
-  'Cold Wax': [
-    s('Upper Lip Cold Wax',       'Cold Wax'),
-    s('Chin Cold Wax',            'Cold Wax'),
-    s('Underarms Cold Wax',       'Cold Wax'),
-    s('Half Arms Cold Wax',       'Cold Wax'),
-    s('Full Arms Cold Wax',       'Cold Wax'),
-    s('Half Legs Cold Wax',       'Cold Wax'),
-    s('Full Legs Cold Wax',       'Cold Wax'),
-    s('Back Cold Wax',            'Cold Wax'),
-    s('Stomach Cold Wax',         'Cold Wax'),
-    s('Full Body Cold Wax',       'Cold Wax'),
+  'Honey Wax': [
+    s('Half Arms Honey Wax',      'Honey Wax', 600, 20),
+    s('Full Arms Honey Wax',      'Honey Wax', 700, 25),
+    s('Half Legs Honey Wax',      'Honey Wax', 700, 25),
+    s('Full Legs Honey Wax',      'Honey Wax', 1200, 40),
+    s('Hips Honey Wax',           'Honey Wax', 500, 15),
+    s('Stomach Honey Wax',        'Honey Wax', 600, 20),
+    s('Back Honey Wax',           'Honey Wax', 600, 20),
+    s('Back Neck Honey Wax',      'Honey Wax', 400, 10),
+    s('Underarms Honey Wax',      'Honey Wax', 400, 15),
+    s('Under Legs Honey Wax',     'Honey Wax', 1000, 30),
+    s('Full Body Honey Wax',      'Honey Wax', 2800, 60),
   ],
 
-  'Oil Wax': [
-    s('Upper Lip Oil Wax',        'Oil Wax'),
-    s('Chin Oil Wax',             'Oil Wax'),
-    s('Underarms Oil Wax',        'Oil Wax'),
-    s('Half Arms Oil Wax',        'Oil Wax'),
-    s('Full Arms Oil Wax',        'Oil Wax'),
-    s('Half Legs Oil Wax',        'Oil Wax'),
-    s('Full Legs Oil Wax',        'Oil Wax'),
-    s('Full Body Oil Wax',        'Oil Wax'),
+  'Rica Wax': [
+    s('Half Arms Rica Wax',       'Rica Wax', 750, 20),
+    s('Full Arms Rica Wax',       'Rica Wax', 900, 25),
+    s('Half Legs Rica Wax',       'Rica Wax', 900, 25),
+    s('Full Legs Rica Wax',       'Rica Wax', 1600, 40),
+    s('Hips Rica Wax',            'Rica Wax', 800, 15),
+    s('Stomach Rica Wax',         'Rica Wax', 800, 20),
+    s('Back Rica Wax',            'Rica Wax', 800, 20),
+    s('Underarms Rica Wax',       'Rica Wax', 600, 15),
+    s('Under Legs Rica Wax',      'Rica Wax', 1300, 30),
+    s('Full Body Rica Wax',       'Rica Wax', 4000, 60),
   ],
 
   'Bleach & Polish': [
-    s('Face Bleach',              'Bleach & Polish'),
-    s('Neck Bleach',              'Bleach & Polish'),
-    s('Full Arms Bleach',         'Bleach & Polish'),
-    s('Full Legs Bleach',         'Bleach & Polish'),
-    s('Full Body Bleach',         'Bleach & Polish'),
-    s('Face Polish',              'Bleach & Polish'),
-    s('Arms Polish',              'Bleach & Polish'),
-    s('Legs Polish',              'Bleach & Polish'),
-    s('Back Polish',              'Bleach & Polish'),
-    s('Full Body Polish',         'Bleach & Polish'),
+    s('Hands Bleach',             'Bleach & Polish', 400, 15),
+    s('Feet Bleach',              'Bleach & Polish', 500, 15),
+    s('Loreal Whitening Face Bleach', 'Bleach & Polish', 650, 20),
+    s('Half Arms Bleach',         'Bleach & Polish', 800, 20),
+    s('Full Arms Bleach',         'Bleach & Polish', 1000, 25),
+    s('Loreal Face Polish',       'Bleach & Polish', 900, 25),
+    s('Diamond Face Polish',      'Bleach & Polish', 1000, 25),
+    s('Sandal Face Polish',       'Bleach & Polish', 1200, 30),
+    s('Body Bleach',              'Bleach & Polish', 4000, 45),
   ],
 
   'Massage': [
-    s('Head Massage',             'Massage'),
-    s('Face Massage',             'Massage'),
-    s('Shoulder Massage',         'Massage'),
-    s('Back Massage',             'Massage'),
-    s('Arms Massage',             'Massage'),
-    s('Legs Massage',             'Massage'),
-    s('Foot Massage',             'Massage'),
-    s('Full Body Massage',        'Massage'),
+    s('Back Massage',             'Massage', 700, 15),
+    s('Arms Massage',             'Massage', 700, 15),
+    s('Head Massage',             'Massage', 700, 15),
+    s('Half Legs Massage',        'Massage', 700, 15),
+    s('Full Legs Massage',        'Massage', 1400, 30),
+    s('Head Massage & Wash',      'Massage', 1500, 30),
+    s('Full Body Massage',        'Massage', 2500, 40),
   ],
 
   'Hair Treatments': [
-    s('Protein Treatment',        'Hair Treatments'),
-    s('Keratin Treatment',        'Hair Treatments'),
-    s('Hair Fall Treatment',      'Hair Treatments'),
-    s('Dandruff Treatment',       'Hair Treatments'),
-    s('Deep Conditioning',        'Hair Treatments'),
+    s('Normal Protein Treatment',        'Hair Treatments', 2000, 45),
+    s('Hair Fall Treatment with Ampule', 'Hair Treatments', 3000, 40),
+    s('Dandruff Treatment with Ampule',  'Hair Treatments', 3000, 40),
+    s('Olorchee Treatment',              'Hair Treatments', 2500, 45),
+    s('Wellaplex Stand-Alone Treatment', 'Hair Treatments', 3000, 60),
   ],
 
   'Cleansing': [
-    s('Basic Cleansing',          'Cleansing'),
-    s('Deep Cleansing',           'Cleansing'),
-    s('Blackhead Removal',        'Cleansing'),
-    s('Pore Cleansing Facial',    'Cleansing'),
+    s('HD Cleansing',             'Cleansing', 1700, 40),
+    s('White Glow Cleansing',     'Cleansing', 1200, 35),
+    s('Acne Cleansing',           'Cleansing', 1400, 35),
+    s('Janssen Whitening Cleansing', 'Cleansing', 3000, 45),
   ],
 
   'Facials': [
-    s('Basic Facial',             'Facials'),
-    s('Gold Facial',              'Facials'),
-    s('Diamond Facial',           'Facials'),
-    s('Whitening Facial',         'Facials'),
-    s('Anti-Ageing Facial',       'Facials'),
-    s('Fruit Facial',             'Facials'),
-    s('Oxygen Facial',            'Facials'),
-    s('D-Tan Facial',             'Facials'),
-    s('Brightening Facial',       'Facials'),
-    s('Hydrating Facial',         'Facials'),
-    s('Premium Facial',           'Facials'),
+    s('Normal Facial',            'Facials', 1400, 45),
+    s('Herbal Organic Facial',    'Facials', 1600, 50),
+    s('Acne Facial',              'Facials', 1800, 50),
+    s('Whitening Facial',         'Facials', 1900, 55),
+    s('White Glow Facial',        'Facials', 2000, 55),
+    s("T.J's Facial",             'Facials', 2500, 60),
+    s('Whitening Fruit Facial',   'Facials', 2600, 60),
+    s('Oxy Glow Facial',          'Facials', 2800, 60),
+    s('HD Whitening Facial',      'Facials', 3000, 65),
+    s('Ultra Brightening Facial', 'Facials', 3500, 70),
+    s('Janssen Whitening Facial', 'Facials', 5500, 75),
   ],
 
   'Nails': [
-    s('Basic Manicure',           'Nails'),
-    s('French Manicure',          'Nails'),
-    s('Gel Manicure',             'Nails'),
-    s('Paraffin Manicure',        'Nails'),
-    s('Basic Pedicure',           'Nails'),
-    s('French Pedicure',          'Nails'),
-    s('Gel Pedicure',             'Nails'),
-    s('Paraffin Pedicure',        'Nails'),
-    s('Nail Extensions (Acrylic)','Nails'),
-    s('Nail Extensions (Gel)',    'Nails'),
-    s('Nail Art – Simple',        'Nails'),
-    s('Nail Art – Detailed',      'Nails'),
-    s('Nail Art – Bridal',        'Nails'),
-    s('Nail Removal',             'Nails'),
-    s('Nail Repair',              'Nails'),
-    s('Buff & Shine',             'Nails'),
-    s('Cuticle Care',             'Nails'),
-    s('Nail Wraps',               'Nails'),
+    s('Nail Paint',               'Nails', 300, 15),
+    s('Nail Filing',              'Nails', 300, 10),
+    s('Nail Filing & Shining',    'Nails', 600, 20),
+    s('French Tips',              'Nails', 700, 25),
+    s('Normal Manicure',          'Nails', 900, 30),
+    s('Normal Pedicure',          'Nails', 1000, 35),
+    s('Whitening Manicure',       'Nails', 1200, 35),
+    s('Whitening Pedicure',       'Nails', 1400, 40),
+    s('Jessica Manicure',         'Nails', 1200, 35),
+    s('Jessica Pedicure',         'Nails', 1300, 35),
+    s('Paraffin Manicure',        'Nails', 1300, 40),
+    s('Paraffin Pedicure',        'Nails', 1300, 40),
+    s('SPA Manicure',             'Nails', 1400, 45),
+    s('SPA Pedicure',             'Nails', 1400, 45),
+    s('Whitening Paraffin Manicure', 'Nails', 1600, 50),
+    s('Whitening Paraffin Pedicure', 'Nails', 1600, 50),
+    s('French Manicure',          'Nails', 1600, 45),
+    s('French Pedicure',          'Nails', 1600, 45),
   ],
 
   'Bridal': [
-    { id: _id++, name: 'Full Bridal Package', category: 'Bridal',
+    { id: _id++, name: 'Full Bridal Package', category: 'Bridal', pricePkr: null, durationMinutes: null,
       desc: 'Our signature all-day bridal experience — hair, makeup, draping, and touch-ups from preparation to reception.',
       includes: ['Bridal makeup', 'Hair styling', 'Dupatta draping', 'Touch-up kit', 'Event presence'] },
-    { id: _id++, name: 'Bridal Trial', category: 'Bridal',
+    { id: _id++, name: 'Bridal Trial', category: 'Bridal', pricePkr: null, durationMinutes: null,
       desc: 'A full preview of your wedding look so you walk down the aisle knowing you look perfect.',
       includes: ['Look consultation', 'Full hair & makeup trial', 'Photos for reference'] },
-    { id: _id++, name: 'Engagement Look', category: 'Bridal',
+    { id: _id++, name: 'Engagement Look', category: 'Bridal', pricePkr: null, durationMinutes: null,
       desc: 'Glam-ready styling for your engagement — romantic, radiant, and completely you.',
       includes: ['Makeup application', 'Hair set', 'Lash application'] },
-    { id: _id++, name: 'Mehndi / Dholki Look', category: 'Bridal',
+    { id: _id++, name: 'Mehndi / Dholki Look', category: 'Bridal', pricePkr: null, durationMinutes: null,
       desc: 'Vibrant, colourful, and festive — a look that celebrates the joy of pre-wedding functions.',
       includes: ['Festive makeup', 'Flower or jewellery hair styling', 'Setting spray'] },
   ],
 
   'Hair': [
-    { id: _id++, name: 'Haircut & Blowdry', category: 'Hair',
+    { id: _id++, name: 'Haircut & Blowdry', category: 'Hair', pricePkr: null, durationMinutes: null,
       desc: 'A precision cut and professional blowdry tailored to your face shape and hair texture.',
       includes: ['Consultation', 'Shampoo & condition', 'Cut & blowdry'] },
-    { id: _id++, name: 'Hair Colour', category: 'Hair',
+    { id: _id++, name: 'Hair Colour', category: 'Hair', pricePkr: null, durationMinutes: null,
       desc: 'Full-colour, highlights, balayage, or toning — rich, lasting colour applied with care.',
       includes: ['Colour consultation', 'Application', 'Toning & blowdry'] },
-    { id: _id++, name: 'Blowdry & Styling', category: 'Hair',
+    { id: _id++, name: 'Blowdry & Styling', category: 'Hair', pricePkr: null, durationMinutes: null,
       desc: 'A salon-quality blowdry and finish — smooth, voluminous, or styled exactly as you like.',
       includes: ['Shampoo', 'Blowdry', 'Style & finish'] },
-    { id: _id++, name: 'Bridal Hair Styling', category: 'Hair',
+    { id: _id++, name: 'Bridal Hair Styling', category: 'Hair', pricePkr: null, durationMinutes: null,
       desc: 'Elegant updos, curls, braids or sleek styles — your perfect wedding hair, exactly as you envisioned.',
       includes: ['Style consultation', 'Blowout prep', 'Full styling', 'Finishing spray'] },
   ],
 
   'Eyebrow Tattoo': [
-    { id: _id++, name: 'Microblading', category: 'Eyebrow Tattoo',
+    { id: _id++, name: 'Microblading', category: 'Eyebrow Tattoo', pricePkr: null, durationMinutes: null,
       desc: 'Hair-stroke semi-permanent tattooing that creates naturally full, defined brows lasting 12–18 months.',
       includes: ['Brow design consultation', 'Numbing cream', 'Microblading', 'Aftercare kit'] },
-    { id: _id++, name: 'Powder Brows', category: 'Eyebrow Tattoo',
+    { id: _id++, name: 'Powder Brows', category: 'Eyebrow Tattoo', pricePkr: null, durationMinutes: null,
       desc: 'A soft, powdered makeup look tattooed semi-permanently — ideal for oily or mature skin types.',
       includes: ['Brow mapping', 'Numbing', 'Powder shading', 'Touch-up plan'] },
-    { id: _id++, name: 'Combination Brows', category: 'Eyebrow Tattoo',
+    { id: _id++, name: 'Combination Brows', category: 'Eyebrow Tattoo', pricePkr: null, durationMinutes: null,
       desc: 'The best of both worlds — hair strokes at the front blending into a soft powder fill at the tail.',
       includes: ['Full consultation', 'Microblading strokes', 'Powder shading', 'Aftercare pack'] },
   ],
@@ -207,9 +249,9 @@ export const CATEGORIES   = ['All', ...Object.keys(SERVICES)]
  */
 export const CAT_META = {
   'Threading':       { img: '/threading.jpg',  desc: 'Precision threading for brows, lips, and full face — quick, clean, and perfectly shaped every time.' },
-  'Hot Wax':         { img: '/waxing.jpg',     desc: 'Hot wax for sensitive areas — gentle, effective, and long-lasting results.' },
-  'Cold Wax':        { img: '/wax2.jpg',       desc: 'Smooth, hair-free skin with our cold wax formulation — perfect for arms, legs, and body.' },
-  'Oil Wax':         { img: '/oilwax.jpg',     desc: 'Nourishing oil wax for a smooth finish that conditions your skin while removing hair.' },
+  'Rica Hot Wax':    { img: '/waxing.jpg',     desc: 'Rica hot wax for face and sensitive areas — gentle, effective, and long-lasting results.' },
+  'Honey Wax':       { img: '/wax2.jpg',       desc: 'Smooth, hair-free skin with natural honey wax — perfect for arms, legs, and body.' },
+  'Rica Wax':        { img: '/oilwax.jpg',     desc: 'Premium Rica wax for a smooth finish that conditions your skin while removing hair.' },
   'Bleach & Polish': { img: '/glow.jpg',       desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
   'Massage':         { img: '/massage.jpg',    desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
   'Hair Treatments': { img: '/hairtreatment.jpg', desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },

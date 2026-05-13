@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta, useBooking } from '../shared.jsx'
-import { SERVICES } from '../data.js'
+import { Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta, useBooking, SkipLink } from '../shared.jsx'
+import { SERVICES, YEARS_ACTIVE } from '../data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
@@ -11,13 +11,16 @@ export default function About() {
   const booking = useBooking()
   usePageMeta({
     title: 'Our Story — Farwa Beauty Salon, Karachi',
-    description: 'From a single chair in 2008 to a full-service studio in PECHS Block 2, Karachi — meet Rubina and the story behind 17+ years at Farwa.',
+    description: `From a single chair in 2008 to a full-service studio in PECHS Block 2, Karachi — meet Rubina and the story behind ${YEARS_ACTIVE}+ years at Farwa.`,
+    canonical: 'https://farwasalon.com/about',
+    ogImage: 'https://farwasalon.com/logo.jpg',
   })
 
   return (
     <div className="bg-white overflow-x-hidden">
+      <SkipLink />
       <Navbar />
-      <div className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
+      <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
 
         {/* Page header */}
         <section className="bg-white py-16 md:py-20 px-4 sm:px-5 md:px-10 border-b border-[#e4ddd7]">
@@ -38,7 +41,7 @@ export default function About() {
           <div className="max-w-screen-xl mx-auto">
             <div className="grid grid-cols-3 gap-8 border-b border-[#e4ddd7] pb-12">
               {[
-                { display: '17+',  final: 17,             label: 'Years of expertise' },
+                { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
                 { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
                 { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services on the menu' },
               ].map(({ display, final, label }) => (
@@ -61,7 +64,7 @@ export default function About() {
                 <div className="overflow-hidden mb-10">
                   <motion.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
                     className="font-['Unbounded'] font-bold text-3xl md:text-4xl text-ink leading-tight">
-                    A dream, a single chair, and 17 years of beauty.
+                    A dream, a single chair, and {YEARS_ACTIVE} years of beauty.
                   </motion.h2>
                 </div>
                 <div className="flex flex-col gap-0">
@@ -95,7 +98,7 @@ export default function About() {
                   Rubina began Farwa as a small home-studio. One room became two. Word spread, clients kept returning, and the craft outgrew the house.
                 </p>
                 <p className="text-stone text-sm leading-loose font-light">
-                  She moved into a dedicated salon in PECHS Block 2 and kept expanding the menu — bridal, hair, skin, nails, brows — without letting the chair-side care slip. Seventeen years on, the standard is still set one appointment at a time.
+                  She moved into a dedicated salon in PECHS Block 2 and kept expanding the menu — bridal, hair, skin, nails, brows — without letting the chair-side care slip. {YEARS_ACTIVE} years on, the standard is still set one appointment at a time.
                 </p>
                 <div className="grid grid-cols-1 gap-4 border-t border-[#e4ddd7] pt-8 mt-2">
                   {[
@@ -125,7 +128,7 @@ export default function About() {
             </motion.p>
             <div className="grid md:grid-cols-3 gap-8 md:gap-12">
               {[
-                { num: '01', title: '17 Years of Expertise',       desc: 'Since 2008, Farwa has been crafting beauty with skill, care, and love for every client who walks through the door.' },
+                { num: '01', title: `${YEARS_ACTIVE} Years of Expertise`,       desc: 'Since 2008, Farwa has been crafting beauty with skill, care, and love for every client who walks through the door.' },
                 { num: '02', title: 'A Calm, Considered Space',    desc: 'The studio is unhurried by design — quiet rooms, careful lighting, conversations that stay at the chair.' },
                 { num: '03', title: 'Every Woman, Every Look',      desc: 'From a quick brow thread to a full bridal transformation — no request is too big or too small.' },
               ].map((p, i) => (
@@ -160,7 +163,7 @@ export default function About() {
           </div>
         </section>
 
-      </div>
+      </main>
       <Footer />
       <StickyWA />
     </div>

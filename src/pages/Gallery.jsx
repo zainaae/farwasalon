@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { Navbar, Footer, SmoothyGallery, IgIcon, StickyWA, usePageMeta, useBooking } from '../shared.jsx'
+import { Navbar, Footer, SmoothyGallery, IgIcon, StickyWA, usePageMeta, useBooking, SkipLink } from '../shared.jsx'
 import { IG_LINK, GALLERY_PHOTOS } from '../data.js'
 
 export default function Gallery() {
@@ -8,12 +8,15 @@ export default function Gallery() {
   usePageMeta({
     title: 'Gallery — Farwa Beauty Salon, Karachi',
     description: 'Real work from our Karachi salon — bridal transformations, hair, facials, nails and more. Follow us @farwasalon for daily updates.',
+    canonical: 'https://farwasalon.com/gallery',
+    ogImage: 'https://farwasalon.com/logo.jpg',
   })
 
   return (
     <div className="bg-white overflow-x-hidden">
+      <SkipLink />
       <Navbar />
-      <div className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
+      <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
 
         {/* Header */}
         <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-12 sm:py-16 md:py-20">
@@ -67,7 +70,7 @@ export default function Gallery() {
           </div>
         </section>
 
-      </div>
+      </main>
       <Footer />
       <StickyWA />
     </div>

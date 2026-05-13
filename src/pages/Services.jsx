@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, ChevronLeft } from 'lucide-react'
-import { Navbar, Footer, StickyWA, ServiceModal, usePageMeta, useBooking } from '../shared.jsx'
-import { SERVICES, CAT_META } from '../data.js'
+import { Navbar, Footer, StickyWA, ServiceModal, usePageMeta, useBooking, SkipLink, formatPrice, formatDuration } from '../shared.jsx'
+import { SERVICES, CAT_META, CAT_SLUGS, slugToCategory, track } from '../data.js'
 
 function getCatMeta(cat) {
   return CAT_META[cat] || { img: '/glow.jpg', desc: 'Expert beauty services tailored just for you.' }
 }
 
 /* ─── Category grid ────────────────────────────────────────────── */
-function CategoryGrid({ onSelect }) {
+function CategoryGrid() {
+  const navigate = useNavigate()
   const categories = Object.keys(SERVICES)
   return (
     <div>
@@ -31,7 +33,7 @@ function CategoryGrid({ onSelect }) {
           const meta = getCatMeta(cat)
           const count = SERVICES[cat].length
           return (
-            <motion.button type="button" key={cat} onClick={() => onSelect(cat)}
+            <motion.button type="button" key={cat} onClick={() => { track('ServiceCategoryView', { category: cat }); navigate(`/services/${CAT_SLUGS[cat]}`) }}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.05 }}
               className="relative overflow-hidden group text-left" style={{ aspectRatio: '3/4' }}>
               <img src={meta.img} alt={cat} loading="lazy" decoding="async" width="900" height="1200"
@@ -62,13 +64,15 @@ function CategoryGrid({ onSelect }) {
 }
 
 /* ─── Category detail ──────────────────────────────────────────── */
-function CategoryDetail({ category, onBack }) {
+function CategoryDetail({ category }) {
   const [modal, setModal] = useState(null)
   const booking  = useBooking()
+  const navigate = useNavigate()
   const services = SERVICES[category] || []
   const meta     = getCatMeta(category)
   const canOpen  = s => !!(s.desc || (Array.isArray(s.includes) && s.includes.length))
   const openFor  = s => { if (canOpen(s)) setModal(s) }
+  const onBack   = () => navigate('/services')
 
   return (
     <div className="max-w-3xl">
@@ -102,6 +106,13 @@ function CategoryDetail({ category, onBack }) {
                   <p className="font-['Syne'] font-bold text-[13px] text-ink uppercase leading-tight group-hover:text-stone transition-colors">
                     {s.name}
                   </p>
+                  {(s.pricePkr != null || s.durationMinutes != null) && (
+                    <p className="text-[#c9a98a] text-[11px] font-['Inter'] mt-0.5">
+                      {s.pricePkr != null && formatPrice(s.pricePkr)}
+                      {s.pricePkr != null && s.durationMinutes != null && ' · '}
+                      {s.durationMinutes != null && formatDuration(s.durationMinutes)}
+                    </p>
+                  )}
                   {s.desc && (
                     <p className="text-stone text-[11px] font-light mt-0.5 line-clamp-1 hidden sm:block">{s.desc}</p>
                   )}
@@ -111,6 +122,13 @@ function CategoryDetail({ category, onBack }) {
                   <p className="font-['Syne'] font-bold text-[13px] text-ink uppercase leading-tight">
                     {s.name}
                   </p>
+                  {(s.pricePkr != null || s.durationMinutes != null) && (
+                    <p className="text-[#c9a98a] text-[11px] font-['Inter'] mt-0.5">
+                      {s.pricePkr != null && formatPrice(s.pricePkr)}
+                      {s.pricePkr != null && s.durationMinutes != null && ' · '}
+                      {s.durationMinutes != null && formatDuration(s.durationMinutes)}
+                    </p>
+                  )}
                 </div>
               )}
               <button
@@ -143,32 +161,44 @@ function CategoryDetail({ category, onBack }) {
 
 /* ─── Page ─────────────────────────────────────────────────────── */
 export default function Services() {
-  const [selected, setSelected] = useState(null)
+  const { categorySlug } = useParams()
+  const selected = categorySlug ? slugToCategory(categorySlug) : null
+
+  const canonical = selected
+    ? `https://farwasalon.com/services/${categorySlug}`
+    : 'https://farwasalon.com/services'
 
   usePageMeta({
-    title: 'Services — Farwa Beauty Salon, Karachi',
-    description: 'Explore our full menu — bridal packages, facials, hair, nails, threading, waxing, massage and more. Book any service directly on WhatsApp.',
+    title: selected
+      ? `${selected} — Farwa Beauty Salon, Karachi`
+      : 'Services — Farwa Beauty Salon, Karachi',
+    description: selected
+      ? `${selected} services at Farwa Beauty Salon, PECHS Block 2, Karachi. Book on WhatsApp.`
+      : 'Explore our full menu — bridal packages, facials, hair, nails, threading, waxing, massage and more. Book any service directly on WhatsApp.',
+    canonical,
+    ogImage: 'https://farwasalon.com/logo.jpg',
   })
 
   useEffect(() => { window.scrollTo(0, 0) }, [selected])
 
   return (
     <div className="bg-white overflow-x-hidden">
+      <SkipLink />
       <Navbar />
       <div className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
+        <main id="main" className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
           <AnimatePresence mode="wait">
             {selected ? (
               <motion.div key={selected} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-                <CategoryDetail category={selected} onBack={() => setSelected(null)} />
+                <CategoryDetail category={selected} />
               </motion.div>
             ) : (
               <motion.div key="grid" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-                <CategoryGrid onSelect={setSelected} />
+                <CategoryGrid />
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </main>
       </div>
       <Footer />
       <StickyWA />

@@ -7,6 +7,9 @@ const Services = lazy(() => import('./pages/Services'))
 const Gallery  = lazy(() => import('./pages/Gallery'))
 const About    = lazy(() => import('./pages/About'))
 const Contact  = lazy(() => import('./pages/Contact'))
+const Privacy  = lazy(() => import('./pages/Privacy'))
+const Team     = lazy(() => import('./pages/Team'))
+const FAQ      = lazy(() => import('./pages/FAQ'))
 
 /* ─── Champagne scroll progress bar — fixed top of viewport ───── */
 function ScrollProgress() {
@@ -92,12 +95,16 @@ export default function App() {
         <ErrorBoundary>
         <Suspense fallback={<PageFallback />}>
           <Routes>
-            <Route path="/"         element={<Home />}     />
-            <Route path="/services" element={<Services />} />
-            <Route path="/gallery"  element={<Gallery />}  />
-            <Route path="/about"    element={<About />}    />
-            <Route path="/contact"  element={<Contact />}  />
-            <Route path="*"         element={<NotFound />} />
+            <Route path="/"                       element={<Home />}     />
+            <Route path="/services"               element={<Services />} />
+            <Route path="/services/:categorySlug" element={<Services />} />
+            <Route path="/gallery"                element={<Gallery />}  />
+            <Route path="/about"                  element={<About />}    />
+            <Route path="/contact"                element={<Contact />}  />
+            <Route path="/privacy"                element={<Privacy />}  />
+            <Route path="/team"                   element={<Team />}     />
+            <Route path="/faq"                    element={<FAQ />}      />
+            <Route path="*"                       element={<NotFound />} />
           </Routes>
         </Suspense>
         </ErrorBoundary>

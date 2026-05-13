@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, ChevronDown, X } from 'lucide-react'
-import { Navbar, Footer, IgIcon, StickyWA, usePageMeta, useBooking, useNextSlot } from '../shared.jsx'
-import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking } from '../data.js'
+import { Navbar, Footer, IgIcon, StickyWA, usePageMeta, useBooking, useNextSlot, SkipLink } from '../shared.jsx'
+import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track } from '../data.js'
 
 export default function Contact() {
   const [name,    setName]    = useState('')
@@ -27,18 +27,22 @@ export default function Contact() {
   usePageMeta({
     title: 'Book an Appointment — Farwa Beauty Salon, Karachi',
     description: 'Book your salon visit in PECHS Block 2, Karachi. WhatsApp +92 322 2782254 · Mon–Sat 11am–7pm.',
+    canonical: 'https://farwasalon.com/contact',
+    ogImage: 'https://farwasalon.com/logo.jpg',
   })
 
   const handleWhatsApp = e => {
     e.preventDefault()
     if (picked.length === 0) return
+    track('WhatsAppIntent', { source: 'ContactPage', services: picked.join(', ') })
     window.open(waLinkBooking(picked, { name, date, time }), '_blank', 'noopener,noreferrer')
   }
 
   return (
     <div className="bg-white overflow-x-hidden">
+      <SkipLink />
       <Navbar />
-      <div className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
+      <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
 
         {/* Header */}
         <section className="bg-white py-14 md:py-20 px-4 sm:px-5 md:px-10 border-b border-[#e4ddd7]">
@@ -222,7 +226,7 @@ export default function Contact() {
           </div>
         </section>
 
-      </div>
+      </main>
       <Footer />
       <StickyWA />
     </div>

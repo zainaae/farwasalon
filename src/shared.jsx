@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback, createContext, useContext } f
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Check } from 'lucide-react'
-import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES } from './data.js'
+import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, track, CAT_SLUGS } from './data.js'
 
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
 export function useNextSlot() {
@@ -81,20 +81,31 @@ export function FbEmbed({ src, height = 200, title, reviewerName }) {
   )
 }
 
-/* ─── Per-page document title + description hook ─────────────── */
-export function usePageMeta({ title, description }) {
+/* ─── Per-page document title + description + OG/canonical hook ── */
+function setMeta(selector, attr, value) {
+  let tag = document.querySelector(selector)
+  if (!value) { tag?.remove(); return }
+  if (!tag) {
+    tag = document.createElement(selector.startsWith('link') ? 'link' : 'meta')
+    const parts = selector.match(/\[([^\]=]+)="([^"]+)"\]/g) || []
+    parts.forEach(p => { const [, a, v] = p.match(/\[([^\]=]+)="([^"]+)"\]/); tag.setAttribute(a, v) })
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute(attr, value)
+}
+
+export function usePageMeta({ title, description, canonical, ogImage }) {
   useEffect(() => {
     if (title) document.title = title
-    if (description) {
-      let tag = document.querySelector('meta[name="description"]')
-      if (!tag) {
-        tag = document.createElement('meta')
-        tag.setAttribute('name', 'description')
-        document.head.appendChild(tag)
-      }
-      tag.setAttribute('content', description)
-    }
-  }, [title, description])
+    if (description) setMeta('meta[name="description"]', 'content', description)
+    setMeta('link[rel="canonical"]', 'href', canonical || null)
+    setMeta('meta[property="og:title"]', 'content', title || null)
+    setMeta('meta[property="og:description"]', 'content', description || null)
+    setMeta('meta[property="og:url"]', 'content', canonical || null)
+    setMeta('meta[property="og:image"]', 'content', ogImage || null)
+    setMeta('meta[name="twitter:title"]', 'content', title || null)
+    setMeta('meta[name="twitter:description"]', 'content', description || null)
+  }, [title, description, canonical, ogImage])
 }
 
 /* ─── Instagram icon (removed from lucide-react v1.x) ────────── */
@@ -194,6 +205,7 @@ export function SmoothyGallery({ photos }) {
           <figure key={i} className="relative shrink-0 overflow-hidden bg-[#0d0609]"
             style={{ width: 'clamp(260px,36vw,420px)', height: 'clamp(340px,50vw,560px)' }}>
             <img src={p.src} alt={p.label} loading="lazy" decoding="async" draggable={false}
+              width="420" height="560"
               className="w-full h-full object-cover select-none" />
             <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-ink/70 via-ink/30 to-transparent">
               <p className="text-white text-[10px] tracking-[0.22em] uppercase font-['Inter']">{p.label}</p>
@@ -363,6 +375,10 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
   const [picked, setPicked] = useState([])
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
+  const [bkName, setBkName] = useState('')
+  const [fallbackUrl, setFallbackUrl] = useState(null)
+  const sheetRef = useRef(null)
+  const returnRef = useRef(null)
 
   useEffect(() => {
     if (!open) return undefined
@@ -379,6 +395,8 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
         setPicked([])
         setDate('')
         setTime('')
+        setBkName('')
+        setFallbackUrl(null)
       }, 350)
       return () => clearTimeout(t)
     }
@@ -387,10 +405,31 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
 
   useEffect(() => {
     if (!open) return
+    returnRef.current = document.activeElement
     document.body.style.overflow = 'hidden'
-    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+
+    const focusables = () => sheetRef.current?.querySelectorAll(
+      'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    ) ?? []
+    const first = focusables()[0]
+    first?.focus()
+
+    const onKey = (e) => {
+      if (e.key === 'Escape') { onClose(); return }
+      if (e.key === 'Tab') {
+        const list = Array.from(focusables())
+        if (list.length === 0) return
+        const f = list[0], l = list[list.length - 1]
+        if (e.shiftKey && document.activeElement === f) { e.preventDefault(); l.focus() }
+        else if (!e.shiftKey && document.activeElement === l) { e.preventDefault(); f.focus() }
+      }
+    }
     window.addEventListener('keydown', onKey)
-    return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey) }
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+      returnRef.current?.focus?.()
+    }
   }, [open, onClose])
 
   const toggleService = useCallback((s) => {
@@ -420,7 +459,13 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
 
   const handleBook = () => {
     const names = picked.map((p) => p.name).filter(Boolean)
-    window.open(waLinkBooking(names, { date, time }), '_blank', 'noopener,noreferrer')
+    const url = waLinkBooking(names, { date, time, name: bkName })
+    track('WhatsAppIntent', { source: 'BookingSheet', services: names.join(', ') })
+    const win = window.open(url, '_blank', 'noopener,noreferrer')
+    if (!win) {
+      setFallbackUrl(url)
+      return
+    }
     onClose()
   }
 
@@ -462,9 +507,24 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
               />
             </div>
 
-            <div className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6 pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] md:pb-6 overscroll-contain flex flex-col min-h-0">
+            <div ref={sheetRef} className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6 pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] md:pb-6 overscroll-contain flex flex-col min-h-0">
+              {fallbackUrl && (
+                <div className="mb-4 p-3 border border-[#c9a98a] bg-[#faf7f5]">
+                  <p className="text-ink text-xs font-['Inter'] mb-2">Popup was blocked. Open WhatsApp manually:</p>
+                  <a href={fallbackUrl} target="_blank" rel="noreferrer"
+                    className="text-[#8b6d59] underline text-xs font-['Inter'] font-medium break-all">
+                    Open WhatsApp manually →
+                  </a>
+                </div>
+              )}
               {step === 0 && (
                 <>
+                  <div className="mb-4">
+                    <label htmlFor="bk-name" className="sr-only">Your name</label>
+                    <input id="bk-name" type="text" placeholder="Your name" autoComplete="name"
+                      value={bkName} onChange={e => setBkName(e.target.value)}
+                      className="border border-[#e4ddd7] text-ink placeholder-stone text-sm font-['Inter'] px-4 py-2.5 w-full focus:outline-none focus:border-ink transition-colors bg-white" />
+                  </div>
                   <BookingSheetSelectedChips picked={picked} onRemove={removePick} />
                   {!cat ? (
                     <div className="flex-1">
@@ -508,7 +568,16 @@ export function BookingSheet({ open, onClose, initialCategory = null }) {
                                 sel ? 'bg-[#faf7f5] pl-2' : 'hover:bg-mist hover:pl-2'
                               }`}
                             >
-                              <span className="font-['Syne'] font-bold text-[13px] text-ink uppercase min-w-0">{s.name}</span>
+                              <div className="min-w-0">
+                                <span className="font-['Syne'] font-bold text-[13px] text-ink uppercase block">{s.name}</span>
+                                {(s.pricePkr != null || s.durationMinutes != null) && (
+                                  <span className="text-stone text-[10px] font-['Inter'] mt-0.5 block">
+                                    {s.pricePkr != null && formatPrice(s.pricePkr)}
+                                    {s.pricePkr != null && s.durationMinutes != null && ' · '}
+                                    {s.durationMinutes != null && formatDuration(s.durationMinutes)}
+                                  </span>
+                                )}
+                              </div>
                               <span
                                 className={`shrink-0 w-8 h-8 flex items-center justify-center border ${
                                   sel ? 'border-ink bg-ink text-white' : 'border-[#e4ddd7] text-transparent'
@@ -630,7 +699,10 @@ const BookingCtx = createContext({ open: () => {} })
 export function BookingProvider({ children }) {
   const [state, setState] = useState({ open: false, category: null })
   const value = {
-    open: (category = null) => setState({ open: true, category }),
+    open: (category = null, source = 'unknown') => {
+      track('BookingStarted', { source, category: category || 'none' })
+      setState({ open: true, category })
+    },
     close: () => setState(s => ({ ...s, open: false })),
   }
   return (
@@ -678,10 +750,13 @@ export function ServiceModal({ service, onClose }) {
   const descId     = 'svc-modal-desc'
 
   useEffect(() => {
+    track('ServiceModalOpen', { service: service.name, category: service.category })
+  }, [service.name, service.category])
+
+  useEffect(() => {
     returnRef.current = document.activeElement
     document.body.style.overflow = 'hidden'
 
-    // focus first focusable inside dialog
     const focusables = () => dialogRef.current?.querySelectorAll(
       'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     ) ?? []
@@ -726,9 +801,16 @@ export function ServiceModal({ service, onClose }) {
               <button onClick={onClose} aria-label="Close dialog"
                 className="text-stone hover:text-ink transition-colors"><X className="w-5 h-5" /></button>
             </div>
-            <h2 id={titleId} className="font-['Unbounded'] font-bold text-lg md:text-xl text-ink mb-4 leading-tight uppercase">
+            <h2 id={titleId} className="font-['Unbounded'] font-bold text-lg md:text-xl text-ink mb-2 leading-tight uppercase">
               {service.name}
             </h2>
+            {(service.pricePkr != null || service.durationMinutes != null) && (
+              <p className="text-[#c9a98a] text-sm font-['Inter'] font-medium mb-4 flex items-center gap-2">
+                {service.pricePkr != null && <span>{formatPrice(service.pricePkr)}</span>}
+                {service.pricePkr != null && service.durationMinutes != null && <span className="text-stone/30">·</span>}
+                {service.durationMinutes != null && <span>{formatDuration(service.durationMinutes)}</span>}
+              </p>
+            )}
             {service.desc && (
               <p id={descId} className="text-stone text-sm font-light leading-relaxed mb-6">{service.desc}</p>
             )}
@@ -875,7 +957,14 @@ export function Navbar({ transparent = false }) {
 
 /* ─── Footer ───────────────────────────────────────────────────── */
 export function Footer() {
-  const serviceLinks = ['Threading','Bridal','Facials','Nails','Eyebrow Tattoo','Massage']
+  const serviceLinks = [
+    { label: 'Threading',       slug: CAT_SLUGS['Threading'] },
+    { label: 'Bridal',          slug: CAT_SLUGS['Bridal'] },
+    { label: 'Facials',         slug: CAT_SLUGS['Facials'] },
+    { label: 'Nails',           slug: CAT_SLUGS['Nails'] },
+    { label: 'Eyebrow Tattoo',  slug: CAT_SLUGS['Eyebrow Tattoo'] },
+    { label: 'Massage',         slug: CAT_SLUGS['Massage'] },
+  ]
   const booking = useBooking()
   const slot = useNextSlot()
   return (
@@ -910,15 +999,15 @@ export function Footer() {
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Services</p>
               <ul className="flex flex-col gap-2.5">
-                {serviceLinks.map(l => (
-                  <li key={l}><Link to="/services" className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{l}</Link></li>
+                {serviceLinks.map(sl => (
+                  <li key={sl.label}><Link to={`/services/${sl.slug}`} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{sl.label}</Link></li>
                 ))}
               </ul>
             </div>
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Navigate</p>
               <ul className="flex flex-col gap-2.5">
-                {[['Home','/'],['Services','/services'],['Gallery','/gallery'],['About','/about'],['Contact','/contact']].map(([l,to]) => (
+                {[['Home','/'],['Services','/services'],['Gallery','/gallery'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,to]) => (
                   <li key={l}><Link to={to} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{l}</Link></li>
                 ))}
               </ul>
@@ -946,7 +1035,11 @@ export function Footer() {
               <span className="text-[#e4ddd7] hidden sm:inline">·</span>
               <UrduSignature className="sm:hidden text-stone/70 text-[13px]" />
             </div>
-            <p className="text-stone text-[11px] font-['Inter']">PECHS Block 2, Karachi · Est. 2008</p>
+              <div className="flex items-center gap-3">
+                <Link to="/privacy" className="text-stone text-[11px] font-['Inter'] hover:text-ink transition-colors">Privacy Policy</Link>
+                <span className="text-[#e4ddd7]">·</span>
+                <p className="text-stone text-[11px] font-['Inter']">PECHS Block 2, Karachi · Est. 2008</p>
+              </div>
           </div>
         </div>
       </div>
@@ -972,5 +1065,39 @@ export function StickyWA() {
   )
 }
 
-/* ─── Page wrapper with Lenis ──────────────────────────────────── */
-export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES }
+/* ─── Lazy video — IntersectionObserver-controlled ─────────────── */
+export function LazyVideo({ src, poster, className, ...props }) {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true)
+        el.play?.().catch(() => {})
+      } else {
+        el.pause?.()
+      }
+    }, { rootMargin: '200px' })
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  return (
+    <video
+      ref={ref}
+      src={visible ? src : undefined}
+      poster={poster}
+      muted
+      loop
+      playsInline
+      className={className}
+      {...props}
+    />
+  )
+}
+
+/* ─── Re-exports ───────────────────────────────────────────────── */
+export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, CAT_SLUGS }
