@@ -1,0 +1,48 @@
+import { NextResponse } from 'next/server'
+
+const INDEXNOW_KEY = 'farwasalon2024indexnow'
+const HOST = 'https://farwasalon.com'
+
+export async function POST(request) {
+  try {
+    const { urls } = await request.json()
+    if (!Array.isArray(urls) || urls.length === 0) {
+      return NextResponse.json({ error: 'urls array required' }, { status: 400 })
+    }
+
+    const fullUrls = urls.map(u => u.startsWith('http') ? u : `${HOST}${u}`)
+
+    const payload = {
+      host: 'farwasalon.com',
+      key: INDEXNOW_KEY,
+      keyLocation: `${HOST}/${INDEXNOW_KEY}.txt`,
+      urlList: fullUrls,
+    }
+
+    const endpoints = [
+      'https://api.indexnow.org/indexnow',
+      'https://www.bing.com/indexnow',
+      'https://yandex.com/indexnow',
+    ]
+
+    const results = await Promise.allSettled(
+      endpoints.map(ep =>
+        fetch(ep, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        })
+      )
+    )
+
+    return NextResponse.json({
+      submitted: fullUrls.length,
+      results: results.map((r, i) => ({
+        engine: endpoints[i],
+        status: r.status === 'fulfilled' ? r.value.status : 'failed',
+      })),
+    })
+  } catch {
+    return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+  }
+}

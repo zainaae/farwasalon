@@ -28,5 +28,8 @@ dist-ssr
 
 .vercel
 
-# Vite
+# Next.js
+.next/
+
+# Vite (legacy)
 .vite/

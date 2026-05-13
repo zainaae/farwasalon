@@ -1,5 +1,7 @@
+'use client'
 import { useEffect, useRef, useState, useCallback, createContext, useContext } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Check } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, track, CAT_SLUGS, CAT_SEO, CAT_FAQS } from './data.js'
@@ -883,27 +885,25 @@ function Logo({ light }) {
 export function Navbar({ transparent = false }) {
   const [scrolled,   setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const { pathname } = useLocation()
+  const pathname = usePathname()
   const booking = useBooking()
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
-  /* Close mobile drawer on route change */
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- close drawer on navigation
-    setMobileOpen(false)
+    setMobileOpen(false) // eslint-disable-line react-hooks/set-state-in-effect -- intentional: close mobile nav on route change
   }, [pathname])
   const light = scrolled || !transparent
 
   const navLinks = [
-    { label: 'Home',         to: '/' },
-    { label: 'Services',     to: '/services' },
-    { label: 'Gallery',      to: '/gallery' },
-    { label: 'Blog',         to: '/blog' },
-    { label: 'About',        to: '/about' },
-    { label: 'Contact',      to: '/contact' },
+    { label: 'Home',         href: '/' },
+    { label: 'Services',     href: '/services' },
+    { label: 'Gallery',      href: '/gallery' },
+    { label: 'Blog',         href: '/blog' },
+    { label: 'About',        href: '/about' },
+    { label: 'Contact',      href: '/contact' },
   ]
 
   return (
@@ -919,19 +919,20 @@ export function Navbar({ transparent = false }) {
       }`}
     >
       <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 h-[3.375rem] md:h-14 flex items-center justify-between gap-2 min-w-0">
-        <Link to="/" className="shrink-0">
+        <Link href="/" className="shrink-0">
           <Logo light={light} />
         </Link>
         <nav className="hidden md:flex items-center gap-7">
-          {navLinks.map(({ label, to }) => (
-            <NavLink key={to} to={to} end={to === '/'}
-              className={({ isActive }) =>
-                `link-underline text-[11px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors
-                ${isActive ? (light ? 'text-ink' : 'text-white') : (light ? 'text-stone hover:text-ink' : 'text-white/70 hover:text-white')}`
-              }>
-              {label}
-            </NavLink>
-          ))}
+          {navLinks.map(({ label, href }) => {
+            const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
+            return (
+              <Link key={href} href={href}
+                className={`link-underline text-[11px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors
+                ${isActive ? (light ? 'text-ink' : 'text-white') : (light ? 'text-stone hover:text-ink' : 'text-white/70 hover:text-white')}`}>
+                {label}
+              </Link>
+            )
+          })}
         </nav>
         <div className="flex items-center gap-3">
           <button
@@ -955,8 +956,8 @@ export function Navbar({ transparent = false }) {
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden bg-white border-t border-[#e4ddd7]">
             <div className="px-5 py-5 flex flex-col gap-4">
-              {navLinks.map(({ label, to }) => (
-                <Link key={to} to={to} onClick={() => setMobileOpen(false)}
+              {navLinks.map(({ label, href }) => (
+                <Link key={href} href={href} onClick={() => setMobileOpen(false)}
                   className="text-[11px] tracking-[0.18em] uppercase text-stone hover:text-ink font-['Inter']">
                   {label}
                 </Link>
@@ -991,7 +992,7 @@ export function Footer() {
       <div className="border-t border-[#e4ddd7] px-5 md:px-10 py-8 md:py-10">
         <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
-            <Link to="/" className="shrink-0">
+            <Link href="/" className="shrink-0">
               <img src="/logo.jpg" alt="Farwa Beauty Salon" width="945" height="945" loading="lazy" className="h-10 md:h-12 w-auto"
                 onError={e => { e.currentTarget.style.display='none'; e.currentTarget.nextSibling.style.display='block' }} />
               <span style={{display:'none'}} className="font-['Unbounded'] font-bold text-sm text-ink">FARWA</span>
@@ -1018,15 +1019,15 @@ export function Footer() {
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Services</p>
               <ul className="flex flex-col gap-2.5">
                 {serviceLinks.map(sl => (
-                  <li key={sl.label}><Link to={`/services/${sl.slug}`} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{sl.label}</Link></li>
+                  <li key={sl.label}><Link href={`/services/${sl.slug}`} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{sl.label}</Link></li>
                 ))}
               </ul>
             </div>
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Navigate</p>
               <ul className="flex flex-col gap-2.5">
-                {[['Home','/'],['Services','/services'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,to]) => (
-                  <li key={l}><Link to={to} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{l}</Link></li>
+                {[['Home','/'],['Services','/services'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,href]) => (
+                  <li key={l}><Link href={href} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{l}</Link></li>
                 ))}
               </ul>
             </div>
@@ -1054,7 +1055,7 @@ export function Footer() {
               <UrduSignature className="sm:hidden text-stone/70 text-[13px]" />
             </div>
               <div className="flex items-center gap-3">
-                <Link to="/privacy" className="text-stone text-[11px] font-['Inter'] hover:text-ink transition-colors">Privacy Policy</Link>
+                <Link href="/privacy" className="text-stone text-[11px] font-['Inter'] hover:text-ink transition-colors">Privacy Policy</Link>
                 <span className="text-[#e4ddd7]">·</span>
                 <p className="text-stone text-[11px] font-['Inter']">PECHS Block 2, Karachi · Est. 2008</p>
               </div>

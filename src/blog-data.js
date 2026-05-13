@@ -1,16 +1,10 @@
-import { useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
-import { Navbar, Footer, StickyWA, usePageMeta, SkipLink, useBooking } from '../shared.jsx'
-import { WA_DEFAULT } from '../data.js'
-
-const BLOG_POSTS = [
+export const BLOG_POSTS = [
   {
     slug: 'bridal-beauty-timeline',
     title: 'Complete Bridal Beauty Timeline — When to Start Prep Before Your Wedding',
     description: 'A month-by-month beauty preparation guide for Karachi brides, from skincare routines to the final bridal trial.',
     date: '2026-05-10',
+    lastModified: '2026-05-10',
     readTime: '8 min read',
     category: 'Bridal',
     content: [
@@ -34,6 +28,7 @@ const BLOG_POSTS = [
     title: '5 Skincare Mistakes Karachi Women Make in Summer',
     description: 'Avoid these common skincare errors that Karachi\'s heat and humidity make worse. Expert tips from our aestheticians.',
     date: '2026-05-05',
+    lastModified: '2026-05-05',
     readTime: '6 min read',
     category: 'Skincare',
     content: [
@@ -57,6 +52,7 @@ const BLOG_POSTS = [
     title: 'Threading vs Waxing: Which Is Better for Your Skin Type?',
     description: 'A detailed comparison of threading and waxing for facial and body hair removal — pros, cons, and expert recommendations.',
     date: '2026-04-28',
+    lastModified: '2026-04-28',
     readTime: '5 min read',
     category: 'Guide',
     content: [
@@ -80,6 +76,7 @@ const BLOG_POSTS = [
     title: 'How to Make Your Manicure Last 2 Weeks',
     description: 'Professional tips to extend the life of your salon manicure — from nail prep to daily habits that prevent chipping.',
     date: '2026-04-20',
+    lastModified: '2026-04-20',
     readTime: '4 min read',
     category: 'Nails',
     content: [
@@ -100,264 +97,3 @@ const BLOG_POSTS = [
     ],
   },
 ]
-
-export { BLOG_POSTS }
-
-function ArticleJsonLd({ post }) {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
-    description: post.description,
-    datePublished: post.date,
-    dateModified: post.date,
-    author: { '@type': 'Organization', name: 'Farwa Beauty Salon' },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Farwa Beauty Salon',
-      logo: { '@type': 'ImageObject', url: 'https://farwasalon.com/logo.jpg' },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://farwasalon.com/blog/${post.slug}`,
-    },
-  }
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  )
-}
-
-function BreadcrumbJsonLd({ items }) {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: item.name,
-      item: item.url,
-    })),
-  }
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  )
-}
-
-function BlogIndex() {
-  const booking = useBooking()
-  usePageMeta({
-    title: 'Beauty Tips & Blog — Farwa Beauty Salon, Karachi',
-    description: 'Expert beauty tips, bridal prep guides, skincare advice, and salon insights from Farwa Beauty Salon in PECHS Block 2, Karachi.',
-    canonical: 'https://farwasalon.com/blog',
-    ogImage: 'https://farwasalon.com/logo.jpg',
-  })
-
-  return (
-    <>
-      <BreadcrumbJsonLd items={[
-        { name: 'Home', url: 'https://farwasalon.com/' },
-        { name: 'Blog', url: 'https://farwasalon.com/blog' },
-      ]} />
-      <div className="mb-10 md:mb-14 border-b border-[#e4ddd7] pb-8">
-        <div className="overflow-hidden">
-          <motion.h1
-            initial={{ y: '60%', opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="display-section text-ink mb-4"
-          >
-            BEAUTY TIPS<span className="text-[#e4ddd7] mx-3 font-light italic text-[0.6em]">—</span>&amp; GUIDES
-          </motion.h1>
-        </div>
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
-          className="text-stone text-sm font-light max-w-lg"
-        >
-          Expert advice from our team — bridal prep timelines, skincare for Karachi weather, and professional tips you can use at home.
-        </motion.p>
-      </div>
-
-      <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-        {BLOG_POSTS.map((post, i) => (
-          <motion.article
-            key={post.slug}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
-            className="group border border-[#e4ddd7] hover:border-ink transition-colors duration-300"
-          >
-            <Link to={`/blog/${post.slug}`} className="block p-6 md:p-8">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
-                  {post.category}
-                </span>
-                <span className="text-stone/50 text-[10px] font-['Inter']">{post.readTime}</span>
-              </div>
-              <h2 className="font-['Syne'] font-bold text-base md:text-lg text-ink leading-snug mb-3 group-hover:text-stone transition-colors">
-                {post.title}
-              </h2>
-              <p className="text-stone text-sm font-light leading-relaxed line-clamp-2 mb-4">
-                {post.description}
-              </p>
-              <span className="inline-flex items-center gap-1 text-[10px] tracking-[0.16em] uppercase font-medium font-['Inter'] text-ink group-hover:gap-2 transition-all">
-                Read article <ChevronRight className="w-3 h-3" />
-              </span>
-            </Link>
-          </motion.article>
-        ))}
-      </div>
-
-      <div className="mt-12 pt-8 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <p className="text-stone text-sm font-light font-['Inter']">
-          Have a beauty question? We&apos;d love to answer it.
-        </p>
-        <button
-          onClick={() => booking.open()}
-          className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors"
-        >
-          Book a Consultation <ArrowUpRight className="w-4 h-4" />
-        </button>
-      </div>
-    </>
-  )
-}
-
-function BlogArticle({ post }) {
-  usePageMeta({
-    title: `${post.title} — Farwa Beauty Salon`,
-    description: post.description,
-    canonical: `https://farwasalon.com/blog/${post.slug}`,
-    ogImage: 'https://farwasalon.com/logo.jpg',
-  })
-
-  const formatted = new Date(post.date + 'T12:00:00').toLocaleDateString('en-PK', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
-
-  return (
-    <>
-      <ArticleJsonLd post={post} />
-      <BreadcrumbJsonLd items={[
-        { name: 'Home', url: 'https://farwasalon.com/' },
-        { name: 'Blog', url: 'https://farwasalon.com/blog' },
-        { name: post.title, url: `https://farwasalon.com/blog/${post.slug}` },
-      ]} />
-
-      <div className="max-w-2xl">
-        <motion.div
-          initial={{ opacity: 0, x: -16 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Link
-            to="/blog"
-            className="flex items-center gap-2 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors mb-8"
-          >
-            <ChevronLeft className="w-3.5 h-3.5" /> All Articles
-          </Link>
-        </motion.div>
-
-        <motion.header
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-10 pb-8 border-b border-[#e4ddd7]"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
-              {post.category}
-            </span>
-            <span className="text-stone/50 text-[10px] font-['Inter']">{post.readTime}</span>
-          </div>
-          <h1 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight mb-3">
-            {post.title}
-          </h1>
-          <p className="text-stone text-sm font-light">
-            Published {formatted} · Farwa Beauty Salon
-          </p>
-        </motion.header>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="prose-farwa"
-        >
-          {post.content.map((block, i) => {
-            if (block.type === 'h2') {
-              return (
-                <h2
-                  key={i}
-                  className="font-['Syne'] font-bold text-lg text-ink mt-8 mb-3"
-                >
-                  {block.text}
-                </h2>
-              )
-            }
-            return (
-              <p
-                key={i}
-                className="text-stone text-[15px] font-light leading-relaxed mb-4 font-['Inter']"
-              >
-                {block.text}
-              </p>
-            )
-          })}
-        </motion.div>
-
-        <div className="mt-10 pt-8 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-start sm:items-center gap-4">
-          <a
-            href={WA_DEFAULT}
-            target="_blank"
-            rel="noreferrer"
-            className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors"
-          >
-            Book on WhatsApp <ArrowUpRight className="w-4 h-4" />
-          </a>
-          <Link
-            to="/blog"
-            className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
-          >
-            ← More articles
-          </Link>
-        </div>
-      </div>
-    </>
-  )
-}
-
-export default function Blog() {
-  const { slug } = useParams()
-  const post = slug ? BLOG_POSTS.find((p) => p.slug === slug) : null
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [slug])
-
-  return (
-    <div className="bg-white overflow-x-hidden">
-      <SkipLink />
-      <Navbar />
-      <div className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-        <main
-          id="main"
-          className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen"
-        >
-          {post ? <BlogArticle post={post} /> : <BlogIndex />}
-        </main>
-      </div>
-      <Footer />
-      <StickyWA />
-    </div>
-  )
-}

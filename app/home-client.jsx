@@ -1,20 +1,18 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, Star, Quote } from 'lucide-react'
 import {
-  Navbar, Footer, AnimatedNumber, StickyWA, usePageMeta,
-  SkipLink, WordmarkDivider, useBooking, useNextSlot, LazyVideo, CAT_SLUGS,
-} from '../shared.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER } from '../data.js'
+  AnimatedNumber, useBooking, useNextSlot, LazyVideo, CAT_SLUGS,
+  WordmarkDivider,
+} from '../src/shared.jsx'
+import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 
-/* ─── Real Facebook reviews — text curated from public posts ────
-   Each entry maps to a live public FB post. Replace `quote` with the
-   exact verbatim copy from the post if you want 1:1 parity. The link
-   stays authoritative — anyone can verify with one click. ─────── */
 const FB_POSTS = [
   {
     name: 'Tathira B.', initials: 'TB', date: 'Aug 2024', service: 'Bridal',
@@ -48,7 +46,6 @@ const FB_POSTS = [
   },
 ]
 
-/* ─── Featured pull-quote (editorial hero above FB grid) ───────── */
 const FEATURED_REVIEW = {
   name: 'Tathira B.',
   quote: 'Farwa Aapi ne itni care aur detail se kaam kiya ke har visit pe ghar jaisa lagta hai. Best salon in Karachi, hands down.',
@@ -56,7 +53,6 @@ const FEATURED_REVIEW = {
   link: 'https://www.facebook.com/tathirabid/posts/pfbid02J73qHitLiSYbpvJPJEYvNfBHyjSfKEhWL1hS6VbMupr15TzuPuGtXNTKBDMuvRyKl',
 }
 
-/* ─── Editorial slideshow — mix of stills + motion for rhythm ── */
 const EDITORIAL_PHOTOS = [
   { src: '/bridal.jpg',                label: 'Bridal' },
   { src: '/eyebrowtattoo.mp4',         label: 'Eyebrow Tattoo',   video: true, poster: '/eyebrowtattoo.jpg' },
@@ -73,7 +69,6 @@ const EDITORIAL_PHOTOS = [
   { src: '/glow2.png',                 label: 'Bleach & Polish' },
 ]
 
-/* ─── Hero — thesis copy + kinetic reveal + calmer video ──────── */
 function Hero() {
   const { scrollY } = useScroll()
   const textY    = useTransform(scrollY, [0, 500], [0, -40])
@@ -89,12 +84,10 @@ function Hero() {
     if (reduce) {
       v.pause()
     } else {
-      // Slower, cinematic pacing — prior value was 0.5, now 0.35
       v.playbackRate = 0.35
     }
   }, [])
 
-  /* Kinetic thesis — fragments revealed sequentially */
   const thesis = [
     { text: 'Bridal. Hair. Skin.',              em: true  },
     { text: 'Rubina\u2019s studio',             em: false },
@@ -104,8 +97,6 @@ function Hero() {
 
   return (
     <section className="relative w-full h-[100svh] min-h-[520px] max-h-[1100px] overflow-hidden bg-[#0d0609]">
-
-      {/* Background video — less zoom via object-position offset */}
       <video
         ref={videoRef}
         autoPlay muted loop playsInline
@@ -118,30 +109,25 @@ function Hero() {
         <source src="/hero2.mp4" type="video/mp4" />
       </video>
 
-      {/* Gradient overlay for text contrast */}
       <motion.div className="absolute inset-0 z-[1]"
         style={{
           opacity: overlayO,
           background: 'linear-gradient(to top, rgba(13,6,9,0.95) 0%, rgba(13,6,9,0.55) 38%, rgba(13,6,9,0.22) 68%, rgba(13,6,9,0.5) 100%)',
         }} />
 
-      {/* Vignette (subtle) */}
       <div className="absolute inset-0 z-[1] pointer-events-none"
         style={{ background: 'radial-gradient(ellipse at center, rgba(0,0,0,0) 48%, rgba(0,0,0,0.5) 100%)' }} />
 
-      {/* Film grain — 6%, mood without noise */}
       <div className="absolute inset-0 pointer-events-none z-[2]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           backgroundSize: '180px', opacity: 0.055, mixBlendMode: 'overlay',
         }} />
 
-      {/* Hero content */}
       <motion.div
         style={{ y: textY }}
         className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14">
         <div className="max-w-screen-2xl mx-auto">
-          {/* Eyebrow */}
           <div className="overflow-hidden mb-4 md:mb-6">
             <motion.p
               initial={{ y: '100%' }} animate={{ y: 0 }}
@@ -151,7 +137,6 @@ function Hero() {
             </motion.p>
           </div>
 
-          {/* Kinetic thesis line — the real headline */}
           <h1 className="font-['Unbounded'] text-white leading-[0.95] mb-6 md:mb-8"
             style={{
               fontSize: 'clamp(1.9rem, 6.4vw, 5.25rem)',
@@ -171,7 +156,6 @@ function Hero() {
             ))}
           </h1>
 
-          {/* Signature */}
           <div className="overflow-hidden mb-8 md:mb-10">
             <motion.p
               initial={{ y: '100%' }} animate={{ y: 0 }}
@@ -181,7 +165,6 @@ function Hero() {
             </motion.p>
           </div>
 
-          {/* CTAs + live slot */}
           <motion.div
             initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.35, duration: 0.75, ease: [0.16,1,0.3,1] }}
@@ -191,11 +174,10 @@ function Hero() {
               className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2 bg-white text-ink text-[11px] md:text-[12px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-all duration-300 shadow-lg shadow-black/25">
               Book an Appointment <ArrowUpRight className="w-4 h-4" />
             </button>
-            <Link to="/services"
+            <Link href="/services"
               className="tap-safe link-underline text-white/80 text-[11px] md:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
               Explore Services
             </Link>
-            {/* Live-availability pill */}
             <div className="hidden sm:flex items-center gap-2 ml-auto">
               <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#9cd48c]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
               <span className="text-white/55 text-[10px] tracking-[0.22em] uppercase font-['Inter']">
@@ -204,7 +186,6 @@ function Hero() {
             </div>
           </motion.div>
 
-          {/* Mobile slot — own line */}
           <motion.p
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6, duration: 0.7 }}
             className="sm:hidden mt-4 text-white/55 text-[10px] tracking-[0.22em] uppercase font-['Inter'] flex items-center gap-2">
@@ -214,7 +195,6 @@ function Hero() {
         </div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         transition={{ delay: 2.4, duration: 1 }}
@@ -231,7 +211,6 @@ function Hero() {
   )
 }
 
-/* ─── Stats strip ──────────────────────────────────────────────── */
 function StatsStrip() {
   return (
     <section className="bg-white py-14 sm:py-16 md:py-24 px-4 sm:px-5 md:px-10">
@@ -241,7 +220,7 @@ function StatsStrip() {
             <motion.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
-              KARACHI'S<br />MOST<br />TRUSTED<br />BEAUTY STUDIO
+              KARACHI&apos;S<br />MOST<br />TRUSTED<br />BEAUTY STUDIO
             </motion.h2>
           </div>
           <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
@@ -264,7 +243,7 @@ function StatsStrip() {
                 </div>
               ))}
             </div>
-            <Link to="/about" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-['Inter'] group w-fit">
+            <Link href="/about" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-['Inter'] group w-fit">
               <span className="link-underline">Read Our Story</span>
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
@@ -275,16 +254,11 @@ function StatsStrip() {
   )
 }
 
-/* ─── Editorial photo slideshow ─────────────────────────────────
-   Desktop: auto-scrolling marquee with 320px-wide cards
-   Mobile:  scroll-snap horizontal strip — full-bleed, swipe-friendly ── */
 function EditorialSlideshow() {
   const doubled = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
 
   return (
     <section className="bg-white border-y border-[#e4ddd7] overflow-hidden" aria-label="Editorial photo showcase">
-
-      {/* ── Mobile: auto-scrolling marquee (infinite, seamless) ── */}
       <div className="md:hidden py-3 overflow-hidden">
         <div className="flex w-max" style={{ animation: 'marquee 45s linear infinite' }}>
           {doubled.map((p, i) => (
@@ -313,7 +287,6 @@ function EditorialSlideshow() {
         </div>
       </div>
 
-      {/* ── Desktop: auto-scrolling marquee ── */}
       <div className="hidden md:block py-2">
         <div className="flex w-max" style={{ animation: 'marquee 65s linear infinite' }}>
           {doubled.map((p, i) => (
@@ -333,25 +306,20 @@ function EditorialSlideshow() {
           ))}
         </div>
       </div>
-
     </section>
   )
 }
 
-/* ─── Featured services — hover-image left panel on desktop ──── */
 function FeaturedServices() {
   const categories  = Object.keys(SERVICES)
   const [hovered, setHovered] = useState(null)
 
-  /* Active image: hovered category's image, fallback to video */
   const activeImg   = hovered ? CAT_META[hovered]?.img   : null
   const activeVideo = hovered ? CAT_META[hovered]?.video : null
 
   return (
     <section className="bg-white py-14 md:py-24 px-4 sm:px-5 md:px-10 border-t border-[#e4ddd7]">
       <div className="max-w-screen-xl mx-auto">
-
-        {/* Header row */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-10 md:mb-14">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— What we do</p>
@@ -359,26 +327,19 @@ function FeaturedServices() {
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="shrink-0 self-start sm:self-auto">
-            <Link to="/services"
+            <Link href="/services"
               className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-all duration-300">
               View All <ArrowUpRight className="w-3 h-3" />
             </Link>
           </motion.div>
         </div>
 
-        {/* Two-column editorial layout */}
         <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-start">
-
-          {/* Left — image/video panel, cross-fades on hover */}
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[3/4] hidden md:block sticky top-24 bg-[#0d0609]">
-
-            {/* Video base layer (always mounted, shown when no hover) */}
             <LazyVideo src="/ct.mp4" poster="/bridal.jpg"
               className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
               style={{ opacity: (activeImg || activeVideo) ? 0 : 1 }} />
-
-            {/* Category image cross-fade layer */}
             {categories.map(cat => (
               <img key={cat}
                 src={CAT_META[cat]?.img}
@@ -391,8 +352,6 @@ function FeaturedServices() {
                 loading="lazy"
               />
             ))}
-
-            {/* Category video cross-fade layer — plays only when hovered */}
             {activeVideo && (
               <video
                 key={activeVideo}
@@ -402,7 +361,6 @@ function FeaturedServices() {
                 aria-hidden="true"
               />
             )}
-
             <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-ink/80 to-transparent z-10">
               <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-all duration-300">
                 {hovered ?? 'Farwa Beauty Salon'}
@@ -413,9 +371,7 @@ function FeaturedServices() {
             </div>
           </motion.div>
 
-          {/* Right — numbered category list */}
           <div>
-            {/* Mobile video */}
             <div className="relative overflow-hidden mb-8 md:hidden" style={{ aspectRatio: '4/3' }}>
               <LazyVideo src="/ct.mp4" poster="/bridal.jpg"
                 className="absolute inset-0 w-full h-full object-cover object-center" />
@@ -426,7 +382,7 @@ function FeaturedServices() {
                 <motion.div key={cat}
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}>
-                  <Link to={`/services/${CAT_SLUGS[cat]}`}
+                  <Link href={`/services/${CAT_SLUGS[cat]}`}
                     onMouseEnter={() => setHovered(cat)}
                     onMouseLeave={() => setHovered(null)}
                     className="group flex items-center justify-between py-4 md:py-5 gap-4">
@@ -456,14 +412,12 @@ function FeaturedServices() {
               </p>
             </motion.div>
           </div>
-
         </div>
       </div>
     </section>
   )
 }
 
-/* ─── Trust pillars ────────────────────────────────────────────── */
 function TrustPillars() {
   return (
     <section className="bg-ink py-14 md:py-20 px-4 sm:px-5 md:px-10">
@@ -490,11 +444,9 @@ function TrustPillars() {
   )
 }
 
-/* ─── Native review card — dark editorial, no iframes ─────── */
 function ReviewCard({ post, compact = false }) {
   return (
     <article className={`group relative bg-[#1a1614] border border-[#c9a98a]/20 hover:border-[#c9a98a]/50 transition-colors duration-500 flex flex-col overflow-hidden ${compact ? 'shrink-0 snap-start w-[85vw] max-w-[320px]' : 'h-full'}`}>
-      {/* Subtle gold corner accent */}
       <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{ background: 'radial-gradient(circle at top right, rgba(201,169,138,0.22), transparent 60%)' }} />
 
@@ -538,17 +490,13 @@ function ReviewCard({ post, compact = false }) {
   )
 }
 
-/* ─── Testimonials — featured-quote hero + refined FB grid ──── */
 function TestimonialsPreview() {
   return (
     <section className="relative py-16 sm:py-20 md:py-28 overflow-hidden bg-ink">
-      {/* Ambient glow top + bottom */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
         style={{ background: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(201,169,138,0.10) 0%, transparent 65%), radial-gradient(ellipse 50% 30% at 50% 100%, rgba(201,169,138,0.06) 0%, transparent 60%)' }} />
 
       <div className="relative max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
-
-        {/* ── Header ── */}
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
           className="flex flex-col sm:flex-row sm:items-end md:justify-between gap-6 mb-14 md:mb-20">
@@ -572,7 +520,6 @@ function TestimonialsPreview() {
           </div>
         </motion.div>
 
-        {/* ── Featured pull-quote ── */}
         <motion.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
           className="relative border border-[#c9a98a]/30 bg-[#1a1614] px-6 py-10 md:px-14 md:py-14 mb-3 md:mb-4">
@@ -596,7 +543,6 @@ function TestimonialsPreview() {
           </figcaption>
         </motion.figure>
 
-        {/* ── Curated review cards — native dark editorial style ── */}
         <div className="mb-12 md:mb-14">
           <div className="flex items-baseline justify-between mb-5 md:mb-6 px-0.5">
             <p className="text-white/25 text-[9px] tracking-[0.32em] uppercase font-['Inter']">
@@ -608,14 +554,12 @@ function TestimonialsPreview() {
             </a>
           </div>
 
-          {/* Mobile: horizontal scroll */}
           <div className="md:hidden flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
             {FB_POSTS.map((post) => (
               <ReviewCard key={post.name} post={post} compact />
             ))}
           </div>
 
-          {/* Desktop: 3-col grid */}
           <div className="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-3">
             {FB_POSTS.map((post, i) => (
               <motion.div key={post.name}
@@ -628,7 +572,6 @@ function TestimonialsPreview() {
           </div>
         </div>
 
-        {/* ── Footer CTA ── */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="pt-8 border-t border-white/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
           <p className="text-white/40 text-[11px] font-light font-['Inter'] tracking-wide">
@@ -645,13 +588,11 @@ function TestimonialsPreview() {
             </a>
           </div>
         </motion.div>
-
       </div>
     </section>
   )
 }
 
-/* ─── Areas We Serve — local SEO content ────────────────────────── */
 function AreasWeServe() {
   const areas = [
     { name: 'PECHS Block 2', detail: 'Our home since 2008 — walk in or book ahead.' },
@@ -698,7 +639,6 @@ function AreasWeServe() {
   )
 }
 
-/* ─── CTA band ─────────────────────────────────────────────────── */
 function CtaBand() {
   const booking = useBooking()
   return (
@@ -708,7 +648,7 @@ function CtaBand() {
           <p className="text-stone text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Trusted by women across Karachi</p>
           <h2 className="font-['Unbounded'] font-bold text-white leading-tight"
             style={{ fontSize: 'clamp(1.5rem, 5vw, 2.75rem)' }}>
-            Ready for your glow?<br />We're ready for you.
+            Ready for your glow?<br />We&apos;re ready for you.
           </h2>
         </motion.div>
         <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }}
@@ -718,7 +658,7 @@ function CtaBand() {
             className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-all duration-300 w-full sm:w-auto justify-center sm:justify-start">
             Book an Appointment <ArrowUpRight className="w-4 h-4" />
           </button>
-          <Link to="/services" className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
+          <Link href="/services" className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
             View Services
           </Link>
         </motion.div>
@@ -727,31 +667,18 @@ function CtaBand() {
   )
 }
 
-/* ─── Page ─────────────────────────────────────────────────────── */
-export default function Home() {
-  usePageMeta({
-    title: 'Farwa Beauty Salon — Karachi\'s trusted beauty studio since 2008',
-    description: `Bridal, facials, hair, nails, threading, waxing and more in PECHS Block 2, Karachi. ${YEARS_ACTIVE}+ years of beauty expertise — book directly on WhatsApp.`,
-    canonical: 'https://farwasalon.com/',
-    ogImage: 'https://farwasalon.com/logo.jpg',
-  })
+export default function HomeClient() {
   return (
-    <div className="bg-white overflow-x-hidden">
-      <SkipLink />
-      <Navbar transparent />
-      <main id="main">
-        <Hero />
-        <StatsStrip />
-        <EditorialSlideshow />
-        <WordmarkDivider />
-        <FeaturedServices />
-        <TrustPillars />
-        <TestimonialsPreview />
-        <AreasWeServe />
-        <CtaBand />
-      </main>
-      <Footer />
-      <StickyWA />
-    </div>
+    <main id="main">
+      <Hero />
+      <StatsStrip />
+      <EditorialSlideshow />
+      <WordmarkDivider />
+      <FeaturedServices />
+      <TrustPillars />
+      <TestimonialsPreview />
+      <AreasWeServe />
+      <CtaBand />
+    </main>
   )
 }
