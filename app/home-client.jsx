@@ -102,7 +102,7 @@ function Hero() {
         ref={videoRef}
         autoPlay muted loop playsInline
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover md:scale-105 md:blur-[2px]"
         style={{ objectPosition: '50% 35%' }}
         poster="/glow2.jpg"
         preload="metadata"
@@ -113,7 +113,7 @@ function Hero() {
       <motion.div className="absolute inset-0 z-[1]"
         style={{
           opacity: overlayO,
-          background: 'linear-gradient(to top, rgba(13,6,9,0.95) 0%, rgba(13,6,9,0.55) 38%, rgba(13,6,9,0.22) 68%, rgba(13,6,9,0.5) 100%)',
+          background: 'linear-gradient(to top, rgba(13,6,9,0.95) 0%, rgba(13,6,9,0.6) 38%, rgba(13,6,9,0.3) 68%, rgba(13,6,9,0.55) 100%)',
         }} />
 
       <div className="absolute inset-0 z-[1] pointer-events-none"
