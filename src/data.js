@@ -272,34 +272,6 @@ export const GALLERY_PHOTOS = [
   { src: '/glow.jpg',       label: 'Glow' },
   { src: '/bridal2.jpg',    label: 'Bridal Look' },
   { src: '/glow3.jpg',      label: 'Radiance' },
-  { src: '/glow2.png',      label: 'Beauty' },
+  { src: '/glow2.jpg',      label: 'Beauty' },
   { src: '/waxing.jpg',     label: 'Waxing' },
-]
-
-/*
- * TESTIMONIALS — PLACEHOLDER content awaiting real Google/Facebook reviews.
- * Replace via one of:
- *   A. Google Places API — set VITE_GOOGLE_PLACES_KEY + VITE_GOOGLE_PLACE_ID
- *      in .env.local; the Home page will fetch fresh reviews on load.
- *   B. Manual paste — swap the objects below, keep the shape.
- *   C. Third-party widget — replace TestimonialsPreview in Home.jsx.
- *
- * Shape: { id, source, stars, date, name, role, company, content, avatar }
- *   source: 'google' | 'facebook' | 'direct'
- *   stars:  1–5
- *   date:   ISO string (optional)
- */
-export const TESTIMONIALS = [
-  { id: 1, source: 'google', stars: 5, date: '2024-08-12',
-    name: 'Aisha K.', role: 'Bride', company: 'Full Bridal Package',
-    content: 'Rubina Aapi made my wedding day absolutely perfect. I had been her client for years but nothing prepared me for how I felt on my nikah. Every bride in Karachi deserves this kind of care.',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face' },
-  { id: 2, source: 'google', stars: 5, date: '2024-05-03',
-    name: 'Sana R.', role: 'Regular Client', company: 'Since 2019',
-    content: 'I have been coming to Farwa for over 5 years and I will never go anywhere else. The team genuinely cares, the work is flawless, and the standard never slips — visit after visit.',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face' },
-  { id: 3, source: 'facebook', stars: 5, date: '2024-02-18',
-    name: 'Mehwish T.', role: 'Monthly Member', company: 'Skincare & Nails',
-    content: 'Best salon in PECHS — no question. My skin has transformed since I started doing monthly Gold Facials here. The nail art is always exactly what I asked for.',
-    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&h=100&fit=crop&crop=face' },
 ]
