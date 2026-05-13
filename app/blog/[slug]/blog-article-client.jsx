@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, ChevronLeft } from 'lucide-react'
+import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { WA_DEFAULT } from '../../../src/data.js'
 import { BLOG_POSTS } from '../../../src/blog-data.js'
 
@@ -82,6 +82,16 @@ export default function BlogArticleClient({ slug }) {
         ]} />
 
         <div className="max-w-2xl">
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">
+              <li><Link href="/" className="hover:text-ink transition-colors">Home</Link></li>
+              <li><ChevronRight className="w-2.5 h-2.5" /></li>
+              <li><Link href="/blog" className="hover:text-ink transition-colors">Blog</Link></li>
+              <li><ChevronRight className="w-2.5 h-2.5" /></li>
+              <li className="text-ink line-clamp-1">{post.title}</li>
+            </ol>
+          </nav>
+
           <motion.div
             initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
@@ -159,6 +169,23 @@ export default function BlogArticleClient({ slug }) {
               ← More articles
             </Link>
           </div>
+
+          {(() => {
+            const related = BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 3)
+            return related.length > 0 && (
+              <section className="mt-10 pt-8 border-t border-[#e4ddd7]">
+                <h2 className="font-['Syne'] font-bold text-base text-ink mb-4">Related Articles</h2>
+                <div className="space-y-4">
+                  {related.map((p) => (
+                    <Link key={p.slug} href={`/blog/${p.slug}`} className="block group">
+                      <p className="font-['Syne'] font-bold text-sm text-ink group-hover:text-stone transition-colors leading-snug">{p.title}</p>
+                      <p className="text-stone text-xs font-['Inter'] mt-1 line-clamp-1">{p.description}</p>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )
+          })()}
         </div>
       </div>
     </main>

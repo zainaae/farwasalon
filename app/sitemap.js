@@ -41,6 +41,12 @@ export default function sitemap() {
         changeFrequency: 'monthly',
         priority: 0.5,
       })
+      programmaticPages.push({
+        url: `${BASE}/services/best-${svc}-${loc}`,
+        lastModified: new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.5,
+      })
     }
   }
 

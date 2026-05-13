@@ -57,7 +57,7 @@ export default function LocationServicePage({ data }) {
               {displayServices.map((svc, i) => (
                 <div key={i} className="border border-[#e4ddd7] p-4 hover:border-ink transition-colors">
                   <p className="font-['Syne'] font-semibold text-sm text-ink mb-1">{svc.name}</p>
-                  {svc.price && <p className="text-stone text-xs font-['Inter']">{formatPrice(svc.price)}</p>}
+                  {svc.pricePkr != null && <p className="text-stone text-xs font-['Inter']">{formatPrice(svc.pricePkr)}</p>}
                 </div>
               ))}
             </div>

@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft } from 'lucide-react'
+import Link from 'next/link'
 import { ServiceModal, useBooking, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, CAT_FAQS, slugToCategory } from '../../../src/data.js'
 
@@ -71,6 +72,16 @@ export default function CategoryDetailClient({ categorySlug }) {
             { name: category, url: `https://farwasalon.com/services/${slug}` },
           ]} />
           {faqs.length > 0 && <FaqJsonLd faqs={faqs} />}
+
+          <nav aria-label="Breadcrumb" className="mb-6">
+            <ol className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">
+              <li><Link href="/" className="hover:text-ink transition-colors">Home</Link></li>
+              <li><ChevronLeft className="w-2.5 h-2.5 rotate-180" /></li>
+              <li><Link href="/services" className="hover:text-ink transition-colors">Services</Link></li>
+              <li><ChevronLeft className="w-2.5 h-2.5 rotate-180" /></li>
+              <li className="text-ink">{category}</li>
+            </ol>
+          </nav>
 
           <motion.button initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}
             onClick={onBack}
@@ -161,6 +172,23 @@ export default function CategoryDetailClient({ categorySlug }) {
               ← Back to all categories
             </button>
           </div>
+
+          {(() => {
+            const related = Object.entries(CAT_SLUGS).filter(([k]) => k !== category).slice(0, 5)
+            return related.length > 0 && (
+              <section className="mt-10 pt-8 border-t border-[#e4ddd7]">
+                <h3 className="font-['Syne'] font-bold text-base text-ink mb-3">Related Services</h3>
+                <div className="flex flex-wrap gap-2">
+                  {related.map(([cat, catSlug]) => (
+                    <Link key={catSlug} href={`/services/${catSlug}`}
+                      className="text-[11px] font-['Inter'] px-3 py-2 border border-[#e4ddd7] hover:border-ink transition-colors">
+                      {cat}
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            )
+          })()}
 
           {modal && <ServiceModal service={modal} onClose={() => setModal(null)} />}
         </div>
