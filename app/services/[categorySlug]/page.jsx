@@ -4,6 +4,8 @@ import { parseLocationSlug, getAllLocationServiceSlugs } from '../../../src/loca
 import CategoryDetailClient from './category-detail-client'
 import LocationServicePage from './location-service-page'
 
+export const dynamicParams = false
+
 export function generateStaticParams() {
   const categoryParams = Object.values(CAT_SLUGS).map((slug) => ({ categorySlug: slug }))
   const locationParams = getAllLocationServiceSlugs().map((slug) => ({ categorySlug: slug }))
@@ -22,8 +24,8 @@ export async function generateMetadata({ params }) {
     return {
       title,
       description: `${service.description} Serving clients from ${location.name}. Book at Farwa Beauty Salon, PECHS Block 2, Karachi — WhatsApp +92 322 278 2254.`,
-      alternates: { canonical: `https://farwasalon.com/services/${categorySlug}` },
-      openGraph: { images: ['/logo.jpg'] },
+      alternates: { canonical: `/services/${categorySlug}` },
+      openGraph: { type: 'website', images: ['/logo.jpg'] },
     }
   }
 
@@ -31,10 +33,10 @@ export async function generateMetadata({ params }) {
   if (!category) return notFound()
 
   return {
-    title: `${category} — Farwa Beauty Salon, Karachi`,
+    title: category,
     description: CAT_SEO[category]?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS Block 2, Karachi. Book on WhatsApp.`,
-    alternates: { canonical: `https://farwasalon.com/services/${categorySlug}` },
-    openGraph: { images: ['/logo.jpg'] },
+    alternates: { canonical: `/services/${categorySlug}` },
+    openGraph: { type: 'website', images: ['/logo.jpg'] },
   }
 }
 

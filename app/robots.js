@@ -7,6 +7,7 @@ export default function robots() {
         disallow: ['/api/'],
       },
     ],
-    sitemap: 'https://farwasalon.com/sitemap.xml',
+    // TODO: change back to https://farwasalon.com/sitemap.xml once custom domain is connected
+    sitemap: 'https://farwasalon.vercel.app/sitemap.xml',
   }
 }

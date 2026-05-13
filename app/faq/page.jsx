@@ -1,10 +1,10 @@
 import FaqClient from './faq-client'
 
 export const metadata = {
-  title: 'FAQ — Farwa Beauty Salon, Karachi',
+  title: 'FAQ',
   description: 'Frequently asked questions about Farwa Beauty Salon — parking, walk-ins, payment, cancellation, bridal trials, and more.',
-  alternates: { canonical: 'https://farwasalon.com/faq' },
-  openGraph: { images: ['/logo.jpg'] },
+  alternates: { canonical: '/faq' },
+  openGraph: { type: 'website', images: ['/logo.jpg'] },
 }
 
 export default function FaqPage() {

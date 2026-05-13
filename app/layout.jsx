@@ -206,7 +206,8 @@ export const metadata = {
   },
   description:
     "Bridal, facials, hair, nails, threading, waxing and more in PECHS Block 2, Karachi. Expert beauty care since 2008 — book directly on WhatsApp.",
-  metadataBase: new URL('https://farwasalon.com'),
+  // TODO: change back to https://farwasalon.com once custom domain is connected
+  metadataBase: new URL('https://farwasalon.vercel.app'),
   openGraph: {
     type: 'website',
     siteName: 'Farwa Beauty Salon',
@@ -226,8 +227,8 @@ export const metadata = {
     apple: '/logo.jpg',
   },
   alternates: {
-    canonical: 'https://farwasalon.com/',
-    languages: { 'en-pk': 'https://farwasalon.com/' },
+    canonical: '/',
+    languages: { 'en-pk': '/' },
   },
   other: {
     'geo.region': 'PK-SD',
