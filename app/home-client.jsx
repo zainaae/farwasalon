@@ -104,7 +104,7 @@ function Hero() {
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover hidden md:block scale-[1.01]"
         style={{ objectPosition: '50% 35%' }}
-        poster="/bleachpolish.jpg"
+        poster="/bridal2.jpg"
         preload="auto"
       >
         <source src="/hero-mp4.mp4" type="video/mp4" />
