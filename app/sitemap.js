@@ -2,7 +2,7 @@ import { CAT_SLUGS } from '../src/data.js'
 import { BLOG_POSTS } from '../src/blog-data.js'
 
 const BASE = 'https://farwasalon.com'
-const SITE_LAUNCH = '2025-06-01'
+const SITE_LAUNCH = '2026-05-14'
 const LAST_SERVICE_UPDATE = '2026-05-10'
 const LAST_CONTENT_UPDATE = '2026-05-10'
 
