@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { m, useScroll, useTransform } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useBooking, useNextSlot } from '../src/shared.jsx'
 import { YEARS_ACTIVE } from '../src/data.js'
@@ -13,10 +13,9 @@ const HomeBelowFold = dynamic(() => import('./home-below-fold'), {
 })
 
 function Hero() {
-  const { scrollY } = useScroll()
-  const textY    = useTransform(scrollY, [0, 500], [0, -40])
-  const overlayO = useTransform(scrollY, [0, 400], [0.58, 0.82])
   const videoRef = useRef(null)
+  const textRef = useRef(null)
+  const overlayRef = useRef(null)
   const booking  = useBooking()
   const slot     = useNextSlot()
 
@@ -29,6 +28,19 @@ function Hero() {
     } else {
       v.playbackRate = 0.35
     }
+  }, [])
+
+  useEffect(() => {
+    let raf = 0
+    const update = () => {
+      const y = window.scrollY
+      if (textRef.current) textRef.current.style.transform = `translateY(${(y / 500) * -40}px)`
+      if (overlayRef.current) overlayRef.current.style.opacity = String(0.58 + (Math.min(y, 400) / 400) * 0.24)
+    }
+    const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update) }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf) }
   }, [])
 
   const thesis = [
@@ -64,9 +76,9 @@ function Hero() {
         }}
       />
 
-      <m.div className="absolute inset-0 z-[1]"
+      <div ref={overlayRef} className="absolute inset-0 z-[1]"
         style={{
-          opacity: overlayO,
+          opacity: 0.58,
           background: 'linear-gradient(to top, rgba(13,6,9,0.95) 0%, rgba(13,6,9,0.6) 38%, rgba(13,6,9,0.3) 68%, rgba(13,6,9,0.55) 100%)',
         }} />
 
@@ -79,8 +91,8 @@ function Hero() {
           backgroundSize: '180px', opacity: 0.055, mixBlendMode: 'overlay',
         }} />
 
-      <m.div
-        style={{ y: textY }}
+      <div
+        ref={textRef}
         className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14">
         <div className="max-w-screen-2xl mx-auto">
           <div className="overflow-hidden mb-4 md:mb-6">
@@ -104,7 +116,7 @@ function Hero() {
                   initial={{ y: '110%' }}
                   animate={{ y: 0 }}
                   transition={{ delay: 0.3 + i * 0.18, duration: 1.05, ease: [0.16,1,0.3,1] }}
-                  className={`block ${line.em ? 'text-white font-black' : 'text-white/80 font-extralight italic font-[\'Syne\']'}`}>
+                  className={`block ${line.em ? 'text-white font-black' : "text-white/80 font-extralight italic font-['Syne']"}`}>
                   {line.text}
                 </m.span>
               </span>
@@ -148,7 +160,7 @@ function Hero() {
             Next slot <span className="text-white font-medium">{slot.label}</span>
           </m.p>
         </div>
-      </m.div>
+      </div>
 
       <m.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}

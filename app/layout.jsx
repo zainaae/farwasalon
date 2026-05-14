@@ -21,7 +21,7 @@ const unbounded = Unbounded({
 
 const syne = Syne({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
+  weight: ['400', '600', '700'],
   variable: '--font-syne',
   display: 'swap',
 })
@@ -278,7 +278,7 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${unbounded.variable} ${syne.variable} ${nastaliq.variable}`}
     >
       <head>
-        <link rel="preload" as="image" href="/bridal.jpg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/bridal2.jpg" fetchPriority="high" />
         <Script
           defer
           data-domain="farwasalon.com"

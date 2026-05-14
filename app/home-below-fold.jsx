@@ -170,12 +170,54 @@ function EditorialSlideshow() {
   )
 }
 
+function ServiceMediaPanel({ hovered, categories }) {
+  const activeVideo = hovered ? CAT_META[hovered]?.video : null
+
+  return (
+    <div className="relative w-full h-full bg-[#0d0609]">
+      <video
+        src="/ct.mp4"
+        poster="/bridal.jpg"
+        autoPlay muted loop playsInline
+        className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
+        style={{ opacity: (hovered && !activeVideo) ? 0 : 1 }}
+      />
+      {categories.map(cat => (
+        <Image key={cat}
+          src={CAT_META[cat]?.img || '/bleachpolish.jpg'}
+          alt={cat}
+          fill
+          sizes="(max-width: 768px) 100vw, 45vw"
+          className="absolute inset-0 object-cover transition-opacity duration-500 pointer-events-none"
+          style={{ opacity: hovered === cat && !CAT_META[cat]?.video ? 1 : 0 }}
+          aria-hidden="true"
+          loading="lazy"
+        />
+      ))}
+      {activeVideo && (
+        <video
+          key={activeVideo}
+          src={activeVideo}
+          autoPlay muted loop playsInline
+          className="absolute inset-0 w-full h-full object-cover pointer-events-none animate-fadeIn"
+          aria-hidden="true"
+        />
+      )}
+      <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 bg-gradient-to-t from-ink/80 to-transparent z-10">
+        <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-all duration-300">
+          {hovered ?? 'Farwa Beauty Salon'}
+        </p>
+        <p className="text-white font-['Syne'] font-bold text-sm transition-all duration-300">
+          {hovered ? `${SERVICES[hovered]?.length} services` : 'PECHS Block 3, Karachi'}
+        </p>
+      </div>
+    </div>
+  )
+}
+
 function FeaturedServices() {
   const categories  = Object.keys(SERVICES)
   const [hovered, setHovered] = useState(null)
-
-  const activeImg   = hovered ? CAT_META[hovered]?.img   : null
-  const activeVideo = hovered ? CAT_META[hovered]?.video : null
 
   return (
     <section className="cv-auto bg-white py-14 md:py-24 px-4 sm:px-5 md:px-10 border-t border-[#e4ddd7]">
@@ -196,47 +238,11 @@ function FeaturedServices() {
 
         <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-start">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-            className="relative overflow-hidden aspect-[3/4] hidden md:block sticky top-24 bg-[#0d0609]">
-            <LazyVideo src="/ct.mp4" poster="/bridal.jpg"
-              className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
-              style={{ opacity: (activeImg || activeVideo) ? 0 : 1 }} />
-            {categories.map(cat => (
-              <Image key={cat}
-                src={CAT_META[cat]?.img || '/bleachpolish.jpg'}
-                alt={cat}
-                width={900}
-                height={1200}
-                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500 pointer-events-none"
-                style={{ opacity: hovered === cat && !CAT_META[cat]?.video ? 1 : 0 }}
-                aria-hidden="true"
-                loading="lazy"
-              />
-            ))}
-            {activeVideo && (
-              <video
-                key={activeVideo}
-                src={activeVideo}
-                autoPlay muted loop playsInline
-                className="absolute inset-0 w-full h-full object-cover pointer-events-none animate-fadeIn"
-                aria-hidden="true"
-              />
-            )}
-            <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-ink/80 to-transparent z-10">
-              <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-all duration-300">
-                {hovered ?? 'Farwa Beauty Salon'}
-              </p>
-              <p className="text-white font-['Syne'] font-bold text-sm transition-all duration-300">
-                {hovered ? `${SERVICES[hovered]?.length} services` : 'PECHS Block 3, Karachi'}
-              </p>
-            </div>
+            className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] sticky top-24">
+            <ServiceMediaPanel hovered={hovered} categories={categories} />
           </m.div>
 
           <div>
-            <div className="relative overflow-hidden mb-8 md:hidden" style={{ aspectRatio: '4/3' }}>
-              <LazyVideo src="/ct.mp4" poster="/bridal.jpg"
-                className="absolute inset-0 w-full h-full object-cover object-center" />
-            </div>
-
             <div className="divide-y divide-[#e4ddd7] border-t border-[#e4ddd7]">
               {categories.map((cat, i) => (
                 <m.div key={cat}
