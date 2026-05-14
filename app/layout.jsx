@@ -1,5 +1,6 @@
 import { Inter, Unbounded, Syne, Noto_Nastaliq_Urdu } from 'next/font/google'
 import Script from 'next/script'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import ClientShell from './client-shell'
 import JsonLd from './json-ld'
@@ -287,6 +288,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <ClientShell>{children}</ClientShell>
+        <Analytics />
         <JsonLd data={localBusinessSchema} />
       </body>
     </html>
