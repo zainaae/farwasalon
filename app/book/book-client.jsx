@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Clock, Check, Loader2 } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
 import { SERVICES, CAT_META, CAT_SLUGS, formatPrice, formatDuration } from '../../src/data.js'
 
 const CATEGORIES = Object.keys(SERVICES)
@@ -24,6 +24,47 @@ const stepVariants = {
   enter:  (dir) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
   center: { x: 0, opacity: 1 },
   exit:   (dir) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
+}
+
+function FirstVisitHint() {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className="mb-8 border border-[#e4ddd7] bg-[#faf7f5]">
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        className="tap-safe w-full flex items-center justify-between px-4 py-3 text-left"
+      >
+        <span className="text-ink text-xs font-['Inter'] font-medium">First visit? Here&apos;s what to expect</span>
+        <ChevronDown className={`w-4 h-4 text-stone transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden"
+          >
+            <ul className="px-4 pb-4 flex flex-col gap-2.5">
+              {[
+                'Choose any service — no account needed',
+                'Pick a date and time that works for you',
+                'Confirm via WhatsApp — we\'ll reply within minutes',
+                'Walk-ins welcome too — book online to skip the wait',
+              ].map(tip => (
+                <li key={tip} className="flex items-start gap-2 text-stone text-xs font-['Inter'] font-light">
+                  <Check className="w-3.5 h-3.5 text-[#c9a98a] shrink-0 mt-0.5" />
+                  {tip}
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
 }
 
 export default function BookClient() {
@@ -165,6 +206,8 @@ export default function BookClient() {
           />
         </div>
 
+        <FirstVisitHint />
+
         <AnimatePresence mode="wait" custom={direction}>
           {step === 0 && (
             <motion.div
@@ -223,14 +266,17 @@ export default function BookClient() {
                                     sel ? 'bg-[#faf7f5] pl-2' : 'hover:bg-mist hover:pl-2'
                                   }`}
                                 >
-                                  <div className="min-w-0">
+                                  <div className="min-w-0 flex-1">
                                     <span className="font-['Syne'] font-bold text-[13px] text-ink uppercase block">{s.name}</span>
                                     <span className="text-stone text-[10px] font-['Inter'] mt-0.5 block">
-                                      {s.pricePkr != null && formatPrice(s.pricePkr)}
-                                      {s.pricePkr != null && s.durationMinutes != null && ' · '}
                                       {s.durationMinutes != null && formatDuration(s.durationMinutes)}
                                     </span>
                                   </div>
+                                  {s.pricePkr != null && (
+                                    <span className="shrink-0 text-[#c9a98a] text-sm font-['Inter'] font-semibold">
+                                      {formatPrice(s.pricePkr)}
+                                    </span>
+                                  )}
                                   <span
                                     className={`shrink-0 w-8 h-8 flex items-center justify-center border transition-colors ${
                                       sel ? 'border-ink bg-ink text-white' : 'border-[#e4ddd7] text-transparent'

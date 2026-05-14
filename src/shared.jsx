@@ -1036,7 +1036,7 @@ export function Footer() {
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Visit Us</p>
               <ul className="flex flex-col gap-2.5">
-                {['PECHS Block 2, Karachi','Mon–Sat: 11am–7pm','Closed Sunday'].map(l => (
+                {['Shop 7, Block 2, PECHS, Karachi 75400','Mon–Sat: 11am–7pm','Closed Sunday'].map(l => (
                   <li key={l}><span className="text-stone text-xs font-['Inter']">{l}</span></li>
                 ))}
               </ul>
@@ -1047,6 +1047,7 @@ export function Footer() {
                 <li><a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="link-underline text-stone text-xs font-['Inter'] hover:text-ink">WhatsApp</a></li>
                 <li><a href={IG_LINK}    target="_blank" rel="noreferrer" className="link-underline text-stone text-xs font-['Inter'] hover:text-ink">Instagram @farwasalon</a></li>
                 <li><a href={MAPS_LINK}  target="_blank" rel="noreferrer" className="link-underline text-stone text-xs font-['Inter'] hover:text-ink">Find us on Maps</a></li>
+                <li><a href="https://g.page/farwasalon/review" target="_blank" rel="noreferrer" className="link-underline text-stone text-xs font-['Inter'] hover:text-ink">Leave a Review ★</a></li>
               </ul>
             </div>
           </div>
@@ -1059,7 +1060,7 @@ export function Footer() {
               <div className="flex items-center gap-3">
                 <Link href="/privacy" className="text-stone text-[11px] font-['Inter'] hover:text-ink transition-colors">Privacy Policy</Link>
                 <span className="text-[#e4ddd7]">·</span>
-                <p className="text-stone text-[11px] font-['Inter']">PECHS Block 2, Karachi · Est. 2008</p>
+                <p className="text-stone text-[11px] font-['Inter']">Shop 7, Block 2, PECHS, Karachi 75400 · Est. 2008</p>
               </div>
           </div>
         </div>
@@ -1068,15 +1069,42 @@ export function Footer() {
   )
 }
 
+/* ─── Contextual WhatsApp URL based on current page ────────────── */
+const _slugToCatName = Object.fromEntries(Object.entries(CAT_SLUGS).map(([k, v]) => [v, k]))
+function useContextualWaUrl() {
+  const pathname = usePathname()
+  const slugToCatName = _slugToCatName
+
+  let message = "Hi! I'd like to book an appointment at Farwa Beauty Salon"
+  if (pathname === '/book') {
+    message = "Hi, I'd like to book an appointment at Farwa Salon"
+  } else if (pathname === '/contact') {
+    message = "Hi, I'd like to enquire about services at Farwa Salon"
+  } else if (pathname?.startsWith('/services/')) {
+    const slug = pathname.replace('/services/', '').split('/')[0]
+    const catName = slugToCatName[slug]
+    if (slug === 'bridal') {
+      message = "Hi, I'm interested in Bridal packages at Farwa Salon"
+    } else if (slug === 'facials') {
+      message = "Hi, I'd like to know about Facial treatments"
+    } else if (catName) {
+      message = `Hi, I'm interested in ${catName} services at Farwa Salon`
+    }
+  }
+
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`
+}
+
 /* ─── Sticky WhatsApp pill (shown on all pages) ────────────────── */
 export function StickyWA() {
+  const waUrl = useContextualWaUrl()
   return (
     <>
       {/* flow spacer so page content never hides behind the fixed pill on mobile */}
       <div aria-hidden className="h-[calc(5rem+env(safe-area-inset-bottom,0px))] md:hidden" />
       <div className="fixed z-50 left-0 right-0 flex justify-center md:hidden pointer-events-none px-4"
         style={{ bottom: 'max(1.25rem, env(safe-area-inset-bottom, 0px))' }}>
-        <motion.a href={WA_DEFAULT} target="_blank" rel="noreferrer"
+        <motion.a href={waUrl} target="_blank" rel="noreferrer"
           className="pointer-events-auto inline-flex items-center gap-2 bg-ink text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 shadow-2xl shadow-ink/30"
           initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2, duration: 0.6, ease: [0.16,1,0.3,1] }}>
           Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />

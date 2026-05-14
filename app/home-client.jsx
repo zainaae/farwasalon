@@ -102,9 +102,19 @@ function Hero() {
         ref={videoRef}
         autoPlay muted loop playsInline
         aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover md:scale-105 md:blur-[2px]"
+        className="absolute inset-0 w-full h-full object-cover hidden md:block scale-[1.01]"
         style={{ objectPosition: '50% 35%' }}
         poster="/bleachpolish.jpg"
+        preload="metadata"
+      >
+        <source src="/hero-mp4.mp4" type="video/mp4" />
+      </video>
+      <video
+        autoPlay muted loop playsInline
+        aria-hidden="true"
+        className="absolute inset-0 w-full h-full object-cover md:hidden"
+        style={{ objectPosition: '50% 35%' }}
+        poster="/bridal.jpg"
         preload="metadata"
       >
         <source src="/hero2.mp4" type="video/mp4" />

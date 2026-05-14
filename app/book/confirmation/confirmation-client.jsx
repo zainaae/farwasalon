@@ -119,6 +119,18 @@ function ConfirmationContent() {
               </span>
             ))}
           </div>
+
+          <div className="mt-8 pt-6 border-t border-[#e4ddd7]">
+            <a
+              href="https://g.page/farwasalon/review"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
+            >
+              Enjoyed your visit? Rate us on Google
+              <span className="text-[#c9a98a]" aria-hidden="true">★★★★★</span>
+            </a>
+          </div>
         </motion.div>
       </div>
     </main>

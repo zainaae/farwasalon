@@ -244,6 +244,12 @@ video[aria-hidden="true"] { pointer-events: none; }
   video { playback-rate: 1 !important; }
 }
 
+/* ── Ken Burns hero animation (mobile) ── */
+@keyframes kenburns {
+  0%   { transform: scale(1)    translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1.5%, -1%); }
+}
+
 /* ── Breakpoint-safe touch target (WCAG 2.5.5) ── */
 @media (max-width: 640px) {
   .tap-safe {
