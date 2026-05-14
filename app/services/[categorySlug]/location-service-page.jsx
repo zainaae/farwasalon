@@ -38,7 +38,7 @@ export default function LocationServicePage({ data }) {
 
           <div className="flex flex-wrap gap-3 mb-10">
             <div className="flex items-center gap-2 text-stone text-sm font-['Inter']">
-              <MapPin className="w-4 h-4" /> PECHS Block 2, Karachi
+              <MapPin className="w-4 h-4" /> PECHS Block 3, Karachi
             </div>
             <div className="flex items-center gap-2 text-stone text-sm font-['Inter']">
               <Clock className="w-4 h-4" /> Mon–Sat 11 AM – 7 PM
@@ -76,7 +76,7 @@ export default function LocationServicePage({ data }) {
           <ul className="space-y-2 text-stone text-sm font-light font-['Inter']">
             <li>✓ Trusted since 2008 — {YEARS_ACTIVE}+ years of experience</li>
             <li>✓ Expert {service.name.toLowerCase()} professionals</li>
-            <li>✓ Hygienic, comfortable environment in PECHS Block 2</li>
+            <li>✓ Hygienic, comfortable environment in PECHS Block 3</li>
             <li>✓ Convenient WhatsApp booking — no calls needed</li>
             <li>✓ Serving clients from {location.name} and across Karachi</li>
           </ul>
@@ -86,7 +86,7 @@ export default function LocationServicePage({ data }) {
           className="mb-12">
           <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Getting Here from {location.name}</h2>
           <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed mb-4">
-            Farwa Beauty Salon is located in PECHS Block 2, Karachi. {location.detail} We&apos;re open Monday to Saturday, 11 AM to 7 PM. Book your appointment on WhatsApp for instant confirmation.
+            Farwa Beauty Salon is located in PECHS Block 3, Karachi. {location.detail} We&apos;re open Monday to Saturday, 11 AM to 7 PM. Book your appointment on WhatsApp for instant confirmation.
           </p>
           <a href={waLink(service.name)} target="_blank" rel="noreferrer"
             className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors">

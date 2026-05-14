@@ -18,7 +18,7 @@ export default function AboutClient() {
       <section className="bg-white py-16 md:py-20 px-4 sm:px-5 md:px-10 border-b border-[#e4ddd7]">
         <div className="max-w-screen-xl mx-auto">
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">— Est. 2008 · PECHS Block 2, Karachi</motion.p>
+            className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">— Est. 2008 · PECHS Block 3, Karachi</motion.p>
           <div className="overflow-hidden">
             <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
@@ -63,7 +63,7 @@ export default function AboutClient() {
                   { year: '2010',  text: 'Expanded to two rooms' },
                   { year: '2014',  text: 'Growing by word of mouth' },
                   { year: '2016',  text: 'Moved to dedicated salon space' },
-                  { year: 'Today', text: 'A full-service studio in PECHS Block 2' },
+                  { year: 'Today', text: 'A full-service studio in PECHS Block 3' },
                 ].map((m, i) => (
                   <motion.div key={m.year} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.09 }}
                     className="flex gap-5 items-start">
@@ -88,7 +88,7 @@ export default function AboutClient() {
                 Rubina began Farwa as a small home-studio. One room became two. Word spread, clients kept returning, and the craft outgrew the house.
               </p>
               <p className="text-stone text-sm leading-loose font-light">
-                She moved into a dedicated salon in PECHS Block 2 and kept expanding the menu — bridal, hair, skin, nails, brows — without letting the chair-side care slip. {YEARS_ACTIVE} years on, the standard is still set one appointment at a time.
+                She moved into a dedicated salon in PECHS Block 3 and kept expanding the menu — bridal, hair, skin, nails, brows — without letting the chair-side care slip. {YEARS_ACTIVE} years on, the standard is still set one appointment at a time.
               </p>
               <div className="grid grid-cols-1 gap-4 border-t border-[#e4ddd7] pt-8 mt-2">
                 {[

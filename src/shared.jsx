@@ -1036,7 +1036,7 @@ export function Footer() {
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Visit Us</p>
               <ul className="flex flex-col gap-2.5">
-                {['Shop 7, Block 2, PECHS, Karachi 75400','Mon–Sat: 11am–7pm','Closed Sunday'].map(l => (
+                {['Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400','Mon–Sat: 11am–7pm','Closed Sunday'].map(l => (
                   <li key={l}><span className="text-stone text-xs font-['Inter']">{l}</span></li>
                 ))}
               </ul>
@@ -1060,7 +1060,7 @@ export function Footer() {
               <div className="flex items-center gap-3">
                 <Link href="/privacy" className="text-stone text-[11px] font-['Inter'] hover:text-ink transition-colors">Privacy Policy</Link>
                 <span className="text-[#e4ddd7]">·</span>
-                <p className="text-stone text-[11px] font-['Inter']">Shop 7, Block 2, PECHS, Karachi 75400 · Est. 2008</p>
+                <p className="text-stone text-[11px] font-['Inter']">Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400 · Est. 2008</p>
               </div>
           </div>
         </div>

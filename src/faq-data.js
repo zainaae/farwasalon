@@ -1,7 +1,7 @@
 export const FAQS = [
   {
     q: 'Is parking available near the salon?',
-    a: 'Yes — PECHS Block 2 has street parking available nearby. Most clients find spots within a short walk of the salon.',
+    a: 'Yes — PECHS Block 3 has street parking available nearby. Most clients find spots within a short walk of the salon.',
   },
   {
     q: 'Do you accept walk-ins?',

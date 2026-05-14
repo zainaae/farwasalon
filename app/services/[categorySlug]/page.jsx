@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
       : categorySlug
     return {
       title,
-      description: `${service.description} Serving clients from ${location.name}. Book at Farwa Beauty Salon, PECHS Block 2, Karachi — WhatsApp +92 322 278 2254.`,
+      description: `${service.description} Serving clients from ${location.name}. Book at Farwa Beauty Salon, PECHS Block 3, Karachi — WhatsApp +92 322 278 2254.`,
       alternates: { canonical: `/services/${canonicalSlug}` },
       openGraph: { type: 'website', images: [{ url: '/logo.jpg', width: 1200, height: 630, alt: `${service.name} services near ${location.name} — Farwa Beauty Salon Karachi` }] },
     }
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${category} in PECHS Karachi${priceHint}`,
-    description: CAT_SEO[category]?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS Block 2, Karachi. Book on WhatsApp.`,
+    description: CAT_SEO[category]?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS Block 3, Karachi. Book on WhatsApp.`,
     alternates: { canonical: `/services/${categorySlug}` },
     openGraph: { type: 'website', images: [{ url: catImg, width: 1200, height: 630, alt: `${category} services at Farwa Beauty Salon PECHS Karachi` }] },
   }

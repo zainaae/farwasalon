@@ -27,7 +27,7 @@ export default function PrivacyClient() {
             <div>
               <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Who we are</h2>
               <p className="text-stone text-sm font-light leading-relaxed font-['Inter']">
-                Farwa Beauty Salon is a beauty studio located in PECHS Block 2, Karachi, Pakistan. This policy explains how we handle data collected through this website.
+                Farwa Beauty Salon is a beauty studio located in PECHS Block 3, Karachi, Pakistan. This policy explains how we handle data collected through this website.
               </p>
             </div>
 
@@ -65,7 +65,7 @@ export default function PrivacyClient() {
             <div>
               <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Contact</h2>
               <p className="text-stone text-sm font-light leading-relaxed font-['Inter']">
-                For any privacy-related questions, reach us on WhatsApp at +92 322 2782254 or visit us at PECHS Block 2, Karachi.
+                For any privacy-related questions, reach us on WhatsApp at +92 322 2782254 or visit us at PECHS Block 3, Karachi.
               </p>
             </div>
           </div>
