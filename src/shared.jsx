@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, useCallback, createContext, useContext } f
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Check } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, track, CAT_SLUGS, CAT_SEO, CAT_FAQS } from './data.js'
 
@@ -482,12 +482,12 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           className="fixed inset-0 z-[200] flex items-end md:items-center justify-center bg-ink/[0.62]"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
           onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="booking-title"
         >
-          <motion.div
+          <m.div
             initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }}
             transition={{ type: 'spring', stiffness: 320, damping: 34 }}
             onClick={(e) => e.stopPropagation()}
@@ -695,8 +695,8 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                 </div>
               )}
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   )
@@ -798,8 +798,8 @@ export function ServiceModal({ service, onClose }) {
 
   return (
     <AnimatePresence>
-      <motion.div className="modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
-        <motion.div
+      <m.div className="modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
+        <m.div
           ref={dialogRef}
           role="dialog"
           aria-modal="true"
@@ -851,8 +851,8 @@ export function ServiceModal({ service, onClose }) {
               </a>
             </div>
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </AnimatePresence>
   )
 }
@@ -911,7 +911,7 @@ export function Navbar({ transparent = false }) {
   ]
 
   return (
-    <motion.header
+    <m.header
       layout={false}
       initial={{ y: -32, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -957,7 +957,7 @@ export function Navbar({ transparent = false }) {
       </div>
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
+          <m.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden bg-white border-t border-[#e4ddd7]">
             <div className="px-5 py-5 flex flex-col gap-4">
               {navLinks.map(({ label, href }) => (
@@ -971,10 +971,10 @@ export function Navbar({ transparent = false }) {
                 Book an Appointment
               </button>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </m.header>
   )
 }
 
@@ -1105,11 +1105,11 @@ export function StickyWA() {
       <div aria-hidden className="h-[calc(5rem+env(safe-area-inset-bottom,0px))] md:hidden" />
       <div className="fixed z-50 left-0 right-0 flex justify-center md:hidden pointer-events-none px-4"
         style={{ bottom: 'max(1.25rem, env(safe-area-inset-bottom, 0px))' }}>
-        <motion.a href={waUrl} target="_blank" rel="noreferrer"
+        <m.a href={waUrl} target="_blank" rel="noreferrer"
           className="pointer-events-auto inline-flex items-center gap-2 bg-ink text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 shadow-2xl shadow-ink/30"
           initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2, duration: 0.6, ease: [0.16,1,0.3,1] }}>
           Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
-        </motion.a>
+        </m.a>
       </div>
     </>
   )
@@ -1140,6 +1140,7 @@ export function LazyVideo({ src, poster, className, ...props }) {
       ref={ref}
       src={visible ? src : undefined}
       poster={poster}
+      preload="none"
       muted
       loop
       playsInline

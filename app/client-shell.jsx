@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { MotionConfig } from 'framer-motion'
+import { LazyMotion, domAnimation, MotionConfig } from 'framer-motion'
 import { BookingProvider, SkipLink, Navbar, Footer, StickyWA } from '../src/shared'
 
 function ScrollProgress() {
@@ -46,8 +46,9 @@ export default function ClientShell({ children }) {
   const isHome = pathname === '/'
 
   return (
-    <MotionConfig reducedMotion="user">
-      <BookingProvider>
+    <LazyMotion features={domAnimation}>
+      <MotionConfig reducedMotion="user">
+        <BookingProvider>
         <ScrollProgress />
         <ScrollToTop />
         <SkipLink />
@@ -55,7 +56,8 @@ export default function ClientShell({ children }) {
         {children}
         <Footer />
         <StickyWA />
-      </BookingProvider>
-    </MotionConfig>
+        </BookingProvider>
+      </MotionConfig>
+    </LazyMotion>
   )
 }

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { m, useScroll, useTransform } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, Star, Quote } from 'lucide-react'
 import {
   AnimatedNumber, useBooking, useNextSlot, LazyVideo, CAT_SLUGS,
@@ -81,6 +81,11 @@ function Hero() {
   useEffect(() => {
     const v = videoRef.current
     if (!v) return
+    const isDesktop = window.matchMedia('(min-width: 768px)').matches
+    if (isDesktop) {
+      v.preload = 'auto'
+      v.load()
+    }
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduce) {
       v.pause()
@@ -105,7 +110,7 @@ function Hero() {
         className="absolute inset-0 w-full h-full object-cover hidden md:block scale-[1.01]"
         style={{ objectPosition: '50% 35%' }}
         poster="/bridal2.jpg"
-        preload="auto"
+        preload="none"
       >
         <source src="/hero-mp4.mp4" type="video/mp4" />
       </video>
@@ -115,12 +120,12 @@ function Hero() {
         className="absolute inset-0 w-full h-full object-cover md:hidden scale-[1.01]"
         style={{ objectPosition: '50% 35%' }}
         poster="/bridal.jpg"
-        preload="auto"
+        preload="metadata"
       >
         <source src="/hero2.mp4" type="video/mp4" />
       </video>
 
-      <motion.div className="absolute inset-0 z-[1]"
+      <m.div className="absolute inset-0 z-[1]"
         style={{
           opacity: overlayO,
           background: 'linear-gradient(to top, rgba(13,6,9,0.95) 0%, rgba(13,6,9,0.6) 38%, rgba(13,6,9,0.3) 68%, rgba(13,6,9,0.55) 100%)',
@@ -135,17 +140,17 @@ function Hero() {
           backgroundSize: '180px', opacity: 0.055, mixBlendMode: 'overlay',
         }} />
 
-      <motion.div
+      <m.div
         style={{ y: textY }}
         className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14">
         <div className="max-w-screen-2xl mx-auto">
           <div className="overflow-hidden mb-4 md:mb-6">
-            <motion.p
+            <m.p
               initial={{ y: '100%' }} animate={{ y: 0 }}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']">
               Est. 2008 &middot; PECHS Block 3, Karachi
-            </motion.p>
+            </m.p>
           </div>
 
           <h1 className="font-['Unbounded'] text-white leading-[0.95] mb-6 md:mb-8"
@@ -156,27 +161,27 @@ function Hero() {
             }}>
             {thesis.map((line, i) => (
               <span key={i} className="block overflow-hidden">
-                <motion.span
+                <m.span
                   initial={{ y: '110%' }}
                   animate={{ y: 0 }}
                   transition={{ delay: 0.3 + i * 0.18, duration: 1.05, ease: [0.16,1,0.3,1] }}
                   className={`block ${line.em ? 'text-white font-black' : 'text-white/80 font-extralight italic font-[\'Syne\']'}`}>
                   {line.text}
-                </motion.span>
+                </m.span>
               </span>
             ))}
           </h1>
 
           <div className="overflow-hidden mb-8 md:mb-10">
-            <motion.p
+            <m.p
               initial={{ y: '100%' }} animate={{ y: 0 }}
               transition={{ delay: 1.1, duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="text-white/55 text-[10px] sm:text-[11px] tracking-[0.32em] uppercase font-['Inter']">
               Farwa Beauty Salon
-            </motion.p>
+            </m.p>
           </div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.35, duration: 0.75, ease: [0.16,1,0.3,1] }}
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 max-w-md sm:max-w-none">
@@ -195,29 +200,29 @@ function Hero() {
                 Next slot <span className="text-white font-medium ml-1">{slot.label}</span>
               </span>
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6, duration: 0.7 }}
             className="sm:hidden mt-4 text-white/55 text-[10px] tracking-[0.22em] uppercase font-['Inter'] flex items-center gap-2">
             <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#9cd48c]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
             Next slot <span className="text-white font-medium">{slot.label}</span>
-          </motion.p>
+          </m.p>
         </div>
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }}
         transition={{ delay: 2.4, duration: 1 }}
         aria-hidden="true"
         className="hidden md:flex absolute bottom-10 right-10 z-10 flex-col items-center gap-1.5">
         <div className="w-px h-10 bg-white/25 relative overflow-hidden">
-          <motion.div className="absolute top-0 left-0 w-full bg-white"
+          <m.div className="absolute top-0 left-0 w-full bg-white"
             animate={{ y: ['-100%','200%'] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
             style={{ height: '40%' }} />
         </div>
         <span className="text-white/45 text-[9px] tracking-[0.2em] uppercase font-['Inter'] rotate-90 origin-center mt-2">scroll</span>
-      </motion.div>
+      </m.div>
     </section>
   )
 }
@@ -228,13 +233,13 @@ function StatsStrip() {
       <div className="max-w-screen-xl mx-auto">
         <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
           <div className="overflow-hidden">
-            <motion.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
+            <m.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
               KARACHI&apos;S<br />MOST<br />TRUSTED<br />BEAUTY STUDIO
-            </motion.h2>
+            </m.h2>
           </div>
-          <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+          <m.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.15 }}
             className="flex flex-col gap-6 sm:gap-7">
             <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
@@ -258,7 +263,7 @@ function StatsStrip() {
               <span className="link-underline">Read Our Story</span>
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>
@@ -333,21 +338,21 @@ function FeaturedServices() {
     <section className="bg-white py-14 md:py-24 px-4 sm:px-5 md:px-10 border-t border-[#e4ddd7]">
       <div className="max-w-screen-xl mx-auto">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-10 md:mb-14">
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— What we do</p>
             <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight">Our Services</h2>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
+          </m.div>
+          <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="shrink-0 self-start sm:self-auto">
             <Link href="/services"
               className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-all duration-300">
               View All <ArrowUpRight className="w-3 h-3" />
             </Link>
-          </motion.div>
+          </m.div>
         </div>
 
         <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-start">
-          <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+          <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[3/4] hidden md:block sticky top-24 bg-[#0d0609]">
             <LazyVideo src="/ct.mp4" poster="/bridal.jpg"
               className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
@@ -381,7 +386,7 @@ function FeaturedServices() {
                 {hovered ? `${SERVICES[hovered]?.length} services` : 'PECHS Block 3, Karachi'}
               </p>
             </div>
-          </motion.div>
+          </m.div>
 
           <div>
             <div className="relative overflow-hidden mb-8 md:hidden" style={{ aspectRatio: '4/3' }}>
@@ -391,7 +396,7 @@ function FeaturedServices() {
 
             <div className="divide-y divide-[#e4ddd7] border-t border-[#e4ddd7]">
               {categories.map((cat, i) => (
-                <motion.div key={cat}
+                <m.div key={cat}
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}>
                   <Link href={`/services/${CAT_SLUGS[cat]}`}
@@ -413,16 +418,16 @@ function FeaturedServices() {
                       <ArrowUpRight className="w-3.5 h-3.5 text-stone/40 group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
                     </div>
                   </Link>
-                </motion.div>
+                </m.div>
               ))}
             </div>
 
-            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
+            <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
               className="mt-8 pt-6 border-t border-[#e4ddd7]">
               <p className="text-stone text-xs font-['Inter'] font-light">
                 Book any service directly on WhatsApp — we confirm within a few hours.
               </p>
-            </motion.div>
+            </m.div>
           </div>
         </div>
       </div>
@@ -434,21 +439,21 @@ function TrustPillars() {
   return (
     <section className="bg-ink py-14 md:py-20 px-4 sm:px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto">
-        <motion.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</motion.p>
+        <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</m.p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-12">
           {[
             { num: '01', title: `${YEARS_ACTIVE} Years of Expertise`,        desc: 'Since 2008, Farwa has been crafting beauty with skill, care, and love for every client who walks through the door.' },
             { num: '02', title: 'A Calm, Considered Space',      desc: 'The studio is unhurried by design — quiet rooms, careful lighting, conversations that stay at the chair.' },
             { num: '03', title: 'Every Woman, Every Look',       desc: 'From a quick brow thread to a full bridal transformation — no request is too big or too small.' },
           ].map((p, i) => (
-            <motion.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
+            <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
               className="border-t border-white/10 pt-7">
               <p className="font-['Unbounded'] text-[10px] text-stone mb-4">{p.num}</p>
               <h3 className="font-['Syne'] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
               <p className="text-stone text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>
@@ -509,7 +514,7 @@ function TestimonialsPreview() {
         style={{ background: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(201,169,138,0.10) 0%, transparent 65%), radial-gradient(ellipse 50% 30% at 50% 100%, rgba(201,169,138,0.06) 0%, transparent 60%)' }} />
 
       <div className="relative max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
-        <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
+        <m.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
           className="flex flex-col sm:flex-row sm:items-end md:justify-between gap-6 mb-14 md:mb-20">
           <div className="min-w-0">
@@ -530,9 +535,9 @@ function TestimonialsPreview() {
               Hundreds of reviews · Facebook &amp; Google
             </span>
           </div>
-        </motion.div>
+        </m.div>
 
-        <motion.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
+        <m.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
           className="relative border border-[#c9a98a]/30 bg-[#1a1614] px-6 py-10 md:px-14 md:py-14 mb-3 md:mb-4">
           <Quote className="absolute top-6 left-6 md:top-8 md:left-10 w-7 h-7 md:w-10 md:h-10 text-[#c9a98a]/20 rotate-180" aria-hidden="true" />
@@ -553,7 +558,7 @@ function TestimonialsPreview() {
               FB <ArrowUpRight className="w-2.5 h-2.5" />
             </a>
           </figcaption>
-        </motion.figure>
+        </m.figure>
 
         <div className="mb-12 md:mb-14">
           <div className="flex items-baseline justify-between mb-5 md:mb-6 px-0.5">
@@ -574,17 +579,17 @@ function TestimonialsPreview() {
 
           <div className="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-3">
             {FB_POSTS.map((post, i) => (
-              <motion.div key={post.name}
+              <m.div key={post.name}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}>
                 <ReviewCard post={post} />
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
 
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+        <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="pt-8 border-t border-white/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
           <p className="text-white/40 text-[11px] font-light font-['Inter'] tracking-wide">
             Loved your visit? Help us spread the word.
@@ -599,7 +604,7 @@ function TestimonialsPreview() {
               Follow on Facebook <ArrowUpRight className="w-3 h-3" />
             </a>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )
@@ -611,14 +616,14 @@ function CtaBand() {
   return (
     <section className="bg-ink py-14 sm:py-16 md:py-24 px-4 sm:px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-10">
-        <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+        <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
           <p className="text-stone text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Trusted by women across Karachi</p>
           <h2 className="font-['Unbounded'] font-bold text-white leading-tight"
             style={{ fontSize: 'clamp(1.5rem, 5vw, 2.75rem)' }}>
             Ready for your glow?<br />We&apos;re ready for you.
           </h2>
-        </motion.div>
-        <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }}
+        </m.div>
+        <m.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.15 }}
           className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 shrink-0 w-full md:w-auto">
           <button onClick={() => booking.open()}
@@ -628,7 +633,7 @@ function CtaBand() {
           <Link href="/services" className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
             View Services
           </Link>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

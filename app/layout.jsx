@@ -278,13 +278,13 @@ export default function RootLayout({ children }) {
       className={`${inter.variable} ${unbounded.variable} ${syne.variable} ${nastaliq.variable}`}
     >
       <head>
-        <link rel="preload" as="image" href="/bleachpolish.jpg" fetchPriority="high" />
+        <link rel="preload" as="image" href="/bridal.jpg" fetchPriority="high" />
         <Script
           defer
           data-domain="farwasalon.com"
           src="https://plausible.io/js/script.tagged-events.outbound-links.js"
         />
-        <Script id="plausible-setup" strategy="beforeInteractive">
+        <Script id="plausible-setup" strategy="afterInteractive">
           {`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}
         </Script>
       </head>
