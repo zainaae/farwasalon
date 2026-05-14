@@ -28,7 +28,7 @@ const syne = Syne({
 
 const nastaliq = Noto_Nastaliq_Urdu({
   subsets: ['arabic'],
-  weight: ['400', '700'],
+  weight: ['400'],
   variable: '--font-nastaliq',
   display: 'optional',
 })
@@ -283,8 +283,9 @@ export default function RootLayout({ children }) {
           defer
           data-domain="farwasalon.com"
           src="https://plausible.io/js/script.tagged-events.outbound-links.js"
+          strategy="lazyOnload"
         />
-        <Script id="plausible-setup" strategy="afterInteractive">
+        <Script id="plausible-setup" strategy="lazyOnload">
           {`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}
         </Script>
       </head>

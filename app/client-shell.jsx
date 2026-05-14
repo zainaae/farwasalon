@@ -1,23 +1,28 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { LazyMotion, domAnimation, MotionConfig } from 'framer-motion'
 import { BookingProvider, SkipLink, Navbar, Footer, StickyWA } from '../src/shared'
 
 function ScrollProgress() {
-  const [p, setP] = useState(0)
+  const barRef = useRef(null)
   useEffect(() => {
-    const fn = () => {
+    let raf = 0
+    const update = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight
-      setP(max > 0 ? Math.min(1, window.scrollY / max) : 0)
+      const p = max > 0 ? Math.min(1, window.scrollY / max) : 0
+      if (barRef.current) barRef.current.style.transform = `scaleX(${p})`
     }
-    fn()
+    const fn = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(update)
+    }
+    update()
     window.addEventListener('scroll', fn, { passive: true })
-    window.addEventListener('resize', fn, { passive: true })
     return () => {
       window.removeEventListener('scroll', fn)
-      window.removeEventListener('resize', fn)
+      cancelAnimationFrame(raf)
     }
   }, [])
   return (
@@ -26,8 +31,9 @@ function ScrollProgress() {
       className="fixed top-0 left-0 right-0 z-[110] h-[2px] bg-transparent pointer-events-none"
     >
       <div
+        ref={barRef}
         className="h-full origin-left bg-gradient-to-r from-[#c9a98a] via-[#e4c7a8] to-[#c9a98a]"
-        style={{ transform: `scaleX(${p})`, transition: 'transform 0.08s linear' }}
+        style={{ transform: 'scaleX(0)', transition: 'transform 0.08s linear' }}
       />
     </div>
   )

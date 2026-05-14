@@ -250,6 +250,18 @@ video[aria-hidden="true"] { pointer-events: none; }
   100% { transform: scale(1.12) translate(-1.5%, -1%); }
 }
 
+/* ── Navbar slide-in (replaces framer-motion for perf) ── */
+@keyframes navSlideIn {
+  from { transform: translateY(-32px); opacity: 0; }
+  to   { transform: translateY(0);     opacity: 1; }
+}
+
+/* ── content-visibility for below-fold sections (paint-holding) ── */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+
 /* ── Breakpoint-safe touch target (WCAG 2.5.5) ── */
 @media (max-width: 640px) {
   .tap-safe {

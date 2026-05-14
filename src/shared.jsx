@@ -911,12 +911,8 @@ export function Navbar({ transparent = false }) {
   ]
 
   return (
-    <m.header
-      layout={false}
-      initial={{ y: -32, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-      className={`fixed top-0 left-0 right-0 z-[100] transition-[background-color,box-shadow] duration-300 pt-[env(safe-area-inset-top,0px)] isolate [backface-visibility:hidden] ${
+    <header
+      className={`fixed top-0 left-0 right-0 z-[100] transition-[background-color,box-shadow] duration-300 pt-[env(safe-area-inset-top,0px)] isolate [backface-visibility:hidden] animate-[navSlideIn_0.55s_cubic-bezier(0.16,1,0.3,1)_both] ${
         scrolled
           ? 'bg-white shadow-[0_1px_0_0_#e4ddd7]'
           : transparent ? '' : 'bg-white'
@@ -974,7 +970,7 @@ export function Navbar({ transparent = false }) {
           </m.div>
         )}
       </AnimatePresence>
-    </m.header>
+    </header>
   )
 }
 
