@@ -232,9 +232,9 @@ export default function BookClient() {
                         <button
                           type="button"
                           onClick={() => setExpandedCat(cat)}
-                          className="tap-safe w-full p-4 border border-[#e4ddd7] hover:border-ink hover:bg-mist transition-all text-left group"
+                          className="tap-safe w-full px-3 py-4 md:px-4 border border-[#e4ddd7] hover:border-ink hover:bg-mist transition-all text-left group"
                         >
-                          <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight">{cat}</p>
+                          <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight break-words">{cat}</p>
                           <p className="text-stone text-[10px] font-['Inter'] mt-1">{services.length} services</p>
                         </button>
                       ) : (
