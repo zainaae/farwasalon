@@ -7,6 +7,7 @@ import { ArrowUpRight, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ServiceModal, useBooking, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, CAT_FAQS, slugToCategory } from '../../../src/data.js'
+import { BreadcrumbJsonLd } from '../../json-ld.jsx'
 
 function getCatMeta(cat) {
   return CAT_META[cat] || { img: '/glow2.jpg', desc: 'Expert beauty services tailored just for you.' }
@@ -41,20 +42,6 @@ function ServiceJsonLd({ category, services }) {
       offerCount: String(services.length),
     },
     areaServed: { '@type': 'City', name: 'Karachi' },
-  }
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-}
-
-function BreadcrumbJsonLd({ items }) {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: item.name,
-      item: item.url,
-    })),
   }
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }

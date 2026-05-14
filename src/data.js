@@ -13,7 +13,7 @@ export const waLink = (service = '') =>
 /** Pre-filled WhatsApp URL for bookings with one or many service names */
 export function waLinkBooking(names = [], extra = {}) {
   const trimmed = [...names].map(n => String(n).trim()).filter(Boolean)
-  const { date = '', time = '', name = '' } = extra
+  const { date = '', time = '', name = '', phone = '' } = extra
   const header = [`Hi! I'd like to book an appointment at Farwa Beauty Salon.`]
   const svcBlock =
     trimmed.length === 0
@@ -23,6 +23,7 @@ export function waLinkBooking(names = [], extra = {}) {
         : [``, `Services:`, ...trimmed.map(s => `• ${s}`)]
   const meta = []
   if (name) meta.push(`Name: ${name}`)
+  if (phone) meta.push(`Phone: ${phone}`)
   if (date) meta.push(`Preferred date: ${date}`)
   if (time) meta.push(`Preferred time: ${time}`)
   const body = [...header, ...svcBlock, ...(meta.length ? [``, ...meta] : [])].join('\n')

@@ -20,11 +20,13 @@ function FaqItem({ faq, index }) {
         onClick={() => setOpen(o => !o)}
         className="w-full flex items-center justify-between gap-4 py-5 text-left"
         aria-expanded={open}
+        aria-controls={`faq-panel-${index}`}
+        aria-label={faq.q}
       >
         <span className="font-['Syne'] font-bold text-sm text-ink leading-snug">{faq.q}</span>
         <ChevronDown className={`w-4 h-4 text-stone shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
-      <div className={`overflow-hidden transition-all duration-200 ${open ? 'max-h-96 pb-5 -mt-1' : 'max-h-0'}`}>
+      <div id={`faq-panel-${index}`} role="region" className={`overflow-hidden transition-all duration-200 ${open ? 'max-h-96 pb-5 -mt-1' : 'max-h-0'}`}>
         <p className="text-stone text-sm font-light leading-relaxed font-['Inter']">{faq.a}</p>
       </div>
     </motion.div>
@@ -44,7 +46,7 @@ export default function FaqClient() {
           <div className="overflow-hidden">
             <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
-              FREQUENTLY<br />ASKED
+              FREQUENTLY <br />ASKED
             </motion.h1>
           </div>
         </div>

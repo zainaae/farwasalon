@@ -39,12 +39,22 @@ export async function GET(request) {
     return NextResponse.json({ error: 'Date must be today or within the next 14 days' }, { status: 400 })
   }
 
-  if (!isConfigured()) {
-    const slots = FILTERED_SLOTS.map(time => ({ time, available: true }))
-    return NextResponse.json({ slots })
+  let bookings = []
+  let usingMock = true
+
+  if (isConfigured()) {
+    try {
+      bookings = await getSheetRows(date)
+      usingMock = false
+    } catch {
+      console.warn('[slots] Google Sheets fetch failed, falling back to mock data')
+    }
   }
 
-  const bookings = await getSheetRows(date)
+  if (usingMock) {
+    const slots = FILTERED_SLOTS.map(time => ({ time, available: true }))
+    return NextResponse.json({ slots, mock: true })
+  }
 
   const occupied = new Array(FILTERED_SLOTS.length).fill(0)
 

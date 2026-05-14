@@ -8,6 +8,7 @@ import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track } from '
 
 export default function ContactClient() {
   const [name,    setName]    = useState('')
+  const [phone,   setPhone]   = useState('')
   const [picked,  setPicked]  = useState([])
   const [addNonce, setAddNonce] = useState(0)
   const [date,    setDate]    = useState('')
@@ -33,7 +34,7 @@ export default function ContactClient() {
     e.preventDefault()
     if (picked.length === 0) return
     track('WhatsAppIntent', { source: 'ContactPage', services: picked.join(', ') })
-    const url = waLinkBooking(picked, { name, date, time })
+    const url = waLinkBooking(picked, { name, phone, date, time })
     const w = window.open(url, '_blank', 'noopener,noreferrer')
     if (w) {
       setSubmitted(true)
@@ -52,7 +53,7 @@ export default function ContactClient() {
           <div className="overflow-hidden">
             <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
-              BOOK YOUR<br />APPOINTMENT
+              BOOK YOUR <br />APPOINTMENT
             </motion.h1>
           </div>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}
@@ -148,6 +149,11 @@ export default function ContactClient() {
                 value={name} onChange={e => setName(e.target.value)} required
                 className="border border-[#e4ddd7] text-ink placeholder-stone text-sm font-['Inter'] px-5 py-3.5 focus:outline-none focus:border-ink transition-colors w-full bg-white" />
 
+              <label htmlFor="booking-phone" className="sr-only">Phone number</label>
+              <input id="booking-phone" name="phone" type="tel" placeholder="03xx-xxxxxxx" autoComplete="tel"
+                value={phone} onChange={e => setPhone(e.target.value)} required
+                className="border border-[#e4ddd7] text-ink placeholder-stone text-sm font-['Inter'] px-5 py-3.5 focus:outline-none focus:border-ink transition-colors w-full bg-white" />
+
               <fieldset className="border border-[#e4ddd7] bg-white px-5 py-4">
                 <legend className="text-[11px] font-['Inter'] text-stone px-1">Services (add one or more)</legend>
                 {picked.length === 0 ? (
@@ -203,7 +209,7 @@ export default function ContactClient() {
                 <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone pointer-events-none" aria-hidden="true" />
               </div>
 
-              <button type="submit" disabled={picked.length === 0}
+              <button type="submit" disabled={picked.length === 0} aria-label="Send booking request on WhatsApp"
                 className="mt-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-300 w-full flex items-center justify-center gap-2">
                 Send on WhatsApp <ArrowUpRight className="w-4 h-4" />
               </button>

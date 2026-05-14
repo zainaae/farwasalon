@@ -6,20 +6,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import { useBooking } from '../../src/shared.jsx'
 import { BLOG_POSTS } from '../../src/blog-data.js'
-
-function BreadcrumbJsonLd({ items }) {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: item.name,
-      item: item.url,
-    })),
-  }
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-}
+import { BreadcrumbJsonLd } from '../json-ld.jsx'
 
 export default function BlogIndexClient() {
   const booking = useBooking()

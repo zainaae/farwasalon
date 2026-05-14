@@ -988,7 +988,6 @@ export function Footer() {
     { label: 'Massage',         slug: CAT_SLUGS['Massage'] },
   ]
   const booking = useBooking()
-  const slot = useNextSlot()
   return (
     <footer className="bg-white">
       {/* Top bar — logo + Urdu signature + CTA */}
@@ -1008,9 +1007,9 @@ export function Footer() {
               className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3 hover:bg-stone transition-colors duration-300">
               Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
-            <p className="text-stone text-[10px] font-['Inter'] tracking-wide">
-              Next slot <span className="text-ink font-medium">{slot.label}</span>
-            </p>
+            <Link href="/book" className="text-stone text-[10px] font-['Inter'] tracking-wide hover:text-ink transition-colors">
+              Next slot — <span className="text-ink font-medium">Book Online</span>
+            </Link>
           </div>
         </div>
       </div>

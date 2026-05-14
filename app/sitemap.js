@@ -20,6 +20,7 @@ export default function sitemap() {
     { url: `${BASE}/contact`, lastModified: SITE_LAUNCH, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/team`, lastModified: SITE_LAUNCH, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${BASE}/faq`, lastModified: LAST_CONTENT_UPDATE, changeFrequency: 'monthly', priority: 0.6 },
+    { url: `${BASE}/book`, lastModified: SITE_LAUNCH, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${BASE}/blog`, lastModified: latestBlogDate, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${BASE}/privacy`, lastModified: '2026-05-14', changeFrequency: 'yearly', priority: 0.3 },
   ]

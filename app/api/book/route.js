@@ -2,6 +2,30 @@ import { NextResponse } from 'next/server'
 import { getSheetRows, appendBooking, generateBookingId, isConfigured } from '../../../lib/google-sheets.js'
 import { ALL_SERVICES } from '../../../src/data.js'
 
+const PHONE_RE = /^(\+?92|0)?3\d{2}[\s-]?\d{7}$/
+
+const RATE_LIMIT_WINDOW = 10 * 60 * 1000
+const RATE_LIMIT_MAX = 5
+const rateLimitMap = new Map()
+
+function isRateLimited(ip) {
+  const now = Date.now()
+  const entry = rateLimitMap.get(ip)
+  if (!entry) {
+    rateLimitMap.set(ip, [now])
+    return false
+  }
+  const recent = entry.filter(ts => now - ts < RATE_LIMIT_WINDOW)
+  recent.push(now)
+  rateLimitMap.set(ip, recent)
+  return recent.length > RATE_LIMIT_MAX
+}
+
+function sanitizeForSheets(str) {
+  if (typeof str !== 'string') return str
+  return str.replace(/^[=+\-@\t\r]+/, '')
+}
+
 const SLOT_TIMES = []
 for (let h = 11; h <= 18; h++) {
   SLOT_TIMES.push(`${String(h).padStart(2, '0')}:00`)
@@ -22,6 +46,11 @@ function slotIndex(time) {
 }
 
 export async function POST(request) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  if (isRateLimited(ip)) {
+    return NextResponse.json({ error: 'Too many requests. Please try again later.' }, { status: 429 })
+  }
+
   let body
   try {
     body = await request.json()
@@ -35,6 +64,10 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Missing required fields: serviceId, date, time, clientName, clientPhone' }, { status: 400 })
   }
 
+  if (!PHONE_RE.test(clientPhone.replace(/\s/g, ''))) {
+    return NextResponse.json({ error: 'Invalid phone number format' }, { status: 400 })
+  }
+
   const service = ALL_SERVICES.find(s => s.id === parseInt(serviceId, 10))
   if (!service) {
     return NextResponse.json({ error: 'Service not found' }, { status: 404 })
@@ -43,10 +76,23 @@ export async function POST(request) {
   const duration = service.durationMinutes || 30
   const endTime = addMinutes(time, duration)
 
-  if (!isConfigured()) {
+  let bookings = []
+  let sheetsAvailable = false
+
+  if (isConfigured()) {
+    try {
+      bookings = await getSheetRows(date)
+      sheetsAvailable = true
+    } catch {
+      console.warn('[book] Google Sheets fetch failed, using mock mode')
+    }
+  }
+
+  if (!sheetsAvailable) {
     const mockId = generateBookingId(date, 0)
     return NextResponse.json({
       success: true,
+      mock: true,
       booking: {
         id: mockId,
         date,
@@ -58,8 +104,6 @@ export async function POST(request) {
       },
     })
   }
-
-  const bookings = await getSheetRows(date)
 
   const occupied = new Array(FILTERED.length).fill(0)
   for (const bk of bookings) {
@@ -92,14 +136,14 @@ export async function POST(request) {
     date,
     timeSlot: time,
     endTime,
-    clientName,
-    clientPhone,
+    clientName: sanitizeForSheets(clientName),
+    clientPhone: sanitizeForSheets(clientPhone),
     service: service.name,
     category: service.category,
     duration,
     status: 'Confirmed',
     bookedAt: new Date().toISOString(),
-    notes: notes || '',
+    notes: sanitizeForSheets(notes || ''),
   })
 
   return NextResponse.json({

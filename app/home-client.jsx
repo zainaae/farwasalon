@@ -90,9 +90,9 @@ function Hero() {
   }, [])
 
   const thesis = [
-    { text: 'Bridal. Hair. Skin.',              em: true  },
-    { text: 'Rubina\u2019s studio',             em: false },
-    { text: 'in PECHS Block 2,',                em: false },
+    { text: 'Bridal. Hair. Skin. ',             em: true  },
+    { text: 'Rubina\u2019s studio ',            em: false },
+    { text: 'in PECHS Block 2, ',               em: false },
     { text: 'since 2008.',                      em: true  },
   ]
 

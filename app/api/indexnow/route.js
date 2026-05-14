@@ -4,6 +4,16 @@ const INDEXNOW_KEY = 'farwasalon2024indexnow'
 const HOST = 'https://farwasalon.com'
 
 export async function POST(request) {
+  const secret = process.env.INDEXNOW_SECRET
+  if (!secret) {
+    return NextResponse.json({ error: 'Endpoint disabled' }, { status: 503 })
+  }
+
+  const authHeader = request.headers.get('authorization')
+  if (authHeader !== `Bearer ${secret}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
   try {
     const { urls } = await request.json()
     if (!Array.isArray(urls) || urls.length === 0) {

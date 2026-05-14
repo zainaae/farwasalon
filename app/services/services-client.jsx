@@ -1,10 +1,10 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
-import { LazyVideo, CAT_SLUGS } from '../../src/shared.jsx'
+import { CAT_SLUGS } from '../../src/shared.jsx'
 import { SERVICES, CAT_META, track, formatPrice } from '../../src/data.js'
 
 function getCatMeta(cat) {
@@ -12,7 +12,6 @@ function getCatMeta(cat) {
 }
 
 export default function ServicesClient() {
-  const router = useRouter()
   const categories = Object.keys(SERVICES)
 
   return (
@@ -38,10 +37,14 @@ export default function ServicesClient() {
             const count = services.length
             const prices = services.map(s => s.pricePkr).filter(Boolean)
             const minPrice = prices.length ? Math.min(...prices) : null
+            const href = `/services/${CAT_SLUGS[cat]}`
             return (
-              <motion.button type="button" key={cat} onClick={() => { track('ServiceCategoryView', { category: cat }); router.push(`/services/${CAT_SLUGS[cat]}`) }}
+              <motion.article key={cat}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.05 }}
                 className="relative overflow-hidden group text-left" style={{ aspectRatio: '3/4' }}>
+                <Link href={href} onClick={() => track('ServiceCategoryView', { category: cat })} className="absolute inset-0 z-10" aria-label={`${cat} — ${count} services${minPrice ? `, from ${formatPrice(minPrice)}` : ''}`}>
+                  <span className="sr-only">View {cat} services</span>
+                </Link>
                 <Image src={meta.img} alt={cat} loading="lazy" width={900} height={1200}
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105${meta.video ? ' group-hover:opacity-0' : ''}`} />
                 {meta.video && (
@@ -57,14 +60,14 @@ export default function ServicesClient() {
                   )}
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-white font-['Syne'] font-bold text-xs sm:text-sm uppercase leading-tight mb-1 line-clamp-2">{cat}</p>
+                  <h2 className="text-white font-['Syne'] font-bold text-xs sm:text-sm uppercase leading-tight mb-1 line-clamp-2">{cat}</h2>
                   <p className="text-white/50 text-[10px] font-['Inter'] leading-snug hidden md:block line-clamp-2">{meta.desc}</p>
                   <div className="flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                     <span className="text-white text-[10px] tracking-widest uppercase font-['Inter']">View services</span>
                     <ChevronRight className="w-3 h-3 text-white" />
                   </div>
                 </div>
-              </motion.button>
+              </motion.article>
             )
           })}
         </div>

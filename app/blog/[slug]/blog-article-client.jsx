@@ -4,8 +4,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
-import { WA_DEFAULT } from '../../../src/data.js'
+import { WA_DEFAULT, YEARS_ACTIVE } from '../../../src/data.js'
 import { BLOG_POSTS } from '../../../src/blog-data.js'
+import { BreadcrumbJsonLd } from '../../json-ld.jsx'
 
 function ArticleJsonLd({ post }) {
   const schema = {
@@ -31,25 +32,6 @@ function ArticleJsonLd({ post }) {
       '@type': 'WebPage',
       '@id': `https://farwasalon.com/blog/${post.slug}`,
     },
-  }
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  )
-}
-
-function BreadcrumbJsonLd({ items }) {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: item.name,
-      item: item.url,
-    })),
   }
   return (
     <script
@@ -176,7 +158,7 @@ export default function BlogArticleClient({ slug }) {
                 <p className="font-['Syne'] font-bold text-sm text-ink">{post.author || 'Rubina'}</p>
                 <p className="text-stone text-xs font-['Inter'] mt-0.5">Founder, Farwa Beauty Salon</p>
                 <p className="text-stone text-[13px] font-light font-['Inter'] mt-2 leading-relaxed">
-                  Rubina founded Farwa Beauty Salon in 2008 and has spent 18+ years perfecting bridal artistry, skincare, and brow techniques in Karachi. She writes to help women make confident beauty decisions.
+                  {`Rubina founded Farwa Beauty Salon in 2008 and has spent ${YEARS_ACTIVE}+ years perfecting bridal artistry, skincare, and brow techniques in Karachi. She writes to help women make confident beauty decisions.`}
                 </p>
               </div>
             </div>
