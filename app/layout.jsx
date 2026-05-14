@@ -43,7 +43,7 @@ const localBusinessSchema = {
   priceRange: '$$',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'PECHS Block 2',
+    streetAddress: 'PECHS Block 3',
     addressLocality: 'Karachi',
     addressRegion: 'Sindh',
     postalCode: '75400',
@@ -219,7 +219,7 @@ export const metadata = {
     template: '%s — Farwa Beauty Salon',
   },
   description:
-    "Farwa Beauty Salon in PECHS Block 2, Karachi — 100+ treatments from Rs 100. Bridal makeup, facials, threading, waxing, nails & microblading since 2008. Book on WhatsApp.",
+    "Farwa Beauty Salon in PECHS Block 3, Karachi — 100+ treatments from Rs 100. Bridal makeup, facials, threading, waxing, nails & microblading since 2008. Book on WhatsApp.",
   metadataBase: new URL('https://farwasalon.com'),
   openGraph: {
     type: 'website',
@@ -242,10 +242,12 @@ export const metadata = {
   robots: { index: true, follow: true },
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
       { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon-512.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: '/logo.jpg',
+    apple: '/apple-touch-icon.png',
   },
   alternates: {
     canonical: '/',
