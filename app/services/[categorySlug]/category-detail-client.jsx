@@ -10,7 +10,7 @@ import { SERVICES, CAT_META, CAT_FAQS, slugToCategory } from '../../../src/data.
 import { BreadcrumbJsonLd } from '../../json-ld.jsx'
 
 function getCatMeta(cat) {
-  return CAT_META[cat] || { img: '/glow2.jpg', desc: 'Expert beauty services tailored just for you.' }
+  return CAT_META[cat] || { img: '/bleachpolish.jpg', desc: 'Expert beauty services tailored just for you.' }
 }
 
 function FaqJsonLd({ faqs }) {

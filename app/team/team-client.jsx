@@ -13,24 +13,6 @@ const TEAM = [
     bio: `With ${YEARS_ACTIVE}+ years of expertise, Rubina founded Farwa Beauty Salon in 2008 from a single chair. Her mastery spans bridal styling, advanced skincare, and precision brow work. Every treatment at Farwa reflects her personal standard of care.`,
     specialties: ['Bridal', 'Facials', 'Eyebrow Shaping'],
   },
-  {
-    name: 'Sana',
-    role: 'Senior Beautician',
-    bio: 'Specialising in waxing, threading, and skin treatments, Sana brings warmth and meticulous attention to every appointment. Clients trust her gentle technique and consistent results.',
-    specialties: ['Threading', 'Waxing', 'Bleach & Polish'],
-  },
-  {
-    name: 'Ayesha',
-    role: 'Hair Stylist',
-    bio: 'From precision cuts to bold colour transformations, Ayesha brings creative flair and technical skill to every hair service. She stays current with the latest styling techniques.',
-    specialties: ['Hair Colour', 'Blowdry', 'Hair Treatments'],
-  },
-  {
-    name: 'Fatima',
-    role: 'Nail Artist',
-    bio: 'Fatima creates everything from classic French tips to intricate bridal nail art. Her steady hand and eye for design make every set a small work of art.',
-    specialties: ['Nail Art', 'Gel Extensions', 'Manicure & Pedicure'],
-  },
 ]
 
 export default function TeamClient() {

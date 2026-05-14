@@ -62,12 +62,12 @@ const EDITORIAL_PHOTOS = [
   { src: '/threading.jpg',             label: 'Threading' },
   { src: '/hairdo.jpg',                label: 'Hair' },
   { src: '/oilwax.jpg',                label: 'Oil Wax' },
-  { src: '/cleansing.mp4',             label: 'Cleansing',        video: true, poster: '/cleansing.jpg' },
+  { src: '/cleansing.mp4',             label: 'Cleansing',        video: true, poster: '/facialcleansing.jpg' },
   { src: '/massage.jpg',               label: 'Massage' },
   { src: '/nailpaintedhands.mp4',      label: 'Nail Finish',      video: true, poster: '/pedicure.jpg' },
   { src: '/wax2.jpg',                  label: 'Cold Wax' },
   { src: '/hairtreatment.jpg',         label: 'Hair Treatments' },
-  { src: '/glow2.jpg',                 label: 'Bleach & Polish' },
+  { src: '/bleachpolish.jpg',                 label: 'Bleach & Polish' },
 ]
 
 function Hero() {
@@ -104,7 +104,7 @@ function Hero() {
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover md:scale-105 md:blur-[2px]"
         style={{ objectPosition: '50% 35%' }}
-        poster="/glow2.jpg"
+        poster="/bleachpolish.jpg"
         preload="metadata"
       >
         <source src="/hero2.mp4" type="video/mp4" />
@@ -344,7 +344,7 @@ function FeaturedServices() {
               style={{ opacity: (activeImg || activeVideo) ? 0 : 1 }} />
             {categories.map(cat => (
               <Image key={cat}
-                src={CAT_META[cat]?.img || '/glow2.jpg'}
+                src={CAT_META[cat]?.img || '/bleachpolish.jpg'}
                 alt={cat}
                 width={900}
                 height={1200}

@@ -180,7 +180,7 @@ export default function BookClient() {
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
                 {CATEGORIES.map((cat) => {
-                  const meta = CAT_META[cat] || { img: '/glow2.jpg' }
+                  const meta = CAT_META[cat] || { img: '/bleachpolish.jpg' }
                   const services = SERVICES[cat]
                   const isExpanded = expandedCat === cat
 
