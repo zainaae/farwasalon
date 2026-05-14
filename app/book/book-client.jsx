@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
-import { SERVICES, CAT_META, CAT_SLUGS, formatPrice, formatDuration } from '../../src/data.js'
+import { SERVICES, CAT_SLUGS, formatPrice, formatDuration } from '../../src/data.js'
 
 const CATEGORIES = Object.keys(SERVICES)
 
@@ -93,7 +93,7 @@ export default function BookClient() {
 
   useEffect(() => {
     if (step !== 1 || !selectedDate || !selectedService) return
-    setLoadingSlots(true)
+    setLoadingSlots(true) // eslint-disable-line react-hooks/set-state-in-effect -- set loading before async fetch
     setSelectedTime('')
     fetch(`/api/slots?date=${selectedDate}&serviceId=${selectedService.id}`)
       .then(r => r.json())
@@ -223,7 +223,6 @@ export default function BookClient() {
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
                 {CATEGORIES.map((cat) => {
-                  const meta = CAT_META[cat] || { img: '/bleachpolish.jpg' }
                   const services = SERVICES[cat]
                   const isExpanded = expandedCat === cat
 

@@ -11,11 +11,6 @@ const FILTERED_SLOTS = BASE_SLOTS.filter(s => s <= '18:30')
 
 const MAX_WORKERS = 2
 
-function timeToMinutes(t) {
-  const [h, m] = t.split(':').map(Number)
-  return h * 60 + m
-}
-
 function slotIndex(time) {
   return FILTERED_SLOTS.indexOf(time)
 }

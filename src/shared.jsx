@@ -9,9 +9,8 @@ import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVI
 
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
 export function useNextSlot() {
-  const [slot, setSlot] = useState({ label: 'Book Today', open: false })
+  const [slot, setSlot] = useState(() => computeNextSlot())
   useEffect(() => {
-    setSlot(computeNextSlot())
     const id = setInterval(() => setSlot(computeNextSlot()), 60_000)
     return () => clearInterval(id)
   }, [])
