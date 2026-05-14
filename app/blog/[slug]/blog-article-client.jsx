@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { WA_DEFAULT } from '../../../src/data.js'
@@ -12,6 +13,7 @@ function ArticleJsonLd({ post }) {
     '@type': 'Article',
     headline: post.title,
     description: post.description,
+    image: post.featuredImage ? `https://farwasalon.com${post.featuredImage}` : undefined,
     datePublished: post.date,
     dateModified: post.date,
     author: { '@type': 'Organization', name: 'Farwa Beauty Salon' },
@@ -124,6 +126,13 @@ export default function BlogArticleClient({ slug }) {
               Published {formatted} · Farwa Beauty Salon
             </p>
           </motion.header>
+
+          {post.featuredImage && (
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}
+              className="relative overflow-hidden mb-10 aspect-[16/9]">
+              <Image src={post.featuredImage} alt={post.title} fill className="object-cover" priority />
+            </motion.div>
+          )}
 
           <motion.div
             initial={{ opacity: 0 }}

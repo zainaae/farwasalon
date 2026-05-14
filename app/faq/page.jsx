@@ -1,4 +1,5 @@
 import FaqClient from './faq-client'
+import { FAQS } from '../../src/faq-data.js'
 
 export const metadata = {
   title: 'FAQ',
@@ -8,5 +9,19 @@ export const metadata = {
 }
 
 export default function FaqPage() {
-  return <FaqClient />
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQS.map(f => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  }
+  return (
+    <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <FaqClient />
+    </>
+  )
 }

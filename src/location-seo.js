@@ -37,12 +37,17 @@ export function parseLocationSlug(slug) {
     if (svc && loc) return { service: svc, location: loc, prefix: 'near' }
   }
 
-  const bestMatch = slug.match(/^best-(.+)-(.+)$/)
+  const bestMatch = slug.match(/^best-(.+)$/)
   if (bestMatch) {
-    const [, svcPart, locPart] = bestMatch
-    const svc = TOP_SERVICES.find(s => s.slug === svcPart)
-    const loc = NEIGHBORHOODS.find(n => n.slug === locPart)
-    if (svc && loc) return { service: svc, location: loc, prefix: 'best' }
+    const rest = bestMatch[1]
+    const byLength = [...TOP_SERVICES].sort((a, b) => b.slug.length - a.slug.length)
+    for (const svc of byLength) {
+      if (rest.startsWith(svc.slug + '-')) {
+        const locPart = rest.slice(svc.slug.length + 1)
+        const loc = NEIGHBORHOODS.find(n => n.slug === locPart)
+        if (loc) return { service: svc, location: loc, prefix: 'best' }
+      }
+    }
   }
 
   return null

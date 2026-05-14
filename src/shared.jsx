@@ -9,8 +9,9 @@ import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVI
 
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
 export function useNextSlot() {
-  const [slot, setSlot] = useState(() => computeNextSlot())
+  const [slot, setSlot] = useState({ label: 'Book Today', open: false })
   useEffect(() => {
+    setSlot(computeNextSlot())
     const id = setInterval(() => setSlot(computeNextSlot()), 60_000)
     return () => clearInterval(id)
   }, [])
@@ -125,7 +126,7 @@ export function IgIcon({ className = '' }) {
 /* ─── Animated counter ─────────────────────────────────────────── */
 export function AnimatedNumber({ display, final }) {
   const ref   = useRef(null)
-  const [shown, setShown] = useState('0')
+  const [shown, setShown] = useState(display)
   const fired = useRef(false)
   useEffect(() => {
     const el = ref.current

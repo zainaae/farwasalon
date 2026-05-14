@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, MapPin, Clock, Phone } from 'lucide-react'
-import { WA_DEFAULT, waLink, SERVICES, CAT_SLUGS, formatPrice } from '../../../src/data.js'
+import { WA_DEFAULT, waLink, SERVICES, CAT_SLUGS, formatPrice, YEARS_ACTIVE } from '../../../src/data.js'
 import { NEIGHBORHOODS, TOP_SERVICES } from '../../../src/location-seo.js'
 
 export default function LocationServicePage({ data }) {
@@ -74,7 +74,7 @@ export default function LocationServicePage({ data }) {
           className="mb-12 bg-mist p-6 md:p-8">
           <h2 className="font-['Syne'] font-bold text-lg text-ink mb-3">Why Choose Farwa Beauty Salon?</h2>
           <ul className="space-y-2 text-stone text-sm font-light font-['Inter']">
-            <li>✓ Trusted since 2008 — 17+ years of experience</li>
+            <li>✓ Trusted since 2008 — {YEARS_ACTIVE}+ years of experience</li>
             <li>✓ Expert {service.name.toLowerCase()} professionals</li>
             <li>✓ Hygienic, comfortable environment in PECHS Block 2</li>
             <li>✓ Convenient WhatsApp booking — no calls needed</li>

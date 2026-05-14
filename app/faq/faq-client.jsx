@@ -1,45 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronDown } from 'lucide-react'
 import { useBooking } from '../../src/shared.jsx'
-
-const FAQS = [
-  {
-    q: 'Is parking available near the salon?',
-    a: 'Yes — PECHS Block 2 has street parking available nearby. Most clients find spots within a short walk of the salon.',
-  },
-  {
-    q: 'Do you accept walk-ins?',
-    a: 'We welcome walk-ins when slots are available, but we strongly recommend booking in advance via WhatsApp to guarantee your preferred time.',
-  },
-  {
-    q: 'What payment methods do you accept?',
-    a: 'We accept cash, JazzCash, and EasyPaisa. Card payments are not currently available.',
-  },
-  {
-    q: 'What is your cancellation policy?',
-    a: 'Please let us know at least 4 hours in advance if you need to cancel or reschedule. Late cancellations may affect future booking priority.',
-  },
-  {
-    q: 'Do you offer bridal trials?',
-    a: 'Absolutely. We recommend a bridal trial 2–4 weeks before your wedding day. This includes a full hair and makeup preview so you can finalize your look with confidence.',
-  },
-  {
-    q: 'I have sensitive skin — can I still get treatments?',
-    a: 'Yes. Please let us know about any allergies or sensitivities when booking. We use gentle, tested products and can do a patch test before proceeding with treatments like facials, waxing, or bleach.',
-  },
-  {
-    q: 'What are your opening hours?',
-    a: 'We are open Monday through Saturday, 11:00 AM to 7:00 PM. We are closed on Sundays.',
-  },
-  {
-    q: 'How do I book an appointment?',
-    a: 'The easiest way is via WhatsApp — use the "Book an Appointment" button on any page, or message us directly at +92 322 2782254.',
-  },
-]
+import { FAQS } from '../../src/faq-data.js'
 
 function FaqItem({ faq, index }) {
   const [open, setOpen] = useState(false)
@@ -58,34 +24,15 @@ function FaqItem({ faq, index }) {
         <span className="font-['Syne'] font-bold text-sm text-ink leading-snug">{faq.q}</span>
         <ChevronDown className={`w-4 h-4 text-stone shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
-      {open && (
-        <div className="pb-5 -mt-1">
-          <p className="text-stone text-sm font-light leading-relaxed font-['Inter']">{faq.a}</p>
-        </div>
-      )}
+      <div className={`overflow-hidden transition-all duration-200 ${open ? 'max-h-96 pb-5 -mt-1' : 'max-h-0'}`}>
+        <p className="text-stone text-sm font-light leading-relaxed font-['Inter']">{faq.a}</p>
+      </div>
     </motion.div>
   )
 }
 
 export default function FaqClient() {
   const booking = useBooking()
-
-  useEffect(() => {
-    const ld = {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: FAQS.map(f => ({
-        '@type': 'Question',
-        name: f.q,
-        acceptedAnswer: { '@type': 'Answer', text: f.a },
-      })),
-    }
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.textContent = JSON.stringify(ld)
-    document.head.appendChild(script)
-    return () => { document.head.removeChild(script) }
-  }, [])
 
   return (
     <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">

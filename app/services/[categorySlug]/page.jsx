@@ -21,10 +21,13 @@ export async function generateMetadata({ params }) {
     const title = prefix === 'best'
       ? `Best ${service.name} in ${location.name}`
       : `${service.name} ${prefix === 'near' ? 'Near' : 'in'} ${location.name}`
+    const canonicalSlug = prefix === 'best'
+      ? `${service.slug}-in-${location.slug}`
+      : categorySlug
     return {
       title,
       description: `${service.description} Serving clients from ${location.name}. Book at Farwa Beauty Salon, PECHS Block 2, Karachi — WhatsApp +92 322 278 2254.`,
-      alternates: { canonical: `/services/${categorySlug}` },
+      alternates: { canonical: `/services/${canonicalSlug}` },
       openGraph: { type: 'website', images: ['/logo.jpg'] },
     }
   }

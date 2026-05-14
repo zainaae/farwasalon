@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import { useBooking } from '../../src/shared.jsx'
@@ -61,7 +62,13 @@ export default function BlogIndexClient() {
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className="group border border-[#e4ddd7] hover:border-ink transition-colors duration-300"
             >
-              <Link href={`/blog/${post.slug}`} className="block p-6 md:p-8">
+              <Link href={`/blog/${post.slug}`} className="block">
+                {post.featuredImage && (
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <Image src={post.featuredImage} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  </div>
+                )}
+                <div className="p-6 md:p-8">
                 <div className="flex items-center gap-3 mb-4">
                   <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
                     {post.category}
@@ -77,6 +84,7 @@ export default function BlogIndexClient() {
                 <span className="inline-flex items-center gap-1 text-[10px] tracking-[0.16em] uppercase font-medium font-['Inter'] text-ink group-hover:gap-2 transition-all">
                   Read article <ChevronRight className="w-3 h-3" />
                 </span>
+                </div>
               </Link>
             </motion.article>
           ))}
