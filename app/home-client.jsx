@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { m, useScroll, useTransform } from 'framer-motion'
@@ -17,6 +17,8 @@ function Hero() {
   const textY    = useTransform(scrollY, [0, 500], [0, -40])
   const overlayO = useTransform(scrollY, [0, 400], [0.58, 0.82])
   const videoRef = useRef(null)
+  const mobileVideoRef = useRef(null)
+  const [mobileVideoReady, setMobileVideoReady] = useState(false)
   const booking  = useBooking()
   const slot     = useNextSlot()
 
@@ -29,6 +31,18 @@ function Hero() {
     } else {
       v.playbackRate = 0.35
     }
+  }, [])
+
+  useEffect(() => {
+    if (window.innerWidth >= 768) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const v = mobileVideoRef.current
+    if (!v) return
+    const onReady = () => setMobileVideoReady(true)
+    v.addEventListener('canplay', onReady)
+    v.src = '/hero2.mp4'
+    v.load()
+    return () => v.removeEventListener('canplay', onReady)
   }, [])
 
   const thesis = [
@@ -53,7 +67,7 @@ function Hero() {
         <source src="/hero-mp4.mp4" type="video/mp4" />
       </video>
 
-      {/* Mobile: static poster with Ken Burns, no video download */}
+      {/* Mobile: poster for fast LCP, then lazy-fade video */}
       <div
         aria-hidden="true"
         className="absolute inset-0 w-full h-full md:hidden scale-[1.01]"
@@ -61,7 +75,18 @@ function Hero() {
           backgroundImage: 'url(/bridal.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: '50% 35%',
-          animation: 'kenburns 20s ease-in-out infinite alternate',
+        }}
+      />
+      <video
+        ref={mobileVideoRef}
+        muted loop playsInline
+        aria-hidden="true"
+        preload="none"
+        className="absolute inset-0 w-full h-full object-cover md:hidden scale-[1.01]"
+        style={{
+          objectPosition: '50% 35%',
+          opacity: mobileVideoReady ? 1 : 0,
+          transition: 'opacity 0.7s ease',
         }}
       />
 
