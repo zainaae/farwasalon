@@ -76,33 +76,23 @@ export async function POST(request) {
   const duration = service.durationMinutes || 30
   const endTime = addMinutes(time, duration)
 
-  let bookings = []
-  let sheetsAvailable = false
-
-  if (isConfigured()) {
-    try {
-      bookings = await getSheetRows(date)
-      sheetsAvailable = true
-    } catch {
-      console.warn('[book] Google Sheets fetch failed, using mock mode')
-    }
+  if (!isConfigured()) {
+    console.error('[book] Google Sheets credentials not configured')
+    return NextResponse.json(
+      { error: 'Booking system is not configured. Please contact the salon directly.' },
+      { status: 503 }
+    )
   }
 
-  if (!sheetsAvailable) {
-    const mockId = generateBookingId(date, 0)
-    return NextResponse.json({
-      success: true,
-      mock: true,
-      booking: {
-        id: mockId,
-        date,
-        time,
-        endTime,
-        service: service.name,
-        clientName,
-        clientPhone,
-      },
-    })
+  let bookings = []
+  try {
+    bookings = await getSheetRows(date)
+  } catch (err) {
+    console.error('[book] Google Sheets fetch failed:', err?.message || err)
+    return NextResponse.json(
+      { error: 'Unable to check availability. Please try again or contact the salon.' },
+      { status: 502 }
+    )
   }
 
   const occupied = new Array(FILTERED.length).fill(0)
@@ -131,20 +121,28 @@ export async function POST(request) {
 
   const bookingId = generateBookingId(date, bookings.length)
 
-  await appendBooking({
-    bookingId,
-    date,
-    timeSlot: time,
-    endTime,
-    clientName: sanitizeForSheets(clientName),
-    clientPhone: sanitizeForSheets(clientPhone),
-    service: service.name,
-    category: service.category,
-    duration,
-    status: 'Confirmed',
-    bookedAt: new Date().toISOString(),
-    notes: sanitizeForSheets(notes || ''),
-  })
+  try {
+    await appendBooking({
+      bookingId,
+      date,
+      timeSlot: time,
+      endTime,
+      clientName: sanitizeForSheets(clientName),
+      clientPhone: sanitizeForSheets(clientPhone),
+      service: service.name,
+      category: service.category,
+      duration,
+      status: 'Confirmed',
+      bookedAt: new Date().toISOString(),
+      notes: sanitizeForSheets(notes || ''),
+    })
+  } catch (err) {
+    console.error('[book] Failed to write booking to Google Sheets:', err?.message || err)
+    return NextResponse.json(
+      { error: 'Failed to save your booking. Please try again or contact the salon.' },
+      { status: 502 }
+    )
+  }
 
   return NextResponse.json({
     success: true,

@@ -34,21 +34,23 @@ export async function GET(request) {
     return NextResponse.json({ error: 'Date must be today or within the next 14 days' }, { status: 400 })
   }
 
-  let bookings = []
-  let usingMock = true
-
-  if (isConfigured()) {
-    try {
-      bookings = await getSheetRows(date)
-      usingMock = false
-    } catch {
-      console.warn('[slots] Google Sheets fetch failed, falling back to mock data')
-    }
+  if (!isConfigured()) {
+    console.error('[slots] Google Sheets credentials not configured')
+    return NextResponse.json(
+      { error: 'Booking system is not configured.' },
+      { status: 503 }
+    )
   }
 
-  if (usingMock) {
-    const slots = FILTERED_SLOTS.map(time => ({ time, available: true }))
-    return NextResponse.json({ slots, mock: true })
+  let bookings = []
+  try {
+    bookings = await getSheetRows(date)
+  } catch (err) {
+    console.error('[slots] Google Sheets fetch failed:', err?.message || err)
+    return NextResponse.json(
+      { error: 'Unable to load availability. Please try again.' },
+      { status: 502 }
+    )
   }
 
   const occupied = new Array(FILTERED_SLOTS.length).fill(0)
