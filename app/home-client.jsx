@@ -34,7 +34,7 @@ function Hero() {
     const update = () => {
       const y = window.scrollY
       if (textRef.current) textRef.current.style.transform = `translateY(${(y / 500) * -40}px)`
-      if (overlayRef.current) overlayRef.current.style.opacity = String(0.58 + (Math.min(y, 400) / 400) * 0.24)
+      if (overlayRef.current) overlayRef.current.style.opacity = String(0.62 + (Math.min(y, 400) / 400) * 0.22)
     }
     const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update) }
     update()
@@ -77,8 +77,8 @@ function Hero() {
 
       <div ref={overlayRef} className="absolute inset-0 z-[1]"
         style={{
-          opacity: 0.58,
-          background: 'linear-gradient(to top, rgba(13,6,9,0.95) 0%, rgba(13,6,9,0.6) 38%, rgba(13,6,9,0.3) 68%, rgba(13,6,9,0.55) 100%)',
+          opacity: 0.62,
+          background: 'linear-gradient(to top, rgba(13,6,9,0.97) 0%, rgba(13,6,9,0.72) 35%, rgba(13,6,9,0.38) 62%, rgba(13,6,9,0.58) 100%)',
         }} />
 
       <div className="absolute inset-0 z-[1] pointer-events-none"
@@ -92,7 +92,8 @@ function Hero() {
 
       <div
         ref={textRef}
-        className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14">
+        className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14"
+        style={{ textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 1px 6px rgba(0,0,0,0.5)' }}>
         <div className="max-w-screen-2xl mx-auto">
           <div className="overflow-hidden mb-4 md:mb-6">
             <m.p

@@ -72,9 +72,9 @@ const EDITORIAL_PHOTOS = [
 
 function StatsStrip() {
   return (
-    <section className="cv-auto bg-white py-14 sm:py-16 md:py-24 px-4 sm:px-5 md:px-10">
+    <section className="cv-auto bg-white py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-20 items-center">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
           <div className="overflow-hidden">
             <m.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}
@@ -220,9 +220,9 @@ function FeaturedServices() {
   const [hovered, setHovered] = useState(null)
 
   return (
-    <section className="cv-auto bg-white py-14 md:py-24 px-4 sm:px-5 md:px-10 border-t border-[#e4ddd7]">
+    <section className="cv-auto bg-white py-14 md:py-[4.5rem] px-4 sm:px-5 md:px-10 border-t border-[#e4ddd7]">
       <div className="max-w-screen-xl mx-auto">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-10 md:mb-14">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-10 md:mb-12">
           <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— What we do</p>
             <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight">Our Services</h2>
@@ -236,9 +236,9 @@ function FeaturedServices() {
           </m.div>
         </div>
 
-        <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-16 items-start">
+        <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-12 items-start">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-            className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] sticky top-24">
+            className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24">
             <ServiceMediaPanel hovered={hovered} categories={categories} />
           </m.div>
 
@@ -286,11 +286,11 @@ function FeaturedServices() {
 
 function TrustPillars() {
   return (
-    <section className="cv-auto bg-ink py-14 md:py-20 px-4 sm:px-5 md:px-10">
+    <section className="cv-auto bg-ink py-14 md:py-16 px-4 sm:px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto">
         <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</m.p>
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid md:grid-cols-3 gap-8 md:gap-10">
           {[
             { num: '01', title: `${YEARS_ACTIVE} Years of Expertise`,        desc: 'Since 2008, Farwa has been crafting beauty with skill, care, and love for every client who walks through the door.' },
             { num: '02', title: 'A Calm, Considered Space',      desc: 'The studio is unhurried by design — quiet rooms, careful lighting, conversations that stay at the chair.' },
@@ -358,14 +358,14 @@ function ReviewCard({ post, compact = false }) {
 
 function TestimonialsPreview() {
   return (
-    <section className="cv-auto relative py-16 sm:py-20 md:py-28 overflow-hidden bg-ink">
+    <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-ink">
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
         style={{ background: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(201,169,138,0.10) 0%, transparent 65%), radial-gradient(ellipse 50% 30% at 50% 100%, rgba(201,169,138,0.06) 0%, transparent 60%)' }} />
 
       <div className="relative max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
         <m.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
-          className="flex flex-col sm:flex-row sm:items-end md:justify-between gap-6 mb-14 md:mb-20">
+          className="flex flex-col sm:flex-row sm:items-end md:justify-between gap-6 mb-10 md:mb-14">
           <div className="min-w-0">
             <p className="text-[#c9a98a] text-[10px] tracking-[0.32em] uppercase font-['Inter'] mb-4">
               &mdash; Verified client love
@@ -462,7 +462,7 @@ function TestimonialsPreview() {
 
 function CtaBand() {
   return (
-    <section className="cv-auto bg-ink py-14 sm:py-16 md:py-24 px-4 sm:px-5 md:px-10">
+    <section className="cv-auto bg-ink py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-10">
         <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
           <p className="text-stone text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Trusted by women across Karachi</p>
