@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, Star, Quote } from 'lucide-react'
 import {
-  AnimatedNumber, useBooking, LazyVideo, CAT_SLUGS,
+  AnimatedNumber, LazyVideo, CAT_SLUGS,
   WordmarkDivider,
 } from '../src/shared.jsx'
 import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
@@ -274,7 +274,7 @@ function FeaturedServices() {
             <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
               className="mt-8 pt-6 border-t border-[#e4ddd7]">
               <p className="text-stone text-xs font-['Inter'] font-light">
-                Book any service directly on WhatsApp — we confirm within a few hours.
+                Book any service online — or <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noreferrer" className="underline hover:text-ink transition-colors">reach us on WhatsApp</a>.
               </p>
             </m.div>
           </div>
@@ -461,7 +461,6 @@ function TestimonialsPreview() {
 
 
 function CtaBand() {
-  const booking = useBooking()
   return (
     <section className="cv-auto bg-ink py-14 sm:py-16 md:py-24 px-4 sm:px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-10">
@@ -475,13 +474,17 @@ function CtaBand() {
         <m.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.15 }}
           className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 shrink-0 w-full md:w-auto">
-          <button onClick={() => booking.open()}
+          <Link href="/book"
             className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-all duration-300 w-full sm:w-auto justify-center sm:justify-start">
             Book an Appointment <ArrowUpRight className="w-4 h-4" />
-          </button>
+          </Link>
           <Link href="/services" className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
             View Services
           </Link>
+          <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noreferrer"
+            className="tap-safe text-white/40 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white/70 transition-colors flex items-center justify-center sm:justify-start">
+            Or reach us on WhatsApp
+          </a>
         </m.div>
       </div>
     </section>

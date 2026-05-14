@@ -889,7 +889,6 @@ export function Navbar({ transparent = false }) {
   const [scrolled,   setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
-  const booking = useBooking()
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', fn, { passive: true })
@@ -935,12 +934,10 @@ export function Navbar({ transparent = false }) {
           })}
         </nav>
         <div className="flex items-center gap-3">
-          <button
-            type="button"
-            onClick={() => booking.open()}
+          <Link href="/book"
             className={`hidden md:inline-flex items-center gap-1.5 text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-[1.125rem] py-[0.4375rem] transition-colors duration-300 ${light ? 'bg-ink text-white hover:bg-stone' : 'bg-white text-ink hover:bg-nude'}`}>
             Book an Appointment
-          </button>
+          </Link>
           <button
             type="button"
             className={`md:hidden p-2 -m-1 min-w-[44px] min-h-[44px] flex items-center justify-center ${light ? 'text-ink' : 'text-white'}`}
@@ -962,10 +959,10 @@ export function Navbar({ transparent = false }) {
                   {label}
                 </Link>
               ))}
-              <button type="button" onClick={() => { setMobileOpen(false); booking.open() }}
+              <Link href="/book" onClick={() => setMobileOpen(false)}
                 className="inline-flex items-center justify-center bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-5 py-3 w-fit mt-1">
                 Book an Appointment
-              </button>
+              </Link>
             </div>
           </m.div>
         )}
@@ -1066,46 +1063,21 @@ export function Footer() {
   )
 }
 
-/* ─── Contextual WhatsApp URL based on current page ────────────── */
-const _slugToCatName = Object.fromEntries(Object.entries(CAT_SLUGS).map(([k, v]) => [v, k]))
-function useContextualWaUrl() {
-  const pathname = usePathname()
-  const slugToCatName = _slugToCatName
-
-  let message = "Hi! I'd like to book an appointment at Farwa Beauty Salon"
-  if (pathname === '/book') {
-    message = "Hi, I'd like to book an appointment at Farwa Salon"
-  } else if (pathname === '/contact') {
-    message = "Hi, I'd like to enquire about services at Farwa Salon"
-  } else if (pathname?.startsWith('/services/')) {
-    const slug = pathname.replace('/services/', '').split('/')[0]
-    const catName = slugToCatName[slug]
-    if (slug === 'bridal') {
-      message = "Hi, I'm interested in Bridal packages at Farwa Salon"
-    } else if (slug === 'facials') {
-      message = "Hi, I'd like to know about Facial treatments"
-    } else if (catName) {
-      message = `Hi, I'm interested in ${catName} services at Farwa Salon`
-    }
-  }
-
-  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`
-}
-
-/* ─── Sticky WhatsApp pill (shown on all pages) ────────────────── */
+/* ─── Sticky booking pill (shown on all pages, mobile only) ───── */
 export function StickyWA() {
-  const waUrl = useContextualWaUrl()
   return (
     <>
       {/* flow spacer so page content never hides behind the fixed pill on mobile */}
       <div aria-hidden className="h-[calc(5rem+env(safe-area-inset-bottom,0px))] md:hidden" />
       <div className="fixed z-50 left-0 right-0 flex justify-center md:hidden pointer-events-none px-4"
         style={{ bottom: 'max(1.25rem, env(safe-area-inset-bottom, 0px))' }}>
-        <m.a href={waUrl} target="_blank" rel="noreferrer"
-          className="pointer-events-auto inline-flex items-center gap-2 bg-ink text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 shadow-2xl shadow-ink/30"
+        <m.div
           initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2, duration: 0.6, ease: [0.16,1,0.3,1] }}>
-          Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
-        </m.a>
+          <Link href="/book"
+            className="pointer-events-auto inline-flex items-center gap-2 bg-ink text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 shadow-2xl shadow-ink/30">
+            Book Online <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+        </m.div>
       </div>
     </>
   )

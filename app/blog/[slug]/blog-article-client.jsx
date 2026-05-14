@@ -165,13 +165,19 @@ export default function BlogArticleClient({ slug }) {
           </div>
 
           <div className="pt-8 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <Link
+              href="/book"
+              className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors"
+            >
+              Book Online <ArrowUpRight className="w-4 h-4" />
+            </Link>
             <a
               href={WA_DEFAULT}
               target="_blank"
               rel="noreferrer"
-              className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors"
+              className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
             >
-              Book on WhatsApp <ArrowUpRight className="w-4 h-4" />
+              Or WhatsApp us
             </a>
             <Link
               href="/blog"

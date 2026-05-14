@@ -43,7 +43,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${category} in PECHS Karachi${priceHint}`,
-    description: CAT_SEO[category]?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS Block 3, Karachi. Book on WhatsApp.`,
+    description: CAT_SEO[category]?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS Block 3, Karachi. Book online.`,
     alternates: { canonical: `/services/${categorySlug}` },
     openGraph: { type: 'website', images: [{ url: catImg, width: 1200, height: 630, alt: `${category} services at Farwa Beauty Salon PECHS Karachi` }] },
   }

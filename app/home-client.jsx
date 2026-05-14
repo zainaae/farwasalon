@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { useBooking, useNextSlot } from '../src/shared.jsx'
-import { YEARS_ACTIVE } from '../src/data.js'
+import { useNextSlot } from '../src/shared.jsx'
+import { YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
 
 const HomeBelowFold = dynamic(() => import('./home-below-fold'), {
   loading: () => <div className="min-h-screen" />,
@@ -16,7 +16,6 @@ function Hero() {
   const videoRef = useRef(null)
   const textRef = useRef(null)
   const overlayRef = useRef(null)
-  const booking  = useBooking()
   const slot     = useNextSlot()
 
   useEffect(() => {
@@ -136,15 +135,18 @@ function Hero() {
             initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.35, duration: 0.75, ease: [0.16,1,0.3,1] }}
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 max-w-md sm:max-w-none">
-            <button
-              onClick={() => booking.open()}
+            <Link href="/book"
               className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2 bg-white text-ink text-[11px] md:text-[12px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-all duration-300 shadow-lg shadow-black/25">
               Book an Appointment <ArrowUpRight className="w-4 h-4" />
-            </button>
+            </Link>
             <Link href="/services"
               className="tap-safe link-underline text-white/80 text-[11px] md:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
               Explore Services
             </Link>
+            <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noreferrer"
+              className="tap-safe text-white/40 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white/70 transition-colors flex items-center justify-center sm:justify-start">
+              Or message us on WhatsApp
+            </a>
             <div className="hidden sm:flex items-center gap-2 ml-auto">
               <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#9cd48c]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
               <span className="text-white/55 text-[10px] tracking-[0.22em] uppercase font-['Inter']">

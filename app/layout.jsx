@@ -219,7 +219,7 @@ export const metadata = {
     template: '%s — Farwa Beauty Salon',
   },
   description:
-    "Farwa Beauty Salon in PECHS Block 3, Karachi — 100+ treatments from Rs 100. Bridal makeup, facials, threading, waxing, nails & microblading since 2008. Book on WhatsApp.",
+    "Farwa Beauty Salon in PECHS Block 3, Karachi — 100+ treatments from Rs 100. Bridal makeup, facials, threading, waxing, nails & microblading since 2008. Book online.",
   metadataBase: new URL('https://farwasalon.com'),
   openGraph: {
     type: 'website',
