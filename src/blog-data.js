@@ -7,6 +7,7 @@ export const BLOG_POSTS = [
     date: '2026-05-10',
     lastModified: '2026-05-10',
     readTime: '8 min read',
+    author: 'Rubina',
     category: 'Bridal',
     content: [
       { type: 'p', text: 'Your wedding day is one of the most photographed days of your life. Every bride deserves to look and feel her absolute best — but that kind of radiance doesn\'t happen overnight. At Farwa Beauty Salon in PECHS Block 2, Karachi, we\'ve helped hundreds of brides prepare for their big day since 2008. Here\'s the timeline we recommend.' },
@@ -32,6 +33,7 @@ export const BLOG_POSTS = [
     date: '2026-05-05',
     lastModified: '2026-05-05',
     readTime: '6 min read',
+    author: 'Rubina',
     category: 'Skincare',
     content: [
       { type: 'p', text: 'Karachi\'s summer is relentless — the humidity, the heat, the dust. Your skincare routine needs to adapt, but many women make the same mistakes year after year. After 17+ years of treating Karachi skin, here\'s what we see most often at Farwa Beauty Salon.' },
@@ -57,6 +59,7 @@ export const BLOG_POSTS = [
     date: '2026-04-28',
     lastModified: '2026-04-28',
     readTime: '5 min read',
+    author: 'Rubina',
     category: 'Guide',
     content: [
       { type: 'p', text: 'It\'s one of the most common questions we get at Farwa Beauty Salon: "Should I thread or wax?" The answer depends on the area being treated, your skin sensitivity, and what results you\'re after. Here\'s an honest breakdown from our team.' },
@@ -82,6 +85,7 @@ export const BLOG_POSTS = [
     date: '2026-04-20',
     lastModified: '2026-04-20',
     readTime: '4 min read',
+    author: 'Rubina',
     category: 'Nails',
     content: [
       { type: 'p', text: 'You just got a beautiful manicure at the salon and within three days it\'s chipping. Sound familiar? The problem usually isn\'t the polish — it\'s what happens before and after application. Here\'s how to get a full two weeks out of your next manicure.' },
@@ -108,6 +112,7 @@ export const BLOG_POSTS = [
     date: '2026-05-12',
     lastModified: '2026-05-12',
     readTime: '7 min read',
+    author: 'Rubina',
     category: 'Bridal',
     content: [
       { type: 'p', text: 'Your wedding day deserves a look that is uniquely, unmistakably you. In a city with hundreds of salons, choosing the right bridal makeup package in Karachi can feel overwhelming. Price ranges vary wildly, inclusions differ from studio to studio, and the wrong choice can leave you with regret on the most photographed day of your life. At Farwa Beauty Salon in PECHS Block 2, we have been styling Karachi brides since 2008 — here is everything you need to know before you book.' },
@@ -135,6 +140,7 @@ export const BLOG_POSTS = [
     date: '2026-05-08',
     lastModified: '2026-05-08',
     readTime: '6 min read',
+    author: 'Rubina',
     category: 'Skincare',
     content: [
       { type: 'p', text: 'Walk into any salon in Karachi and you will find gold facials and whitening facials near the top of the menu. Both promise glowing skin, but they work in fundamentally different ways and suit different skin concerns. At Farwa Beauty Salon in PECHS Block 2, these two treatments are among our most requested — here is an honest comparison to help you choose.' },
@@ -162,6 +168,7 @@ export const BLOG_POSTS = [
     date: '2026-05-03',
     lastModified: '2026-05-03',
     readTime: '7 min read',
+    author: 'Rubina',
     category: 'Hair',
     content: [
       { type: 'p', text: 'Karachi\'s water, humidity, dust, and sun create a perfect storm for damaged hair. Whether you are battling frizz, breakage, hair fall, or just general dullness, professional hair treatments can transform your locks in a single session. At Farwa Beauty Salon in PECHS Block 2, we have been treating Karachi hair since 2008 — here is our complete guide to the most popular treatments and how to choose the right one.' },
@@ -189,6 +196,7 @@ export const BLOG_POSTS = [
     date: '2026-04-25',
     lastModified: '2026-04-25',
     readTime: '5 min read',
+    author: 'Rubina',
     category: 'Guide',
     content: [
       { type: 'p', text: 'Walking into a beauty salon for the first time can feel intimidating — especially if you are not sure what to expect, what to ask for, or how things work. Whether you are a college student booking your first facial, a bride-to-be exploring options, or someone who has simply never had the occasion, this guide will help you feel confident and prepared. At Farwa Beauty Salon in PECHS Block 2, Karachi, we welcome first-time visitors every week — here is what we wish everyone knew before their first appointment.' },

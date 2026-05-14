@@ -55,8 +55,9 @@ const localBusinessSchema = {
   },
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: '5',
+    ratingValue: '4.9',
     bestRating: '5',
+    worstRating: '1',
     ratingCount: '6',
     reviewCount: '6',
   },
@@ -96,6 +97,12 @@ const localBusinessSchema = {
               description:
                 'Complete wedding packages — trials, engagement looks, mehndi, and full bridal transformations.',
             },
+            priceSpecification: {
+              '@type': 'PriceSpecification',
+              priceCurrency: 'PKR',
+              minPrice: '8000',
+              maxPrice: '25000',
+            },
           },
         ],
       },
@@ -129,6 +136,12 @@ const localBusinessSchema = {
               '@type': 'Service',
               name: 'Hair Services',
               description: 'Cuts, colour, blowdry, styling, and treatments.',
+            },
+            priceSpecification: {
+              '@type': 'PriceSpecification',
+              priceCurrency: 'PKR',
+              minPrice: '1500',
+              maxPrice: '8000',
             },
           },
         ],
@@ -205,17 +218,25 @@ export const metadata = {
     template: '%s — Farwa Beauty Salon',
   },
   description:
-    "Bridal, facials, hair, nails, threading, waxing and more in PECHS Block 2, Karachi. Expert beauty care since 2008 — book directly on WhatsApp.",
+    "Farwa Beauty Salon in PECHS Block 2, Karachi — 100+ treatments from Rs 100. Bridal makeup, facials, threading, waxing, nails & microblading since 2008. Book on WhatsApp.",
   metadataBase: new URL('https://farwasalon.com'),
   openGraph: {
     type: 'website',
     siteName: 'Farwa Beauty Salon',
     locale: 'en_PK',
-    images: ['/logo.jpg'],
+    images: [{
+      url: '/bridal.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'Farwa Beauty Salon — Bridal, Facials & Threading in PECHS Karachi',
+    }],
   },
   twitter: {
     card: 'summary_large_image',
-    images: ['/logo.jpg'],
+    images: [{
+      url: '/bridal.jpg',
+      alt: 'Farwa Beauty Salon — Bridal, Facials & Threading in PECHS Karachi',
+    }],
   },
   robots: { index: true, follow: true },
   icons: {

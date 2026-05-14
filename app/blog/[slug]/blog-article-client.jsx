@@ -16,7 +16,12 @@ function ArticleJsonLd({ post }) {
     image: post.featuredImage ? `https://farwasalon.com${post.featuredImage}` : undefined,
     datePublished: post.date,
     dateModified: post.date,
-    author: { '@type': 'Organization', name: 'Farwa Beauty Salon' },
+    author: {
+      '@type': 'Person',
+      name: post.author || 'Rubina',
+      jobTitle: 'Founder',
+      worksFor: { '@type': 'BeautySalon', name: 'Farwa Beauty Salon' },
+    },
     publisher: {
       '@type': 'Organization',
       name: 'Farwa Beauty Salon',
@@ -123,7 +128,7 @@ export default function BlogArticleClient({ slug }) {
               {post.title}
             </h1>
             <p className="text-stone text-sm font-light">
-              Published {formatted} · Farwa Beauty Salon
+              By {post.author || 'Rubina'}, Founder · Farwa Beauty Salon · {formatted}
             </p>
           </motion.header>
 
@@ -162,7 +167,22 @@ export default function BlogArticleClient({ slug }) {
             })}
           </motion.div>
 
-          <div className="mt-10 pt-8 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="mt-10 pt-8 border-t border-[#e4ddd7]">
+            <div className="flex items-start gap-4 mb-8">
+              <div className="w-12 h-12 rounded-full bg-mist flex items-center justify-center flex-shrink-0">
+                <span className="text-ink font-['Syne'] font-bold text-lg">R</span>
+              </div>
+              <div>
+                <p className="font-['Syne'] font-bold text-sm text-ink">{post.author || 'Rubina'}</p>
+                <p className="text-stone text-xs font-['Inter'] mt-0.5">Founder, Farwa Beauty Salon</p>
+                <p className="text-stone text-[13px] font-light font-['Inter'] mt-2 leading-relaxed">
+                  Rubina founded Farwa Beauty Salon in 2008 and has spent 18+ years perfecting bridal artistry, skincare, and brow techniques in Karachi. She writes to help women make confident beauty decisions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-8 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <a
               href={WA_DEFAULT}
               target="_blank"

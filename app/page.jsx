@@ -2,10 +2,10 @@ import HomeClient from './home-client'
 import { YEARS_ACTIVE } from '../src/data.js'
 
 export const metadata = {
-  title: { absolute: "Farwa Beauty Salon — Karachi's trusted beauty studio since 2008" },
-  description: `Bridal, facials, hair, nails, threading, waxing and more in PECHS Block 2, Karachi. ${YEARS_ACTIVE}+ years of beauty expertise — book directly on WhatsApp.`,
+  title: { absolute: 'Beauty Salon in PECHS Karachi — Bridal, Facials & Threading | Farwa Beauty Salon' },
+  description: `Farwa Beauty Salon in PECHS Block 2, Karachi — trusted since 2008. Expert bridal makeup, facials, threading, waxing, nails & eyebrow tattoo. ${YEARS_ACTIVE}+ years serving women across Karachi. Book via WhatsApp today.`,
   alternates: { canonical: '/' },
-  openGraph: { type: 'website', images: ['/logo.jpg'] },
+  openGraph: { type: 'website', images: [{ url: '/bridal.jpg', width: 1200, height: 630, alt: 'Farwa Beauty Salon — Bridal makeup & beauty services in PECHS Karachi' }] },
 }
 
 export default function HomePage() {

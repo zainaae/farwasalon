@@ -25,6 +25,26 @@ function FaqJsonLd({ faqs }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
+function ServiceJsonLd({ category, services }) {
+  const prices = services.map(s => s.pricePkr).filter(Boolean)
+  if (!prices.length) return null
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: category,
+    provider: { '@type': 'BeautySalon', name: 'Farwa Beauty Salon' },
+    offers: {
+      '@type': 'AggregateOffer',
+      lowPrice: String(Math.min(...prices)),
+      highPrice: String(Math.max(...prices)),
+      priceCurrency: 'PKR',
+      offerCount: String(services.length),
+    },
+    areaServed: { '@type': 'City', name: 'Karachi' },
+  }
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+}
+
 function BreadcrumbJsonLd({ items }) {
   const schema = {
     '@context': 'https://schema.org',
@@ -71,6 +91,7 @@ export default function CategoryDetailClient({ categorySlug }) {
             { name: 'Services', url: 'https://farwasalon.com/services' },
             { name: category, url: `https://farwasalon.com/services/${slug}` },
           ]} />
+          <ServiceJsonLd category={category} services={services} />
           {faqs.length > 0 && <FaqJsonLd faqs={faqs} />}
 
           <nav aria-label="Breadcrumb" className="mb-6">

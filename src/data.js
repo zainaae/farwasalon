@@ -250,36 +250,36 @@ export const CATEGORIES   = ['All', ...Object.keys(SERVICES)]
  * All 13 categories now have unique dedicated images.
  */
 export const CAT_META = {
-  'Threading':       { img: '/threading.jpg',  desc: 'Precision threading for brows, lips, and full face — quick, clean, and perfectly shaped every time.' },
-  'Rica Hot Wax':    { img: '/waxing.jpg',     desc: 'Rica hot wax for face and sensitive areas — gentle, effective, and long-lasting results.' },
-  'Honey Wax':       { img: '/wax2.jpg',       desc: 'Smooth, hair-free skin with natural honey wax — perfect for arms, legs, and body.' },
-  'Rica Wax':        { img: '/oilwax.jpg',     desc: 'Premium Rica wax for a smooth finish that conditions your skin while removing hair.' },
-  'Bleach & Polish': { img: '/glow2.jpg',       desc: 'Brightening bleach and polish treatments for face and body — revealing radiant, even-toned skin.' },
-  'Massage':         { img: '/massage.jpg',    desc: 'Relaxing massages for back, arms, legs, and full body — tension released, body renewed.' },
-  'Hair Treatments': { img: '/hairtreatment.jpg', desc: 'Targeted treatments for protein repair, hair fall, dandruff, and deep restoration.' },
-  'Cleansing':       { img: '/cleansing.jpg',      video: '/cleansing.mp4',      desc: 'Deep cleansing treatments to purify, brighten, and refresh your skin from within.' },
-  'Facials':         { img: '/glow3.jpg',                                        desc: 'A full range of facials — from everyday glow to premium whitening and anti-ageing treatments.' },
-  'Nails':           { img: '/pedicure.jpg',       video: '/nails.mp4',          desc: 'Manicures, pedicures, nail art, and extensions — for hands and feet that make a statement.' },
-  'Bridal':          { img: '/bridal.jpg',                                        desc: 'Complete wedding packages — from trials to the big day. We make every bride feel extraordinary.' },
-  'Hair':            { img: '/hairdo.jpg',                                        desc: 'Cuts, colour, blowdrys, and styling for every hair type and texture.' },
-  'Eyebrow Tattoo':  { img: '/eyebrowtattoo.jpg',  video: '/eyebrowtattoo.mp4',  desc: 'Semi-permanent brow definition — microblading, powder brows, and combination brows.' },
+  'Threading':       { img: '/threading.jpg',  desc: 'Eyebrow threading from Rs 200 in PECHS Karachi — precision shaping for brows, lips & full face. Expert results since 2008.' },
+  'Rica Hot Wax':    { img: '/waxing.jpg',     desc: 'Rica hot wax from Rs 150 in PECHS Karachi — gentle Italian stripless wax for face and sensitive areas. Less pain, smoother skin.' },
+  'Honey Wax':       { img: '/wax2.jpg',       desc: 'Honey wax from Rs 400 in PECHS Karachi — smooth, hair-free arms, legs and body with natural honey strip wax.' },
+  'Rica Wax':        { img: '/oilwax.jpg',     desc: 'Rica body wax from Rs 600 in PECHS Karachi — premium Italian strip wax for arms, legs, underarms and full body.' },
+  'Bleach & Polish': { img: '/glow2.jpg',       desc: 'Face bleach & polish from Rs 400 in PECHS Karachi — Loreal whitening, diamond polish and sandal glow for radiant skin.' },
+  'Massage':         { img: '/massage.jpg',    desc: 'Massage from Rs 700 in PECHS Karachi — head, back, full body. Professional pressure-point therapy to release tension.' },
+  'Hair Treatments': { img: '/hairtreatment.jpg', desc: 'Hair treatments from Rs 2,000 in PECHS Karachi — protein repair, hair fall control, Wellaplex and keratin at Farwa Salon.' },
+  'Cleansing':       { img: '/cleansing.jpg',      video: '/cleansing.mp4',      desc: 'Deep cleansing from Rs 1,200 in PECHS Karachi — HD cleansing, acne treatment and Janssen whitening at Farwa Salon.' },
+  'Facials':         { img: '/glow3.jpg',                                        desc: 'Professional facials from Rs 1,400 in PECHS Karachi — 11 treatments including whitening, HD, gold & Janssen. Expert skincare since 2008.' },
+  'Nails':           { img: '/pedicure.jpg',       video: '/nails.mp4',          desc: 'Manicure & pedicure from Rs 300 in PECHS Karachi — nail art, SPA pedicure, French tips and paraffin treatments.' },
+  'Bridal':          { img: '/bridal.jpg',                                        desc: 'Bridal makeup packages in Karachi from Rs 8,000 — trials, engagement, mehndi & full-day styling. 18+ years of bridal expertise.' },
+  'Hair':            { img: '/hairdo.jpg',                                        desc: 'Haircut & styling from Rs 1,500 in PECHS Karachi — cuts, colour, blowdry & bridal updos by expert stylists.' },
+  'Eyebrow Tattoo':  { img: '/eyebrowtattoo.jpg',  video: '/eyebrowtattoo.mp4',  desc: 'Microblading & powder brows from Rs 15,000 in Karachi — semi-permanent brow definition with numbing and aftercare kit.' },
 }
 
 /* ─── Unique meta descriptions per service category (SEO) ──── */
 export const CAT_SEO = {
-  'Threading':       { metaDesc: 'Professional eyebrow, lip, and full face threading at Farwa Beauty Salon, PECHS Block 2, Karachi. Precision shaping from Rs 100. Book on WhatsApp.' },
-  'Rica Hot Wax':    { metaDesc: 'Gentle Rica hot wax for face and sensitive areas at Farwa Beauty Salon, Karachi. Smooth, lasting results from Rs 150. PECHS Block 2.' },
-  'Honey Wax':       { metaDesc: 'Natural honey wax for arms, legs, and full body at Farwa Beauty Salon, PECHS Block 2, Karachi. Prices from Rs 400. Book on WhatsApp.' },
-  'Rica Wax':        { metaDesc: 'Premium Rica body wax — arms, legs, underarms, and full body at Farwa Beauty Salon, Karachi. From Rs 600. PECHS Block 2.' },
-  'Bleach & Polish': { metaDesc: 'Face and body bleach, Loreal whitening, diamond polish, and sandal polish at Farwa Beauty Salon, PECHS Block 2, Karachi. From Rs 400.' },
-  'Massage':         { metaDesc: 'Relaxing back, head, and full body massage at Farwa Beauty Salon, PECHS Block 2, Karachi. Sessions from Rs 700. Book on WhatsApp.' },
-  'Hair Treatments': { metaDesc: 'Protein repair, hair fall treatment, dandruff control, and Wellaplex at Farwa Beauty Salon, PECHS Block 2, Karachi. From Rs 2,000.' },
-  'Cleansing':       { metaDesc: 'HD cleansing, acne cleansing, and Janssen whitening deep cleanse at Farwa Beauty Salon, PECHS Block 2, Karachi. From Rs 1,200.' },
-  'Facials':         { metaDesc: 'Professional facials in Karachi — organic, whitening, HD, Janssen, and anti-ageing treatments at Farwa Beauty Salon, PECHS Block 2. From Rs 1,400.' },
-  'Nails':           { metaDesc: 'Manicure, pedicure, French tips, paraffin, and SPA nail treatments at Farwa Beauty Salon, PECHS Block 2, Karachi. From Rs 300.' },
-  'Bridal':          { metaDesc: 'Complete bridal makeup packages in Karachi — trials, engagement looks, mehndi styling at Farwa Beauty Salon, PECHS Block 2. Book on WhatsApp.' },
-  'Hair':            { metaDesc: 'Haircuts, colour, blowdry, and bridal hair styling at Farwa Beauty Salon, PECHS Block 2, Karachi. Expert stylists since 2008.' },
-  'Eyebrow Tattoo':  { metaDesc: 'Microblading, powder brows, and combination brow tattoo at Farwa Beauty Salon, PECHS Block 2, Karachi. Semi-permanent results.' },
+  'Threading':       { metaDesc: 'Eyebrow threading from Rs 100 at Farwa Beauty Salon, PECHS Block 2, Karachi. Precision brow, lip & full-face threading since 2008. Book on WhatsApp — walk-ins welcome.' },
+  'Rica Hot Wax':    { metaDesc: 'Rica hot wax from Rs 150 at Farwa Beauty Salon, PECHS Block 2, Karachi. Gentle Italian stripless wax for face, underarms & sensitive areas. Book on WhatsApp.' },
+  'Honey Wax':       { metaDesc: 'Honey wax from Rs 400 at Farwa Beauty Salon, PECHS Block 2, Karachi. Natural strip wax for arms, legs & full body — smooth results lasting 3–4 weeks. Book on WhatsApp.' },
+  'Rica Wax':        { metaDesc: 'Rica body wax from Rs 600 at Farwa Beauty Salon, PECHS Block 2, Karachi. Premium Italian strip wax for arms, legs, underarms & full body. Book on WhatsApp.' },
+  'Bleach & Polish': { metaDesc: 'Face bleach & polish from Rs 400 at Farwa Beauty Salon, PECHS Block 2, Karachi. Loreal whitening bleach, diamond & sandal polish for radiant skin. Book on WhatsApp.' },
+  'Massage':         { metaDesc: 'Massage from Rs 700 at Farwa Beauty Salon, PECHS Block 2, Karachi. Head, back & full body massage — professional pressure-point relief. Book on WhatsApp.' },
+  'Hair Treatments': { metaDesc: 'Hair treatments from Rs 2,000 at Farwa Beauty Salon, PECHS Block 2, Karachi. Protein repair, hair fall ampule, dandruff control & Wellaplex. Book on WhatsApp.' },
+  'Cleansing':       { metaDesc: 'Deep cleansing from Rs 1,200 at Farwa Beauty Salon, PECHS Block 2, Karachi. HD cleansing, acne extraction & Janssen whitening cleanse. Book on WhatsApp.' },
+  'Facials':         { metaDesc: '11 professional facials from Rs 1,400 at Farwa Beauty Salon, PECHS Block 2, Karachi. Whitening, HD, gold, Janssen & organic facials — expert skincare since 2008. Book on WhatsApp.' },
+  'Nails':           { metaDesc: 'Manicure & pedicure from Rs 300 at Farwa Beauty Salon, PECHS Block 2, Karachi. Nail art, SPA pedicure, French tips, paraffin & gel. Book on WhatsApp.' },
+  'Bridal':          { metaDesc: 'Bridal makeup packages from Rs 8,000 at Farwa Beauty Salon, PECHS Block 2, Karachi. Full trials, engagement, mehndi & reception looks — 18+ years of bridal artistry. Book on WhatsApp.' },
+  'Hair':            { metaDesc: 'Haircuts, colour & styling from Rs 1,500 at Farwa Beauty Salon, PECHS Block 2, Karachi. Cuts, blowdry, bridal updos & balayage — expert stylists since 2008. Book on WhatsApp.' },
+  'Eyebrow Tattoo':  { metaDesc: 'Microblading & powder brows from Rs 15,000 at Farwa Beauty Salon, PECHS Block 2, Karachi. Semi-permanent brows with numbing, aftercare kit & 2-hour session. Book on WhatsApp.' },
 }
 
 /* ─── FAQ content for popular categories (SEO + user value) ──── */
@@ -301,6 +301,57 @@ export const CAT_FAQS = {
     { q: 'How long does eyebrow threading take?', a: 'Eyebrow threading at Farwa takes about 10 minutes. A Full Face Threading session takes approximately 25 minutes.' },
     { q: 'Does threading hurt more than waxing?', a: 'Threading involves a brief, sharp sensation but no heat or chemicals touch your skin. Most clients find it less irritating than waxing, especially for facial areas. Any redness typically fades within 30 minutes.' },
     { q: 'How often should I get my eyebrows threaded?', a: 'Most clients come every 2–3 weeks to maintain a clean, defined shape. The timing depends on how quickly your hair grows — we\'ll recommend a schedule that works for your growth pattern.' },
+  ],
+  'Nails': [
+    { q: 'How long does a manicure or pedicure take?', a: 'A standard manicure takes about 30 minutes, while a pedicure takes around 40 minutes. Spa treatments and nail art sessions may take 45–60 minutes depending on complexity.' },
+    { q: 'What is included in the SPA Pedicure?', a: 'Our SPA Pedicure (Rs 1,200) includes a foot soak, exfoliation scrub, cuticle care, callus removal, hydrating mask, massage, and polish application. It\'s a full pampering experience for tired feet.' },
+    { q: 'Do you offer nail art and custom designs?', a: 'Yes — our nail artists create custom designs, French tips, ombre, marble effects, and seasonal styles. Bring reference photos or let our team design something unique for you.' },
+  ],
+  'Hair': [
+    { q: 'How much does a haircut cost at Farwa?', a: 'A haircut with professional blowdry starts at Rs 2,000. This includes a consultation, shampoo, conditioning, precision cut, and styled blowdry.' },
+    { q: 'Do you do bridal hair styling?', a: 'Yes — bridal hair styling (Rs 8,000) includes a style consultation, blowout prep, full styling (updos, curls, braids, or sleek looks), and finishing spray. It\'s also part of our Full Bridal Package.' },
+    { q: 'What hair colouring options do you offer?', a: 'We offer full-colour, highlights, balayage, and toning starting at Rs 4,000. Colour consultations are included to ensure the perfect shade for your skin tone and hair type.' },
+  ],
+  'Eyebrow Tattoo': [
+    { q: 'How long does microblading last?', a: 'Microblading typically lasts 12–18 months depending on skin type, sun exposure, and aftercare. Oily skin types may need a touch-up sooner. We provide a complete aftercare kit with every session.' },
+    { q: 'What is the difference between microblading and powder brows?', a: 'Microblading creates individual hair-like strokes for a natural look. Powder brows give a soft, filled-in makeup effect. Combination brows blend both techniques — strokes at the front with powder shading at the tail.' },
+    { q: 'Does eyebrow tattooing hurt?', a: 'We apply a topical numbing cream before the procedure so most clients feel only mild pressure. The full session takes about 2 hours including consultation, numbing, and the tattooing process.' },
+    { q: 'How much does microblading cost in Karachi?', a: 'At Farwa Beauty Salon, microblading and powder brows start at Rs 15,000. Combination brows are Rs 18,000. All sessions include a brow design consultation, numbing, the procedure, and an aftercare kit.' },
+  ],
+  'Massage': [
+    { q: 'What types of massage do you offer?', a: 'We offer head massage, back massage, full arm massage, full leg massage, and complete full body massage. All massages use professional-grade oils and techniques to release tension and improve circulation.' },
+    { q: 'How long is a full body massage?', a: 'A full body massage session lasts approximately 60 minutes. Individual area massages (head, back, arms, or legs) take 15–30 minutes each.' },
+    { q: 'Can I combine massage with other treatments?', a: 'Absolutely — many clients pair a massage with a facial or waxing session for a complete pampering visit. Let us know when booking and we\'ll schedule everything together.' },
+  ],
+  'Hair Treatments': [
+    { q: 'What is the best treatment for hair fall?', a: 'Our Hair Fall Treatment with Ampule (Rs 3,000) targets thinning and excessive shedding using concentrated nutrient ampules. For best results, we recommend a course of 3 monthly sessions.' },
+    { q: 'What is a Wellaplex treatment?', a: 'Wellaplex (Rs 3,000) is a bond-strengthening treatment that repairs hair damaged by colour, heat, or chemical processing. It restores elasticity, shine, and strength from within the hair shaft.' },
+    { q: 'How often should I get a protein treatment?', a: 'A protein treatment every 6–8 weeks is ideal for maintaining strong, healthy hair. If your hair is chemically processed or heat-styled frequently, monthly treatments give the best protection.' },
+  ],
+  'Cleansing': [
+    { q: 'What is the difference between HD Cleansing and Acne Cleansing?', a: 'HD Cleansing (Rs 1,700) uses high-definition extraction techniques for general deep pore cleaning. Acne Cleansing (Rs 1,200) specifically targets active breakouts with antibacterial products and gentle extraction.' },
+    { q: 'How often should I get a professional deep cleanse?', a: 'We recommend a deep cleansing every 4–6 weeks for oily or combination skin, and every 6–8 weeks for normal or dry skin. Regular cleansing prevents blackheads, whiteheads, and congestion.' },
+    { q: 'Is the Janssen Whitening Deep Cleanse safe for sensitive skin?', a: 'The Janssen Whitening Deep Cleanse (Rs 2,800) uses professional German cosmeceutical products that are dermatologically tested. We always assess your skin before starting and can adjust the treatment intensity.' },
+  ],
+  'Bleach & Polish': [
+    { q: 'What is the difference between bleach and polish?', a: 'Bleach lightens facial and body hair to make it less visible, while polish removes dead skin cells for a smoother, brighter complexion. Many clients combine both for a radiant, even-toned result.' },
+    { q: 'Is face bleach safe for sensitive skin?', a: 'Our Loreal Whitening Face Bleach (Rs 650) is formulated for facial use and suitable for most skin types. We always do a patch check first. If you have very reactive skin, let us know and we\'ll use a gentler option.' },
+    { q: 'How long do bleach and polish results last?', a: 'Face bleach results typically last 2–3 weeks as new hair growth appears. Polish results are immediate and last about a week before the natural skin renewal cycle continues. Monthly sessions maintain the best results.' },
+  ],
+  'Rica Hot Wax': [
+    { q: 'What is Rica hot wax and how is it different from regular wax?', a: 'Rica hot wax is a premium Italian stripless wax that adheres to hair rather than skin. It\'s gentler, less painful, and ideal for sensitive areas like the face, underarms, and bikini line.' },
+    { q: 'Is Rica wax suitable for sensitive skin?', a: 'Yes — Rica hot wax is specifically designed for sensitive skin. It doesn\'t pull on the skin like strip wax, reducing redness and irritation. Many clients with eczema-prone or reactive skin prefer it.' },
+    { q: 'How long should hair be before a Rica wax appointment?', a: 'Hair should be at least 5mm (about 2 weeks of growth) for the wax to grip effectively. Avoid shaving between appointments for the smoothest results.' },
+  ],
+  'Honey Wax': [
+    { q: 'What areas can be treated with honey wax?', a: 'Honey wax is versatile and suitable for arms, legs, underarms, and larger body areas. For facial areas and sensitive zones, we recommend Rica hot wax for a gentler experience.' },
+    { q: 'How long do honey wax results last?', a: 'Honey wax results typically last 3–4 weeks. With regular sessions, hair grows back finer and sparser over time. We recommend booking every 3–4 weeks for consistently smooth skin.' },
+    { q: 'Is honey wax painful?', a: 'There\'s a brief pulling sensation during strip removal, but it\'s quick. Our aestheticians work efficiently to minimise discomfort. After the first session, most clients find subsequent sessions much easier as the hair becomes finer.' },
+  ],
+  'Rica Wax': [
+    { q: 'What is the difference between Rica Wax and Rica Hot Wax?', a: 'Rica Wax (strip wax) is a premium Italian formula used with cloth strips — ideal for large body areas like arms, legs, and back. Rica Hot Wax is stripless and applied directly — best for small, sensitive areas like face and underarms.' },
+    { q: 'How much does full body Rica wax cost?', a: 'Full Body Rica Wax at Farwa Beauty Salon costs Rs 4,000. This includes arms, legs, underarms, and other body areas. Individual area pricing starts from Rs 600.' },
+    { q: 'Can I get Rica wax during pregnancy?', a: 'Rica wax is generally safe during pregnancy as it\'s gentle and doesn\'t contain harsh chemicals. However, skin may be more sensitive during pregnancy — please let our team know so we can adjust pressure and temperature accordingly.' },
   ],
 }
 

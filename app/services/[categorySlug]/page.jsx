@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { CAT_SLUGS, CAT_SEO, slugToCategory } from '../../../src/data.js'
+import { CAT_SLUGS, CAT_SEO, CAT_META, SERVICES, slugToCategory, formatPrice } from '../../../src/data.js'
 import { parseLocationSlug, getAllLocationServiceSlugs } from '../../../src/location-seo.js'
 import CategoryDetailClient from './category-detail-client'
 import LocationServicePage from './location-service-page'
@@ -28,18 +28,24 @@ export async function generateMetadata({ params }) {
       title,
       description: `${service.description} Serving clients from ${location.name}. Book at Farwa Beauty Salon, PECHS Block 2, Karachi — WhatsApp +92 322 278 2254.`,
       alternates: { canonical: `/services/${canonicalSlug}` },
-      openGraph: { type: 'website', images: ['/logo.jpg'] },
+      openGraph: { type: 'website', images: [{ url: '/logo.jpg', width: 1200, height: 630, alt: `${service.name} services near ${location.name} — Farwa Beauty Salon Karachi` }] },
     }
   }
 
   const category = slugToCategory(categorySlug)
   if (!category) return notFound()
 
+  const services = SERVICES[category] || []
+  const prices = services.map(s => s.pricePkr).filter(Boolean)
+  const minPrice = prices.length ? Math.min(...prices) : null
+  const priceHint = minPrice ? ` — From ${formatPrice(minPrice)}` : ''
+  const catImg = CAT_META[category]?.img || '/logo.jpg'
+
   return {
-    title: category,
+    title: `${category} in PECHS Karachi${priceHint}`,
     description: CAT_SEO[category]?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS Block 2, Karachi. Book on WhatsApp.`,
     alternates: { canonical: `/services/${categorySlug}` },
-    openGraph: { type: 'website', images: ['/logo.jpg'] },
+    openGraph: { type: 'website', images: [{ url: catImg, width: 1200, height: 630, alt: `${category} services at Farwa Beauty Salon PECHS Karachi` }] },
   }
 }
 

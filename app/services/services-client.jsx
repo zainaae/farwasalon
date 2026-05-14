@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import { LazyVideo, CAT_SLUGS } from '../../src/shared.jsx'
-import { SERVICES, CAT_META, track } from '../../src/data.js'
+import { SERVICES, CAT_META, track, formatPrice } from '../../src/data.js'
 
 function getCatMeta(cat) {
   return CAT_META[cat] || { img: '/glow2.jpg', desc: 'Expert beauty services tailored just for you.' }
@@ -34,7 +34,10 @@ export default function ServicesClient() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
           {categories.map((cat, i) => {
             const meta = getCatMeta(cat)
-            const count = SERVICES[cat].length
+            const services = SERVICES[cat]
+            const count = services.length
+            const prices = services.map(s => s.pricePkr).filter(Boolean)
+            const minPrice = prices.length ? Math.min(...prices) : null
             return (
               <motion.button type="button" key={cat} onClick={() => { track('ServiceCategoryView', { category: cat }); router.push(`/services/${CAT_SLUGS[cat]}`) }}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.05 }}
@@ -47,8 +50,11 @@ export default function ServicesClient() {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-ink/5" />
                 <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/20 transition-colors duration-300" />
-                <div className="absolute top-3 right-3">
+                <div className="absolute top-3 right-3 flex flex-col items-end gap-1">
                   <span className="text-[9px] tracking-widest uppercase text-white/50 font-['Inter'] bg-ink/30 backdrop-blur-sm px-2 py-1">{count} services</span>
+                  {minPrice && (
+                    <span className="text-[9px] tracking-wider text-white/80 font-['Inter'] bg-ink/40 backdrop-blur-sm px-2 py-1">From {formatPrice(minPrice)}</span>
+                  )}
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <p className="text-white font-['Syne'] font-bold text-xs sm:text-sm uppercase leading-tight mb-1 line-clamp-2">{cat}</p>
