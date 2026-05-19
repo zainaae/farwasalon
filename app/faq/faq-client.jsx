@@ -46,7 +46,7 @@ export default function FaqClient() {
           <div className="overflow-hidden">
             <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
-              FREQUENTLY <br />ASKED
+              <span className="block">FREQUENTLY</span> <span className="block">ASKED</span>
             </motion.h1>
           </div>
         </div>

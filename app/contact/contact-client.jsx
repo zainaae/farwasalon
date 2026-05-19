@@ -53,7 +53,7 @@ export default function ContactClient() {
           <div className="overflow-hidden">
             <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
-              BOOK YOUR <br />APPOINTMENT
+              <span className="block">BOOK YOUR</span> <span className="block">APPOINTMENT</span>
             </motion.h1>
           </div>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}

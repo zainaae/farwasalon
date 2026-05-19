@@ -79,7 +79,7 @@ function StatsStrip() {
             <m.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
-              KARACHI&apos;S<br />MOST<br />TRUSTED<br />BEAUTY STUDIO
+              <span className="block">KARACHI&apos;S</span> <span className="block">MOST</span> <span className="block">TRUSTED</span> <span className="block">BEAUTY STUDIO</span>
             </m.h2>
           </div>
           <m.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
@@ -372,8 +372,8 @@ function TestimonialsPreview() {
             </p>
             <h2 className="font-['Unbounded'] font-bold text-white leading-[0.95]"
               style={{ fontSize: 'clamp(1.9rem, 5vw, 3.75rem)', letterSpacing: '-0.025em' }}>
-              Five stars,<br />
-              <span className="font-['Syne'] italic font-extralight text-[#c9a98a]">a thousand times over.</span>
+              <span className="block">Five stars,</span>
+              <span className="block font-['Syne'] italic font-extralight text-[#c9a98a]">a thousand times over.</span>
             </h2>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 shrink-0 pb-1">
@@ -468,7 +468,7 @@ function CtaBand() {
           <p className="text-stone text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Trusted by women across Karachi</p>
           <h2 className="font-['Unbounded'] font-bold text-white leading-tight"
             style={{ fontSize: 'clamp(1.5rem, 5vw, 2.75rem)' }}>
-            Ready for your glow?<br />We&apos;re ready for you.
+            <span className="block">Ready for your glow?</span> <span className="block">We&apos;re ready for you.</span>
           </h2>
         </m.div>
         <m.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }}

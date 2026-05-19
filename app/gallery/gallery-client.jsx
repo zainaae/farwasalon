@@ -19,7 +19,7 @@ export default function GalleryClient() {
             <div className="overflow-hidden">
               <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
                 className="display-section text-ink">
-                THE WORK <br />SPEAKS
+                <span className="block">THE WORK</span> <span className="block">SPEAKS</span>
               </motion.h1>
             </div>
           </div>
@@ -43,7 +43,7 @@ export default function GalleryClient() {
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
             <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">— Follow along</p>
             <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-white leading-tight">
-              See daily updates<br />on Instagram
+              <span className="block">See daily updates</span> <span className="block">on Instagram</span>
             </h2>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.15 }}

@@ -30,6 +30,9 @@ export function waLinkBooking(names = [], extra = {}) {
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(body)}`
 }
 
+/* ─── Validation ──────────────────────────────────────────────── */
+export const PHONE_RE = /^(\+?92|0)?3\d{2}[\s-]?\d{7}$/
+
 /* ─── Founding ─────────────────────────────────────────────────── */
 export const FOUNDING_YEAR = 2008
 export const YEARS_ACTIVE  = new Date().getFullYear() - FOUNDING_YEAR

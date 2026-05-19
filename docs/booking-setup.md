@@ -97,7 +97,7 @@ function checkNewBookings() {
 
   if (notifiedCell.getValue() === 'YES') return;
 
-  var row = sheet.getRange(lastRow, 1, 1, 12).getValues()[0];
+  var row = sheet.getRange(lastRow, 1, lastRow, 12).getValues()[0];
   var bookingId   = row[0];
   var date        = row[1];
   var timeSlot    = row[2];

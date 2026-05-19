@@ -1,3 +1,4 @@
+import { preload } from 'react-dom'
 import HomeClient from './home-client'
 import { YEARS_ACTIVE } from '../src/data.js'
 
@@ -9,5 +10,6 @@ export const metadata = {
 }
 
 export default function HomePage() {
+  preload('/bridal2.jpg', { as: 'image', fetchPriority: 'high' })
   return <HomeClient />
 }

@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
 import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE } from '../../src/data.js'
+import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
 
@@ -436,8 +437,8 @@ export default function BookClient() {
               <div className="flex gap-2 overflow-x-auto pb-3 snap-x snap-mandatory -mx-1 px-1">
                 {days.map((d) => {
                   const iso = d.toISOString().slice(0, 10)
-                  const day = d.getDay()
-                  const isSunday = day === 0
+                  const blocked = isDateBlocked(iso)
+                  const blockReason = blocked ? getBlockedReason(iso) : null
                   const sel = selectedDate === iso
                   const dayName = d.toLocaleDateString('en-US', { weekday: 'short' })
                   const dateNum = d.getDate()
@@ -447,12 +448,14 @@ export default function BookClient() {
                     <button
                       key={iso}
                       type="button"
-                      onClick={() => !isSunday && setSelectedDate(iso)}
-                      disabled={isSunday}
+                      onClick={() => !blocked && setSelectedDate(iso)}
+                      disabled={blocked}
+                      title={blockReason || undefined}
+                      aria-label={blocked ? `${dayName} ${dateNum} ${monthName} — ${blockReason}` : `${dayName} ${dateNum} ${monthName}`}
                       className={`snap-center shrink-0 w-[4.5rem] py-3 border text-center transition-all ${
                         sel
                           ? 'bg-ink text-white border-ink'
-                          : isSunday
+                          : blocked
                             ? 'border-[#e4ddd7] text-stone/30 cursor-not-allowed'
                             : 'border-[#e4ddd7] text-ink hover:border-ink hover:bg-mist cursor-pointer'
                       }`}
@@ -462,7 +465,7 @@ export default function BookClient() {
                       </span>
                       <span className="block font-['Syne'] font-bold text-lg leading-tight mt-0.5">{dateNum}</span>
                       <span className={`block text-[9px] font-['Inter'] ${sel ? 'text-white/70' : 'text-stone'}`}>
-                        {isSunday ? 'Call' : monthName}
+                        {blocked ? 'Call' : monthName}
                       </span>
                     </button>
                   )

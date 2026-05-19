@@ -4,11 +4,11 @@ import { ALL_SERVICES } from '../../../src/data.js'
 import { checkRateLimit } from '../../../lib/rate-limit.js'
 import {
   FILTERED_SLOTS,
+  MAX_WORKERS,
   buildOccupiedCounts,
   slotsNeededForDuration,
 } from '../../../lib/booking-slots.js'
-
-const MAX_WORKERS = 2
+import { isDateBlocked, getBlockedReason } from '../../../lib/blocked-dates.js'
 
 export async function GET(request) {
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
@@ -36,6 +36,10 @@ export async function GET(request) {
 
   if (reqDate < today || reqDate > maxDate) {
     return NextResponse.json({ error: 'Date must be today or within the next 14 days' }, { status: 400 })
+  }
+
+  if (isDateBlocked(date)) {
+    return NextResponse.json({ slots: [], closed: true, reason: getBlockedReason(date) })
   }
 
   if (!isConfigured()) {

@@ -11,6 +11,7 @@ import {
   slotsNeededForDuration,
   canFitAtIndex,
 } from '../../../lib/booking-slots.js'
+import { isDateBlocked, getBlockedReason } from '../../../lib/blocked-dates.js'
 
 export async function POST(request) {
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
@@ -61,6 +62,10 @@ export async function POST(request) {
 
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
     return NextResponse.json({ error: 'Invalid date format' }, { status: 400 })
+  }
+
+  if (isDateBlocked(date)) {
+    return NextResponse.json({ error: getBlockedReason(date) || 'Salon is closed on this date.' }, { status: 400 })
   }
 
   if (!PHONE_RE.test(clientPhone.replace(/\s/g, ''))) {

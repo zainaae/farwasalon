@@ -24,10 +24,14 @@ function computeNextSlot() {
   const hr   = now.getHours()
   const isOpen = day !== 0 && hr >= 11 && hr < 19
   if (isOpen) {
-    // Round up to next half hour
     const min = now.getMinutes()
     let h = hr, m = min < 30 ? 30 : 0
     if (min >= 30) h = Math.min(18, hr + 1)
+    if (h > 18 || (h === 18 && m > 30)) {
+      return day === 6
+        ? { label: 'Monday · 11:00am', open: false }
+        : { label: 'Tomorrow · 11:00am', open: false }
+    }
     const suffix = h >= 12 ? 'pm' : 'am'
     const h12 = h > 12 ? h - 12 : (h === 0 ? 12 : h)
     return { label: `Today · ${h12}:${String(m).padStart(2,'0')}${suffix}`, open: true }
@@ -210,7 +214,7 @@ export function SmoothyGallery({ photos }) {
           <figure key={i} className="relative shrink-0 overflow-hidden bg-[#0d0609]"
             style={{ width: 'clamp(260px,36vw,420px)', height: 'clamp(340px,50vw,560px)' }}>
             <Image src={p.src} alt={p.label} loading="lazy" draggable={false}
-              width={420} height={560}
+              width={420} height={560} sizes="clamp(260px, 36vw, 420px)"
               className="w-full h-full object-cover select-none" />
             <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-ink/70 via-ink/30 to-transparent">
               <p className="text-white text-[10px] tracking-[0.22em] uppercase font-['Inter']">{p.label}</p>
@@ -989,7 +993,7 @@ export function Footer() {
         <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
             <Link href="/" className="shrink-0">
-              <Image src="/logo.jpg" alt="Farwa Beauty Salon" width={945} height={945} loading="lazy" className="h-10 md:h-12 w-auto"
+              <Image src="/logo.jpg" alt="Farwa Beauty Salon" width={945} height={945} loading="lazy" sizes="48px" className="h-10 md:h-12 w-auto"
                 onError={e => { e.currentTarget.style.display='none'; e.currentTarget.nextSibling.style.display='block' }} />
               <span style={{display:'none'}} className="font-['Unbounded'] font-bold text-sm text-ink">FARWA</span>
             </Link>
@@ -1103,10 +1107,11 @@ export function LazyVideo({ src, poster, className, ...props }) {
     return () => io.disconnect()
   }, [])
 
+  const webm = src?.replace(/\.mp4$/, '.webm')
+
   return (
     <video
       ref={ref}
-      src={visible ? src : undefined}
       poster={poster}
       preload="none"
       muted
@@ -1114,7 +1119,14 @@ export function LazyVideo({ src, poster, className, ...props }) {
       playsInline
       className={className}
       {...props}
-    />
+    >
+      {visible && (
+        <>
+          {webm !== src && <source src={webm} type="video/webm" />}
+          <source src={src} type="video/mp4" />
+        </>
+      )}
+    </video>
   )
 }
 
