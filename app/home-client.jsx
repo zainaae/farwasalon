@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
 import Link from 'next/link'
 import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
@@ -12,22 +13,26 @@ const HomeBelowFold = dynamic(() => import('./home-below-fold'), {
   loading: () => <div className="min-h-screen" />,
 })
 
+const HERO_POSTER = '/bridal2.jpg'
+
 function Hero() {
   const videoRef = useRef(null)
   const textRef = useRef(null)
   const overlayRef = useRef(null)
   const slot     = useNextSlot()
+  const [playVideo] = useState(() => {
+    if (typeof window === 'undefined') return false
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const desktop = window.matchMedia('(min-width: 768px)').matches
+    return desktop && !reduce
+  })
 
   useEffect(() => {
     const v = videoRef.current
-    if (!v) return
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) {
-      v.pause()
-    } else {
-      v.playbackRate = 0.35
-    }
-  }, [])
+    if (!v || !playVideo) return
+    v.playbackRate = 0.35
+    v.play().catch(() => {})
+  }, [playVideo])
 
   useEffect(() => {
     let raf = 0
@@ -51,29 +56,33 @@ function Hero() {
 
   return (
     <section className="relative w-full h-[100svh] min-h-[520px] max-h-[1100px] overflow-hidden bg-[#0d0609]">
-      {/* Desktop: real video */}
-      <video
-        ref={videoRef}
-        autoPlay muted loop playsInline
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover hidden md:block scale-[1.01]"
+      <Image
+        src={HERO_POSTER}
+        alt=""
+        fill
+        priority
+        sizes="100vw"
+        aria-hidden
+        className="object-cover scale-[1.01]"
         style={{ objectPosition: '50% 35%' }}
-        poster="/bridal2.jpg"
-        preload="none"
-      >
-        <source src="/hero-mp4.mp4" type="video/mp4" />
-      </video>
-
-      {/* Mobile: static poster image */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full md:hidden scale-[1.01]"
-        style={{
-          backgroundImage: 'url(/bridal2.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: '50% 35%',
-        }}
       />
+
+      {playVideo && (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover hidden md:block scale-[1.01] z-[1]"
+          style={{ objectPosition: '50% 35%' }}
+          poster={HERO_POSTER}
+          preload="none"
+        >
+          <source src="/hero-mp4.mp4" type="video/mp4" />
+        </video>
+      )}
 
       <div ref={overlayRef} className="absolute inset-0 z-[1]"
         style={{

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
-import { CAT_SLUGS } from '../../src/shared.jsx'
+import { CAT_SLUGS, LazyVideo } from '../../src/shared.jsx'
 import { SERVICES, CAT_META, track, formatPrice } from '../../src/data.js'
 
 function getCatMeta(cat) {
@@ -48,6 +48,7 @@ export default function ServicesClient() {
           </motion.p>
         </div>
 
+        <h2 className="sr-only">Browse all service categories</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
           {categories.map((cat, i) => {
             const meta = getCatMeta(cat)
@@ -66,10 +67,14 @@ export default function ServicesClient() {
                   <span className="sr-only">View {cat} services</span>
                 </Link>
                 <Image src={meta.img} alt={cat} loading="lazy" width={900} height={1200}
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105${meta.video ? ' group-hover:opacity-0' : ''}`} />
                 {meta.video && (
-                  <video src={meta.video} autoPlay muted loop playsInline
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <LazyVideo
+                    src={meta.video}
+                    poster={meta.img}
+                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-ink/5" />
                 <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/20 transition-colors duration-300" />

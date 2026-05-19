@@ -4,9 +4,30 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
-import { WA_DEFAULT, YEARS_ACTIVE } from '../../../src/data.js'
+import { WA_DEFAULT, YEARS_ACTIVE, CAT_SLUGS, CAT_META } from '../../../src/data.js'
 import { BLOG_POSTS } from '../../../src/blog-data.js'
 import { BreadcrumbJsonLd } from '../../json-ld.jsx'
+
+function renderText(text) {
+  if (!text) return null
+  const parts = []
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g
+  let lastIndex = 0
+  let match
+  let key = 0
+  while ((match = regex.exec(text)) !== null) {
+    if (match.index > lastIndex) parts.push(text.slice(lastIndex, match.index))
+    const [, label, href] = match
+    parts.push(
+      href.startsWith('/')
+        ? <Link key={key++} href={href} className="text-ink underline underline-offset-2 hover:text-stone transition-colors">{label}</Link>
+        : <a key={key++} href={href} target="_blank" rel="noreferrer" className="text-ink underline underline-offset-2 hover:text-stone transition-colors">{label}</a>
+    )
+    lastIndex = regex.lastIndex
+  }
+  if (lastIndex < text.length) parts.push(text.slice(lastIndex))
+  return parts.length ? parts : text
+}
 
 function ArticleJsonLd({ post }) {
   const schema = {
@@ -138,12 +159,46 @@ export default function BlogArticleClient({ slug }) {
                   </h2>
                 )
               }
+              if (block.type === 'h3') {
+                return (
+                  <h3
+                    key={i}
+                    className="font-['Syne'] font-bold text-sm text-ink mt-5 mb-2"
+                  >
+                    {block.text}
+                  </h3>
+                )
+              }
+              if (block.type === 'ul') {
+                return (
+                  <ul
+                    key={i}
+                    className="list-disc pl-5 mb-4 space-y-1.5 text-stone text-[15px] font-light leading-relaxed font-['Inter'] marker:text-[#c9a98a]"
+                  >
+                    {block.items?.map((item, j) => (
+                      <li key={j}>{renderText(item)}</li>
+                    ))}
+                  </ul>
+                )
+              }
+              if (block.type === 'ol') {
+                return (
+                  <ol
+                    key={i}
+                    className="list-decimal pl-5 mb-4 space-y-1.5 text-stone text-[15px] font-light leading-relaxed font-['Inter'] marker:text-[#c9a98a]"
+                  >
+                    {block.items?.map((item, j) => (
+                      <li key={j}>{renderText(item)}</li>
+                    ))}
+                  </ol>
+                )
+              }
               return (
                 <p
                   key={i}
                   className="text-stone text-[15px] font-light leading-relaxed mb-4 font-['Inter']"
                 >
-                  {block.text}
+                  {renderText(block.text)}
                 </p>
               )
             })}
@@ -163,6 +218,28 @@ export default function BlogArticleClient({ slug }) {
               </div>
             </div>
           </div>
+
+          {post.relatedCategories?.length > 0 && (
+            <section className="pt-8 border-t border-[#e4ddd7]">
+              <h2 className="font-['Syne'] font-bold text-base text-ink mb-4">Related Services</h2>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {post.relatedCategories.map((cat) => {
+                  const meta = CAT_META[cat]
+                  const slug = CAT_SLUGS[cat]
+                  if (!meta || !slug) return null
+                  return (
+                    <Link key={cat} href={`/services/${slug}`} className="group relative overflow-hidden aspect-[4/3]">
+                      <Image src={meta.img} alt={cat} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 50vw, 33vw" />
+                      <div className="absolute inset-0 bg-ink/50 group-hover:bg-ink/60 transition-colors" />
+                      <div className="absolute inset-0 flex items-end p-3">
+                        <span className="text-white font-['Syne'] font-bold text-xs uppercase">{cat}</span>
+                      </div>
+                    </Link>
+                  )
+                })}
+              </div>
+            </section>
+          )}
 
           <div className="pt-8 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <Link

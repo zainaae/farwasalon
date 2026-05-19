@@ -1,10 +1,57 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
-import { SERVICES, CAT_SLUGS, formatPrice, formatDuration } from '../../src/data.js'
+import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE } from '../../src/data.js'
+
+const BOOK_DRAFT_KEY = 'farwa-book-draft'
+
+function loadBookDraft(searchParams) {
+  let draft = null
+  if (typeof window !== 'undefined') {
+    try {
+      const raw = localStorage.getItem(BOOK_DRAFT_KEY)
+      if (raw) draft = JSON.parse(raw)
+    } catch {
+      draft = null
+    }
+  }
+
+  const serviceIdParam = searchParams.get('serviceId')
+  const dateParam = searchParams.get('date')
+  const timeParam = searchParams.get('time')
+  const stepParam = searchParams.get('step')
+
+  const serviceId = serviceIdParam ?? (draft?.serviceId != null ? String(draft.serviceId) : null)
+  let selectedService = null
+  let expandedCat = null
+  if (serviceId) {
+    const svc = ALL_SERVICES.find(s => s.id === parseInt(serviceId, 10))
+    if (svc) {
+      selectedService = svc
+      expandedCat = svc.category
+    }
+  }
+
+  const selectedDate = dateParam || draft?.date || ''
+  const selectedTime = timeParam || draft?.time || ''
+  const step = stepParam != null
+    ? Math.min(2, Math.max(0, parseInt(stepParam, 10) || 0))
+    : (draft?.step ?? (serviceId && selectedDate && selectedTime ? 2 : serviceId && selectedDate ? 1 : 0))
+
+  return {
+    step,
+    selectedService,
+    expandedCat,
+    selectedDate,
+    selectedTime,
+    clientName: draft?.clientName || '',
+    clientPhone: draft?.clientPhone || '',
+    notes: draft?.notes || '',
+  }
+}
 
 const CATEGORIES = Object.keys(SERVICES)
 
@@ -69,22 +116,56 @@ function FirstVisitHint() {
 
 export default function BookClient() {
   const router = useRouter()
-  const [step, setStep] = useState(0)
+  const searchParams = useSearchParams()
+  const initial = useRef(null)
+  if (!initial.current) {
+    initial.current = loadBookDraft(searchParams)
+  }
+  const boot = initial.current
+
+  const [step, setStep] = useState(boot.step)
   const [direction, setDirection] = useState(1)
 
-  const [expandedCat, setExpandedCat] = useState(null)
-  const [selectedService, setSelectedService] = useState(null)
+  const [expandedCat, setExpandedCat] = useState(boot.expandedCat)
+  const [selectedService, setSelectedService] = useState(boot.selectedService)
 
-  const [selectedDate, setSelectedDate] = useState('')
-  const [selectedTime, setSelectedTime] = useState('')
+  const [selectedDate, setSelectedDate] = useState(boot.selectedDate)
+  const [selectedTime, setSelectedTime] = useState(boot.selectedTime)
   const [slots, setSlots] = useState([])
   const [loadingSlots, setLoadingSlots] = useState(false)
 
-  const [clientName, setClientName] = useState('')
-  const [clientPhone, setClientPhone] = useState('')
-  const [notes, setNotes] = useState('')
+  const [clientName, setClientName] = useState(boot.clientName)
+  const [clientPhone, setClientPhone] = useState(boot.clientPhone)
+  const [notes, setNotes] = useState(boot.notes)
+  const [website, setWebsite] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [phoneError, setPhoneError] = useState('')
+
+  useEffect(() => {
+    const params = new URLSearchParams()
+    if (selectedService) params.set('serviceId', String(selectedService.id))
+    if (selectedDate) params.set('date', selectedDate)
+    if (selectedTime) params.set('time', selectedTime)
+    if (step > 0) params.set('step', String(step))
+
+    const qs = params.toString()
+    router.replace(qs ? `/book?${qs}` : '/book', { scroll: false })
+
+    try {
+      localStorage.setItem(BOOK_DRAFT_KEY, JSON.stringify({
+        serviceId: selectedService?.id ?? null,
+        date: selectedDate,
+        time: selectedTime,
+        step,
+        clientName,
+        clientPhone,
+        notes,
+      }))
+    } catch {
+      // ignore quota / private mode
+    }
+  }, [selectedService, selectedDate, selectedTime, step, clientName, clientPhone, notes, router])
 
   const goTo = useCallback((s) => {
     setDirection(s > step ? 1 : -1)
@@ -102,11 +183,21 @@ export default function BookClient() {
       .finally(() => setLoadingSlots(false))
   }, [step, selectedDate, selectedService])
 
+  const validatePhone = (value) => {
+    if (value && !PHONE_RE.test(value.replace(/\s/g, ''))) {
+      setPhoneError('Enter a valid Pakistani number (e.g. 03xx-xxxxxxx)')
+      return false
+    }
+    setPhoneError('')
+    return true
+  }
+
   const handleSubmit = async () => {
     if (!clientName.trim() || !clientPhone.trim()) {
       setError('Please fill in your name and phone number.')
       return
     }
+    if (!validatePhone(clientPhone.trim())) return
     setError('')
     setSubmitting(true)
     try {
@@ -120,6 +211,7 @@ export default function BookClient() {
           clientName: clientName.trim(),
           clientPhone: clientPhone.trim(),
           notes: notes.trim(),
+          website,
         }),
       })
       const data = await res.json()
@@ -128,13 +220,18 @@ export default function BookClient() {
         setSubmitting(false)
         return
       }
+      try {
+        localStorage.removeItem(BOOK_DRAFT_KEY)
+      } catch {
+        // ignore
+      }
       const params = new URLSearchParams({
         id: data.booking.id,
         service: data.booking.service,
         date: data.booking.date,
         time: data.booking.time,
-        phone: data.booking.clientPhone,
         name: data.booking.clientName,
+        duration: String(data.booking.duration || selectedService.durationMinutes || 60),
       })
       router.push(`/book/confirmation?${params.toString()}`)
     } catch {
@@ -378,8 +475,8 @@ export default function BookClient() {
                     — Available times · {formatDateNice(selectedDate)}
                   </p>
                   {loadingSlots ? (
-                    <div className="flex items-center justify-center py-10">
-                      <Loader2 className="w-5 h-5 text-stone animate-spin" />
+                    <div role="status" aria-live="polite" className="flex items-center justify-center py-10">
+                      <Loader2 className="w-5 h-5 text-stone animate-spin" aria-hidden="true" />
                       <span className="text-stone text-sm font-['Inter'] ml-2">Checking availability…</span>
                     </div>
                   ) : (
@@ -456,7 +553,17 @@ export default function BookClient() {
                 )}
               </div>
 
-              <div className="flex flex-col gap-3 max-w-md">
+              <div className="flex flex-col gap-3 max-w-md relative">
+                <input
+                  type="text"
+                  name="website"
+                  value={website}
+                  onChange={e => setWebsite(e.target.value)}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden"
+                />
                 <div>
                   <label htmlFor="bk-name" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
                     Name <span className="text-[#c9a98a]">*</span>
@@ -479,13 +586,18 @@ export default function BookClient() {
                   <input
                     id="bk-phone"
                     type="tel"
+                    inputMode="tel"
                     placeholder="03xx-xxxxxxx"
                     autoComplete="tel"
                     value={clientPhone}
-                    onChange={e => setClientPhone(e.target.value)}
+                    onChange={e => { setClientPhone(e.target.value); if (phoneError) validatePhone(e.target.value) }}
+                    onBlur={e => e.target.value && validatePhone(e.target.value)}
                     required
+                    aria-invalid={!!phoneError}
+                    aria-describedby={phoneError ? 'bk-phone-error' : undefined}
                     className="border border-[#e4ddd7] text-ink placeholder-stone/50 text-sm font-['Inter'] px-4 py-3 w-full focus:outline-none focus:border-ink transition-colors bg-white"
                   />
+                  {phoneError && <p id="bk-phone-error" role="alert" className="text-red-600 text-xs font-['Inter'] mt-1">{phoneError}</p>}
                 </div>
                 <div>
                   <label htmlFor="bk-notes" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
@@ -502,11 +614,13 @@ export default function BookClient() {
                 </div>
               </div>
 
-              {error && (
-                <div className="mt-4 p-3 border border-red-200 bg-red-50 max-w-md">
-                  <p className="text-red-700 text-xs font-['Inter']">{error}</p>
-                </div>
-              )}
+              <div role="alert" aria-live="assertive">
+                {error && (
+                  <div className="mt-4 p-3 border border-red-200 bg-red-50 max-w-md">
+                    <p className="text-red-700 text-xs font-['Inter']">{error}</p>
+                  </div>
+                )}
+              </div>
 
               <div className="flex justify-between gap-3 pt-5 mt-6 border-t border-[#e4ddd7]">
                 <button
@@ -520,6 +634,7 @@ export default function BookClient() {
                   type="button"
                   onClick={handleSubmit}
                   disabled={submitting || !clientName.trim() || !clientPhone.trim()}
+                  aria-busy={submitting}
                   className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                 >
                   {submitting ? (

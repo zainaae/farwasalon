@@ -1,10 +1,11 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import { Suspense } from 'react'
+import { Suspense, useMemo } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Check, ArrowUpRight } from 'lucide-react'
+import { Check, ArrowUpRight, CalendarPlus } from 'lucide-react'
+import { buildBookingIcs } from '../../../lib/calendar-ics.js'
 
 const WA_NUMBER = '923222782254'
 
@@ -29,6 +30,13 @@ function ConfirmationContent() {
   const date    = searchParams.get('date') || ''
   const time    = searchParams.get('time') || ''
   const name    = searchParams.get('name') || ''
+  const duration = parseInt(searchParams.get('duration') || '60', 10) || 60
+
+  const calendarHref = useMemo(() => {
+    if (!date || !time) return null
+    const ics = buildBookingIcs({ id, service, date, time, name, durationMinutes: duration })
+    return `data:text/calendar;charset=utf-8,${encodeURIComponent(ics)}`
+  }, [id, service, date, time, name, duration])
 
   const waText = [
     `Hi! I've just booked ${service} at Farwa Beauty Salon.`,
@@ -52,12 +60,14 @@ function ConfirmationContent() {
             <Check className="w-8 h-8 text-[#4a9b3f]" strokeWidth={2.5} />
           </div>
 
-          <h1 className="font-['Syne'] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
-            Booking Confirmed!
-          </h1>
-          <p className="text-stone text-sm font-['Inter'] font-light mb-8">
-            Your appointment has been booked. Send a WhatsApp message to confirm with the salon.
-          </p>
+          <div role="status" aria-live="polite">
+            <h1 className="font-['Syne'] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
+              Booking Confirmed!
+            </h1>
+            <p className="text-stone text-sm font-['Inter'] font-light mb-8">
+              Your appointment has been booked. Send a WhatsApp message to confirm with the salon.
+            </p>
+          </div>
 
           <div className="border border-[#e4ddd7] bg-[#faf7f5] p-6 text-left mb-8">
             <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-4">Appointment details</p>
@@ -104,6 +114,16 @@ function ConfirmationContent() {
               Confirm on WhatsApp
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
+            {calendarHref && (
+              <a
+                href={calendarHref}
+                download={`farwa-booking-${id || 'appointment'}.ics`}
+                className="tap-safe w-full inline-flex items-center justify-center gap-2 border border-[#e4ddd7] text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist transition-colors"
+              >
+                <CalendarPlus className="w-4 h-4" />
+                Add to Calendar
+              </a>
+            )}
             <Link
               href="/book"
               className="tap-safe w-full inline-flex items-center justify-center gap-2 border border-[#e4ddd7] text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist transition-colors"

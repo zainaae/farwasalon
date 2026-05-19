@@ -1,21 +1,25 @@
 import { NextResponse } from 'next/server'
 import { getSheetRows, isConfigured } from '../../../lib/google-sheets.js'
 import { ALL_SERVICES } from '../../../src/data.js'
-
-const BASE_SLOTS = []
-for (let h = 11; h <= 18; h++) {
-  BASE_SLOTS.push(`${String(h).padStart(2, '0')}:00`)
-  if (h < 18 || h === 18) BASE_SLOTS.push(`${String(h).padStart(2, '0')}:30`)
-}
-const FILTERED_SLOTS = BASE_SLOTS.filter(s => s <= '18:30')
+import { checkRateLimit } from '../../../lib/rate-limit.js'
+import {
+  FILTERED_SLOTS,
+  buildOccupiedCounts,
+  slotsNeededForDuration,
+} from '../../../lib/booking-slots.js'
 
 const MAX_WORKERS = 2
 
-function slotIndex(time) {
-  return FILTERED_SLOTS.indexOf(time)
-}
-
 export async function GET(request) {
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
+  const rl = checkRateLimit(ip, { window: 60, max: 30 })
+  if (rl.limited) {
+    return NextResponse.json(
+      { error: 'Too many requests. Please try again later.' },
+      { status: 429, headers: { 'Retry-After': String(rl.retryAfter) } },
+    )
+  }
+
   const { searchParams } = new URL(request.url)
   const date = searchParams.get('date')
   const serviceIdParam = searchParams.get('serviceId')
@@ -53,18 +57,7 @@ export async function GET(request) {
     )
   }
 
-  const occupied = new Array(FILTERED_SLOTS.length).fill(0)
-
-  for (const bk of bookings) {
-    if (bk.status === 'Cancelled') continue
-    const startIdx = slotIndex(bk.timeSlot)
-    if (startIdx === -1) continue
-    const dur = bk.duration || 30
-    const slotsNeeded = Math.ceil(dur / 30)
-    for (let i = 0; i < slotsNeeded && startIdx + i < FILTERED_SLOTS.length; i++) {
-      occupied[startIdx + i]++
-    }
-  }
+  const occupied = buildOccupiedCounts(bookings)
 
   let serviceDuration = 30
   if (serviceIdParam) {
@@ -72,7 +65,7 @@ export async function GET(request) {
     if (svc?.durationMinutes) serviceDuration = svc.durationMinutes
   }
 
-  const slotsNeeded = Math.ceil(serviceDuration / 30)
+  const slotsNeeded = slotsNeededForDuration(serviceDuration)
 
   const slots = FILTERED_SLOTS.map((time, idx) => {
     let available = occupied[idx] < MAX_WORKERS
