@@ -3,8 +3,7 @@ import { getSheetRows, updateBookingStatus, isConfigured } from '../../../../lib
 import { checkRateLimit } from '../../../../lib/rate-limit.js'
 import { isAllowedOrigin } from '../../../../lib/origin-check.js'
 import { verifyCancelToken, phoneLast4 } from '../../../../lib/booking-cancel-token.js'
-
-const MIN_HOURS_AHEAD = 2
+import { CANCELLATION_MIN_HOURS } from '../../../../lib/booking-duration.js'
 
 export async function POST(request) {
   if (!isAllowedOrigin(request)) {
@@ -85,9 +84,9 @@ export async function POST(request) {
   const bookingTime = new Date(`${booking.date}T${booking.timeSlot}:00`)
   const now = new Date()
   const hoursAway = (bookingTime.getTime() - now.getTime()) / 3600000
-  if (hoursAway < MIN_HOURS_AHEAD) {
+  if (hoursAway < CANCELLATION_MIN_HOURS) {
     return NextResponse.json(
-      { error: `Cancellations must be made at least ${MIN_HOURS_AHEAD} hours before the appointment. Please WhatsApp the salon.` },
+      { error: `Cancellations must be made at least ${CANCELLATION_MIN_HOURS} hours before the appointment. Please WhatsApp the salon.` },
       { status: 400 },
     )
   }

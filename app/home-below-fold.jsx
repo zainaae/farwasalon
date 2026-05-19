@@ -9,6 +9,7 @@ import {
   AnimatedNumber, LazyVideo, CAT_SLUGS,
   WordmarkDivider,
 } from '../src/shared.jsx'
+import { formatPrice } from '../src/data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
 
@@ -176,12 +177,16 @@ function ServiceMediaPanel({ hovered, categories }) {
 
   return (
     <div className="relative w-full h-full bg-[#0d0609]">
-      <video
+      <LazyVideo
         src="/ct.mp4"
         poster="/bridal.jpg"
-        autoPlay muted loop playsInline
+        autoPlay
+        muted
+        loop
+        playsInline
+        aria-hidden
         className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
-        style={{ opacity: (hovered && !activeVideo) ? 0 : 1 }}
+        style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
       />
       {categories.map(cat => (
         <Image key={cat}
@@ -257,13 +262,25 @@ function FeaturedServices() {
                       <span className="font-['Unbounded'] text-[10px] text-stone/40 shrink-0 w-5 tabular-nums">
                         {String(i + 1).padStart(2, '0')}
                       </span>
-                      <span className="font-['Syne'] font-bold text-sm md:text-base uppercase text-ink group-hover:text-stone transition-colors duration-200 truncate">
-                        {cat}
+                      <span className="min-w-0">
+                        <span className="block font-['Syne'] font-bold text-sm md:text-base uppercase text-ink group-hover:text-stone transition-colors duration-200 truncate">
+                          {cat}
+                        </span>
+                        {CAT_META[cat]?.tagline && (
+                          <span className="block text-stone text-[10px] font-['Inter'] font-light mt-0.5 truncate">
+                            {CAT_META[cat].tagline}
+                          </span>
+                        )}
                       </span>
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
                       <span className="text-stone text-[10px] font-['Inter'] hidden sm:block">
-                        {SERVICES[cat].length} services
+                        {(() => {
+                          const prices = SERVICES[cat].map((s) => s.pricePkr).filter(Boolean)
+                          return prices.length
+                            ? `${SERVICES[cat].length} · from ${formatPrice(Math.min(...prices))}`
+                            : `${SERVICES[cat].length} services`
+                        })()}
                       </span>
                       <ArrowUpRight className="w-3.5 h-3.5 text-stone/40 group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
                     </div>

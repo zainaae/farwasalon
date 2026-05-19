@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "node ./node_modules/vitest/vitest.mjs run",
-    "verify": "npm run lint && npm run build"
+    "verify": "npm run lint && npm run test && npm run build"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

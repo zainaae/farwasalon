@@ -2,8 +2,9 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Link from 'next/link'
 import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, ChevronDown, X } from 'lucide-react'
-import { IgIcon, useBooking, useNextSlot } from '../../src/shared.jsx'
+import { IgIcon, useNextSlot } from '../../src/shared.jsx'
 import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track } from '../../src/data.js'
 
 export default function ContactClient() {
@@ -13,7 +14,6 @@ export default function ContactClient() {
   const [addNonce, setAddNonce] = useState(0)
   const [date,    setDate]    = useState('')
   const [time,    setTime]    = useState('')
-  const booking = useBooking()
   const slot    = useNextSlot()
 
   const addService = (svcName) => {
@@ -62,10 +62,10 @@ export default function ContactClient() {
               <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#6b9b5f]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
               Next slot <span className="text-ink font-medium ml-1">{slot.label}</span>
             </span>
-            <button onClick={() => booking.open()}
+            <Link href="/book"
               className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-5 py-2.5 hover:bg-stone transition-colors">
-              <Sparkles className="w-3 h-3" /> Quick 3-tap booking
-            </button>
+              <Sparkles className="w-3 h-3" /> Book online
+            </Link>
           </motion.div>
         </div>
       </section>

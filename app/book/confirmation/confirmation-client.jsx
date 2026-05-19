@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import { Suspense, useMemo } from 'react'
+import { Suspense, useMemo, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Check, ArrowUpRight, CalendarPlus } from 'lucide-react'
@@ -26,12 +26,28 @@ function formatTime12(t) {
 function ConfirmationContent() {
   const searchParams = useSearchParams()
   const id      = searchParams.get('id') || ''
-  const service = searchParams.get('service') || ''
   const date    = searchParams.get('date') || ''
   const time    = searchParams.get('time') || ''
-  const name    = searchParams.get('name') || ''
-  const duration = parseInt(searchParams.get('duration') || '60', 10) || 60
   const cancelToken = searchParams.get('token') || ''
+  const duration = parseInt(searchParams.get('duration') || '60', 10) || 60
+
+  const [service, setService] = useState(() => searchParams.get('service') || '')
+  const [name, setName] = useState(() => searchParams.get('name') || '')
+
+  useEffect(() => {
+    if (!id || typeof window === 'undefined') return
+    queueMicrotask(() => {
+      try {
+        const raw = sessionStorage.getItem(`farwa-confirm-${id}`)
+        if (!raw) return
+        const stored = JSON.parse(raw)
+        if (stored.service) setService(stored.service)
+        if (stored.name) setName(stored.name)
+      } catch {
+        // ignore
+      }
+    })
+  }, [id])
 
   const calendarHref = useMemo(() => {
     if (!date || !time) return null
@@ -157,7 +173,7 @@ function ConfirmationContent() {
 
           {cancelToken && id && date && (
             <p className="mt-4 text-stone/60 text-[10px] font-['Inter']">
-              Need to cancel?{' '}
+              Need to cancel? (at least 2 hours before your appointment){' '}
               <Link
                 href={`/book/cancel?${new URLSearchParams({
                   token: cancelToken,

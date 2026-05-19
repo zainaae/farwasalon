@@ -14,6 +14,7 @@ import {
 } from '../../../lib/booking-slots.js'
 import { signCancelToken, phoneLast4 } from '../../../lib/booking-cancel-token.js'
 import { isDateBlocked, getBlockedReason } from '../../../lib/blocked-dates.js'
+import { computeBookingDurationMinutes, parseAddonIdsParam } from '../../../lib/booking-duration.js'
 
 export async function POST(request) {
   if (!isAllowedOrigin(request)) {
@@ -82,7 +83,8 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Service not found' }, { status: 404 })
   }
 
-  const duration = service.durationMinutes || 30
+  const addonIds = parseAddonIdsParam(body.addonIds)
+  const duration = computeBookingDurationMinutes(service, addonIds)
   const endTime = addMinutes(time, duration)
 
   if (!isConfigured()) {

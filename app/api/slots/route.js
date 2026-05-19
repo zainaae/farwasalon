@@ -9,6 +9,7 @@ import {
   slotsNeededForDuration,
 } from '../../../lib/booking-slots.js'
 import { isDateBlocked, getBlockedReason } from '../../../lib/blocked-dates.js'
+import { computeBookingDurationMinutes, parseAddonIdsParam } from '../../../lib/booking-duration.js'
 
 export async function GET(request) {
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
@@ -23,6 +24,7 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url)
   const date = searchParams.get('date')
   const serviceIdParam = searchParams.get('serviceId')
+  const addonIdsParam = searchParams.get('addonIds')
 
   if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
     return NextResponse.json({ error: 'Invalid date format' }, { status: 400 })
@@ -65,10 +67,13 @@ export async function GET(request) {
 
   let serviceDuration = 30
   let maxWorkers = MAX_WORKERS
+  const addonIds = parseAddonIdsParam(addonIdsParam)
   if (serviceIdParam) {
     const svc = ALL_SERVICES.find(s => s.id === parseInt(serviceIdParam, 10))
-    if (svc?.durationMinutes) serviceDuration = svc.durationMinutes
-    if (svc) maxWorkers = getServiceMaxWorkers(svc)
+    if (svc) {
+      serviceDuration = computeBookingDurationMinutes(svc, addonIds)
+      maxWorkers = getServiceMaxWorkers(svc)
+    }
   }
 
   const slotsNeeded = slotsNeededForDuration(serviceDuration)

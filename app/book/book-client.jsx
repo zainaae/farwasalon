@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'l
 import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE, getAddonsForService } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { toLocalDateString } from '../../lib/date-local.js'
+import { computeBookingDurationMinutes } from '../../lib/booking-duration.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
 
@@ -196,12 +197,19 @@ export default function BookClient() {
     setStep(next)
   }, [step, selectedService, selectedDate, selectedTime])
 
+  const addonIdsList = [...selectedAddonIds]
+  const addonIdsKey = addonIdsList.sort((a, b) => a - b).join(',')
+  const totalDurationMinutes = selectedService
+    ? computeBookingDurationMinutes(selectedService, addonIdsList)
+    : 0
+
   useEffect(() => {
     if (step !== 1 || !selectedDate || !selectedService) return
     setLoadingSlots(true) // eslint-disable-line react-hooks/set-state-in-effect -- set loading before async fetch
     setSlotsError('')
     setSelectedTime('')
-    fetch(`/api/slots?date=${selectedDate}&serviceId=${selectedService.id}`)
+    const addonQuery = addonIdsKey ? `&addonIds=${encodeURIComponent(addonIdsKey)}` : ''
+    fetch(`/api/slots?date=${selectedDate}&serviceId=${selectedService.id}${addonQuery}`)
       .then(async (r) => {
         const data = await r.json()
         if (!r.ok) {
@@ -219,7 +227,7 @@ export default function BookClient() {
         setSlotsError('Could not load times. Check your connection and try again.')
       })
       .finally(() => setLoadingSlots(false))
-  }, [step, selectedDate, selectedService])
+  }, [step, selectedDate, selectedService, addonIdsKey])
 
   const validatePhone = (value) => {
     if (value && !PHONE_RE.test(value.replace(/\s/g, ''))) {
@@ -257,6 +265,7 @@ export default function BookClient() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           serviceId: selectedService.id,
+          addonIds: addonIdsList,
           date: selectedDate,
           time: selectedTime,
           clientName: clientName.trim(),
@@ -276,13 +285,24 @@ export default function BookClient() {
       } catch {
         // ignore
       }
+      const confirmPayload = {
+        service: data.booking.service,
+        name: data.booking.clientName,
+        duration: data.booking.duration || totalDurationMinutes,
+      }
+      try {
+        sessionStorage.setItem(
+          `farwa-confirm-${data.booking.id}`,
+          JSON.stringify(confirmPayload),
+        )
+      } catch {
+        // ignore private mode
+      }
       const params = new URLSearchParams({
         id: data.booking.id,
-        service: data.booking.service,
         date: data.booking.date,
         time: data.booking.time,
-        name: data.booking.clientName,
-        duration: String(data.booking.duration || selectedService.durationMinutes || 60),
+        duration: String(confirmPayload.duration),
       })
       if (data.booking.cancelToken) params.set('token', data.booking.cancelToken)
       router.push(`/book/confirmation?${params.toString()}`)
@@ -480,9 +500,52 @@ export default function BookClient() {
               <p className="font-['Syne'] font-bold text-sm text-ink uppercase mb-6">
                 {selectedService?.name}
                 <span className="text-stone font-normal text-[10px] font-['Inter'] ml-2">
-                  {formatDuration(selectedService?.durationMinutes)}
+                  {formatDuration(totalDurationMinutes)}
                 </span>
               </p>
+
+              {selectedService && getAddonsForService(selectedService.id).length > 0 && (
+                <motion.div className="mb-6 max-w-md">
+                  <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-3">
+                    Optional add-ons (affects time slots)
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    {getAddonsForService(selectedService.id).map((addon) => {
+                      const checked = selectedAddonIds.has(addon.id)
+                      return (
+                        <label
+                          key={addon.id}
+                          className={`flex items-center gap-3 border px-4 py-3 cursor-pointer transition-colors ${
+                            checked ? 'border-ink bg-mist' : 'border-[#e4ddd7] hover:border-ink/40'
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => {
+                              setSelectedAddonIds((prev) => {
+                                const next = new Set(prev)
+                                if (next.has(addon.id)) next.delete(addon.id)
+                                else next.add(addon.id)
+                                return next
+                              })
+                              setSelectedTime('')
+                            }}
+                            className="w-4 h-4 accent-ink"
+                          />
+                          <span className="flex-1 text-sm font-['Inter'] text-ink">{addon.name}</span>
+                          {addon.durationMinutes != null && (
+                            <span className="text-xs text-stone">+{formatDuration(addon.durationMinutes)}</span>
+                          )}
+                          {addon.pricePkr != null && (
+                            <span className="text-xs text-stone">{formatPrice(addon.pricePkr)}</span>
+                          )}
+                        </label>
+                      )
+                    })}
+                  </div>
+                </motion.div>
+              )}
 
               <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-4">— Pick a date</p>
               <div className="flex gap-2 overflow-x-auto pb-3 snap-x snap-mandatory -mx-1 px-1">
@@ -613,7 +676,7 @@ export default function BookClient() {
                 <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-2">Booking summary</p>
                 <p className="font-['Syne'] font-bold text-sm text-ink uppercase">{selectedService?.name}</p>
                 <p className="text-stone text-xs font-['Inter'] mt-1">
-                  {formatDateNice(selectedDate)} · {formatTime12(selectedTime)} · {formatDuration(selectedService?.durationMinutes)}
+                  {formatDateNice(selectedDate)} · {formatTime12(selectedTime)} · {formatDuration(totalDurationMinutes)}
                 </p>
                 {selectedService?.pricePkr != null && (
                   <p className="text-[#c9a98a] text-xs font-['Inter'] font-medium mt-0.5">
@@ -630,45 +693,6 @@ export default function BookClient() {
                       </p>
                     ))}
               </div>
-
-              {selectedService && getAddonsForService(selectedService.id).length > 0 && (
-                <div className="mb-6 max-w-md">
-                  <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-3">
-                    Popular add-ons
-                  </p>
-                  <div className="flex flex-col gap-2">
-                    {getAddonsForService(selectedService.id).map((addon) => {
-                      const checked = selectedAddonIds.has(addon.id)
-                      return (
-                        <label
-                          key={addon.id}
-                          className={`flex items-center gap-3 border px-4 py-3 cursor-pointer transition-colors ${
-                            checked ? 'border-ink bg-mist' : 'border-[#e4ddd7] hover:border-ink/40'
-                          }`}
-                        >
-                          <input
-                            type="checkbox"
-                            checked={checked}
-                            onChange={() => {
-                              setSelectedAddonIds((prev) => {
-                                const next = new Set(prev)
-                                if (next.has(addon.id)) next.delete(addon.id)
-                                else next.add(addon.id)
-                                return next
-                              })
-                            }}
-                            className="w-4 h-4 accent-ink"
-                          />
-                          <span className="flex-1 text-sm font-['Inter'] text-ink">{addon.name}</span>
-                          {addon.pricePkr != null && (
-                            <span className="text-xs text-stone">{formatPrice(addon.pricePkr)}</span>
-                          )}
-                        </label>
-                      )
-                    })}
-                  </div>
-                </div>
-              )}
 
               <div className="flex flex-col gap-3 max-w-md relative">
                 <input

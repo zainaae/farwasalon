@@ -5,7 +5,7 @@ export const FAQS = [
   },
   {
     q: 'Do you accept walk-ins?',
-    a: 'We welcome walk-ins when slots are available, but we strongly recommend booking in advance via WhatsApp to guarantee your preferred time.',
+    a: 'We welcome walk-ins when slots are available. For a guaranteed time, book online at farwasalon.com/book or message us on WhatsApp.',
   },
   {
     q: 'What payment methods do you accept?',
@@ -13,7 +13,7 @@ export const FAQS = [
   },
   {
     q: 'What is your cancellation policy?',
-    a: 'Please let us know at least 4 hours in advance if you need to cancel or reschedule. Late cancellations may affect future booking priority.',
+    a: 'Please cancel or reschedule at least 2 hours before your appointment (use the link on your confirmation page or WhatsApp us). Late cancellations may affect future booking priority.',
   },
   {
     q: 'Do you offer bridal trials?',
