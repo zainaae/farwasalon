@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { ArrowUpRight, MapPin, Clock, Phone } from 'lucide-react'
 import JsonLd from '../json-ld'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
-import { getPriorityLocationLinks } from '../../lib/location-links.js'
 import {
   SALON_ADDRESS_LINES,
   SALON_PHONE_DISPLAY,
@@ -30,7 +29,6 @@ export const metadata = {
 }
 
 export default function BeautySalonKarachiPage() {
-  const locationLinks = getPriorityLocationLinks().slice(0, 12)
   const rating = getAggregateRating()
 
   return (
@@ -44,8 +42,8 @@ export default function BeautySalonKarachiPage() {
           </h1>
           <p className="text-body md:text-lg max-w-3xl mb-8">
             Farwa Beauty Salon has been a home for bridal makeup, facials, threading, waxing, hair, and nail
-            services in PECHS Block 3 since 2008. Clients travel from Gulshan, Clifton, DHA, Bahadurabad, and
-            across Karachi for consistent quality, transparent pricing from Rs 100, and online booking.
+            services in PECHS Block 3 since 2008. Transparent pricing from Rs 100, a calm studio, and online
+            booking — one address, one team you can trust.
           </p>
 
           <div className="flex flex-wrap gap-3 mb-12">
@@ -59,7 +57,7 @@ export default function BeautySalonKarachiPage() {
 
           <section className="mb-12" aria-labelledby="why-heading">
             <h2 id="why-heading" className="section-title mb-4">
-              Why choose Farwa in Karachi
+              Why choose Farwa in PECHS
             </h2>
             <ul className="space-y-3 text-body max-w-3xl list-disc pl-5 marker:text-accent-gold">
               <li>
@@ -130,21 +128,6 @@ export default function BeautySalonKarachiPage() {
                   <Link href={`/services/${slug}`} className="card-link">
                     {label}
                     <ArrowUpRight className="w-3.5 h-3.5" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section aria-labelledby="areas-heading">
-            <h2 id="areas-heading" className="section-title mb-4">
-              Beauty services near your area
-            </h2>
-            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
-              {locationLinks.map(({ href, label, slug }) => (
-                <li key={slug}>
-                  <Link href={href} className="link-underline text-sm font-['Inter'] text-stone hover:text-ink py-1">
-                    {label}
                   </Link>
                 </li>
               ))}

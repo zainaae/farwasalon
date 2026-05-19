@@ -66,14 +66,13 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     await expect(h1).toContainText(/PECHS/i)
   })
 
-  test('areas served links return 200', async ({ page, request }) => {
+  test('footer shows single salon location', async ({ page }) => {
     await page.goto('/')
-    await expect(page.getByRole('heading', { name: /Beauty salon clients across Karachi/i })).toBeVisible()
-    const section = page.locator('section[aria-labelledby="areas-served-heading"]')
-    const href = await section.locator('ul a').first().getAttribute('href')
-    expect(href).toMatch(/^\/services\//)
-    const res = await request.get(href!)
-    expect(res.ok()).toBeTruthy()
+    const footer = page.locator('footer')
+    await expect(footer.getByText('Location')).toBeVisible()
+    await expect(footer.getByText(/PECHS Block 3, Karachi/i)).toBeVisible()
+    await expect(footer.getByRole('link', { name: /Directions on Google Maps/i })).toBeVisible()
+    await expect(footer.getByText('Salon near you in Karachi')).toHaveCount(0)
   })
 
   test('/beauty-salon-karachi hub page', async ({ page }) => {

@@ -11,7 +11,6 @@ import {
 } from '../src/shared.jsx'
 import { formatPrice } from '../src/data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
-import AreasServed from './components/areas-served.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
 import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
 
@@ -90,7 +89,7 @@ function StatsStrip() {
             viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.15 }}
             className="flex flex-col gap-6 sm:gap-7">
             <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
-              For over {YEARS_ACTIVE} years, Farwa Beauty Salon has been the trusted choice for women across Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
+              For over {YEARS_ACTIVE} years, Farwa Beauty Salon has been the trusted choice in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
             </p>
             <div className="grid grid-cols-3 max-[380px]:grid-cols-1 gap-3 sm:gap-4 border-t border-border-soft pt-6 sm:pt-7">
               {[
@@ -517,7 +516,7 @@ function CtaBand() {
     <section className="cv-auto bg-ink py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-10">
         <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-          <p className="text-stone text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Trusted by women across Karachi</p>
+          <p className="text-stone text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
           <h2 className="font-['Unbounded'] font-bold text-white leading-tight"
             style={{ fontSize: 'clamp(1.5rem, 5vw, 2.75rem)' }}>
             <span className="block">Ready for your glow?</span> <span className="block">We&apos;re ready for you.</span>
@@ -552,7 +551,6 @@ export default function HomeBelowFold() {
       <WordmarkDivider />
       <FeaturedServices />
       <TrustPillars />
-      <AreasServed />
       <SalonLocalBlock />
       <TestimonialsPreview />
       <CtaBand />

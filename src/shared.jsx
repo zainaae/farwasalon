@@ -8,8 +8,6 @@ import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Chec
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, track, CAT_SLUGS, CAT_SEO, CAT_FAQS } from './data.js'
 import { toLocalDateString } from '../lib/date-local.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
-import { getFooterLocalLinks } from '../lib/location-links.js'
-
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
 export function useNextSlot() {
   const [slot, setSlot] = useState({ label: 'Book Online', open: false })
@@ -980,7 +978,6 @@ export function Navbar({ transparent = false }) {
 
 /* ─── Footer ───────────────────────────────────────────────────── */
 export function Footer() {
-  const localLinks = getFooterLocalLinks()
   const serviceLinks = [
     { label: 'Threading',       slug: CAT_SLUGS['Threading'] },
     { label: 'Bridal',          slug: CAT_SLUGS['Bridal'] },
@@ -1029,7 +1026,7 @@ export function Footer() {
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Navigate</p>
               <ul className="flex flex-col gap-2.5">
-                {[['Home','/'],['Services','/services'],['Beauty Salon Karachi','/beauty-salon-karachi'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,href]) => (
+                {[['Home','/'],['Services','/services'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,href]) => (
                   <li key={l}><Link href={href} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{l}</Link></li>
                 ))}
               </ul>
@@ -1054,20 +1051,14 @@ export function Footer() {
           </div>
           <div className="mb-10 pb-8 border-b border-border-soft">
             <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-3">
-              Salon near you in Karachi
+              Location
             </p>
-            <ul className="flex flex-wrap gap-x-4 gap-y-2">
-              {localLinks.map((link) => (
-                <li key={link.slug}>
-                  <Link
-                    href={link.href}
-                    className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <p className="text-stone text-xs font-['Inter']">
+              PECHS Block 3, Karachi ·{' '}
+              <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="link-underline hover:text-ink transition-colors">
+                Directions on Google Maps
+              </a>
+            </p>
           </div>
           <div className="border-t border-border-soft pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
             <div className="flex items-center gap-3 flex-wrap">
