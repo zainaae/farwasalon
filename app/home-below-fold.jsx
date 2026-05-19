@@ -11,6 +11,7 @@ import {
 } from '../src/shared.jsx'
 import { formatPrice } from '../src/data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
+import QuickPickRow from './quick-pick-row.jsx'
 import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
@@ -221,9 +222,14 @@ function ServiceMediaPanel({ hovered, categories }) {
   )
 }
 
+const HOME_SERVICE_TABS = ['All', 'Bridal', 'Facials', 'Threading', 'Nails', 'Hair']
+
 function FeaturedServices() {
-  const categories  = Object.keys(SERVICES)
+  const categories = Object.keys(SERVICES)
   const [hovered, setHovered] = useState(null)
+  const [activeTab, setActiveTab] = useState('All')
+  const visibleCategories =
+    activeTab === 'All' ? categories : categories.filter((c) => c === activeTab)
 
   return (
     <section className="cv-auto bg-white py-14 md:py-[4.5rem] px-4 sm:px-5 md:px-10 border-t border-[#e4ddd7]">
@@ -245,12 +251,40 @@ function FeaturedServices() {
         <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-12 items-start">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24">
-            <ServiceMediaPanel hovered={hovered} categories={categories} />
+            <ServiceMediaPanel hovered={hovered} categories={visibleCategories} />
           </m.div>
 
           <div>
+            <m.div
+              initial={{ opacity: 0, y: 8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-wrap gap-2 mb-6"
+              role="tablist"
+              aria-label="Filter service categories"
+            >
+              {HOME_SERVICE_TABS.map((tab) => (
+                <button
+                  key={tab}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeTab === tab}
+                  onClick={() => {
+                    setActiveTab(tab)
+                    setHovered(null)
+                  }}
+                  className={`text-[10px] tracking-[0.14em] uppercase font-['Inter'] px-3 py-2 border transition-colors ${
+                    activeTab === tab
+                      ? 'bg-ink text-white border-ink'
+                      : 'border-[#e4ddd7] text-stone hover:border-ink hover:text-ink'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </m.div>
             <div className="divide-y divide-[#e4ddd7] border-t border-[#e4ddd7]">
-              {categories.map((cat, i) => (
+              {visibleCategories.map((cat, i) => (
                 <m.div key={cat}
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}>
@@ -515,6 +549,7 @@ function CtaBand() {
 export default function HomeBelowFold() {
   return (
     <>
+      <QuickPickRow />
       <StatsStrip />
       <EditorialSlideshow />
       <WordmarkDivider />

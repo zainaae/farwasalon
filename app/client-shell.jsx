@@ -12,6 +12,7 @@ import {
   StickyMobileCTA,
   shouldShowMobileCtaBar,
 } from '../src/shared'
+import NewsletterModal from './newsletter-modal'
 
 function ScrollProgress() {
   const barRef = useRef(null)
@@ -76,6 +77,7 @@ export default function ClientShell({ children }) {
         ) : (
           <StickyWA hidden={hideSticky} />
         )}
+        <NewsletterModal />
         </BookingProvider>
       </MotionConfig>
     </LazyMotion>

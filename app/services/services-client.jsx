@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import { CAT_SLUGS, LazyVideo } from '../../src/shared.jsx'
 import { SERVICES, CAT_META, track, formatPrice } from '../../src/data.js'
+import LiveAvailability from './live-availability'
 
 function getCatMeta(cat) {
   return CAT_META[cat] || { img: '/bleachpolish.jpg', tagline: 'Expert beauty services tailored for you.' }
@@ -47,6 +48,8 @@ export default function ServicesClient() {
             From threading to bridal packages — select a category to explore our full menu. Book online in under a minute, or message us on WhatsApp.
           </motion.p>
         </div>
+
+        <LiveAvailability />
 
         <h2 className="sr-only">Browse all service categories</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">

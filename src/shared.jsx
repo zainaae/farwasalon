@@ -1068,8 +1068,20 @@ export function Footer() {
   )
 }
 
-/* ─── Sticky booking pill (shown on all pages, mobile only) ───── */
-export function StickyWA({ hidden = false }) {
+const CATEGORY_SLUG_SET = new Set(Object.values(CAT_SLUGS))
+
+/** Paths that show the 3-action mobile CTA bar (call / WhatsApp / book). */
+export function shouldShowMobileCtaBar(pathname) {
+  if (pathname === '/' || pathname === '/services') return true
+  const m = pathname.match(/^\/services\/([^/]+)$/)
+  if (!m) return false
+  const slug = m[1]
+  if (slug.includes('-in-') || slug.startsWith('best-')) return false
+  return CATEGORY_SLUG_SET.has(slug)
+}
+
+/* ─── Mobile CTA bar: tel + WhatsApp + book (key landing pages) ─ */
+export function StickyMobileCTA({ hidden = false }) {
   if (hidden) return null
   return (
     <>
@@ -1086,7 +1098,7 @@ export function StickyWA({ hidden = false }) {
       >
         <div className="mx-3 flex items-stretch gap-1.5 rounded-xl bg-ink/95 backdrop-blur-md shadow-2xl shadow-ink/40 border border-white/10 p-1.5">
           <a
-            href={`tel:${WA_NUMBER}`}
+            href={`tel:+${WA_NUMBER}`}
             aria-label="Call the salon"
             className="tap-safe flex-1 inline-flex items-center justify-center gap-1.5 text-white/85 hover:text-white active:scale-[0.97] text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] py-3 transition-colors"
           >
@@ -1095,7 +1107,7 @@ export function StickyWA({ hidden = false }) {
           </a>
           <span aria-hidden="true" className="w-px bg-white/15 my-1.5" />
           <a
-            href={`https://wa.me/${WA_NUMBER}`}
+            href={WA_DEFAULT}
             target="_blank"
             rel="noreferrer"
             aria-label="Message the salon on WhatsApp"
@@ -1113,6 +1125,26 @@ export function StickyWA({ hidden = false }) {
           </Link>
         </div>
       </m.div>
+    </>
+  )
+}
+
+/* ─── Sticky booking pill (other pages, mobile only) ───────────── */
+export function StickyWA({ hidden = false }) {
+  if (hidden) return null
+  return (
+    <>
+      <div aria-hidden className="h-[calc(5rem+env(safe-area-inset-bottom,0px))] md:hidden" />
+      <div className="fixed z-50 left-0 right-0 flex justify-center md:hidden pointer-events-none px-4"
+        style={{ bottom: 'max(1.25rem, env(safe-area-inset-bottom, 0px))' }}>
+        <m.div
+          initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2, duration: 0.6, ease: [0.16,1,0.3,1] }}>
+          <Link href="/book"
+            className="pointer-events-auto inline-flex items-center gap-2 bg-ink text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 shadow-2xl shadow-ink/30">
+            Book Online <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+        </m.div>
+      </div>
     </>
   )
 }

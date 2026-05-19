@@ -34,3 +34,7 @@ dist-ssr
 
 # Vite (legacy)
 .vite/
+
+# Compressed-asset originals — kept locally as safety backups, never committed
+public/*.orig.mp4
+public/*.orig.webm
