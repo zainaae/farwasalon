@@ -174,4 +174,4 @@ When column N set, Apps Script sends “You have Eyebrow at 2pm” to staff numb
 
 ---
 
-See also: `docs/master-improvement-plan.md`, `docs/booking-setup.md`
+See also: `docs/live-vs-local.md` (prod vs local matrix), `docs/master-improvement-plan.md`, `docs/booking-setup.md`
