@@ -33,11 +33,11 @@ This document walks through setting up the Google Sheets backend for the Farwa B
 
 1. Go to [sheets.google.com](https://sheets.google.com/) and create a new spreadsheet
 2. Rename the first sheet tab to **Bookings** (exact spelling matters)
-3. Add these headers in **Row 1** (columns A through L):
+3. Add these headers in **Row 1** (columns A through M):
 
-| A | B | C | D | E | F | G | H | I | J | K | L |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| Booking ID | Date | Time Slot | End Time | Client Name | Client Phone | Service | Category | Duration (min) | Status | Booked At | Notes |
+| A | B | C | D | E | F | G | H | I | J | K | L | M |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Booking ID | Date | Time Slot | End Time | Client Name | Client Phone | Service | Category | Duration (min) | Status | Booked At | Notes | Notified |
 
 4. Copy the spreadsheet ID from the URL:
    ```
@@ -76,75 +76,57 @@ GOOGLE_SHEET_ID=your_spreadsheet_id_here
 
 ## 7. Email Notification (Google Apps Script)
 
-To receive email notifications when a new booking is added:
+The website appends bookings via the Sheets API. **`onEdit` does not run for API writes**, so email alerts use a **time-driven trigger** that scans column **M (Notified)**.
 
-1. Open your Google Sheet
-2. Go to **Extensions → Apps Script**
-3. Replace the default code with:
+### Sheet column M
 
-```javascript
-function onEdit(e) {
-  // onEdit won't fire for API writes — use onChange or a time-driven trigger instead
-}
+Add header **`Notified`** in cell **M1** (the script can also set this on first run). After a booking email is sent, the script writes **`YES`** in column M for that row. Cancelled bookings are marked `YES` without sending mail.
 
-function checkNewBookings() {
-  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Bookings');
-  var lastRow = sheet.getLastRow();
-  if (lastRow <= 1) return;
+### Paste the script
 
-  var statusCell = sheet.getRange(lastRow, 10); // Column J = Status
-  var notifiedCell = sheet.getRange(lastRow, 13); // Column M = Notified flag (add this column)
+1. Open your Google Sheet → **Extensions → Apps Script**
+2. Delete any broken code in the default `Code.gs`
+3. Copy the full contents of **`google-apps-script/EmailBot.gs`** from this repo and paste into the Apps Script editor (one file is enough; you can rename it `EmailBot.gs` in the editor if you like)
+4. At the top of the script, set **`SALON_NOTIFY_EMAIL`** to the inbox that should receive alerts (do not commit your real address to git)
+5. **Save** (Ctrl+S) and **Run → checkNewBookings** once — approve permissions when prompted
 
-  if (notifiedCell.getValue() === 'YES') return;
+### Time-driven trigger (recommended: every 5–10 minutes)
 
-  var row = sheet.getRange(lastRow, 1, lastRow, 12).getValues()[0];
-  var bookingId   = row[0];
-  var date        = row[1];
-  var timeSlot    = row[2];
-  var endTime     = row[3];
-  var clientName  = row[4];
-  var clientPhone = row[5];
-  var service     = row[6];
-  var category    = row[7];
-  var duration    = row[8];
+Do **not** use “every minute” — overlapping runs caused **“JavaScript runtime exited unexpectedly”** failures.
 
-  var subject = '🗓️ New Booking: ' + service + ' — ' + clientName;
-  var body = [
-    'New booking received!',
-    '',
-    'Booking ID: ' + bookingId,
-    'Service: ' + service + ' (' + category + ')',
-    'Client: ' + clientName,
-    'Phone: ' + clientPhone,
-    'Date: ' + date,
-    'Time: ' + timeSlot + ' – ' + endTime,
-    'Duration: ' + duration + ' minutes',
-    '',
-    'Open the sheet: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl()
-  ].join('\n');
+**Option A — helper (easiest):**
 
-  MailApp.sendEmail({
-    to: 'your-email@example.com',  // ← Replace with your email
-    subject: subject,
-    body: body
-  });
+1. In the Apps Script editor, select **`setupTrigger`** → **Run**
+2. Authorize if asked — this creates a **5-minute** trigger for `checkNewBookings` if one does not exist
 
-  notifiedCell.setValue('YES');
-}
-```
+**Option B — manual:**
 
-4. Replace `your-email@example.com` with your actual email
-5. Save the script (Ctrl+S)
+1. Click the **clock** icon (Triggers) → **+ Add Trigger**
+2. Function: **`checkNewBookings`**
+3. Event source: **Time-driven**
+4. Type: **Minutes timer** → **Every 5 minutes** (or 10)
+5. Save and authorize
 
-**If `checkNewBookings` crashes with "JavaScript runtime exited unexpectedly":** ensure `getRange(lastRow, 1, lastRow, 12)` uses `lastRow` for both start and end row (not `1`). Add column **M** header `Notified` so the script can skip rows already emailed.
+### Test
 
-6. Set up a **time-driven trigger**:
-   - Click the clock icon (Triggers) in the left sidebar
-   - Click **+ Add Trigger**
-   - Function: `checkNewBookings`
-   - Event source: **Time-driven**
-   - Type: **Minutes timer** → **Every minute**
-   - Click **Save** and authorize
+1. Add a test row on the **Bookings** tab (or submit a booking on the site)
+2. Leave column **M** empty for that row; set **Status** (column J) to something other than `Cancelled`
+3. Run **`checkNewBookings`** manually from the editor
+4. Confirm email arrived and **M** is **`YES`**
+5. Run again — it should skip that row (no duplicate email)
+
+### Troubleshooting
+
+| Symptom | Fix |
+|--------|-----|
+| `JavaScript runtime exited unexpectedly` | Use the repo `EmailBot.gs` (fixes `getRange(lastRow, 1, 1, 12)` bug); use 5–10 min trigger, not every minute |
+| No email, no error | Check `SALON_NOTIFY_EMAIL`; run `checkNewBookings` manually and open **Executions** for logs |
+| Missed bookings after bulk API writes | Fixed script scans **all** rows where M ≠ `YES`, up to 15 per run |
+| Duplicate emails | Ensure column M exists; old script only checked the last row |
+
+### Share sheet with service account (required for website)
+
+The Next.js app still needs **Editor** access for the service account (see [§5](#5-share-the-sheet-with-the-service-account)). The Apps Script runs as **you** (the sheet owner) for `MailApp.sendEmail`; no extra share is needed for the script beyond owning the spreadsheet.
 
 ---
 
