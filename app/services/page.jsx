@@ -1,4 +1,6 @@
 import ServicesClient from './services-client'
+import JsonLd from '../json-ld'
+import { buildServicesItemListSchema } from '../../lib/business-schema.js'
 
 export const metadata = {
   title: 'Salon Services in PECHS Karachi — 100+ Treatments',
@@ -8,5 +10,10 @@ export const metadata = {
 }
 
 export default function ServicesPage() {
-  return <ServicesClient />
+  return (
+    <>
+      <JsonLd data={buildServicesItemListSchema()} />
+      <ServicesClient />
+    </>
+  )
 }

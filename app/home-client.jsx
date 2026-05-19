@@ -143,6 +143,7 @@ function Hero() {
         <div className="max-w-screen-2xl mx-auto">
           <div className="overflow-hidden mb-4 md:mb-6">
             <m.p
+              id="hero-lede"
               initial={{ y: '100%' }} animate={{ y: 0 }}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']">
@@ -150,7 +151,7 @@ function Hero() {
             </m.p>
           </div>
 
-          <h1 className="font-['Unbounded'] text-white leading-[0.95] mb-6 md:mb-8"
+          <h1 id="hero-headline" className="font-['Unbounded'] text-white leading-[0.95] mb-6 md:mb-8"
             style={{
               fontSize: 'clamp(1.9rem, 6.4vw, 5.25rem)',
               letterSpacing: '-0.02em',

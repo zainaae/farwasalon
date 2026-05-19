@@ -4,6 +4,7 @@ import { checkRateLimit } from '../../../../lib/rate-limit.js'
 import { isAllowedOrigin } from '../../../../lib/origin-check.js'
 import { verifyCancelToken, phoneLast4 } from '../../../../lib/booking-cancel-token.js'
 import { CANCELLATION_MIN_HOURS } from '../../../../lib/booking-duration.js'
+import { logger, hashIp, errCtx } from '../../../../lib/logger.js'
 
 export async function POST(request) {
   if (!isAllowedOrigin(request)) {
@@ -61,7 +62,7 @@ export async function POST(request) {
   try {
     bookings = await getSheetRows(date)
   } catch (err) {
-    console.error('[cancel] Sheets fetch failed:', err?.message || err)
+    logger.error('/api/book/cancel', 'sheets-fetch-failed', { ip: hashIp(ip), bookingId, ...errCtx(err) })
     return NextResponse.json(
       { error: 'Unable to verify booking. Please try again or WhatsApp the salon.' },
       { status: 502 },
@@ -94,7 +95,7 @@ export async function POST(request) {
   try {
     await updateBookingStatus(bookingId, 'Cancelled')
   } catch (err) {
-    console.error('[cancel] Failed to update status:', err?.message || err)
+    logger.error('/api/book/cancel', 'status-update-failed', { ip: hashIp(ip), bookingId, ...errCtx(err) })
     return NextResponse.json(
       { error: 'Failed to cancel. Please try again or WhatsApp the salon.' },
       { status: 502 },

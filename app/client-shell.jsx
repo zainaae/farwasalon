@@ -3,7 +3,15 @@
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { LazyMotion, domAnimation, MotionConfig } from 'framer-motion'
-import { BookingProvider, SkipLink, Navbar, Footer, StickyWA } from '../src/shared'
+import {
+  BookingProvider,
+  SkipLink,
+  Navbar,
+  Footer,
+  StickyWA,
+  StickyMobileCTA,
+  shouldShowMobileCtaBar,
+} from '../src/shared'
 
 function ScrollProgress() {
   const barRef = useRef(null)
@@ -50,6 +58,8 @@ function ScrollToTop() {
 export default function ClientShell({ children }) {
   const pathname = usePathname()
   const isHome = pathname === '/'
+  const hideSticky = pathname.startsWith('/book')
+  const useMobileCtaBar = shouldShowMobileCtaBar(pathname)
 
   return (
     <LazyMotion features={domAnimation}>
@@ -61,7 +71,11 @@ export default function ClientShell({ children }) {
         <Navbar transparent={isHome} />
         {children}
         <Footer />
-        <StickyWA hidden={pathname.startsWith('/book')} />
+        {useMobileCtaBar ? (
+          <StickyMobileCTA hidden={hideSticky} />
+        ) : (
+          <StickyWA hidden={hideSticky} />
+        )}
         </BookingProvider>
       </MotionConfig>
     </LazyMotion>

@@ -7,7 +7,9 @@ import { ArrowUpRight, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ServiceModal, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, CAT_FAQS, slugToCategory } from '../../../src/data.js'
-import { BreadcrumbJsonLd } from '../../json-ld.jsx'
+import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
+import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
+import { SITE_ORIGIN, buildSpeakableSchema } from '../../../lib/business-schema.js'
 
 function getCatMeta(cat) {
   return CAT_META[cat] || { img: '/bleachpolish.jpg', desc: 'Expert beauty services tailored just for you.' }
@@ -78,6 +80,16 @@ export default function CategoryDetailClient({ categorySlug }) {
             { name: category, url: `https://farwasalon.com/services/${slug}` },
           ]} />
           <ServiceJsonLd category={category} services={services} />
+          {slug && (() => {
+            const offers = buildCategoryOffersSchema(category, services, slug)
+            return offers ? <JsonLd data={offers} /> : null
+          })()}
+          <JsonLd
+            data={buildSpeakableSchema({
+              pageUrl: `${SITE_ORIGIN}/services/${slug}`,
+              cssSelectors: ['#service-category-title', '#service-category-desc'],
+            })}
+          />
           {faqs.length > 0 && <FaqJsonLd faqs={faqs} />}
 
           <nav aria-label="Breadcrumb" className="mb-6">
@@ -99,8 +111,8 @@ export default function CategoryDetailClient({ categorySlug }) {
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="mb-8 pb-8 border-b border-[#e4ddd7]">
             <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— {services.length} services</p>
-            <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink uppercase mb-3">{category}</h2>
-            <p className="text-stone text-sm font-light leading-relaxed max-w-lg">{meta.desc}</p>
+            <h2 id="service-category-title" className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink uppercase mb-3">{category}</h2>
+            <p id="service-category-desc" className="text-stone text-sm font-light leading-relaxed max-w-lg">{meta.desc}</p>
           </motion.div>
 
           <ul className="divide-y divide-[#e4ddd7]">

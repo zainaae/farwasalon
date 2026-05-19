@@ -1,7 +1,13 @@
 import { preload } from 'react-dom'
 import HomeClient from './home-client'
+import JsonLd from './json-ld'
 import { YEARS_ACTIVE } from '../src/data.js'
 import { pageSocialMeta } from '../lib/page-metadata.js'
+import {
+  SITE_ORIGIN,
+  buildSpeakableSchema,
+  buildHeroVideoSchema,
+} from '../lib/business-schema.js'
 
 const title = 'Beauty Salon in PECHS Karachi — Bridal, Facials & Threading | Farwa Beauty Salon'
 const description = `Farwa Beauty Salon in PECHS, Karachi — trusted since 2008. Bridal makeup, facials, threading, waxing, nails & more. ${YEARS_ACTIVE}+ years. Book online or WhatsApp +92 322 278 2254. ★ 4.9 on Google.`
@@ -15,5 +21,16 @@ export const metadata = {
 
 export default function HomePage() {
   preload('/bridal2.jpg', { as: 'image', fetchPriority: 'high' })
-  return <HomeClient />
+  return (
+    <>
+      <JsonLd
+        data={buildSpeakableSchema({
+          pageUrl: `${SITE_ORIGIN}/`,
+          cssSelectors: ['#hero-headline', '#hero-lede'],
+        })}
+      />
+      <JsonLd data={buildHeroVideoSchema()} />
+      <HomeClient />
+    </>
+  )
 }

@@ -209,7 +209,11 @@ export default function BookClient() {
     setSlotsError('')
     setSelectedTime('')
     const addonQuery = addonIdsKey ? `&addonIds=${encodeURIComponent(addonIdsKey)}` : ''
-    fetch(`/api/slots?date=${selectedDate}&serviceId=${selectedService.id}${addonQuery}`)
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 25_000)
+    fetch(`/api/slots?date=${selectedDate}&serviceId=${selectedService.id}${addonQuery}`, {
+      signal: controller.signal,
+    })
       .then(async (r) => {
         const data = await r.json()
         if (!r.ok) {
@@ -222,11 +226,19 @@ export default function BookClient() {
           setSlotsError('No times available for this date.')
         }
       })
-      .catch(() => {
+      .catch((err) => {
         setSlots([])
-        setSlotsError('Could not load times. Check your connection and try again.')
+        const aborted = err?.name === 'AbortError'
+        setSlotsError(
+          aborted
+            ? 'Request timed out — slow connection. Try again or message us on WhatsApp.'
+            : 'Could not load times. Check your connection and try again.',
+        )
       })
-      .finally(() => setLoadingSlots(false))
+      .finally(() => {
+        clearTimeout(timeoutId)
+        setLoadingSlots(false)
+      })
   }, [step, selectedDate, selectedService, addonIdsKey])
 
   const validatePhone = (value) => {
@@ -259,10 +271,13 @@ export default function BookClient() {
         : ''
     const combinedNotes = [notes.trim(), addonNote].filter(Boolean).join('\n')
 
+    const bookController = new AbortController()
+    const bookTimeoutId = setTimeout(() => bookController.abort(), 25_000)
     try {
       const res = await fetch('/api/book', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: bookController.signal,
         body: JSON.stringify({
           serviceId: selectedService.id,
           addonIds: addonIdsList,
@@ -306,9 +321,16 @@ export default function BookClient() {
       })
       if (data.booking.cancelToken) params.set('token', data.booking.cancelToken)
       router.push(`/book/confirmation?${params.toString()}`)
-    } catch {
-      setError('Network error. Please check your connection.')
+    } catch (err) {
+      const aborted = err?.name === 'AbortError'
+      setError(
+        aborted
+          ? 'Request timed out — slow connection. Try again or message us on WhatsApp.'
+          : 'Network error. Please check your connection.',
+      )
       setSubmitting(false)
+    } finally {
+      clearTimeout(bookTimeoutId)
     }
   }
 

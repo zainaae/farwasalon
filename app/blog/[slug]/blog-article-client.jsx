@@ -7,6 +7,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { WA_DEFAULT, YEARS_ACTIVE, CAT_SLUGS, CAT_META } from '../../../src/data.js'
 import { BLOG_POSTS } from '../../../src/blog-data.js'
 import { BreadcrumbJsonLd } from '../../json-ld.jsx'
+import { buildArticleSchema, countBlogWords } from '../../../lib/business-schema.js'
 
 function renderText(text) {
   if (!text) return null
@@ -30,30 +31,8 @@ function renderText(text) {
 }
 
 function ArticleJsonLd({ post }) {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.title,
-    description: post.description,
-    image: post.featuredImage ? `https://farwasalon.com${post.featuredImage}` : undefined,
-    datePublished: post.date,
-    dateModified: post.date,
-    author: {
-      '@type': 'Person',
-      name: post.author || 'Rubina',
-      jobTitle: 'Founder',
-      worksFor: { '@type': 'BeautySalon', name: 'Farwa Beauty Salon' },
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'Farwa Beauty Salon',
-      logo: { '@type': 'ImageObject', url: 'https://farwasalon.com/logo.jpg' },
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `https://farwasalon.com/blog/${post.slug}`,
-    },
-  }
+  const wordCount = countBlogWords(post.content)
+  const schema = buildArticleSchema(post, { wordCount })
   return (
     <script
       type="application/ld+json"

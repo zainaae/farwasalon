@@ -13,7 +13,8 @@ import {
   canFitAtIndex,
 } from '../../../lib/booking-slots.js'
 import { signCancelToken, phoneLast4 } from '../../../lib/booking-cancel-token.js'
-import { isDateBlocked, getBlockedReason } from '../../../lib/blocked-dates.js'
+import { validateBookingDate, validateTimeInGrid } from '../../../lib/booking-date-rules.js'
+import { logger, hashIp, errCtx } from '../../../lib/logger.js'
 import { computeBookingDurationMinutes, parseAddonIdsParam } from '../../../lib/booking-duration.js'
 
 export async function POST(request) {
@@ -66,12 +67,14 @@ export async function POST(request) {
   const { value: time } = timeField
   const { value: notes } = notesField
 
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-    return NextResponse.json({ error: 'Invalid date format' }, { status: 400 })
+  const dateCheck = validateBookingDate(date)
+  if (!dateCheck.ok) {
+    return NextResponse.json({ error: dateCheck.message }, { status: 400 })
   }
 
-  if (isDateBlocked(date)) {
-    return NextResponse.json({ error: getBlockedReason(date) || 'Salon is closed on this date.' }, { status: 400 })
+  const timeCheck = validateTimeInGrid(time)
+  if (!timeCheck.ok) {
+    return NextResponse.json({ error: timeCheck.message }, { status: 400 })
   }
 
   if (!PHONE_RE.test(clientPhone.replace(/\s/g, ''))) {
@@ -88,7 +91,7 @@ export async function POST(request) {
   const endTime = addMinutes(time, duration)
 
   if (!isConfigured()) {
-    console.error('[book] Google Sheets credentials not configured')
+    logger.error('/api/book', 'sheets-not-configured', { ip: hashIp(ip) })
     return NextResponse.json(
       { error: 'Booking system is not configured. Please contact the salon directly.' },
       { status: 503 }
@@ -99,7 +102,7 @@ export async function POST(request) {
   try {
     bookings = await getSheetRows(date)
   } catch (err) {
-    console.error('[book] Google Sheets fetch failed:', err?.message || err)
+    logger.error('/api/book', 'sheets-fetch-failed', { ip: hashIp(ip), date, ...errCtx(err) })
     return NextResponse.json(
       { error: 'Unable to check availability. Please try again or contact the salon.' },
       { status: 502 }
@@ -133,7 +136,7 @@ export async function POST(request) {
       notes,
     })
   } catch (err) {
-    console.error('[book] Failed to write booking to Google Sheets:', err?.message || err)
+    logger.error('/api/book', 'sheets-write-failed', { ip: hashIp(ip), date, serviceId: service.id, ...errCtx(err) })
     return NextResponse.json(
       { error: 'Failed to save your booking. Please try again or contact the salon.' },
       { status: 502 }

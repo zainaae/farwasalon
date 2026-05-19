@@ -8,8 +8,9 @@ import {
   buildOccupiedCounts,
   slotsNeededForDuration,
 } from '../../../lib/booking-slots.js'
-import { isDateBlocked, getBlockedReason } from '../../../lib/blocked-dates.js'
+import { validateBookingDate } from '../../../lib/booking-date-rules.js'
 import { computeBookingDurationMinutes, parseAddonIdsParam } from '../../../lib/booking-duration.js'
+import { logger, hashIp, errCtx } from '../../../lib/logger.js'
 
 export async function GET(request) {
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
@@ -26,26 +27,20 @@ export async function GET(request) {
   const serviceIdParam = searchParams.get('serviceId')
   const addonIdsParam = searchParams.get('addonIds')
 
-  if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+  if (!date) {
     return NextResponse.json({ error: 'Invalid date format' }, { status: 400 })
   }
 
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
-  const reqDate = new Date(date + 'T00:00:00')
-  const maxDate = new Date(today)
-  maxDate.setDate(maxDate.getDate() + 14)
-
-  if (reqDate < today || reqDate > maxDate) {
-    return NextResponse.json({ error: 'Date must be today or within the next 14 days' }, { status: 400 })
-  }
-
-  if (isDateBlocked(date)) {
-    return NextResponse.json({ slots: [], closed: true, reason: getBlockedReason(date) })
+  const dateCheck = validateBookingDate(date)
+  if (!dateCheck.ok) {
+    if (dateCheck.closed) {
+      return NextResponse.json({ slots: [], closed: true, reason: dateCheck.message })
+    }
+    return NextResponse.json({ error: dateCheck.message }, { status: 400 })
   }
 
   if (!isConfigured()) {
-    console.error('[slots] Google Sheets credentials not configured')
+    logger.error('/api/slots', 'sheets-not-configured', { ip: hashIp(ip) })
     return NextResponse.json(
       { error: 'Booking system is not configured.' },
       { status: 503 }
@@ -56,7 +51,7 @@ export async function GET(request) {
   try {
     bookings = await getSheetRows(date)
   } catch (err) {
-    console.error('[slots] Google Sheets fetch failed:', err?.message || err)
+    logger.error('/api/slots', 'sheets-fetch-failed', { ip: hashIp(ip), date, ...errCtx(err) })
     return NextResponse.json(
       { error: 'Unable to load availability. Please try again.' },
       { status: 502 }
