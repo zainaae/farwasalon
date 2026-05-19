@@ -3,15 +3,14 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { AnimatedNumber, useBooking } from '../../src/shared.jsx'
+import { AnimatedNumber } from '../../src/shared.jsx'
+import SalonLocalBlock from '../components/salon-local-block.jsx'
 import { SERVICES, YEARS_ACTIVE } from '../../src/data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 
 export default function AboutClient() {
-  const booking = useBooking()
-
   return (
     <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
 
@@ -140,16 +139,18 @@ export default function AboutClient() {
           </motion.h2>
           <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
             className="flex flex-wrap items-center gap-4">
-            <button onClick={() => booking.open()}
+            <Link href="/book"
               className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3.5 hover:bg-stone transition-colors duration-300">
               Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" />
-            </button>
+            </Link>
             <Link href="/services" className="link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
               Our Services
             </Link>
           </motion.div>
         </div>
       </section>
+
+      <SalonLocalBlock />
     </main>
   )
 }

@@ -13,6 +13,7 @@ import {
   getDefaultServiceIdForCategory,
 } from '../../../src/data.js'
 import { NEIGHBORHOODS, TOP_SERVICES } from '../../../src/location-seo.js'
+import { SALON_ADDRESS_LINES, SALON_PHONE_DISPLAY, GOOGLE_REVIEW_LINK, getAggregateRating } from '../../../lib/business-schema.js'
 
 export default function LocationServicePage({ data }) {
   const { service, location, prefix } = data
@@ -28,6 +29,7 @@ export default function LocationServicePage({ data }) {
   const faqs = CAT_FAQS[service.category]?.slice(0, 3) ?? []
   const bookServiceId = getDefaultServiceIdForCategory(service.category)
   const bookHref = bookServiceId ? `/book?serviceId=${bookServiceId}` : '/book'
+  const rating = getAggregateRating()
 
   return (
     <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
@@ -50,14 +52,22 @@ export default function LocationServicePage({ data }) {
 
           <div className="flex flex-wrap gap-3 mb-10">
             <div className="flex items-center gap-2 text-stone text-sm font-['Inter']">
-              <MapPin className="w-4 h-4" /> PECHS Block 3, Karachi
+              <MapPin className="w-4 h-4 shrink-0" /> {SALON_ADDRESS_LINES[0]}
             </div>
             <div className="flex items-center gap-2 text-stone text-sm font-['Inter']">
-              <Clock className="w-4 h-4" /> Mon–Sat 11 AM – 7 PM
+              <Clock className="w-4 h-4 shrink-0" /> {SALON_ADDRESS_LINES[1]} · {SALON_ADDRESS_LINES[2]}
             </div>
             <div className="flex items-center gap-2 text-stone text-sm font-['Inter']">
-              <Phone className="w-4 h-4" /> +92 322 278 2254
+              <Phone className="w-4 h-4 shrink-0" /> {SALON_PHONE_DISPLAY}
             </div>
+            <a
+              href={GOOGLE_REVIEW_LINK}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 text-stone text-sm font-['Inter'] hover:text-ink"
+            >
+              ★ {rating.ratingValue} ({rating.reviewCount} Google reviews)
+            </a>
           </div>
         </motion.div>
 
@@ -89,7 +99,7 @@ export default function LocationServicePage({ data }) {
             <li>✓ Trusted since 2008 — {YEARS_ACTIVE}+ years of experience</li>
             <li>✓ Expert {service.name.toLowerCase()} professionals</li>
             <li>✓ Hygienic, comfortable environment in PECHS Block 3</li>
-            <li>✓ Convenient WhatsApp booking — no calls needed</li>
+            <li>✓ Book online or on WhatsApp — instant confirmation</li>
             <li>✓ Serving clients from {location.name} and across Karachi</li>
           </ul>
         </motion.section>

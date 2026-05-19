@@ -9,6 +9,7 @@ import {
   AnimatedNumber, LazyVideo, CAT_SLUGS,
   WordmarkDivider,
 } from '../src/shared.jsx'
+import SalonLocalBlock from './components/salon-local-block.jsx'
 import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
@@ -420,6 +421,9 @@ function TestimonialsPreview() {
             </a>
           </div>
 
+          <p className="md:hidden text-white/30 text-[9px] tracking-[0.2em] uppercase font-['Inter'] mb-2 px-0.5">
+            Swipe for more reviews →
+          </p>
           <div className="md:hidden flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
             {FB_POSTS.map((post) => (
               <ReviewCard key={post.name} post={post} compact />
@@ -499,6 +503,7 @@ export default function HomeBelowFold() {
       <WordmarkDivider />
       <FeaturedServices />
       <TrustPillars />
+      <SalonLocalBlock />
       <TestimonialsPreview />
       <CtaBand />
     </>

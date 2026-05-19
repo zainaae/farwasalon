@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
-import { ServiceModal, useBooking, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
+import { ServiceModal, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, CAT_FAQS, slugToCategory } from '../../../src/data.js'
 import { BreadcrumbJsonLd } from '../../json-ld.jsx'
 
@@ -49,7 +49,6 @@ function ServiceJsonLd({ category, services }) {
 export default function CategoryDetailClient({ categorySlug }) {
   const category = slugToCategory(categorySlug)
   const [modal, setModal] = useState(null)
-  const booking  = useBooking()
   const router   = useRouter()
   const services = SERVICES[category] || []
   const meta     = getCatMeta(category)
@@ -143,12 +142,12 @@ export default function CategoryDetailClient({ categorySlug }) {
                       )}
                     </div>
                   )}
-                  <button
-                    onClick={() => booking.open(category)}
+                  <Link
+                    href={`/book?serviceId=${s.id}`}
                     aria-label={`Book ${s.name}`}
                     className="tap-safe shrink-0 inline-flex items-center gap-1.5 bg-ink text-white text-[10px] tracking-[0.12em] uppercase font-medium font-['Inter'] px-3.5 md:px-4 py-2.5 hover:bg-stone transition-colors duration-200">
                     Book <ArrowUpRight className="w-3 h-3" />
-                  </button>
+                  </Link>
                 </motion.li>
               )
             })}
@@ -171,10 +170,10 @@ export default function CategoryDetailClient({ categorySlug }) {
           )}
 
           <div className="mt-8 pt-6 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <button onClick={() => booking.open(category)}
+            <Link href={`/book?category=${encodeURIComponent(category)}`}
               className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors duration-300">
               Book a {category} Service <ArrowUpRight className="w-4 h-4" />
-            </button>
+            </Link>
             <button onClick={onBack}
               className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
               ← Back to all categories

@@ -44,7 +44,7 @@ export default function ServicesClient() {
           </div>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }}
             className="text-stone text-sm font-light max-w-lg">
-            From threading to bridal packages — select a category to explore our full menu. Book anything directly on WhatsApp.
+            From threading to bridal packages — select a category to explore our full menu. Book online in under a minute, or message us on WhatsApp.
           </motion.p>
         </div>
 

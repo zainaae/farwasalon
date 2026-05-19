@@ -61,7 +61,7 @@ export default function ClientShell({ children }) {
         <Navbar transparent={isHome} />
         {children}
         <Footer />
-        <StickyWA />
+        <StickyWA hidden={pathname.startsWith('/book')} />
         </BookingProvider>
       </MotionConfig>
     </LazyMotion>

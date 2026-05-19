@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import ClientShell from './client-shell'
 import JsonLd from './json-ld'
+import { buildBeautySalonSchema, buildWebSiteSchema } from '../lib/business-schema.js'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -33,193 +34,21 @@ const nastaliq = Noto_Nastaliq_Urdu({
   display: 'optional',
 })
 
-const localBusinessSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'BeautySalon',
-  name: 'Farwa Beauty Salon',
-  image: 'https://farwasalon.com/logo.jpg',
-  url: 'https://farwasalon.com/',
-  telephone: '+923222782254',
-  priceRange: '$$',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'PECHS Block 3',
-    addressLocality: 'Karachi',
-    addressRegion: 'Sindh',
-    postalCode: '75400',
-    addressCountry: 'PK',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 24.8797532,
-    longitude: 67.0584185,
-  },
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '4.9',
-    bestRating: '5',
-    worstRating: '1',
-    ratingCount: '6',
-    reviewCount: '6',
-  },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      opens: '11:00',
-      closes: '19:00',
-    },
-  ],
-  sameAs: [
-    'https://www.instagram.com/farwasalon/',
-    'https://www.facebook.com/farwasalon',
-  ],
-  foundingDate: '2008',
-  description:
-    "Karachi's trusted beauty home since 2008. Bridal, facials, hair, nails, threading, waxing, massage and more.",
-  areaServed: {
-    '@type': 'City',
-    name: 'Karachi',
-    containedInPlace: { '@type': 'State', name: 'Sindh' },
-  },
-  hasOfferCatalog: {
-    '@type': 'OfferCatalog',
-    name: 'Salon Services',
-    itemListElement: [
-      {
-        '@type': 'OfferCatalog',
-        name: 'Bridal',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Bridal Makeup & Styling',
-              description:
-                'Complete wedding packages — trials, engagement looks, mehndi, and full bridal transformations.',
-            },
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              priceCurrency: 'PKR',
-              minPrice: '8000',
-              maxPrice: '25000',
-            },
-          },
-        ],
-      },
-      {
-        '@type': 'OfferCatalog',
-        name: 'Facials',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Facials',
-              description: 'Organic, whitening, HD, and anti-ageing facials.',
-            },
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              priceCurrency: 'PKR',
-              minPrice: '1400',
-              maxPrice: '5500',
-            },
-          },
-        ],
-      },
-      {
-        '@type': 'OfferCatalog',
-        name: 'Hair',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Hair Services',
-              description: 'Cuts, colour, blowdry, styling, and treatments.',
-            },
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              priceCurrency: 'PKR',
-              minPrice: '1500',
-              maxPrice: '8000',
-            },
-          },
-        ],
-      },
-      {
-        '@type': 'OfferCatalog',
-        name: 'Nails',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Nails',
-              description:
-                'Manicures, pedicures, nail art, French tips, and paraffin treatments.',
-            },
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              priceCurrency: 'PKR',
-              minPrice: '300',
-              maxPrice: '1600',
-            },
-          },
-        ],
-      },
-      {
-        '@type': 'OfferCatalog',
-        name: 'Threading',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Threading',
-              description: 'Precision eyebrow, lip, and full face threading.',
-            },
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              priceCurrency: 'PKR',
-              minPrice: '100',
-              maxPrice: '1200',
-            },
-          },
-        ],
-      },
-      {
-        '@type': 'OfferCatalog',
-        name: 'Waxing',
-        itemListElement: [
-          {
-            '@type': 'Offer',
-            itemOffered: {
-              '@type': 'Service',
-              name: 'Waxing',
-              description:
-                'Rica hot wax, honey wax, and body waxing for smooth, lasting results.',
-            },
-            priceSpecification: {
-              '@type': 'PriceSpecification',
-              priceCurrency: 'PKR',
-              minPrice: '150',
-              maxPrice: '4000',
-            },
-          },
-        ],
-      },
-    ],
-  },
-}
-
 export const metadata = {
   title: {
     default: "Farwa Beauty Salon — Karachi's trusted beauty home since 2008",
     template: '%s — Farwa Beauty Salon',
   },
   description:
-    "Farwa Beauty Salon in PECHS Block 3, Karachi — 100+ treatments from Rs 100. Bridal makeup, facials, threading, waxing, nails & microblading since 2008. Book online.",
+    "Beauty salon & parlour in PECHS Block 3, Karachi — bridal makeup, facials, threading, waxing, nails since 2008. 100+ services from Rs 100. Book online. Near me: DHA, Clifton, Gulshan.",
+  keywords: [
+    'beauty salon Karachi',
+    'beauty parlour PECHS',
+    'salon near me',
+    'bridal makeup Karachi',
+    'threading salon PECHS',
+    'Farwa Beauty Salon',
+  ],
   metadataBase: new URL('https://farwasalon.com'),
   openGraph: {
     type: 'website',
@@ -292,7 +121,8 @@ export default function RootLayout({ children }) {
       <body>
         <ClientShell>{children}</ClientShell>
         <Analytics />
-        <JsonLd data={localBusinessSchema} />
+        <JsonLd data={buildBeautySalonSchema()} />
+        <JsonLd data={buildWebSiteSchema()} />
       </body>
     </html>
   )

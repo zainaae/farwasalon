@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
 import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Check } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, track, CAT_SLUGS, CAT_SEO, CAT_FAQS } from './data.js'
+import { toLocalDateString } from '../lib/date-local.js'
 
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
 export function useNextSlot() {
@@ -265,13 +266,13 @@ function MonthCalendar({ value, onChange }) {
   const firstWeekday = new Date(yr, mo, 1).getDay()
   const daysInMonth  = new Date(yr, mo + 1, 0).getDate()
   const monthLabel   = new Date(yr, mo).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
-  const todayStr     = todayStart.toISOString().slice(0, 10)
+  const todayStr     = toLocalDateString(todayStart)
 
   const prev = () => { const d = new Date(yr, mo - 1); setYr(d.getFullYear()); setMo(d.getMonth()) }
   const next = () => { const d = new Date(yr, mo + 1); setYr(d.getFullYear()); setMo(d.getMonth()) }
   const canPrev = new Date(yr, mo) > new Date(todayStart.getFullYear(), todayStart.getMonth())
 
-  const strFor   = (day) => new Date(yr, mo, day).toISOString().slice(0, 10)
+  const strFor   = (day) => toLocalDateString(new Date(yr, mo, day))
   const dayOfWk  = (day) => new Date(yr, mo, day).getDay()
   const isPast   = (day) => { const d = new Date(yr, mo, day); d.setHours(0,0,0,0); return d < todayStart }
   const isClosed = (day) => dayOfWk(day) === 0  // Sunday
@@ -985,7 +986,6 @@ export function Footer() {
     { label: 'Eyebrow Tattoo',  slug: CAT_SLUGS['Eyebrow Tattoo'] },
     { label: 'Massage',         slug: CAT_SLUGS['Massage'] },
   ]
-  const booking = useBooking()
   return (
     <footer className="bg-white">
       {/* Top bar — logo + Urdu signature + CTA */}
@@ -1001,13 +1001,13 @@ export function Footer() {
             <UrduSignature className="hidden sm:inline text-stone/80" />
           </div>
           <div className="flex flex-col sm:items-end gap-2">
-            <button onClick={() => booking.open()}
+            <Link href="/book"
               className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3 hover:bg-stone transition-colors duration-300">
               Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" />
-            </button>
-            <Link href="/book" className="text-stone text-[10px] font-['Inter'] tracking-wide hover:text-ink transition-colors">
-              Next slot — <span className="text-ink font-medium">Book Online</span>
             </Link>
+            <a href={`https://wa.me/923222782254`} className="text-stone text-[10px] font-['Inter'] tracking-wide hover:text-ink transition-colors">
+              Or message us on WhatsApp
+            </a>
           </div>
         </div>
       </div>
@@ -1068,7 +1068,8 @@ export function Footer() {
 }
 
 /* ─── Sticky booking pill (shown on all pages, mobile only) ───── */
-export function StickyWA() {
+export function StickyWA({ hidden = false }) {
+  if (hidden) return null
   return (
     <>
       {/* flow spacer so page content never hides behind the fixed pill on mobile */}

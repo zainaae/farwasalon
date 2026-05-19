@@ -3,6 +3,8 @@ import { CAT_SLUGS, CAT_SEO, CAT_META, SERVICES, slugToCategory, formatPrice } f
 import { parseLocationSlug, getAllLocationServiceSlugs } from '../../../src/location-seo.js'
 import CategoryDetailClient from './category-detail-client'
 import LocationServicePage from './location-service-page'
+import LocationServiceSchema from './location-service-schema'
+import { pageSocialMeta } from '../../../lib/page-metadata.js'
 
 export const dynamicParams = false
 
@@ -24,11 +26,18 @@ export async function generateMetadata({ params }) {
     const canonicalSlug = prefix === 'best'
       ? `${service.slug}-in-${location.slug}`
       : categorySlug
+    const description = `${service.name} in ${location.name}, Karachi — ${service.description} Book online at Farwa Beauty Salon, PECHS. From Rs 100. ★ 4.9 Google rating.`
     return {
       title,
-      description: `${service.description} Serving clients from ${location.name}. Book at Farwa Beauty Salon, PECHS Block 3, Karachi — WhatsApp +92 322 278 2254.`,
+      description,
       alternates: { canonical: `/services/${canonicalSlug}` },
-      openGraph: { type: 'website', images: [{ url: '/logo.jpg', width: 1200, height: 630, alt: `${service.name} services near ${location.name} — Farwa Beauty Salon Karachi` }] },
+      ...pageSocialMeta({
+        title: `${title} — Farwa Beauty Salon`,
+        description,
+        path: `/services/${canonicalSlug}`,
+        image: '/logo.jpg',
+        imageAlt: `${service.name} near ${location.name} — Farwa Beauty Salon`,
+      }),
     }
   }
 
@@ -54,7 +63,12 @@ export default async function CategoryPage({ params }) {
 
   const locationData = parseLocationSlug(categorySlug)
   if (locationData) {
-    return <LocationServicePage data={locationData} slug={categorySlug} />
+    return (
+      <>
+        <LocationServiceSchema data={locationData} slug={categorySlug} />
+        <LocationServicePage data={locationData} slug={categorySlug} />
+      </>
+    )
   }
 
   const category = slugToCategory(categorySlug)

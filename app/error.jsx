@@ -12,7 +12,7 @@ export default function Error({ error, reset }) {
   }, [error])
 
   return (
-    <main className="min-h-screen bg-white flex flex-col items-center justify-center px-6 text-center">
+    <main id="main" className="min-h-screen bg-white flex flex-col items-center justify-center px-6 text-center pt-[calc(3.375rem+env(safe-area-inset-top,0px))]">
       <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">
         — Something went wrong
       </p>

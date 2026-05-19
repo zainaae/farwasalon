@@ -1,12 +1,16 @@
 import { preload } from 'react-dom'
 import HomeClient from './home-client'
 import { YEARS_ACTIVE } from '../src/data.js'
+import { pageSocialMeta } from '../lib/page-metadata.js'
+
+const title = 'Beauty Salon in PECHS Karachi — Bridal, Facials & Threading | Farwa Beauty Salon'
+const description = `Farwa Beauty Salon in PECHS Block 3, Karachi — trusted since 2008. Bridal makeup, facials, threading, waxing, nails & more. ${YEARS_ACTIVE}+ years. Book online or WhatsApp +92 322 278 2254. ★ 4.9 on Google.`
 
 export const metadata = {
-  title: { absolute: 'Beauty Salon in PECHS Karachi — Bridal, Facials & Threading | Farwa Beauty Salon' },
-  description: `Farwa Beauty Salon in PECHS Block 3, Karachi — trusted since 2008. Expert bridal makeup, facials, threading, waxing, nails & eyebrow tattoo. ${YEARS_ACTIVE}+ years serving women across Karachi. Book via WhatsApp today.`,
+  title: { absolute: title },
+  description,
   alternates: { canonical: '/' },
-  openGraph: { type: 'website', images: [{ url: '/bridal.jpg', width: 1200, height: 630, alt: 'Farwa Beauty Salon — Bridal makeup & beauty services in PECHS Karachi' }] },
+  ...pageSocialMeta({ title, description, path: '/', image: '/bridal.jpg', imageAlt: 'Farwa Beauty Salon — PECHS Karachi' }),
 }
 
 export default function HomePage() {

@@ -29,6 +29,6 @@ export const FAQS = [
   },
   {
     q: 'How do I book an appointment?',
-    a: 'The easiest way is via WhatsApp — use the "Book an Appointment" button on any page, or message us directly at +92 322 2782254.',
+    a: 'Book online at farwasalon.com/book — pick your service, date, and time. You can also message us on WhatsApp at +92 322 2782254 if you prefer.',
   },
 ]

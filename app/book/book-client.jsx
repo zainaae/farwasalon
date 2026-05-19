@@ -6,8 +6,15 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
 import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE, getAddonsForService } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
+import { toLocalDateString } from '../../lib/date-local.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
+
+function effectiveStep(step, selectedService, selectedDate, selectedTime) {
+  if (!selectedService) return 0
+  if (!selectedDate || !selectedTime) return Math.min(1, Math.max(0, step))
+  return Math.min(2, Math.max(0, step))
+}
 
 function loadBookDraft(searchParams) {
   let draft = null
@@ -21,13 +28,14 @@ function loadBookDraft(searchParams) {
   }
 
   const serviceIdParam = searchParams.get('serviceId')
+  const categoryParam = searchParams.get('category')
   const dateParam = searchParams.get('date')
   const timeParam = searchParams.get('time')
   const stepParam = searchParams.get('step')
 
   const serviceId = serviceIdParam ?? (draft?.serviceId != null ? String(draft.serviceId) : null)
   let selectedService = null
-  let expandedCat = null
+  let expandedCat = categoryParam && CATEGORIES.includes(categoryParam) ? categoryParam : null
   if (serviceId) {
     const svc = ALL_SERVICES.find(s => s.id === parseInt(serviceId, 10))
     if (svc) {
@@ -38,9 +46,12 @@ function loadBookDraft(searchParams) {
 
   const selectedDate = dateParam || draft?.date || ''
   const selectedTime = timeParam || draft?.time || ''
-  const step = stepParam != null
+  let step = stepParam != null
     ? Math.min(2, Math.max(0, parseInt(stepParam, 10) || 0))
     : (draft?.step ?? (serviceId && selectedDate && selectedTime ? 2 : serviceId && selectedDate ? 1 : 0))
+  step = effectiveStep(step, selectedService, selectedDate, selectedTime)
+
+  const addonIds = Array.isArray(draft?.addonIds) ? draft.addonIds : []
 
   return {
     step,
@@ -51,6 +62,7 @@ function loadBookDraft(searchParams) {
     clientName: draft?.clientName || '',
     clientPhone: draft?.clientPhone || '',
     notes: draft?.notes || '',
+    addonIds,
   }
 }
 
@@ -99,8 +111,9 @@ function FirstVisitHint() {
               {[
                 'Choose any service — no account needed',
                 'Pick a date and time that works for you',
-                'Confirm via WhatsApp — we\'ll reply within minutes',
-                'Walk-ins welcome too — book online to skip the wait',
+                'Confirm online — your slot is saved instantly',
+                'Optional: message us on WhatsApp for directions or questions',
+                'Walk-ins welcome — book online to skip the wait',
               ].map(tip => (
                 <li key={tip} className="flex items-start gap-2 text-stone text-xs font-['Inter'] font-light">
                   <Check className="w-3.5 h-3.5 text-[#c9a98a] shrink-0 mt-0.5" />
@@ -138,7 +151,10 @@ export default function BookClient() {
   const [clientName, setClientName] = useState(boot.clientName)
   const [clientPhone, setClientPhone] = useState(boot.clientPhone)
   const [notes, setNotes] = useState(boot.notes)
-  const [selectedAddonIds, setSelectedAddonIds] = useState(() => new Set())
+  const [selectedAddonIds, setSelectedAddonIds] = useState(
+    () => new Set(boot.addonIds || []),
+  )
+  const [slotsError, setSlotsError] = useState('')
   const [website, setWebsite] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
@@ -153,7 +169,9 @@ export default function BookClient() {
 
     const qs = params.toString()
     router.replace(qs ? `/book?${qs}` : '/book', { scroll: false })
+  }, [selectedService, selectedDate, selectedTime, step, router])
 
+  useEffect(() => {
     try {
       localStorage.setItem(BOOK_DRAFT_KEY, JSON.stringify({
         serviceId: selectedService?.id ?? null,
@@ -163,25 +181,43 @@ export default function BookClient() {
         clientName,
         clientPhone,
         notes,
+        addonIds: [...selectedAddonIds],
       }))
     } catch {
       // ignore quota / private mode
     }
-  }, [selectedService, selectedDate, selectedTime, step, clientName, clientPhone, notes, router])
+  }, [selectedService, selectedDate, selectedTime, step, clientName, clientPhone, notes, selectedAddonIds])
 
-  const goTo = useCallback((s) => {
-    setDirection(s > step ? 1 : -1)
-    setStep(s)
-  }, [step])
+  const goTo = useCallback((target) => {
+    const next = effectiveStep(target, selectedService, selectedDate, selectedTime)
+    if (target === 1 && !selectedService) return
+    if (target === 2 && (!selectedService || !selectedDate || !selectedTime)) return
+    setDirection(next > step ? 1 : -1)
+    setStep(next)
+  }, [step, selectedService, selectedDate, selectedTime])
 
   useEffect(() => {
     if (step !== 1 || !selectedDate || !selectedService) return
     setLoadingSlots(true) // eslint-disable-line react-hooks/set-state-in-effect -- set loading before async fetch
+    setSlotsError('')
     setSelectedTime('')
     fetch(`/api/slots?date=${selectedDate}&serviceId=${selectedService.id}`)
-      .then(r => r.json())
-      .then(data => setSlots(data.slots || []))
-      .catch(() => setSlots([]))
+      .then(async (r) => {
+        const data = await r.json()
+        if (!r.ok) {
+          setSlots([])
+          setSlotsError(data.error || 'Could not load times. Please try again.')
+          return
+        }
+        setSlots(data.slots || [])
+        if ((data.slots || []).length === 0) {
+          setSlotsError('No times available for this date.')
+        }
+      })
+      .catch(() => {
+        setSlots([])
+        setSlotsError('Could not load times. Check your connection and try again.')
+      })
       .finally(() => setLoadingSlots(false))
   }, [step, selectedDate, selectedService])
 
@@ -195,6 +231,10 @@ export default function BookClient() {
   }
 
   const handleSubmit = async () => {
+    if (!selectedService || !selectedDate || !selectedTime) {
+      setError('Please complete service, date, and time before confirming.')
+      return
+    }
     if (!clientName.trim() || !clientPhone.trim()) {
       setError('Please fill in your name and phone number.')
       return
@@ -447,7 +487,7 @@ export default function BookClient() {
               <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-4">— Pick a date</p>
               <div className="flex gap-2 overflow-x-auto pb-3 snap-x snap-mandatory -mx-1 px-1">
                 {days.map((d) => {
-                  const iso = d.toISOString().slice(0, 10)
+                  const iso = toLocalDateString(d)
                   const blocked = isDateBlocked(iso)
                   const blockReason = blocked ? getBlockedReason(iso) : null
                   const sel = selectedDate === iso
@@ -493,6 +533,21 @@ export default function BookClient() {
                       <Loader2 className="w-5 h-5 text-stone animate-spin" aria-hidden="true" />
                       <span className="text-stone text-sm font-['Inter'] ml-2">Checking availability…</span>
                     </div>
+                  ) : slotsError || slots.length === 0 ? (
+                    <motion.div
+                      role="status"
+                      className="border border-[#e4ddd7] bg-[#faf7f5] px-4 py-8 text-center"
+                    >
+                      <p className="text-stone text-sm font-['Inter'] font-light mb-4">
+                        {slotsError || 'No open slots for this date. Try another day or message us on WhatsApp.'}
+                      </p>
+                      <a
+                        href="https://wa.me/923222782254"
+                        className="text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] underline underline-offset-2"
+                      >
+                        WhatsApp the salon
+                      </a>
+                    </motion.div>
                   ) : (
                     <div className="grid grid-cols-3 min-[420px]:grid-cols-4 md:grid-cols-6 gap-2">
                       {slots.map(({ time, available }) => {
@@ -565,6 +620,15 @@ export default function BookClient() {
                     {formatPrice(selectedService.pricePkr)}
                   </p>
                 )}
+                {selectedService &&
+                  getAddonsForService(selectedService.id)
+                    .filter((a) => selectedAddonIds.has(a.id))
+                    .map((a) => (
+                      <p key={a.id} className="text-stone text-xs font-['Inter'] mt-1">
+                        + {a.name}
+                        {a.pricePkr != null ? ` · ${formatPrice(a.pricePkr)}` : ''}
+                      </p>
+                    ))}
               </div>
 
               {selectedService && getAddonsForService(selectedService.id).length > 0 && (
