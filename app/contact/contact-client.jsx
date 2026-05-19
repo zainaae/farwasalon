@@ -44,12 +44,12 @@ export default function ContactClient() {
   }
 
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
+    <main id="main" className="page-content">
 
-      <section className="bg-white py-14 md:py-20 px-4 sm:px-5 md:px-10 border-b border-[#e4ddd7]">
-        <div className="max-w-screen-xl mx-auto">
+      <section className="bg-white py-14 md:py-20 border-b border-border-soft">
+        <div className="section-shell">
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">— Ready?</motion.p>
+            className="eyebrow mb-3">— Ready?</motion.p>
           <div className="overflow-hidden">
             <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
@@ -58,28 +58,27 @@ export default function ContactClient() {
           </div>
           <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}
             className="mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
-            <span className="inline-flex items-center gap-2 border border-[#e4ddd7] px-3 py-2 text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone">
+            <span className="inline-flex items-center gap-2 border border-border-soft px-3 py-2 text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone">
               <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#6b9b5f]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
               Next slot <span className="text-ink font-medium ml-1">{slot.label}</span>
             </span>
-            <Link href="/book"
-              className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[10px] sm:text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-5 py-2.5 hover:bg-stone transition-colors">
+            <Link href="/book" className="tap-safe btn-primary text-[10px] sm:text-[11px] !py-2.5 !px-5">
               <Sparkles className="w-3 h-3" /> Book online
             </Link>
           </motion.div>
         </div>
       </section>
 
-      <section className="py-14 md:py-20 px-4 sm:px-5 md:px-10">
-        <div className="max-w-screen-xl mx-auto grid md:grid-cols-[1.2fr_1fr] gap-14 md:gap-20">
+      <section className="py-14 md:py-20">
+        <div className="section-shell grid md:grid-cols-[1.2fr_1fr] gap-14 md:gap-20">
 
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
-            <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-6">— Find us</p>
+            <p className="eyebrow mb-6">— Find us</p>
 
             <div className="flex flex-col gap-5 mb-10">
               <a href={MAPS_LINK} target="_blank" rel="noreferrer"
                 className="flex items-start gap-4 group">
-                <div className="w-9 h-9 border border-[#e4ddd7] flex items-center justify-center shrink-0 group-hover:border-ink transition-colors">
+                <div className="w-9 h-9 border border-border-soft flex items-center justify-center shrink-0 group-hover:border-ink transition-colors">
                   <MapPin className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
                 </div>
                 <div>
@@ -90,7 +89,7 @@ export default function ContactClient() {
               </a>
               <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
                 className="flex items-start gap-4 group">
-                <div className="w-9 h-9 border border-[#e4ddd7] flex items-center justify-center shrink-0 group-hover:border-ink transition-colors">
+                <div className="w-9 h-9 border border-border-soft flex items-center justify-center shrink-0 group-hover:border-ink transition-colors">
                   <Phone className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
                 </div>
                 <div>
@@ -100,7 +99,7 @@ export default function ContactClient() {
               </a>
               <a href={IG_LINK} target="_blank" rel="noreferrer"
                 className="flex items-start gap-4 group">
-                <div className="w-9 h-9 border border-[#e4ddd7] flex items-center justify-center shrink-0 group-hover:border-ink transition-colors">
+                <div className="w-9 h-9 border border-border-soft flex items-center justify-center shrink-0 group-hover:border-ink transition-colors">
                   <IgIcon className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
                 </div>
                 <div>
@@ -109,7 +108,7 @@ export default function ContactClient() {
                 </div>
               </a>
               <div className="flex items-start gap-4">
-                <div className="w-9 h-9 border border-[#e4ddd7] flex items-center justify-center shrink-0">
+                <div className="w-9 h-9 border border-border-soft flex items-center justify-center shrink-0">
                   <Clock className="w-3.5 h-3.5 text-stone" />
                 </div>
                 <div>
@@ -121,7 +120,7 @@ export default function ContactClient() {
               </div>
             </div>
 
-            <div className="relative overflow-hidden bg-mist border border-[#e4ddd7]" style={{ aspectRatio: '4/3' }}>
+            <div className="relative overflow-hidden panel-soft" style={{ aspectRatio: '4/3' }}>
               <iframe
                 title="Farwa Beauty Salon location — PECHS, Karachi"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.5!2d67.0584185!3d24.8797532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f2832975c79%3A0xe55ba4a44d34a210!2sFarwa%20beauty%20salon!5e0!3m2!1sen!2spk!4v1"
@@ -138,8 +137,8 @@ export default function ContactClient() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
-            <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-6">— Book via WhatsApp</p>
-            <p className="text-stone font-light text-sm leading-relaxed mb-8">
+            <p className="eyebrow mb-6">— Book via WhatsApp</p>
+            <p className="text-body mb-8">
               Fill in the details below and we&apos;ll open a pre-filled WhatsApp message. We confirm within a few hours.
             </p>
 
@@ -147,14 +146,14 @@ export default function ContactClient() {
               <label htmlFor="booking-name" className="sr-only">Your name</label>
               <input id="booking-name" name="name" type="text" placeholder="Your name" autoComplete="name"
                 value={name} onChange={e => setName(e.target.value)} required
-                className="border border-[#e4ddd7] text-ink placeholder-stone text-sm font-['Inter'] px-5 py-3.5 focus:outline-none focus:border-ink transition-colors w-full bg-white" />
+                className="input-field" />
 
               <label htmlFor="booking-phone" className="sr-only">Phone number</label>
               <input id="booking-phone" name="phone" type="tel" placeholder="03xx-xxxxxxx" autoComplete="tel"
                 value={phone} onChange={e => setPhone(e.target.value)} required
-                className="border border-[#e4ddd7] text-ink placeholder-stone text-sm font-['Inter'] px-5 py-3.5 focus:outline-none focus:border-ink transition-colors w-full bg-white" />
+                className="input-field" />
 
-              <fieldset className="border border-[#e4ddd7] bg-white px-5 py-4">
+              <fieldset className="panel-soft px-5 py-4">
                 <legend className="text-[11px] font-['Inter'] text-stone px-1">Services (add one or more)</legend>
                 {picked.length === 0 ? (
                   <p id="booking-services-hint" className="text-stone text-xs font-light mb-3">Pick from the menu below — you can add multiple.</p>
@@ -162,7 +161,7 @@ export default function ContactClient() {
                   <ul className="flex flex-wrap gap-2 mb-3" aria-label="Services to book">
                     {picked.map((s) => (
                       <li key={s}>
-                        <span className="inline-flex items-center gap-1 pl-3 pr-1 py-1 bg-mist border border-[#e4ddd7] text-xs font-['Syne'] font-semibold uppercase text-ink">
+                        <span className="inline-flex items-center gap-1 pl-3 pr-1 py-1 bg-mist border border-border-soft text-xs font-['Syne'] font-semibold uppercase text-ink">
                           <span className="max-w-[14rem] truncate">{s}</span>
                           <button type="button" className="tap-safe p-1.5 text-stone hover:text-ink" onClick={() => removeService(s)} aria-label={`Remove ${s}`}>
                             <X className="w-3.5 h-3.5" />
@@ -181,7 +180,7 @@ export default function ContactClient() {
                     defaultValue=""
                     aria-describedby={picked.length === 0 ? 'booking-services-hint' : undefined}
                     onChange={(e) => { const v = e.target.value; if (v) addService(v) }}
-                    className="border border-[#e4ddd7] text-stone text-sm font-['Inter'] px-5 py-3.5 pr-10 focus:outline-none focus:border-ink transition-colors appearance-none w-full bg-white">
+                    className="input-field appearance-none pr-10">
                     <option value="">Add a service…</option>
                     {Object.entries(SERVICES).map(([cat, svcs]) => (
                       <optgroup key={cat} label={cat}>
@@ -195,12 +194,12 @@ export default function ContactClient() {
 
               <label htmlFor="booking-date" className="sr-only">Preferred date</label>
               <input id="booking-date" name="date" type="date" value={date} onChange={e => setDate(e.target.value)}
-                className="border border-[#e4ddd7] text-stone text-sm font-['Inter'] px-5 py-3.5 focus:outline-none focus:border-ink transition-colors w-full bg-white" />
+                className="input-field" />
 
               <label htmlFor="booking-time" className="sr-only">Preferred time</label>
               <div className="relative">
                 <select id="booking-time" name="time" value={time} onChange={e => setTime(e.target.value)}
-                  className="border border-[#e4ddd7] text-stone text-sm font-['Inter'] px-5 py-3.5 pr-10 focus:outline-none focus:border-ink transition-colors appearance-none w-full bg-white">
+                  className="input-field appearance-none pr-10">
                   <option value="">Preferred time</option>
                   {['11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'].map(t => (
                     <option key={t} value={t}>{t}</option>
@@ -210,7 +209,7 @@ export default function ContactClient() {
               </div>
 
               <button type="submit" disabled={picked.length === 0} aria-label="Send booking request on WhatsApp"
-                className="mt-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors duration-300 w-full flex items-center justify-center gap-2">
+                className="mt-2 btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-ink">
                 Send on WhatsApp <ArrowUpRight className="w-4 h-4" />
               </button>
             </form>

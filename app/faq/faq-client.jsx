@@ -13,7 +13,7 @@ function FaqItem({ faq, index }) {
     <motion.div
       initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.05 }}
-      className="border-b border-[#e4ddd7]"
+      className="border-b border-border-soft"
     >
       <button
         type="button"
@@ -27,7 +27,7 @@ function FaqItem({ faq, index }) {
         <ChevronDown className={`w-4 h-4 text-stone shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
       <div id={`faq-panel-${index}`} role="region" className={`overflow-hidden transition-all duration-200 ${open ? 'max-h-96 pb-5 -mt-1' : 'max-h-0'}`}>
-        <p className="text-stone text-sm font-light leading-relaxed font-['Inter']">{faq.a}</p>
+        <p className="text-body text-sm">{faq.a}</p>
       </div>
     </motion.div>
   )
@@ -37,12 +37,12 @@ export default function FaqClient() {
   const booking = useBooking()
 
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
+    <main id="main" className="page-content">
 
-      <section className="bg-white py-16 md:py-20 px-4 sm:px-5 md:px-10 border-b border-[#e4ddd7]">
-        <div className="max-w-screen-xl mx-auto">
+      <section className="bg-white py-16 md:py-20 border-b border-border-soft">
+        <div className="section-shell">
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">— Common questions</motion.p>
+            className="eyebrow mb-3">— Common questions</motion.p>
           <div className="overflow-hidden">
             <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
@@ -52,9 +52,9 @@ export default function FaqClient() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20 px-4 sm:px-5 md:px-10">
+      <section className="py-14 md:py-20">
         <div className="max-w-screen-md mx-auto">
-          <div className="border-t border-[#e4ddd7]">
+          <div className="border-t border-border-soft">
             {FAQS.map((faq, i) => (
               <FaqItem key={i} faq={faq} index={i} />
             ))}
@@ -62,8 +62,8 @@ export default function FaqClient() {
         </div>
       </section>
 
-      <section className="bg-ink py-16 md:py-20 px-4 sm:px-5 md:px-10">
-        <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <section className="bg-ink py-16 md:py-20">
+        <div className="section-shell flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <motion.h2 initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
             className="font-['Unbounded'] font-bold text-xl md:text-2xl text-white">
             Have another question? Ask us directly.

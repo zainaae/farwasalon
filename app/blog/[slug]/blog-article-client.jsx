@@ -46,9 +46,9 @@ export default function BlogArticleClient({ slug }) {
 
   if (!post) {
     return (
-      <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
-          <p className="text-stone text-sm">Article not found.</p>
+      <main id="main" className="page-content">
+        <div className="section-shell section-pad min-h-screen">
+          <p className="text-body">Article not found.</p>
         </div>
       </main>
     )
@@ -61,8 +61,8 @@ export default function BlogArticleClient({ slug }) {
   })
 
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
+    <main id="main" className="page-content">
+      <div className="section-shell section-pad min-h-screen">
         <ArticleJsonLd post={post} />
         <BreadcrumbJsonLd items={[
           { name: 'Home', url: 'https://farwasalon.com/' },
@@ -98,7 +98,7 @@ export default function BlogArticleClient({ slug }) {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-10 pb-8 border-b border-[#e4ddd7]"
+            className="mb-10 pb-8 border-b border-border-soft"
           >
             <div className="flex items-center gap-3 mb-4">
               <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
@@ -183,7 +183,7 @@ export default function BlogArticleClient({ slug }) {
             })}
           </motion.div>
 
-          <div className="mt-10 pt-8 border-t border-[#e4ddd7]">
+          <div className="mt-10 pt-8 border-t border-border-soft">
             <div className="flex items-start gap-4 mb-8">
               <div className="w-12 h-12 rounded-full bg-mist flex items-center justify-center flex-shrink-0">
                 <span className="text-ink font-['Syne'] font-bold text-lg">R</span>
@@ -199,7 +199,7 @@ export default function BlogArticleClient({ slug }) {
           </div>
 
           {post.relatedCategories?.length > 0 && (
-            <section className="pt-8 border-t border-[#e4ddd7]">
+            <section className="pt-8 border-t border-border-soft">
               <h2 className="font-['Syne'] font-bold text-base text-ink mb-4">Related Services</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {post.relatedCategories.map((cat) => {
@@ -220,11 +220,8 @@ export default function BlogArticleClient({ slug }) {
             </section>
           )}
 
-          <div className="pt-8 border-t border-[#e4ddd7] flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <Link
-              href="/book"
-              className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors"
-            >
+          <div className="pt-8 border-t border-border-soft flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <Link href="/book" className="tap-safe btn-primary">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
             <a
@@ -246,7 +243,7 @@ export default function BlogArticleClient({ slug }) {
           {(() => {
             const related = BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 3)
             return related.length > 0 && (
-              <section className="mt-10 pt-8 border-t border-[#e4ddd7]">
+              <section className="mt-10 pt-8 border-t border-border-soft">
                 <h2 className="font-['Syne'] font-bold text-base text-ink mb-4">Related Articles</h2>
                 <div className="space-y-4">
                   {related.map((p) => (
