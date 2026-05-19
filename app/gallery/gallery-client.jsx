@@ -10,7 +10,7 @@ export default function GalleryClient() {
   const booking = useBooking()
 
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
+    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))] overflow-x-clip max-w-full min-w-0">
 
       <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-12 sm:py-16 md:py-20">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-[#e4ddd7] pb-8 md:pb-10">

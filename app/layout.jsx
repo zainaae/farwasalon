@@ -124,7 +124,7 @@ export default function RootLayout({ children }) {
           {`window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }`}
         </Script>
       </head>
-      <body>
+      <body className="overflow-x-clip">
         <ClientShell>{children}</ClientShell>
         <Analytics />
         <JsonLd data={buildBeautySalonSchema()} />

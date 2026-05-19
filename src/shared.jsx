@@ -201,7 +201,7 @@ export function SmoothyGallery({ photos }) {
   }, [idx, count, scrollTo])
 
   return (
-    <div className="relative">
+    <div className="relative overflow-x-clip max-w-full">
       <div
         ref={scrollerRef}
         onScroll={onScroll}
@@ -1086,9 +1086,9 @@ export function StickyMobileCTA({ hidden = false }) {
   return (
     <>
       {/* flow spacer so page content never hides behind the fixed bar on mobile */}
-      <div aria-hidden className="h-[calc(5rem+env(safe-area-inset-bottom,0px))] md:hidden" />
+      <div aria-hidden className="h-[calc(5.25rem+env(safe-area-inset-bottom,0px))] md:hidden shrink-0" />
       <nav
-        className="fixed z-50 left-0 right-0 md:hidden"
+        className="fixed z-50 left-0 right-0 md:hidden max-w-[100vw]"
         style={{ bottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}
         aria-label="Quick contact and booking"
       >
@@ -1096,7 +1096,7 @@ export function StickyMobileCTA({ hidden = false }) {
           initial={{ y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.0, duration: 0.55, ease: [0.16,1,0.3,1] }}
-          className="mx-3 flex items-stretch gap-1.5 rounded-xl bg-ink/95 backdrop-blur-md shadow-2xl shadow-ink/40 border border-white/10 p-1.5"
+          className="mx-3 flex items-stretch gap-1.5 rounded-xl bg-ink/95 backdrop-blur-md shadow-2xl shadow-ink/40 border border-white/10 p-1.5 min-w-0 max-w-[calc(100vw-1.5rem)]"
         >
           <a
             href={`tel:+${WA_NUMBER}`}

@@ -36,6 +36,8 @@
   *, *::before, *::after { box-sizing: border-box; }
   html {
     scroll-behavior: smooth;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
   }
   body {
     margin: 0;
@@ -46,7 +48,14 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    overflow-x: hidden;
+    overflow-x: clip;
+    min-height: 100dvh;
+  }
+  img, video, svg {
+    max-width: 100%;
+  }
+  #main {
+    min-width: 0;
   }
 }
 
@@ -92,9 +101,10 @@
 .display-section {
   font-family: 'Unbounded', sans-serif;
   font-weight: 700;
-  font-size: clamp(2rem, 5vw, 5.5rem);
+  font-size: clamp(1.75rem, 4.5vw, 5.5rem);
   line-height: 0.95;
   letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
 }
 .display-card {
   font-family: 'Syne', sans-serif;
@@ -262,10 +272,12 @@ video[aria-hidden="true"] { pointer-events: none; }
   contain-intrinsic-size: auto 600px;
 }
 
-/* ── Breakpoint-safe touch target (WCAG 2.5.5) ── */
-@media (max-width: 640px) {
-  .tap-safe {
-    min-height: 44px;
-    min-width: 44px;
-  }
+/* ── Touch target floor (WCAG 2.5.5; holds at browser zoom-out) ── */
+.tap-safe {
+  min-height: 44px;
+}
+button.tap-safe,
+[role="button"].tap-safe,
+[role="tab"].tap-safe {
+  min-width: 44px;
 }

@@ -63,7 +63,7 @@ export default function CategoryDetailClient({ categorySlug }) {
   if (!category) {
     return (
       <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-0">
           <p className="text-stone text-sm">Category not found.</p>
         </div>
       </main>
@@ -72,7 +72,7 @@ export default function CategoryDetailClient({ categorySlug }) {
 
   return (
     <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-0">
         <div className="max-w-3xl">
           <BreadcrumbJsonLd items={[
             { name: 'Home', url: 'https://farwasalon.com/' },

@@ -70,7 +70,9 @@ export default function ClientShell({ children }) {
         <ScrollToTop />
         <SkipLink />
         <Navbar transparent={isHome} />
-        {children}
+        <div className="overflow-x-clip w-full max-w-full min-w-0">
+          {children}
+        </div>
         <Footer />
         {useMobileCtaBar ? (
           <StickyMobileCTA hidden={hideSticky} />

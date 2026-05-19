@@ -82,9 +82,9 @@ function formatDateNice(dateStr) {
 }
 
 const stepVariants = {
-  enter:  (dir) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
-  center: { x: 0, opacity: 1 },
-  exit:   (dir) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
+  enter:  () => ({ opacity: 0, y: 12 }),
+  center: { opacity: 1, y: 0 },
+  exit:   () => ({ opacity: 0, y: -12 }),
 }
 
 function FirstVisitHint() {
@@ -344,20 +344,20 @@ export default function BookClient() {
   }
 
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
+    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))] overflow-x-clip">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-0 min-w-0 max-w-full overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
 
         <div className="mb-10 md:mb-14 border-b border-[#e4ddd7] pb-8">
-          <div className="overflow-hidden">
+          <motion.div className="overflow-hidden">
             <motion.h1
               initial={{ y: '60%', opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="display-section text-ink mb-4"
+              className="display-section text-ink mb-4 break-words"
             >
-              BOOK<span className="text-[#e4ddd7] mx-3 font-light italic text-[0.6em]">—</span>ONLINE
+              BOOK<span className="text-[#e4ddd7] mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>ONLINE
             </motion.h1>
-          </div>
+          </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -369,9 +369,9 @@ export default function BookClient() {
         </div>
 
         {/* Step indicator */}
-        <div className="flex items-center gap-4 mb-8">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 sm:gap-4 mb-8 min-w-0">
           {['Service', 'Date & Time', 'Details'].map((label, i) => (
-            <div key={label} className="flex items-center gap-2">
+            <div key={label} className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <span className={`w-7 h-7 flex items-center justify-center text-[11px] font-['Inter'] font-bold transition-colors ${
                 i < step ? 'bg-ink text-white' :
                 i === step ? 'bg-ink text-white' :
@@ -487,7 +487,7 @@ export default function BookClient() {
               </div>
 
               {selectedService && (
-                <div className="sticky bottom-0 z-[1] pt-5 mt-6 border-t border-[#e4ddd7] bg-white">
+                <div className="sticky bottom-0 z-[1] pt-5 mt-6 border-t border-[#e4ddd7] bg-white pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]">
                   <div className="flex items-center justify-between gap-4">
                     <div className="min-w-0">
                       <p className="font-['Syne'] font-bold text-sm text-ink uppercase truncate">{selectedService.name}</p>
@@ -570,7 +570,8 @@ export default function BookClient() {
               )}
 
               <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-4">— Pick a date</p>
-              <div className="flex gap-2 overflow-x-auto pb-3 snap-x snap-mandatory -mx-1 px-1">
+              <div className="min-w-0 max-w-full overflow-x-hidden">
+              <div className="flex gap-2 overflow-x-auto overscroll-x-contain pb-3 snap-x snap-mandatory scrollbar-none min-w-0">
                 {days.map((d) => {
                   const iso = toLocalDateString(d)
                   const blocked = isDateBlocked(iso)
@@ -588,7 +589,7 @@ export default function BookClient() {
                       disabled={blocked}
                       title={blockReason || undefined}
                       aria-label={blocked ? `${dayName} ${dateNum} ${monthName} — ${blockReason}` : `${dayName} ${dateNum} ${monthName}`}
-                      className={`snap-center shrink-0 w-[4.5rem] py-3 border text-center transition-all ${
+                      className={`tap-safe snap-center shrink-0 min-w-[4.25rem] w-[4.5rem] py-3 border text-center transition-all ${
                         sel
                           ? 'bg-ink text-white border-ink'
                           : blocked
@@ -606,6 +607,7 @@ export default function BookClient() {
                     </button>
                   )
                 })}
+              </div>
               </div>
 
               {selectedDate && (
@@ -643,7 +645,7 @@ export default function BookClient() {
                             type="button"
                             onClick={() => available && setSelectedTime(time)}
                             disabled={!available}
-                            className={`tap-safe py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-all ${
+                            className={`tap-safe min-h-[44px] py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-all ${
                               sel
                                 ? 'bg-ink text-white border-ink'
                                 : available

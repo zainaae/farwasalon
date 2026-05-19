@@ -34,13 +34,13 @@ export default function ServicesClient() {
   const categories = Object.keys(SERVICES)
 
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
+    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))] overflow-x-clip max-w-full min-w-0">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-0">
         <div className="mb-10 md:mb-14 border-b border-[#e4ddd7] pb-8">
           <div className="overflow-hidden">
             <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink mb-4">
-              OUR<span className="text-[#e4ddd7] mx-3 font-light italic text-[0.6em]">—</span>SERVICES
+              OUR<span className="text-[#e4ddd7] mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>SERVICES
             </motion.h1>
           </div>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }}

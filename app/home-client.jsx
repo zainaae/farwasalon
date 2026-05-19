@@ -140,7 +140,7 @@ function Hero() {
         ref={textRef}
         className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14"
         style={{ textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 1px 6px rgba(0,0,0,0.5)' }}>
-        <div className="max-w-screen-2xl mx-auto">
+        <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
           <div className="overflow-hidden mb-4 md:mb-6">
             <m.p
               id="hero-lede"
@@ -151,9 +151,9 @@ function Hero() {
             </m.p>
           </div>
 
-          <h1 id="hero-headline" className="font-['Unbounded'] text-white leading-[0.95] mb-6 md:mb-8"
+          <h1 id="hero-headline" className="font-['Unbounded'] text-white leading-[0.95] mb-6 md:mb-8 break-words"
             style={{
-              fontSize: 'clamp(1.9rem, 6.4vw, 5.25rem)',
+              fontSize: 'clamp(1.75rem, 6.4vw, 5.25rem)',
               letterSpacing: '-0.02em',
               maxWidth: '22ch',
             }}>
@@ -230,7 +230,7 @@ function Hero() {
 
 export default function HomeClient() {
   return (
-    <main id="main">
+    <main id="main" className="overflow-x-clip max-w-full min-w-0">
       <Hero />
       <HomeBelowFold />
     </main>

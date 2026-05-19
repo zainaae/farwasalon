@@ -120,9 +120,9 @@ function EditorialSlideshow() {
   const doubled = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
 
   return (
-    <section className="cv-auto bg-white border-y border-[#e4ddd7] overflow-hidden" aria-label="Editorial photo showcase">
-      <div className="md:hidden py-3 overflow-hidden">
-        <div className="flex w-max" style={{ animation: 'marquee 45s linear infinite' }}>
+    <section className="cv-auto bg-white border-y border-[#e4ddd7] overflow-x-clip max-w-full" aria-label="Editorial photo showcase">
+      <div className="md:hidden py-3 w-full max-w-full overflow-x-clip">
+        <div className="flex w-max max-w-none" style={{ animation: 'marquee 45s linear infinite' }}>
           {doubled.map((p, i) => (
             <figure key={i}
               className="relative shrink-0 overflow-hidden mx-[5px]"
@@ -149,8 +149,8 @@ function EditorialSlideshow() {
         </div>
       </div>
 
-      <div className="hidden md:block py-2">
-        <div className="flex w-max" style={{ animation: 'marquee 65s linear infinite' }}>
+      <div className="hidden md:block py-2 w-full max-w-full overflow-x-clip">
+        <div className="flex w-max max-w-none" style={{ animation: 'marquee 65s linear infinite' }}>
           {doubled.map((p, i) => (
             <div key={i} className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group cursor-default">
               {p.video ? (
@@ -259,7 +259,7 @@ function FeaturedServices() {
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-wrap gap-2 mb-6"
+              className="flex flex-wrap gap-2 mb-6 min-w-0"
               role="tablist"
               aria-label="Filter service categories"
             >
@@ -273,7 +273,7 @@ function FeaturedServices() {
                     setActiveTab(tab)
                     setHovered(null)
                   }}
-                  className={`text-[10px] tracking-[0.14em] uppercase font-['Inter'] px-3 py-2 border transition-colors ${
+                  className={`tap-safe text-[10px] tracking-[0.14em] uppercase font-['Inter'] px-3 py-2 border transition-colors shrink-0 ${
                     activeTab === tab
                       ? 'bg-ink text-white border-ink'
                       : 'border-[#e4ddd7] text-stone hover:border-ink hover:text-ink'

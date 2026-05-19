@@ -131,7 +131,7 @@ export default function NewsletterModal() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-ink/60 backdrop-blur-sm"
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-ink/60 backdrop-blur-sm p-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] pl-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))]"
           role="dialog"
           aria-modal="true"
           aria-labelledby="newsletter-heading"
@@ -142,14 +142,14 @@ export default function NewsletterModal() {
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 24, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-md bg-white shadow-2xl"
+            className="relative w-full max-w-md max-h-[min(90dvh,calc(100dvh-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-2rem))] overflow-y-auto overscroll-contain bg-white shadow-2xl mx-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={dismiss}
               aria-label="Close newsletter signup"
-              className="absolute top-3 right-3 p-2 text-stone hover:text-ink transition-colors"
+              className="tap-safe absolute top-2 right-2 p-2 text-stone hover:text-ink transition-colors"
             >
               <X className="w-4 h-4" />
             </button>

@@ -26,7 +26,7 @@ export default function BeforeAfterSlider({ before, after, label }) {
   }
 
   return (
-    <figure className="w-full max-w-md mx-auto">
+    <figure className="w-full max-w-md min-w-0 mx-auto">
       <div
         ref={containerRef}
         className="relative aspect-[4/5] overflow-hidden border border-[#e4ddd7] bg-mist select-none touch-none"
@@ -48,7 +48,7 @@ export default function BeforeAfterSlider({ before, after, label }) {
           aria-hidden="true"
         />
         <div
-          className="absolute top-1/2 w-8 h-8 rounded-full bg-white border border-[#e4ddd7] shadow flex items-center justify-center text-[10px] text-ink font-['Inter'] pointer-events-none"
+          className="absolute top-1/2 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-white border border-[#e4ddd7] shadow flex items-center justify-center text-[10px] text-ink font-['Inter'] pointer-events-none"
           style={{ left: `${position}%`, transform: 'translate(-50%, -50%)' }}
           aria-hidden="true"
         >
