@@ -361,7 +361,7 @@ function BookingSheetSelectedChips({ picked, onRemove }) {
       <ul className="flex flex-wrap gap-2 mb-4" aria-label="Selected services">
         {picked.map((p) => (
           <li key={p.id}>
-            <span className="inline-flex items-center gap-1.5 max-w-full pl-3 pr-1 py-1.5 bg-mist border border-[#e4ddd7] text-[11px] font-['Inter'] text-ink">
+            <span className="inline-flex items-center gap-1.5 max-w-full pl-3 pr-1 py-1.5 bg-mist border border-border-soft text-[11px] font-['Inter'] text-ink">
               <span className="truncate font-['Syne'] font-semibold uppercase tracking-tight">{p.name}</span>
               <button
                 type="button"
@@ -500,7 +500,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
             onClick={(e) => e.stopPropagation()}
             className="bg-white w-full md:max-w-xl md:mx-4 rounded-t-2xl md:rounded-none flex flex-col max-h-[min(92dvh,calc(100svh-env(safe-area-inset-bottom,0px)))] shadow-[0_-8px_40px_rgba(0,0,0,0.12)] md:shadow-none"
           >
-            <div className="flex items-center justify-between px-5 md:px-7 py-3.5 md:py-4 border-b border-[#e4ddd7]">
+            <div className="flex items-center justify-between px-5 md:px-7 py-3.5 md:py-4 border-b border-border-soft">
               <div>
                 <p className="text-stone text-[10px] tracking-[0.24em] uppercase font-['Inter']">Step {step + 1} of 3</p>
                 <h2 id="booking-title" className="font-['Unbounded'] font-bold text-ink text-base md:text-lg mt-0.5">
@@ -538,7 +538,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                     <label htmlFor="bk-name" className="sr-only">Your name</label>
                     <input id="bk-name" type="text" placeholder="Your name" autoComplete="name"
                       value={bkName} onChange={e => setBkName(e.target.value)}
-                      className="border border-[#e4ddd7] text-ink placeholder-stone text-sm font-['Inter'] px-4 py-2.5 w-full focus:outline-none focus:border-ink transition-colors bg-white" />
+                      className="border border-border-soft text-ink placeholder-stone text-sm font-['Inter'] px-4 py-2.5 w-full focus:outline-none focus:border-ink transition-colors bg-white" />
                   </div>
                   <BookingSheetSelectedChips picked={picked} onRemove={removePick} />
                   {!cat ? (
@@ -549,7 +549,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                             key={c}
                             type="button"
                             onClick={() => setCat(c)}
-                            className="tap-safe p-3 border border-[#e4ddd7] hover:border-ink hover:bg-mist transition-all text-left"
+                            className="tap-safe p-3 border border-border-soft hover:border-ink hover:bg-mist transition-all text-left"
                           >
                             <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight">{c}</p>
                             <p className="text-stone text-[10px] font-['Inter'] mt-1">{SERVICES[c].length} services</p>
@@ -570,7 +570,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                       <p className="text-[11px] text-stone/80 font-['Inter'] font-light mb-3">
                         Tap to select one or more. Then continue when you&apos;re ready.
                       </p>
-                      <div className="flex flex-col divide-y divide-[#e4ddd7] border-y border-[#e4ddd7] flex-1 min-h-0 overflow-y-auto overscroll-contain">
+                      <div className="flex flex-col divide-y divide-[#e4ddd7] border-y border-border-soft flex-1 min-h-0 overflow-y-auto overscroll-contain">
                         {(SERVICES[cat] ?? []).map((s) => {
                           const sel = picked.some((p) => p.id === s.id)
                           return (
@@ -595,7 +595,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                               </div>
                               <span
                                 className={`shrink-0 w-8 h-8 flex items-center justify-center border ${
-                                  sel ? 'border-ink bg-ink text-white' : 'border-[#e4ddd7] text-transparent'
+                                  sel ? 'border-ink bg-ink text-white' : 'border-border-soft text-transparent'
                                 }`}
                                 aria-hidden="true"
                               >
@@ -618,7 +618,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                   )}
 
                   {picked.length > 0 && (
-                    <div className="sticky bottom-0 z-[1] -mx-2 px-2 pt-4 mt-4 border-t border-[#e4ddd7] bg-white shrink-0">
+                    <div className="sticky bottom-0 z-[1] -mx-2 px-2 pt-4 mt-4 border-t border-border-soft bg-white shrink-0">
                       <button
                         type="button"
                         onClick={() => setStep(1)}
@@ -647,7 +647,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                     </ul>
                   )}
                   <MonthCalendar value={date} onChange={(d) => { setDate(d); setStep(2) }} />
-                  <div className="flex justify-start gap-2 mt-5 pt-4 border-t border-[#e4ddd7]">
+                  <div className="flex justify-start gap-2 mt-5 pt-4 border-t border-border-soft">
                     <button
                       type="button"
                       onClick={() => setStep(0)}
@@ -674,7 +674,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                         className={`tap-safe py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-all ${
                           time === t
                             ? 'bg-ink text-white border-ink'
-                            : 'border-[#e4ddd7] text-ink hover:border-ink hover:bg-mist'
+                            : 'border-border-soft text-ink hover:border-ink hover:bg-mist'
                         }`}
                       >
                         <Clock className="w-3 h-3 inline mr-1 opacity-60" aria-hidden="true" />
@@ -682,7 +682,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                       </button>
                     ))}
                   </div>
-                  <div className="flex justify-between gap-2 pt-3 border-t border-[#e4ddd7]">
+                  <div className="flex justify-between gap-2 pt-3 border-t border-border-soft">
                     <button
                       type="button"
                       onClick={() => setStep(1)}
@@ -745,7 +745,7 @@ export function UrduSignature({ className = '' }) {
 /* ─── Kinetic wordmark divider (replaces plain marquee) ────────── */
 export function WordmarkDivider() {
   return (
-    <div aria-hidden="true" className="bg-white border-y border-[#e4ddd7] overflow-hidden">
+    <div aria-hidden="true" className="bg-white border-y border-border-soft overflow-hidden">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-5 sm:py-6 md:py-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 md:gap-8 text-center sm:text-left">
         <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a98a]/50 to-[#c9a98a]" />
         <span className="font-['Unbounded'] font-black text-ink tracking-[0.3em] text-[11px] md:text-[13px] shrink-0">
@@ -853,7 +853,7 @@ export function ServiceModal({ service, onClose }) {
                 <Sparkles className="w-3.5 h-3.5" /> Add to Booking
               </button>
               <a href={waLink(service.name)} target="_blank" rel="noreferrer" onClick={onClose}
-                className="inline-flex items-center justify-center gap-2 border border-[#e4ddd7] text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-all duration-300">
+                className="inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-all duration-300">
                 Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -958,7 +958,7 @@ export function Navbar({ transparent = false }) {
       <AnimatePresence>
         {mobileOpen && (
           <m.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden bg-white border-t border-[#e4ddd7]">
+            className="md:hidden overflow-hidden bg-white border-t border-border-soft">
             <div className="px-5 py-5 flex flex-col gap-4">
               {navLinks.map(({ label, href }) => (
                 <Link key={href} href={href} onClick={() => setMobileOpen(false)}
@@ -992,7 +992,7 @@ export function Footer() {
   return (
     <footer className="bg-white">
       {/* Top bar — logo + Urdu signature + CTA */}
-      <div className="border-t border-[#e4ddd7] px-5 md:px-10 py-8 md:py-10">
+      <div className="border-t border-border-soft px-5 md:px-10 py-8 md:py-10">
         <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
             <Link href="/" className="shrink-0">
@@ -1015,7 +1015,7 @@ export function Footer() {
         </div>
       </div>
       {/* Link grid */}
-      <div className="border-t border-[#e4ddd7] px-5 md:px-10 py-10 md:py-12">
+      <div className="border-t border-border-soft px-5 md:px-10 py-10 md:py-12">
         <div className="max-w-screen-xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-10">
             <div>
@@ -1052,7 +1052,7 @@ export function Footer() {
               </ul>
             </div>
           </div>
-          <div className="mb-10 pb-8 border-b border-[#e4ddd7]">
+          <div className="mb-10 pb-8 border-b border-border-soft">
             <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-3">
               Salon near you in Karachi
             </p>
@@ -1069,7 +1069,7 @@ export function Footer() {
               ))}
             </ul>
           </div>
-          <div className="border-t border-[#e4ddd7] pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+          <div className="border-t border-border-soft pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
             <div className="flex items-center gap-3 flex-wrap">
               <p className="text-stone text-[11px] font-['Inter']">© {new Date().getFullYear()} Farwa Beauty Salon. All rights reserved.</p>
               <span className="text-[#e4ddd7] hidden sm:inline">·</span>

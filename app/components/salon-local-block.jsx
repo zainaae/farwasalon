@@ -18,20 +18,18 @@ export default function SalonLocalBlock({ variant = 'light', className = '' }) {
 
   return (
     <section
-      className={`${className} ${dark ? 'bg-ink text-white' : 'bg-mist border-y border-[#e4ddd7]'}`}
+      className={`${className} ${dark ? 'bg-ink text-white' : 'bg-mist border-y border-border-soft'}`}
       aria-labelledby="visit-salon-heading"
     >
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-12 md:py-16">
+      <div className="section-shell py-12 md:py-16">
         <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-start">
           <div>
-            <p
-              className={`text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3 ${dark ? 'text-[#c9a98a]' : 'text-stone'}`}
-            >
+            <p className={`eyebrow mb-3 ${dark ? 'text-accent-gold' : ''}`}>
               — Visit the salon
             </p>
             <h2
               id="visit-salon-heading"
-              className={`font-['Unbounded'] font-bold text-xl md:text-2xl mb-4 ${dark ? 'text-white' : 'text-ink'}`}
+              className={`section-title mb-4 ${dark ? 'text-white' : ''}`}
             >
               Farwa Beauty Salon · PECHS, Karachi
             </h2>
@@ -67,9 +65,7 @@ export default function SalonLocalBlock({ variant = 'light', className = '' }) {
             <div className="flex flex-wrap gap-3 mt-6">
               <Link
                 href="/book"
-                className={`tap-safe inline-flex items-center gap-2 text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3.5 transition-colors ${
-                  dark ? 'bg-white text-ink hover:bg-nude' : 'bg-ink text-white hover:bg-stone'
-                }`}
+                className={`btn-primary ${dark ? '!bg-white !text-ink hover:!bg-nude !border-white' : ''}`}
               >
                 Book online <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
@@ -77,18 +73,14 @@ export default function SalonLocalBlock({ variant = 'light', className = '' }) {
                 href={`https://wa.me/${WA_NUMBER}`}
                 target="_blank"
                 rel="noreferrer"
-                className={`tap-safe inline-flex items-center gap-2 border text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3.5 transition-colors ${
-                  dark
-                    ? 'border-white/30 text-white hover:border-white'
-                    : 'border-[#e4ddd7] text-ink hover:border-ink'
-                }`}
+                className={`btn-secondary ${dark ? '!border-white/30 !text-white hover:!border-white hover:!bg-white/10' : ''}`}
               >
                 WhatsApp
               </a>
             </div>
           </div>
           <div>
-            <div className="aspect-[4/3] w-full min-h-[220px] bg-[#e4ddd7] overflow-hidden">
+            <div className="aspect-[4/3] w-full min-h-[220px] bg-border-soft overflow-hidden shadow-soft">
               <iframe
                 title="Farwa Beauty Salon on Google Maps"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3619.0!2d67.0584185!3d24.8797532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f2832975c79%3A0xe55ba4a44d34a210!2sFarwa%20beauty%20salon!5e0!3m2!1sen!2spk!4v1"

@@ -51,7 +51,7 @@ export default function LiveAvailability() {
       <motion.div
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8 flex items-center justify-between gap-3 border border-[#e4ddd7] bg-[#faf7f5] px-4 py-3"
+        className="mb-8 flex items-center justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft"
         role="status"
         aria-live="polite"
       >
@@ -78,7 +78,7 @@ export default function LiveAvailability() {
     <motion.div
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mb-8 flex items-center justify-between gap-3 border border-[#e4ddd7] bg-[#faf7f5] px-4 py-3"
+      className="mb-8 flex items-center justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft"
       role="status"
       aria-live="polite"
     >

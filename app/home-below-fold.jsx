@@ -92,7 +92,7 @@ function StatsStrip() {
             <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
               For over {YEARS_ACTIVE} years, Farwa Beauty Salon has been the trusted choice for women across Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
             </p>
-            <div className="grid grid-cols-3 max-[380px]:grid-cols-1 gap-3 sm:gap-4 border-t border-[#e4ddd7] pt-6 sm:pt-7">
+            <div className="grid grid-cols-3 max-[380px]:grid-cols-1 gap-3 sm:gap-4 border-t border-border-soft pt-6 sm:pt-7">
               {[
                 { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
                 { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
@@ -233,12 +233,12 @@ function FeaturedServices() {
     activeTab === 'All' ? categories : categories.filter((c) => c === activeTab)
 
   return (
-    <section className="cv-auto bg-white py-14 md:py-[4.5rem] px-4 sm:px-5 md:px-10 border-t border-[#e4ddd7]">
-      <div className="max-w-screen-xl mx-auto">
+    <section className="cv-auto bg-white section-pad border-t border-border-soft">
+      <div className="section-shell">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-10 md:mb-12">
           <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— What we do</p>
-            <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight">Our Services</h2>
+            <p className="eyebrow mb-2">— What we do</p>
+            <h2 className="section-title text-2xl md:text-3xl">Our Services</h2>
           </m.div>
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="shrink-0 self-start sm:self-auto">
@@ -274,17 +274,13 @@ function FeaturedServices() {
                     setActiveTab(tab)
                     setHovered(null)
                   }}
-                  className={`tap-safe text-[10px] tracking-[0.14em] uppercase font-['Inter'] px-3 py-2 border transition-colors shrink-0 ${
-                    activeTab === tab
-                      ? 'bg-ink text-white border-ink'
-                      : 'border-[#e4ddd7] text-stone hover:border-ink hover:text-ink'
-                  }`}
+                  className={`tap-safe tab-pill ${activeTab === tab ? 'tab-pill-active' : ''}`}
                 >
                   {tab}
                 </button>
               ))}
             </m.div>
-            <div className="divide-y divide-[#e4ddd7] border-t border-[#e4ddd7]">
+            <div className="divide-y divide-border-soft border-t border-border-soft">
               {visibleCategories.map((cat, i) => (
                 <m.div key={cat}
                   initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}

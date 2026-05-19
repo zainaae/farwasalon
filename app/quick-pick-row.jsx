@@ -26,12 +26,12 @@ export default function QuickPickRow() {
   return (
     <section
       aria-labelledby="quickpick-heading"
-      className="cv-auto bg-white border-b border-[#e4ddd7] py-5 md:py-7 px-4 sm:px-5 md:px-10"
+      className="cv-auto bg-white border-b border-border-soft py-5 md:py-7"
     >
-      <div className="max-w-screen-xl mx-auto">
+      <div className="section-shell">
         <div className="flex items-baseline justify-between gap-4 mb-3.5 md:mb-4">
           <div className="flex items-baseline gap-3 min-w-0">
-            <h2 id="quickpick-heading" className="text-stone text-[10px] tracking-[0.32em] uppercase font-['Inter'] font-medium">
+            <h2 id="quickpick-heading" className="eyebrow font-medium tracking-[0.32em]">
               — Quick pick
             </h2>
             <p className="text-stone/60 text-[10px] sm:text-[11px] font-['Inter'] hidden sm:block">
@@ -59,13 +59,13 @@ export default function QuickPickRow() {
                 href={`/book?category=${encodeURIComponent(category)}`}
                 onClick={() => track('QuickPick', { category })}
                 aria-label={`Book ${category}${minPrice ? ` — from ${formatPrice(minPrice)}` : ''}`}
-                className="tap-safe snap-start shrink-0 inline-flex flex-col items-start gap-0.5 border border-[#e4ddd7] hover:border-ink hover:bg-mist transition-all px-4 py-2.5 min-w-[7rem]"
+                className="tap-safe snap-start shrink-0 inline-flex flex-col items-start gap-0.5 border border-border-soft hover:border-ink hover:bg-mist hover:shadow-soft transition-all px-4 py-2.5 min-w-[7rem]"
               >
                 <span className="font-['Syne'] font-bold text-[12px] text-ink uppercase leading-tight">
                   {category}
                 </span>
                 {minPrice != null ? (
-                  <span className="text-[#c9a98a] text-[10px] font-['Inter'] font-medium">
+                  <span className="text-accent-gold text-[10px] font-['Inter'] font-medium">
                     From {formatPrice(minPrice)}
                   </span>
                 ) : (

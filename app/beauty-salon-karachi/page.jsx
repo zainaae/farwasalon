@@ -36,43 +36,32 @@ export default function BeautySalonKarachiPage() {
   return (
     <>
       <JsonLd data={buildBeautySalonSchema()} />
-      <main
-        id="main"
-        className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]"
-      >
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-0">
-          <p className="text-[10px] tracking-[0.28em] uppercase font-['Inter'] text-stone mb-4">
-            — Karachi beauty salon
-          </p>
-          <h1 className="font-['Unbounded'] font-bold text-3xl md:text-4xl text-ink mb-6 max-w-3xl">
+      <main id="main" className="page-content">
+        <div className="section-shell section-pad min-h-0">
+          <p className="eyebrow mb-4">— Karachi beauty salon</p>
+          <h1 className="font-['Unbounded'] font-bold text-3xl md:text-[2.5rem] text-ink mb-6 max-w-3xl leading-tight tracking-tight">
             Beauty Salon in Karachi — PECHS
           </h1>
-          <p className="text-stone font-['Inter'] font-light text-base md:text-lg leading-relaxed max-w-3xl mb-8">
+          <p className="text-body md:text-lg max-w-3xl mb-8">
             Farwa Beauty Salon has been a home for bridal makeup, facials, threading, waxing, hair, and nail
             services in PECHS Block 3 since 2008. Clients travel from Gulshan, Clifton, DHA, Bahadurabad, and
             across Karachi for consistent quality, transparent pricing from Rs 100, and online booking.
           </p>
 
           <div className="flex flex-wrap gap-3 mb-12">
-            <Link
-              href="/book"
-              className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone transition-colors"
-            >
+            <Link href="/book" className="btn-primary">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <Link
-              href="/services"
-              className="tap-safe inline-flex items-center gap-2 border border-ink text-ink text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-6 py-3.5 hover:bg-mist transition-colors"
-            >
+            <Link href="/services" className="btn-secondary">
               View All Services
             </Link>
           </div>
 
           <section className="mb-12" aria-labelledby="why-heading">
-            <h2 id="why-heading" className="font-['Unbounded'] font-bold text-xl text-ink mb-4">
+            <h2 id="why-heading" className="section-title mb-4">
               Why choose Farwa in Karachi
             </h2>
-            <ul className="space-y-3 text-sm font-['Inter'] text-stone font-light max-w-3xl list-disc pl-5">
+            <ul className="space-y-3 text-body max-w-3xl list-disc pl-5 marker:text-accent-gold">
               <li>
                 <strong className="font-medium text-ink">{YEARS_ACTIVE}+ years</strong> in PECHS with bridal
                 trials, mehndi, and full wedding packages.
@@ -89,11 +78,11 @@ export default function BeautySalonKarachiPage() {
             </ul>
           </section>
 
-          <section className="mb-12 bg-mist border border-[#e4ddd7] p-6 md:p-8" aria-labelledby="visit-heading">
-            <h2 id="visit-heading" className="font-['Unbounded'] font-bold text-lg text-ink mb-4">
+          <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-heading">
+            <h2 id="visit-heading" className="section-title text-lg mb-4">
               Visit the salon
             </h2>
-            <ul className="space-y-3 text-sm font-['Inter'] text-stone">
+            <ul className="space-y-3 text-sm font-['Inter'] text-stone font-light">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-ink" />
                 {SALON_ADDRESS_LINES[0]}
@@ -104,7 +93,7 @@ export default function BeautySalonKarachiPage() {
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 shrink-0 text-ink" />
-                <a href="tel:+923222782254" className="hover:underline text-ink">
+                <a href="tel:+923222782254" className="hover:underline text-ink font-medium">
                   {SALON_PHONE_DISPLAY}
                 </a>
               </li>
@@ -125,7 +114,7 @@ export default function BeautySalonKarachiPage() {
           </section>
 
           <section className="mb-12" aria-labelledby="services-heading">
-            <h2 id="services-heading" className="font-['Unbounded'] font-bold text-xl text-ink mb-4">
+            <h2 id="services-heading" className="section-title mb-4">
               Popular services
             </h2>
             <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -138,10 +127,7 @@ export default function BeautySalonKarachiPage() {
                 ['Rica Wax', CAT_SLUGS['Rica Wax']],
               ].map(([label, slug]) => (
                 <li key={slug}>
-                  <Link
-                    href={`/services/${slug}`}
-                    className="tap-safe flex items-center justify-between border border-[#e4ddd7] px-4 py-3 text-sm font-['Inter'] hover:bg-mist transition-colors"
-                  >
+                  <Link href={`/services/${slug}`} className="card-link">
                     {label}
                     <ArrowUpRight className="w-3.5 h-3.5" />
                   </Link>
@@ -151,20 +137,20 @@ export default function BeautySalonKarachiPage() {
           </section>
 
           <section aria-labelledby="areas-heading">
-            <h2 id="areas-heading" className="font-['Unbounded'] font-bold text-xl text-ink mb-4">
+            <h2 id="areas-heading" className="section-title mb-4">
               Beauty services near your area
             </h2>
-            <ul className="grid sm:grid-cols-2 gap-2">
+            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2">
               {locationLinks.map(({ href, label, slug }) => (
                 <li key={slug}>
-                  <Link href={href} className="link-underline text-sm font-['Inter'] text-stone hover:text-ink">
+                  <Link href={href} className="link-underline text-sm font-['Inter'] text-stone hover:text-ink py-1">
                     {label}
                   </Link>
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-xs text-stone font-['Inter']">
-              <Link href="/" className="link-underline hover:text-ink">
+            <p className="mt-8 pt-6 border-t border-border-soft text-xs text-stone font-['Inter']">
+              <Link href="/" className="link-underline hover:text-ink font-medium">
                 Back to home
               </Link>
             </p>
