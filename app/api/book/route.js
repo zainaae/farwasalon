@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
 import { getSheetRows, appendBooking, generateBookingId, isConfigured, updateBookingStatus } from '../../../lib/google-sheets.js'
-import { ALL_SERVICES, PHONE_RE } from '../../../src/data.js'
+import { ALL_SERVICES, PHONE_RE, getServiceMaxWorkers } from '../../../src/data.js'
 import { checkRateLimit } from '../../../lib/rate-limit.js'
 import { requireStringField } from '../../../lib/sanitize.js'
+import { isAllowedOrigin } from '../../../lib/origin-check.js'
 import {
   FILTERED_SLOTS,
   slotIndex,
@@ -11,9 +12,13 @@ import {
   slotsNeededForDuration,
   canFitAtIndex,
 } from '../../../lib/booking-slots.js'
+import { signCancelToken, phoneLast4 } from '../../../lib/booking-cancel-token.js'
 import { isDateBlocked, getBlockedReason } from '../../../lib/blocked-dates.js'
 
 export async function POST(request) {
+  if (!isAllowedOrigin(request)) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+  }
   const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
   const rl = checkRateLimit(ip, { window: 600, max: 5 })
   if (rl.limited) {
@@ -99,11 +104,12 @@ export async function POST(request) {
     )
   }
 
+  const maxWorkers = getServiceMaxWorkers(service)
   const occupied = buildOccupiedCounts(bookings)
   const startIdx = slotIndex(time)
   const needed = slotsNeededForDuration(duration)
 
-  if (!canFitAtIndex(occupied, startIdx, needed)) {
+  if (!canFitAtIndex(occupied, startIdx, needed, maxWorkers)) {
     return NextResponse.json({ error: 'Time slot is no longer available' }, { status: 409 })
   }
 
@@ -135,7 +141,7 @@ export async function POST(request) {
   try {
     const freshBookings = await getSheetRows(date)
     const freshOccupied = buildOccupiedCounts(freshBookings)
-    if (!canFitAtIndex(freshOccupied, startIdx, needed)) {
+    if (!canFitAtIndex(freshOccupied, startIdx, needed, maxWorkers)) {
       await updateBookingStatus(bookingId, 'Cancelled')
       return NextResponse.json(
         { error: 'This slot was just booked by someone else. Please choose a different time.' },
@@ -145,6 +151,12 @@ export async function POST(request) {
   } catch {
     // Verify-read failed — treat booking as successful (optimistic)
   }
+
+  const cancelToken = signCancelToken({
+    bookingId,
+    date,
+    phoneLast4: phoneLast4(clientPhone),
+  })
 
   return NextResponse.json({
     success: true,
@@ -157,6 +169,7 @@ export async function POST(request) {
       duration,
       clientName,
       clientPhone,
+      cancelToken,
     },
   })
 }

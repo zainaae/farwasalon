@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { SmoothyGallery, IgIcon, useBooking } from '../../src/shared.jsx'
-import { IG_LINK, GALLERY_PHOTOS } from '../../src/data.js'
+import { IG_LINK, GALLERY_PHOTOS, GALLERY_COMPARE_PAIRS } from '../../src/data.js'
+import BeforeAfterSlider from './before-after-slider.jsx'
 
 export default function GalleryClient() {
   const booking = useBooking()
@@ -30,6 +31,18 @@ export default function GalleryClient() {
           </motion.a>
         </div>
       </div>
+
+      <section className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 mb-12 md:mb-16">
+        <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-6 text-center">
+          — Before &amp; after
+        </p>
+        <div className="grid md:grid-cols-3 gap-8 md:gap-6">
+          {GALLERY_COMPARE_PAIRS.map((pair) => (
+            <BeforeAfterSlider key={pair.label} before={pair.before} after={pair.after} label={pair.label} />
+          ))}
+        </div>
+        <p className="text-stone/70 text-[10px] font-['Inter'] text-center mt-4">Drag the slider to compare</p>
+      </section>
 
       <div className="overflow-hidden pb-4">
         <SmoothyGallery photos={GALLERY_PHOTOS} />

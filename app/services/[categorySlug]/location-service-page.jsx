@@ -2,7 +2,16 @@
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, MapPin, Clock, Phone } from 'lucide-react'
-import { WA_DEFAULT, waLink, SERVICES, CAT_SLUGS, formatPrice, YEARS_ACTIVE } from '../../../src/data.js'
+import {
+  WA_DEFAULT,
+  waLink,
+  SERVICES,
+  CAT_SLUGS,
+  formatPrice,
+  YEARS_ACTIVE,
+  CAT_FAQS,
+  getDefaultServiceIdForCategory,
+} from '../../../src/data.js'
 import { NEIGHBORHOODS, TOP_SERVICES } from '../../../src/location-seo.js'
 
 export default function LocationServicePage({ data }) {
@@ -16,6 +25,9 @@ export default function LocationServicePage({ data }) {
 
   const relatedLocations = NEIGHBORHOODS.filter(n => n.slug !== location.slug).slice(0, 4)
   const relatedServices = TOP_SERVICES.filter(s => s.slug !== service.slug).slice(0, 4)
+  const faqs = CAT_FAQS[service.category]?.slice(0, 3) ?? []
+  const bookServiceId = getDefaultServiceIdForCategory(service.category)
+  const bookHref = bookServiceId ? `/book?serviceId=${bookServiceId}` : '/book'
 
   return (
     <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
@@ -88,11 +100,34 @@ export default function LocationServicePage({ data }) {
           <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed mb-4">
             Farwa Beauty Salon is located in PECHS Block 3, Karachi. {location.detail} We&apos;re open Monday to Saturday, 11 AM to 7 PM. Book your appointment on WhatsApp for instant confirmation.
           </p>
-          <a href={waLink(service.name)} target="_blank" rel="noreferrer"
-            className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors">
-            Book {service.name} on WhatsApp <ArrowUpRight className="w-4 h-4" />
-          </a>
+          <div className="flex flex-wrap gap-3">
+            <Link
+              href={bookHref}
+              className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors"
+            >
+              Book online <ArrowUpRight className="w-4 h-4" />
+            </Link>
+            <a href={waLink(service.name)} target="_blank" rel="noreferrer"
+              className="tap-safe inline-flex items-center gap-2 border border-[#e4ddd7] text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-mist transition-colors">
+              WhatsApp <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </div>
         </motion.section>
+
+        {faqs.length > 0 && (
+          <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }}
+            className="mb-12">
+            <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Common questions</h2>
+            <div className="space-y-4">
+              {faqs.map((item) => (
+                <div key={item.q} className="border border-[#e4ddd7] p-4">
+                  <h3 className="font-['Syne'] font-semibold text-sm text-ink mb-2">{item.q}</h3>
+                  <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed">{item.a}</p>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+        )}
 
         <section className="pt-8 border-t border-[#e4ddd7]">
           <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Also Available</h2>

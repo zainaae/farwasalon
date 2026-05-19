@@ -202,16 +202,16 @@ export const SERVICES = {
   ],
 
   'Bridal': [
-    { id: _id++, name: 'Full Bridal Package', category: 'Bridal', pricePkr: 25000, durationMinutes: 300,
+    { id: _id++, name: 'Full Bridal Package', category: 'Bridal', pricePkr: 25000, durationMinutes: 300, maxWorkers: 3,
       desc: 'Our signature all-day bridal experience — hair, makeup, draping, and touch-ups from preparation to reception.',
       includes: ['Bridal makeup', 'Hair styling', 'Dupatta draping', 'Touch-up kit', 'Event presence'] },
-    { id: _id++, name: 'Bridal Trial', category: 'Bridal', pricePkr: 8000, durationMinutes: 120,
+    { id: _id++, name: 'Bridal Trial', category: 'Bridal', pricePkr: 8000, durationMinutes: 120, maxWorkers: 3,
       desc: 'A full preview of your wedding look so you walk down the aisle knowing you look perfect.',
       includes: ['Look consultation', 'Full hair & makeup trial', 'Photos for reference'] },
-    { id: _id++, name: 'Engagement Look', category: 'Bridal', pricePkr: 12000, durationMinutes: 150,
+    { id: _id++, name: 'Engagement Look', category: 'Bridal', pricePkr: 12000, durationMinutes: 150, maxWorkers: 3,
       desc: 'Glam-ready styling for your engagement — romantic, radiant, and completely you.',
       includes: ['Makeup application', 'Hair set', 'Lash application'] },
-    { id: _id++, name: 'Mehndi / Dholki Look', category: 'Bridal', pricePkr: 10000, durationMinutes: 120,
+    { id: _id++, name: 'Mehndi / Dholki Look', category: 'Bridal', pricePkr: 10000, durationMinutes: 120, maxWorkers: 3,
       desc: 'Vibrant, colourful, and festive — a look that celebrates the joy of pre-wedding functions.',
       includes: ['Festive makeup', 'Flower or jewellery hair styling', 'Setting spray'] },
   ],
@@ -247,6 +247,43 @@ export const SERVICES = {
 
 export const ALL_SERVICES = Object.values(SERVICES).flat()
 export const CATEGORIES   = ['All', ...Object.keys(SERVICES)]
+
+/** Default concurrent stations when a service has no maxWorkers */
+export const DEFAULT_MAX_WORKERS = 2
+
+/** Per-service station cap for slot conflict checks (bridal uses more chairs) */
+export function getServiceMaxWorkers(service) {
+  if (service?.maxWorkers != null && service.maxWorkers > 0) return service.maxWorkers
+  if (service?.category === 'Bridal') return 3
+  return DEFAULT_MAX_WORKERS
+}
+
+/** First bookable service id in a category (for SEO landing CTAs) */
+export function getDefaultServiceIdForCategory(categoryName) {
+  const list = SERVICES[categoryName]
+  return list?.[0]?.id ?? null
+}
+
+/** Optional add-on service ids shown during booking confirm step */
+export const SERVICE_ADDON_IDS = {
+  1: [2],       // Eyebrow Threading → Upper Lip
+  7: [2, 4],    // Full Face → Upper Lip, Forehead
+  16: [25],     // Half Arms Honey → Underarms Honey (verify ids)
+}
+
+export function getAddonsForService(serviceId) {
+  const ids = SERVICE_ADDON_IDS[serviceId] || []
+  return ids
+    .map((id) => ALL_SERVICES.find((s) => s.id === id))
+    .filter(Boolean)
+}
+
+/** Before/after pairs for gallery compare slider */
+export const GALLERY_COMPARE_PAIRS = [
+  { before: '/threading.jpg', after: '/glow3.jpg', label: 'Threading & glow facial' },
+  { before: '/bridal.jpg', after: '/bridal2.jpg', label: 'Bridal transformation' },
+  { before: '/hairdo.jpg', after: '/hairtreatment.jpg', label: 'Hair styling & treatment' },
+]
 
 /*
  * CAT_META — one unique image per category, carefully mapped so no two

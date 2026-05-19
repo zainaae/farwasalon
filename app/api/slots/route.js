@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getSheetRows, isConfigured } from '../../../lib/google-sheets.js'
-import { ALL_SERVICES } from '../../../src/data.js'
+import { ALL_SERVICES, getServiceMaxWorkers } from '../../../src/data.js'
 import { checkRateLimit } from '../../../lib/rate-limit.js'
 import {
   FILTERED_SLOTS,
@@ -64,18 +64,20 @@ export async function GET(request) {
   const occupied = buildOccupiedCounts(bookings)
 
   let serviceDuration = 30
+  let maxWorkers = MAX_WORKERS
   if (serviceIdParam) {
     const svc = ALL_SERVICES.find(s => s.id === parseInt(serviceIdParam, 10))
     if (svc?.durationMinutes) serviceDuration = svc.durationMinutes
+    if (svc) maxWorkers = getServiceMaxWorkers(svc)
   }
 
   const slotsNeeded = slotsNeededForDuration(serviceDuration)
 
   const slots = FILTERED_SLOTS.map((time, idx) => {
-    let available = occupied[idx] < MAX_WORKERS
+    let available = occupied[idx] < maxWorkers
     if (available && slotsNeeded > 1) {
       for (let j = 1; j < slotsNeeded; j++) {
-        if (idx + j >= FILTERED_SLOTS.length || occupied[idx + j] >= MAX_WORKERS) {
+        if (idx + j >= FILTERED_SLOTS.length || occupied[idx + j] >= maxWorkers) {
           available = false
           break
         }

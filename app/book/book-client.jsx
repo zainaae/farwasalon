@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
-import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE } from '../../src/data.js'
+import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE, getAddonsForService } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
@@ -138,6 +138,7 @@ export default function BookClient() {
   const [clientName, setClientName] = useState(boot.clientName)
   const [clientPhone, setClientPhone] = useState(boot.clientPhone)
   const [notes, setNotes] = useState(boot.notes)
+  const [selectedAddonIds, setSelectedAddonIds] = useState(() => new Set())
   const [website, setWebsite] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
@@ -201,6 +202,15 @@ export default function BookClient() {
     if (!validatePhone(clientPhone.trim())) return
     setError('')
     setSubmitting(true)
+    const addons = getAddonsForService(selectedService.id).filter((a) =>
+      selectedAddonIds.has(a.id),
+    )
+    const addonNote =
+      addons.length > 0
+        ? `Add-ons: ${addons.map((a) => a.name).join(', ')}`
+        : ''
+    const combinedNotes = [notes.trim(), addonNote].filter(Boolean).join('\n')
+
     try {
       const res = await fetch('/api/book', {
         method: 'POST',
@@ -211,7 +221,7 @@ export default function BookClient() {
           time: selectedTime,
           clientName: clientName.trim(),
           clientPhone: clientPhone.trim(),
-          notes: notes.trim(),
+          notes: combinedNotes,
           website,
         }),
       })
@@ -234,6 +244,7 @@ export default function BookClient() {
         name: data.booking.clientName,
         duration: String(data.booking.duration || selectedService.durationMinutes || 60),
       })
+      if (data.booking.cancelToken) params.set('token', data.booking.cancelToken)
       router.push(`/book/confirmation?${params.toString()}`)
     } catch {
       setError('Network error. Please check your connection.')
@@ -555,6 +566,45 @@ export default function BookClient() {
                   </p>
                 )}
               </div>
+
+              {selectedService && getAddonsForService(selectedService.id).length > 0 && (
+                <div className="mb-6 max-w-md">
+                  <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-3">
+                    Popular add-ons
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    {getAddonsForService(selectedService.id).map((addon) => {
+                      const checked = selectedAddonIds.has(addon.id)
+                      return (
+                        <label
+                          key={addon.id}
+                          className={`flex items-center gap-3 border px-4 py-3 cursor-pointer transition-colors ${
+                            checked ? 'border-ink bg-mist' : 'border-[#e4ddd7] hover:border-ink/40'
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={checked}
+                            onChange={() => {
+                              setSelectedAddonIds((prev) => {
+                                const next = new Set(prev)
+                                if (next.has(addon.id)) next.delete(addon.id)
+                                else next.add(addon.id)
+                                return next
+                              })
+                            }}
+                            className="w-4 h-4 accent-ink"
+                          />
+                          <span className="flex-1 text-sm font-['Inter'] text-ink">{addon.name}</span>
+                          {addon.pricePkr != null && (
+                            <span className="text-xs text-stone">{formatPrice(addon.pricePkr)}</span>
+                          )}
+                        </label>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
 
               <div className="flex flex-col gap-3 max-w-md relative">
                 <input

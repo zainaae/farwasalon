@@ -31,6 +31,7 @@ function ConfirmationContent() {
   const time    = searchParams.get('time') || ''
   const name    = searchParams.get('name') || ''
   const duration = parseInt(searchParams.get('duration') || '60', 10) || 60
+  const cancelToken = searchParams.get('token') || ''
 
   const calendarHref = useMemo(() => {
     if (!date || !time) return null
@@ -131,6 +132,25 @@ function ConfirmationContent() {
               Book Another Appointment
             </Link>
           </div>
+
+          {id && date && (
+            <p className="mt-4 text-stone/60 text-[10px] font-['Inter']">
+              Need to cancel?{' '}
+              <Link
+                href={`/book/cancel?${new URLSearchParams({
+                  ...(cancelToken ? { token: cancelToken } : {}),
+                  id,
+                  service,
+                  date,
+                  time,
+                  name,
+                }).toString()}`}
+                className="underline underline-offset-2 hover:text-ink transition-colors"
+              >
+                Cancel this appointment
+              </Link>
+            </p>
+          )}
 
           <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-6">
             {['No card required', 'Quick confirmation'].map(t => (
