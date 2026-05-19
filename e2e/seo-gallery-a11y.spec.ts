@@ -63,6 +63,7 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     const h1 = page.locator('#hero-headline')
     await expect(h1).toContainText(/Beauty Salon/i)
     await expect(h1).toContainText(/Karachi/i)
+    await expect(h1).toContainText(/PECHS/i)
   })
 
   test('areas served links return 200', async ({ page, request }) => {

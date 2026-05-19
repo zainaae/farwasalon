@@ -34,17 +34,17 @@ export default function ServicesClient() {
   const categories = Object.keys(SERVICES)
 
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))] overflow-x-clip max-w-full min-w-0">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-0">
-        <div className="mb-10 md:mb-14 border-b border-[#e4ddd7] pb-8">
+    <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
+      <div className="section-shell section-pad min-h-0">
+        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
           <div className="overflow-hidden">
             <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink mb-4">
-              OUR<span className="text-[#e4ddd7] mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>SERVICES
+              OUR<span className="text-border-soft mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>SERVICES
             </motion.h1>
           </div>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }}
-            className="text-stone text-sm font-light max-w-lg">
+            className="text-body max-w-lg">
             From threading to bridal packages — select a category to explore our full menu. Book online in under a minute, or message us on WhatsApp.
           </motion.p>
         </div>
@@ -83,7 +83,7 @@ export default function ServicesClient() {
                 <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/20 transition-colors duration-300" />
                 <div className="absolute top-3 right-3 flex flex-col items-end gap-1">
                   {isPopular && (
-                    <span className="text-[8px] tracking-[0.18em] uppercase font-semibold font-['Inter'] text-[#faf7f5] bg-[#c9a98a]/90 backdrop-blur-sm px-2.5 py-1">Most Booked</span>
+                    <span className="text-[8px] tracking-[0.18em] uppercase font-semibold font-['Inter'] text-[#faf7f5] bg-accent-gold/90 backdrop-blur-sm px-2.5 py-1">Most Booked</span>
                   )}
                   <span className="text-[9px] tracking-widest uppercase text-white/50 font-['Inter'] bg-ink/30 backdrop-blur-sm px-2 py-1">{count} services</span>
                   {minPrice && (

@@ -100,7 +100,7 @@ function CancelContent() {
         </p>
         <Link
           href="/book"
-          className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone transition-colors"
+          className="btn-primary w-full"
         >
           Book another appointment <ArrowUpRight className="w-3.5 h-3.5" />
         </Link>
@@ -126,8 +126,8 @@ function CancelContent() {
         This will free your time slot for other guests. Please confirm below.
       </p>
 
-      <div className="border border-[#e4ddd7] bg-[#faf7f5] p-6 text-left mb-8">
-        <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-4">Appointment details</p>
+      <div className="panel-soft p-6 text-left mb-8 shadow-soft">
+        <p className="eyebrow mb-4">Appointment details</p>
         <div className="space-y-3">
           {service && (
             <>
@@ -135,7 +135,7 @@ function CancelContent() {
                 <span className="text-stone text-xs font-['Inter']">Service</span>
                 <span className="font-['Syne'] font-bold text-sm text-ink uppercase text-right max-w-[60%]">{service}</span>
               </div>
-              <div className="h-px bg-[#e4ddd7]" />
+              <div className="h-px bg-border-soft" />
             </>
           )}
           <div className="flex justify-between items-start">
@@ -144,14 +144,14 @@ function CancelContent() {
           </div>
           {time && (
             <>
-              <div className="h-px bg-[#e4ddd7]" />
+              <div className="h-px bg-border-soft" />
               <div className="flex justify-between items-start">
                 <span className="text-stone text-xs font-['Inter']">Time</span>
                 <span className="text-ink text-sm font-['Inter'] font-medium">{formatTime12(time)}</span>
               </div>
             </>
           )}
-          <div className="h-px bg-[#e4ddd7]" />
+          <div className="h-px bg-border-soft" />
           <div className="flex justify-between items-start">
             <span className="text-stone text-xs font-['Inter']">Booking ID</span>
             <span className="text-stone text-xs font-['Inter'] font-mono">{id}</span>
@@ -188,7 +188,7 @@ function CancelContent() {
         </a>
         <Link
           href="/"
-          className="tap-safe w-full inline-flex items-center justify-center gap-2 border border-[#e4ddd7] text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist transition-colors"
+          className="btn-secondary w-full"
         >
           Keep my appointment
         </Link>
@@ -199,8 +199,8 @@ function CancelContent() {
 
 export default function CancelClient() {
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen flex items-start justify-center">
+    <main id="main" className="page-content">
+      <div className="section-shell section-pad min-h-screen flex items-start justify-center">
         <Suspense fallback={<p className="text-stone text-sm font-['Inter']">Loading…</p>}>
           <CancelContent />
         </Suspense>

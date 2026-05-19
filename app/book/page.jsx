@@ -12,9 +12,9 @@ export const metadata = {
 export default function BookPage() {
   return (
     <Suspense fallback={
-      <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-        <div className="max-w-screen-xl mx-auto px-4 py-20 flex items-center justify-center min-h-screen">
-          <p className="text-stone text-sm font-['Inter']">Loading booking…</p>
+      <main id="main" className="page-content">
+        <div className="section-shell section-pad flex items-center justify-center min-h-screen">
+          <p className="text-body">Loading booking…</p>
         </div>
       </main>
     }>

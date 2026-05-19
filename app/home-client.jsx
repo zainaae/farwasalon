@@ -146,7 +146,7 @@ function Hero() {
               initial={{ y: '100%' }} animate={{ y: 0 }}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']">
-              Est. 2008 &middot; Farwa Beauty Salon &middot; PECHS, Karachi
+              Est. 2008 &middot; Farwa Beauty Salon &middot; Bridal &amp; Beauty
             </m.p>
           </div>
 
@@ -164,7 +164,16 @@ function Hero() {
                 animate={{ y: 0 }}
                 transition={{ delay: 0.28, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
                 className="block text-white font-black">
-                Beauty Salon in PECHS, Karachi
+                Karachi&rsquo;s Trusted Beauty Salon
+              </m.span>
+            </span>
+            <span className="block overflow-hidden">
+              <m.span
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.4, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+                className="block text-white/90 font-extralight italic font-['Syne']">
+                in PECHS
               </m.span>
             </span>
           </h1>

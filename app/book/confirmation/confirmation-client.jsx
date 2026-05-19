@@ -67,8 +67,8 @@ function ConfirmationContent() {
 
   if (!valid) {
     return (
-      <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-        <motion.div className="max-w-screen-xl mx-auto px-4 py-20 min-h-screen flex items-center justify-center">
+      <main id="main" className="page-content">
+        <motion.div className="section-shell section-pad min-h-screen flex items-center justify-center">
           <div className="max-w-md text-center">
             <h1 className="font-['Syne'] font-bold text-xl text-ink uppercase mb-3">Invalid confirmation link</h1>
             <p className="text-stone text-sm font-['Inter'] font-light mb-6">
@@ -76,7 +76,7 @@ function ConfirmationContent() {
             </p>
             <Link
               href="/book"
-              className="inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5"
+              className="btn-primary"
             >
               Book an appointment
             </Link>
@@ -87,8 +87,8 @@ function ConfirmationContent() {
   }
 
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen flex items-start justify-center">
+    <main id="main" className="page-content">
+      <motion.div className="section-shell section-pad min-h-screen flex items-start justify-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,31 +108,31 @@ function ConfirmationContent() {
             </p>
           </div>
 
-          <div className="border border-[#e4ddd7] bg-[#faf7f5] p-6 text-left mb-8">
-            <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-4">Appointment details</p>
+          <div className="panel-soft p-6 text-left mb-8 shadow-soft">
+            <p className="eyebrow mb-4">Appointment details</p>
             <div className="space-y-3">
               <div className="flex justify-between items-start">
                 <span className="text-stone text-xs font-['Inter']">Service</span>
                 <span className="font-['Syne'] font-bold text-sm text-ink uppercase text-right max-w-[60%]">{service}</span>
               </div>
-              <div className="h-px bg-[#e4ddd7]" />
+              <div className="h-px bg-border-soft" />
               <div className="flex justify-between items-start">
                 <span className="text-stone text-xs font-['Inter']">Date</span>
                 <span className="text-ink text-sm font-['Inter'] font-medium">{formatDateNice(date)}</span>
               </div>
-              <div className="h-px bg-[#e4ddd7]" />
+              <div className="h-px bg-border-soft" />
               <div className="flex justify-between items-start">
                 <span className="text-stone text-xs font-['Inter']">Time</span>
                 <span className="text-ink text-sm font-['Inter'] font-medium">{formatTime12(time)}</span>
               </div>
-              <div className="h-px bg-[#e4ddd7]" />
+              <div className="h-px bg-border-soft" />
               <div className="flex justify-between items-start">
                 <span className="text-stone text-xs font-['Inter']">Name</span>
                 <span className="text-ink text-sm font-['Inter'] font-medium">{name}</span>
               </div>
               {id && (
                 <>
-                  <div className="h-px bg-[#e4ddd7]" />
+                  <div className="h-px bg-border-soft" />
                   <div className="flex justify-between items-start">
                     <span className="text-stone text-xs font-['Inter']">Booking ID</span>
                     <span className="text-stone text-xs font-['Inter'] font-mono">{id}</span>
@@ -157,7 +157,7 @@ function ConfirmationContent() {
               <a
                 href={calendarHref}
                 download={`farwa-booking-${id || 'appointment'}.ics`}
-                className="tap-safe w-full inline-flex items-center justify-center gap-2 border border-[#e4ddd7] text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist transition-colors"
+                className="btn-secondary w-full"
               >
                 <CalendarPlus className="w-4 h-4" />
                 Add to Calendar
@@ -165,7 +165,7 @@ function ConfirmationContent() {
             )}
             <Link
               href="/book"
-              className="tap-safe w-full inline-flex items-center justify-center gap-2 border border-[#e4ddd7] text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist transition-colors"
+              className="tap-safe w-full inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist transition-colors"
             >
               Book Another Appointment
             </Link>
@@ -198,7 +198,7 @@ function ConfirmationContent() {
             ))}
           </div>
 
-          <div className="mt-8 pt-6 border-t border-[#e4ddd7]">
+          <div className="mt-8 pt-6 border-t border-border-soft">
             <a
               href="https://g.page/farwasalon/review"
               target="_blank"
@@ -206,11 +206,11 @@ function ConfirmationContent() {
               className="inline-flex items-center gap-2 text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
             >
               Enjoyed your visit? Rate us on Google
-              <span className="text-[#c9a98a]" aria-hidden="true">★★★★★</span>
+              <span className="text-accent-gold" aria-hidden="true">★★★★★</span>
             </a>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </main>
   )
 }
@@ -218,9 +218,9 @@ function ConfirmationContent() {
 export default function ConfirmationClient() {
   return (
     <Suspense fallback={
-      <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-        <div className="max-w-screen-xl mx-auto px-4 py-20 flex items-center justify-center min-h-screen">
-          <p className="text-stone text-sm font-['Inter']">Loading confirmation…</p>
+      <main id="main" className="page-content">
+        <div className="section-shell section-pad flex items-center justify-center min-h-screen">
+          <p className="text-body">Loading confirmation…</p>
         </div>
       </main>
     }>

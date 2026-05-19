@@ -32,8 +32,8 @@ export default function LocationServicePage({ data }) {
   const rating = getAggregateRating()
 
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))]">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-screen">
+    <main id="main" className="page-content">
+      <div className="section-shell section-pad min-h-0">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">
@@ -46,7 +46,7 @@ export default function LocationServicePage({ data }) {
           </nav>
 
           <h1 className="font-['Unbounded'] font-bold text-2xl md:text-4xl text-ink leading-tight mb-4">{heading}</h1>
-          <p className="text-stone text-base font-light max-w-2xl mb-6 leading-relaxed">
+          <p className="text-body md:text-base max-w-2xl mb-6">
             {service.description} {location.detail}
           </p>
 
@@ -77,10 +77,10 @@ export default function LocationServicePage({ data }) {
             <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Our {service.name} Services</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {displayServices.map((svc, i) => (
-                <div key={i} className="border border-[#e4ddd7] p-4 hover:border-ink transition-colors">
+                <motion.div key={i} className="card-link !justify-start !flex-col !items-start hover:shadow-soft">
                   <p className="font-['Syne'] font-semibold text-sm text-ink mb-1">{svc.name}</p>
                   {svc.pricePkr != null && <p className="text-stone text-xs font-['Inter']">{formatPrice(svc.pricePkr)}</p>}
-                </div>
+                </motion.div>
               ))}
             </div>
             {categoryKey && (
@@ -93,7 +93,7 @@ export default function LocationServicePage({ data }) {
         )}
 
         <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-12 bg-mist p-6 md:p-8">
+          className="mb-12 panel-soft p-6 md:p-8 shadow-soft">
           <h2 className="font-['Syne'] font-bold text-lg text-ink mb-3">Why Choose Farwa Beauty Salon?</h2>
           <ul className="space-y-2 text-stone text-sm font-light font-['Inter']">
             <li>✓ Trusted since 2008 — {YEARS_ACTIVE}+ years of experience</li>
@@ -113,12 +113,12 @@ export default function LocationServicePage({ data }) {
           <div className="flex flex-wrap gap-3">
             <Link
               href={bookHref}
-              className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors"
+              className="btn-primary"
             >
               Book online <ArrowUpRight className="w-4 h-4" />
             </Link>
             <a href={waLink(service.name)} target="_blank" rel="noreferrer"
-              className="tap-safe inline-flex items-center gap-2 border border-[#e4ddd7] text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-mist transition-colors">
+              className="btn-secondary">
               WhatsApp <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
@@ -130,7 +130,7 @@ export default function LocationServicePage({ data }) {
             <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Common questions</h2>
             <div className="space-y-4">
               {faqs.map((item) => (
-                <div key={item.q} className="border border-[#e4ddd7] p-4">
+                <div key={item.q} className="panel-soft p-4 shadow-soft">
                   <h3 className="font-['Syne'] font-semibold text-sm text-ink mb-2">{item.q}</h3>
                   <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed">{item.a}</p>
                 </div>
@@ -139,12 +139,12 @@ export default function LocationServicePage({ data }) {
           </motion.section>
         )}
 
-        <section className="pt-8 border-t border-[#e4ddd7]">
+        <section className="pt-8 border-t border-border-soft">
           <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Also Available</h2>
           <div className="flex flex-wrap gap-2 mb-6">
             {relatedServices.map((rs) => (
               <Link key={rs.slug} href={`/services/${rs.slug}-in-${location.slug}`}
-                className="text-[11px] font-['Inter'] px-3 py-2 border border-[#e4ddd7] hover:border-ink transition-colors">
+                className="tab-pill hover:border-ink hover:text-ink">
                 {rs.name} in {location.name}
               </Link>
             ))}
@@ -153,7 +153,7 @@ export default function LocationServicePage({ data }) {
           <div className="flex flex-wrap gap-2">
             {relatedLocations.map((rl) => (
               <Link key={rl.slug} href={`/services/${service.slug}-in-${rl.slug}`}
-                className="text-[11px] font-['Inter'] px-3 py-2 border border-[#e4ddd7] hover:border-ink transition-colors">
+                className="tab-pill hover:border-ink hover:text-ink">
                 {service.name} in {rl.name}
               </Link>
             ))}

@@ -90,7 +90,7 @@ const stepVariants = {
 function FirstVisitHint() {
   const [open, setOpen] = useState(false)
   return (
-    <div className="mb-8 border border-[#e4ddd7] bg-[#faf7f5]">
+    <div className="mb-8 panel-muted shadow-soft">
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
@@ -117,7 +117,7 @@ function FirstVisitHint() {
                 'Walk-ins welcome — book online to skip the wait',
               ].map(tip => (
                 <li key={tip} className="flex items-start gap-2 text-stone text-xs font-['Inter'] font-light">
-                  <Check className="w-3.5 h-3.5 text-[#c9a98a] shrink-0 mt-0.5" />
+                  <Check className="w-3.5 h-3.5 text-accent-gold shrink-0 mt-0.5" />
                   {tip}
                 </li>
               ))}
@@ -344,10 +344,10 @@ export default function BookClient() {
   }
 
   return (
-    <main id="main" className="pt-[calc(3.375rem+env(safe-area-inset-top,0px))] md:pt-[calc(3.5rem+env(safe-area-inset-top,0px))] overflow-x-clip">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-20 min-h-0 min-w-0 max-w-full overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
+    <main id="main" className="page-content overflow-x-clip">
+      <div className="section-shell section-pad min-h-0 min-w-0 max-w-full overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
 
-        <div className="mb-10 md:mb-14 border-b border-[#e4ddd7] pb-8">
+        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
           <motion.div className="overflow-hidden">
             <motion.h1
               initial={{ y: '60%', opacity: 0 }}
@@ -355,14 +355,14 @@ export default function BookClient() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="display-section text-ink mb-4 break-words"
             >
-              BOOK<span className="text-[#e4ddd7] mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>ONLINE
+              BOOK<span className="text-border-soft mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>ONLINE
             </motion.h1>
           </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
-            className="text-stone text-sm font-light max-w-lg font-['Inter']"
+            className="text-body max-w-lg"
           >
             Pick a service, choose a date and time, and confirm your appointment in under a minute.
           </motion.p>
@@ -375,7 +375,7 @@ export default function BookClient() {
               <span className={`w-7 h-7 flex items-center justify-center text-[11px] font-['Inter'] font-bold transition-colors ${
                 i < step ? 'bg-ink text-white' :
                 i === step ? 'bg-ink text-white' :
-                'border border-[#e4ddd7] text-stone'
+                'border border-border-soft text-stone'
               }`}>
                 {i < step ? <Check className="w-3.5 h-3.5" /> : i + 1}
               </span>
@@ -384,14 +384,14 @@ export default function BookClient() {
               }`}>
                 {label}
               </span>
-              {i < 2 && <span className="w-8 h-px bg-[#e4ddd7] hidden sm:block" />}
+              {i < 2 && <span className="w-8 h-px bg-border-soft hidden sm:block" />}
             </div>
           ))}
         </div>
 
-        <div className="h-[2px] bg-[#e4ddd7] w-full mb-8">
+        <div className="h-[2px] bg-border-soft w-full mb-8">
           <motion.div
-            className="h-full bg-gradient-to-r from-[#c9a98a] to-[#8b6d59]"
+            className="h-full bg-gradient-to-r from-accent-gold to-[#8b6d59]"
             animate={{ width: `${((step + 1) / 3) * 100}%` }}
             transition={{ duration: 0.4 }}
           />
@@ -410,7 +410,7 @@ export default function BookClient() {
               exit="exit"
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-6">— Choose a service</p>
+              <p className="eyebrow mb-6">— Choose a service</p>
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
                 {CATEGORIES.map((cat) => {
@@ -423,13 +423,13 @@ export default function BookClient() {
                         <button
                           type="button"
                           onClick={() => setExpandedCat(cat)}
-                          className="tap-safe w-full px-3 py-4 md:px-4 border border-[#e4ddd7] hover:border-ink hover:bg-mist transition-all text-left group"
+                          className="tap-safe book-category-btn group"
                         >
                           <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight break-words">{cat}</p>
                           <p className="text-stone text-[10px] font-['Inter'] mt-1">{services.length} services</p>
                         </button>
                       ) : (
-                        <div className="border border-[#e4ddd7] p-5 md:p-6">
+                        <div className="panel-soft p-5 md:p-6 shadow-soft">
                           <div className="flex items-center justify-between mb-4">
                             <div>
                               <p className="font-['Syne'] font-bold text-sm text-ink uppercase">{cat}</p>
@@ -443,7 +443,7 @@ export default function BookClient() {
                               <ChevronLeft className="w-3 h-3" /> All categories
                             </button>
                           </div>
-                          <div className="flex flex-col divide-y divide-[#e4ddd7] border-y border-[#e4ddd7]">
+                          <div className="flex flex-col divide-y divide-border-soft border-y border-border-soft">
                             {services.map((s) => {
                               const sel = selectedService?.id === s.id
                               return (
@@ -453,7 +453,7 @@ export default function BookClient() {
                                   onClick={() => setSelectedService(sel ? null : s)}
                                   aria-pressed={sel}
                                   className={`tap-safe flex items-center justify-between gap-3 py-3.5 text-left transition-colors ${
-                                    sel ? 'bg-[#faf7f5] pl-2' : 'hover:bg-mist hover:pl-2'
+                                    sel ? 'bg-mist/80 pl-2' : 'hover:bg-mist hover:pl-2'
                                   }`}
                                 >
                                   <div className="min-w-0 flex-1">
@@ -463,13 +463,13 @@ export default function BookClient() {
                                     </span>
                                   </div>
                                   {s.pricePkr != null && (
-                                    <span className="shrink-0 text-[#c9a98a] text-sm font-['Inter'] font-semibold">
+                                    <span className="shrink-0 text-accent-gold text-sm font-['Inter'] font-semibold">
                                       {formatPrice(s.pricePkr)}
                                     </span>
                                   )}
                                   <span
                                     className={`shrink-0 w-8 h-8 flex items-center justify-center border transition-colors ${
-                                      sel ? 'border-ink bg-ink text-white' : 'border-[#e4ddd7] text-transparent'
+                                      sel ? 'border-ink bg-ink text-white' : 'border-border-soft text-transparent'
                                     }`}
                                     aria-hidden="true"
                                   >
@@ -487,7 +487,7 @@ export default function BookClient() {
               </div>
 
               {selectedService && (
-                <div className="sticky bottom-0 z-[1] pt-5 mt-6 border-t border-[#e4ddd7] bg-white pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]">
+                <div className="sticky bottom-0 z-[1] pt-5 mt-6 border-t border-border-soft bg-white pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]">
                   <div className="flex items-center justify-between gap-4">
                     <div className="min-w-0">
                       <p className="font-['Syne'] font-bold text-sm text-ink uppercase truncate">{selectedService.name}</p>
@@ -498,7 +498,7 @@ export default function BookClient() {
                     <button
                       type="button"
                       onClick={() => goTo(1)}
-                      className="tap-safe shrink-0 inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone transition-colors"
+                      className="btn-primary shrink-0"
                     >
                       Next <ChevronRight className="w-3.5 h-3.5" />
                     </button>
@@ -518,7 +518,7 @@ export default function BookClient() {
               exit="exit"
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-2">— Selected service</p>
+              <p className="eyebrow mb-2">— Selected service</p>
               <p className="font-['Syne'] font-bold text-sm text-ink uppercase mb-6">
                 {selectedService?.name}
                 <span className="text-stone font-normal text-[10px] font-['Inter'] ml-2">
@@ -538,7 +538,7 @@ export default function BookClient() {
                         <label
                           key={addon.id}
                           className={`flex items-center gap-3 border px-4 py-3 cursor-pointer transition-colors ${
-                            checked ? 'border-ink bg-mist' : 'border-[#e4ddd7] hover:border-ink/40'
+                            checked ? 'border-ink bg-mist' : 'border-border-soft hover:border-ink/40'
                           }`}
                         >
                           <input
@@ -569,7 +569,7 @@ export default function BookClient() {
                 </motion.div>
               )}
 
-              <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-4">— Pick a date</p>
+              <p className="eyebrow mb-4">— Pick a date</p>
               <div className="min-w-0 max-w-full overflow-x-hidden">
               <div className="flex gap-2 overflow-x-auto overscroll-x-contain pb-3 snap-x snap-mandatory scrollbar-none min-w-0">
                 {days.map((d) => {
@@ -593,8 +593,8 @@ export default function BookClient() {
                         sel
                           ? 'bg-ink text-white border-ink'
                           : blocked
-                            ? 'border-[#e4ddd7] text-stone/30 cursor-not-allowed'
-                            : 'border-[#e4ddd7] text-ink hover:border-ink hover:bg-mist cursor-pointer'
+                            ? 'border-border-soft text-stone/30 cursor-not-allowed'
+                            : 'border-border-soft text-ink hover:border-ink hover:bg-mist cursor-pointer'
                       }`}
                     >
                       <span className={`block text-[9px] tracking-wider uppercase font-['Inter'] ${sel ? 'text-white/70' : 'text-stone'}`}>
@@ -623,7 +623,7 @@ export default function BookClient() {
                   ) : slotsError || slots.length === 0 ? (
                     <motion.div
                       role="status"
-                      className="border border-[#e4ddd7] bg-[#faf7f5] px-4 py-8 text-center"
+                      className="panel-muted px-4 py-8 text-center shadow-soft"
                     >
                       <p className="text-stone text-sm font-['Inter'] font-light mb-4">
                         {slotsError || 'No open slots for this date. Try another day or message us on WhatsApp.'}
@@ -649,8 +649,8 @@ export default function BookClient() {
                               sel
                                 ? 'bg-ink text-white border-ink'
                                 : available
-                                  ? 'border-[#e4ddd7] text-ink hover:border-ink hover:bg-mist'
-                                  : 'border-[#e4ddd7] text-stone/25 cursor-not-allowed line-through'
+                                  ? 'border-border-soft text-ink hover:border-ink hover:bg-mist'
+                                  : 'border-border-soft text-stone/25 cursor-not-allowed line-through'
                             }`}
                           >
                             <Clock className="w-3 h-3 inline mr-1 opacity-60" aria-hidden="true" />
@@ -663,7 +663,7 @@ export default function BookClient() {
                 </div>
               )}
 
-              <div className="flex justify-between gap-3 pt-5 mt-6 border-t border-[#e4ddd7]">
+              <div className="flex justify-between gap-3 pt-5 mt-6 border-t border-border-soft">
                 <button
                   type="button"
                   onClick={() => goTo(0)}
@@ -675,7 +675,7 @@ export default function BookClient() {
                   <button
                     type="button"
                     onClick={() => goTo(2)}
-                    className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone transition-colors"
+                    className="btn-primary"
                   >
                     Next <ChevronRight className="w-3.5 h-3.5" />
                   </button>
@@ -694,16 +694,16 @@ export default function BookClient() {
               exit="exit"
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-6">— Your details</p>
+              <p className="eyebrow mb-6">— Your details</p>
 
-              <div className="border border-[#e4ddd7] bg-[#faf7f5] p-4 mb-6">
+              <div className="panel-muted p-4 mb-6 shadow-soft">
                 <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-2">Booking summary</p>
                 <p className="font-['Syne'] font-bold text-sm text-ink uppercase">{selectedService?.name}</p>
                 <p className="text-stone text-xs font-['Inter'] mt-1">
                   {formatDateNice(selectedDate)} · {formatTime12(selectedTime)} · {formatDuration(totalDurationMinutes)}
                 </p>
                 {selectedService?.pricePkr != null && (
-                  <p className="text-[#c9a98a] text-xs font-['Inter'] font-medium mt-0.5">
+                  <p className="text-accent-gold text-xs font-['Inter'] font-medium mt-0.5">
                     {formatPrice(selectedService.pricePkr)}
                   </p>
                 )}
@@ -731,7 +731,7 @@ export default function BookClient() {
                 />
                 <div>
                   <label htmlFor="bk-name" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
-                    Name <span className="text-[#c9a98a]">*</span>
+                    Name <span className="text-accent-gold">*</span>
                   </label>
                   <input
                     id="bk-name"
@@ -741,12 +741,12 @@ export default function BookClient() {
                     value={clientName}
                     onChange={e => setClientName(e.target.value)}
                     required
-                    className="border border-[#e4ddd7] text-ink placeholder-stone/50 text-sm font-['Inter'] px-4 py-3 w-full focus:outline-none focus:border-ink transition-colors bg-white"
+                    className="input-field"
                   />
                 </div>
                 <div>
                   <label htmlFor="bk-phone" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
-                    Phone <span className="text-[#c9a98a]">*</span>
+                    Phone <span className="text-accent-gold">*</span>
                   </label>
                   <input
                     id="bk-phone"
@@ -760,7 +760,7 @@ export default function BookClient() {
                     required
                     aria-invalid={!!phoneError}
                     aria-describedby={phoneError ? 'bk-phone-error' : undefined}
-                    className="border border-[#e4ddd7] text-ink placeholder-stone/50 text-sm font-['Inter'] px-4 py-3 w-full focus:outline-none focus:border-ink transition-colors bg-white"
+                    className="input-field"
                   />
                   {phoneError && <p id="bk-phone-error" role="alert" className="text-red-600 text-xs font-['Inter'] mt-1">{phoneError}</p>}
                 </div>
@@ -774,7 +774,7 @@ export default function BookClient() {
                     value={notes}
                     onChange={e => setNotes(e.target.value)}
                     rows={3}
-                    className="border border-[#e4ddd7] text-ink placeholder-stone/50 text-sm font-['Inter'] px-4 py-3 w-full focus:outline-none focus:border-ink transition-colors bg-white resize-none"
+                    className="input-field resize-none"
                   />
                 </div>
               </div>
@@ -787,7 +787,7 @@ export default function BookClient() {
                 )}
               </div>
 
-              <div className="flex justify-between gap-3 pt-5 mt-6 border-t border-[#e4ddd7]">
+              <div className="flex justify-between gap-3 pt-5 mt-6 border-t border-border-soft">
                 <button
                   type="button"
                   onClick={() => goTo(1)}
@@ -800,7 +800,7 @@ export default function BookClient() {
                   onClick={handleSubmit}
                   disabled={submitting || !clientName.trim() || !clientPhone.trim()}
                   aria-busy={submitting}
-                  className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                  className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-ink"
                 >
                   {submitting ? (
                     <>
