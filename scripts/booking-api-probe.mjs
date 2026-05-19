@@ -7,7 +7,8 @@
  *   PROBE_WRITE=1 node scripts/booking-api-probe.mjs   # creates one test booking
  */
 
-const BASE = process.env.BASE_URL || 'http://localhost:3000'
+// Prefer 127.0.0.1 on Windows (localhost may resolve to ::1 while Next binds IPv4).
+const BASE = process.env.BASE_URL || 'http://127.0.0.1:3000'
 const WRITE = process.env.PROBE_WRITE === '1'
 
 /** Local calendar date YYYY-MM-DD (avoids UTC shift from toISOString). */

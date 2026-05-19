@@ -1087,16 +1087,17 @@ export function StickyMobileCTA({ hidden = false }) {
     <>
       {/* flow spacer so page content never hides behind the fixed bar on mobile */}
       <div aria-hidden className="h-[calc(5rem+env(safe-area-inset-bottom,0px))] md:hidden" />
-      <m.div
-        initial={{ y: 80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1.0, duration: 0.55, ease: [0.16,1,0.3,1] }}
+      <nav
         className="fixed z-50 left-0 right-0 md:hidden"
         style={{ bottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}
-        role="navigation"
         aria-label="Quick contact and booking"
       >
-        <div className="mx-3 flex items-stretch gap-1.5 rounded-xl bg-ink/95 backdrop-blur-md shadow-2xl shadow-ink/40 border border-white/10 p-1.5">
+        <m.div
+          initial={{ y: 80, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1.0, duration: 0.55, ease: [0.16,1,0.3,1] }}
+          className="mx-3 flex items-stretch gap-1.5 rounded-xl bg-ink/95 backdrop-blur-md shadow-2xl shadow-ink/40 border border-white/10 p-1.5"
+        >
           <a
             href={`tel:+${WA_NUMBER}`}
             aria-label="Call the salon"
@@ -1123,8 +1124,8 @@ export function StickyMobileCTA({ hidden = false }) {
           >
             Book <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
-        </div>
-      </m.div>
+        </m.div>
+      </nav>
     </>
   )
 }

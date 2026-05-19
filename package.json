@@ -9,6 +9,8 @@
     "start": "next start",
     "lint": "eslint .",
     "test": "node ./node_modules/vitest/vitest.mjs run",
+    "test:e2e": "playwright test",
+    "test:e2e:ci": "npm run build && playwright test",
     "verify": "npm run lint && npm run test && npm run build"
   },
   "dependencies": {
@@ -24,6 +26,7 @@
     "@emnapi/core": "^1.10.0",
     "@emnapi/runtime": "^1.10.0",
     "@eslint/js": "^9.39.4",
+    "@playwright/test": "^1.51.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^25.7.0",

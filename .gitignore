@@ -32,6 +32,10 @@ dist-ssr
 .next/
 .next-ci/
 
+# Playwright
+playwright-report/
+test-results/
+
 # Vite (legacy)
 .vite/
 
