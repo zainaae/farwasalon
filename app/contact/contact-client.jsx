@@ -84,7 +84,7 @@ export default function ContactClient() {
                 </div>
                 <div>
                   <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">Location</p>
-                  <p className="text-stone text-sm font-light font-['Inter']">PECHS Block 3, Karachi</p>
+                  <p className="text-stone text-sm font-light font-['Inter']">PECHS, Karachi</p>
                   <p className="text-stone text-[11px] font-['Inter'] mt-0.5 hover:text-ink transition-colors">Get directions →</p>
                 </div>
               </a>
@@ -123,7 +123,7 @@ export default function ContactClient() {
 
             <div className="relative overflow-hidden bg-mist border border-[#e4ddd7]" style={{ aspectRatio: '4/3' }}>
               <iframe
-                title="Farwa Beauty Salon location — PECHS Block 3, Karachi"
+                title="Farwa Beauty Salon location — PECHS, Karachi"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.5!2d67.0584185!3d24.8797532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f2832975c79%3A0xe55ba4a44d34a210!2sFarwa%20beauty%20salon!5e0!3m2!1sen!2spk!4v1"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"

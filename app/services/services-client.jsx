@@ -8,7 +8,7 @@ import { CAT_SLUGS, LazyVideo } from '../../src/shared.jsx'
 import { SERVICES, CAT_META, track, formatPrice } from '../../src/data.js'
 
 function getCatMeta(cat) {
-  return CAT_META[cat] || { img: '/bleachpolish.jpg', desc: 'Expert beauty services tailored just for you.' }
+  return CAT_META[cat] || { img: '/bleachpolish.jpg', tagline: 'Expert beauty services tailored for you.' }
 }
 
 const POPULAR_CATS = new Set(['Threading', 'Facials', 'Bridal'])
@@ -89,7 +89,9 @@ export default function ServicesClient() {
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <h2 className="text-white font-['Syne'] font-bold text-xs sm:text-sm uppercase leading-tight mb-1 line-clamp-2">{cat}</h2>
-                  <p className="text-white/50 text-[10px] font-['Inter'] leading-snug hidden md:block line-clamp-2">{meta.desc}</p>
+                  {meta.tagline && (
+                    <p className="text-white/55 text-[10px] font-['Inter'] leading-snug line-clamp-1">{meta.tagline}</p>
+                  )}
                   {availability && (
                     <p className="text-white/40 text-[9px] font-['Inter'] mt-1">{availability}</p>
                   )}

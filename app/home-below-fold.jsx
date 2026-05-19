@@ -209,7 +209,7 @@ function ServiceMediaPanel({ hovered, categories }) {
           {hovered ?? 'Farwa Beauty Salon'}
         </p>
         <p className="text-white font-['Syne'] font-bold text-sm transition-all duration-300">
-          {hovered ? `${SERVICES[hovered]?.length} services` : 'PECHS Block 3, Karachi'}
+          {hovered ? `${SERVICES[hovered]?.length} services` : 'PECHS, Karachi'}
         </p>
       </div>
     </div>

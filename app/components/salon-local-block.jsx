@@ -33,7 +33,7 @@ export default function SalonLocalBlock({ variant = 'light', className = '' }) {
               id="visit-salon-heading"
               className={`font-['Unbounded'] font-bold text-xl md:text-2xl mb-4 ${dark ? 'text-white' : 'text-ink'}`}
             >
-              Farwa Beauty Salon · PECHS Block 3
+              Farwa Beauty Salon · PECHS, Karachi
             </h2>
             <ul className={`space-y-3 text-sm font-['Inter'] font-light ${dark ? 'text-white/75' : 'text-stone'}`}>
               <li className="flex items-start gap-2">

@@ -11,7 +11,7 @@ export const BLOG_POSTS = [
     category: 'Bridal',
     relatedCategories: ['Bridal', 'Facials', 'Hair Treatments'],
     content: [
-      { type: 'p', text: 'Your wedding day is one of the most photographed days of your life. Every bride deserves to look and feel her absolute best — but that kind of radiance doesn\'t happen overnight. At Farwa Beauty Salon in PECHS Block 3, Karachi, we\'ve helped hundreds of brides prepare for their big day since 2008. Here\'s the timeline we recommend.' },
+      { type: 'p', text: 'Your wedding day is one of the most photographed days of your life. Every bride deserves to look and feel her absolute best — but that kind of radiance doesn\'t happen overnight. At Farwa Beauty Salon in PECHS, Karachi, we\'ve helped hundreds of brides prepare for their big day since 2008. Here\'s the timeline we recommend.' },
       { type: 'p', text: 'Whether you are planning a grand barat or an intimate nikah, the key to bridal beauty is starting early. Rushing your prep in the final weeks leads to stress, breakouts, and last-minute compromises. A structured timeline lets your skin, hair, and overall look develop naturally — so on the big day, everything comes together effortlessly.' },
 
       { type: 'h2', text: '6 Months Before: Start Your Skincare Routine' },
@@ -117,7 +117,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Look for a gel or fluid-based SPF 50 with a matte finish. Brands like La Roche-Posay, Neutrogena Ultra Sheer, and local derma-grade options work well. Your aesthetician at Farwa can recommend a specific product during your consultation.' },
 
       { type: 'h2', text: 'Get a Summer Skin Assessment' },
-      { type: 'p', text: 'Not sure what your skin needs? Book a consultation at our PECHS Block 3 studio. We\'ll build a summer routine that actually works for Karachi weather. WhatsApp us at +92 322 2782254.' },
+      { type: 'p', text: 'Not sure what your skin needs? Book a consultation at our PECHS studio. We\'ll build a summer routine that actually works for Karachi weather. WhatsApp us at +92 322 2782254.' },
     ],
   },
   {
@@ -252,7 +252,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Dark polish does not chip faster, but chips are more visible against dark colours. Nudes, pinks, and sheer shades are more forgiving because minor chips blend with your natural nail colour. For maximum durability with dark shades, the capping technique is essential.' },
 
       { type: 'h2', text: 'Book Your Next Manicure' },
-      { type: 'p', text: 'Book your next manicure at Farwa Beauty Salon, PECHS Block 3. WhatsApp us at +92 322 2782254.' },
+      { type: 'p', text: 'Book your next manicure at Farwa Beauty Salon, PECHS. WhatsApp us at +92 322 2782254.' },
     ],
   },
   {
@@ -267,7 +267,7 @@ export const BLOG_POSTS = [
     category: 'Bridal',
     relatedCategories: ['Bridal', 'Facials', 'Threading'],
     content: [
-      { type: 'p', text: 'Your wedding day deserves a look that is uniquely, unmistakably you. In a city with hundreds of salons, choosing the right bridal makeup package in Karachi can feel overwhelming. Price ranges vary wildly, inclusions differ from studio to studio, and the wrong choice can leave you with regret on the most photographed day of your life. At Farwa Beauty Salon in PECHS Block 3, we have been styling Karachi brides since 2008 — here is everything you need to know before you book.' },
+      { type: 'p', text: 'Your wedding day deserves a look that is uniquely, unmistakably you. In a city with hundreds of salons, choosing the right bridal makeup package in Karachi can feel overwhelming. Price ranges vary wildly, inclusions differ from studio to studio, and the wrong choice can leave you with regret on the most photographed day of your life. At Farwa Beauty Salon in PECHS, we have been styling Karachi brides since 2008 — here is everything you need to know before you book.' },
 
       { type: 'h2', text: 'What Is Typically Included in a Bridal Package?' },
       { type: 'p', text: 'A standard bridal makeup package in Karachi usually covers the base makeup application (foundation, concealer, contouring, setting), eye makeup with lashes, lip colour, brow detailing, and dupatta or hijab draping. Higher-tier packages add hairstyling, jewellery setting, a bridal trial session, and touch-up service at the venue. At Farwa, our [Bridal Packages](/services/bridal) begin at Rs 15,000 for nikah looks and go up to Rs 50,000+ for full multi-event coverage including mehndi, barat, and walima looks.' },
@@ -316,7 +316,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Yes. We offer makeup services for mothers, sisters, and bridal party members as well. These can be booked alongside your bridal package at discounted rates. Contact us for family package pricing.' },
 
       { type: 'h2', text: 'Ready to Start Planning?' },
-      { type: 'p', text: 'Every bride\'s journey is different, and we love helping you find the perfect look. WhatsApp us at +92 322 2782254 to schedule your bridal consultation at our PECHS Block 3 studio. Browse our full [Bridal services](/services/bridal) to see what we offer.' },
+      { type: 'p', text: 'Every bride\'s journey is different, and we love helping you find the perfect look. WhatsApp us at +92 322 2782254 to schedule your bridal consultation at our PECHS studio. Browse our full [Bridal services](/services/bridal) to see what we offer.' },
     ],
   },
   {
@@ -331,7 +331,7 @@ export const BLOG_POSTS = [
     category: 'Skincare',
     relatedCategories: ['Facials', 'Cleansing'],
     content: [
-      { type: 'p', text: 'Walk into any salon in Karachi and you will find gold facials and whitening facials near the top of the menu. Both promise glowing skin, but they work in fundamentally different ways and suit different skin concerns. At Farwa Beauty Salon in PECHS Block 3, these two treatments are among our most requested — here is an honest comparison to help you choose.' },
+      { type: 'p', text: 'Walk into any salon in Karachi and you will find gold facials and whitening facials near the top of the menu. Both promise glowing skin, but they work in fundamentally different ways and suit different skin concerns. At Farwa Beauty Salon in PECHS, these two treatments are among our most requested — here is an honest comparison to help you choose.' },
 
       { type: 'h2', text: 'What Is a Gold Facial?' },
       { type: 'p', text: 'A gold facial uses products infused with colloidal gold particles. Gold has been used in skincare for centuries — Cleopatra reportedly slept in a gold mask. In modern formulations, the gold particles stimulate blood circulation, promote cell renewal, and give skin a warm, luminous finish. Our Gold Facial at Farwa (Rs 2,500) includes deep cleansing, gold-infused serum, a gold sheet mask, and a finishing moisturiser. The entire session takes about 60 to 75 minutes.' },
@@ -377,7 +377,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Absolutely. Skincare is not gender-specific. We welcome male clients for facials, and the treatments are adjusted for typically thicker, oilier male skin. A gold facial before a wedding or important event is popular with grooms as well.' },
 
       { type: 'h2', text: 'Book Your Skin Consultation' },
-      { type: 'p', text: 'Not sure which facial is right for you? Let our team assess your skin in person. WhatsApp us at +92 322 2782254 to book at our PECHS Block 3 studio. Explore our full [Facials menu](/services/facials) for all available treatments and pricing.' },
+      { type: 'p', text: 'Not sure which facial is right for you? Let our team assess your skin in person. WhatsApp us at +92 322 2782254 to book at our PECHS studio. Explore our full [Facials menu](/services/facials) for all available treatments and pricing.' },
     ],
   },
   {
@@ -392,7 +392,7 @@ export const BLOG_POSTS = [
     category: 'Hair',
     relatedCategories: ['Hair Treatments', 'Hair'],
     content: [
-      { type: 'p', text: 'Karachi\'s water, humidity, dust, and sun create a perfect storm for damaged hair. Whether you are battling frizz, breakage, hair fall, or just general dullness, professional hair treatments can transform your locks in a single session. At Farwa Beauty Salon in PECHS Block 3, we have been treating Karachi hair since 2008 — here is our complete guide to the most popular treatments and how to choose the right one.' },
+      { type: 'p', text: 'Karachi\'s water, humidity, dust, and sun create a perfect storm for damaged hair. Whether you are battling frizz, breakage, hair fall, or just general dullness, professional hair treatments can transform your locks in a single session. At Farwa Beauty Salon in PECHS, we have been treating Karachi hair since 2008 — here is our complete guide to the most popular treatments and how to choose the right one.' },
       { type: 'p', text: 'Many women try expensive shampoos and conditioners without seeing real results. The reality is that drugstore products can only do so much for hair that is structurally damaged. Professional treatments work at a deeper level — repairing bonds, infusing protein, and sealing cuticles in ways that home care simply cannot replicate. If your hair feels dry, rough, or unmanageable despite a good routine, a salon treatment is likely what you need.' },
 
       { type: 'h2', text: 'Keratin Treatment' },
@@ -444,7 +444,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Keratin smoothing reduces frizz and loosens curl pattern but does not make hair bone-straight like permanent straightening (rebonding). If you want to keep some natural wave or volume, keratin is an excellent option. If you want completely straight hair, discuss rebonding or Japanese straightening with your stylist.' },
 
       { type: 'h2', text: 'Book Your Hair Consultation' },
-      { type: 'p', text: 'Every head of hair is different, and cookie-cutter solutions rarely work. WhatsApp us at +92 322 2782254 to book a hair assessment at our PECHS Block 3 studio. Check out our full [Hair & Hair Treatments menu](/services/hair-treatments) for all services and pricing.' },
+      { type: 'p', text: 'Every head of hair is different, and cookie-cutter solutions rarely work. WhatsApp us at +92 322 2782254 to book a hair assessment at our PECHS studio. Check out our full [Hair & Hair Treatments menu](/services/hair-treatments) for all services and pricing.' },
     ],
   },
   {
@@ -459,7 +459,7 @@ export const BLOG_POSTS = [
     category: 'Guide',
     relatedCategories: ['Threading', 'Facials', 'Nails'],
     content: [
-      { type: 'p', text: 'Walking into a beauty salon for the first time can feel intimidating — especially if you are not sure what to expect, what to ask for, or how things work. Whether you are a college student booking your first facial, a bride-to-be exploring options, or someone who has simply never had the occasion, this guide will help you feel confident and prepared. At Farwa Beauty Salon in PECHS Block 3, Karachi, we welcome first-time visitors every week — here is what we wish everyone knew before their first appointment.' },
+      { type: 'p', text: 'Walking into a beauty salon for the first time can feel intimidating — especially if you are not sure what to expect, what to ask for, or how things work. Whether you are a college student booking your first facial, a bride-to-be exploring options, or someone who has simply never had the occasion, this guide will help you feel confident and prepared. At Farwa Beauty Salon in PECHS, Karachi, we welcome first-time visitors every week — here is what we wish everyone knew before their first appointment.' },
       { type: 'p', text: 'There is absolutely no reason to feel nervous or embarrassed. Every one of our regular clients was a first-timer once. Our team is trained to make new visitors comfortable, explain every step of every treatment, and never judge. Your first salon visit should be a relaxing, enjoyable experience — and with a little preparation, it absolutely will be.' },
 
       { type: 'h2', text: 'Start With What You Want to Achieve' },
@@ -477,7 +477,7 @@ export const BLOG_POSTS = [
       ]},
 
       { type: 'h2', text: 'What to Expect When You Arrive' },
-      { type: 'p', text: 'Most salons will greet you, ask your name, and seat you in the waiting area. You may be offered water or tea. A staff member will discuss what services you want, explain the process, and give you a price estimate before starting. At our PECHS Block 3 studio, the atmosphere is calm and unhurried — we never rush clients through services. If anything makes you uncomfortable during a treatment, speak up immediately. Your comfort is the priority.' },
+      { type: 'p', text: 'Most salons will greet you, ask your name, and seat you in the waiting area. You may be offered water or tea. A staff member will discuss what services you want, explain the process, and give you a price estimate before starting. At our PECHS studio, the atmosphere is calm and unhurried — we never rush clients through services. If anything makes you uncomfortable during a treatment, speak up immediately. Your comfort is the priority.' },
       { type: 'p', text: 'Your first visit might take a little longer than future visits because of the initial consultation. We want to understand your skin type, any allergies or sensitivities, your lifestyle, and your goals. This information helps us provide better service not just today but on every visit going forward. Think of it as building a relationship with your beauty team.' },
 
       { type: 'h2', text: 'How to Communicate Your Preferences' },
@@ -513,7 +513,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Of course. Many first-timers feel more comfortable with a friend. You can even book services together and make it a girls\' day. We have seating in the waiting area for companions, and our studio atmosphere is welcoming for groups.' },
 
       { type: 'h2', text: 'Book Your First Appointment' },
-      { type: 'p', text: 'Everyone was a first-timer once, and we love welcoming new faces. WhatsApp us at +92 322 2782254 to book your first visit at Farwa Beauty Salon, PECHS Block 3, Karachi. Browse our services — from [threading](/services/threading) and [facials](/services/facials) to [bridal packages](/services/bridal), we have something for everyone.' },
+      { type: 'p', text: 'Everyone was a first-timer once, and we love welcoming new faces. WhatsApp us at +92 322 2782254 to book your first visit at Farwa Beauty Salon, PECHS, Karachi. Browse our services — from [threading](/services/threading) and [facials](/services/facials) to [bridal packages](/services/bridal), we have something for everyone.' },
     ],
   },
 ]

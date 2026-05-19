@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -14,21 +14,59 @@ const HomeBelowFold = dynamic(() => import('./home-below-fold'), {
 })
 
 const HERO_POSTER = '/bridal2.jpg'
+const HERO_VIDEO = '/hero-mp4.mp4'
+const HERO_PLAYBACK_RATE = 0.65
 
 function Hero() {
   const videoRef = useRef(null)
   const textRef = useRef(null)
   const overlayRef = useRef(null)
   const slot     = useNextSlot()
+  const [playVideo, setPlayVideo] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
+
   useEffect(() => {
-    const v = videoRef.current
-    if (!v) return
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const desktop = window.matchMedia('(min-width: 768px)').matches
     if (!desktop || reduce) return
-    v.playbackRate = 0.35
-    v.play().catch(() => {})
+
+    const enable = () => setPlayVideo(true)
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(enable, { timeout: 2000 })
+      return () => cancelIdleCallback(id)
+    }
+    const t = setTimeout(enable, 400)
+    return () => clearTimeout(t)
   }, [])
+
+  useEffect(() => {
+    if (!playVideo) return
+    const v = videoRef.current
+    if (!v) return
+
+    const start = () => {
+      v.playbackRate = HERO_PLAYBACK_RATE
+      v.play().catch(() => {})
+      setVideoReady(true)
+    }
+
+    if (v.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+      start()
+      return
+    }
+
+    const onReady = () => {
+      v.removeEventListener('canplaythrough', onReady)
+      v.removeEventListener('loadeddata', onReady)
+      start()
+    }
+    v.addEventListener('canplaythrough', onReady)
+    v.addEventListener('loadeddata', onReady)
+    return () => {
+      v.removeEventListener('canplaythrough', onReady)
+      v.removeEventListener('loadeddata', onReady)
+    }
+  }, [playVideo])
 
   useEffect(() => {
     let raf = 0
@@ -46,7 +84,7 @@ function Hero() {
   const thesis = [
     { text: 'Bridal. Hair. Skin. ',             em: true  },
     { text: 'Rubina\u2019s studio ',            em: false },
-    { text: 'in PECHS Block 3, ',               em: false },
+    { text: 'in PECHS, ',                        em: false },
     { text: 'since 2008.',                      em: true  },
   ]
 
@@ -63,20 +101,25 @@ function Hero() {
         style={{ objectPosition: '50% 35%' }}
       />
 
-      <video
-        ref={videoRef}
-        autoPlay
-        muted
-        loop
-        playsInline
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover hidden md:block scale-[1.01] z-[1]"
-        style={{ objectPosition: '50% 35%' }}
-        poster={HERO_POSTER}
-        preload="none"
-      >
-        <source src="/hero-mp4.mp4" type="video/mp4" />
-      </video>
+      {playVideo && (
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover hidden md:block scale-[1.01] z-[1] transition-opacity duration-700"
+          style={{
+            objectPosition: '50% 35%',
+            opacity: videoReady ? 1 : 0,
+          }}
+          poster={HERO_POSTER}
+          preload="auto"
+        >
+          <source src={HERO_VIDEO} type="video/mp4" />
+        </video>
+      )}
 
       <div ref={overlayRef} className="absolute inset-0 z-[1]"
         style={{
@@ -103,7 +146,7 @@ function Hero() {
               initial={{ y: '100%' }} animate={{ y: 0 }}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']">
-              Est. 2008 &middot; PECHS Block 3, Karachi
+              Est. 2008 &middot; PECHS, Karachi
             </m.p>
           </div>
 

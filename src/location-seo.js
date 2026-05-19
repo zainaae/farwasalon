@@ -1,5 +1,5 @@
 export const NEIGHBORHOODS = [
-  { slug: 'pechs-karachi', name: 'PECHS, Karachi', detail: 'Our home salon is in PECHS Block 3 — visit us for all services.' },
+  { slug: 'pechs-karachi', name: 'PECHS, Karachi', detail: 'Our home salon is in PECHS — visit us for all services.' },
   { slug: 'gulshan', name: 'Gulshan-e-Iqbal', detail: 'Many of our regular clients travel from Gulshan — and say it\'s worth every minute.' },
   { slug: 'clifton-karachi', name: 'Clifton, Karachi', detail: 'We welcome clients from Clifton for bridal and special occasion bookings.' },
   { slug: 'bahadurabad', name: 'Bahadurabad', detail: 'A short drive through PECHS brings you to our door from Bahadurabad.' },
