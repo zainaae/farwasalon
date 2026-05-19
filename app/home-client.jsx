@@ -84,7 +84,6 @@ function Hero() {
   const thesis = [
     { text: 'Bridal. Hair. Skin. ',             em: true  },
     { text: 'Rubina\u2019s studio ',            em: false },
-    { text: 'in PECHS, ',                        em: false },
     { text: 'since 2008.',                      em: true  },
   ]
 
@@ -147,37 +146,49 @@ function Hero() {
               initial={{ y: '100%' }} animate={{ y: 0 }}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']">
-              Est. 2008 &middot; PECHS, Karachi
+              Est. 2008 &middot; Farwa Beauty Salon &middot; PECHS, Karachi
             </m.p>
           </div>
 
-          <h1 id="hero-headline" className="font-['Unbounded'] text-white leading-[0.95] mb-6 md:mb-8 break-words"
+          <h1
+            id="hero-headline"
+            className="font-['Unbounded'] text-white leading-[0.95] mb-4 md:mb-5 break-words"
             style={{
-              fontSize: 'clamp(1.75rem, 6.4vw, 5.25rem)',
+              fontSize: 'clamp(1.75rem, 6.4vw, 4.5rem)',
+              letterSpacing: '-0.02em',
+              maxWidth: '24ch',
+            }}>
+            <span className="block overflow-hidden">
+              <m.span
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.28, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+                className="block text-white font-black">
+                Beauty Salon in PECHS, Karachi
+              </m.span>
+            </span>
+          </h1>
+
+          <p
+            className="font-['Unbounded'] text-white leading-[0.95] mb-6 md:mb-8 break-words"
+            style={{
+              fontSize: 'clamp(1.35rem, 5vw, 3.25rem)',
               letterSpacing: '-0.02em',
               maxWidth: '22ch',
-            }}>
+            }}
+            aria-label="Our specialties">
             {thesis.map((line, i) => (
               <span key={i} className="block overflow-hidden">
                 <m.span
                   initial={{ y: '110%' }}
                   animate={{ y: 0 }}
-                  transition={{ delay: 0.3 + i * 0.18, duration: 1.05, ease: [0.16,1,0.3,1] }}
+                  transition={{ delay: 0.42 + i * 0.18, duration: 1.05, ease: [0.16,1,0.3,1] }}
                   className={`block ${line.em ? 'text-white font-black' : "text-white/80 font-extralight italic font-['Syne']"}`}>
                   {line.text}
                 </m.span>
               </span>
             ))}
-          </h1>
-
-          <div className="overflow-hidden mb-8 md:mb-10">
-            <m.p
-              initial={{ y: '100%' }} animate={{ y: 0 }}
-              transition={{ delay: 1.1, duration: 0.9, ease: [0.16,1,0.3,1] }}
-              className="text-white/55 text-[10px] sm:text-[11px] tracking-[0.32em] uppercase font-['Inter']">
-              Farwa Beauty Salon
-            </m.p>
-          </div>
+          </p>
 
           <m.div
             initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}

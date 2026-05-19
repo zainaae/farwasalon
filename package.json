@@ -11,7 +11,8 @@
     "test": "node ./node_modules/vitest/vitest.mjs run",
     "test:e2e": "playwright test",
     "test:e2e:ci": "npm run build && playwright test",
-    "verify": "npm run lint && npm run test && npm run build"
+    "verify": "npm run lint && npm run test && npm run build",
+    "ping:indexnow": "node scripts/ping-indexnow.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

@@ -58,6 +58,29 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     }
   })
 
+  test('home hero includes local SEO headline', async ({ page }) => {
+    await page.goto('/')
+    const h1 = page.locator('#hero-headline')
+    await expect(h1).toContainText(/Beauty Salon/i)
+    await expect(h1).toContainText(/Karachi/i)
+  })
+
+  test('areas served links return 200', async ({ page, request }) => {
+    await page.goto('/')
+    await expect(page.getByRole('heading', { name: /Beauty salon clients across Karachi/i })).toBeVisible()
+    const section = page.locator('section[aria-labelledby="areas-served-heading"]')
+    const href = await section.locator('ul a').first().getAttribute('href')
+    expect(href).toMatch(/^\/services\//)
+    const res = await request.get(href!)
+    expect(res.ok()).toBeTruthy()
+  })
+
+  test('/beauty-salon-karachi hub page', async ({ page }) => {
+    await page.goto('/beauty-salon-karachi')
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/Beauty Salon in Karachi/i)
+    await expect(page.getByRole('link', { name: /Book Online/i })).toBeVisible()
+  })
+
   test('newsletter subscribe API accepts POST', async ({ request }) => {
     const res = await request.post('/api/subscribe', {
       data: { email: 'e2e-test@example.com', firstName: 'E2E', website: '' },

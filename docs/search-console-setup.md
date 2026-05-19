@@ -78,3 +78,43 @@ After indexing, check these weekly:
 - [ ] Check Core Web Vitals after each deployment
 - [ ] Review search queries monthly to identify content gaps
 - [ ] Set up email alerts for critical issues
+
+---
+
+## 6. Google Business Profile (required for Map Pack)
+
+Bare searches like **"beauty salon"** usually show the **Map Pack** first. Complete GBP even when the website is perfect.
+
+| Task | Action |
+|------|--------|
+| Primary category | **Beauty salon** |
+| Website | `https://farwasalon.com` |
+| Booking link | `https://farwasalon.com/book` |
+| Hours | Mon–Sat 11am–7pm, **Closed Sunday** (match site + schema) |
+| Photos | 10+ (exterior, interior, team, bridal, threading) |
+| Services | Add top services with prices where possible |
+| Reviews | Ask 5–10 recent clients; reply to all |
+
+**If GBP edits fail to save:** try incognito, confirm Owner role, or contact Google Business support.
+
+### Request indexing after deploy
+
+In Search Console → URL Inspection → Request indexing:
+
+- `https://farwasalon.com/`
+- `https://farwasalon.com/beauty-salon-karachi`
+- `https://farwasalon.com/services`
+- `https://farwasalon.com/services/threading-in-pechs-karachi`
+- `https://farwasalon.com/book`
+
+### Track the right queries (Performance report)
+
+Focus on: `beauty salon karachi`, `beauty parlour pechs`, `threading salon near me`, `farwa beauty salon` — not global `beauty salon` alone.
+
+### After each production deploy
+
+```bash
+npm run ping:indexnow
+```
+
+Requires `public/farwa-salon-indexnow.txt` live at `https://farwasalon.com/farwa-salon-indexnow.txt`.

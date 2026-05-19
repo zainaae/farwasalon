@@ -11,6 +11,7 @@ import {
 } from '../src/shared.jsx'
 import { formatPrice } from '../src/data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
+import AreasServed from './components/areas-served.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
 import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
 
@@ -555,6 +556,7 @@ export default function HomeBelowFold() {
       <WordmarkDivider />
       <FeaturedServices />
       <TrustPillars />
+      <AreasServed />
       <SalonLocalBlock />
       <TestimonialsPreview />
       <CtaBand />

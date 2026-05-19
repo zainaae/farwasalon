@@ -8,6 +8,7 @@ import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Chec
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, track, CAT_SLUGS, CAT_SEO, CAT_FAQS } from './data.js'
 import { toLocalDateString } from '../lib/date-local.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
+import { getFooterLocalLinks } from '../lib/location-links.js'
 
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
 export function useNextSlot() {
@@ -979,6 +980,7 @@ export function Navbar({ transparent = false }) {
 
 /* ─── Footer ───────────────────────────────────────────────────── */
 export function Footer() {
+  const localLinks = getFooterLocalLinks()
   const serviceLinks = [
     { label: 'Threading',       slug: CAT_SLUGS['Threading'] },
     { label: 'Bridal',          slug: CAT_SLUGS['Bridal'] },
@@ -1027,7 +1029,7 @@ export function Footer() {
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Navigate</p>
               <ul className="flex flex-col gap-2.5">
-                {[['Home','/'],['Services','/services'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,href]) => (
+                {[['Home','/'],['Services','/services'],['Beauty Salon Karachi','/beauty-salon-karachi'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,href]) => (
                   <li key={l}><Link href={href} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{l}</Link></li>
                 ))}
               </ul>
@@ -1050,17 +1052,34 @@ export function Footer() {
               </ul>
             </div>
           </div>
+          <div className="mb-10 pb-8 border-b border-[#e4ddd7]">
+            <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-3">
+              Salon near you in Karachi
+            </p>
+            <ul className="flex flex-wrap gap-x-4 gap-y-2">
+              {localLinks.map((link) => (
+                <li key={link.slug}>
+                  <Link
+                    href={link.href}
+                    className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
           <div className="border-t border-[#e4ddd7] pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
             <div className="flex items-center gap-3 flex-wrap">
               <p className="text-stone text-[11px] font-['Inter']">© {new Date().getFullYear()} Farwa Beauty Salon. All rights reserved.</p>
               <span className="text-[#e4ddd7] hidden sm:inline">·</span>
               <UrduSignature className="sm:hidden text-stone/70 text-[13px]" />
             </div>
-              <div className="flex items-center gap-3">
-                <Link href="/privacy" className="text-stone text-[11px] font-['Inter'] hover:text-ink transition-colors">Privacy Policy</Link>
-                <span className="text-[#e4ddd7]">·</span>
-                <p className="text-stone text-[11px] font-['Inter']">Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400 · Est. 2008</p>
-              </div>
+            <div className="flex items-center gap-3">
+              <Link href="/privacy" className="text-stone text-[11px] font-['Inter'] hover:text-ink transition-colors">Privacy Policy</Link>
+              <span className="text-[#e4ddd7]">·</span>
+              <p className="text-stone text-[11px] font-['Inter']">Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400 · Est. 2008</p>
+            </div>
           </div>
         </div>
       </div>
