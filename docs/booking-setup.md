@@ -135,6 +135,9 @@ function checkNewBookings() {
 
 4. Replace `your-email@example.com` with your actual email
 5. Save the script (Ctrl+S)
+
+**If `checkNewBookings` crashes with "JavaScript runtime exited unexpectedly":** ensure `getRange(lastRow, 1, lastRow, 12)` uses `lastRow` for both start and end row (not `1`). Add column **M** header `Notified` so the script can skip rows already emailed.
+
 6. Set up a **time-driven trigger**:
    - Click the clock icon (Triggers) in the left sidebar
    - Click **+ Add Trigger**
