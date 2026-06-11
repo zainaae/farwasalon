@@ -53,4 +53,23 @@ test.describe('Services pages', () => {
     const bookLink = page.getByRole('link', { name: /book haircut & blowdry/i })
     await expect(bookLink).toHaveAttribute('href', /\/book\?serviceId=\d+/)
   })
+
+  test('/services/bridal service modal and book link', async ({ page }) => {
+    await page.goto('/services/bridal')
+    await page.getByRole('button', { name: /full bridal package/i }).click()
+    const dialog = page.getByRole('dialog')
+    await expect(dialog).toBeVisible()
+    await expect(dialog.getByRole('heading', { name: /full bridal package/i })).toBeVisible()
+
+    const bookLink = page.getByRole('link', { name: /book full bridal package/i })
+    await expect(bookLink).toHaveAttribute('href', /\/book\?serviceId=\d+/)
+  })
+
+  test('/services/facials lists services with book links', async ({ page }) => {
+    await page.goto('/services/facials')
+    await expect(page.locator('#service-category-title')).toContainText(/facials/i)
+
+    const bookLink = page.getByRole('link', { name: /book normal facial/i })
+    await expect(bookLink).toHaveAttribute('href', /\/book\?serviceId=\d+/)
+  })
 })

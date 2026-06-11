@@ -1,7 +1,41 @@
 import { expect, type Page } from '@playwright/test'
 import { CAT_SLUGS } from '../src/data.js'
+import { BLOG_POSTS } from '../src/blog-data.js'
+import { getPriorityLocationLinks } from '../lib/location-links.js'
 
 export const ALL_CATEGORY_SLUGS = Object.values(CAT_SLUGS)
+export const BLOG_SLUGS = BLOG_POSTS.map((post) => post.slug)
+
+/** Ten representative location landing pages — diverse services and neighborhoods. */
+export const SAMPLE_LOCATION_LINKS = getPriorityLocationLinks().filter(({ slug }) =>
+  [
+    'threading-in-pechs-karachi',
+    'bridal-makeup-in-pechs-karachi',
+    'facials-in-pechs-karachi',
+    'threading-in-gulshan',
+    'bridal-makeup-in-clifton-karachi',
+    'best-bridal-makeup-dha',
+    'best-threading-dha',
+    'threading-in-bahadurabad',
+    'waxing-in-tariq-road',
+    'hair-in-dha',
+  ].includes(slug),
+)
+
+export async function assertNoHorizontalOverflow(page: Page) {
+  const metrics = await page.evaluate(() => {
+    const doc = document.documentElement
+    const body = document.body
+    return {
+      scrollWidth: Math.max(doc.scrollWidth, body.scrollWidth),
+      clientWidth: doc.clientWidth,
+    }
+  })
+  expect(
+    metrics.scrollWidth,
+    `scrollWidth ${metrics.scrollWidth} should fit clientWidth ${metrics.clientWidth}`,
+  ).toBeLessThanOrEqual(metrics.clientWidth + 1)
+}
 
 export const MOCK_SLOTS = {
   slots: [

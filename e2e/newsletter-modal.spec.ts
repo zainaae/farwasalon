@@ -15,4 +15,21 @@ test.describe('Newsletter modal', () => {
     await expect(page.getByRole('heading', { name: /welcome!/i })).toBeVisible({ timeout: 15_000 })
     await expect(page.getByText(/10% off code will arrive/i)).toBeVisible()
   })
+
+  // Exit-intent uses document mouseleave + clientY <= 0; headless Chromium does not
+  // reliably synthesize pointer leave at the viewport edge, so this stays skipped.
+  test.skip('exit-intent mouseleave opens modal', async ({ page }) => {
+    await page.addInitScript(() => {
+      try {
+        localStorage.removeItem('farwa-newsletter-seen')
+      } catch {
+        // private mode
+      }
+    })
+    await page.goto('/')
+    await page.evaluate(() => {
+      document.dispatchEvent(new MouseEvent('mouseleave', { clientY: -1, bubbles: true }))
+    })
+    await expect(page.getByRole('dialog', { name: /10% off/i })).toBeVisible({ timeout: 5_000 })
+  })
 })
