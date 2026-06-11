@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { appendSubscriber, isConfigured } from '../../../lib/google-sheets.js'
+import { appendSubscriber, isConfigured, sheetsErrorDetail } from '../../../lib/google-sheets.js'
 import { checkRateLimit } from '../../../lib/rate-limit.js'
 import { isAllowedOrigin } from '../../../lib/origin-check.js'
 import { requireStringField } from '../../../lib/sanitize.js'
@@ -61,7 +61,11 @@ export async function POST(request) {
       source: sourceField.value || '',
     })
   } catch (err) {
-    logger.error('/api/subscribe', 'sheets-append-failed', { ip: hashIp(ip), ...errCtx(err) })
+    logger.error('/api/subscribe', 'sheets-append-failed', {
+      ip: hashIp(ip),
+      ...errCtx(err),
+      sheets: sheetsErrorDetail(err),
+    })
     return NextResponse.json(
       { error: 'Could not save your subscription. Please try again later.' },
       { status: 502 },

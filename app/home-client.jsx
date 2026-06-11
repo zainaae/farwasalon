@@ -8,6 +8,7 @@ import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useNextSlot } from '../src/shared.jsx'
 import { YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
+import { webmSourceFor } from '../lib/video-manifest.js'
 
 const HomeBelowFold = dynamic(() => import('./home-below-fold'), {
   loading: () => <div className="min-h-screen" />,
@@ -15,6 +16,7 @@ const HomeBelowFold = dynamic(() => import('./home-below-fold'), {
 
 const HERO_POSTER = '/bridal2.jpg'
 const HERO_VIDEO = '/hero-mp4.mp4'
+const HERO_WEBM = webmSourceFor(HERO_VIDEO)
 const HERO_PLAYBACK_RATE = 0.65
 
 function Hero() {
@@ -116,6 +118,7 @@ function Hero() {
           poster={HERO_POSTER}
           preload="auto"
         >
+          {HERO_WEBM && <source src={HERO_WEBM} type="video/webm" />}
           <source src={HERO_VIDEO} type="video/mp4" />
         </video>
       )}

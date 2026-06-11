@@ -85,6 +85,7 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     const res = await request.post('/api/subscribe', {
       data: { email: 'e2e-test@example.com', firstName: 'E2E', website: '' },
     })
-    expect([200, 400, 502, 503]).toContain(res.status())
+    // 503 when Sheets env is missing locally; 502 only on transient upstream failure
+    expect([200, 400, 503]).toContain(res.status())
   })
 })

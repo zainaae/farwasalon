@@ -1,6 +1,6 @@
 # Hero background video
 
-`public/hero-mp4.mp4` is ~7.1MB (as of last check). The site loads **`/bridal2.jpg` as the LCP** (preloaded in `app/page.jsx`). The hero video:
+`public/hero-mp4.mp4` is ~7.1MB; `public/hero-mp4.webm` is ~0.8MB VP9. Desktop hero prefers WebM when supported (`app/home-client.jsx` + `lib/video-manifest.js`). The site loads **`/bridal2.jpg` as the LCP** (preloaded in `app/page.jsx`). The hero video:
 
 - Mounts only on **desktop** when `prefers-reduced-motion` is off
 - Defers mount until **`requestIdleCallback`** (or ~400ms) so the poster wins first paint

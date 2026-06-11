@@ -267,7 +267,7 @@ See you again soon!
 ```
 We understand plans can change!
 
-To cancel or reschedule, please let us know at least 4 hours before your appointment time. This helps us offer the slot to other clients.
+To cancel or reschedule, please let us know at least 2 hours before your appointment time (use the link on your confirmation page or message us here). This helps us offer the slot to other clients.
 
 Would you like to reschedule for another time? 📅
 ```

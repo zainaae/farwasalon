@@ -123,7 +123,7 @@ function CancelContent() {
         Cancel appointment?
       </h1>
       <p className="text-stone text-sm font-['Inter'] font-light mb-8">
-        This will free your time slot for other guests. Please confirm below.
+        This will free your time slot for other guests. Online cancellation is available at least 2 hours before your appointment.
       </p>
 
       <div className="panel-soft p-6 text-left mb-8 shadow-soft">

@@ -123,6 +123,22 @@ async function main() {
 
   results.push(
     await probe(
+      'subscribe',
+      `${BASE}/api/subscribe`,
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          email: `probe-${Date.now()}@example.com`,
+          firstName: 'Probe',
+          source: 'api-probe',
+        }),
+      },
+      { statusIn: [200, 503] },
+    ),
+  )
+
+  results.push(
+    await probe(
       'book past date (reject)',
       `${BASE}/api/book`,
       {

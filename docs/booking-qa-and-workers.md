@@ -106,6 +106,8 @@ Ran `BASE_URL=https://farwasalon.com node scripts/booking-api-probe.mjs` before 
 
 ## 5. Data captured per booking (Google Sheet)
 
+Tab **Subscribers** (newsletter): auto-created on first signup — columns A=Email, B=FirstName, C=SubscribedAt, D=Source.
+
 Tab **Bookings** columns A–L:
 
 | Col | Field | Worker use |
