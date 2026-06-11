@@ -2,7 +2,9 @@
 
 **Site:** https://farwasalon.com  
 **Stack:** Next.js 16 · Vercel · Google Sheets booking · Apps Script email  
-**Last audit:** May 2026 · `master` @ `5bf205e`
+**Last audit:** June 2026 · `master` @ `157c849`
+
+**Completed since last stamp:** single-location UX (footer, hub page, location landing copy), design tokens / shared UI polish, NAP aligned to Block 3 PECHS in code + docs, sitemap-locations e2e coverage.
 
 This plan is the single roadmap: **what to do, in what order, and how to QA each step before moving on.** Do not start Phase 2 until Phase 0 QA is **PASS**.
 

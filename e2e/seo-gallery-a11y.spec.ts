@@ -24,7 +24,7 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     const indexXml = await index.text()
     expect(indexXml).toMatch(/sitemapindex|urlset/i)
 
-    for (const path of ['/sitemap-static.xml', '/sitemap-services.xml', '/sitemap-blog.xml']) {
+    for (const path of ['/sitemap-static.xml', '/sitemap-services.xml', '/sitemap-locations.xml', '/sitemap-blog.xml']) {
       const res = await request.get(path)
       expect(res.ok(), path).toBeTruthy()
       const xml = await res.text()

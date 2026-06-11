@@ -100,7 +100,7 @@ export default function LocationServicePage({ data }) {
             <li>✓ Expert {service.name.toLowerCase()} professionals</li>
             <li>✓ Hygienic, comfortable environment in PECHS</li>
             <li>✓ Book online or on WhatsApp — instant confirmation</li>
-            <li>✓ Serving clients from {location.name} and across Karachi</li>
+            <li>✓ Clients from {location.name} and across Karachi visit us in PECHS</li>
           </ul>
         </motion.section>
 
@@ -149,7 +149,7 @@ export default function LocationServicePage({ data }) {
               </Link>
             ))}
           </div>
-          <h3 className="font-['Syne'] font-bold text-sm text-ink mb-2">{service.name} in Other Areas</h3>
+          <h3 className="font-['Syne'] font-bold text-sm text-ink mb-2">{service.name} for other neighborhoods</h3>
           <div className="flex flex-wrap gap-2">
             {relatedLocations.map((rl) => (
               <Link key={rl.slug} href={`/services/${service.slug}-in-${rl.slug}`}

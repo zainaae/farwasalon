@@ -10,14 +10,14 @@ Use this exact text everywhere to maintain NAP consistency:
 
 ```
 Farwa Beauty Salon
-PECHS Block 2, Karachi, Pakistan
+Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400, Pakistan
 📞 +92 322 278 2254
 🌐 farwasalon.com
 ```
 
 Short version (for character-limited fields):
 ```
-Farwa Beauty Salon | PECHS Block 2, Karachi | 0322-278-2254
+Farwa Beauty Salon | Block 3 PECHS, Karachi | 0322-278-2254
 ```
 
 ---
@@ -26,7 +26,7 @@ Farwa Beauty Salon | PECHS Block 2, Karachi | 0322-278-2254
 
 ### Instagram Bio (150 characters)
 ```
-✨ Beauty Salon in PECHS Block 2, Karachi
+✨ Beauty Salon in PECHS Block 3, Karachi
 💄 Bridal | Facials | Hair | Nails | Wax
 📅 Book via WhatsApp 👇
 ```
@@ -34,12 +34,12 @@ Link in bio: `https://farwasalon.com`
 
 ### Facebook — Short Description (255 characters)
 ```
-Farwa Beauty Salon — your trusted beauty destination in PECHS Block 2, Karachi since 2008. Expert bridal makeup, facials, hair treatments, waxing, nails & massage. Book on WhatsApp: 0322-278-2254 💕
+Farwa Beauty Salon — your trusted beauty destination in PECHS Block 3, Karachi since 2008. Expert bridal makeup, facials, hair treatments, waxing, nails & massage. Book on WhatsApp: 0322-278-2254 💕
 ```
 
 ### Facebook — Long Description
 ```
-Welcome to Farwa Beauty Salon — Karachi's trusted beauty destination in PECHS Block 2, proudly serving clients since 2008.
+Welcome to Farwa Beauty Salon — Karachi's trusted beauty destination in PECHS Block 3, proudly serving clients since 2008.
 
 Our Services:
 💄 Bridal Makeup & Packages (Barat, Walima, Mehndi)
@@ -53,19 +53,19 @@ Why choose us?
 ✅ Experienced beauticians with 15+ years of expertise
 ✅ Premium products and hygiene standards
 ✅ Affordable prices without compromising quality
-✅ Convenient PECHS Block 2 location with easy parking
+✅ Convenient PECHS Block 3 location with easy parking
 
 📅 Book Your Appointment:
 📞 0322-278-2254 (Call/WhatsApp)
 🌐 farwasalon.com
-📍 PECHS Block 2, Karachi
+📍 PECHS Block 3, Karachi
 
 Walk-ins welcome! 🌸
 ```
 
 ### Pinterest Bio (160 characters)
 ```
-Farwa Beauty Salon | Bridal Makeup, Nail Art, Hairstyles & Skincare Inspiration ✨ PECHS Block 2, Karachi | Since 2008
+Farwa Beauty Salon | Bridal Makeup, Nail Art, Hairstyles & Skincare Inspiration ✨ PECHS Block 3, Karachi | Since 2008
 ```
 
 ### TikTok Bio (80 characters)
@@ -78,7 +78,7 @@ Beauty transformations ✨ PECHS Karachi
 ```
 Welcome to the official YouTube channel of Farwa Beauty Salon!
 
-Based in PECHS Block 2, Karachi, we've been transforming beauty since 2008. Watch bridal transformations, beauty tutorials, skincare tips, nail art, and behind-the-scenes content from our salon.
+Based in PECHS Block 3, Karachi, we've been transforming beauty since 2008. Watch bridal transformations, beauty tutorials, skincare tips, nail art, and behind-the-scenes content from our salon.
 
 💄 Services: Bridal Makeup | Facials | Hair Treatments | Nails | Waxing | Massage
 
@@ -92,12 +92,12 @@ Subscribe for weekly beauty content! 🌸
 
 ### LinkedIn Company Description
 ```
-Farwa Beauty Salon is a professional beauty salon established in 2008, located in PECHS Block 2, Karachi, Pakistan. We offer a comprehensive range of beauty services including bridal makeup, facials, hair treatments, waxing, threading, nail care, and massage therapy.
+Farwa Beauty Salon is a professional beauty salon established in 2008, located in PECHS Block 3, Karachi, Pakistan. We offer a comprehensive range of beauty services including bridal makeup, facials, hair treatments, waxing, threading, nail care, and massage therapy.
 
 With over 15 years of experience, our team of skilled beauticians delivers premium beauty services in a clean, welcoming environment. We are committed to quality, customer satisfaction, and helping every client look and feel their best.
 
 Industry: Personal Care & Beauty Services
-Location: PECHS Block 2, Karachi, Pakistan
+Location: PECHS Block 3, Karachi, Pakistan
 Founded: 2008
 ```
 
@@ -188,7 +188,7 @@ Founded: 2008
 [1–2 sentences about the service, benefits, or results]
 
 💰 Starting from PKR [price]
-📍 PECHS Block 2, Karachi
+📍 PECHS Block 3, Karachi
 📅 Book: 0322-278-2254
 
 #FarwaBeautySalon #[ServiceHashtag] #KarachiBeauty
@@ -230,7 +230,7 @@ Save this for later! 🔖
 [Offer details — what, how much off, what's included]
 
 📅 Valid: [dates]
-📍 Farwa Beauty Salon, PECHS Block 2
+📍 Farwa Beauty Salon, PECHS Block 3
 📞 Book now: 0322-278-2254
 
 Limited slots — don't miss out! 🌸
@@ -247,7 +247,7 @@ Limited slots — don't miss out! 🌸
 - Use natural lighting for photos
 - Post consistently (minimum 3x/week on Instagram)
 - Engage with comments within 1 hour
-- Use location tags (PECHS Block 2, Karachi)
+- Use location tags (PECHS Block 3, Karachi)
 - Share client testimonials
 - Show the salon environment (clean, welcoming)
 - Use trending audio on Reels/TikTok

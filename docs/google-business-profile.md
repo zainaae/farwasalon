@@ -51,14 +51,13 @@ Add all that apply:
 
 ### Business Description (750 characters, keyword-optimized)
 ```
-Farwa Beauty Salon is a premier beauty destination in PECHS Block 2, Karachi, serving clients with exceptional beauty services since 2008. We specialize in bridal makeup, mehndi designs, hairstyling, facials, waxing, threading, manicures, pedicures, and full-body massage. Our experienced beauticians deliver salon-quality results using top-brand products in a clean, welcoming environment. Whether you need everyday grooming, a complete bridal package with trial sessions, or a relaxing spa day — Farwa Beauty Salon is your trusted choice in Karachi. Book your appointment today via WhatsApp or phone. Walk-ins welcome.
+Farwa Beauty Salon is a premier beauty destination in PECHS Block 3, Karachi, serving clients with exceptional beauty services since 2008. We specialize in bridal makeup, mehndi designs, hairstyling, facials, waxing, threading, manicures, pedicures, and full-body massage. Our experienced beauticians deliver salon-quality results using top-brand products in a clean, welcoming environment. Whether you need everyday grooming, a complete bridal package with trial sessions, or a relaxing spa day — Farwa Beauty Salon is your trusted choice in Karachi. Book your appointment today via WhatsApp or phone. Walk-ins welcome.
 ```
 
 ### Address
 ```
-PECHS Block 2, Karachi, Pakistan
+Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400, Pakistan
 ```
-> Update with the full street address once confirmed.
 
 ### Phone
 ```
@@ -71,16 +70,15 @@ https://farwasalon.com
 ```
 
 ### Hours
-Set regular business hours (example — adjust to actual):
 | Day | Hours |
 |-----|-------|
-| Monday | 10:00 AM – 8:00 PM |
-| Tuesday | 10:00 AM – 8:00 PM |
-| Wednesday | 10:00 AM – 8:00 PM |
-| Thursday | 10:00 AM – 8:00 PM |
-| Friday | 10:00 AM – 8:00 PM |
-| Saturday | 10:00 AM – 9:00 PM |
-| Sunday | 11:00 AM – 7:00 PM |
+| Monday | 11:00 AM – 7:00 PM |
+| Tuesday | 11:00 AM – 7:00 PM |
+| Wednesday | 11:00 AM – 7:00 PM |
+| Thursday | 11:00 AM – 7:00 PM |
+| Friday | 11:00 AM – 7:00 PM |
+| Saturday | 11:00 AM – 7:00 PM |
+| Sunday | Closed |
 
 > Set special hours for Eid, Ramadan, and wedding season.
 
@@ -211,7 +209,7 @@ Post weekly to keep the listing active and visible. Google Posts appear directly
 
 ### Post Template
 ```
-📍 Farwa Beauty Salon, PECHS Block 2, Karachi
+📍 Farwa Beauty Salon, PECHS Block 3, Karachi
 
 [HEADLINE — 5-8 words]
 
@@ -275,7 +273,7 @@ If you have a moment, we'd really appreciate a quick Google review — it helps 
 Your honest feedback means the world to us! 💕
 
 — Team Farwa Beauty Salon
-PECHS Block 2, Karachi
+PECHS Block 3, Karachi
 📞 0322-278-2254
 ```
 
@@ -303,7 +301,7 @@ Thank you for taking the time to share your feedback, [NAME]. We're sorry your e
 Pre-fill the Q&A section with common questions. Log in with the business account and post these questions, then answer them:
 
 ### Q1: What are your opening hours?
-**A:** Farwa Beauty Salon is open Monday to Friday 10 AM – 8 PM, Saturday 10 AM – 9 PM, and Sunday 11 AM – 7 PM. We recommend booking appointments in advance, especially on weekends and during wedding season.
+**A:** Farwa Beauty Salon is open Monday to Saturday, 11 AM – 7 PM. We are closed on Sundays. We recommend booking appointments in advance, especially on weekends and during wedding season.
 
 ### Q2: Do you offer bridal makeup packages?
 **A:** Yes! We offer complete bridal packages including barat makeup, walima makeup, mehndi night, bridal trial session, and pre-bridal facials and skin prep. Our bridal packages start from PKR 35,000. Book your trial session by calling 0322-278-2254.
@@ -312,7 +310,7 @@ Pre-fill the Q&A section with common questions. Log in with the business account
 **A:** Both! Walk-ins are welcome for quick services like threading and waxing. For facials, bridal makeup, hair treatments, and weekend visits, we strongly recommend booking in advance via WhatsApp at 0322-278-2254.
 
 ### Q4: Where exactly is Farwa Beauty Salon located?
-**A:** We are located in PECHS Block 2, Karachi. You can find us easily on Google Maps. Look for our signboard — we're on the main road with convenient parking nearby.
+**A:** We are at Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400. You can find us easily on Google Maps — look for our signboard with convenient parking nearby.
 
 ### Q5: What brands/products do you use?
 **A:** We use a mix of premium international and trusted local brands for all our services. For facials and skin treatments, we use professional-grade products suited to each skin type. Feel free to ask about specific products during your visit.
@@ -327,10 +325,10 @@ Pre-fill the Q&A section with common questions. Log in with the business account
 **A:** Absolutely! We highly recommend a bridal trial session (PKR 5,000) so we can perfect your look before the big day. Book your trial at least 2–4 weeks before your wedding date by calling 0322-278-2254.
 
 ### Q9: Do you offer home service?
-**A:** Currently, we offer services at our salon in PECHS Block 2. For bridal services, home service may be available for an additional fee — please contact us at 0322-278-2254 to discuss your requirements.
+**A:** Currently, we offer services at our salon in PECHS Block 3. For bridal services, home service may be available for an additional fee — please contact us at 0322-278-2254 to discuss your requirements.
 
 ### Q10: Is parking available near the salon?
-**A:** Yes, there is convenient street parking available near our salon in PECHS Block 2. The area is easily accessible from Shahrah-e-Quaideen and other main roads.
+**A:** Yes, there is convenient street parking available near our salon in PECHS Block 3. The area is easily accessible from Shahrah-e-Quaideen and other main roads.
 
 ---
 
