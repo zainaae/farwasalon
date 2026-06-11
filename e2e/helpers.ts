@@ -1,4 +1,7 @@
 import { expect, type Page } from '@playwright/test'
+import { CAT_SLUGS } from '../src/data.js'
+
+export const ALL_CATEGORY_SLUGS = Object.values(CAT_SLUGS)
 
 export const MOCK_SLOTS = {
   slots: [
@@ -63,4 +66,52 @@ export async function pickDateAndTime(page: Page) {
   await expect(slot).toBeVisible({ timeout: 15_000 })
   await slot.click()
   await page.getByRole('button', { name: 'Next' }).last().click()
+}
+
+export async function mockCancelApi(page: Page) {
+  await page.route('**/api/book/cancel', async (route) => {
+    if (route.request().method() !== 'POST') {
+      await route.continue()
+      return
+    }
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ ok: true }),
+    })
+  })
+}
+
+export async function mockSubscribeApi(page: Page) {
+  await page.route('**/api/subscribe', async (route) => {
+    if (route.request().method() !== 'POST') {
+      await route.continue()
+      return
+    }
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify({ ok: true }),
+    })
+  })
+}
+
+/** Open newsletter modal by accelerating the 25s delay timer in tests. */
+export async function openNewsletterModal(page: Page) {
+  await page.addInitScript(() => {
+    try {
+      localStorage.removeItem('farwa-newsletter-seen')
+    } catch {
+      // private mode
+    }
+    const originalSetTimeout = window.setTimeout.bind(window)
+    window.setTimeout = ((handler: TimerHandler, timeout?: number, ...args: unknown[]) => {
+      if (typeof timeout === 'number' && timeout >= 20_000) {
+        return originalSetTimeout(handler, 50, ...args)
+      }
+      return originalSetTimeout(handler, timeout, ...args)
+    }) as typeof window.setTimeout
+  })
+  await page.goto('/')
+  await expect(page.getByRole('dialog', { name: /10% off/i })).toBeVisible({ timeout: 15_000 })
 }

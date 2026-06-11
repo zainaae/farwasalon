@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 import {
   mockBookApi,
+  mockCancelApi,
   mockSlotsApi,
   pickDateAndTime,
   selectEyebrowThreading,
@@ -90,6 +91,26 @@ test.describe('Booking flow', () => {
     await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
     await expect(page.getByText(/Eyebrow Threading/i)).toBeVisible()
     await expect(page.getByText(/Tester/i)).toBeVisible()
+  })
+
+  test('cancel booking with mocked API shows success', async ({ page }) => {
+    await mockCancelApi(page)
+    await page.goto(
+      '/book/cancel?token=test&date=2026-06-15&time=14:00&id=FS-TEST&service=Threading&name=Test',
+    )
+    await expect(page.getByRole('heading', { name: /cancel appointment/i })).toBeVisible()
+    await page.getByRole('button', { name: /yes, cancel my appointment/i }).click()
+    await expect(page.getByRole('heading', { name: /cancelled/i })).toBeVisible({ timeout: 15_000 })
+    await expect(page.getByText(/appointment has been cancelled/i)).toBeVisible()
+  })
+
+  test('cancel page without token or id shows invalid link UI', async ({ page }) => {
+    await page.goto('/book/cancel?date=2026-06-15&time=14:00&service=Threading&name=Test')
+    await expect(page.getByRole('heading', { name: /invalid cancellation link/i })).toBeVisible()
+    await expect(page.getByRole('link', { name: /whatsapp the salon/i })).toHaveAttribute(
+      'href',
+      /wa\.me/,
+    )
   })
 
   test('mobile viewport 390px — book step 1 layout', async ({ page }) => {
