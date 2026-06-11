@@ -33,24 +33,24 @@ Beauty, Cosmetic & Personal Care
 
 ### Description (256 characters max)
 ```
-Premium beauty salon in PECHS Block 2, Karachi since 2008. Bridal makeup, facials, hair treatments, waxing, threading, nails & massage. Book your appointment today! 💕
+Premium beauty salon in PECHS Block 3, Karachi since 2008. Bridal makeup, facials, hair treatments, waxing, threading, nails & massage. Book your appointment today! 💕
 ```
 
 ### Address
 ```
-PECHS Block 2, Karachi, Pakistan
+Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400, Pakistan
 ```
 
 ### Business Hours
 | Day | Hours |
 |-----|-------|
-| Monday | 10:00 AM – 8:00 PM |
-| Tuesday | 10:00 AM – 8:00 PM |
-| Wednesday | 10:00 AM – 8:00 PM |
-| Thursday | 10:00 AM – 8:00 PM |
-| Friday | 10:00 AM – 8:00 PM |
-| Saturday | 10:00 AM – 9:00 PM |
-| Sunday | 11:00 AM – 7:00 PM |
+| Monday | 11:00 AM – 7:00 PM |
+| Tuesday | 11:00 AM – 7:00 PM |
+| Wednesday | 11:00 AM – 7:00 PM |
+| Thursday | 11:00 AM – 7:00 PM |
+| Friday | 11:00 AM – 7:00 PM |
+| Saturday | 11:00 AM – 7:00 PM |
+| Sunday | Closed |
 
 ### Email
 ```
@@ -154,8 +154,8 @@ Thank you for reaching out. How can we help you today?
 
 Simply reply with a number or describe what you need, and we'll assist you right away!
 
-📍 PECHS Block 2, Karachi
-🕐 Mon–Fri 10AM–8PM | Sat 10AM–9PM | Sun 11AM–7PM
+📍 PECHS Block 3, Karachi
+🕐 Mon–Sat 11AM–7PM | Closed Sunday
 🌐 farwasalon.com
 ```
 
@@ -170,13 +170,12 @@ Thank you for your message! 💕
 We're currently closed and will respond when we reopen.
 
 🕐 Our Hours:
-Mon–Fri: 10 AM – 8 PM
-Sat: 10 AM – 9 PM
-Sun: 11 AM – 7 PM
+Mon–Sat: 11 AM – 7 PM
+Closed Sunday
 
 In the meantime, you can:
 📋 Browse our services: farwasalon.com
-📍 Find us: PECHS Block 2, Karachi
+📍 Find us: PECHS Block 3, Karachi
 
 We'll get back to you as soon as we're open! 🌸
 ```
@@ -245,7 +244,7 @@ We'll confirm your appointment shortly! 🌸
 ### `/location` — Directions
 ```
 📍 Farwa Beauty Salon
-PECHS Block 2, Karachi
+PECHS Block 3, Karachi
 
 🗺️ Google Maps: https://www.google.com/maps?cid=16537974005565006352
 
@@ -286,7 +285,7 @@ WhatsApp Channels allow broadcast updates to followers without seeing their numb
 4. Add the salon logo as channel icon
 5. Write channel description:
 ```
-Official channel of Farwa Beauty Salon, PECHS Block 2, Karachi. Get updates on offers, new services, bridal season specials & beauty tips! 🌸💕
+Official channel of Farwa Beauty Salon, PECHS Block 3, Karachi. Get updates on offers, new services, bridal season specials & beauty tips! 🌸💕
 ```
 
 ### Content Strategy for Channel

@@ -4,7 +4,7 @@ Track all business directory listings in one place. Keep this updated as you cla
 
 **NAP (Keep Consistent Everywhere):**
 - **Name:** Farwa Beauty Salon
-- **Address:** PECHS Block 2, Karachi, Pakistan
+- **Address:** Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400, Pakistan
 - **Phone:** +92 322 278 2254
 - **Website:** https://farwasalon.com
 
@@ -61,7 +61,7 @@ Track all business directory listings in one place. Keep this updated as you cla
 Every listing MUST have:
 - [ ] Exact same business name: **Farwa Beauty Salon**
 - [ ] Exact same phone: **+92 322 278 2254**
-- [ ] Exact same address: **PECHS Block 2, Karachi, Pakistan**
+- [ ] Exact same address: **Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400, Pakistan**
 - [ ] Website link: **https://farwasalon.com**
 - [ ] Business hours (matching across all platforms)
 - [ ] Logo as profile photo
