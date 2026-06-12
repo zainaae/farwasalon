@@ -11,7 +11,7 @@ export const BLOG_POSTS = [
     category: 'Bridal',
     relatedCategories: ['Bridal', 'Facials', 'Hair Treatments'],
     content: [
-      { type: 'p', text: 'Your wedding day is one of the most photographed days of your life. Every bride deserves to look and feel her absolute best — but that kind of radiance doesn\'t happen overnight. At Farwa Beauty Salon in PECHS, Karachi, we\'ve helped hundreds of brides prepare for their big day since 2008. Here\'s the timeline we recommend.' },
+      { type: 'p', text: 'Your wedding day is one of the most photographed days of your life. Every bride deserves to look and feel her absolute best — but that kind of radiance doesn\'t happen overnight. At Farwa Beauty Salon in PECHS, Karachi, we\'ve been helping brides prepare for their big day since 2008. Here\'s the timeline we recommend.' },
       { type: 'p', text: 'Whether you are planning a grand barat or an intimate nikah, the key to bridal beauty is starting early. Rushing your prep in the final weeks leads to stress, breakouts, and last-minute compromises. A structured timeline lets your skin, hair, and overall look develop naturally — so on the big day, everything comes together effortlessly.' },
 
       { type: 'h2', text: '6 Months Before: Start Your Skincare Routine' },

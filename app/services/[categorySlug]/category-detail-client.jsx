@@ -111,7 +111,7 @@ export default function CategoryDetailClient({ categorySlug }) {
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="mb-8 pb-8 border-b border-border-soft">
             <p className="eyebrow mb-2">— {services.length} services</p>
-            <h2 id="service-category-title" className="section-title text-2xl md:text-3xl uppercase mb-3">{category}</h2>
+            <h1 id="service-category-title" className="section-title text-2xl md:text-3xl uppercase mb-3">{category}</h1>
             <p id="service-category-desc" className="text-body max-w-lg">{meta.desc}</p>
           </motion.div>
 
