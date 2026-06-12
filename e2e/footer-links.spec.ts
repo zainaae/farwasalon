@@ -1,26 +1,23 @@
 import { test, expect } from '@playwright/test'
-import { CAT_SLUGS } from '../src/data.js'
+import { CAT_SLUGS, SERVICES } from '../src/data.js'
 
 const NAVIGATE_LINKS = [
   '/',
   '/services',
+  '/book',
   '/gallery',
   '/blog',
   '/about',
   '/contact',
   '/team',
   '/faq',
+  '/bridal',
 ] as const
 
-/** Matches the six service links rendered in Footer (src/shared.jsx). */
-const FOOTER_SERVICE_LINKS = [
-  CAT_SLUGS['Threading'],
-  CAT_SLUGS['Bridal'],
-  CAT_SLUGS['Facials'],
-  CAT_SLUGS['Nails'],
-  CAT_SLUGS['Eyebrow Tattoo'],
-  CAT_SLUGS['Massage'],
-].map((slug) => `/services/${slug}`)
+/** All 13 service category links rendered in Footer (src/shared.jsx). */
+const FOOTER_SERVICE_LINKS = Object.keys(SERVICES).map(
+  (cat) => `/services/${CAT_SLUGS[cat as keyof typeof CAT_SLUGS]}`
+)
 
 test.describe('Footer links @ 390px', () => {
   test.use({ viewport: { width: 390, height: 844 } })

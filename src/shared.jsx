@@ -4,11 +4,17 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
-import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Check, Phone, MessageCircle } from 'lucide-react'
+import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Check, Phone, MessageCircle, Star } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, track, CAT_SLUGS, CAT_SEO, CAT_FAQS } from './data.js'
 import { toLocalDateString } from '../lib/date-local.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
 import { SALON_ADDRESS_LINES } from '../lib/business-schema.js'
+import FooterNewsletter from '../app/components/footer-newsletter.jsx'
+
+/** Standard CTA copy — use for primary book actions sitewide. */
+export const CTA_PRIMARY_LABEL = 'Book appointment'
+export const CTA_WHATSAPP_HINT = 'Or message us on WhatsApp'
+
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
 export function useNextSlot() {
   const [slot, setSlot] = useState({ label: 'Book Online', open: false })
@@ -986,14 +992,10 @@ export function Navbar({ transparent = false }) {
 
 /* ─── Footer ───────────────────────────────────────────────────── */
 export function Footer() {
-  const serviceLinks = [
-    { label: 'Threading',       slug: CAT_SLUGS['Threading'] },
-    { label: 'Bridal',          slug: CAT_SLUGS['Bridal'] },
-    { label: 'Facials',         slug: CAT_SLUGS['Facials'] },
-    { label: 'Nails',           slug: CAT_SLUGS['Nails'] },
-    { label: 'Eyebrow Tattoo',  slug: CAT_SLUGS['Eyebrow Tattoo'] },
-    { label: 'Massage',         slug: CAT_SLUGS['Massage'] },
-  ]
+  const serviceLinks = Object.keys(SERVICES).map((label) => ({
+    label,
+    slug: CAT_SLUGS[label],
+  }))
   return (
     <footer className="bg-white">
       {/* Top bar — logo + Urdu signature + CTA */}
@@ -1011,10 +1013,10 @@ export function Footer() {
           <div className="flex flex-col sm:items-end gap-2">
             <Link href="/book"
               className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3 hover:bg-stone transition-colors duration-300">
-              Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" />
+              {CTA_PRIMARY_LABEL} <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
-            <a href={`https://wa.me/923222782254`} className="text-stone text-[10px] font-['Inter'] tracking-wide hover:text-ink transition-colors">
-              Or message us on WhatsApp
+            <a href={WA_DEFAULT} className="text-stone text-[10px] font-['Inter'] tracking-wide hover:text-ink transition-colors">
+              {CTA_WHATSAPP_HINT}
             </a>
           </div>
         </div>
@@ -1025,16 +1027,21 @@ export function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-10">
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Services</p>
-              <ul className="flex flex-col gap-2.5">
+              <ul className="flex flex-col gap-2 sm:gap-2.5">
                 {serviceLinks.map(sl => (
                   <li key={sl.label}><Link href={`/services/${sl.slug}`} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{sl.label}</Link></li>
                 ))}
+                <li className="pt-1">
+                  <Link href="/services" className="link-underline text-ink text-xs font-['Inter'] font-medium hover:text-stone transition-colors">
+                    All services →
+                  </Link>
+                </li>
               </ul>
             </div>
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Navigate</p>
               <ul className="flex flex-col gap-2.5">
-                {[['Home','/'],['Services','/services'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,href]) => (
+                {[['Home','/'],['Services','/services'],['Book','/book'],['Bridal','/bridal'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,href]) => (
                   <li key={l}><Link href={href} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{l}</Link></li>
                 ))}
               </ul>
@@ -1049,14 +1056,31 @@ export function Footer() {
             </div>
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Connect</p>
-              <ul className="flex flex-col gap-2.5">
-                <li><a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="link-underline text-stone text-xs font-['Inter'] hover:text-ink">WhatsApp</a></li>
-                <li><a href={IG_LINK}    target="_blank" rel="noreferrer" className="link-underline text-stone text-xs font-['Inter'] hover:text-ink">Instagram @farwasalon</a></li>
-                <li><a href={MAPS_LINK}  target="_blank" rel="noreferrer" className="link-underline text-stone text-xs font-['Inter'] hover:text-ink">Find us on Maps</a></li>
-                <li><a href="https://g.page/farwasalon/review" target="_blank" rel="noreferrer" className="link-underline text-stone text-xs font-['Inter'] hover:text-ink">Leave a Review ★</a></li>
+              <ul className="flex flex-col gap-3">
+                <li>
+                  <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="link-underline inline-flex items-center gap-2 text-stone text-xs font-['Inter'] hover:text-ink">
+                    <MessageCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" /> WhatsApp
+                  </a>
+                </li>
+                <li>
+                  <a href={IG_LINK} target="_blank" rel="noreferrer" className="link-underline inline-flex items-center gap-2 text-stone text-xs font-['Inter'] hover:text-ink">
+                    <IgIcon className="w-3.5 h-3.5 shrink-0" aria-hidden="true" /> @farwasalon
+                  </a>
+                </li>
+                <li>
+                  <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="link-underline inline-flex items-center gap-2 text-stone text-xs font-['Inter'] hover:text-ink">
+                    <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" /> Google Maps
+                  </a>
+                </li>
+                <li>
+                  <a href="https://g.page/farwasalon/review" target="_blank" rel="noreferrer" className="link-underline inline-flex items-center gap-2 text-stone text-xs font-['Inter'] hover:text-ink">
+                    <Star className="w-3.5 h-3.5 shrink-0" aria-hidden="true" /> Leave a review
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
+          <FooterNewsletter />
           <div className="mb-10 pb-8 border-b border-border-soft">
             <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-3">
               Location

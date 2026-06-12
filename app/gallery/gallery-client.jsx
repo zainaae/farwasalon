@@ -47,6 +47,16 @@ export default function GalleryClient() {
       <div className="overflow-hidden pb-4">
         <SmoothyGallery photos={GALLERY_PHOTOS} />
       </div>
+      <div className="section-shell mt-4 mb-8 max-w-2xl mx-auto text-center">
+        <p className="text-body text-sm mb-2">
+          This gallery shows a sample of our work — we are actively adding fresh client photos and before/after
+          sets from the PECHS studio. Follow{' '}
+          <a href={IG_LINK} target="_blank" rel="noreferrer" className="link-underline text-ink">
+            @farwasalon on Instagram
+          </a>{' '}
+          for the latest looks, or visit us in person to see the full portfolio.
+        </p>
+      </div>
       <div className="section-shell mt-4 mb-16">
         <p id="gallery-swipe-hint" className="text-body text-[10px]">Swipe or drag to explore; focus the carousel and use arrow keys.</p>
       </div>
