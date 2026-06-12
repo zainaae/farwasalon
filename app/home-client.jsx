@@ -167,7 +167,7 @@ function Hero() {
                 animate={{ y: 0 }}
                 transition={{ delay: 0.28, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
                 className="block text-white font-black">
-                Karachi&rsquo;s Trusted Beauty Salon
+                Beauty Salon in PECHS
               </m.span>
             </span>
             <span className="block overflow-hidden">
@@ -176,7 +176,7 @@ function Hero() {
                 animate={{ y: 0 }}
                 transition={{ delay: 0.4, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
                 className="block text-white/90 font-extralight italic font-['Syne']">
-                in PECHS
+                Karachi
               </m.span>
             </span>
           </h1>

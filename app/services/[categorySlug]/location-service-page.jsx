@@ -12,7 +12,7 @@ import {
   CAT_FAQS,
   getDefaultServiceIdForCategory,
 } from '../../../src/data.js'
-import { NEIGHBORHOODS, TOP_SERVICES } from '../../../src/location-seo.js'
+import { TOP_SERVICES } from '../../../src/location-seo.js'
 import { SALON_ADDRESS_LINES, SALON_PHONE_DISPLAY, GOOGLE_REVIEW_LINK, getAggregateRating } from '../../../lib/business-schema.js'
 
 export default function LocationServicePage({ data }) {
@@ -24,7 +24,6 @@ export default function LocationServicePage({ data }) {
   const categoryServices = categoryKey ? SERVICES[categoryKey] : []
   const displayServices = categoryServices.slice(0, 6)
 
-  const relatedLocations = NEIGHBORHOODS.filter(n => n.slug !== location.slug).slice(0, 4)
   const relatedServices = TOP_SERVICES.filter(s => s.slug !== service.slug).slice(0, 4)
   const faqs = CAT_FAQS[service.category]?.slice(0, 3) ?? []
   const bookServiceId = getDefaultServiceIdForCategory(service.category)
@@ -46,8 +45,11 @@ export default function LocationServicePage({ data }) {
           </nav>
 
           <h1 className="font-['Unbounded'] font-bold text-2xl md:text-4xl text-ink leading-tight mb-4">{heading}</h1>
-          <p className="text-body md:text-base max-w-2xl mb-6">
+          <p className="text-body md:text-base max-w-2xl mb-4">
             {service.description} {location.detail}
+          </p>
+          <p className="text-xs text-stone font-['Inter'] font-light max-w-2xl mb-6 border-l-2 border-accent-gold/40 pl-3">
+            One studio in PECHS — we welcome clients from {location.name} and nearby areas. All appointments are at our PECHS address below.
           </p>
 
           <div className="flex flex-wrap gap-3 mb-10">
@@ -96,7 +98,7 @@ export default function LocationServicePage({ data }) {
           className="mb-12 panel-soft p-6 md:p-8 shadow-soft">
           <h2 className="font-['Syne'] font-bold text-lg text-ink mb-3">Why Choose Farwa Beauty Salon?</h2>
           <ul className="space-y-2 text-stone text-sm font-light font-['Inter']">
-            <li>✓ Trusted since 2008 — {YEARS_ACTIVE}+ years of experience</li>
+            <li>✓ Serving PECHS since 2008 — {YEARS_ACTIVE}+ years of experience</li>
             <li>✓ Expert {service.name.toLowerCase()} professionals</li>
             <li>✓ Hygienic, comfortable environment in PECHS</li>
             <li>✓ Book online or on WhatsApp — instant confirmation</li>
@@ -149,15 +151,17 @@ export default function LocationServicePage({ data }) {
               </Link>
             ))}
           </div>
-          <h3 className="font-['Syne'] font-bold text-sm text-ink mb-2">{service.name} for other neighborhoods</h3>
-          <div className="flex flex-wrap gap-2">
-            {relatedLocations.map((rl) => (
-              <Link key={rl.slug} href={`/services/${service.slug}-in-${rl.slug}`}
-                className="tab-pill hover:border-ink hover:text-ink">
-                {service.name} in {rl.name}
-              </Link>
-            ))}
-          </div>
+          <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed max-w-2xl">
+            We welcome clients from across Karachi at our PECHS studio — one address, one team.{' '}
+            <Link href={`/services/${service.slug}-in-pechs-karachi`} className="link-underline hover:text-ink text-ink">
+              Visit us in PECHS
+            </Link>
+            {' '}or{' '}
+            <Link href="/contact" className="link-underline hover:text-ink text-ink">
+              get directions
+            </Link>
+            .
+          </p>
         </section>
       </div>
     </main>

@@ -82,14 +82,14 @@ function StatsStrip() {
             <m.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
-              <span className="block">KARACHI&apos;S</span> <span className="block">MOST</span> <span className="block">TRUSTED</span> <span className="block">BEAUTY STUDIO</span>
+              <span className="block">A PECHS</span> <span className="block">BEAUTY STUDIO</span> <span className="block">SINCE</span> <span className="block">2008</span>
             </m.h2>
           </div>
           <m.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.15 }}
             className="flex flex-col gap-6 sm:gap-7">
             <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
-              For over {YEARS_ACTIVE} years, Farwa Beauty Salon has been the trusted choice in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
+              For over {YEARS_ACTIVE} years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
             </p>
             <div className="grid grid-cols-3 max-[380px]:grid-cols-1 gap-3 sm:gap-4 border-t border-border-soft pt-6 sm:pt-7">
               {[
@@ -420,8 +420,8 @@ function TestimonialsPreview() {
             </p>
             <h2 className="font-['Unbounded'] font-bold text-white leading-[0.95]"
               style={{ fontSize: 'clamp(1.9rem, 5vw, 3.75rem)', letterSpacing: '-0.025em' }}>
-              <span className="block">Five-star care,</span>
-              <span className="block font-['Syne'] italic font-extralight text-[#c9a98a]">visit after visit.</span>
+              <span className="block">What clients say</span>
+              <span className="block font-['Syne'] italic font-extralight text-[#c9a98a]">about Farwa.</span>
             </h2>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 shrink-0 pb-1">

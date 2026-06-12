@@ -911,6 +911,8 @@ export function Navbar({ transparent = false }) {
     { label: 'Gallery',      href: '/gallery' },
     { label: 'Blog',         href: '/blog' },
     { label: 'About',        href: '/about' },
+    { label: 'Team',         href: '/team' },
+    { label: 'FAQ',          href: '/faq' },
     { label: 'Contact',      href: '/contact' },
   ]
 
