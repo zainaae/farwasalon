@@ -8,6 +8,7 @@ import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Clock, Sparkles, Chec
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, waLinkBooking, SERVICES, ALL_SERVICES, CATEGORIES, formatPrice, formatDuration, track, CAT_SLUGS, CAT_SEO, CAT_FAQS } from './data.js'
 import { toLocalDateString } from '../lib/date-local.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
+import { SALON_ADDRESS_LINES } from '../lib/business-schema.js'
 /* ─── Live "next available slot" based on Mon–Sat 11am–7pm ────── */
 export function useNextSlot() {
   const [slot, setSlot] = useState({ label: 'Book Online', open: false })
@@ -130,7 +131,7 @@ export function IgIcon({ className = '' }) {
 }
 
 /* ─── Animated counter ─────────────────────────────────────────── */
-export function AnimatedNumber({ display, final }) {
+export function AnimatedNumber({ display, final, ariaLabel = display }) {
   const ref   = useRef(null)
   const [shown, setShown] = useState(display)
   const fired = useRef(false)
@@ -159,7 +160,12 @@ export function AnimatedNumber({ display, final }) {
     io.observe(el)
     return () => io.disconnect()
   }, [display, final])
-  return <span ref={ref}>{shown}</span>
+  return (
+    <span ref={ref}>
+      <span className="sr-only">{ariaLabel}</span>
+      <span aria-hidden="true">{shown}</span>
+    </span>
+  )
 }
 
 /* ─── Native scroll-snap gallery (replaces smooothy) ───────────── */
@@ -1036,7 +1042,7 @@ export function Footer() {
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Visit Us</p>
               <ul className="flex flex-col gap-2.5">
-                {['Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400','Mon–Sat: 11am–7pm','Closed Sunday'].map(l => (
+                {SALON_ADDRESS_LINES.map(l => (
                   <li key={l}><span className="text-stone text-xs font-['Inter']">{l}</span></li>
                 ))}
               </ul>
@@ -1060,6 +1066,10 @@ export function Footer() {
               <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="link-underline hover:text-ink transition-colors">
                 Directions on Google Maps
               </a>
+              {' · '}
+              <Link href="/beauty-salon-karachi" className="link-underline hover:text-ink transition-colors">
+                Beauty salon in Karachi
+              </Link>
             </p>
           </div>
           <div className="border-t border-border-soft pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
@@ -1071,7 +1081,7 @@ export function Footer() {
             <div className="flex items-center gap-3">
               <Link href="/privacy" className="text-stone text-[11px] font-['Inter'] hover:text-ink transition-colors">Privacy Policy</Link>
               <span className="text-[#e4ddd7]">·</span>
-              <p className="text-stone text-[11px] font-['Inter']">Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400 · Est. 2008</p>
+              <p className="text-stone text-[11px] font-['Inter']">{SALON_ADDRESS_LINES[0]} · Est. 2008</p>
             </div>
           </div>
         </div>

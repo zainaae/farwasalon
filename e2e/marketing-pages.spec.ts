@@ -24,4 +24,11 @@ test.describe('Marketing pages @ 390px', () => {
       await assertNoHorizontalOverflow(page)
     })
   }
+
+  test('/about stats expose sr-only labels for screen readers', async ({ page }) => {
+    await page.goto('/about')
+    const srOnly = page.locator('#main .sr-only')
+    await expect(srOnly).toHaveCount(3)
+    await expect(srOnly.first()).not.toBeEmpty()
+  })
 })

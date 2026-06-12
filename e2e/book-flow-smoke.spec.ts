@@ -7,6 +7,24 @@ import {
   selectEyebrowThreading,
 } from './helpers'
 
+test.describe('Book pages smoke', () => {
+  test('/book/confirmation returns 200 with valid query params', async ({ page }) => {
+    const res = await page.goto(
+      '/book/confirmation?id=smoke-001&date=2026-05-20&time=10:00&service=Eyebrow%20Threading&name=Tester&duration=10',
+    )
+    expect(res?.status()).toBe(200)
+    await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
+  })
+
+  test('/book/cancel returns 200 with valid query params', async ({ page }) => {
+    const res = await page.goto(
+      '/book/cancel?token=smoke&date=2026-06-15&time=14:00&id=FS-SMOKE&service=Threading&name=Test',
+    )
+    expect(res?.status()).toBe(200)
+    await expect(page.getByRole('heading', { name: /cancel appointment/i })).toBeVisible()
+  })
+})
+
 test.describe('Booking flow', () => {
   test.beforeEach(async ({ page }) => {
     await mockSlotsApi(page)
