@@ -917,15 +917,15 @@ export function Navbar({ transparent = false }) {
   const light = scrolled || !transparent
 
   const navLinks = [
-    { label: 'Home',         href: '/' },
-    { label: 'Services',     href: '/services' },
-    { label: 'Book',         href: '/book' },
-    { label: 'Gallery',      href: '/gallery' },
-    { label: 'Blog',         href: '/blog' },
-    { label: 'About',        href: '/about' },
-    { label: 'Team',         href: '/team' },
-    { label: 'FAQ',          href: '/faq' },
-    { label: 'Contact',      href: '/contact' },
+    { label: 'Home',         href: '/', wideOnly: false },
+    { label: 'Services',     href: '/services', wideOnly: false },
+    { label: 'Book',         href: '/book', wideOnly: false },
+    { label: 'Gallery',      href: '/gallery', wideOnly: false },
+    { label: 'Blog',         href: '/blog', wideOnly: true },
+    { label: 'About',        href: '/about', wideOnly: true },
+    { label: 'Team',         href: '/team', wideOnly: true },
+    { label: 'FAQ',          href: '/faq', wideOnly: true },
+    { label: 'Contact',      href: '/contact', wideOnly: false },
   ]
 
   return (
@@ -936,26 +936,28 @@ export function Navbar({ transparent = false }) {
           : transparent ? '' : 'bg-white'
       }`}
     >
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 h-[3.375rem] md:h-14 flex items-center justify-between gap-2 min-w-0">
-        <Link href="/" className="shrink-0">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-6 lg:px-10 h-[3.375rem] md:h-14 flex items-center justify-between gap-2 min-w-0">
+        <Link href="/" className="shrink-0 min-w-0">
           <Logo light={light} />
         </Link>
-        <nav className="hidden md:flex items-center gap-7">
-          {navLinks.map(({ label, href }) => {
+        <nav className="hidden md:flex items-center gap-2.5 lg:gap-5 xl:gap-7 min-w-0 flex-1 justify-center px-2">
+          {navLinks.map(({ label, href, wideOnly }) => {
             const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
             return (
               <Link key={href} href={href}
-                className={`link-underline text-[11px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors
+                className={`link-underline shrink-0 text-[10px] lg:text-[11px] tracking-[0.14em] lg:tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors whitespace-nowrap
+                ${wideOnly ? 'hidden lg:inline-block' : ''}
                 ${isActive ? (light ? 'text-ink' : 'text-white') : (light ? 'text-stone hover:text-ink' : 'text-white/70 hover:text-white')}`}>
                 {label}
               </Link>
             )
           })}
         </nav>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
           <Link href="/book"
-            className={`hidden md:inline-flex items-center gap-1.5 text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-[1.125rem] py-[0.4375rem] transition-colors duration-300 ${light ? 'bg-ink text-white hover:bg-stone' : 'bg-white text-ink hover:bg-nude'}`}>
-            Book an Appointment
+            className={`hidden md:inline-flex items-center gap-1.5 text-[10px] lg:text-[11px] tracking-[0.12em] lg:tracking-[0.14em] uppercase font-medium font-['Inter'] px-3 lg:px-[1.125rem] py-[0.4375rem] transition-colors duration-300 whitespace-nowrap ${light ? 'bg-ink text-white hover:bg-stone' : 'bg-white text-ink hover:bg-nude'}`}>
+            <span className="lg:hidden">Book</span>
+            <span className="hidden lg:inline">Book an Appointment</span>
           </Link>
           <button
             type="button"

@@ -52,7 +52,7 @@ export default function FooterNewsletter() {
       <p className="text-stone text-xs font-['Inter'] mb-3 max-w-md">
         Occasional PECHS beauty tips and offers — no spam.
       </p>
-      <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md">
+      <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md min-w-0 w-full">
         <label htmlFor="footer-nl-email" className="sr-only">
           Email for salon updates
         </label>
@@ -64,7 +64,7 @@ export default function FooterNewsletter() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="flex-1 border border-border-soft px-3 py-2.5 text-sm font-['Inter'] text-ink bg-white focus:outline-none focus:ring-1 focus:ring-ink/20"
+          className="flex-1 min-w-0 border border-border-soft px-3 py-2.5 text-sm font-['Inter'] text-ink bg-white focus:outline-none focus:ring-1 focus:ring-ink/20"
         />
         <button
           type="submit"

@@ -233,6 +233,41 @@
     background: var(--ink);
     border-color: var(--ink);
   }
+  .tab-scroller {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding-bottom: 0.25rem;
+    margin-left: -0.25rem;
+    margin-right: -0.25rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    scrollbar-width: none;
+  }
+  .tab-scroller::-webkit-scrollbar {
+    display: none;
+  }
+  .tab-scroller > * {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+  @media (min-width: 768px) {
+    .tab-scroller {
+      flex-wrap: wrap;
+      overflow-x: visible;
+      scroll-snap-type: none;
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
   .panel-soft {
     background: var(--mist);
     border: 1px solid var(--border-soft);

@@ -248,6 +248,31 @@ export const SERVICES = {
 export const ALL_SERVICES = Object.values(SERVICES).flat()
 export const CATEGORIES   = ['All', ...Object.keys(SERVICES)]
 
+/** Wax submenu categories grouped under a single "Waxing" filter tab. */
+export const WAXING_CATEGORIES = new Set(['Rica Hot Wax', 'Honey Wax', 'Rica Wax'])
+
+/** Filter tabs covering all 13 service categories (Waxing groups three wax menus). */
+export const SERVICE_FILTER_TABS = [
+  'All',
+  'Bridal',
+  'Facials',
+  'Threading',
+  'Nails',
+  'Hair',
+  'Massage',
+  'Waxing',
+  'Cleansing',
+  'Eyebrow Tattoo',
+  'Hair Treatments',
+  'Bleach & Polish',
+]
+
+export function filterServiceCategories(categories, activeTab) {
+  if (activeTab === 'All') return categories
+  if (activeTab === 'Waxing') return categories.filter((c) => WAXING_CATEGORIES.has(c))
+  return categories.filter((c) => c === activeTab)
+}
+
 /** Default concurrent stations when a service has no maxWorkers */
 export const DEFAULT_MAX_WORKERS = 2
 

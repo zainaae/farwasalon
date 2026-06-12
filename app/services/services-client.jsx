@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
 import { CAT_SLUGS, LazyVideo } from '../../src/shared.jsx'
-import { SERVICES, CAT_META, track, formatPrice } from '../../src/data.js'
+import { SERVICES, CAT_META, track, formatPrice, SERVICE_FILTER_TABS, filterServiceCategories } from '../../src/data.js'
 import LiveAvailability from './live-availability'
 
 function getCatMeta(cat) {
@@ -14,30 +14,6 @@ function getCatMeta(cat) {
 }
 
 const POPULAR_CATS = new Set(['Threading', 'Facials', 'Bridal'])
-
-const WAXING_CATEGORIES = new Set(['Rica Hot Wax', 'Honey Wax', 'Rica Wax'])
-
-/** Filter tabs covering all 13 service categories (Waxing groups three wax menus). */
-const SERVICE_FILTER_TABS = [
-  'All',
-  'Bridal',
-  'Facials',
-  'Threading',
-  'Nails',
-  'Hair',
-  'Massage',
-  'Waxing',
-  'Cleansing',
-  'Eyebrow Tattoo',
-  'Hair Treatments',
-  'Bleach & Polish',
-]
-
-function filterCategories(categories, activeTab) {
-  if (activeTab === 'All') return categories
-  if (activeTab === 'Waxing') return categories.filter((c) => WAXING_CATEGORIES.has(c))
-  return categories.filter((c) => c === activeTab)
-}
 
 const AVAILABILITY_HINTS = {
   'Threading': 'Usually available same-day',
@@ -58,7 +34,7 @@ const AVAILABILITY_HINTS = {
 export default function ServicesClient() {
   const categories = Object.keys(SERVICES)
   const [activeTab, setActiveTab] = useState('All')
-  const visibleCategories = filterCategories(categories, activeTab)
+  const visibleCategories = filterServiceCategories(categories, activeTab)
 
   return (
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
@@ -79,7 +55,7 @@ export default function ServicesClient() {
         <LiveAvailability />
 
         <div
-          className="flex flex-wrap gap-2 mb-6 min-w-0"
+          className="tab-scroller mb-6"
           role="tablist"
           aria-label="Filter service categories"
         >

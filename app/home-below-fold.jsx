@@ -12,7 +12,7 @@ import {
 import { formatPrice } from '../src/data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
+import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories } from '../src/data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
@@ -222,30 +222,13 @@ function ServiceMediaPanel({ hovered, categories }) {
   )
 }
 
-const HOME_SERVICE_TABS = [
-  'All',
-  'Bridal',
-  'Facials',
-  'Threading',
-  'Nails',
-  'Hair',
-  'Massage',
-  'Waxing',
-  'Eyebrow Tattoo',
-  'Cleansing',
-]
-const WAXING_CATEGORIES = new Set(['Rica Hot Wax', 'Honey Wax', 'Rica Wax'])
+const HOME_SERVICE_TABS = SERVICE_FILTER_TABS
 
 function FeaturedServices() {
   const categories = Object.keys(SERVICES)
   const [hovered, setHovered] = useState(null)
   const [activeTab, setActiveTab] = useState('All')
-  const visibleCategories =
-    activeTab === 'All'
-      ? categories
-      : activeTab === 'Waxing'
-      ? categories.filter((c) => WAXING_CATEGORIES.has(c))
-      : categories.filter((c) => c === activeTab)
+  const visibleCategories = filterServiceCategories(categories, activeTab)
 
   return (
     <section className="cv-auto bg-white section-pad border-t border-border-soft">
@@ -275,7 +258,7 @@ function FeaturedServices() {
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-wrap gap-2 mb-6 min-w-0 max-w-full"
+              className="tab-scroller mb-6"
               role="tablist"
               aria-label="Filter service categories"
             >
