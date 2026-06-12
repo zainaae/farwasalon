@@ -2,6 +2,8 @@
 
 Run before promoting a preview deploy to production. Replace `BASE` with your Vercel preview URL or `http://127.0.0.1:3000` locally.
 
+**Custom domain / DNS:** see [domain-dns-setup.md](./domain-dns-setup.md) for Namecheap → Vercel records and production domain verification.
+
 ## 1. Automated (local or CI)
 
 ```bash

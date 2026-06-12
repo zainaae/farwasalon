@@ -2,6 +2,8 @@
 
 This guide covers registering a domain, connecting it to Vercel, and the post-setup checklist for `farwasalon.com`.
 
+**Step-by-step Namecheap DNS + Vercel (fix live site / wrong A record):** [domain-dns-setup.md](./domain-dns-setup.md)
+
 ---
 
 ## 1. Domain Registration

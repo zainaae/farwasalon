@@ -1,5 +1,7 @@
 # Google Search Console Setup — Farwa Beauty Salon
 
+**Prerequisite:** `farwasalon.com` must resolve to Vercel with valid SSL. See [domain-dns-setup.md](./domain-dns-setup.md).
+
 ## 1. Verify Ownership
 
 ### Option A: HTML File Upload (Recommended)
