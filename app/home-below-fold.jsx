@@ -420,8 +420,8 @@ function TestimonialsPreview() {
             </p>
             <h2 className="font-['Unbounded'] font-bold text-white leading-[0.95]"
               style={{ fontSize: 'clamp(1.9rem, 5vw, 3.75rem)', letterSpacing: '-0.025em' }}>
-              <span className="block">Five stars,</span>
-              <span className="block font-['Syne'] italic font-extralight text-[#c9a98a]">a thousand times over.</span>
+              <span className="block">Five-star care,</span>
+              <span className="block font-['Syne'] italic font-extralight text-[#c9a98a]">visit after visit.</span>
             </h2>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 shrink-0 pb-1">
@@ -429,7 +429,7 @@ function TestimonialsPreview() {
               {[...Array(5)].map((_, s) => <Star key={s} className="w-3 h-3 fill-current" />)}
             </div>
             <span className="text-white/40 text-[10px] sm:text-[11px] font-['Inter'] leading-snug max-w-[16rem] sm:max-w-none">
-              Hundreds of reviews · Facebook &amp; Google
+              4.9★ on Google · Facebook reviews too
             </span>
           </div>
         </m.div>
