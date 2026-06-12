@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -13,6 +14,30 @@ function getCatMeta(cat) {
 }
 
 const POPULAR_CATS = new Set(['Threading', 'Facials', 'Bridal'])
+
+const WAXING_CATEGORIES = new Set(['Rica Hot Wax', 'Honey Wax', 'Rica Wax'])
+
+/** Filter tabs covering all 13 service categories (Waxing groups three wax menus). */
+const SERVICE_FILTER_TABS = [
+  'All',
+  'Bridal',
+  'Facials',
+  'Threading',
+  'Nails',
+  'Hair',
+  'Massage',
+  'Waxing',
+  'Cleansing',
+  'Eyebrow Tattoo',
+  'Hair Treatments',
+  'Bleach & Polish',
+]
+
+function filterCategories(categories, activeTab) {
+  if (activeTab === 'All') return categories
+  if (activeTab === 'Waxing') return categories.filter((c) => WAXING_CATEGORIES.has(c))
+  return categories.filter((c) => c === activeTab)
+}
 
 const AVAILABILITY_HINTS = {
   'Threading': 'Usually available same-day',
@@ -32,6 +57,8 @@ const AVAILABILITY_HINTS = {
 
 export default function ServicesClient() {
   const categories = Object.keys(SERVICES)
+  const [activeTab, setActiveTab] = useState('All')
+  const visibleCategories = filterCategories(categories, activeTab)
 
   return (
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
@@ -51,9 +78,28 @@ export default function ServicesClient() {
 
         <LiveAvailability />
 
+        <div
+          className="flex flex-wrap gap-2 mb-6 min-w-0"
+          role="tablist"
+          aria-label="Filter service categories"
+        >
+          {SERVICE_FILTER_TABS.map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              role="tab"
+              aria-selected={activeTab === tab}
+              onClick={() => setActiveTab(tab)}
+              className={`tap-safe tab-pill ${activeTab === tab ? 'tab-pill-active' : ''}`}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
         <h2 className="sr-only">Browse all service categories</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-          {categories.map((cat, i) => {
+          {visibleCategories.map((cat, i) => {
             const meta = getCatMeta(cat)
             const services = SERVICES[cat]
             const count = services.length

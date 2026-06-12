@@ -62,13 +62,16 @@ export default function AboutClient() {
                   { year: '2010',  text: 'Expanded to two rooms' },
                   { year: '2014',  text: 'Growing by word of mouth' },
                   { year: '2016',  text: 'Moved to dedicated salon space' },
+                  { year: '2018',  text: 'Full bridal menu and trial bookings' },
+                  { year: '2020',  text: 'Expanded facials, nails, and brow services' },
+                  { year: '2024',  text: 'Online booking and live slot availability' },
                   { year: 'Today', text: 'A full-service studio in PECHS' },
                 ].map((m, i) => (
                   <motion.div key={m.year} initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.09 }}
                     className="flex gap-5 items-start">
                     <div className="flex flex-col items-center">
                       <div className="w-2 h-2 rounded-full bg-ink mt-1.5 shrink-0" />
-                      {i < 4 && <div className="w-px h-10 bg-border-soft mt-1" />}
+                      {i < 7 && <div className="w-px h-10 bg-border-soft mt-1" />}
                     </div>
                     <div className="pb-2">
                       <p className="font-['Unbounded'] font-bold text-xs text-ink mb-0.5">{m.year}</p>
@@ -116,9 +119,9 @@ export default function AboutClient() {
           </motion.p>
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {[
-              { num: '01', title: `${YEARS_ACTIVE} Years of Expertise`,       desc: 'Since 2008, Farwa has been crafting beauty with skill, care, and love for every client who walks through the door.' },
-              { num: '02', title: 'A Calm, Considered Space',    desc: 'The studio is unhurried by design — quiet rooms, careful lighting, conversations that stay at the chair.' },
-              { num: '03', title: 'Every Woman, Every Look',      desc: 'From a quick brow thread to a full bridal transformation — no request is too big or too small.' },
+              { num: '01', title: 'Founder-Led Standards', desc: 'Rubina still sets the bar for bridal, brows, and skincare — and trains every stylist who works under the Farwa name.' },
+              { num: '02', title: 'A Calm, Considered Space', desc: 'The studio is unhurried by design — quiet rooms, careful lighting, conversations that stay at the chair.' },
+              { num: '03', title: 'Clients Who Stay for Years', desc: 'Many PECHS families have trusted us for a decade or more — that continuity is how we learn your skin, your brows, your wedding timeline.' },
             ].map((p, i) => (
               <motion.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
                 className="border-t border-white/10 pt-7">

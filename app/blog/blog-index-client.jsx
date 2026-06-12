@@ -8,6 +8,14 @@ import { useBooking } from '../../src/shared.jsx'
 import { BLOG_POSTS } from '../../src/blog-data.js'
 import { BreadcrumbJsonLd } from '../json-ld.jsx'
 
+function formatBlogDate(dateStr) {
+  return new Date(`${dateStr}T12:00:00`).toLocaleDateString('en-PK', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  })
+}
+
 export default function BlogIndexClient() {
   const booking = useBooking()
 
@@ -56,10 +64,13 @@ export default function BlogIndexClient() {
                   </div>
                 )}
                 <div className="p-6 md:p-8">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4">
                   <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
                     {post.category}
                   </span>
+                  <time dateTime={post.date} className="text-stone/50 text-[10px] font-['Inter']">
+                    {formatBlogDate(post.date)}
+                  </time>
                   <span className="text-stone/50 text-[10px] font-['Inter']">{post.readTime}</span>
                 </div>
                 <h2 className="font-['Syne'] font-bold text-base md:text-lg text-ink leading-snug mb-3 group-hover:text-stone transition-colors">

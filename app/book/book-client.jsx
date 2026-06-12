@@ -88,7 +88,7 @@ const stepVariants = {
 }
 
 function FirstVisitHint() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   return (
     <div className="mb-8 panel-muted shadow-soft">
       <button

@@ -5,8 +5,19 @@ import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { SERVICES, formatPrice, track } from '../src/data.js'
 
-/** Top 6 categories worth a 1-tap shortcut from the home page. Order matters: most popular first. */
-const QUICK_PICK_CATEGORIES = ['Threading', 'Bridal', 'Facials', 'Nails', 'Hair', 'Massage']
+const CATEGORY_COUNT = Object.keys(SERVICES).length
+
+/** Popular shortcuts + high-value categories missing from the original six. */
+const QUICK_PICK_CATEGORIES = [
+  'Threading',
+  'Bridal',
+  'Facials',
+  'Nails',
+  'Hair',
+  'Massage',
+  'Eyebrow Tattoo',
+  'Rica Hot Wax',
+]
 
 function minPriceFor(category) {
   const list = SERVICES[category]
@@ -74,6 +85,24 @@ export default function QuickPickRow() {
               </Link>
             </m.div>
           ))}
+          <m.div
+            initial={{ opacity: 0, y: 8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: items.length * 0.04, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Link
+              href="/services"
+              onClick={() => track('QuickPick', { category: 'all' })}
+              aria-label={`View all ${CATEGORY_COUNT} service categories`}
+              className="tap-safe snap-start shrink-0 inline-flex flex-col items-start justify-center gap-0.5 border border-dashed border-ink/30 hover:border-ink hover:bg-mist transition-all px-4 py-2.5 min-w-[7.5rem] h-full"
+            >
+              <span className="font-['Syne'] font-bold text-[12px] text-ink uppercase leading-tight">
+                View all {CATEGORY_COUNT}
+              </span>
+              <span className="text-stone text-[10px] font-['Inter']">Categories</span>
+            </Link>
+          </m.div>
         </div>
       </div>
     </section>

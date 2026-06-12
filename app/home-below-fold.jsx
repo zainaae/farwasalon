@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { m } from 'framer-motion'
@@ -50,27 +50,35 @@ const FB_POSTS = [
   },
 ]
 
-const FEATURED_REVIEW = {
-  name: 'Tathira B.',
-  quote: 'Farwa Aapi ne itni care aur detail se kaam kiya ke har visit pe ghar jaisa lagta hai. Best salon in Karachi, hands down.',
-  translation: '"Farwa Aapi works with such care and detail that every visit feels like home. Best salon in Karachi, hands down."',
-  link: 'https://www.facebook.com/tathirabid/posts/pfbid02J73qHitLiSYbpvJPJEYvNfBHyjSfKEhWL1hS6VbMupr15TzuPuGtXNTKBDMuvRyKl',
-}
+const FEATURED_REVIEWS = [
+  {
+    name: 'Tathira B.',
+    quote: 'Farwa Aapi ne itni care aur detail se kaam kiya ke har visit pe ghar jaisa lagta hai. Best salon in Karachi, hands down.',
+    translation: '"Farwa Aapi works with such care and detail that every visit feels like home. Best salon in Karachi, hands down."',
+    link: 'https://www.facebook.com/tathirabid/posts/pfbid02J73qHitLiSYbpvJPJEYvNfBHyjSfKEhWL1hS6VbMupr15TzuPuGtXNTKBDMuvRyKl',
+  },
+  {
+    name: 'Jessica J.',
+    quote: 'Been coming here for years and the quality never drops. Rubina knows my skin better than I do — I leave glowing every single time.',
+    translation: null,
+    link: 'https://www.facebook.com/jessica.joseph.522/posts/pfbid02ZCUhHYUrNBsv9yEfCY5t5MiBPWzJEs6nMwtRSGYaNViyYEEUhKiUZYuSSL8yup9Ul',
+  },
+]
 
 const EDITORIAL_PHOTOS = [
-  { src: '/bridal.jpg',                label: 'Bridal' },
-  { src: '/eyebrowtattoo.mp4',         label: 'Eyebrow Tattoo',   video: true, poster: '/eyebrowtattoo.jpg' },
-  { src: '/manicurephotography.mp4',   label: 'Nail Craft',       video: true, poster: '/pedicure.jpg' },
-  { src: '/glow3.jpg',                 label: 'Facials' },
-  { src: '/threading.jpg',             label: 'Threading' },
-  { src: '/hairdo.jpg',                label: 'Hair' },
-  { src: '/oilwax.jpg',                label: 'Oil Wax' },
-  { src: '/cleansing.mp4',             label: 'Cleansing',        video: true, poster: '/facialcleansing.jpg' },
-  { src: '/massage.jpg',               label: 'Massage' },
-  { src: '/nailpaintedhands.mp4',      label: 'Nail Finish',      video: true, poster: '/pedicure.jpg' },
-  { src: '/wax2.jpg',                  label: 'Cold Wax' },
-  { src: '/hairtreatment.jpg',         label: 'Hair Treatments' },
-  { src: '/bleachpolish.jpg',                 label: 'Bleach & Polish' },
+  { src: '/bridal.jpg',           label: 'Bridal' },
+  { src: '/eyebrowtattoo.jpg',    label: 'Eyebrow Tattoo' },
+  { src: '/pedicure.jpg',         label: 'Nail Craft' },
+  { src: '/glow3.jpg',            label: 'Facials' },
+  { src: '/threading.jpg',        label: 'Threading' },
+  { src: '/hairdo.jpg',           label: 'Hair' },
+  { src: '/oilwax.jpg',           label: 'Rica Wax' },
+  { src: '/facialcleansing.jpg',  label: 'Cleansing' },
+  { src: '/massage.jpg',          label: 'Massage' },
+  { src: '/pedicure.jpg',         label: 'Nail Finish' },
+  { src: '/wax2.jpg',             label: 'Honey Wax' },
+  { src: '/hairtreatment.jpg',    label: 'Hair Treatments' },
+  { src: '/bleachpolish.jpg',     label: 'Bleach & Polish' },
 ]
 
 function StatsStrip() {
@@ -129,14 +137,9 @@ function EditorialSlideshow() {
             <figure key={i}
               className="relative shrink-0 overflow-hidden mx-[5px]"
               style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)' }}>
-              {p.video ? (
-                <LazyVideo src={p.src} poster={p.poster}
-                  className="w-full h-full object-cover" />
-              ) : (
-                <Image src={p.src} alt={p.label} loading="lazy"
-                  width={230} height={306}
-                  className="w-full h-full object-cover" />
-              )}
+              <Image src={p.src} alt={p.label} loading="lazy"
+                width={230} height={306}
+                className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
               <figcaption className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
                 <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
@@ -155,14 +158,9 @@ function EditorialSlideshow() {
         <div className="flex w-max max-w-none" style={{ animation: 'marquee 65s linear infinite' }}>
           {doubled.map((p, i) => (
             <div key={i} className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group cursor-default">
-              {p.video ? (
-                <LazyVideo src={p.src} poster={p.poster}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              ) : (
-                <Image src={p.src} alt={p.label} loading="lazy"
-                  width={330} height={440}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              )}
+              <Image src={p.src} alt={p.label} loading="lazy"
+                width={330} height={440}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
               <span className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
                 {p.label}
@@ -224,14 +222,30 @@ function ServiceMediaPanel({ hovered, categories }) {
   )
 }
 
-const HOME_SERVICE_TABS = ['All', 'Bridal', 'Facials', 'Threading', 'Nails', 'Hair']
+const HOME_SERVICE_TABS = [
+  'All',
+  'Bridal',
+  'Facials',
+  'Threading',
+  'Nails',
+  'Hair',
+  'Massage',
+  'Waxing',
+  'Eyebrow Tattoo',
+  'Cleansing',
+]
+const WAXING_CATEGORIES = new Set(['Rica Hot Wax', 'Honey Wax', 'Rica Wax'])
 
 function FeaturedServices() {
   const categories = Object.keys(SERVICES)
   const [hovered, setHovered] = useState(null)
   const [activeTab, setActiveTab] = useState('All')
   const visibleCategories =
-    activeTab === 'All' ? categories : categories.filter((c) => c === activeTab)
+    activeTab === 'All'
+      ? categories
+      : activeTab === 'Waxing'
+      ? categories.filter((c) => WAXING_CATEGORIES.has(c))
+      : categories.filter((c) => c === activeTab)
 
   return (
     <section className="cv-auto bg-white section-pad border-t border-border-soft">
@@ -342,9 +356,9 @@ function TrustPillars() {
           className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</m.p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-10">
           {[
-            { num: '01', title: `${YEARS_ACTIVE} Years of Expertise`,        desc: 'Since 2008, Farwa has been crafting beauty with skill, care, and love for every client who walks through the door.' },
-            { num: '02', title: 'A Calm, Considered Space',      desc: 'The studio is unhurried by design — quiet rooms, careful lighting, conversations that stay at the chair.' },
-            { num: '03', title: 'Every Woman, Every Look',       desc: 'From a quick brow thread to a full bridal transformation — no request is too big or too small.' },
+            { num: '01', title: `${YEARS_ACTIVE} Years in PECHS`, desc: 'Since 2008 — the same chair-side standard whether you are in for ten minutes or a full bridal day.' },
+            { num: '02', title: 'Book Online, Walk In Welcome', desc: 'Real-time slots on farwasalon.com/book, WhatsApp for questions, and walk-ins when we have room.' },
+            { num: '03', title: 'Transparent PKR Pricing', desc: 'Every service listed with PKR on the site — no surprise quotes at the counter.' },
           ].map((p, i) => (
             <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
@@ -404,6 +418,18 @@ function ReviewCard({ post, compact = false }) {
 }
 
 function TestimonialsPreview() {
+  const [reviewIdx, setReviewIdx] = useState(0)
+
+  useEffect(() => {
+    if (FEATURED_REVIEWS.length <= 1) return undefined
+    const id = setInterval(() => {
+      setReviewIdx((i) => (i + 1) % FEATURED_REVIEWS.length)
+    }, 8000)
+    return () => clearInterval(id)
+  }, [])
+
+  const featured = FEATURED_REVIEWS[reviewIdx]
+
   return (
     <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-mist border-t border-border-soft">
       <div className="relative max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
@@ -426,23 +452,43 @@ function TestimonialsPreview() {
 
         <m.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-          className="relative panel-soft bg-white shadow-soft px-6 py-8 md:px-12 md:py-10 mb-6 md:mb-8">
+          className="relative panel-soft bg-white shadow-soft px-6 py-8 md:px-12 md:py-10 mb-6 md:mb-8"
+          aria-live="polite">
           <Quote className="absolute top-5 left-5 md:top-7 md:left-8 w-5 h-5 md:w-6 md:h-6 text-stone/20 rotate-180" aria-hidden="true" />
           <blockquote className="font-['Syne'] italic font-light text-ink leading-[1.45] text-center max-w-2xl mx-auto text-lg md:text-xl">
-            {FEATURED_REVIEW.quote}
+            {featured.quote}
           </blockquote>
-          <p className="text-stone text-center text-sm font-light mt-4 font-['Inter'] max-w-xl mx-auto">
-            {FEATURED_REVIEW.translation}
-          </p>
-          <figcaption className="flex items-center justify-center gap-2 mt-6">
-            <span className="text-stone text-[10px] tracking-[0.2em] uppercase font-['Inter']">
-              {FEATURED_REVIEW.name}
-            </span>
-            <span className="text-stone/40" aria-hidden="true">·</span>
-            <a href={FEATURED_REVIEW.link} target="_blank" rel="noreferrer"
-              className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
-              Facebook <ArrowUpRight className="w-2.5 h-2.5" />
-            </a>
+          {featured.translation && (
+            <p className="text-stone text-center text-sm font-light mt-4 font-['Inter'] max-w-xl mx-auto">
+              {featured.translation}
+            </p>
+          )}
+          <figcaption className="flex flex-col items-center gap-3 mt-6">
+            <div className="flex items-center justify-center gap-2">
+              <span className="text-stone text-[10px] tracking-[0.2em] uppercase font-['Inter']">
+                {featured.name}
+              </span>
+              <span className="text-stone/40" aria-hidden="true">·</span>
+              <a href={featured.link} target="_blank" rel="noreferrer"
+                className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
+                Facebook <ArrowUpRight className="w-2.5 h-2.5" />
+              </a>
+            </div>
+            {FEATURED_REVIEWS.length > 1 && (
+              <div className="flex items-center gap-1.5" role="tablist" aria-label="Featured reviews">
+                {FEATURED_REVIEWS.map((r, i) => (
+                  <button
+                    key={r.name}
+                    type="button"
+                    role="tab"
+                    aria-selected={reviewIdx === i}
+                    aria-label={`Show review by ${r.name}`}
+                    onClick={() => setReviewIdx(i)}
+                    className={`h-1.5 rounded-full transition-all ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30 hover:bg-stone/50'}`}
+                  />
+                ))}
+              </div>
+            )}
           </figcaption>
         </m.figure>
 
@@ -466,8 +512,8 @@ function TestimonialsPreview() {
             ))}
           </div>
 
-          <div className="hidden md:grid md:grid-cols-2 xl:grid-cols-3 gap-3">
-            {FB_POSTS.map((post, i) => (
+          <div className="hidden md:grid md:grid-cols-2 gap-3 max-w-3xl">
+            {FB_POSTS.slice(0, 2).map((post, i) => (
               <m.div key={post.name}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}

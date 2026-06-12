@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Clock, ArrowUpRight } from 'lucide-react'
+import { CTA_PRIMARY_LABEL } from '../../src/shared.jsx'
 import { toLocalDateString } from '../../lib/date-local.js'
 
 const REFRESH_MS = 60_000
@@ -69,10 +70,10 @@ export default function LiveAvailability() {
   const pct = total > 0 ? free / total : 0
   const tone =
     free === 0
-      ? { dot: 'bg-[#c44a4a]', label: 'fully booked today' }
+      ? { dot: 'bg-[#c44a4a]', label: 'Fully booked today — book ahead for tomorrow' }
       : pct < 0.3
-      ? { dot: 'bg-[#c9a98a]', label: `${free} of ${total} slots open today — book fast` }
-      : { dot: 'bg-[#4a9b3f]', label: `${free} of ${total} slots open today` }
+      ? { dot: 'bg-[#c9a98a]', label: 'Limited slots left today — book soon' }
+      : { dot: 'bg-[#4a9b3f]', label: 'Slots available today' }
 
   return (
     <motion.div
@@ -99,7 +100,7 @@ export default function LiveAvailability() {
           href="/book"
           className="tap-safe shrink-0 inline-flex items-center gap-1 text-ink text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] hover:text-stone transition-colors"
         >
-          Book now <ArrowUpRight className="w-3 h-3" />
+          {CTA_PRIMARY_LABEL} <ArrowUpRight className="w-3 h-3" />
         </Link>
       )}
     </motion.div>

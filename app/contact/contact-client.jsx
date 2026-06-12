@@ -87,10 +87,21 @@ export default function ContactClient() {
                   <p className="text-stone text-[11px] font-['Inter'] mt-0.5 hover:text-ink transition-colors">Get directions →</p>
                 </div>
               </a>
-              <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
+              <a href="tel:+923222782254"
                 className="flex items-start gap-4 group">
                 <div className="w-9 h-9 border border-border-soft flex items-center justify-center shrink-0 group-hover:border-ink transition-colors">
                   <Phone className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
+                </div>
+                <div>
+                  <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">Phone</p>
+                  <p className="text-stone text-sm font-light font-['Inter']">+92 322 2782254</p>
+                  <p className="text-stone text-[11px] font-['Inter'] mt-0.5 group-hover:text-ink transition-colors">Tap to call →</p>
+                </div>
+              </a>
+              <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
+                className="flex items-start gap-4 group">
+                <div className="w-9 h-9 border border-border-soft flex items-center justify-center shrink-0 group-hover:border-ink transition-colors">
+                  <Sparkles className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
                 </div>
                 <div>
                   <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">WhatsApp</p>

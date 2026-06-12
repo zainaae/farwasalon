@@ -238,3 +238,74 @@ Response to the external critical review (7.2/10). Format per section: **Verdict
 ---
 
 *Validated against codebase — June 2026.*
+
+---
+
+## External review (z.ai docx)
+
+**Source:** `farwasalon-comprehensive-website-review.docx` (z.ai, June 12 2026). Page-by-page UX, visual, content, and technical audit (desktop + mobile).
+
+### Comparison table
+
+| # | z.ai finding | Prior review | Status | Notes |
+|---|--------------|--------------|--------|-------|
+| 1 | 17 empty `<video>` elements on homepage | Not in prior review | **DONE** (this pass) | Editorial showcase now uses `<Image>` only; LazyVideo removed from marquee. Service panel videos remain with `aria-hidden`. |
+| 2 | Oil Wax / Cold Wax showcase → 404 | Not in prior review | **DONE** (this pass) | Labels corrected to **Rica Wax** and **Honey Wax** (real categories in `CAT_SLUGS`). |
+| 3 | Footer missing 7 of 13 service links | §13 Footer gaps | **DONE** (fe46f4a) | Footer maps all 13 categories from `SERVICES` + “All services →”. z.ai likely audited pre-fix deploy. |
+| 4 | Desktop/mobile homepage content parity | Not in prior review | **PARTIAL** | `FeaturedServices` renders on both viewports today; z.ai may have hit lazy-loaded below-fold or stale deploy. Mobile sticky CTA bar still mobile-only (intentional). |
+| 5 | 53 font files loaded | Not in prior review | **BACKLOG** | Next.js `next/font` subsets; audit build output / reduce weights if still high. |
+| 6 | No LocalBusiness schema | §10 Missing LocalBusiness | **DISAGREE / DONE** | `buildBeautySalonSchema()` emits `['BeautySalon','LocalBusiness']` sitewide since before z.ai audit. |
+| 7 | No Service / FAQPage schema | §10 Schema audit | **DISAGREE / DONE** | Service schema on category pages; FAQPage on `/faq` (now 22 Qs). z.ai counted 8 FAQs — stale. |
+| 8 | No BreadcrumbList schema | §10 Schema audit | **DISAGREE / DONE** | Location + blog breadcrumbs via JSON-LD components. |
+| 9 | Primary Book CTA doesn't dominate hero | §14 UX polish | **PARTIAL** | Hero CTAs softened in 48f55b2; further hierarchy tweak → backlog. |
+| 10 | Contact page is secretly booking page | Not in prior review | **PARTIAL** | Dual purpose by design (NAP + WhatsApp form); split page → backlog if Rubina wants it. |
+| 11 | Duplicate showcase grid (14×2 DOM) | Not in prior review | **PARTIAL** | Intentional marquee duplication for infinite scroll; no functional bug. Could virtualize later. |
+| 12 | 51 homepage images, lazy load below-fold | Not in prior review | **PARTIAL** | Showcase images use `loading="lazy"`; fewer DOM nodes after video→img fix. |
+| 13 | 6+ Google reviews displayed prominently | §5 Social proof | **DONE** | Honest 4.9★ · 6 reviews; featured quotes are Facebook posts, not fabricated GBP. |
+| 14 | Inconsistent heading styles across pages | Not in prior review | **BACKLOG** | Editorial dash-split vs line-break varies by page; brand polish pass. |
+| 15 | ALL CAPS overuse | Not in prior review | **BACKLOG** | Design-system choice; reserve caps for labels only if redesigning. |
+| 16 | Blog cards all show same read time | Not in prior review | **BACKLOG** | `readTime` in `blog-data.js`; vary per word count when editing posts. |
+| 17 | No publication dates on blog cards | Not in prior review | **DONE** (this pass) | `<time dateTime>` added to blog index cards. |
+| 18 | Team page only 1 member | §1 Team page | **DONE** (fe46f4a) | Honest founder-led copy + photo placeholder; no fake staff. |
+| 19 | No Twitter Card meta tags | Not in prior review | **DISAGREE / DONE** | `layout.jsx` + `page-metadata.js` set `twitter:card` and images. |
+| 20 | No Urdu language option | §6 i18n | **BACKLOG** | Same as prior review — large project. |
+| 21 | Gallery slider default at 50% | Not in prior review | **DONE** (this pass) | Before/after slider defaults to **85%** (after-forward). |
+| 22 | Footer address repeated 3× | Not in prior review | **BACKLOG** | NAP in Visit Us + location bar + copyright; consolidate in footer redesign. |
+| 23 | Stat sub-labels repeat value text | Not in prior review | **BACKLOG** | Minor copy polish on stats strip. |
+| 24 | About timeline gap 2016–Today | §15 About page | **DONE** (uncommitted + fe46f4a) | Milestones 2018, 2020, 2024 added. |
+| 25 | Privacy policy — WhatsApp retention | Not in prior review | **BACKLOG** | Legal/content update for Rubina. |
+| 26 | Mobile filter tabs only 6/13 categories | §14 Featured tabs | **DONE** (uncommitted) | Tabs now include Waxing, Massage, Eyebrow Tattoo, Cleansing (+ All). |
+
+### New items vs prior review (z.ai-only)
+
+1. **Empty video / marquee a11y** — critical performance + screen-reader issue; fixed by img-only showcase.
+2. **Ghost wax category labels** — Oil/Cold Wax not in `CAT_SLUGS`; fixed by renaming to Rica/Honey Wax.
+3. **Desktop nav Services click stays on /** — not reproduced in current code (nav uses `/services` hrefs); monitor.
+4. **53 fonts / 42 JS chunks** — build perf audit not in prior review.
+5. **Blog publication dates on listing** — implemented this pass.
+6. **Gallery slider default position** — implemented this pass.
+7. **Heading style / ALL CAPS consistency** — design backlog.
+8. **Footer address triplication** — layout backlog.
+9. **Contact vs Book page split** — IA backlog.
+
+### z.ai backlog (no code fakes)
+
+| Item | Owner |
+|------|-------|
+| Font/JS bundle audit | Dev |
+| Hero CTA visual hierarchy | Design |
+| Split Contact vs Book pages | Rubina + dev |
+| Heading / caps consistency pass | Design |
+| Footer NAP deduplication | Dev |
+| Privacy policy WhatsApp section | Rubina / legal |
+| Urdu i18n scope | Rubina |
+| Vary blog read times | Content |
+| Professional photo day (gallery alt text) | Rubina |
+
+### Shipped for z.ai (this pass)
+
+- `app/home-below-fold.jsx` — showcase img-only, Rica/Honey Wax labels, service tabs + review rotation (includes prior uncommitted UX work)
+- `app/gallery/before-after-slider.jsx` — default 85% after position
+- `app/blog/blog-index-client.jsx` — publication dates on cards
+- `docs/comprehensive-review-response.md` — this section
+

@@ -4,7 +4,7 @@ import { useState, useRef, useCallback } from 'react'
 import Image from 'next/image'
 
 export default function BeforeAfterSlider({ before, after, label }) {
-  const [position, setPosition] = useState(50)
+  const [position, setPosition] = useState(85)
   const containerRef = useRef(null)
 
   const updateFromClientX = useCallback((clientX) => {
