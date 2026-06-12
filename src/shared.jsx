@@ -1222,19 +1222,15 @@ export function LazyVideo({ src, poster, className, ...props }) {
     <video
       ref={ref}
       poster={poster}
-      preload="none"
+      preload={visible ? 'auto' : 'none'}
       muted
       loop
       playsInline
       className={className}
       {...props}
     >
-      {visible && (
-        <>
-          {webm && <source src={webm} type="video/webm" />}
-          <source src={src} type="video/mp4" />
-        </>
-      )}
+      {webm && <source src={webm} type="video/webm" />}
+      <source src={src} type="video/mp4" />
     </video>
   )
 }
