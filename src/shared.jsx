@@ -212,13 +212,13 @@ export function SmoothyGallery({ photos }) {
   }, [idx, count, scrollTo])
 
   return (
-    <div className="relative overflow-x-clip max-w-full">
+    <div className="relative overflow-x-clip max-w-full w-full isolate">
       <div
         ref={scrollerRef}
         onScroll={onScroll}
         onKeyDown={onRegionKeyDown}
         tabIndex={0}
-        className="snap-x-row snap-center-child flex overflow-x-auto gap-3 md:gap-4 px-[max(1rem,calc(50vw-200px))] md:px-[max(2.5rem,calc(50vw-220px))] pb-2 outline-none focus-visible:ring-2 focus-visible:ring-[#c9a98a] focus-visible:ring-offset-2"
+        className="snap-x-row snap-center-child flex overflow-x-auto gap-3 md:gap-4 px-4 md:px-10 pb-2 outline-none focus-visible:ring-2 focus-visible:ring-[#c9a98a] focus-visible:ring-offset-2 max-w-full"
         role="region"
         aria-label="Salon photo gallery"
         aria-describedby="gallery-swipe-hint"

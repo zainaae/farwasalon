@@ -52,11 +52,11 @@ export default function LiveAvailability() {
       <motion.div
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8 flex items-center justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft"
+        className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft max-w-full min-w-0"
         role="status"
         aria-live="polite"
       >
-        <div className="flex items-center gap-2 min-w-0">
+        <div className="flex items-center gap-2 min-w-0 flex-1">
           <Clock className="w-4 h-4 text-stone shrink-0" aria-hidden="true" />
           <p className="text-stone text-xs font-['Inter']">
             <span className="font-medium text-ink">{state.reason}.</span> Browse services and book ahead for the next open day.
@@ -79,11 +79,11 @@ export default function LiveAvailability() {
     <motion.div
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mb-8 flex items-center justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft"
+      className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft max-w-full min-w-0"
       role="status"
       aria-live="polite"
     >
-      <div className="flex items-center gap-2.5 min-w-0">
+      <div className="flex items-center gap-2.5 min-w-0 flex-1">
         <span
           aria-hidden="true"
           className={`relative inline-flex w-2 h-2 rounded-full ${tone.dot}`}

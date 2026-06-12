@@ -45,10 +45,9 @@ for (const viewport of VIEWPORTS) {
       for (const path of PAGES) {
         test(`${path} has no horizontal overflow`, async ({ page }) => {
           await page.goto(path, { waitUntil: 'load' })
+          await expect(page.locator('#main')).toBeVisible({ timeout: 15_000 })
           if (path === '/book') {
-            await expect(page.getByText('— Choose a service')).toBeVisible({ timeout: 15_000 })
-          } else {
-            await expect(page.locator('#main')).toBeVisible()
+            await expect(page.getByRole('heading', { level: 1 })).toContainText(/BOOK/i)
           }
           await page.waitForTimeout(300)
           await assertNoHorizontalOverflow(page)

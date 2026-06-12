@@ -154,8 +154,8 @@ function EditorialSlideshow() {
         </div>
       </div>
 
-      <div className="hidden md:block py-2 w-full max-w-full overflow-x-clip">
-        <div className="flex w-max max-w-none" style={{ animation: 'marquee 65s linear infinite' }}>
+      <div className="hidden md:block py-2 w-full max-w-full overflow-x-clip isolate">
+        <div className="flex w-max max-w-none will-change-transform" style={{ animation: 'marquee 65s linear infinite' }}>
           {doubled.map((p, i) => (
             <div key={i} className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group cursor-default">
               <Image src={p.src} alt={p.label} loading="lazy"
@@ -275,7 +275,7 @@ function FeaturedServices() {
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-wrap gap-2 mb-6 min-w-0"
+              className="flex flex-wrap gap-2 mb-6 min-w-0 max-w-full"
               role="tablist"
               aria-label="Filter service categories"
             >

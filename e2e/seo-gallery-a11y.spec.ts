@@ -83,7 +83,7 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
   test('/beauty-salon-karachi hub page', async ({ page }) => {
     await page.goto('/beauty-salon-karachi')
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/Beauty Salon in Karachi/i)
-    await expect(page.getByRole('link', { name: /Book Online/i })).toBeVisible()
+    await expect(page.getByRole('link', { name: /Book Online/i }).first()).toBeVisible()
   })
 
   test('newsletter subscribe API accepts POST', async ({ request }) => {
