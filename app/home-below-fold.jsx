@@ -79,11 +79,13 @@ function StatsStrip() {
       <div className="max-w-screen-xl mx-auto">
         <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
           <div className="overflow-hidden">
-            <m.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}
-              className="display-section text-ink">
-              <span className="block">A PECHS</span> <span className="block">BEAUTY STUDIO</span> <span className="block">SINCE</span> <span className="block">2008</span>
-            </m.h2>
+            <m.div initial={{ y: '40%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}>
+              <p className="eyebrow mb-3">— Est. 2008 · PECHS</p>
+              <h2 className="section-title text-2xl md:text-3xl max-w-md">
+                A beauty studio with {YEARS_ACTIVE} years of care
+              </h2>
+            </m.div>
           </div>
           <m.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.15 }}
@@ -360,43 +362,40 @@ function TrustPillars() {
 
 function ReviewCard({ post, compact = false }) {
   return (
-    <article className={`group relative bg-[#1a1614] border border-[#c9a98a]/20 hover:border-[#c9a98a]/50 transition-colors duration-500 flex flex-col overflow-hidden ${compact ? 'shrink-0 snap-start w-[85vw] max-w-[320px]' : 'h-full'}`}>
-      <div className="absolute top-0 right-0 w-16 h-16 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        style={{ background: 'radial-gradient(circle at top right, rgba(201,169,138,0.22), transparent 60%)' }} />
-
-      <header className="flex items-center justify-between px-5 py-4 border-b border-white/5">
+    <article className={`group panel-soft shadow-soft flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-card ${compact ? 'shrink-0 snap-start w-[85vw] max-w-[320px]' : 'h-full'}`}>
+      <header className="flex items-center justify-between px-5 py-4 border-b border-border-soft">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="w-9 h-9 bg-gradient-to-br from-[#c9a98a] to-[#7a5c48] flex items-center justify-center shrink-0 ring-1 ring-[#c9a98a]/20">
-            <span className="text-white font-['Syne'] font-bold text-[11px]">{post.initials}</span>
+          <div className="w-9 h-9 bg-mist border border-border-soft flex items-center justify-center shrink-0">
+            <span className="text-ink font-['Syne'] font-semibold text-[11px]">{post.initials}</span>
           </div>
           <div className="min-w-0">
-            <p className="font-['Syne'] font-semibold text-[13px] text-white/90 truncate leading-tight">{post.name}</p>
+            <p className="font-['Syne'] font-semibold text-[13px] text-ink truncate leading-tight">{post.name}</p>
             <div className="flex items-center gap-1.5 mt-0.5">
-              <div className="flex gap-0.5 text-[#c9a98a]">
-                {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
+              <div className="flex gap-0.5 text-stone/70" aria-hidden="true">
+                {[...Array(5)].map((_, s) => <Star key={s} className="w-2 h-2 fill-current" />)}
               </div>
-              <span className="text-white/30 text-[9px] font-['Inter']">· {post.date}</span>
+              <span className="text-stone/70 text-[9px] font-['Inter']">· {post.date}</span>
             </div>
           </div>
         </div>
         <a href={post.link} target="_blank" rel="noreferrer"
           aria-label={`View ${post.name}'s review on Facebook`}
-          className="shrink-0 text-white/25 group-hover:text-[#c9a98a] transition-colors">
+          className="shrink-0 text-stone/50 group-hover:text-ink transition-colors">
           <ArrowUpRight className="w-4 h-4" />
         </a>
       </header>
 
-      <div className="flex-1 px-5 py-5 flex flex-col">
-        <Quote className="w-5 h-5 text-[#c9a98a]/25 mb-3 rotate-180 shrink-0" aria-hidden="true" />
-        <blockquote className="text-white/90 text-[13px] md:text-sm font-light leading-relaxed font-['Inter'] flex-1">
+      <div className="flex-1 px-5 py-5 flex flex-col bg-white">
+        <Quote className="w-4 h-4 text-stone/25 mb-3 rotate-180 shrink-0" aria-hidden="true" />
+        <blockquote className="text-stone text-[13px] md:text-sm font-light leading-relaxed font-['Inter'] flex-1">
           {post.quote}
         </blockquote>
-        <div className="flex items-center justify-between gap-3 mt-5 pt-4 border-t border-white/5">
-          <span className="text-white/30 text-[9px] tracking-[0.22em] uppercase font-['Inter']">
+        <div className="flex items-center justify-between gap-3 mt-5 pt-4 border-t border-border-soft">
+          <span className="text-stone/80 text-[9px] tracking-[0.18em] uppercase font-['Inter']">
             {post.service}
           </span>
-          <span className="inline-flex items-center gap-1 text-[#c9a98a]/60 text-[9px] tracking-[0.2em] uppercase font-['Inter']">
-            <span className="w-1 h-1 rounded-full bg-[#c9a98a]/70" /> Verified · Facebook
+          <span className="inline-flex items-center gap-1 text-stone/60 text-[9px] tracking-[0.16em] uppercase font-['Inter']">
+            Facebook
           </span>
         </div>
       </div>
@@ -406,69 +405,59 @@ function ReviewCard({ post, compact = false }) {
 
 function TestimonialsPreview() {
   return (
-    <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-ink">
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
-        style={{ background: 'radial-gradient(ellipse 70% 40% at 50% 0%, rgba(201,169,138,0.10) 0%, transparent 65%), radial-gradient(ellipse 50% 30% at 50% 100%, rgba(201,169,138,0.06) 0%, transparent 60%)' }} />
-
+    <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-mist border-t border-border-soft">
       <div className="relative max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
         <m.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
-          className="flex flex-col sm:flex-row sm:items-end md:justify-between gap-6 mb-10 md:mb-14">
+          className="flex flex-col sm:flex-row sm:items-end md:justify-between gap-5 mb-8 md:mb-10">
           <div className="min-w-0">
-            <p className="text-[#c9a98a] text-[10px] tracking-[0.32em] uppercase font-['Inter'] mb-4">
-              &mdash; Verified client love
-            </p>
-            <h2 className="font-['Unbounded'] font-bold text-white leading-[0.95]"
-              style={{ fontSize: 'clamp(1.9rem, 5vw, 3.75rem)', letterSpacing: '-0.025em' }}>
-              <span className="block">What clients say</span>
-              <span className="block font-['Syne'] italic font-extralight text-[#c9a98a]">about Farwa.</span>
-            </h2>
+            <p className="eyebrow mb-2">— Client reviews</p>
+            <h2 className="section-title text-2xl md:text-3xl">What clients say</h2>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 shrink-0 pb-1">
-            <div className="flex gap-0.5 text-[#c9a98a]" aria-label="5 out of 5 stars">
-              {[...Array(5)].map((_, s) => <Star key={s} className="w-3 h-3 fill-current" />)}
+          <div className="flex items-center gap-2 shrink-0 pb-0.5">
+            <div className="flex gap-0.5 text-stone/75" aria-label="4.9 out of 5 stars">
+              {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
             </div>
-            <span className="text-white/40 text-[10px] sm:text-[11px] font-['Inter'] leading-snug max-w-[16rem] sm:max-w-none">
-              4.9★ on Google · Facebook reviews too
+            <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug">
+              4.9★ · 6 Google reviews
             </span>
           </div>
         </m.div>
 
         <m.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-          className="relative border border-[#c9a98a]/30 bg-[#1a1614] px-6 py-10 md:px-14 md:py-14 mb-3 md:mb-4">
-          <Quote className="absolute top-6 left-6 md:top-8 md:left-10 w-7 h-7 md:w-10 md:h-10 text-[#c9a98a]/20 rotate-180" aria-hidden="true" />
-          <blockquote className="font-['Syne'] italic font-light text-white/90 leading-[1.4] text-center max-w-3xl mx-auto"
-            style={{ fontSize: 'clamp(1.1rem, 2.8vw, 1.85rem)' }}>
+          className="relative panel-soft bg-white shadow-soft px-6 py-8 md:px-12 md:py-10 mb-6 md:mb-8">
+          <Quote className="absolute top-5 left-5 md:top-7 md:left-8 w-5 h-5 md:w-6 md:h-6 text-stone/20 rotate-180" aria-hidden="true" />
+          <blockquote className="font-['Syne'] italic font-light text-ink leading-[1.45] text-center max-w-2xl mx-auto text-lg md:text-xl">
             {FEATURED_REVIEW.quote}
           </blockquote>
-          <p className="text-white/35 text-center text-sm font-light mt-5 font-['Inter']">
+          <p className="text-stone text-center text-sm font-light mt-4 font-['Inter'] max-w-xl mx-auto">
             {FEATURED_REVIEW.translation}
           </p>
-          <figcaption className="flex items-center justify-center gap-3 mt-7">
-            <span className="h-px w-6 bg-[#c9a98a]/40" aria-hidden="true" />
-            <span className="text-[#c9a98a] text-[10px] tracking-[0.3em] uppercase font-['Inter'] font-medium">
+          <figcaption className="flex items-center justify-center gap-2 mt-6">
+            <span className="text-stone text-[10px] tracking-[0.2em] uppercase font-['Inter']">
               {FEATURED_REVIEW.name}
             </span>
+            <span className="text-stone/40" aria-hidden="true">·</span>
             <a href={FEATURED_REVIEW.link} target="_blank" rel="noreferrer"
-              className="text-white/30 hover:text-[#c9a98a] text-[9px] tracking-[0.2em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
-              FB <ArrowUpRight className="w-2.5 h-2.5" />
+              className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
+              Facebook <ArrowUpRight className="w-2.5 h-2.5" />
             </a>
           </figcaption>
         </m.figure>
 
-        <div className="mb-12 md:mb-14">
-          <div className="flex items-baseline justify-between mb-5 md:mb-6 px-0.5">
-            <p className="text-white/25 text-[9px] tracking-[0.32em] uppercase font-['Inter']">
-              — Direct from Facebook
+        <div className="mb-10 md:mb-12">
+          <div className="flex items-baseline justify-between mb-4 md:mb-5 px-0.5">
+            <p className="eyebrow">
+              — From Facebook
             </p>
             <a href="https://www.facebook.com/farwasalon/reviews" target="_blank" rel="noreferrer"
-              className="text-white/40 hover:text-[#c9a98a] text-[9px] tracking-[0.24em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1">
+              className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1">
               View all <ArrowUpRight className="w-2.5 h-2.5" />
             </a>
           </div>
 
-          <p className="md:hidden text-white/30 text-[9px] tracking-[0.2em] uppercase font-['Inter'] mb-2 px-0.5">
+          <p className="md:hidden text-stone/70 text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2 px-0.5">
             Swipe for more reviews →
           </p>
           <div className="md:hidden flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
@@ -490,17 +479,17 @@ function TestimonialsPreview() {
         </div>
 
         <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="pt-8 border-t border-white/8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-          <p className="text-white/40 text-[11px] font-light font-['Inter'] tracking-wide">
+          className="pt-8 border-t border-border-soft flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+          <p className="text-stone text-[11px] font-light font-['Inter'] tracking-wide">
             Loved your visit? Help us spread the word.
           </p>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
             <a href="https://g.page/r/CRCiNE2kpFvlEBM/review" target="_blank" rel="noreferrer"
-              className="tap-safe inline-flex items-center justify-center gap-1.5 bg-white text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3 hover:bg-[#c9a98a] hover:text-white transition-colors duration-300">
+              className="tap-safe inline-flex items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3 hover:bg-stone transition-colors duration-300">
               Write a Google review <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
             <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
-              className="tap-safe inline-flex items-center justify-center gap-1.5 text-white/50 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors border border-white/10 hover:border-white/30 px-6 py-3">
+              className="tap-safe inline-flex items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-6 py-3 bg-white">
               Follow on Facebook <ArrowUpRight className="w-3 h-3" />
             </a>
           </div>

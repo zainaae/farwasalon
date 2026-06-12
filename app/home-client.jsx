@@ -75,7 +75,7 @@ function Hero() {
     const update = () => {
       const y = window.scrollY
       if (textRef.current) textRef.current.style.transform = `translateY(${(y / 500) * -40}px)`
-      if (overlayRef.current) overlayRef.current.style.opacity = String(0.62 + (Math.min(y, 400) / 400) * 0.22)
+      if (overlayRef.current) overlayRef.current.style.opacity = String(0.48 + (Math.min(y, 400) / 400) * 0.16)
     }
     const onScroll = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(update) }
     update()
@@ -125,12 +125,12 @@ function Hero() {
 
       <div ref={overlayRef} className="absolute inset-0 z-[1]"
         style={{
-          opacity: 0.62,
-          background: 'linear-gradient(to top, rgba(13,6,9,0.97) 0%, rgba(13,6,9,0.72) 35%, rgba(13,6,9,0.38) 62%, rgba(13,6,9,0.58) 100%)',
+          opacity: 0.48,
+          background: 'linear-gradient(to top, rgba(13,6,9,0.88) 0%, rgba(13,6,9,0.55) 38%, rgba(13,6,9,0.22) 68%, rgba(13,6,9,0.35) 100%)',
         }} />
 
       <div className="absolute inset-0 z-[1] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at center, rgba(0,0,0,0) 48%, rgba(0,0,0,0.5) 100%)' }} />
+        style={{ background: 'radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.32) 100%)' }} />
 
       <div className="absolute inset-0 pointer-events-none z-[2]"
         style={{
@@ -141,7 +141,7 @@ function Hero() {
       <div
         ref={textRef}
         className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14"
-        style={{ textShadow: '0 2px 20px rgba(0,0,0,0.7), 0 1px 6px rgba(0,0,0,0.5)' }}>
+        style={{ textShadow: '0 1px 12px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.25)' }}>
         <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
           <div className="overflow-hidden mb-4 md:mb-6">
             <m.p
@@ -155,18 +155,18 @@ function Hero() {
 
           <h1
             id="hero-headline"
-            className="font-['Unbounded'] text-white leading-[0.95] mb-4 md:mb-5 break-words"
+            className="font-['Unbounded'] text-white leading-[1.02] mb-3 md:mb-4 break-words"
             style={{
-              fontSize: 'clamp(1.75rem, 6.4vw, 4.5rem)',
+              fontSize: 'clamp(1.65rem, 5.2vw, 3.25rem)',
               letterSpacing: '-0.02em',
-              maxWidth: '24ch',
+              maxWidth: '22ch',
             }}>
             <span className="block overflow-hidden">
               <m.span
                 initial={{ y: '110%' }}
                 animate={{ y: 0 }}
                 transition={{ delay: 0.28, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-white font-black">
+                className="block text-white font-semibold">
                 Beauty Salon in PECHS
               </m.span>
             </span>
@@ -175,18 +175,18 @@ function Hero() {
                 initial={{ y: '110%' }}
                 animate={{ y: 0 }}
                 transition={{ delay: 0.4, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-white/90 font-extralight italic font-['Syne']">
+                className="block text-white/85 font-light italic font-['Syne']">
                 Karachi
               </m.span>
             </span>
           </h1>
 
           <p
-            className="font-['Unbounded'] text-white leading-[0.95] mb-6 md:mb-8 break-words"
+            className="font-['Unbounded'] text-white leading-[1.05] mb-6 md:mb-7 break-words"
             style={{
-              fontSize: 'clamp(1.35rem, 5vw, 3.25rem)',
-              letterSpacing: '-0.02em',
-              maxWidth: '22ch',
+              fontSize: 'clamp(1.1rem, 3.6vw, 2rem)',
+              letterSpacing: '-0.015em',
+              maxWidth: '24ch',
             }}
             aria-label="Our specialties">
             {thesis.map((line, i) => (
@@ -195,7 +195,7 @@ function Hero() {
                   initial={{ y: '110%' }}
                   animate={{ y: 0 }}
                   transition={{ delay: 0.42 + i * 0.18, duration: 1.05, ease: [0.16,1,0.3,1] }}
-                  className={`block ${line.em ? 'text-white font-black' : "text-white/80 font-extralight italic font-['Syne']"}`}>
+                  className={`block ${line.em ? 'text-white/95 font-medium' : "text-white/75 font-light italic font-['Syne']"}`}>
                   {line.text}
                 </m.span>
               </span>
