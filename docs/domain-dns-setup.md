@@ -182,15 +182,20 @@ Quick checks:
 
 ## Last verified
 
-**2026-06-12** (automated: nslookup @ 8.8.8.8 / 1.1.1.1, curl HTTPS)
+**2026-06-12 — live audit round 2** (nslookup @ 8.8.8.8 / 1.1.1.1, curl HTTPS, browser QA on `farwasalon.vercel.app`, `booking-api-probe.mjs`)
 
 | Resolver | farwasalon.com (A) | www |
 |----------|----------------------|--------|
-| 8.8.8.8 | 216.198.79.1 (expected) | CNAME to 25cff91a97a4946f.vercel-dns-017.com |
+| 8.8.8.8 | 216.198.79.1 (expected) | CNAME → 25cff91a97a4946f.vercel-dns-017.com |
 | 1.1.1.1 | 198.54.117.242 (stale) | 198.54.117.242 (stale) |
 
-- **Vercel app:** https://farwasalon.vercel.app/ returns HTTP 200.
-- **Custom domain on Vercel IPs:** /, /book, /api/slots return HTTP 200.
-- **Custom domain via default resolver:** HTTPS failed; HTTP apex showed Namecheap parking.
+| Check | Result |
+|-------|--------|
+| `farwasalon.vercel.app` | HTTP 200 — home, `/book`, `/services/threading`, `/contact` |
+| Custom domain (default resolver) | Connection failed (curl exit 7) — still on stale/parking IP |
+| Custom domain (`curl --resolve` → Vercel IP) | HTTP 200 on apex and www |
+| `www` on Vercel IP (pre-fix) | HTTP 200 duplicate (no redirect) — **308 www→apex added in `proxy.js` round 2** |
+| `booking-api-probe.mjs` on Vercel | 8/8 pass (slots, subscribe, book validation) |
+| `npm run verify` + `test:e2e` | 173 unit + 126 e2e pass (1 skipped exit-intent) |
 
-**Action:** Confirm Namecheap records; wait for 1.1.1.1 propagation. Re-verify in 24-48h.
+**Action:** Confirm Namecheap records match the table above; wait for 1.1.1.1 propagation. Re-verify in 24–48h. Until then, use [farwasalon.vercel.app](https://farwasalon.vercel.app).
