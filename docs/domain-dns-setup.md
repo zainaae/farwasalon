@@ -182,20 +182,22 @@ Quick checks:
 
 ## Last verified
 
-**2026-06-12 — live audit round 2** (nslookup @ 8.8.8.8 / 1.1.1.1, curl HTTPS, browser QA on `farwasalon.vercel.app`, `booking-api-probe.mjs`)
+**2026-06-12 — live audit round 3** (nslookup @ 8.8.8.8 / 1.1.1.1, curl HTTPS, browser QA @ 390px on `farwasalon.vercel.app`, `booking-api-probe.mjs`)
 
 | Resolver | farwasalon.com (A) | www |
 |----------|----------------------|--------|
 | 8.8.8.8 | 216.198.79.1 (expected) | CNAME → 25cff91a97a4946f.vercel-dns-017.com |
-| 1.1.1.1 | 198.54.117.242 (stale) | 198.54.117.242 (stale) |
+| 1.1.1.1 | 216.198.79.1 (expected) | CNAME → 25cff91a97a4946f.vercel-dns-017.com |
+| Windows default (system) | **198.54.117.242 (stale)** | not tested |
 
 | Check | Result |
 |-------|--------|
-| `farwasalon.vercel.app` | HTTP 200 — home, `/book`, `/services/threading`, `/contact` |
-| Custom domain (default resolver) | Connection failed (curl exit 7) — still on stale/parking IP |
-| Custom domain (`curl --resolve` → Vercel IP) | HTTP 200 on apex and www |
-| `www` on Vercel IP (pre-fix) | HTTP 200 duplicate (no redirect) — **308 www→apex added in `proxy.js` round 2** |
-| `booking-api-probe.mjs` on Vercel | 8/8 pass (slots, subscribe, book validation) |
-| `npm run verify` + `test:e2e` | 173 unit + 126 e2e pass (1 skipped exit-intent) |
+| `farwasalon.vercel.app` | HTTP 200 — `/`, `/book`, `/services`; subscribe POST 200 |
+| `farwasalon.vercel.app/api/slots` (no params) | HTTP 400 (expected — needs `date` + `serviceId`) |
+| `farwasalon.vercel.app/api/slots?date=…&serviceId=1` | HTTP 200 |
+| Custom domain (system DNS → stale IP) | TCP 443 failed — `198.54.117.242` still cached locally |
+| Custom domain (`curl --resolve` → `216.198.79.1`) | HTTP 200 apex; HTTP 308 www→apex |
+| `booking-api-probe.mjs` on Vercel | 8/8 pass |
+| Browser mobile QA (390px) | Home + book load; no console errors; hero + booking flow accessible |
 
-**Action:** Confirm Namecheap records match the table above; wait for 1.1.1.1 propagation. Re-verify in 24–48h. Until then, use [farwasalon.vercel.app](https://farwasalon.vercel.app).
+**Action:** Public resolvers (8.8.8.8 / 1.1.1.1) now show correct records. Some networks and OS caches may still resolve `198.54.117.242` — flush local DNS or wait for TTL expiry. Confirm Namecheap has no leftover parking A records. Until custom domain works everywhere, use [farwasalon.vercel.app](https://farwasalon.vercel.app).
