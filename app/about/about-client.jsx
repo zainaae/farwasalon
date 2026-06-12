@@ -37,7 +37,7 @@ export default function AboutClient() {
             ].map(({ display, final, label }) => (
               <motion.div key={label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
                 <p className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink mb-1">
-                  <AnimatedNumber display={display} final={final} />
+                  <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
                 </p>
                 <p className="text-body text-[11px]">{label}</p>
               </motion.div>

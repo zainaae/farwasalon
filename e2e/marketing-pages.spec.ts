@@ -1,5 +1,9 @@
 import { test, expect } from '@playwright/test'
 import { assertNoHorizontalOverflow } from './helpers'
+import { SERVICES, YEARS_ACTIVE } from '../src/data.js'
+
+const CATEGORY_COUNT = Object.keys(SERVICES).length
+const SERVICE_COUNT = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 
 const MARKETING_PAGES = [
   { path: '/about', heading: /our story/i },
@@ -29,6 +33,8 @@ test.describe('Marketing pages @ 390px', () => {
     await page.goto('/about')
     const srOnly = page.locator('#main .sr-only')
     await expect(srOnly).toHaveCount(3)
-    await expect(srOnly.first()).not.toBeEmpty()
+    await expect(srOnly.nth(0)).toHaveText(`${YEARS_ACTIVE}+ Years of expertise`)
+    await expect(srOnly.nth(1)).toHaveText(`${CATEGORY_COUNT} Service categories`)
+    await expect(srOnly.nth(2)).toHaveText(`${SERVICE_COUNT}+ Services on the menu`)
   })
 })

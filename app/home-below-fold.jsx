@@ -99,7 +99,7 @@ function StatsStrip() {
               ].map(({ display, final, label }) => (
                 <div key={label} className="min-w-0">
                   <p className="font-['Unbounded'] font-bold text-lg sm:text-xl md:text-2xl text-ink mb-1 leading-none">
-                    <AnimatedNumber display={display} final={final} />
+                    <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
                   </p>
                   <p className="text-stone text-[10px] sm:text-[11px] tracking-wide font-['Inter'] leading-tight">{label}</p>
                 </div>

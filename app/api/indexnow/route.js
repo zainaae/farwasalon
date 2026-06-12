@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
+import { INDEXNOW_KEY, INDEXNOW_KEY_LOCATION } from '../../../lib/indexnow.js'
 
-const INDEXNOW_KEY = 'farwasalon2024indexnow'
 const HOST = 'https://farwasalon.com'
 
 export async function POST(request) {
@@ -25,7 +25,7 @@ export async function POST(request) {
     const payload = {
       host: 'farwasalon.com',
       key: INDEXNOW_KEY,
-      keyLocation: `${HOST}/${INDEXNOW_KEY}.txt`,
+      keyLocation: INDEXNOW_KEY_LOCATION,
       urlList: fullUrls,
     }
 

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, ChevronDown } from 'lucide-react'
-import { useBooking } from '../../src/shared.jsx'
 import { FAQS } from '../../src/faq-data.js'
 
 function FaqItem({ faq, index }) {
@@ -34,8 +33,6 @@ function FaqItem({ faq, index }) {
 }
 
 export default function FaqClient() {
-  const booking = useBooking()
-
   return (
     <main id="main" className="page-content">
 
@@ -70,10 +67,10 @@ export default function FaqClient() {
           </motion.h2>
           <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
             className="flex flex-wrap items-center gap-4">
-            <button onClick={() => booking.open()}
+            <Link href="/book"
               className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3.5 hover:bg-nude transition-colors duration-300">
               Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" />
-            </button>
+            </Link>
             <Link href="/contact" className="link-underline text-white/60 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors">
               Contact Us
             </Link>

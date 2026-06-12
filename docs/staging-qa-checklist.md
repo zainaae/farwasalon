@@ -8,7 +8,8 @@ Run before promoting a preview deploy to production. Replace `BASE` with your Ve
 
 ```bash
 npm run verify          # lint + unit tests + build
-npm run test:e2e        # Playwright (starts dev server)
+npm run verify:full     # verify + Playwright e2e
+npm run test:e2e        # Playwright only (starts production server)
 ```
 
 ## 2. API probe (no UI)
@@ -85,3 +86,16 @@ BASE_URL=https://farwasalon.com node scripts/booking-api-probe.mjs
 
 - [ ] Home LCP is poster image; desktop hero video fades in (WebM on supported browsers)
 - [ ] Plausible / Analytics receiving pageviews on preview
+
+## 8. Production ops checklist (manual)
+
+Run once after promoting to production or when rotating credentials:
+
+| Task | Pass? |
+|------|-------|
+| Live book → Google Sheet row → Apps Script email within 10 min | ☐ |
+| Vercel env set: `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY`, `GOOGLE_SHEET_ID`, `BOOKING_CANCEL_SECRET` | ☐ |
+| Cancel link works **>2h** before appointment; blocked **<2h** | ☐ |
+| Google Business Profile NAP matches `SALON_ADDRESS_LINES` in `lib/business-schema.js` | ☐ |
+| IndexNow key file live: `https://farwasalon.com/farwa-salon-indexnow.txt` returns key text | ☐ |
+| Post-deploy ping: `npm run ping:indexnow` (or CI/deploy hook) | ☐ |

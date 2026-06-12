@@ -3,6 +3,8 @@ import { BLOG_POSTS } from '../src/blog-data.js'
 import { BLOG_SLUGS } from './helpers'
 
 test.describe('Blog articles', () => {
+  test.describe.configure({ mode: 'serial' })
+
   test('blog index lists all posts', async ({ page }) => {
     await page.goto('/blog')
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/beauty tips/i)

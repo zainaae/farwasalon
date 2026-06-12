@@ -25,7 +25,10 @@ This plan is the single roadmap: **what to do, in what order, and how to QA each
 npm run lint
 npm run test
 npm run build
+npm run test:e2e    # CI runs this after build; locally use npm run verify:full
 ```
+
+**Local full gate:** `npm run verify:full` = lint + unit tests + build + e2e.
 
 **Production smoke (after every deploy):**
 

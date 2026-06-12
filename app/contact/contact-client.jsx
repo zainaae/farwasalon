@@ -137,9 +137,19 @@ export default function ContactClient() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
-            <p className="eyebrow mb-6">— Book via WhatsApp</p>
+            <div className="mb-8 p-6 md:p-8 bg-mist border border-border-soft">
+              <p className="eyebrow mb-3">— Instant confirmation</p>
+              <p className="text-body text-sm mb-5">
+                Pick your service, date, and time online — you&apos;ll get a confirmation page right away.
+              </p>
+              <Link href="/book" className="tap-safe btn-primary w-full sm:w-auto justify-center">
+                Book online <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            <p className="eyebrow mb-4">— Or message us on WhatsApp</p>
             <p className="text-body mb-8">
-              Fill in the details below and we&apos;ll open a pre-filled WhatsApp message. We confirm within a few hours.
+              Prefer WhatsApp? Fill in the details below and we&apos;ll open a pre-filled message. We confirm within a few hours.
             </p>
 
             <form onSubmit={handleWhatsApp} className="flex flex-col gap-3" aria-label="Booking request form">

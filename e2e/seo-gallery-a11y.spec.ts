@@ -4,7 +4,8 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
   test('/blog index and article', async ({ page }) => {
     await page.goto('/blog')
     await expect(page.locator('#main')).toBeVisible()
-    await expect(page.getByRole('link', { name: /bridal|beauty|read/i }).first()).toBeVisible()
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/beauty tips/i)
+    await expect(page.getByRole('link', { name: /Read article/i }).first()).toBeVisible()
 
     await page.goto('/blog/bridal-beauty-timeline')
     await expect(page.locator('#main')).toBeVisible()
@@ -72,6 +73,10 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     await expect(footer.getByText('Location')).toBeVisible()
     await expect(footer.getByText(/PECHS Block 3, Karachi/i)).toBeVisible()
     await expect(footer.getByRole('link', { name: /Directions on Google Maps/i })).toBeVisible()
+    await expect(footer.getByRole('link', { name: /Beauty salon in Karachi/i })).toHaveAttribute(
+      'href',
+      '/beauty-salon-karachi',
+    )
     await expect(footer.getByText('Salon near you in Karachi')).toHaveCount(0)
   })
 

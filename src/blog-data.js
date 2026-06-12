@@ -504,7 +504,7 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: 'Frequently Asked Questions' },
       { type: 'h3', text: 'Q: Do I need to make an appointment or can I walk in?' },
-      { type: 'p', text: 'A: At Farwa, we welcome both walk-ins and appointments. However, we recommend booking in advance for facials, bridal services, and hair treatments to ensure your preferred time slot. Threading and basic nail services are usually available on a walk-in basis.' },
+      { type: 'p', text: 'A: At Farwa, we welcome both walk-ins and appointments. For instant confirmation, book online at farwasalon.com/book — especially for facials, bridal services, and hair treatments. Threading and basic nail services are usually available on a walk-in basis too.' },
       { type: 'h3', text: 'Q: Is it okay to go to a salon during my period?' },
       { type: 'p', text: 'A: Absolutely. Most services are completely fine. However, your skin may be slightly more sensitive to waxing during this time. If you are concerned, schedule waxing for a different day and stick to threading, facials, or nail services.' },
       { type: 'h3', text: 'Q: What if I do not like the result — can I say something?' },

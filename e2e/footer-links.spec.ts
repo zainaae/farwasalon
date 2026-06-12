@@ -50,4 +50,13 @@ test.describe('Footer links @ 390px', () => {
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     }
   })
+
+  test('Location hub link returns 200 with a heading', async ({ page }) => {
+    await page.goto('/')
+    const hubLink = page.locator('footer').getByRole('link', { name: /Beauty salon in Karachi/i })
+    await expect(hubLink).toBeVisible()
+    const res = await page.goto('/beauty-salon-karachi')
+    expect(res?.status()).toBe(200)
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  })
 })
