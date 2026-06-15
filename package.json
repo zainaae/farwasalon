@@ -13,7 +13,8 @@
     "test:e2e:ci": "npm run build && playwright test",
     "verify": "npm run lint && npm run test && npm run build",
     "verify:full": "npm run verify && npm run test:e2e",
-    "ping:indexnow": "node scripts/ping-indexnow.mjs"
+    "ping:indexnow": "node scripts/ping-indexnow.mjs",
+    "qa:workflow": "node scripts/qa-workflow-run.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
