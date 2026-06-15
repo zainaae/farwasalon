@@ -308,11 +308,11 @@ export function getAddonsForService(serviceId) {
     .filter(Boolean)
 }
 
-/** Before/after pairs for gallery compare slider */
-export const GALLERY_COMPARE_PAIRS = [
-  { before: '/threading.jpg', after: '/glow3.jpg', label: 'Threading & glow facial' },
-  { before: '/bridal.jpg', after: '/bridal2.jpg', label: 'Bridal transformation' },
-  { before: '/hairdo.jpg', after: '/hairtreatment.jpg', label: 'Hair styling & treatment' },
+/** Featured service samples for gallery showcase (single image per service — not before/after pairs) */
+export const GALLERY_SHOWCASE_ITEMS = [
+  { src: '/glow3.jpg', label: 'Threading & glow facial', alt: 'Facial glow treatment at Farwa Beauty Salon' },
+  { src: '/bridal.jpg', label: 'Bridal styling', alt: 'Bridal makeup and styling at Farwa Beauty Salon' },
+  { src: '/hairdo.jpg', label: 'Hair styling & treatment', alt: 'Hair styling at Farwa Beauty Salon' },
 ]
 
 /*

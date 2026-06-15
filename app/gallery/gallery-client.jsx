@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { SmoothyGallery, IgIcon, useBooking } from '../../src/shared.jsx'
-import { IG_LINK, GALLERY_PHOTOS, GALLERY_COMPARE_PAIRS } from '../../src/data.js'
-import BeforeAfterSlider from './before-after-slider.jsx'
+import { IG_LINK, GALLERY_PHOTOS, GALLERY_SHOWCASE_ITEMS } from '../../src/data.js'
+import WorkShowcaseCard from './work-showcase-card.jsx'
 
 export default function GalleryClient() {
   const booking = useBooking()
@@ -26,22 +26,26 @@ export default function GalleryClient() {
           </div>
           <motion.a initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             href={IG_LINK} target="_blank" rel="noreferrer"
-            className="link-underline text-ink text-xs tracking-wide font-['Inter'] inline-flex items-center gap-2 shrink-0">
-            <IgIcon className="w-4 h-4" /> @farwasalon on Instagram
+            className="link-underline !inline-flex items-center gap-2 shrink-0 text-ink text-xs tracking-wide font-['Inter']">
+            <IgIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
+            <span className="min-w-0">@farwasalon on Instagram</span>
           </motion.a>
         </div>
       </div>
 
-      <section className="section-shell mb-12 md:mb-16">
-        <p className="eyebrow mb-6 text-center">
-          — Before &amp; after
+      <section className="section-shell mb-12 md:mb-16" aria-labelledby="gallery-showcase-heading">
+        <p className="eyebrow mb-3 text-center">— Work we do</p>
+        <h2 id="gallery-showcase-heading" className="section-title text-xl md:text-2xl text-center mb-2">
+          Results showcase
+        </h2>
+        <p className="text-stone text-sm font-['Inter'] font-light text-center max-w-xl mx-auto mb-8">
+          A sample of the services we offer at our PECHS studio. Authentic client before/after sets will be added here as they become available.
         </p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-6">
-          {GALLERY_COMPARE_PAIRS.map((pair) => (
-            <BeforeAfterSlider key={pair.label} before={pair.before} after={pair.after} label={pair.label} />
+          {GALLERY_SHOWCASE_ITEMS.map((item) => (
+            <WorkShowcaseCard key={item.label} src={item.src} label={item.label} alt={item.alt} />
           ))}
         </div>
-        <p className="text-stone/70 text-[10px] font-['Inter'] text-center mt-4">Drag the slider to compare</p>
       </section>
 
       <div className="overflow-hidden pb-4">
@@ -49,8 +53,8 @@ export default function GalleryClient() {
       </div>
       <div className="section-shell mt-4 mb-8 max-w-2xl mx-auto text-center">
         <p className="text-body text-sm mb-2">
-          This gallery shows a sample of our work — we are actively adding fresh client photos and before/after
-          sets from the PECHS studio. Follow{' '}
+          This gallery shows a sample of our work — we are actively adding fresh client photos from the PECHS
+          studio. Follow{' '}
           <a href={IG_LINK} target="_blank" rel="noreferrer" className="link-underline text-ink">
             @farwasalon on Instagram
           </a>{' '}
@@ -76,8 +80,9 @@ export default function GalleryClient() {
               <IgIcon className="w-4 h-4" /> @farwasalon
             </a>
             <button onClick={() => booking.open()}
-              className="tap-safe link-underline text-white/50 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors inline-flex items-center gap-1.5">
-              Book an Appointment <ArrowUpRight className="w-3 h-3" />
+              className="tap-safe link-underline !inline-flex items-center gap-1.5 text-white/50 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors">
+              <span className="min-w-0">Book an Appointment</span>
+              <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
             </button>
           </motion.div>
         </div>
