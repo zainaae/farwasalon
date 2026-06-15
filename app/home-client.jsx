@@ -169,7 +169,7 @@ function Hero() {
               animate={{ y: 0 }}
               transition={{ delay: 0.42, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
               className="text-white/70 text-[13px] sm:text-[15px] leading-relaxed font-['Syne'] font-light max-w-[30ch]">
-              Bridal, threading &amp; facials &mdash; by appointment.
+              Full-service beauty studio &mdash; by appointment.
             </m.p>
           </div>
 
