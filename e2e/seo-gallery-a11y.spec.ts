@@ -62,9 +62,10 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
   test('home hero includes local SEO headline', async ({ page }) => {
     await page.goto('/')
     const h1 = page.locator('#hero-headline')
+    const lede = page.locator('#hero-lede')
     await expect(h1).toContainText(/Beauty Salon/i)
-    await expect(h1).toContainText(/Karachi/i)
-    await expect(h1).toContainText(/PECHS/i)
+    await expect(lede).toContainText(/Karachi/i)
+    await expect(lede).toContainText(/PECHS/i)
   })
 
   test('footer shows single salon location', async ({ page }) => {

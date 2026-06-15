@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useNextSlot } from '../src/shared.jsx'
-import { YEARS_ACTIVE, WA_NUMBER } from '../src/data.js'
+import { WA_NUMBER } from '../src/data.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
 
 const HomeBelowFold = dynamic(() => import('./home-below-fold'), {
@@ -137,58 +137,39 @@ function Hero() {
         className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14"
         style={{ textShadow: '0 1px 12px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.25)' }}>
         <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
-          <div className="overflow-hidden mb-4 md:mb-6">
+          <div className="overflow-hidden mb-4 md:mb-5">
             <m.p
               id="hero-lede"
               initial={{ y: '100%' }} animate={{ y: 0 }}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16,1,0.3,1] }}
-              className="text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']">
-              Farwa Beauty Salon &middot; PECHS Block 3 &middot; Since 2008
+              className="text-[#b8aea4] text-[10px] sm:text-[11px] tracking-[0.22em] uppercase font-['Inter']">
+              Est. 2008 &middot; PECHS, Karachi
             </m.p>
           </div>
 
-          <h1
-            id="hero-headline"
-            className="font-['Unbounded'] text-white leading-[1.02] mb-3 md:mb-4 break-words"
-            style={{
-              fontSize: 'clamp(1.65rem, 5.2vw, 3.25rem)',
-              letterSpacing: '-0.02em',
-              maxWidth: '22ch',
-            }}>
-            <span className="block overflow-hidden">
-              <m.span
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ delay: 0.28, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-white font-semibold">
-                Bridal, brows &amp; skin
-              </m.span>
-            </span>
-            <span className="block overflow-hidden">
-              <m.span
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ delay: 0.4, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-white/85 font-light italic font-['Syne']">
-                your beauty salon in PECHS, Karachi
-              </m.span>
-            </span>
-          </h1>
+          <div className="overflow-hidden mb-4 md:mb-5">
+            <m.h1
+              id="hero-headline"
+              initial={{ y: '110%' }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.28, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+              className="font-['Unbounded'] text-white font-semibold leading-[1.05] break-words"
+              style={{
+                fontSize: 'clamp(1.75rem, 5.4vw, 3.35rem)',
+                letterSpacing: '-0.02em',
+                maxWidth: '18ch',
+              }}>
+              Farwa Beauty Salon
+            </m.h1>
+          </div>
 
           <div className="overflow-hidden mb-6 md:mb-7">
             <m.p
               initial={{ y: '110%' }}
               animate={{ y: 0 }}
-              transition={{ delay: 0.55, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-              className="text-white/75 text-[13px] sm:text-[15px] leading-relaxed font-['Syne'] font-light max-w-[32ch]">
-              Rubina&apos;s studio for {YEARS_ACTIVE}+ years — threading, facials &amp; makeup you&apos;ll want to book again.
-            </m.p>
-            <m.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.85, duration: 0.7 }}
-              className="mt-3 text-white/45 text-[10px] tracking-[0.18em] uppercase font-['Inter']">
-              4.9&#9733; on Google &middot; PECHS, Karachi
+              transition={{ delay: 0.42, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+              className="text-white/70 text-[13px] sm:text-[15px] leading-relaxed font-['Syne'] font-light max-w-[30ch]">
+              Bridal, threading &amp; facials &mdash; by appointment.
             </m.p>
           </div>
 
