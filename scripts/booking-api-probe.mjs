@@ -35,8 +35,12 @@ function offsetWeekday(n) {
   return localDateIso(d)
 }
 
+function isSundayIso(dateStr) {
+  return new Date(`${dateStr}T12:00:00`).getDay() === 0
+}
+
 async function probe(name, url, init = {}, expect = {}) {
-  const { status: expectStatus, statusIn } = expect
+  const { status: expectStatus, statusIn, bodyCheck } = expect
   const start = Date.now()
   try {
     const res = await fetch(url, {
@@ -62,12 +66,14 @@ async function probe(name, url, init = {}, expect = {}) {
         : statusIn
           ? statusIn.includes(res.status)
           : res.ok
-    const tag = statusOk ? 'OK' : 'FAIL'
+    const bodyOk = bodyCheck ? bodyCheck(body, res) : true
+    const pass = statusOk && bodyOk
+    const tag = pass ? 'OK' : 'FAIL'
     console.log(
       `[${tag}] ${name} → ${res.status} (${ms}ms)`,
       typeof body === 'object' ? JSON.stringify(body).slice(0, 120) : body,
     )
-    return { res, body, ms, pass: statusOk }
+    return { res, body, ms, pass }
   } catch (err) {
     console.log(`[ERR] ${name} →`, err.message)
     return { err, pass: false }
@@ -104,12 +110,17 @@ async function main() {
       { status: 400 },
     ),
   )
+  const yesterday = offsetDays(-1)
   results.push(
     await probe(
-      'slots yesterday (reject)',
-      `${BASE}/api/slots?date=${offsetDays(-1)}&serviceId=1`,
+      isSundayIso(yesterday)
+        ? 'slots yesterday (Sunday closed)'
+        : 'slots yesterday (reject)',
+      `${BASE}/api/slots?date=${yesterday}&serviceId=1`,
       {},
-      { status: 400 },
+      isSundayIso(yesterday)
+        ? { status: 200, bodyCheck: (b) => b?.closed === true }
+        : { status: 400 },
     ),
   )
   results.push(
