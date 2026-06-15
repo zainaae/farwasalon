@@ -8,7 +8,6 @@
   --nude:   #e8ddd5;
   --mist:   #f8f5f1;
   --stone:  #6b5f57;
-  --border: #e4ddd7;
 
   /* shadcn tokens */
   --background: 30 20% 99%;
@@ -222,6 +221,15 @@ textarea:focus-visible,
   transform-origin: top left;
   display: block;
   border: 0;
+}
+
+/* ── Image quality: high-quality rendering and prevent blurry upscaling ── */
+img {
+  image-rendering: auto;
+  -ms-interpolation-mode: bicubic;
+}
+img[data-max-native] {
+  image-rendering: high-quality;
 }
 
 /* ── Prevent video controls interception ── */

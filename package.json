@@ -4,37 +4,45 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node ./node_modules/vite/bin/vite.js --host",
-    "build": "node ./node_modules/vite/bin/vite.js build",
-    "lint": "node ./node_modules/eslint/bin/eslint.js .",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
     "test": "node ./node_modules/vitest/vitest.mjs run",
+    "test:e2e": "playwright test",
+    "test:e2e:ci": "npm run build && playwright test",
     "verify": "npm run lint && npm run test && npm run build",
-    "preview": "node ./node_modules/vite/bin/vite.js preview"
+    "verify:full": "npm run verify && npm run test:e2e",
+    "ping:indexnow": "node scripts/ping-indexnow.mjs",
+    "qa:workflow": "node scripts/qa-workflow-run.mjs"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "framer-motion": "^12.38.0",
+    "googleapis": "^171.4.0",
     "lucide-react": "^1.8.0",
+    "next": "^16.2.6",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-router-dom": "^7.14.1"
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
+    "@emnapi/core": "^1.10.0",
+    "@emnapi/runtime": "^1.10.0",
     "@eslint/js": "^9.39.4",
+    "@playwright/test": "^1.51.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
+    "@types/node": "^25.7.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^6.0.1",
     "autoprefixer": "^10.5.0",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
     "jsdom": "^29.1.1",
     "postcss": "^8.5.9",
-    "sharp": "^0.34.5",
     "tailwindcss": "^3.4.19",
-    "vite": "^8.0.4",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.5"
   }
 }

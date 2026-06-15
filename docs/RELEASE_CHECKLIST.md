@@ -2,6 +2,8 @@
 
 Use this right before promoting a Vercel deployment to **production** or tagging a release. It complements automated CI (lint, build, test) and the deeper criteria in [quality-gates-release.md](./quality-gates-release.md).
 
+**Custom domain / DNS:** [domain-dns-setup.md](./domain-dns-setup.md)
+
 ## Automated gates (must be green)
 
 - [ ] Latest commit on the release candidate passes GitHub Actions **CI** (`lint`, `build`, `test`).

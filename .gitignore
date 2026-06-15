@@ -28,5 +28,17 @@ dist-ssr
 
 .vercel
 
-# Vite
+# Next.js
+.next/
+.next-ci/
+
+# Playwright
+playwright-report/
+test-results/
+
+# Vite (legacy)
 .vite/
+
+# Compressed-asset originals — kept locally as safety backups, never committed
+public/*.orig.mp4
+public/*.orig.webm
