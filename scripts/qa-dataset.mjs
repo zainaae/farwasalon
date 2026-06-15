@@ -236,7 +236,6 @@ export const NAV_FOOTER_MATRIX = {
     '/blog',
     '/about',
     '/contact',
-    '/team',
     '/faq',
     '/bridal',
   ],
@@ -265,7 +264,6 @@ export const HTML_EXPECTATIONS = {
   '/services/threading': ['Threading', 'Rs'],
   '/faq': ['Frequently', 'id="main"'],
   '/about': ['OUR', 'STORY'],
-  '/team': ['Our Team'],
   '/privacy': ['Privacy Policy'],
 }
 

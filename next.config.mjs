@@ -23,6 +23,11 @@ const nextConfig = {
   trailingSlash: false,
   redirects: async () => [
     {
+      source: '/team',
+      destination: '/about',
+      permanent: true,
+    },
+    {
       source: '/review',
       destination:
         'https://search.google.com/local/writereview?placeid=ChIJeVyXMig_szoQEKI0TaSkW-U',

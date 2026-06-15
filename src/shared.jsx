@@ -923,7 +923,6 @@ export function Navbar({ transparent = false }) {
     { label: 'Gallery',      href: '/gallery', wideOnly: false },
     { label: 'Blog',         href: '/blog', wideOnly: true },
     { label: 'About',        href: '/about', wideOnly: true },
-    { label: 'Team',         href: '/team', wideOnly: true },
     { label: 'FAQ',          href: '/faq', wideOnly: true },
     { label: 'Contact',      href: '/contact', wideOnly: false },
   ]
@@ -1054,7 +1053,7 @@ export function Footer() {
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Navigate</p>
               <ul className="flex flex-col gap-2.5">
-                {[['Home','/'],['Services','/services'],['Book','/book'],['Bridal','/bridal'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['Team','/team'],['FAQ','/faq']].map(([l,href]) => (
+                {[['Home','/'],['Services','/services'],['Book','/book'],['Bridal','/bridal'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['FAQ','/faq']].map(([l,href]) => (
                   <li key={l}><Link href={href} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{l}</Link></li>
                 ))}
               </ul>
