@@ -91,9 +91,10 @@ export default function TeamClient() {
               href={WA_DEFAULT}
               target="_blank"
               rel="noreferrer"
-              className="link-underline text-ink text-[11px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1.5"
+              className="link-underline !inline-flex items-center gap-1.5 text-ink text-[11px] tracking-[0.14em] uppercase font-['Inter']"
             >
-              Message us on WhatsApp <ArrowUpRight className="w-3 h-3" />
+              <span className="min-w-0">Message us on WhatsApp</span>
+              <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
             </a>
           </motion.div>
         </div>

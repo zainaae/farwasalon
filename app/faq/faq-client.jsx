@@ -86,8 +86,9 @@ export default function FaqClient() {
               <MessageCircle className="w-3.5 h-3.5" /> Message on WhatsApp
             </a>
             <Link href="/book"
-              className="link-underline text-white/60 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors inline-flex items-center gap-1.5">
-              {CTA_PRIMARY_LABEL} <ArrowUpRight className="w-3 h-3" />
+              className="link-underline !inline-flex items-center gap-1.5 text-white/60 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors">
+              <span className="min-w-0">{CTA_PRIMARY_LABEL}</span>
+              <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
             </Link>
           </motion.div>
         </div>
