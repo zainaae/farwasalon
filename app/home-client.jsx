@@ -83,12 +83,6 @@ function Hero() {
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf) }
   }, [])
 
-  const thesis = [
-    { text: 'Bridal. Hair. Skin. ',             em: true  },
-    { text: 'Rubina\u2019s studio ',            em: false },
-    { text: 'since 2008.',                      em: true  },
-  ]
-
   return (
     <section className="relative w-full h-[100svh] min-h-[520px] max-h-[1100px] overflow-hidden bg-[#0d0609]">
       <Image
@@ -149,7 +143,7 @@ function Hero() {
               initial={{ y: '100%' }} animate={{ y: 0 }}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']">
-              Est. 2008 &middot; Farwa Beauty Salon &middot; Bridal &amp; Beauty
+              Farwa Beauty Salon &middot; PECHS Block 3 &middot; Since 2008
             </m.p>
           </div>
 
@@ -167,7 +161,7 @@ function Hero() {
                 animate={{ y: 0 }}
                 transition={{ delay: 0.28, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
                 className="block text-white font-semibold">
-                Beauty Salon in PECHS
+                Bridal, brows &amp; skin
               </m.span>
             </span>
             <span className="block overflow-hidden">
@@ -176,31 +170,27 @@ function Hero() {
                 animate={{ y: 0 }}
                 transition={{ delay: 0.4, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
                 className="block text-white/85 font-light italic font-['Syne']">
-                Karachi
+                your beauty salon in PECHS, Karachi
               </m.span>
             </span>
           </h1>
 
-          <p
-            className="font-['Unbounded'] text-white leading-[1.05] mb-6 md:mb-7 break-words"
-            style={{
-              fontSize: 'clamp(1.1rem, 3.6vw, 2rem)',
-              letterSpacing: '-0.015em',
-              maxWidth: '24ch',
-            }}
-            aria-label="Our specialties">
-            {thesis.map((line, i) => (
-              <span key={i} className="block overflow-hidden">
-                <m.span
-                  initial={{ y: '110%' }}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 0.42 + i * 0.18, duration: 1.05, ease: [0.16,1,0.3,1] }}
-                  className={`block ${line.em ? 'text-white/95 font-medium' : "text-white/75 font-light italic font-['Syne']"}`}>
-                  {line.text}
-                </m.span>
-              </span>
-            ))}
-          </p>
+          <div className="overflow-hidden mb-6 md:mb-7">
+            <m.p
+              initial={{ y: '110%' }}
+              animate={{ y: 0 }}
+              transition={{ delay: 0.55, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+              className="text-white/75 text-[13px] sm:text-[15px] leading-relaxed font-['Syne'] font-light max-w-[32ch]">
+              Rubina&apos;s studio for {YEARS_ACTIVE}+ years — threading, facials &amp; makeup you&apos;ll want to book again.
+            </m.p>
+            <m.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.85, duration: 0.7 }}
+              className="mt-3 text-white/45 text-[10px] tracking-[0.18em] uppercase font-['Inter']">
+              4.9&#9733; on Google &middot; PECHS, Karachi
+            </m.p>
+          </div>
 
           <m.div
             initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
