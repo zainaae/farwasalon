@@ -289,6 +289,11 @@ export function getDefaultServiceIdForCategory(categoryName) {
   return list?.[0]?.id ?? null
 }
 
+/** Bookable service id by exact name (for CTA labels that target a specific service) */
+export function getServiceIdByName(name) {
+  return ALL_SERVICES.find((s) => s.name === name)?.id ?? null
+}
+
 /** Optional add-on service ids shown during booking confirm step */
 export const SERVICE_ADDON_IDS = {
   1: [2],       // Eyebrow Threading → Upper Lip

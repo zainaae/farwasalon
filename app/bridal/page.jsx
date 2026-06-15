@@ -10,7 +10,7 @@ import {
   buildSpeakableSchema,
   getAggregateRating,
 } from '../../lib/business-schema.js'
-import { CAT_SLUGS, CAT_FAQS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getDefaultServiceIdForCategory, formatPrice } from '../../src/data.js'
+import { CAT_SLUGS, CAT_FAQS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice } from '../../src/data.js'
 
 const title = 'Bridal Makeup in PECHS Karachi — Trials & Packages | Farwa Beauty Salon'
 const description =
@@ -32,7 +32,7 @@ export const metadata = {
 export default function BridalLandingPage() {
   const rating = getAggregateRating()
   const packages = SERVICES.Bridal || []
-  const trialServiceId = getDefaultServiceIdForCategory('Bridal')
+  const trialServiceId = getServiceIdByName('Bridal Trial')
   const faqs = CAT_FAQS.Bridal || []
 
   const faqSchema = {

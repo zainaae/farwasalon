@@ -1199,7 +1199,8 @@ export function StickyWA({ hidden = false }) {
 }
 
 /* ─── Lazy video — IntersectionObserver-controlled ─────────────── */
-export function LazyVideo({ src, poster, className, ...props }) {
+// eslint-disable-next-line no-unused-vars -- autoPlay is IO-controlled, not forwarded to <video>
+export function LazyVideo({ src, poster, className, autoPlay, ...props }) {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
 

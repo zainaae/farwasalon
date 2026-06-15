@@ -187,8 +187,7 @@ function Hero() {
               fontSize: 'clamp(1.1rem, 3.6vw, 2rem)',
               letterSpacing: '-0.015em',
               maxWidth: '24ch',
-            }}
-            aria-label="Our specialties">
+            }}>
             {thesis.map((line, i) => (
               <span key={i} className="block overflow-hidden">
                 <m.span

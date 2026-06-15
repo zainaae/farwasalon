@@ -181,7 +181,6 @@ function ServiceMediaPanel({ hovered, categories }) {
       <LazyVideo
         src="/ct.mp4"
         poster="/bridal.jpg"
-        autoPlay
         muted
         loop
         playsInline
