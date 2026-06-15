@@ -98,7 +98,7 @@ function Hero() {
         priority
         sizes="100vw"
         aria-hidden
-        className="object-cover scale-[1.01]"
+        className="object-cover scale-[1.01] pointer-events-none"
         style={{ objectPosition: '50% 35%' }}
       />
 

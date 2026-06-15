@@ -257,7 +257,7 @@ function FeaturedServices() {
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="tab-scroller mb-6"
+              className="service-filter-grid mb-6"
               role="tablist"
               aria-label="Filter service categories"
             >
@@ -273,7 +273,7 @@ function FeaturedServices() {
                   }}
                   className={`tap-safe tab-pill ${activeTab === tab ? 'tab-pill-active' : ''}`}
                 >
-                  {tab}
+                  <span className="line-clamp-2 leading-tight">{tab}</span>
                 </button>
               ))}
             </m.div>
@@ -531,26 +531,49 @@ function TestimonialsPreview() {
 function CtaBand() {
   return (
     <section className="cv-auto bg-ink py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10">
-      <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8 md:gap-10">
-        <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
+      <div className="max-w-screen-xl mx-auto flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12 xl:gap-14">
+        <m.div
+          initial={{ opacity: 0, x: -24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="w-full lg:flex-1 lg:min-w-0"
+        >
           <p className="text-stone text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
-          <h2 className="font-['Unbounded'] font-bold text-white leading-tight"
-            style={{ fontSize: 'clamp(1.5rem, 5vw, 2.75rem)' }}>
-            <span className="block">Ready for your glow?</span> <span className="block">We&apos;re ready for you.</span>
+          <h2
+            className="font-['Unbounded'] font-bold text-white leading-tight text-balance max-w-2xl lg:max-w-none"
+            style={{ fontSize: 'clamp(1.5rem, 4vw + 0.5rem, 2.75rem)' }}
+          >
+            Ready for your glow? We&apos;re ready for you.
           </h2>
         </m.div>
-        <m.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.15 }}
-          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 shrink-0 w-full md:w-auto">
-          <Link href="/book"
-            className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-all duration-300 w-full sm:w-auto justify-center sm:justify-start">
-            Book an Appointment <ArrowUpRight className="w-4 h-4" />
-          </Link>
-          <Link href="/services" className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
-            View Services
-          </Link>
-          <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noreferrer"
-            className="tap-safe text-white/40 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white/70 transition-colors flex items-center justify-center sm:justify-start">
+        <m.div
+          initial={{ opacity: 0, x: 24 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.15 }}
+          className="flex flex-col gap-3 w-full lg:w-auto lg:shrink-0"
+        >
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
+            <Link
+              href="/book"
+              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-all duration-300 w-full sm:w-auto justify-center sm:justify-start"
+            >
+              Book an Appointment <ArrowUpRight className="w-4 h-4 shrink-0" />
+            </Link>
+            <Link
+              href="/services"
+              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
+            >
+              View Services
+            </Link>
+          </div>
+          <a
+            href={`https://wa.me/${WA_NUMBER}`}
+            target="_blank"
+            rel="noreferrer"
+            className="tap-safe text-white/40 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white/70 transition-colors flex items-center justify-center sm:justify-start lg:justify-end min-w-0"
+          >
             Or reach us on WhatsApp
           </a>
         </m.div>

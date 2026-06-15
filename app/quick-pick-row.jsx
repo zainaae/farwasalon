@@ -26,6 +26,12 @@ function minPriceFor(category) {
   return prices.length ? Math.min(...prices) : null
 }
 
+const cardMotion = {
+  initial: { opacity: 0, y: 8 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+}
+
 export default function QuickPickRow() {
   const items = QUICK_PICK_CATEGORIES.filter((c) => SERVICES[c]?.length).map((c) => ({
     category: c,
@@ -57,26 +63,25 @@ export default function QuickPickRow() {
           </Link>
         </div>
 
-        <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 snap-x snap-mandatory scrollbar-none">
+        <div className="quick-pick-grid">
           {items.map(({ category, minPrice }, i) => (
             <m.div
               key={category}
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              className="min-w-0 h-full"
+              {...cardMotion}
               transition={{ duration: 0.4, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
             >
               <Link
                 href={`/book?category=${encodeURIComponent(category)}`}
                 onClick={() => track('QuickPick', { category })}
                 aria-label={`Book ${category}${minPrice ? ` — from ${formatPrice(minPrice)}` : ''}`}
-                className="tap-safe snap-start shrink-0 inline-flex flex-col items-start gap-0.5 border border-border-soft hover:border-ink hover:bg-mist hover:shadow-soft transition-all px-4 py-2.5 min-w-[7rem]"
+                className="tap-safe quick-pick-card"
               >
-                <span className="font-['Syne'] font-bold text-[12px] text-ink uppercase leading-tight">
+                <span className="font-['Syne'] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full">
                   {category}
                 </span>
                 {minPrice != null ? (
-                  <span className="text-accent-gold text-[10px] font-['Inter'] font-medium">
+                  <span className="text-accent-gold text-[10px] font-['Inter'] font-medium truncate w-full">
                     From {formatPrice(minPrice)}
                   </span>
                 ) : (
@@ -86,18 +91,17 @@ export default function QuickPickRow() {
             </m.div>
           ))}
           <m.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            className="min-w-0 h-full"
+            {...cardMotion}
             transition={{ duration: 0.4, delay: items.length * 0.04, ease: [0.16, 1, 0.3, 1] }}
           >
             <Link
               href="/services"
               onClick={() => track('QuickPick', { category: 'all' })}
               aria-label={`View all ${CATEGORY_COUNT} service categories`}
-              className="tap-safe snap-start shrink-0 inline-flex flex-col items-start justify-center gap-0.5 border border-dashed border-ink/30 hover:border-ink hover:bg-mist transition-all px-4 py-2.5 min-w-[7.5rem] h-full"
+              className="tap-safe quick-pick-card quick-pick-card--all"
             >
-              <span className="font-['Syne'] font-bold text-[12px] text-ink uppercase leading-tight">
+              <span className="font-['Syne'] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full">
                 View all {CATEGORY_COUNT}
               </span>
               <span className="text-stone text-[10px] font-['Inter']">Categories</span>

@@ -881,13 +881,13 @@ function Logo({ light }) {
      (JPG has white background so brightness-0+invert turns it into a flat white blob) */
   if (!light) {
     return (
-      <span className="font-['Unbounded'] font-bold text-[12px] md:text-[13px] tracking-[0.12em] text-white">
+      <span className="font-['Unbounded'] font-bold text-[12px] md:text-[13px] lg:text-[14px] tracking-[0.14em] md:tracking-[0.16em] text-white">
         FARWA
       </span>
     )
   }
   if (err) {
-    return <span className="font-['Unbounded'] font-bold text-[12px] md:text-[13px] tracking-[0.12em] text-ink">FARWA</span>
+    return <span className="font-['Unbounded'] font-bold text-[12px] md:text-[13px] lg:text-[14px] tracking-[0.14em] md:tracking-[0.16em] text-ink">FARWA</span>
   }
   return (
     <Image
@@ -919,7 +919,7 @@ export function Navbar({ transparent = false }) {
   const navLinks = [
     { label: 'Home',         href: '/', wideOnly: false },
     { label: 'Services',     href: '/services', wideOnly: false },
-    { label: 'Book',         href: '/book', wideOnly: false },
+    { label: 'Book',         href: '/book', wideOnly: false, hideOnDesktop: true },
     { label: 'Gallery',      href: '/gallery', wideOnly: false },
     { label: 'Blog',         href: '/blog', wideOnly: true },
     { label: 'About',        href: '/about', wideOnly: true },
@@ -928,34 +928,45 @@ export function Navbar({ transparent = false }) {
     { label: 'Contact',      href: '/contact', wideOnly: false },
   ]
 
+  const headerSurface = scrolled
+    ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_0_0_#e4ddd7]'
+    : transparent
+      ? 'bg-ink/35 backdrop-blur-md border-b border-white/[0.08]'
+      : 'bg-white/95 backdrop-blur-md'
+
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-[100] transition-[background-color,box-shadow] duration-300 pt-[env(safe-area-inset-top,0px)] isolate [backface-visibility:hidden] animate-[navSlideIn_0.55s_cubic-bezier(0.16,1,0.3,1)_both] ${
-        scrolled
-          ? 'bg-white shadow-[0_1px_0_0_#e4ddd7]'
-          : transparent ? '' : 'bg-white'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-[100] transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300 pt-[env(safe-area-inset-top,0px)] isolate [backface-visibility:hidden] animate-[navSlideIn_0.55s_cubic-bezier(0.16,1,0.3,1)_both] ${headerSurface}`}
     >
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-6 lg:px-10 h-[3.375rem] md:h-14 flex items-center justify-between gap-2 min-w-0">
-        <Link href="/" className="shrink-0 min-w-0">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-6 lg:px-10 h-[3.375rem] md:h-14 flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between md:justify-normal gap-3 min-w-0">
+        <Link href="/" className="justify-self-start shrink-0 min-w-0">
           <Logo light={light} />
         </Link>
-        <nav className="hidden md:flex items-center gap-2.5 lg:gap-5 xl:gap-7 min-w-0 flex-1 justify-center px-2">
-          {navLinks.map(({ label, href, wideOnly }) => {
+        <nav
+          className="hidden md:flex items-center justify-center gap-x-3 md:gap-x-4 lg:gap-x-5 min-w-0 max-w-[min(100%,42rem)] justify-self-center px-1"
+          aria-label="Main navigation"
+        >
+          {navLinks.map(({ label, href, wideOnly, hideOnDesktop }) => {
             const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
             return (
               <Link key={href} href={href}
-                className={`link-underline shrink-0 text-[10px] lg:text-[11px] tracking-[0.14em] lg:tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors whitespace-nowrap
+                aria-current={isActive ? 'page' : undefined}
+                className={`nav-link shrink-0 text-[9px] md:text-[10px] lg:text-[11px] tracking-[0.16em] md:tracking-[0.18em] lg:tracking-[0.2em] uppercase font-medium font-['Inter'] transition-colors duration-200 whitespace-nowrap
+                ${hideOnDesktop ? 'md:hidden' : ''}
                 ${wideOnly ? 'hidden lg:inline-block' : ''}
-                ${isActive ? (light ? 'text-ink' : 'text-white') : (light ? 'text-stone hover:text-ink' : 'text-white/70 hover:text-white')}`}>
+                ${isActive ? `nav-link--active ${light ? 'nav-link--on-light text-ink' : 'nav-link--on-dark text-white'}` : (light ? 'text-stone hover:text-ink' : 'text-white/65 hover:text-white')}`}>
                 {label}
               </Link>
             )
           })}
         </nav>
-        <div className="flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
+        <div className="justify-self-end flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
           <Link href="/book"
-            className={`hidden md:inline-flex items-center gap-1.5 text-[10px] lg:text-[11px] tracking-[0.12em] lg:tracking-[0.14em] uppercase font-medium font-['Inter'] px-3 lg:px-[1.125rem] py-[0.4375rem] transition-colors duration-300 whitespace-nowrap ${light ? 'bg-ink text-white hover:bg-stone' : 'bg-white text-ink hover:bg-nude'}`}>
+            className={`hidden md:inline-flex items-center gap-1.5 text-[9px] md:text-[10px] lg:text-[11px] tracking-[0.14em] lg:tracking-[0.16em] uppercase font-semibold font-['Inter'] px-3 md:px-3.5 lg:px-4 py-2 rounded-sm border transition-all duration-300 whitespace-nowrap active:scale-[0.98] ${
+              light
+                ? 'bg-ink text-white border-ink hover:bg-stone hover:border-stone'
+                : 'bg-transparent text-white border-white/70 hover:bg-white hover:text-ink hover:border-white'
+            }`}>
             <span className="lg:hidden">Book</span>
             <span className="hidden lg:inline">Book an Appointment</span>
           </Link>
@@ -1056,27 +1067,31 @@ export function Footer() {
                 ))}
               </ul>
             </div>
-            <div>
+            <div className="min-w-0">
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Connect</p>
               <ul className="flex flex-col gap-3">
                 <li>
-                  <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="link-underline inline-flex items-center gap-2 text-stone text-xs font-['Inter'] hover:text-ink">
-                    <MessageCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" /> WhatsApp
+                  <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="link-underline !inline-flex items-center gap-2 text-stone text-xs leading-snug font-['Inter'] hover:text-ink">
+                    <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
+                    <span className="min-w-0">WhatsApp</span>
                   </a>
                 </li>
                 <li>
-                  <a href={IG_LINK} target="_blank" rel="noreferrer" className="link-underline inline-flex items-center gap-2 text-stone text-xs font-['Inter'] hover:text-ink">
-                    <IgIcon className="w-3.5 h-3.5 shrink-0" aria-hidden="true" /> @farwasalon
+                  <a href={IG_LINK} target="_blank" rel="noreferrer" className="link-underline !inline-flex items-center gap-2 text-stone text-xs leading-snug font-['Inter'] hover:text-ink">
+                    <IgIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
+                    <span className="min-w-0">@farwasalon</span>
                   </a>
                 </li>
                 <li>
-                  <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="link-underline inline-flex items-center gap-2 text-stone text-xs font-['Inter'] hover:text-ink">
-                    <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" /> Google Maps
+                  <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="link-underline !inline-flex items-center gap-2 text-stone text-xs leading-snug font-['Inter'] hover:text-ink">
+                    <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
+                    <span className="min-w-0">Google Maps</span>
                   </a>
                 </li>
                 <li>
-                  <a href="https://g.page/farwasalon/review" target="_blank" rel="noreferrer" className="link-underline inline-flex items-center gap-2 text-stone text-xs font-['Inter'] hover:text-ink">
-                    <Star className="w-3.5 h-3.5 shrink-0" aria-hidden="true" /> Leave a review
+                  <a href="https://g.page/farwasalon/review" target="_blank" rel="noreferrer" className="link-underline !inline-flex items-center gap-2 text-stone text-xs leading-snug font-['Inter'] hover:text-ink">
+                    <Star className="w-4 h-4 shrink-0" aria-hidden="true" />
+                    <span className="min-w-0">Leave a review</span>
                   </a>
                 </li>
               </ul>
