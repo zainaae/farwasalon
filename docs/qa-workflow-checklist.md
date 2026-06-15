@@ -11,11 +11,18 @@ npm run verify:full
 # Lint + unit + build only
 npm run verify
 
-# Dataset-driven API + route crawl
+# Dataset-driven API + route crawl (defaults to http://127.0.0.1:$PORT, PORT=3000)
 npm run qa:workflow
 
-# Against production
+# Local server on a non-default port (e.g. next start -p 3001)
+PORT=3001 npm run qa:workflow
+
+# Against production (bash / macOS / Linux)
 BASE_URL=https://farwasalon.com npm run qa:workflow
+
+# Against production or custom URL (Windows PowerShell)
+$env:BASE_URL="https://farwasalon.com"; npm run qa:workflow
+$env:BASE_URL="http://127.0.0.1:3001"; npm run qa:workflow
 
 # Legacy booking probe (subset of API scenarios)
 node scripts/booking-api-probe.mjs
@@ -24,6 +31,15 @@ BASE_URL=https://farwasalon.com node scripts/booking-api-probe.mjs
 # Optional live sheet write (cancel row after)
 QA_WRITE=1 BASE_URL=https://farwasalon.com npm run qa:workflow
 ```
+
+**Environment variables**
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `BASE_URL` | `http://127.0.0.1:$PORT` | Target origin for API + crawl |
+| `PORT` | `3000` | Used when `BASE_URL` is unset (`next start -p` should match) |
+| `QA_WRITE` | off | Create one real booking row |
+| `QA_SKIP_CRAWL` | off | Skip HTML route crawl |
 
 ## Automated matrix
 
@@ -105,6 +121,11 @@ Navigate column (10 links) + Services column (13) + location hub — all **200**
 ```bash
 BASE_URL=https://farwasalon.com npm run qa:workflow
 BASE_URL=https://farwasalon.com node scripts/booking-api-probe.mjs
+```
+
+```powershell
+$env:BASE_URL="https://farwasalon.com"; npm run qa:workflow
+$env:BASE_URL="https://farwasalon.com"; node scripts/booking-api-probe.mjs
 ```
 
 - [ ] IndexNow key: `https://farwasalon.com/farwa-salon-indexnow.txt`

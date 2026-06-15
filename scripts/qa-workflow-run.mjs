@@ -4,12 +4,16 @@
  *
  * Usage:
  *   node scripts/qa-workflow-run.mjs
+ *   PORT=3001 node scripts/qa-workflow-run.mjs          # default → http://127.0.0.1:3001
  *   BASE_URL=https://farwasalon.com node scripts/qa-workflow-run.mjs
  *   QA_WRITE=1 node scripts/qa-workflow-run.mjs   # optional live booking row
  *   QA_SKIP_CRAWL=1 node scripts/qa-workflow-run.mjs
+ *
+ * Windows PowerShell:
+ *   $env:BASE_URL="https://farwasalon.com"; npm run qa:workflow
+ *   $env:BASE_URL="http://127.0.0.1:3001"; npm run qa:workflow
  */
 import {
-  QA_BASE_URL_DEFAULT,
   QA_PROBE_ORIGIN,
   API_SCENARIOS,
   ROUTE_CRAWL_PATHS,
@@ -22,7 +26,9 @@ import {
   DATASET_META,
 } from './qa-dataset.mjs'
 
-const BASE = (process.env.BASE_URL || QA_BASE_URL_DEFAULT).replace(/\/$/, '')
+const BASE = (
+  process.env.BASE_URL || `http://127.0.0.1:${process.env.PORT || 3000}`
+).replace(/\/$/, '')
 const WRITE = process.env.QA_WRITE === '1' || process.env.PROBE_WRITE === '1'
 const SKIP_CRAWL = process.env.QA_SKIP_CRAWL === '1'
 const CRAWL_LIMIT = Number(process.env.QA_CRAWL_LIMIT || '0') || ROUTE_CRAWL_PATHS.length
