@@ -64,8 +64,9 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     const h1 = page.locator('#hero-headline')
     const lede = page.locator('#hero-lede')
     await expect(h1).toContainText(/Beauty Salon/i)
-    await expect(lede).toContainText(/Karachi/i)
-    await expect(lede).toContainText(/PECHS/i)
+    await expect(h1).toContainText(/PECHS/i)
+    await expect(h1).toContainText(/Karachi/i)
+    await expect(lede).toContainText(/Farwa Beauty Salon/i)
   })
 
   test('footer shows single salon location', async ({ page }) => {

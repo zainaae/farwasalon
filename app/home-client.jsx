@@ -83,6 +83,12 @@ function Hero() {
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf) }
   }, [])
 
+  const thesis = [
+    { text: 'Bridal. Hair. Skin. ',             em: true  },
+    { text: 'Rubina\u2019s studio ',            em: false },
+    { text: 'since 2008.',                      em: true  },
+  ]
+
   return (
     <section className="relative w-full h-[100svh] min-h-[520px] max-h-[1100px] overflow-hidden bg-[#0d0609]">
       <Image
@@ -137,41 +143,64 @@ function Hero() {
         className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14"
         style={{ textShadow: '0 1px 12px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.25)' }}>
         <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
-          <div className="overflow-hidden mb-4 md:mb-5">
+          <div className="overflow-hidden mb-4 md:mb-6">
             <m.p
               id="hero-lede"
               initial={{ y: '100%' }} animate={{ y: 0 }}
               transition={{ delay: 0.15, duration: 0.9, ease: [0.16,1,0.3,1] }}
-              className="text-[#b8aea4] text-[10px] sm:text-[11px] tracking-[0.22em] uppercase font-['Inter']">
-              Est. 2008 &middot; PECHS, Karachi
+              className="text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']">
+              Est. 2008 &middot; Farwa Beauty Salon &middot; Bridal &amp; Beauty
             </m.p>
           </div>
 
-          <div className="overflow-hidden mb-4 md:mb-5">
-            <m.h1
-              id="hero-headline"
-              initial={{ y: '110%' }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.28, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-              className="font-['Unbounded'] text-white font-semibold leading-[1.05] break-words"
-              style={{
-                fontSize: 'clamp(1.75rem, 5.4vw, 3.35rem)',
-                letterSpacing: '-0.02em',
-                maxWidth: '18ch',
-              }}>
-              Farwa Beauty Salon
-            </m.h1>
-          </div>
+          <h1
+            id="hero-headline"
+            className="font-['Unbounded'] text-white leading-[1.02] mb-3 md:mb-4 break-words"
+            style={{
+              fontSize: 'clamp(1.65rem, 5.2vw, 3.25rem)',
+              letterSpacing: '-0.02em',
+              maxWidth: '22ch',
+            }}>
+            <span className="block overflow-hidden">
+              <m.span
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.28, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+                className="block text-white font-semibold">
+                Beauty Salon in PECHS
+              </m.span>
+            </span>
+            <span className="block overflow-hidden">
+              <m.span
+                initial={{ y: '110%' }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.4, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+                className="block text-white/85 font-light italic font-['Syne']">
+                Karachi
+              </m.span>
+            </span>
+          </h1>
 
-          <div className="overflow-hidden mb-6 md:mb-7">
-            <m.p
-              initial={{ y: '110%' }}
-              animate={{ y: 0 }}
-              transition={{ delay: 0.42, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-              className="text-white/70 text-[13px] sm:text-[15px] leading-relaxed font-['Syne'] font-light max-w-[30ch]">
-              Full-service beauty studio &mdash; by appointment.
-            </m.p>
-          </div>
+          <p
+            className="font-['Unbounded'] text-white leading-[1.05] mb-6 md:mb-7 break-words"
+            style={{
+              fontSize: 'clamp(1.1rem, 3.6vw, 2rem)',
+              letterSpacing: '-0.015em',
+              maxWidth: '24ch',
+            }}
+            aria-label="Our specialties">
+            {thesis.map((line, i) => (
+              <span key={i} className="block overflow-hidden">
+                <m.span
+                  initial={{ y: '110%' }}
+                  animate={{ y: 0 }}
+                  transition={{ delay: 0.42 + i * 0.18, duration: 1.05, ease: [0.16,1,0.3,1] }}
+                  className={`block ${line.em ? 'text-white/95 font-medium' : "text-white/75 font-light italic font-['Syne']"}`}>
+                  {line.text}
+                </m.span>
+              </span>
+            ))}
+          </p>
 
           <m.div
             initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
