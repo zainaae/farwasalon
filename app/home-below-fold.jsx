@@ -411,12 +411,24 @@ function toFbCard(post) {
     name: post.name,
     initials: post.initials || reviewInitials(post.name),
     date: post.date || post.relativeTime || '',
-    service: post.service || 'Google review',
+    service: post.service || (post.source === 'google' ? 'Google review' : 'Facebook'),
     quote: post.quote,
     link: post.link,
     source: post.source || 'facebook',
   }
 }
+
+function toGoogleCards(reviews) {
+  return reviews.slice(0, 6).map((r) =>
+    toFbCard({
+      ...r,
+      service: r.relativeTime || 'Google review',
+      source: 'google',
+    }),
+  )
+}
+
+const FB_GRID_POSTS = FB_POSTS.map((post) => toFbCard(post))
 
 const manualPayload = getManualReviewsPayload()
 const gbpStats = getGbpStatsForDisplay()
@@ -425,24 +437,53 @@ const initialRatingLabel =
     ? `${gbpStats.rating}★ · ${gbpStats.reviewCount} Google reviews`
     : 'Reviews on Google'
 
-const initialManualGrid = manualPayload?.reviews?.length
-  ? manualPayload.reviews.slice(0, 6).map((r) =>
-      toFbCard({
-        ...r,
-        service: r.relativeTime || 'Google review',
-        source: 'google',
-      }),
-    )
-  : null
+const initialGoogleGrid = manualPayload?.reviews?.length
+  ? toGoogleCards(manualPayload.reviews)
+  : []
+
+function ReviewGridSection({ label, viewAllHref, posts, className = '' }) {
+  if (!posts.length) return null
+
+  return (
+    <div className={className}>
+      <div className="flex items-baseline justify-between mb-4 md:mb-5 px-0.5">
+        <p className="eyebrow">— {label}</p>
+        <a href={viewAllHref} target="_blank" rel="noreferrer"
+          className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1">
+          View all <ArrowUpRight className="w-2.5 h-2.5" />
+        </a>
+      </div>
+
+      <p className="md:hidden text-stone/70 text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2 px-0.5">
+        Swipe for more reviews →
+      </p>
+      <div className="md:hidden flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
+        {posts.map((post) => (
+          <ReviewCard key={`${label}-${post.name}-${post.quote.slice(0, 24)}`} post={post} compact />
+        ))}
+      </div>
+
+      <div className="hidden md:grid md:grid-cols-2 gap-3 max-w-3xl">
+        {posts.slice(0, 2).map((post, i) => (
+          <m.div key={`${label}-${post.name}`}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}>
+            <ReviewCard post={post} />
+          </m.div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 function TestimonialsPreview() {
   const [reviewIdx, setReviewIdx] = useState(0)
-  const [reviewSource, setReviewSource] = useState(manualPayload ? 'google' : 'facebook')
   const [ratingLabel, setRatingLabel] = useState(initialRatingLabel)
   const [featuredReviews, setFeaturedReviews] = useState(
     manualPayload?.reviews?.length ? manualPayload.reviews : FALLBACK_FEATURED_REVIEWS,
   )
-  const [gridPosts, setGridPosts] = useState(initialManualGrid ?? FB_POSTS)
+  const [googleGridPosts, setGoogleGridPosts] = useState(initialGoogleGrid)
 
   useEffect(() => {
     let cancelled = false
@@ -458,21 +499,13 @@ function TestimonialsPreview() {
           data.reviews?.length
         if (!isGoogle) return
 
-        setReviewSource('google')
         setFeaturedReviews(data.reviews)
-        setGridPosts(
-          data.reviews.slice(0, 6).map((r) =>
-            toFbCard({
-              ...r,
-              service: r.relativeTime || 'Google review',
-            }),
-          ),
-        )
+        setGoogleGridPosts(toGoogleCards(data.reviews))
         if (data.rating != null && data.reviewCount != null) {
           setRatingLabel(`${data.rating}★ · ${data.reviewCount} Google reviews`)
         }
       } catch {
-        /* keep Facebook fallback */
+        /* keep manual / Facebook fallback */
       }
     }
 
@@ -491,11 +524,7 @@ function TestimonialsPreview() {
   }, [featuredReviews.length])
 
   const featured = featuredReviews[reviewIdx]
-  const gridSourceLabel = reviewSource === 'google' ? 'From Google' : 'From Facebook'
-  const gridViewAllHref =
-    reviewSource === 'google'
-      ? 'https://g.page/farwasalon/review'
-      : 'https://www.facebook.com/farwasalon/reviews'
+  const featuredSourceLabel = featured.source === 'google' ? 'Google' : 'Facebook'
 
   return (
     <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-mist border-t border-border-soft">
@@ -538,7 +567,7 @@ function TestimonialsPreview() {
               <span className="text-stone/40" aria-hidden="true">·</span>
               <a href={featured.link} target="_blank" rel="noreferrer"
                 className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
-                {reviewSource === 'google' ? 'Google' : 'Facebook'}{' '}
+                {featuredSourceLabel}{' '}
                 <ArrowUpRight className="w-2.5 h-2.5" />
               </a>
             </div>
@@ -560,37 +589,18 @@ function TestimonialsPreview() {
           </figcaption>
         </m.figure>
 
-        <div className="mb-10 md:mb-12">
-          <div className="flex items-baseline justify-between mb-4 md:mb-5 px-0.5">
-            <p className="eyebrow">
-              — {gridSourceLabel}
-            </p>
-            <a href={gridViewAllHref} target="_blank" rel="noreferrer"
-              className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1">
-              View all <ArrowUpRight className="w-2.5 h-2.5" />
-            </a>
-          </div>
-
-          <p className="md:hidden text-stone/70 text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2 px-0.5">
-            Swipe for more reviews →
-          </p>
-          <div className="md:hidden flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
-            {gridPosts.map((post) => (
-              <ReviewCard key={`${post.name}-${post.quote.slice(0, 24)}`} post={post} compact />
-            ))}
-          </div>
-
-          <div className="hidden md:grid md:grid-cols-2 gap-3 max-w-3xl">
-            {gridPosts.slice(0, 2).map((post, i) => (
-              <m.div key={post.name}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}>
-                <ReviewCard post={post} />
-              </m.div>
-            ))}
-          </div>
-        </div>
+        <ReviewGridSection
+          label="From Google"
+          viewAllHref="https://g.page/farwasalon/review"
+          posts={googleGridPosts}
+          className={googleGridPosts.length ? 'mb-8 md:mb-10' : ''}
+        />
+        <ReviewGridSection
+          label="From Facebook"
+          viewAllHref="https://www.facebook.com/farwasalon/reviews"
+          posts={FB_GRID_POSTS}
+          className="mb-10 md:mb-12"
+        />
 
         <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="pt-8 border-t border-border-soft flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
