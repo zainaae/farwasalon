@@ -357,10 +357,17 @@ function TrustPillars() {
   )
 }
 
-function ReviewCard({ post, compact = false }) {
+function ReviewCard({ post, compact = false, excerpt = false }) {
+  const sourceLabel = post.source === 'google' ? 'Google' : 'Facebook'
+  const clampQuote = excerpt || compact
+
   return (
-    <article className={`group panel-soft shadow-soft flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-card ${compact ? 'shrink-0 snap-start w-[85vw] max-w-[320px]' : 'h-full'}`}>
-      <header className="flex items-center justify-between px-5 py-4 border-b border-border-soft">
+    <article
+      className={`group panel-soft shadow-soft flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-card ${
+        compact ? 'shrink-0 snap-start w-[85vw] max-w-[320px]' : 'h-full min-h-[260px] sm:min-h-[272px]'
+      }`}
+    >
+      <header className="flex items-center justify-between px-5 py-3.5 sm:py-4 border-b border-border-soft">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-9 h-9 bg-mist border border-border-soft flex items-center justify-center shrink-0">
             <span className="text-ink font-['Syne'] font-semibold text-[11px]">{post.initials}</span>
@@ -376,23 +383,38 @@ function ReviewCard({ post, compact = false }) {
           </div>
         </div>
         <a href={post.link} target="_blank" rel="noreferrer"
-          aria-label={`View ${post.name}'s review on ${post.source === 'google' ? 'Google' : 'Facebook'}`}
+          aria-label={`View ${post.name}'s review on ${sourceLabel}`}
           className="shrink-0 text-stone/50 group-hover:text-ink transition-colors">
           <ArrowUpRight className="w-4 h-4" />
         </a>
       </header>
 
-      <div className="flex-1 px-5 py-5 flex flex-col bg-white">
-        <Quote className="w-4 h-4 text-stone/25 mb-3 rotate-180 shrink-0" aria-hidden="true" />
-        <blockquote className="text-stone text-[13px] md:text-sm font-light leading-relaxed font-['Inter'] flex-1">
+      <div className="flex-1 px-5 py-4 sm:py-5 flex flex-col bg-white min-h-0">
+        <Quote className="w-3.5 h-3.5 text-accent-gold/35 mb-2.5 rotate-180 shrink-0" aria-hidden="true" />
+        <blockquote
+          className={`text-stone text-[13px] md:text-sm font-light leading-relaxed font-['Inter'] flex-1 ${
+            clampQuote ? 'line-clamp-4 sm:line-clamp-5' : ''
+          }`}
+        >
           {post.quote}
         </blockquote>
-        <div className="flex items-center justify-between gap-3 mt-5 pt-4 border-t border-border-soft">
-          <span className="text-stone/80 text-[9px] tracking-[0.18em] uppercase font-['Inter']">
+        {clampQuote && (
+          <a
+            href={post.link}
+            target="_blank"
+            rel="noreferrer"
+            className="review-excerpt-link mt-3 inline-flex items-center gap-1 self-start"
+          >
+            Read on {sourceLabel}
+            <ArrowUpRight className="w-2.5 h-2.5" />
+          </a>
+        )}
+        <div className="flex items-center justify-between gap-3 mt-auto pt-4 border-t border-border-soft">
+          <span className="text-stone/80 text-[9px] tracking-[0.18em] uppercase font-['Inter'] truncate">
             {post.service}
           </span>
-          <span className="inline-flex items-center gap-1 text-stone/60 text-[9px] tracking-[0.16em] uppercase font-['Inter']">
-            {post.source === 'google' ? 'Google' : 'Facebook'}
+          <span className="inline-flex items-center gap-1 text-stone/60 text-[9px] tracking-[0.16em] uppercase font-['Inter'] shrink-0">
+            {sourceLabel}
           </span>
         </div>
       </div>
@@ -441,35 +463,35 @@ const initialGoogleGrid = manualPayload?.reviews?.length
   ? toGoogleCards(manualPayload.reviews)
   : []
 
-function ReviewGridSection({ label, viewAllHref, posts, className = '' }) {
+function ReviewGridSection({ label, viewAllHref, posts, className = '', divided = true }) {
   if (!posts.length) return null
 
   return (
-    <div className={className}>
-      <div className="flex items-baseline justify-between mb-4 md:mb-5 px-0.5">
-        <p className="eyebrow">— {label}</p>
+    <div className={`reviews-block-divider ${divided ? '' : 'border-t-0 pt-0'} ${className}`}>
+      <div className="flex items-center justify-between gap-4 mb-4 sm:mb-5 md:mb-6">
+        <p className="eyebrow mb-0">— {label}</p>
         <a href={viewAllHref} target="_blank" rel="noreferrer"
-          className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1">
+          className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1 shrink-0">
           View all <ArrowUpRight className="w-2.5 h-2.5" />
         </a>
       </div>
 
-      <p className="md:hidden text-stone/70 text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2 px-0.5">
+      <p className="md:hidden text-stone/70 text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2.5">
         Swipe for more reviews →
       </p>
-      <div className="md:hidden flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
+      <div className="md:hidden flex gap-3.5 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
         {posts.map((post) => (
-          <ReviewCard key={`${label}-${post.name}-${post.quote.slice(0, 24)}`} post={post} compact />
+          <ReviewCard key={`${label}-${post.name}-${post.quote.slice(0, 24)}`} post={post} compact excerpt />
         ))}
       </div>
 
-      <div className="hidden md:grid md:grid-cols-2 gap-3 max-w-3xl">
+      <div className="hidden md:grid md:grid-cols-2 gap-4 sm:gap-5 max-w-3xl items-stretch">
         {posts.slice(0, 2).map((post, i) => (
-          <m.div key={`${label}-${post.name}`}
+          <m.div key={`${label}-${post.name}`} className="h-full"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}>
-            <ReviewCard post={post} />
+            <ReviewCard post={post} excerpt />
           </m.div>
         ))}
       </div>
@@ -531,16 +553,16 @@ function TestimonialsPreview() {
       <div className="relative max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
         <m.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
-          className="flex flex-col sm:flex-row sm:items-end md:justify-between gap-5 mb-8 md:mb-10">
+          className="flex flex-col gap-4 sm:gap-5 sm:flex-row sm:items-end sm:justify-between mb-8 sm:mb-10 md:mb-12">
           <div className="min-w-0">
             <p className="eyebrow mb-2">— Client reviews</p>
             <h2 className="section-title text-2xl md:text-3xl">What clients say</h2>
           </div>
-          <div className="flex items-center gap-2 shrink-0 pb-0.5">
-            <div className="flex gap-0.5 text-stone/75" aria-label="4.9 out of 5 stars">
-              {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
+          <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
+            <div className="flex gap-0.5 text-stone/80" aria-label="4.9 out of 5 stars">
+              {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />)}
             </div>
-            <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug">
+            <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug whitespace-nowrap">
               {ratingLabel}
             </span>
           </div>
@@ -548,23 +570,23 @@ function TestimonialsPreview() {
 
         <m.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-          className="relative panel-soft bg-white shadow-soft px-6 py-8 md:px-12 md:py-10 mb-6 md:mb-8"
+          className="reviews-featured relative px-6 py-9 sm:px-9 sm:py-10 md:px-12 md:py-11 mb-8 sm:mb-10 md:mb-12"
           aria-live="polite">
-          <Quote className="absolute top-5 left-5 md:top-7 md:left-8 w-5 h-5 md:w-6 md:h-6 text-stone/20 rotate-180" aria-hidden="true" />
-          <blockquote className="font-['Syne'] italic font-light text-ink leading-[1.45] text-center max-w-2xl mx-auto text-lg md:text-xl">
+          <Quote className="reviews-featured-mark absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 sm:w-10 sm:h-10 rotate-180 pointer-events-none" aria-hidden="true" />
+          <blockquote className="relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6">
             {featured.quote}
           </blockquote>
           {featured.translation && (
-            <p className="text-stone text-center text-sm font-light mt-4 font-['Inter'] max-w-xl mx-auto">
+            <p className="relative z-[1] text-stone text-center text-sm font-light mt-4 sm:mt-5 font-['Inter'] max-w-xl mx-auto leading-relaxed">
               {featured.translation}
             </p>
           )}
-          <figcaption className="flex flex-col items-center gap-3 mt-6">
-            <div className="flex items-center justify-center gap-2">
+          <figcaption className="relative z-[1] flex flex-col items-center gap-3.5 mt-7 sm:mt-8">
+            <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
               <span className="text-stone text-[10px] tracking-[0.2em] uppercase font-['Inter']">
                 {featured.name}
               </span>
-              <span className="text-stone/40" aria-hidden="true">·</span>
+              <span className="text-stone/40 hidden sm:inline" aria-hidden="true">·</span>
               <a href={featured.link} target="_blank" rel="noreferrer"
                 className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
                 {featuredSourceLabel}{' '}
@@ -593,28 +615,28 @@ function TestimonialsPreview() {
           label="From Google"
           viewAllHref="https://g.page/farwasalon/review"
           posts={googleGridPosts}
-          className={googleGridPosts.length ? 'mb-8 md:mb-10' : ''}
+          className={googleGridPosts.length ? 'mb-6 sm:mb-8 md:mb-10' : ''}
         />
         <ReviewGridSection
           label="From Facebook"
           viewAllHref="https://www.facebook.com/farwasalon/reviews"
           posts={FB_GRID_POSTS}
-          className="mb-10 md:mb-12"
+          className="mb-8 sm:mb-10 md:mb-12"
         />
 
         <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="pt-8 border-t border-border-soft flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-          <p className="text-stone text-[11px] font-light font-['Inter'] tracking-wide">
+          className="reviews-cta-row pt-8 sm:pt-10 border-t border-border-soft flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 sm:gap-6">
+          <p className="text-stone text-[11px] sm:text-xs font-light font-['Inter'] tracking-wide max-w-sm">
             Loved your visit? Help us spread the word.
           </p>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+          <div className="reviews-cta-actions flex flex-col min-[480px]:flex-row sm:flex-row items-stretch gap-3 w-full lg:w-auto lg:max-w-xl">
             <a href="https://g.page/r/CRCiNE2kpFvlEBM/review" target="_blank" rel="noreferrer"
-              className="tap-safe inline-flex items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3 hover:bg-stone transition-colors duration-300">
-              Write a Google review <ArrowUpRight className="w-3.5 h-3.5" />
+              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-5 sm:px-6 py-3 hover:bg-stone transition-colors duration-300">
+              Write a Google review <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
             </a>
             <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
-              className="tap-safe inline-flex items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-6 py-3 bg-white">
-              Follow on Facebook <ArrowUpRight className="w-3 h-3" />
+              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-5 sm:px-6 py-3 bg-white">
+              Follow on Facebook <ArrowUpRight className="w-3 h-3 shrink-0" />
             </a>
           </div>
         </m.div>
