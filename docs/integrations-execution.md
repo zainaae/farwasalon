@@ -23,11 +23,12 @@ Google’s terms: don’t fake reviews; show attribution; cache responsibly. **P
 From `src/data.js` → `MAPS_LINK`, the listing is **Farwa beauty salon** at `24.8797532, 67.0584185`.
 
 1. Open [Place ID Finder](https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder) or call Places API once with name + coordinates.
-2. Save as env: `GOOGLE_PLACE_ID=ChIJ...` (exact value from the tool).
+2. Save as env: `GOOGLE_PLACE_ID=ChIJeVyXMig_szoQEKI0TaSkW-U` (confirmed in `docs/domain-setup.md`).
 
 ### Step A — Places API (show reviews on site) — ~2–4 hours dev
 
 1. **Google Cloud** (same project as Sheets if you have one):
+   - Enable **billing** on the project. If card verification fails with **`OR_BACR2_31`**, try a different payment method or contact Google Cloud billing support — Places API will not work until billing is active.
    - Enable **Places API (New)**.
    - Create an API key → restrict to **Places API** + **IP** (Vercel) or use server-only routes (no browser key).
 
@@ -41,11 +42,11 @@ From `src/data.js` → `MAPS_LINK`, the listing is **Farwa beauty salon** at `24
    - `GET /api/reviews` → calls  
      `https://places.googleapis.com/v1/places/{PLACE_ID}`  
      with header `X-Goog-FieldMask: rating,userRatingCount,reviews`  
-   - Cache response **24h** (Vercel KV, or file in edge cache, or `revalidate: 86400`).
+   - Cache response **24h** (`revalidate: 86400` + `Cache-Control` on the route).
 
-4. **Frontend**
-   - Replace static testimonial block on home with fetched reviews (name, text, rating, relative time).
-   - Update `SALON_GBP_RATING` / `SALON_GBP_REVIEW_COUNT` in Vercel from `rating` + `userRatingCount` so JSON-LD matches Google (see `lib/business-schema.js`).
+4. **Frontend** *(implemented in repo)*
+   - Homepage testimonials fetch `/api/reviews` when env is set; otherwise keep Facebook fallback (`app/home-below-fold.jsx`).
+   - After first successful fetch, update `SALON_GBP_RATING` / `SALON_GBP_REVIEW_COUNT` in Vercel from `rating` + `userRatingCount` so JSON-LD matches Google (see `lib/business-schema.js`).
 
 5. **Cost**
    - Places Details is billed per request; with 1 cached fetch/day → negligible.
@@ -250,7 +251,8 @@ BOOKING_CANCEL_SECRET=
 ## What to do this week (checklist)
 
 - [ ] **GBP:** Confirm address matches website (`lib/business-schema.js` / footer).
-- [ ] **Reviews:** Enable Places API + add `GOOGLE_PLACE_ID` + build `/api/reviews` (or stay with review link only).
+- [ ] **Reviews (you):** GCP billing active → enable Places API (New) → create restricted API key → add `GOOGLE_PLACES_API_KEY` + `GOOGLE_PLACE_ID` on Vercel → test `GET /api/reviews`.
+- [x] **Reviews (code):** `lib/google-places.js`, `GET /api/reviews`, homepage fallback wired (`app/home-below-fold.jsx`).
 - [ ] **WhatsApp:** Finish `docs/whatsapp-business-setup.md` quick replies; decide API vs manual.
 - [ ] **JazzCash:** Open merchant account; decide deposit amount; start with QR/manual or sandbox API.
 - [ ] **Templates:** Submit 2–3 WhatsApp templates in Meta if going automated.
@@ -268,3 +270,16 @@ BOOKING_CANCEL_SECRET=
 | `docs/booking-backend-architecture.md` | Full notification design |
 
 When you’re ready to implement in code, say which track to build first (**reviews API**, **JazzCash**, or **WhatsApp cron**) and we can add the routes and sheet columns in the repo.
+
+### Test `/api/reviews` after env is set
+
+```bash
+# Local (with .env.local)
+curl -s http://127.0.0.1:3000/api/reviews | jq
+
+# Production
+curl -s https://farwasalon.com/api/reviews | jq
+```
+
+Expected when configured: `{ "configured": true, "source": "google", "rating": 4.9, "reviewCount": 6, "reviews": [...] }`.  
+Without env: `{ "configured": false, "source": "fallback" }` (homepage keeps Facebook quotes).

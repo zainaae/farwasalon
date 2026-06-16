@@ -50,7 +50,7 @@ const FB_POSTS = [
   },
 ]
 
-const FEATURED_REVIEWS = [
+const FALLBACK_FEATURED_REVIEWS = [
   {
     name: 'Tathira B.',
     quote: 'Farwa Aapi ne itni care aur detail se kaam kiya ke har visit pe ghar jaisa lagta hai. Best salon in Karachi, hands down.',
@@ -391,7 +391,7 @@ function ReviewCard({ post, compact = false }) {
             {post.service}
           </span>
           <span className="inline-flex items-center gap-1 text-stone/60 text-[9px] tracking-[0.16em] uppercase font-['Inter']">
-            Facebook
+            {post.source === 'google' ? 'Google' : 'Facebook'}
           </span>
         </div>
       </div>
@@ -399,18 +399,79 @@ function ReviewCard({ post, compact = false }) {
   )
 }
 
+function reviewInitials(name) {
+  const parts = String(name).trim().split(/\s+/).filter(Boolean)
+  if (parts.length >= 2) return `${parts[0][0]}${parts[1][0]}`.toUpperCase()
+  return (parts[0]?.slice(0, 2) || '??').toUpperCase()
+}
+
+function toFbCard(post) {
+  return {
+    name: post.name,
+    initials: post.initials || reviewInitials(post.name),
+    date: post.date || post.relativeTime || '',
+    service: post.service || 'Google review',
+    quote: post.quote,
+    link: post.link,
+    source: post.source || 'facebook',
+  }
+}
+
 function TestimonialsPreview() {
   const [reviewIdx, setReviewIdx] = useState(0)
+  const [reviewSource, setReviewSource] = useState('facebook')
+  const [ratingLabel, setRatingLabel] = useState('4.9★ · 6 Google reviews')
+  const [featuredReviews, setFeaturedReviews] = useState(FALLBACK_FEATURED_REVIEWS)
+  const [gridPosts, setGridPosts] = useState(FB_POSTS)
 
   useEffect(() => {
-    if (FEATURED_REVIEWS.length <= 1) return undefined
-    const id = setInterval(() => {
-      setReviewIdx((i) => (i + 1) % FEATURED_REVIEWS.length)
-    }, 8000)
-    return () => clearInterval(id)
+    let cancelled = false
+
+    async function loadReviews() {
+      try {
+        const res = await fetch('/api/reviews')
+        if (!res.ok || cancelled) return
+        const data = await res.json()
+        if (cancelled || data.source !== 'google' || !data.reviews?.length) return
+
+        setReviewSource('google')
+        setFeaturedReviews(data.reviews)
+        setGridPosts(
+          data.reviews.slice(0, 6).map((r) =>
+            toFbCard({
+              ...r,
+              service: r.relativeTime || 'Google review',
+            }),
+          ),
+        )
+        if (data.rating != null && data.reviewCount != null) {
+          setRatingLabel(`${data.rating}★ · ${data.reviewCount} Google reviews`)
+        }
+      } catch {
+        /* keep Facebook fallback */
+      }
+    }
+
+    loadReviews()
+    return () => {
+      cancelled = true
+    }
   }, [])
 
-  const featured = FEATURED_REVIEWS[reviewIdx]
+  useEffect(() => {
+    if (featuredReviews.length <= 1) return undefined
+    const id = setInterval(() => {
+      setReviewIdx((i) => (i + 1) % featuredReviews.length)
+    }, 8000)
+    return () => clearInterval(id)
+  }, [featuredReviews.length])
+
+  const featured = featuredReviews[reviewIdx]
+  const gridSourceLabel = reviewSource === 'google' ? 'From Google' : 'From Facebook'
+  const gridViewAllHref =
+    reviewSource === 'google'
+      ? 'https://g.page/farwasalon/review'
+      : 'https://www.facebook.com/farwasalon/reviews'
 
   return (
     <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-mist border-t border-border-soft">
@@ -427,7 +488,7 @@ function TestimonialsPreview() {
               {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
             </div>
             <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug">
-              4.9★ · 6 Google reviews
+              {ratingLabel}
             </span>
           </div>
         </m.div>
@@ -453,12 +514,13 @@ function TestimonialsPreview() {
               <span className="text-stone/40" aria-hidden="true">·</span>
               <a href={featured.link} target="_blank" rel="noreferrer"
                 className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
-                Facebook <ArrowUpRight className="w-2.5 h-2.5" />
+                {reviewSource === 'google' ? 'Google' : 'Facebook'}{' '}
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </a>
             </div>
-            {FEATURED_REVIEWS.length > 1 && (
+            {featuredReviews.length > 1 && (
               <div className="flex items-center gap-1.5" role="tablist" aria-label="Featured reviews">
-                {FEATURED_REVIEWS.map((r, i) => (
+                {featuredReviews.map((r, i) => (
                   <button
                     key={r.name}
                     type="button"
@@ -477,9 +539,9 @@ function TestimonialsPreview() {
         <div className="mb-10 md:mb-12">
           <div className="flex items-baseline justify-between mb-4 md:mb-5 px-0.5">
             <p className="eyebrow">
-              — From Facebook
+              — {gridSourceLabel}
             </p>
-            <a href="https://www.facebook.com/farwasalon/reviews" target="_blank" rel="noreferrer"
+            <a href={gridViewAllHref} target="_blank" rel="noreferrer"
               className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1">
               View all <ArrowUpRight className="w-2.5 h-2.5" />
             </a>
@@ -489,13 +551,13 @@ function TestimonialsPreview() {
             Swipe for more reviews →
           </p>
           <div className="md:hidden flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
-            {FB_POSTS.map((post) => (
-              <ReviewCard key={post.name} post={post} compact />
+            {gridPosts.map((post) => (
+              <ReviewCard key={`${post.name}-${post.quote.slice(0, 24)}`} post={post} compact />
             ))}
           </div>
 
           <div className="hidden md:grid md:grid-cols-2 gap-3 max-w-3xl">
-            {FB_POSTS.slice(0, 2).map((post, i) => (
+            {gridPosts.slice(0, 2).map((post, i) => (
               <m.div key={post.name}
                 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
