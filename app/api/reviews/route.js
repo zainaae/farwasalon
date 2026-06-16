@@ -3,10 +3,24 @@ import {
   fetchPlaceReviews,
   isGooglePlacesConfigured,
 } from '../../../lib/google-places.js'
+import { getManualReviewsPayload } from '../../../lib/google-reviews.js'
 import { checkRateLimit } from '../../../lib/rate-limit.js'
 import { logger, hashIp, errCtx } from '../../../lib/logger.js'
 
 export const revalidate = 86400
+
+const CACHE_HEADERS = { 'Cache-Control': 'public, max-age=300' }
+
+function manualOrFallbackResponse() {
+  const manual = getManualReviewsPayload()
+  if (manual) {
+    return NextResponse.json(manual, { headers: CACHE_HEADERS })
+  }
+  return NextResponse.json(
+    { configured: false, source: 'fallback' },
+    { headers: CACHE_HEADERS },
+  )
+}
 
 export async function GET(request) {
   const ip =
@@ -20,26 +34,24 @@ export async function GET(request) {
   }
 
   if (!isGooglePlacesConfigured()) {
-    return NextResponse.json(
-      { configured: false, source: 'fallback' },
-      { headers: { 'Cache-Control': 'public, max-age=300' } },
-    )
+    return manualOrFallbackResponse()
   }
 
   try {
     const result = await fetchPlaceReviews()
     if (!result.ok) {
       if (result.error === 'not-configured') {
-        return NextResponse.json(
-          { configured: false, source: 'fallback' },
-          { headers: { 'Cache-Control': 'public, max-age=300' } },
-        )
+        return manualOrFallbackResponse()
       }
       logger.error('/api/reviews', 'places-fetch-failed', {
         ip: hashIp(ip),
         status: result.status,
         detail: result.detail,
       })
+      const manual = getManualReviewsPayload()
+      if (manual) {
+        return NextResponse.json(manual, { headers: CACHE_HEADERS })
+      }
       return NextResponse.json(
         { configured: true, source: 'fallback', error: 'unavailable' },
         { status: 502 },
@@ -66,6 +78,10 @@ export async function GET(request) {
       ip: hashIp(ip),
       ...errCtx(err),
     })
+    const manual = getManualReviewsPayload()
+    if (manual) {
+      return NextResponse.json(manual, { headers: CACHE_HEADERS })
+    }
     return NextResponse.json(
       { configured: true, source: 'fallback', error: 'unavailable' },
       { status: 502 },

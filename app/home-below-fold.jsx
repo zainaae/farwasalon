@@ -13,6 +13,7 @@ import { formatPrice } from '../src/data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
 import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories } from '../src/data.js'
+import { getGbpStatsForDisplay, getManualReviewsPayload } from '../lib/google-reviews.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
@@ -375,7 +376,7 @@ function ReviewCard({ post, compact = false }) {
           </div>
         </div>
         <a href={post.link} target="_blank" rel="noreferrer"
-          aria-label={`View ${post.name}'s review on Facebook`}
+          aria-label={`View ${post.name}'s review on ${post.source === 'google' ? 'Google' : 'Facebook'}`}
           className="shrink-0 text-stone/50 group-hover:text-ink transition-colors">
           <ArrowUpRight className="w-4 h-4" />
         </a>
@@ -417,12 +418,31 @@ function toFbCard(post) {
   }
 }
 
+const manualPayload = getManualReviewsPayload()
+const gbpStats = getGbpStatsForDisplay()
+const initialRatingLabel =
+  gbpStats.rating != null && gbpStats.reviewCount != null
+    ? `${gbpStats.rating}★ · ${gbpStats.reviewCount} Google reviews`
+    : 'Reviews on Google'
+
+const initialManualGrid = manualPayload?.reviews?.length
+  ? manualPayload.reviews.slice(0, 6).map((r) =>
+      toFbCard({
+        ...r,
+        service: r.relativeTime || 'Google review',
+        source: 'google',
+      }),
+    )
+  : null
+
 function TestimonialsPreview() {
   const [reviewIdx, setReviewIdx] = useState(0)
-  const [reviewSource, setReviewSource] = useState('facebook')
-  const [ratingLabel, setRatingLabel] = useState('4.9★ · 6 Google reviews')
-  const [featuredReviews, setFeaturedReviews] = useState(FALLBACK_FEATURED_REVIEWS)
-  const [gridPosts, setGridPosts] = useState(FB_POSTS)
+  const [reviewSource, setReviewSource] = useState(manualPayload ? 'google' : 'facebook')
+  const [ratingLabel, setRatingLabel] = useState(initialRatingLabel)
+  const [featuredReviews, setFeaturedReviews] = useState(
+    manualPayload?.reviews?.length ? manualPayload.reviews : FALLBACK_FEATURED_REVIEWS,
+  )
+  const [gridPosts, setGridPosts] = useState(initialManualGrid ?? FB_POSTS)
 
   useEffect(() => {
     let cancelled = false
@@ -432,7 +452,11 @@ function TestimonialsPreview() {
         const res = await fetch('/api/reviews')
         if (!res.ok || cancelled) return
         const data = await res.json()
-        if (cancelled || data.source !== 'google' || !data.reviews?.length) return
+        if (cancelled) return
+        const isGoogle =
+          (data.source === 'google' || data.source === 'google-manual') &&
+          data.reviews?.length
+        if (!isGoogle) return
 
         setReviewSource('google')
         setFeaturedReviews(data.reviews)
