@@ -59,7 +59,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'How do I book a bridal consultation or trial?',
-        a: 'Message us on WhatsApp with your wedding date and events (mehndi, nikkah, walima), or book a Bridal Trial online at farwasalon.com/book. We recommend booking 2–3 months ahead in peak season and scheduling your trial 2–4 weeks before the wedding.',
+        a: 'Book a Bridal Trial online at farwasalon.com/book, or message us on WhatsApp with your wedding date and events (mehndi, nikkah, walima). We recommend booking 2–3 months ahead in peak season and scheduling your trial 2–4 weeks before the wedding.',
       },
       {
         q: 'Do you travel to homes or venues for bridal?',
@@ -67,7 +67,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'How far in advance should I book bridal makeup?',
-        a: 'For peak wedding season (Oct–Feb), book 2–3 months ahead. Trials should be scheduled 2–4 weeks before your event. Last-minute dates are sometimes available — WhatsApp us with your date.',
+        a: 'For peak wedding season (Oct–Feb), book online at farwasalon.com/book 2–3 months ahead. Trials should be scheduled 2–4 weeks before your event. Last-minute dates are sometimes available — WhatsApp us with your date.',
       },
     ],
   },

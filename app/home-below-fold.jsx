@@ -12,7 +12,8 @@ import {
 import { formatPrice } from '../src/data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories } from '../src/data.js'
+import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK } from '../src/data.js'
+import { EDITORIAL_PHOTOS } from '../src/salon-media.js'
 import { getGbpStatsForDisplay, getManualReviewsPayload } from '../lib/google-reviews.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
@@ -66,21 +67,27 @@ const FALLBACK_FEATURED_REVIEWS = [
   },
 ]
 
-const EDITORIAL_PHOTOS = [
-  { src: '/bridal.jpg',           label: 'Bridal' },
-  { src: '/eyebrowtattoo.jpg',    label: 'Eyebrow Tattoo' },
-  { src: '/pedicure.jpg',         label: 'Nail Craft' },
-  { src: '/glow3.jpg',            label: 'Facials' },
-  { src: '/threading.jpg',        label: 'Threading' },
-  { src: '/hairdo.jpg',           label: 'Hair' },
-  { src: '/oilwax.jpg',           label: 'Rica Wax' },
-  { src: '/facialcleansing.jpg',  label: 'Cleansing' },
-  { src: '/massage.jpg',          label: 'Massage' },
-  { src: '/pedicure.jpg',         label: 'Nail Finish' },
-  { src: '/wax2.jpg',             label: 'Honey Wax' },
-  { src: '/hairtreatment.jpg',    label: 'Hair Treatments' },
-  { src: '/bleachpolish.jpg',     label: 'Bleach & Polish' },
-]
+function EditorialMedia({ item, className = '' }) {
+  if (item.video) {
+    return (
+      <video
+        src={item.video}
+        poster={item.src}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className={`w-full h-full object-cover ${className}`}
+        aria-hidden
+      />
+    )
+  }
+  return (
+    <Image src={item.src} alt={item.label} loading="lazy"
+      width={330} height={440}
+      className={`w-full h-full object-cover ${className}`} />
+  )
+}
 
 function StatsStrip() {
   return (
@@ -138,9 +145,7 @@ function EditorialSlideshow() {
             <figure key={i}
               className="relative shrink-0 overflow-hidden mx-[5px]"
               style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)' }}>
-              <Image src={p.src} alt={p.label} loading="lazy"
-                width={230} height={306}
-                className="w-full h-full object-cover" />
+              <EditorialMedia item={p} />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
               <figcaption className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
                 <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
@@ -159,9 +164,7 @@ function EditorialSlideshow() {
         <div className="flex w-max max-w-none will-change-transform" style={{ animation: 'marquee 65s linear infinite' }}>
           {doubled.map((p, i) => (
             <div key={i} className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group cursor-default">
-              <Image src={p.src} alt={p.label} loading="lazy"
-                width={330} height={440}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
               <span className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
                 {p.label}
@@ -466,6 +469,9 @@ const initialGoogleGrid = manualPayload?.reviews?.length
 function ReviewGridSection({ label, viewAllHref, posts, className = '', divided = true }) {
   if (!posts.length) return null
 
+  const desktopCols = posts.length >= 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'
+  const desktopLimit = posts.length >= 3 ? posts.length : 2
+
   return (
     <div className={`reviews-block-divider ${divided ? '' : 'border-t-0 pt-0'} ${className}`}>
       <div className="flex items-center justify-between gap-4 mb-4 sm:mb-5 md:mb-6">
@@ -485,8 +491,8 @@ function ReviewGridSection({ label, viewAllHref, posts, className = '', divided 
         ))}
       </div>
 
-      <div className="hidden md:grid md:grid-cols-2 gap-4 sm:gap-5 max-w-3xl items-stretch">
-        {posts.slice(0, 2).map((post, i) => (
+      <div className={`hidden md:grid ${desktopCols} gap-4 sm:gap-5 max-w-5xl items-stretch`}>
+        {posts.slice(0, desktopLimit).map((post, i) => (
           <m.div key={`${label}-${post.name}`} className="h-full"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
@@ -559,7 +565,7 @@ function TestimonialsPreview() {
             <h2 className="section-title text-2xl md:text-3xl">What clients say</h2>
           </div>
           <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
-            <div className="flex gap-0.5 text-stone/80" aria-label="4.9 out of 5 stars">
+            <div className="flex gap-0.5 text-stone/80" role="img" aria-label="4.9 out of 5 stars">
               {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />)}
             </div>
             <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug whitespace-nowrap">
@@ -573,7 +579,7 @@ function TestimonialsPreview() {
           className="reviews-featured relative px-6 py-9 sm:px-9 sm:py-10 md:px-12 md:py-11 mb-8 sm:mb-10 md:mb-12"
           aria-live="polite">
           <Quote className="reviews-featured-mark absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 sm:w-10 sm:h-10 rotate-180 pointer-events-none" aria-hidden="true" />
-          <blockquote className="relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6">
+          <blockquote className={`relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6 sm:line-clamp-none' : ''}`}>
             {featured.quote}
           </blockquote>
           {featured.translation && (
@@ -613,7 +619,7 @@ function TestimonialsPreview() {
 
         <ReviewGridSection
           label="From Google"
-          viewAllHref="https://g.page/farwasalon/review"
+          viewAllHref={GOOGLE_REVIEW_LINK}
           posts={googleGridPosts}
           className={googleGridPosts.length ? 'mb-6 sm:mb-8 md:mb-10' : ''}
         />
@@ -630,7 +636,7 @@ function TestimonialsPreview() {
             Loved your visit? Help us spread the word.
           </p>
           <div className="reviews-cta-actions flex flex-col min-[480px]:flex-row sm:flex-row items-stretch gap-3 w-full lg:w-auto lg:max-w-xl">
-            <a href="https://g.page/r/CRCiNE2kpFvlEBM/review" target="_blank" rel="noreferrer"
+            <a href={GOOGLE_REVIEW_LINK} target="_blank" rel="noreferrer"
               className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-5 sm:px-6 py-3 hover:bg-stone transition-colors duration-300">
               Write a Google review <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
             </a>

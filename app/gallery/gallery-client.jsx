@@ -43,7 +43,7 @@ export default function GalleryClient() {
         </p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-6">
           {GALLERY_SHOWCASE_ITEMS.map((item) => (
-            <WorkShowcaseCard key={item.label} src={item.src} label={item.label} alt={item.alt} />
+            <WorkShowcaseCard key={item.label} src={item.src} label={item.label} alt={item.alt} video={item.video} />
           ))}
         </div>
       </section>

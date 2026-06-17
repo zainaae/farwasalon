@@ -39,7 +39,7 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     await expect(page.getByRole('heading', { name: /Results showcase/i })).toBeVisible()
     await expect(page.getByText('Threading & glow facial')).toBeVisible()
     await expect(page.getByText('Bridal styling')).toBeVisible()
-    await expect(page.getByText('Hair styling & treatment')).toBeVisible()
+    await expect(page.getByText('Manicure & pedicure')).toBeVisible()
   })
 
   test('accessibility smoke — no empty buttons, images have alt on home', async ({ page }) => {

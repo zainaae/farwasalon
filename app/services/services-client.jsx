@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { ChevronRight } from 'lucide-react'
+import { ChevronRight, ArrowUpRight } from 'lucide-react'
 import { CAT_SLUGS, LazyVideo } from '../../src/shared.jsx'
 import { SERVICES, CAT_META, track, formatPrice, SERVICE_FILTER_TABS, filterServiceCategories } from '../../src/data.js'
 import LiveAvailability from './live-availability'
@@ -47,9 +47,19 @@ export default function ServicesClient() {
             </motion.h1>
           </div>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }}
-            className="text-body max-w-lg">
+            className="text-body max-w-lg mb-6">
             From threading to bridal packages — select a category to explore our full menu. Book online in under a minute, or message us on WhatsApp.
           </motion.p>
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}
+            className="flex flex-wrap items-center gap-3">
+            <Link href="/book" className="tap-safe btn-primary text-[10px] sm:text-[11px] !py-2.5 !px-5">
+              Book online <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
+            <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer"
+              className="tap-safe btn-secondary text-[10px] sm:text-[11px] !py-2.5 !px-5">
+              WhatsApp
+            </a>
+          </motion.div>
         </div>
 
         <LiveAvailability />

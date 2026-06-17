@@ -291,7 +291,15 @@ export default function BookClient() {
       })
       const data = await res.json()
       if (!res.ok) {
-        setError(data.error || 'Something went wrong. Please try again.')
+        let msg = data.error || 'Something went wrong. Please try again.'
+        if (res.status === 429) {
+          msg = 'Too many booking attempts — please wait a minute and try again.'
+        } else if (res.status === 400 && /closed|sunday/i.test(String(data.error || ''))) {
+          msg = 'We are closed that day. Please choose another date or message us on WhatsApp.'
+        } else if (res.status === 409) {
+          msg = 'That time was just taken. Please pick another slot.'
+        }
+        setError(msg)
         setSubmitting(false)
         return
       }
@@ -369,9 +377,12 @@ export default function BookClient() {
         </div>
 
         {/* Step indicator */}
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 sm:gap-4 mb-8 min-w-0">
+        <p className="sr-only" aria-live="polite">
+          Step {step + 1} of 3: {['Choose a service', 'Pick date and time', 'Enter your details'][step]}
+        </p>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-2 sm:gap-4 mb-8 min-w-0" role="list" aria-label="Booking steps">
           {['Service', 'Date & Time', 'Details'].map((label, i) => (
-            <div key={label} className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <div key={label} className="flex items-center gap-1.5 sm:gap-2 shrink-0" role="listitem">
               <span className={`w-7 h-7 flex items-center justify-center text-[11px] font-['Inter'] font-bold transition-colors ${
                 i < step ? 'bg-ink text-white' :
                 i === step ? 'bg-ink text-white' :
@@ -379,12 +390,12 @@ export default function BookClient() {
               }`}>
                 {i < step ? <Check className="w-3.5 h-3.5" /> : i + 1}
               </span>
-              <span className={`text-[11px] tracking-[0.12em] uppercase font-['Inter'] hidden sm:inline ${
+              <span className={`text-[10px] sm:text-[11px] tracking-[0.1em] sm:tracking-[0.12em] uppercase font-['Inter'] ${
                 i === step ? 'text-ink font-medium' : 'text-stone'
               }`}>
                 {label}
               </span>
-              {i < 2 && <span className="w-8 h-px bg-border-soft hidden sm:block" />}
+              {i < 2 && <span className="w-4 sm:w-8 h-px bg-border-soft" aria-hidden="true" />}
             </div>
           ))}
         </div>
