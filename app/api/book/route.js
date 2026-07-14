@@ -173,7 +173,6 @@ export async function POST(request) {
       service: service.name,
       duration,
       clientName,
-      clientPhone,
       cancelToken,
     },
   })
