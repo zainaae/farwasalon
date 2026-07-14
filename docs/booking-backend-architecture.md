@@ -1,6 +1,14 @@
 # Production booking backend — design and scope
 
-This document scopes a **real appointment system** to replace or augment the current **WhatsApp-only** flow ([`BookingSheet`](../src/shared.jsx), [`Contact.jsx`](../src/pages/Contact.jsx), [`waLink`](../src/data.js)).
+> **Status (14 Jul 2026): largely implemented.** This was written when the site was
+> WhatsApp-only. Online booking now ships: `/book` plus `app/api/book`, `app/api/slots`,
+> and `app/api/book/cancel`, backed by Google Sheets ([`lib/google-sheets.js`](../lib/google-sheets.js))
+> with add-on-aware slot durations ([`lib/booking-duration.js`](../lib/booking-duration.js))
+> and signed cancel links. Keep this doc as the **design rationale and the roadmap for what
+> is still missing** (staff/resource modelling, reschedule, a real datastore) — see
+> `master-improvement-plan.md` for current status.
+
+This document scopes a **real appointment system** to replace or augment the original **WhatsApp-only** flow ([`waLink`](../src/data.js)).
 
 ## Goals
 

@@ -1,6 +1,6 @@
 # SDLC automation — Farwa Beauty Salon
 
-**Repo:** [zainaae/farwasalon](https://github.com/zainaae/farwasalon) · **Stack:** Vite 8, React 19, Vercel.  
+**Repo:** [zainaae/farwasalon](https://github.com/zainaae/farwasalon) · **Stack:** Next.js 16 (App Router), React 19, Vercel.  
 **Audience:** Solo maintainer or small team. This file defines **phases**, **gates** (what must pass), and **ownership** (who does what).
 
 ---
@@ -14,7 +14,7 @@
 
 **Automation / artifacts**
 
-- Local pre-push: `npm run verify` (lint + production build). CI runs **lint → build → test** on `main` / `master`.
+- Local pre-push: `npm run verify` (lint + test + build); `npm run verify:full` adds e2e. CI runs **lint → test → build → Playwright e2e** on `main` / `master`.
 - Pre-release human gates: [RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md) and detailed criteria in [quality-gates-release.md](./quality-gates-release.md).
 
 **Optional later:** GitHub Issue & PR templates (`.github/ISSUE_TEMPLATE/`, `pull_request_template.md`) — not required for CI to pass.
@@ -27,9 +27,11 @@ Lightweight pointers (not a full enterprise CMDB).
 
 | Area | Where it lives |
 |------|----------------|
-| **Routes** | `src/App.jsx` — `/`, `/services`, `/gallery`, `/about`, `/contact`, `*` (404). |
-| **Booking / WhatsApp** | `src/shared.jsx` — `BookingProvider`, booking sheet UX; `src/data.js` — `waLink`, `waLinkBooking`, `WA_NUMBER`. |
-| **Content / services data** | `src/data.js` — `SERVICES`, `CAT_META`, testimonials placeholders. |
+| **Routes** | `app/` (App Router) — `/`, `/services/[categorySlug]`, `/gallery`, `/about`, `/contact`, `/book`, `/blog/[slug]`, `/faq`, `/bridal`, `not-found.jsx` (404). |
+| **API routes** | `app/api/` — `book`, `book/cancel`, `slots`, `reviews`, `subscribe`, `indexnow`. |
+| **Booking logic** | `lib/booking-duration.js` (durations + 2h cancel window), `lib/booking-slots.js`, `lib/google-sheets.js`; booking UX in `app/book/`. |
+| **Booking / WhatsApp helpers** | `src/shared.jsx` — shared UI; `src/data.js` — `waLink`, `waLinkBooking`, `WA_NUMBER`. |
+| **Content / services data** | `src/data.js` — `SERVICES`, `CAT_META`; `src/blog-data.js`, `src/faq-data.js`. |
 | **Backend / CMS (future)** | `docs/booking-backend-architecture.md`, `docs/cms-content-migration.md`. |
 | **Conversion / KPIs** | `docs/conversion-flow-and-kpis.md`. |
 
@@ -73,11 +75,11 @@ Lightweight pointers (not a full enterprise CMDB).
 
 | Layer | Tool | Scope |
 |-------|------|--------|
-| Unit / smoke | Vitest + jsdom | Pure helpers in `data.js`; minimal App render (RTL) |
+| Unit / smoke | Vitest + jsdom + RTL | Booking rules (durations, slots, cancel tokens, date rules), schema, SEO helpers, sanitisation, rate limiting — **185 tests across 19 files** |
+| End-to-end | Playwright | 15 specs in `e2e/` — book flow, mobile nav, responsive overflow, location pages, footer links, newsletter |
+| Accessibility | `@axe-core/playwright` | `e2e/a11y-axe.spec.ts` |
 
-**Gate:** `npm run test` passes locally and in CI.
-
-**Future (documented in quality-gates):** Playwright e2e, stronger coverage for booking and `shared.jsx` — optional `workflow_dispatch` if flakiness is a concern.
+**Gate:** `npm run test` and `npm run test:e2e` pass locally and in CI.
 
 ---
 
@@ -95,8 +97,8 @@ Lightweight pointers (not a full enterprise CMDB).
 
 | Capability | Status |
 |------------|--------|
-| **Analytics** | Plausible snippet in `index.html` — enable by completing Plausible domain setup (see HTML comment). |
-| **Errors** | `ErrorBoundary` in `src/App.jsx` — user-facing fallback; **optional:** Sentry (or similar) SDK + DSN via env — not mandated; no paid tier required. |
+| **Analytics** | Plausible script + Vercel Analytics (`@vercel/analytics`), both wired in `app/layout.jsx`. |
+| **Errors** | `app/error.jsx` (route error boundary) and `app/not-found.jsx` — user-facing fallbacks; **optional:** Sentry (or similar) SDK + DSN via env — not mandated. |
 | **Logging** | Browser console in dev; production relies on user reports + analytics funnels until error monitoring is added. |
 
 **Placeholder actions:** Before major campaigns, confirm Plausible loads and spot-check critical paths (home, contact, WhatsApp links).
