@@ -27,7 +27,8 @@ export async function generateMetadata({ params }) {
     const canonicalSlug = prefix === 'best'
       ? `${service.slug}-in-${location.slug}`
       : categorySlug
-    const description = `${service.name} in ${location.name}, Karachi — ${service.description} Book online at Farwa Beauty Salon, PECHS. From Rs 100. ★ ${GOOGLE_GBP_STATS.rating} Google rating.`
+    const locality = location.name.includes('Karachi') ? location.name : `${location.name}, Karachi`
+    const description = `${service.name} in ${locality} — ${service.description} Book online at Farwa Beauty Salon, PECHS. From Rs 100. ★ ${GOOGLE_GBP_STATS.rating} Google rating.`
     return {
       title,
       description,
