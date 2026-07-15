@@ -273,7 +273,7 @@ responsive-overflow, and location-page coverage. CI runs them on every push and 
 
 | Item | Cadence |
 |------|---------|
-| Request Google reviews after appointments | Weekly habit |
+| Request Google reviews after appointments — templates + rhythm in [whatsapp-business-setup.md §5b](whatsapp-business-setup.md) | Daily ask, Friday count |
 | GBP posts (offers, bridal season) | 2×/month |
 | Blog 1 post/month | SEO long-tail |
 | Compress new images/video before `public/` | Per upload |
