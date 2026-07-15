@@ -14,7 +14,8 @@
     "verify": "npm run lint && npm run test && npm run build",
     "verify:full": "npm run verify && npm run test:e2e",
     "ping:indexnow": "node scripts/ping-indexnow.mjs",
-    "qa:workflow": "node scripts/qa-workflow-run.mjs"
+    "qa:workflow": "node scripts/qa-workflow-run.mjs",
+    "test:coverage": "node ./node_modules/vitest/vitest.mjs run --coverage"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -36,6 +37,7 @@
     "@types/node": "^25.7.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^4.1.10",
     "autoprefixer": "^10.5.0",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.0.1",

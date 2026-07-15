@@ -42,3 +42,4 @@ test-results/
 # Compressed-asset originals — kept locally as safety backups, never committed
 public/*.orig.mp4
 public/*.orig.webm
+coverage/
