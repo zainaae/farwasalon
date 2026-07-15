@@ -2,8 +2,9 @@
 
 **Site:** https://farwasalon.com
 **Stack:** Next.js 16 · React 19 · Vercel · Google Sheets booking · Apps Script email
-**Last audit:** 14 July 2026 · `master` @ `271790b`
-**Baseline health:** `npm run lint` clean · 185 unit tests passing (19 files) · CI runs lint + test + build + e2e
+**Last audit:** 15 July 2026 · deployed to production (Vercel, master pushed)
+**Baseline health:** lint clean · 279 unit tests · 174 e2e (axe color-contrast ENFORCED,
+5 pages) · coverage ratchet in CI · nightly synthetic monitoring of production
 
 This plan is the single roadmap: **what to do, in what order, and how to QA each step.**
 
@@ -11,20 +12,37 @@ This plan is the single roadmap: **what to do, in what order, and how to QA each
 
 ## Status at a glance
 
-**All of Phase 0 and Phase 1 dev work is complete, and so is Phase 2.1 (Places reviews)
-and 2.4 (e2e + a11y).** The previous revision of this doc was stamped at `157c849` and
-had gone stale by 38 commits — it still listed shipped work as pending. This revision was
-re-derived from the code on 14 July 2026.
+**Phases 0, 1, 2.1 (fallback path), and 2.4 are complete AND live-verified on
+production (15 July 2026):**
+
+- **QA-0.3 PASSED** — email bot confirmed running: all 21 sheet rows marked
+  Notified, including four test bookings made that same day.
+- **QA-0.4 PASSED** — live book + cancel cycle on farwasalon.com
+  (FBS-74685277: booked, cancelled with real HMAC token, tampered token
+  rejected 400).
+- **QA-1.5 PASSED** — rating claims aligned to the live Google listing
+  (4.6★ / 19 reviews) in JSON-LD, copy, and meta; verified serving on prod.
+- **Past-slot booking bug fixed and verified on prod** — /api/slots no longer
+  offers times that already passed in Karachi time (Vercel runs UTC; the check
+  is explicitly Asia/Karachi with a 30-min same-day lead).
+- **Synthetic monitoring** — `.github/workflows/synthetic.yml` probes
+  production nightly (12 API scenarios + 48-route crawl). Client errors now
+  land in Vercel function logs via `/api/log-error` (see `app/error.jsx`).
+- **Lighthouse CI** — warn-only budgets in `lighthouserc.json`; promote to
+  errors once scores stabilize.
 
 | Phase | Dev work | Ops work (owner: You) |
 |-------|----------|----------------------|
-| 0 — Correctness & trust | ✅ Done | ⚠️ Steps 0.3, 0.4 — verify on production |
-| 1 — Conversion & performance | ✅ Done | ⚠️ Steps 1.4, 1.5, 1.8 — verify against GBP/WhatsApp |
-| 2 — Integrations | 2.1 ✅ · 2.4 ✅ · **2.2, 2.3 open** | Blocked on Meta / JazzCash accounts |
+| 0 — Correctness & trust | ✅ Done | ✅ Verified live 15 Jul 2026 |
+| 1 — Conversion & performance | ✅ Done | ⚠️ 1.4 GBP hours check + 1.8 WhatsApp playbook |
+| 2 — Integrations | 2.1 ✅ (manual fallback) · 2.4 ✅ · **2.2, 2.3 open** | Places API key needs GCP billing; Meta / JazzCash accounts |
 | 3 — Growth & polish | Ongoing | Ongoing |
 
-**The only open dev work is Phase 2.2 (WhatsApp reminders) and 2.3 (JazzCash deposits).**
-Both are gated on external accounts, not on code.
+**Remaining dev work: Phase 2.2 (WhatsApp reminders) and 2.3 (JazzCash
+deposits)** — both gated on external accounts. Remaining ops: create the
+Google Places API key once GCP billing works (live reviews then replace the
+curated fallback automatically), confirm GBP hours match the site, and run
+the WhatsApp manual playbook (1.8).
 
 ---
 

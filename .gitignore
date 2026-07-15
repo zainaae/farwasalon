@@ -43,3 +43,4 @@ test-results/
 public/*.orig.mp4
 public/*.orig.webm
 coverage/
+.lighthouseci/
