@@ -13,6 +13,10 @@ const contentSecurityPolicy = [
   "img-src 'self' data: https:",
   'frame-src https://www.google.com',
   "connect-src 'self' https://plausible.io https://wa.me",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'self'",
 ].join('; ')
 
 const nextConfig = {
