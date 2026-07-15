@@ -140,3 +140,184 @@ function checkNewBookings() {
     lock.releaseLock();
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════
+ * REVIEW DIGEST — daily one-tap Google-review asks
+ *
+ * Every evening this emails the salon a list of the day's clients.
+ * Each client has one-tap wa.me links that open WhatsApp with a
+ * PERSONALIZED review-ask already typed (name filled in, bridal
+ * variant auto-selected). Staff just taps and hits send — the human
+ * stays in the loop, so this is fully WhatsApp-ToS-safe.
+ *
+ * Also lists clients from 3 days ago for the single follow-up nudge.
+ *
+ * Setup: run setupTriggers() once from the editor (replaces the old
+ * setupTrigger — it creates BOTH the 5-min booking check and the
+ * daily 19:00 digest).
+ * ══════════════════════════════════════════════════════════════════ */
+
+var REVIEW_LINK = 'https://farwasalon.com/review';
+var DIGEST_HOUR = 19; // 7 PM PKT — right after closing
+var SALON_TZ = 'Asia/Karachi';
+
+/** Creates both triggers (idempotent). Run once after pasting. */
+function setupTriggers() {
+  setupTrigger(); // existing 5-minute booking-notification trigger
+  var triggers = ScriptApp.getProjectTriggers();
+  for (var t = 0; t < triggers.length; t++) {
+    if (triggers[t].getHandlerFunction() === 'sendReviewDigest') {
+      Logger.log('Trigger for sendReviewDigest already exists.');
+      return;
+    }
+  }
+  ScriptApp.newTrigger('sendReviewDigest')
+    .timeBased()
+    .everyDays(1)
+    .atHour(DIGEST_HOUR)
+    .inTimezone(SALON_TZ)
+    .create();
+  Logger.log('Created daily ' + DIGEST_HOUR + ':00 trigger for sendReviewDigest.');
+}
+
+/** '0322 2782254' / '+92 322...' / '92322...' -> '923222782254' for wa.me */
+function waNumber(phone) {
+  var digits = String(phone || '').replace(/\D/g, '');
+  if (digits.indexOf('92') === 0) return digits;
+  if (digits.indexOf('0') === 0) return '92' + digits.slice(1);
+  return digits ? '92' + digits : '';
+}
+
+/** Normalize a sheet date cell (Date object or 'YYYY-MM-DD' string). */
+function cellDateStr(v) {
+  if (v instanceof Date) return Utilities.formatDate(v, SALON_TZ, 'yyyy-MM-dd');
+  return String(v || '').slice(0, 10);
+}
+
+function firstName(fullName) {
+  var n = String(fullName || '').trim().split(/\s+/)[0];
+  return n || 'there';
+}
+
+function reviewMessage(name, category) {
+  var first = firstName(name);
+  if (String(category || '').toLowerCase() === 'bridal') {
+    return 'It was an honour being part of your special day, ' + first + '! 💍✨ You looked absolutely stunning.\n\n' +
+      'When things settle down, we would love a short Google review about your bridal experience — it means the world to brides choosing their salon:\n\n' +
+      '⭐ ' + REVIEW_LINK + '\n\n— Rubina & team 🌸';
+  }
+  return 'Thank you for visiting Farwa Beauty Salon today, ' + first + '! 🌸 It was lovely having you.\n\n' +
+    'If you enjoyed your visit, would you take 30 seconds to leave us a Google review? It genuinely helps our small salon grow:\n\n' +
+    '⭐ ' + REVIEW_LINK + '\n\n— Rubina & team 💕';
+}
+
+function reviewMessageUrdu(name) {
+  var first = firstName(name);
+  return 'Aaj Farwa Beauty Salon aane ka shukriya, ' + first + '! 🌸 Umeed hai aap ko apna look pasand aaya.\n\n' +
+    'Agar aap ka tajurba acha raha ho to please 30 second nikaal kar Google review de dein — is se hamare salon ko bohat madad milti hai:\n\n' +
+    '⭐ ' + REVIEW_LINK + '\n\n— Rubina & team 💕';
+}
+
+function nudgeMessage(name) {
+  var first = firstName(name);
+  return 'Salaam ' + first + '! Just a gentle reminder 🌸 — if you have 30 seconds, we would love your Google review:\n\n' +
+    '⭐ ' + REVIEW_LINK + '\n\n' +
+    'Aur agar visit mein koi bhi masla raha ho, to please yahin bata dein — hum usay zaroor theek karenge. 💕';
+}
+
+function waLink(phone, message) {
+  var num = waNumber(phone);
+  return num ? 'https://wa.me/' + num + '?text=' + encodeURIComponent(message) : '';
+}
+
+/** Collect non-cancelled bookings for a date, de-duped by phone. */
+function clientsForDate(data, dateStr) {
+  var seen = {};
+  var out = [];
+  for (var i = 0; i < data.length; i++) {
+    var row = data[i];
+    if (!row[0]) continue;
+    if (cellDateStr(row[1]) !== dateStr) continue;
+    if (String(row[9] || '').trim() === 'Cancelled') continue;
+    var phone = waNumber(row[5]);
+    if (!phone || seen[phone]) continue;
+    seen[phone] = true;
+    out.push({ name: row[4], phone: row[5], service: row[6], category: row[7], time: row[2] });
+  }
+  return out;
+}
+
+function digestRowHtml(c, links) {
+  var parts = [];
+  for (var i = 0; i < links.length; i++) {
+    parts.push('<a href="' + links[i].href + '" style="display:inline-block;padding:6px 14px;margin:2px 6px 2px 0;background:#0d0d0d;color:#fff;text-decoration:none;border-radius:4px;font-size:13px;">' + links[i].label + '</a>');
+  }
+  return '<tr><td style="padding:10px 8px;border-bottom:1px solid #eee;">' +
+    '<strong>' + c.name + '</strong> — ' + c.service + ' (' + c.time + ')<br>' + parts.join('') +
+    '</td></tr>';
+}
+
+/**
+ * Emails the salon today's one-tap review asks + 3-day nudge list.
+ * Safe to run manually from the editor any time.
+ */
+function sendReviewDigest() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Bookings');
+  if (!sheet) throw new Error('Sheet "Bookings" not found.');
+  var lastRow = sheet.getLastRow();
+  if (lastRow <= 1) return;
+
+  var notifyTo = String(SALON_NOTIFY_EMAIL || '').trim();
+  if (!notifyTo || notifyTo.indexOf('@') === -1) {
+    throw new Error('Set SALON_NOTIFY_EMAIL at the top of EmailBot.gs.');
+  }
+
+  var data = sheet.getRange(2, 1, lastRow, 13).getValues();
+  var today = Utilities.formatDate(new Date(), SALON_TZ, 'yyyy-MM-dd');
+  var threeDaysAgo = Utilities.formatDate(new Date(Date.now() - 3 * 86400000), SALON_TZ, 'yyyy-MM-dd');
+
+  var todays = clientsForDate(data, today);
+  var nudges = clientsForDate(data, threeDaysAgo);
+
+  if (todays.length === 0 && nudges.length === 0) {
+    Logger.log('Review digest: nothing to send today.');
+    return;
+  }
+
+  var html = '<div style="font-family:Arial,sans-serif;max-width:560px;">' +
+    '<h2 style="margin:0 0 4px;">⭐ Review asks — ' + today + '</h2>' +
+    '<p style="color:#666;margin:0 0 16px;font-size:13px;">Tap a button on the salon phone — WhatsApp opens with the message ready. Just press send. Skip anyone who seemed unhappy (use /recover instead).</p>';
+
+  if (todays.length) {
+    html += '<h3 style="margin:16px 0 4px;">Today&#39;s clients (' + todays.length + ')</h3><table style="border-collapse:collapse;width:100%;">';
+    for (var i = 0; i < todays.length; i++) {
+      var c = todays[i];
+      html += digestRowHtml(c, [
+        { label: 'Ask — English', href: waLink(c.phone, reviewMessage(c.name, c.category)) },
+        { label: 'Ask — Urdu', href: waLink(c.phone, reviewMessageUrdu(c.name)) }
+      ]);
+    }
+    html += '</table>';
+  }
+
+  if (nudges.length) {
+    html += '<h3 style="margin:20px 0 4px;">Follow-up nudges — visited ' + threeDaysAgo + ' (' + nudges.length + ')</h3>' +
+      '<p style="color:#666;margin:0 0 8px;font-size:12px;">Only nudge clients who never replied and have not reviewed. One nudge maximum.</p>' +
+      '<table style="border-collapse:collapse;width:100%;">';
+    for (var j = 0; j < nudges.length; j++) {
+      var n = nudges[j];
+      html += digestRowHtml(n, [{ label: 'Send nudge', href: waLink(n.phone, nudgeMessage(n.name)) }]);
+    }
+    html += '</table>';
+  }
+
+  html += '<p style="color:#999;font-size:12px;margin-top:20px;">Friday check: review count at <a href="' + REVIEW_LINK + '">' + REVIEW_LINK + '</a> · goal +2–3/week · never offer anything in exchange for a review.</p></div>';
+
+  MailApp.sendEmail({
+    to: notifyTo,
+    subject: '⭐ Review asks: ' + todays.length + ' today' + (nudges.length ? ' + ' + nudges.length + ' nudges' : ''),
+    body: 'Open this email on the salon phone to send one-tap review asks.',
+    htmlBody: html
+  });
+  Logger.log('Review digest sent: ' + todays.length + ' asks, ' + nudges.length + ' nudges.');
+}

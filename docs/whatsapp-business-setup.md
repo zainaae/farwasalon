@@ -358,12 +358,34 @@ Thank you so much, {name}! 🌸 It was a pleasure having you at Farwa. See you n
 Thank you for the feedback, {name} — we're sorry your visit fell short. Please WhatsApp us at +92 322 2782254 so we can make it right. — Rubina
 ```
 
+### ⚡ Automated: the daily Review Digest email
+
+The booking sheet's Apps Script bot (`google-apps-script/EmailBot.gs`) now sends
+the salon inbox an email **every day at 7 PM** listing that day's clients — each
+with **one-tap buttons** that open WhatsApp with the review ask already typed,
+name filled in, bridal variant auto-selected. It also lists clients from 3 days
+ago for the follow-up nudge. Nothing to type, nothing to remember.
+
+**One-time setup (2 minutes):**
+1. Open the Bookings Google Sheet → **Extensions → Apps Script**
+2. Replace the whole file with the current `google-apps-script/EmailBot.gs`
+3. In the editor, select **`setupTriggers`** from the function dropdown → **Run**
+   (authorize when prompted) — this creates the daily 7 PM digest alongside the
+   existing 5-minute booking check
+4. Test it: select **`sendReviewDigest`** → **Run** — the digest for today
+   arrives in the salon inbox immediately
+
+**Daily use:** open the 7 PM email *on the salon phone* → tap a button per
+client → WhatsApp opens with the personalized message → press send. Skip anyone
+who seemed unhappy (send `/recover` instead). The quick replies above remain the
+manual fallback.
+
 ### The weekly rhythm
 
 | When | What |
 |------|------|
-| Every evening | Send `/review-en` or `/review-ur` to the day's clients (from the bookings sheet) |
-| ~3 days later | `/review-nudge` to non-responders — once only |
+| 7 PM daily (automatic) | Digest email arrives — tap through the day's review asks |
+| In the same digest | "Nudge" section lists 3-day-old visits — once only, skip repliers |
 | Friday | Count total Google reviews; aim for +2–3 per week |
 | Friday | Reply to any new Google reviews |
 
