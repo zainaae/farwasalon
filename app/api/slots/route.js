@@ -7,6 +7,7 @@ import {
   MAX_WORKERS,
   buildOccupiedCounts,
   slotsNeededForDuration,
+  isSlotInPast,
 } from '../../../lib/booking-slots.js'
 import { validateBookingDate } from '../../../lib/booking-date-rules.js'
 import { computeBookingDurationMinutes, parseAddonIdsParam } from '../../../lib/booking-duration.js'
@@ -74,7 +75,7 @@ export async function GET(request) {
   const slotsNeeded = slotsNeededForDuration(serviceDuration)
 
   const slots = FILTERED_SLOTS.map((time, idx) => {
-    let available = occupied[idx] < maxWorkers
+    let available = occupied[idx] < maxWorkers && !isSlotInPast(date, time)
     if (available && slotsNeeded > 1) {
       for (let j = 1; j < slotsNeeded; j++) {
         if (idx + j >= FILTERED_SLOTS.length || occupied[idx + j] >= maxWorkers) {
