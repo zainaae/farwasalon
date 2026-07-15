@@ -10,6 +10,7 @@
   --stone:  #6b5f57;
   --border-soft: #e4ddd7;
   --accent-gold: #c9a98a;
+  --accent-gold-deep: #82664a; /* gold for text on light bg — 5.3:1 on white, 4.9:1 on mist */
   --shadow-soft: 0 2px 12px rgba(13, 13, 13, 0.05);
   --shadow-card: 0 8px 32px rgba(13, 13, 13, 0.08);
 
@@ -103,6 +104,7 @@
     border-color: var(--border-soft);
   }
   .text-accent-gold { color: var(--accent-gold) !important; }
+  .text-accent-gold-deep { color: var(--accent-gold-deep) !important; }
   .shadow-soft { box-shadow: var(--shadow-soft); }
   .shadow-card { box-shadow: var(--shadow-card); }
 }

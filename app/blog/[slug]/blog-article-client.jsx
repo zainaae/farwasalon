@@ -104,7 +104,7 @@ export default function BlogArticleClient({ slug }) {
               <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
                 {post.category}
               </span>
-              <span className="text-stone/50 text-[10px] font-['Inter']">{post.readTime}</span>
+              <span className="text-stone text-[10px] font-['Inter']">{post.readTime}</span>
             </div>
             <h1 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight mb-3">
               {post.title}

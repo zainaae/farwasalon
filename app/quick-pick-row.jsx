@@ -81,7 +81,7 @@ export default function QuickPickRow() {
                   {category}
                 </span>
                 {minPrice != null ? (
-                  <span className="text-accent-gold text-[10px] font-['Inter'] font-medium truncate w-full">
+                  <span className="text-accent-gold-deep text-[10px] font-['Inter'] font-medium truncate w-full">
                     From {formatPrice(minPrice)}
                   </span>
                 ) : (

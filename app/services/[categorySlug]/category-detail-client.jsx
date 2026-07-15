@@ -130,7 +130,7 @@ export default function CategoryDetailClient({ categorySlug }) {
                         {s.name}
                       </p>
                       {(s.pricePkr != null || s.durationMinutes != null) && (
-                        <p className="text-accent-gold text-[11px] font-['Inter'] mt-0.5">
+                        <p className="text-accent-gold-deep text-[11px] font-['Inter'] mt-0.5">
                           {s.pricePkr != null && formatPrice(s.pricePkr)}
                           {s.pricePkr != null && s.durationMinutes != null && ' · '}
                           {s.durationMinutes != null && formatDuration(s.durationMinutes)}
@@ -146,7 +146,7 @@ export default function CategoryDetailClient({ categorySlug }) {
                         {s.name}
                       </p>
                       {(s.pricePkr != null || s.durationMinutes != null) && (
-                        <p className="text-accent-gold text-[11px] font-['Inter'] mt-0.5">
+                        <p className="text-accent-gold-deep text-[11px] font-['Inter'] mt-0.5">
                           {s.pricePkr != null && formatPrice(s.pricePkr)}
                           {s.pricePkr != null && s.durationMinutes != null && ' · '}
                           {s.durationMinutes != null && formatDuration(s.durationMinutes)}

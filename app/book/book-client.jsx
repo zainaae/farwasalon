@@ -117,7 +117,7 @@ function FirstVisitHint() {
                 'Walk-ins welcome — book online to skip the wait',
               ].map(tip => (
                 <li key={tip} className="flex items-start gap-2 text-stone text-xs font-['Inter'] font-light">
-                  <Check className="w-3.5 h-3.5 text-accent-gold shrink-0 mt-0.5" />
+                  <Check className="w-3.5 h-3.5 text-accent-gold-deep shrink-0 mt-0.5" />
                   {tip}
                 </li>
               ))}
@@ -437,7 +437,13 @@ export default function BookClient() {
                           className="tap-safe book-category-btn group"
                         >
                           <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight break-words">{cat}</p>
-                          <p className="text-stone text-[10px] font-['Inter'] mt-1">{services.length} services</p>
+                          <p className="text-stone text-[10px] font-['Inter'] mt-1">
+                            {services.length} services
+                            {(() => {
+                              const prices = services.map((s) => s.pricePkr).filter(Boolean)
+                              return prices.length ? ` · from ${formatPrice(Math.min(...prices))}` : ''
+                            })()}
+                          </p>
                         </button>
                       ) : (
                         <div className="panel-soft p-5 md:p-6 shadow-soft">
@@ -474,7 +480,7 @@ export default function BookClient() {
                                     </span>
                                   </div>
                                   {s.pricePkr != null && (
-                                    <span className="shrink-0 text-accent-gold text-sm font-['Inter'] font-semibold">
+                                    <span className="shrink-0 text-accent-gold-deep text-sm font-['Inter'] font-semibold">
                                       {formatPrice(s.pricePkr)}
                                     </span>
                                   )}
@@ -714,7 +720,7 @@ export default function BookClient() {
                   {formatDateNice(selectedDate)} · {formatTime12(selectedTime)} · {formatDuration(totalDurationMinutes)}
                 </p>
                 {selectedService?.pricePkr != null && (
-                  <p className="text-accent-gold text-xs font-['Inter'] font-medium mt-0.5">
+                  <p className="text-accent-gold-deep text-xs font-['Inter'] font-medium mt-0.5">
                     {formatPrice(selectedService.pricePkr)}
                   </p>
                 )}
@@ -742,7 +748,7 @@ export default function BookClient() {
                 />
                 <div>
                   <label htmlFor="bk-name" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
-                    Name <span className="text-accent-gold">*</span>
+                    Name <span className="text-accent-gold-deep">*</span>
                   </label>
                   <input
                     id="bk-name"
@@ -757,7 +763,7 @@ export default function BookClient() {
                 </div>
                 <div>
                   <label htmlFor="bk-phone" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
-                    Phone <span className="text-accent-gold">*</span>
+                    Phone <span className="text-accent-gold-deep">*</span>
                   </label>
                   <input
                     id="bk-phone"

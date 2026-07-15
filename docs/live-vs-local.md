@@ -39,3 +39,21 @@ npm run test:e2e
 ## Do not commit
 
 `public/*.webm`, `*.mp4`, `*.orig.mp4` unless intentionally shipping new hero assets.
+
+## Known dev-server rendering quirk (2026-07-15)
+
+Under `npm run dev` (Turbopack) + automated browsers, below-fold homepage
+sections can render blank: the deferred `home-below-fold` chunk mounts late,
+and per-row `whileInView` wrappers can stay at `opacity: 0` even when standing
+on them. **Production builds do not have this problem** — verified by
+screenshot tour against `next start` (all sections render at every scroll
+position, desktop + mobile).
+
+Practical rules:
+- Judge visuals only against a production build (`npm run build && npm start`),
+  never the dev server.
+- Playwright's `toBeVisible()` does not catch `opacity: 0` (it checks display /
+  visibility / size), so e2e green does not disprove an animation-stuck bug —
+  screenshot or computed-style checks do.
+- `chrome-headless-shell` ships without H.264: mp4-only panels screenshot as
+  voids. Use `test.use({ channel: 'chrome' })` for pixel-accurate captures.

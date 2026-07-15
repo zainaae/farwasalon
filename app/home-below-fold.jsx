@@ -291,7 +291,7 @@ function FeaturedServices() {
                     onMouseLeave={() => setHovered(null)}
                     className="group flex items-center justify-between py-4 md:py-5 gap-4">
                     <div className="flex items-center gap-4 min-w-0">
-                      <span className="font-['Unbounded'] text-[10px] text-stone/40 shrink-0 w-5 tabular-nums">
+                      <span className="font-['Unbounded'] text-[10px] text-stone shrink-0 w-5 tabular-nums">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="min-w-0">
@@ -299,14 +299,14 @@ function FeaturedServices() {
                           {cat}
                         </span>
                         {CAT_META[cat]?.tagline && (
-                          <span className="block text-stone text-[10px] font-['Inter'] font-light mt-0.5 truncate">
+                          <span className="block text-stone text-[11px] font-['Inter'] mt-0.5 truncate">
                             {CAT_META[cat].tagline}
                           </span>
                         )}
                       </span>
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
-                      <span className="text-stone text-[10px] font-['Inter'] hidden sm:block">
+                      <span className="text-stone text-[11px] font-['Inter'] hidden sm:block">
                         {(() => {
                           const prices = SERVICES[cat].map((s) => s.pricePkr).filter(Boolean)
                           return prices.length
@@ -339,7 +339,7 @@ function TrustPillars() {
     <section className="cv-auto bg-ink py-14 md:py-16 px-4 sm:px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto">
         <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</m.p>
+          className="text-accent-gold text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</m.p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-10">
           {[
             { num: '01', title: `${YEARS_ACTIVE} Years in PECHS`, desc: 'Since 2008 — the same chair-side standard whether you are in for ten minutes or a full bridal day.' },
@@ -349,9 +349,9 @@ function TrustPillars() {
             <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
               className="border-t border-white/10 pt-7">
-              <p className="font-['Unbounded'] text-[10px] text-stone mb-4">{p.num}</p>
+              <p className="font-['Unbounded'] text-[10px] text-accent-gold mb-4">{p.num}</p>
               <h3 className="font-['Syne'] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
-              <p className="text-stone text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
+              <p className="text-nude/90 text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
             </m.div>
           ))}
         </div>
@@ -381,7 +381,7 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
               <div className="flex gap-0.5 text-stone/70" aria-hidden="true">
                 {[...Array(5)].map((_, s) => <Star key={s} className="w-2 h-2 fill-current" />)}
               </div>
-              <span className="text-stone/70 text-[9px] font-['Inter']">· {post.date}</span>
+              <span className="text-stone text-[9px] font-['Inter']">· {post.date}</span>
             </div>
           </div>
         </div>
@@ -413,7 +413,7 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
           </a>
         )}
         <div className="flex items-center justify-between gap-3 mt-auto pt-4 border-t border-border-soft">
-          <span className="text-stone/80 text-[9px] tracking-[0.18em] uppercase font-['Inter'] truncate">
+          <span className="text-stone text-[9px] tracking-[0.18em] uppercase font-['Inter'] truncate">
             {post.service}
           </span>
           <span className="inline-flex items-center gap-1 text-stone text-[9px] tracking-[0.16em] uppercase font-['Inter'] shrink-0">
@@ -482,7 +482,7 @@ function ReviewGridSection({ label, viewAllHref, posts, className = '', divided 
         </a>
       </div>
 
-      <p className="md:hidden text-stone/70 text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2.5">
+      <p className="md:hidden text-stone text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2.5">
         Swipe for more reviews →
       </p>
       <div className="md:hidden flex gap-3.5 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
@@ -663,7 +663,7 @@ function CtaBand() {
           transition={{ duration: 0.8 }}
           className="w-full lg:flex-1 lg:min-w-0"
         >
-          <p className="text-stone text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
+          <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
           <h2
             className="font-['Unbounded'] font-bold text-white leading-tight text-balance max-w-2xl lg:max-w-none"
             style={{ fontSize: 'clamp(1.5rem, 4vw + 0.5rem, 2.75rem)' }}

@@ -68,10 +68,10 @@ export default function BlogIndexClient() {
                   <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
                     {post.category}
                   </span>
-                  <time dateTime={post.date} className="text-stone/50 text-[10px] font-['Inter']">
+                  <time dateTime={post.date} className="text-stone text-[10px] font-['Inter']">
                     {formatBlogDate(post.date)}
                   </time>
-                  <span className="text-stone/50 text-[10px] font-['Inter']">{post.readTime}</span>
+                  <span className="text-stone text-[10px] font-['Inter']">{post.readTime}</span>
                 </div>
                 <h2 className="font-['Syne'] font-bold text-base md:text-lg text-ink leading-snug mb-3 group-hover:text-stone transition-colors">
                   {post.title}
