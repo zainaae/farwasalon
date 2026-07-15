@@ -233,13 +233,13 @@ export const SERVICES = {
   ],
 
   'Eyebrow Tattoo': [
-    { id: _id++, name: 'Microblading', category: 'Eyebrow Tattoo', pricePkr: 15000, durationMinutes: 120,
+    { id: _id++, name: 'Microblading', category: 'Eyebrow Tattoo', pricePkr: 20000, durationMinutes: 120,
       desc: 'Hair-stroke semi-permanent tattooing that creates naturally full, defined brows lasting 12–18 months.',
       includes: ['Brow design consultation', 'Numbing cream', 'Microblading', 'Aftercare kit'] },
-    { id: _id++, name: 'Powder Brows', category: 'Eyebrow Tattoo', pricePkr: 15000, durationMinutes: 120,
+    { id: _id++, name: 'Powder Brows', category: 'Eyebrow Tattoo', pricePkr: 20000, durationMinutes: 120,
       desc: 'A soft, powdered makeup look tattooed semi-permanently — ideal for oily or mature skin types.',
       includes: ['Brow mapping', 'Numbing', 'Powder shading', 'Touch-up plan'] },
-    { id: _id++, name: 'Combination Brows', category: 'Eyebrow Tattoo', pricePkr: 18000, durationMinutes: 150,
+    { id: _id++, name: 'Combination Brows', category: 'Eyebrow Tattoo', pricePkr: 23000, durationMinutes: 150,
       desc: 'The best of both worlds — hair strokes at the front blending into a soft powder fill at the tail.',
       includes: ['Full consultation', 'Microblading strokes', 'Powder shading', 'Aftercare pack'] },
   ],
@@ -359,8 +359,8 @@ export const CAT_META = {
     tagline: 'Cuts, colour & styling from Rs 1,500',
     desc: 'Professional haircut, colour, and styling services starting from Rs 1,500 at Farwa Beauty Salon in PECHS, Karachi. Whether you need a precision cut tailored to your face shape, a fresh colour transformation with highlights or balayage, a salon-quality blowdry for a special occasion, or elegant bridal hair styling for your wedding day, our experienced stylists deliver beautiful results every time. Our hair services are ideal for anyone looking to refresh their look, maintain healthy ends, try a bold new colour, or need event-ready styling that holds all day and evening. Every appointment begins with a personal consultation to understand your hair texture, lifestyle, and desired outcome — because great hair starts with understanding what works uniquely for you. Expect vibrant, lasting colour, smooth and voluminous blowouts, and cuts that grow out gracefully between visits. For aftercare, use sulphate-free products to preserve colour, avoid excessive heat styling at home, and book a trim every six to eight weeks to keep your style looking fresh. Visit us in PECHS or book online or on WhatsApp.' },
   'Eyebrow Tattoo':  { img: '/eyebrowtattoo.jpg',  video: '/eyebrowtattoo.mp4',
-    tagline: 'Microblading & powder brows from Rs 15,000',
-    desc: 'Semi-permanent eyebrow tattooing starting from Rs 15,000 at Farwa Beauty Salon in PECHS, Karachi — including microblading, powder brows, and combination brow techniques. Eyebrow tattooing is a cosmetic procedure that implants pigment into the skin to create naturally fuller, perfectly shaped brows that last 12 to 18 months without daily makeup. This service is ideal for clients with sparse, over-plucked, or uneven brows, as well as anyone who wants to save time on their daily brow routine. Choose microblading for realistic hair-stroke detail, powder brows for a soft filled-in makeup look, or combination brows that blend both techniques for the most natural result. Every session includes a thorough brow design consultation, topical numbing for comfort, the tattooing procedure, and a complete aftercare kit. Expect beautifully defined brows that frame your face and enhance your features from the moment you leave the salon. For best results, avoid getting the brows wet for seven days after treatment, skip makeup on the area during healing, and apply the provided aftercare balm as directed. Book online at farwasalon.com/book or on WhatsApp.' },
+    tagline: 'Microblading & powder brows from Rs 20,000',
+    desc: 'Semi-permanent eyebrow tattooing starting from Rs 20,000 at Farwa Beauty Salon in PECHS, Karachi — including microblading, powder brows, and combination brow techniques. Eyebrow tattooing is a cosmetic procedure that implants pigment into the skin to create naturally fuller, perfectly shaped brows that last 12 to 18 months without daily makeup. This service is ideal for clients with sparse, over-plucked, or uneven brows, as well as anyone who wants to save time on their daily brow routine. Choose microblading for realistic hair-stroke detail, powder brows for a soft filled-in makeup look, or combination brows that blend both techniques for the most natural result. Every session includes a thorough brow design consultation, topical numbing for comfort, the tattooing procedure, and a complete aftercare kit. Expect beautifully defined brows that frame your face and enhance your features from the moment you leave the salon. For best results, avoid getting the brows wet for seven days after treatment, skip makeup on the area during healing, and apply the provided aftercare balm as directed. Book online at farwasalon.com/book or on WhatsApp.' },
 }
 
 /* ─── Unique meta descriptions per service category (SEO) ──── */
@@ -377,7 +377,7 @@ export const CAT_SEO = {
   'Nails':           { metaDesc: 'Manicure & pedicure from Rs 300 at Farwa Salon, PECHS Karachi. SPA, French, paraffin & nail art for perfect nails. Book online!' },
   'Bridal':          { metaDesc: 'Bridal makeup from Rs 8,000 at Farwa Salon, PECHS Karachi. Trials, engagement & mehndi looks — 18+ years expertise. Book your trial now!' },
   'Hair':            { metaDesc: 'Haircuts, colour & styling from Rs 1,500 at Farwa Salon, PECHS Karachi. Cuts, blowdry, balayage & bridal updos. Book online today!' },
-  'Eyebrow Tattoo':  { metaDesc: 'Microblading & powder brows from Rs 15,000 at Farwa Salon, PECHS Karachi. Semi-permanent brows lasting 12\u201318 months. Book online!' },
+  'Eyebrow Tattoo':  { metaDesc: 'Microblading & powder brows from Rs 20,000 at Farwa Salon, PECHS Karachi. Semi-permanent brows lasting 12\u201318 months. Book online!' },
 }
 
 /* ─── FAQ content for popular categories (SEO + user value) ──── */
@@ -414,7 +414,7 @@ export const CAT_FAQS = {
     { q: 'How long does microblading last?', a: 'Microblading typically lasts 12–18 months depending on skin type, sun exposure, and aftercare. Oily skin types may need a touch-up sooner. We provide a complete aftercare kit with every session.' },
     { q: 'What is the difference between microblading and powder brows?', a: 'Microblading creates individual hair-like strokes for a natural look. Powder brows give a soft, filled-in makeup effect. Combination brows blend both techniques — strokes at the front with powder shading at the tail.' },
     { q: 'Does eyebrow tattooing hurt?', a: 'We apply a topical numbing cream before the procedure so most clients feel only mild pressure. The full session takes about 2 hours including consultation, numbing, and the tattooing process.' },
-    { q: 'How much does microblading cost in Karachi?', a: 'At Farwa Beauty Salon, microblading and powder brows start at Rs 15,000. Combination brows are Rs 18,000. All sessions include a brow design consultation, numbing, the procedure, and an aftercare kit.' },
+    { q: 'How much does microblading cost in Karachi?', a: 'At Farwa Beauty Salon, microblading and powder brows start at Rs 20,000. Combination brows are Rs 23,000. All sessions include a brow design consultation, numbing, the procedure, and an aftercare kit.' },
   ],
   'Massage': [
     { q: 'What types of massage do you offer?', a: 'We offer head massage, back massage, full arm massage, full leg massage, and complete full body massage. All massages use professional-grade oils and techniques to release tension and improve circulation.' },
