@@ -10,6 +10,7 @@ import {
   WordmarkDivider,
 } from '../src/shared.jsx'
 import { formatPrice } from '../src/data.js'
+import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
 import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK } from '../src/data.js'
@@ -565,7 +566,7 @@ function TestimonialsPreview() {
             <h2 className="section-title text-2xl md:text-3xl">What clients say</h2>
           </div>
           <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
-            <div className="flex gap-0.5 text-stone/80" role="img" aria-label="4.9 out of 5 stars">
+            <div className="flex gap-0.5 text-stone/80" role="img" aria-label={`${GOOGLE_GBP_STATS.rating} out of 5 stars`}>
               {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />)}
             </div>
             <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug whitespace-nowrap">

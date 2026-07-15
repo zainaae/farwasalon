@@ -6,8 +6,8 @@
 
 /** Live GBP totals — update when your Google Maps star count changes. */
 export const GOOGLE_GBP_STATS = {
-  rating: 4.9,
-  reviewCount: 6,
+  rating: 4.6,
+  reviewCount: 19,
 }
 
 /**

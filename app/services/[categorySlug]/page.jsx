@@ -5,6 +5,7 @@ import CategoryDetailClient from './category-detail-client'
 import LocationServicePage from './location-service-page'
 import LocationServiceSchema from './location-service-schema'
 import { pageSocialMeta } from '../../../lib/page-metadata.js'
+import { GOOGLE_GBP_STATS } from '../../../src/google-reviews-data.js'
 
 export const dynamicParams = false
 
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }) {
     const canonicalSlug = prefix === 'best'
       ? `${service.slug}-in-${location.slug}`
       : categorySlug
-    const description = `${service.name} in ${location.name}, Karachi — ${service.description} Book online at Farwa Beauty Salon, PECHS. From Rs 100. ★ 4.9 Google rating.`
+    const description = `${service.name} in ${location.name}, Karachi — ${service.description} Book online at Farwa Beauty Salon, PECHS. From Rs 100. ★ ${GOOGLE_GBP_STATS.rating} Google rating.`
     return {
       title,
       description,
