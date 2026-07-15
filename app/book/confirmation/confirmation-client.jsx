@@ -172,7 +172,7 @@ function ConfirmationContent() {
           </div>
 
           {cancelToken && id && date && (
-            <p className="mt-4 text-stone/60 text-[10px] font-['Inter']">
+            <p className="mt-4 text-stone text-[10px] font-['Inter']">
               Need to cancel? (at least 2 hours before your appointment){' '}
               <Link
                 href={`/book/cancel?${new URLSearchParams({

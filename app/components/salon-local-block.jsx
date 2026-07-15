@@ -90,7 +90,7 @@ export default function SalonLocalBlock({ variant = 'light', className = '' }) {
                 allowFullScreen
               />
             </div>
-            <p className={`mt-2 text-[10px] font-['Inter'] ${dark ? 'text-white/40' : 'text-stone'}`}>
+            <p className={`mt-2 text-[10px] font-['Inter'] ${dark ? 'text-white/60' : 'text-stone'}`}>
               <a
                 href={MAPS_LINK}
                 target="_blank"

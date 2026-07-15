@@ -214,7 +214,7 @@ function Hero() {
               Explore Services
             </Link>
             <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noreferrer"
-              className="tap-safe text-white/40 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white/70 transition-colors flex items-center justify-center sm:justify-start">
+              className="tap-safe text-white/60 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
               Or message us on WhatsApp
             </a>
             <div className="hidden sm:flex items-center gap-2 ml-auto">
@@ -244,7 +244,7 @@ function Hero() {
             animate={{ y: ['-100%','200%'] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
             style={{ height: '40%' }} />
         </div>
-        <span className="text-white/45 text-[9px] tracking-[0.2em] uppercase font-['Inter'] rotate-90 origin-center mt-2">scroll</span>
+        <span className="text-white/60 text-[9px] tracking-[0.2em] uppercase font-['Inter'] rotate-90 origin-center mt-2">scroll</span>
       </m.div>
     </section>
   )

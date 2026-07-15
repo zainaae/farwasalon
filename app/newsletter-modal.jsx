@@ -244,7 +244,7 @@ export default function NewsletterModal() {
                     </button>
                   </form>
 
-                  <p className="mt-4 text-stone/60 text-[10px] font-['Inter']">
+                  <p className="mt-4 text-stone text-[10px] font-['Inter']">
                     We never share your email. Unsubscribe any time.{' '}
                     <button
                       type="button"

@@ -128,7 +128,7 @@ export default function ServicesClient() {
                     <p className="text-white/55 text-[10px] font-['Inter'] leading-snug line-clamp-1">{meta.tagline}</p>
                   )}
                   {availability && (
-                    <p className="text-white/40 text-[9px] font-['Inter'] mt-1">{availability}</p>
+                    <p className="text-white/65 text-[9px] font-['Inter'] mt-1">{availability}</p>
                   )}
                   <div className="flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                     <span className="text-white text-[10px] tracking-widest uppercase font-['Inter']">View services</span>

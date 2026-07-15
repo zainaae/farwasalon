@@ -167,9 +167,9 @@ export default function CategoryDetailClient({ categorySlug }) {
 
           {faqs.length > 0 && (
             <section className="mt-12 pt-10 border-t border-border-soft">
-              <h3 className="font-['Unbounded'] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
+              <h2 className="font-['Unbounded'] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
                 Frequently Asked Questions
-              </h3>
+              </h2>
               <dl className="divide-y divide-border-soft">
                 {faqs.map((faq, i) => (
                   <div key={i} className="py-5">
@@ -196,7 +196,7 @@ export default function CategoryDetailClient({ categorySlug }) {
             const related = Object.entries(CAT_SLUGS).filter(([k]) => k !== category).slice(0, 5)
             return related.length > 0 && (
               <section className="mt-10 pt-8 border-t border-border-soft">
-                <h3 className="font-['Syne'] font-bold text-base text-ink mb-3">Related Services</h3>
+                <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Related Services</h2>
                 <div className="flex flex-wrap gap-2">
                   {related.map(([cat, catSlug]) => (
                     <Link key={catSlug} href={`/services/${catSlug}`}

@@ -151,7 +151,7 @@ function EditorialSlideshow() {
                 <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
                   {p.label}
                 </span>
-                <span className="text-white/40 text-[9px] font-['Inter'] tabular-nums">
+                <span className="text-white/60 text-[9px] font-['Inter'] tabular-nums">
                   {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
                 </span>
               </figcaption>
@@ -416,7 +416,7 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
           <span className="text-stone/80 text-[9px] tracking-[0.18em] uppercase font-['Inter'] truncate">
             {post.service}
           </span>
-          <span className="inline-flex items-center gap-1 text-stone/60 text-[9px] tracking-[0.16em] uppercase font-['Inter'] shrink-0">
+          <span className="inline-flex items-center gap-1 text-stone text-[9px] tracking-[0.16em] uppercase font-['Inter'] shrink-0">
             {sourceLabel}
           </span>
         </div>
@@ -696,7 +696,7 @@ function CtaBand() {
             href={`https://wa.me/${WA_NUMBER}`}
             target="_blank"
             rel="noreferrer"
-            className="tap-safe text-white/40 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white/70 transition-colors flex items-center justify-center sm:justify-start lg:justify-end min-w-0"
+            className="tap-safe text-white/60 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start lg:justify-end min-w-0"
           >
             Or reach us on WhatsApp
           </a>

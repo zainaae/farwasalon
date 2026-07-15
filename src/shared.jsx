@@ -315,7 +315,7 @@ function MonthCalendar({ value, onChange }) {
       <div className="grid grid-cols-7 mb-1">
         {['Su','Mo','Tu','We','Th','Fr','Sa'].map((d, i) => (
           <div key={d}
-            className={`text-center text-[9px] tracking-wide uppercase font-['Inter'] py-1.5 ${i === 0 ? 'text-stone/30' : 'text-stone'}`}>
+            className={`text-center text-[9px] tracking-wide uppercase font-['Inter'] py-1.5 text-stone ${i === 0 ? 'line-through' : ''}`}>
             {d}
           </div>
         ))}
@@ -353,11 +353,11 @@ function MonthCalendar({ value, onChange }) {
         })}
       </div>
 
-      <p className="text-[9px] text-stone/45 font-['Inter'] mt-3 flex items-center gap-3">
+      <p className="text-[9px] text-stone font-['Inter'] mt-3 flex items-center gap-3">
         <span className="inline-flex items-center gap-1">
           <span className="inline-block w-3 h-3 border border-[#c9a98a]" aria-hidden="true" /> Today
         </span>
-        <span className="text-stone/25">Su = Closed</span>
+        <span>Su = Closed</span>
       </p>
     </div>
   )

@@ -51,7 +51,7 @@ export default function QuickPickRow() {
             <h2 id="quickpick-heading" className="eyebrow font-medium tracking-[0.32em]">
               — Quick pick
             </h2>
-            <p className="text-stone/60 text-[10px] sm:text-[11px] font-['Inter'] hidden sm:block">
+            <p className="text-stone text-[10px] sm:text-[11px] font-['Inter'] hidden sm:block">
               Tap a service to start booking in one step
             </p>
           </div>

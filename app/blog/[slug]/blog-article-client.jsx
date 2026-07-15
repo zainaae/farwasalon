@@ -208,7 +208,7 @@ export default function BlogArticleClient({ slug }) {
                   if (!meta || !slug) return null
                   return (
                     <Link key={cat} href={`/services/${slug}`} className="group relative overflow-hidden aspect-[4/3]">
-                      <Image src={meta.img} alt={cat} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 50vw, 33vw" />
+                      <Image src={meta.img} alt="" fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 50vw, 33vw" />
                       <div className="absolute inset-0 bg-ink/50 group-hover:bg-ink/60 transition-colors" />
                       <div className="absolute inset-0 flex items-end p-3">
                         <span className="text-white font-['Syne'] font-bold text-xs uppercase">{cat}</span>

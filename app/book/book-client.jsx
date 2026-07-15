@@ -777,7 +777,7 @@ export default function BookClient() {
                 </div>
                 <div>
                   <label htmlFor="bk-notes" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
-                    Notes <span className="text-stone/40">(optional)</span>
+                    Notes <span className="text-stone">(optional)</span>
                   </label>
                   <textarea
                     id="bk-notes"
