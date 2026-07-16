@@ -99,7 +99,7 @@ function StatsStrip() {
             <m.div initial={{ y: '40%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}>
               <p className="eyebrow mb-3">— Est. 2008 · PECHS</p>
-              <h2 className="section-title text-2xl md:text-3xl max-w-md">
+              <h2 className="display-section max-w-2xl">
                 A beauty studio with {YEARS_ACTIVE} years of care
               </h2>
             </m.div>
@@ -110,17 +110,20 @@ function StatsStrip() {
             <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
               For over {YEARS_ACTIVE} years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
             </p>
-            <div className="grid grid-cols-3 max-[380px]:grid-cols-1 gap-3 sm:gap-4 border-t border-border-soft pt-6 sm:pt-7">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-4 border-t border-border-soft pt-6 sm:pt-7">
               {[
                 { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
-                { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
-                { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services on the menu' },
+                { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Specialities, one roof' },
+                { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services, every price printed' },
+                { display: `${GOOGLE_GBP_STATS.rating}★`, final: null, label: 'Rated by Karachi on Google' },
               ].map(({ display, final, label }) => (
                 <div key={label} className="min-w-0">
-                  <p className="font-['Unbounded'] font-bold text-lg sm:text-xl md:text-2xl text-ink mb-1 leading-none">
-                    <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
+                  <p className="font-['Unbounded'] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none">
+                    {final !== null
+                      ? <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
+                      : display}
                   </p>
-                  <p className="text-stone text-[10px] sm:text-[11px] tracking-wide font-['Inter'] leading-tight">{label}</p>
+                  <p className="text-stone text-[11px] tracking-wide font-['Inter'] leading-tight">{label}</p>
                 </div>
               ))}
             </div>
@@ -240,7 +243,7 @@ function FeaturedServices() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-10 md:mb-12">
           <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <p className="eyebrow mb-2">— What we do</p>
-            <h2 className="section-title text-2xl md:text-3xl">Our Services</h2>
+            <h2 className="display-section">Our Services</h2>
           </m.div>
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="shrink-0 self-start sm:self-auto">
@@ -563,7 +566,7 @@ function TestimonialsPreview() {
           className="flex flex-col gap-4 sm:gap-5 sm:flex-row sm:items-end sm:justify-between mb-8 sm:mb-10 md:mb-12">
           <div className="min-w-0">
             <p className="eyebrow mb-2">— Client reviews</p>
-            <h2 className="section-title text-2xl md:text-3xl">What clients say</h2>
+            <h2 className="display-section">What clients say</h2>
           </div>
           <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
             <div className="flex gap-0.5 text-stone/80" role="img" aria-label={`${GOOGLE_GBP_STATS.rating} out of 5 stars`}>
@@ -666,8 +669,8 @@ function CtaBand() {
         >
           <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
           <h2
-            className="font-['Unbounded'] font-bold text-white leading-tight text-balance max-w-2xl lg:max-w-none"
-            style={{ fontSize: 'clamp(1.5rem, 4vw + 0.5rem, 2.75rem)' }}
+            className="font-['Unbounded'] font-bold text-white leading-[1.05] text-balance max-w-2xl lg:max-w-none"
+            style={{ fontSize: 'clamp(1.9rem, 5.5vw + 0.5rem, 4rem)' }}
           >
             Ready for your glow? We&apos;re ready for you.
           </h2>
@@ -707,6 +710,25 @@ function CtaBand() {
   )
 }
 
+function FounderNote() {
+  return (
+    <section className="cv-auto bg-mist border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
+      <div className="max-w-3xl mx-auto text-center">
+        <p className="eyebrow mb-6">— The House</p>
+        <blockquote
+          className="font-['Syne'] italic text-ink text-balance leading-[1.3]"
+          style={{ fontSize: 'clamp(1.35rem, 3.6vw, 2.25rem)' }}>
+          &ldquo;Trends visit Karachi every season. Grace stays. I opened this
+          salon in 2008 to give every woman on this street both.&rdquo;
+        </blockquote>
+        <p className="mt-6 text-[11px] tracking-[0.28em] uppercase font-['Inter'] text-stone">
+          Rubina · Founder, Farwa Beauty Salon
+        </p>
+      </div>
+    </section>
+  )
+}
+
 export default function HomeBelowFold() {
   return (
     <>
@@ -717,6 +739,7 @@ export default function HomeBelowFold() {
       <FeaturedServices />
       <TrustPillars />
       <SalonLocalBlock />
+      <FounderNote />
       <TestimonialsPreview />
       <CtaBand />
     </>

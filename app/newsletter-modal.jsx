@@ -6,7 +6,7 @@ import { m, AnimatePresence } from 'framer-motion'
 import { X, Check, ArrowUpRight } from 'lucide-react'
 
 const STORAGE_KEY = 'farwa-newsletter-seen'
-const DELAY_MS = 25_000
+const SCROLL_DEPTH = 0.6
 
 function alreadySeen() {
   if (typeof window === 'undefined') return true
@@ -44,7 +44,6 @@ export default function NewsletterModal() {
     if (!eligible || alreadySeen()) return
 
     let fired = false
-    let timer = null
 
     const triggerOnce = () => {
       if (fired) return
@@ -52,7 +51,12 @@ export default function NewsletterModal() {
       setOpen(true)
     }
 
-    timer = setTimeout(triggerOnce, DELAY_MS)
+    // Engagement-gated only: never ambush a visitor who just arrived.
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      if (max > 0 && window.scrollY / max >= SCROLL_DEPTH) triggerOnce()
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
 
     const onPointerLeave = (e) => {
       // exit-intent: mouse leaves through the top of the viewport
@@ -61,7 +65,7 @@ export default function NewsletterModal() {
     document.addEventListener('mouseleave', onPointerLeave)
 
     return () => {
-      clearTimeout(timer)
+      window.removeEventListener('scroll', onScroll)
       document.removeEventListener('mouseleave', onPointerLeave)
     }
   }, [eligible, pathname])
@@ -176,11 +180,11 @@ export default function NewsletterModal() {
                 </div>
               ) : (
                 <>
-                  <p className="text-[#c9a98a] text-[10px] tracking-[0.32em] uppercase font-['Inter'] font-medium mb-3">
+                  <p className="text-accent-gold-deep text-[10px] tracking-[0.32em] uppercase font-['Inter'] font-medium mb-3">
                     — A welcome gift
                   </p>
                   <h2 id="newsletter-heading" className="font-['Unbounded'] font-bold text-2xl sm:text-[1.65rem] text-ink leading-tight mb-3">
-                    Get <span className="text-[#c9a98a]">10% off</span> your first facial
+                    Get <span className="text-accent-gold-deep">10% off</span> your first facial
                   </h2>
                   <p className="text-stone text-[13px] font-['Inter'] font-light leading-relaxed mb-6">
                     Plus monthly seasonal tips, bridal timelines, and early access to slots in peak season. No spam — promise.
