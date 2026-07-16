@@ -704,6 +704,31 @@ video[aria-hidden="true"] { pointer-events: none; }
   to   { transform: translateY(0);     opacity: 1; }
 }
 
+/* ── Hero entrance (replaces framer-motion so first paint doesn't wait
+      for hydration — the hero text was the LCP element, painting at ~10s
+      on throttled mobile because JS gated its visibility) ── */
+@keyframes heroRise {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.hero-rise {
+  animation: heroRise 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-fade-up {
+  animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-fade {
+  animation: heroFade 0.7s ease both;
+}
+
 /* ── content-visibility for below-fold sections (paint-holding) ── */
 .cv-auto {
   content-visibility: auto;
