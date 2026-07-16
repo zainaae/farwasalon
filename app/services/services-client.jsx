@@ -35,6 +35,11 @@ export default function ServicesClient() {
   const categories = Object.keys(SERVICES)
   const [activeTab, setActiveTab] = useState('All')
   const visibleCategories = filterServiceCategories(categories, activeTab)
+  // Videos only mount on first hover/touch/focus — mounting them all on
+  // scroll would fetch every category's clip (~2MB each) just browsing the grid.
+  const [videoCats, setVideoCats] = useState(() => new Set())
+  const activateVideo = (cat) =>
+    setVideoCats((prev) => (prev.has(cat) ? prev : new Set(prev).add(cat)))
 
   return (
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
@@ -97,14 +102,17 @@ export default function ServicesClient() {
             return (
               <motion.article key={cat}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="relative overflow-hidden group text-left" style={{ aspectRatio: '3/4' }}>
+                className="relative overflow-hidden group text-left" style={{ aspectRatio: '3/4' }}
+                onMouseEnter={() => meta.video && activateVideo(cat)}
+                onTouchStart={() => meta.video && activateVideo(cat)}
+                onFocus={() => meta.video && activateVideo(cat)}>
                 <Link href={href} onClick={() => track('ServiceCategoryView', { category: cat })} className="absolute inset-0 z-10" aria-label={`${cat} — ${count} services${minPrice ? `, from ${formatPrice(minPrice)}` : ''}`}>
                   <span className="sr-only">View {cat} services</span>
                 </Link>
                 <Image src={meta.img} alt={cat} loading="lazy" width={900} height={1200}
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105${meta.video ? ' group-hover:opacity-0' : ''}`} />
-                {meta.video && (
+                {meta.video && videoCats.has(cat) && (
                   <LazyVideo
                     src={meta.video}
                     poster={meta.img}

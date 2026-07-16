@@ -43,6 +43,19 @@ test.describe('Services pages', () => {
     })
   }
 
+  test('/services category videos mount only on hover', async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('farwa-newsletter-seen', '1'))
+    await page.goto('/services')
+    await expect(page.getByRole('link', { name: /threading/i }).first()).toBeVisible()
+
+    // No hover yet — no category clip may be fetched just from browsing the grid.
+    expect(await page.locator('article video').count()).toBe(0)
+
+    const card = page.locator('article', { has: page.locator('a[href="/services/threading"]') })
+    await card.hover()
+    await expect(card.locator('video source[src="/threading.mp4"]')).toHaveCount(1)
+  })
+
   test('/services/hair service modal and book link', async ({ page }) => {
     await page.goto('/services/hair')
     await page.getByRole('button', { name: /haircut & blowdry/i }).click()
