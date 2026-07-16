@@ -26,28 +26,27 @@ export function useNextSlot() {
   }, [])
   return slot
 }
-function computeNextSlot() {
-  const now  = new Date()
-  const day  = now.getDay() // 0 Sun..6 Sat
-  const hr   = now.getHours()
-  const isOpen = day !== 0 && hr >= 11 && hr < 19
-  if (isOpen) {
-    const min = now.getMinutes()
-    let h = hr, m = min < 30 ? 30 : 0
-    if (min >= 30) h = Math.min(18, hr + 1)
-    if (h > 18 || (h === 18 && m > 30)) {
-      return day === 6
-        ? { label: 'Monday · 11:00am', open: false }
-        : { label: 'Tomorrow · 11:00am', open: false }
-    }
-    const suffix = h >= 12 ? 'pm' : 'am'
-    const h12 = h > 12 ? h - 12 : (h === 0 ? 12 : h)
-    return { label: `Today · ${h12}:${String(m).padStart(2,'0')}${suffix}`, open: true }
-  }
+export function computeNextSlot(now = new Date()) {
+  const day = now.getDay() // 0 Sun..6 Sat
   if (day === 0) return { label: 'Tomorrow · 11:00am', open: false } // Sunday closed → Monday
-  if (day === 6 && hr >= 19) return { label: 'Monday · 11:00am', open: false }
+
+  const hr = now.getHours()
   if (hr < 11) return { label: 'Today · 11:00am', open: false }
-  return { label: 'Tomorrow · 11:00am', open: false }
+
+  // Same 30-min lead the slots API enforces, rounded up to the next :00/:30.
+  const LAST_SLOT = 18 * 60 + 30 // 6:30pm is the last bookable slot of the day
+  const slotMin = Math.ceil((hr * 60 + now.getMinutes() + 30) / 30) * 30
+  if (slotMin > LAST_SLOT) {
+    return day === 6
+      ? { label: 'Monday · 11:00am', open: false }
+      : { label: 'Tomorrow · 11:00am', open: false }
+  }
+
+  const h = Math.floor(slotMin / 60)
+  const m = slotMin % 60
+  const suffix = h >= 12 ? 'pm' : 'am'
+  const h12 = h > 12 ? h - 12 : h
+  return { label: `Today · ${h12}:${String(m).padStart(2, '0')}${suffix}`, open: true }
 }
 
 /* ─── Skip-to-content link (keyboard a11y) ─────────────────────── */
