@@ -1,4 +1,4 @@
-import { Inter, Unbounded, Syne, Noto_Nastaliq_Urdu } from 'next/font/google'
+import { Inter, Unbounded, Syne } from 'next/font/google'
 import Script from 'next/script'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
@@ -15,7 +15,7 @@ const inter = Inter({
 
 const unbounded = Unbounded({
   subsets: ['latin'],
-  weight: ['400', '700', '900'],
+  weight: ['400', '700'],
   variable: '--font-unbounded',
   display: 'swap',
 })
@@ -25,13 +25,6 @@ const syne = Syne({
   weight: ['400', '600', '700'],
   variable: '--font-syne',
   display: 'swap',
-})
-
-const nastaliq = Noto_Nastaliq_Urdu({
-  subsets: ['arabic'],
-  weight: ['400'],
-  variable: '--font-nastaliq',
-  display: 'optional',
 })
 
 export const metadata = {
@@ -104,7 +97,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${unbounded.variable} ${syne.variable} ${nastaliq.variable}`}
+      className={`${inter.variable} ${unbounded.variable} ${syne.variable}`}
     >
       <head>
         {/* Fonts are self-hosted via next/font — no runtime Google Fonts connection. */}

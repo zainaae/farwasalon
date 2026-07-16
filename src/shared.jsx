@@ -758,7 +758,7 @@ export function WordmarkDivider() {
     <div aria-hidden="true" className="bg-white border-y border-border-soft overflow-hidden">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-5 sm:py-6 md:py-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 md:gap-8 text-center sm:text-left">
         <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a98a]/50 to-[#c9a98a]" />
-        <span className="font-['Unbounded'] font-black text-ink tracking-[0.3em] text-[11px] md:text-[13px] shrink-0">
+        <span className="font-['Unbounded'] font-bold text-ink tracking-[0.3em] text-[11px] md:text-[13px] shrink-0">
           F · B · S
         </span>
         <span className="hidden sm:inline text-[#c9a98a] text-xs" aria-hidden="true">✦</span>
