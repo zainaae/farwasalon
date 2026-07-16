@@ -154,15 +154,15 @@ function Hero() {
 
           <h1
             id="hero-headline"
-            className="font-['Unbounded'] text-white leading-[1.02] mb-3 md:mb-4 break-words"
+            className="font-['Unbounded'] text-white leading-[0.98] mb-3 md:mb-4 break-words"
             style={{
-              fontSize: 'clamp(1.65rem, 5.2vw, 3.25rem)',
-              letterSpacing: '-0.02em',
-              maxWidth: '22ch',
+              fontSize: 'clamp(2.35rem, 8.5vw, 6.75rem)',
+              letterSpacing: '-0.025em',
+              maxWidth: '14ch',
             }}>
             <span className="block overflow-hidden">
               <span
-                className="hero-rise block text-white font-semibold"
+                className="hero-rise block text-white font-bold"
                 style={{ animationDelay: '0.28s' }}>
                 Beauty Salon in PECHS
               </span>
@@ -198,11 +198,11 @@ function Hero() {
             className="hero-fade-up flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 max-w-md sm:max-w-none"
             style={{ animationDelay: '1.35s' }}>
             <Link href="/book"
-              className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2 bg-white text-ink text-[11px] md:text-[12px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-all duration-300 shadow-lg shadow-black/25">
+              className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2 bg-white text-ink text-[12.5px] md:text-[13px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 md:px-9 py-4 md:py-[1.15rem] hover:bg-nude active:scale-[0.97] transition-all duration-300 shadow-lg shadow-black/25">
               Book an Appointment <ArrowUpRight className="w-4 h-4" />
             </Link>
             <Link href="/services"
-              className="tap-safe link-underline text-white/80 text-[11px] md:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
+              className="tap-safe link-underline text-white/80 text-[12.5px] md:text-[13px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
               Explore Services
             </Link>
             <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noreferrer"

@@ -950,7 +950,7 @@ export function Navbar({ transparent = false }) {
             return (
               <Link key={href} href={href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`nav-link shrink-0 text-[9px] md:text-[10px] lg:text-[11px] tracking-[0.16em] md:tracking-[0.18em] lg:tracking-[0.2em] uppercase font-medium font-['Inter'] transition-colors duration-200 whitespace-nowrap
+                className={`nav-link shrink-0 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors duration-200 whitespace-nowrap
                 ${hideOnDesktop ? 'md:hidden' : ''}
                 ${wideOnly ? 'hidden lg:inline-block' : ''}
                 ${isActive ? `nav-link--active ${light ? 'nav-link--on-light text-ink' : 'nav-link--on-dark text-white'}` : (light ? 'text-stone hover:text-ink' : 'text-white/65 hover:text-white')}`}>
@@ -961,7 +961,7 @@ export function Navbar({ transparent = false }) {
         </nav>
         <div className="justify-self-end flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
           <Link href="/book"
-            className={`hidden md:inline-flex items-center gap-1.5 text-[9px] md:text-[10px] lg:text-[11px] tracking-[0.14em] lg:tracking-[0.16em] uppercase font-semibold font-['Inter'] px-3 md:px-3.5 lg:px-4 py-2 rounded-sm border transition-all duration-300 whitespace-nowrap active:scale-[0.98] ${
+            className={`hidden md:inline-flex items-center gap-1.5 text-[11px] lg:text-[12px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-4 lg:px-5 py-2.5 rounded-sm border transition-all duration-300 whitespace-nowrap active:scale-[0.98] ${
               light
                 ? 'bg-ink text-white border-ink hover:bg-stone hover:border-stone'
                 : 'bg-transparent text-white border-white/70 hover:bg-white hover:text-ink hover:border-white'

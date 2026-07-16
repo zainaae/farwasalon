@@ -43,17 +43,18 @@ test.describe('Services pages', () => {
     })
   }
 
-  test('/services category videos mount only on hover', async ({ page }) => {
+  test('/services menu lists all 13 categories with printed prices', async ({ page }) => {
     await page.addInitScript(() => localStorage.setItem('farwa-newsletter-seen', '1'))
     await page.goto('/services')
     await expect(page.getByRole('link', { name: /threading/i }).first()).toBeVisible()
 
-    // No hover yet — no category clip may be fetched just from browsing the grid.
-    expect(await page.locator('article video').count()).toBe(0)
-
-    const card = page.locator('article', { has: page.locator('a[href="/services/threading"]') })
-    await card.hover()
-    await expect(card.locator('video source[src="/threading.mp4"]')).toHaveCount(1)
+    // Five editorial chapters, thirteen category rows, every row priced.
+    for (const chapter of ['The Face', 'The Brow & The Silk', 'The Hair', 'The Hands & The Calm', 'The Bride']) {
+      await expect(page.locator(`section[aria-label="${chapter}"]`)).toHaveCount(1)
+    }
+    const rows = page.locator('a[href^="/services/"]', { has: page.locator('h2') })
+    await expect(rows).toHaveCount(13)
+    await expect(page.getByText(/^from$/i)).toHaveCount(13)
   })
 
   test('/services/hair service modal and book link', async ({ page }) => {

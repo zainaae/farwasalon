@@ -1,12 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { m } from 'framer-motion'
-import { ChevronRight, ArrowUpRight } from 'lucide-react'
-import { CAT_SLUGS, LazyVideo } from '../../src/shared.jsx'
-import { SERVICES, CAT_META, track, formatPrice, SERVICE_FILTER_TABS, filterServiceCategories } from '../../src/data.js'
+import { ArrowUpRight, ChevronRight } from 'lucide-react'
+import { CAT_SLUGS } from '../../src/shared.jsx'
+import { SERVICES, CAT_META, track, formatPrice } from '../../src/data.js'
 import LiveAvailability from './live-availability'
 
 function getCatMeta(cat) {
@@ -31,16 +30,73 @@ const AVAILABILITY_HINTS = {
   'Eyebrow Tattoo': 'Book 3–5 days ahead',
 }
 
-export default function ServicesClient() {
-  const categories = Object.keys(SERVICES)
-  const [activeTab, setActiveTab] = useState('All')
-  const visibleCategories = filterServiceCategories(categories, activeTab)
-  // Videos only mount on first hover/touch/focus — mounting them all on
-  // scroll would fetch every category's clip (~2MB each) just browsing the grid.
-  const [videoCats, setVideoCats] = useState(() => new Set())
-  const activateVideo = (cat) =>
-    setVideoCats((prev) => (prev.has(cat) ? prev : new Set(prev).add(cat)))
+/* The menu is grouped into editorial chapters instead of a card grid —
+   a ruled, priced list reads like a couture menu and prints every
+   starting price (the big salons make you call to ask). */
+const MENU_CHAPTERS = [
+  { name: 'The Face', caption: 'Glow & skin rituals', cats: ['Facials', 'Cleansing', 'Bleach & Polish'] },
+  { name: 'The Brow & The Silk', caption: 'Shaping & hair removal', cats: ['Threading', 'Eyebrow Tattoo', 'Rica Hot Wax', 'Honey Wax', 'Rica Wax'] },
+  { name: 'The Hair', caption: 'Cut · colour · repair', cats: ['Hair', 'Hair Treatments'] },
+  { name: 'The Hands & The Calm', caption: 'Nails · body · rest', cats: ['Nails', 'Massage'] },
+  { name: 'The Bride', caption: 'The flagship', cats: ['Bridal'] },
+]
 
+function MenuRow({ cat }) {
+  const meta = getCatMeta(cat)
+  const services = SERVICES[cat] || []
+  const count = services.length
+  const prices = services.map(s => s.pricePkr).filter(Boolean)
+  const minPrice = prices.length ? Math.min(...prices) : null
+  const href = `/services/${CAT_SLUGS[cat]}`
+  const availability = AVAILABILITY_HINTS[cat]
+
+  return (
+    <Link
+      href={href}
+      onClick={() => track('ServiceCategoryView', { category: cat })}
+      className="group grid grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] items-center gap-4 sm:gap-6 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
+      <span className="relative block w-14 h-[4.2rem] sm:w-[4.5rem] sm:h-[5.4rem] shrink-0 border border-border-soft p-[3px] bg-white">
+        <span className="relative block w-full h-full overflow-hidden">
+          <Image
+            src={meta.img}
+            alt=""
+            fill
+            sizes="72px"
+            loading="lazy"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        </span>
+      </span>
+      <span className="min-w-0">
+        <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+          <h2 className="font-['Syne'] font-semibold text-ink text-lg sm:text-xl md:text-2xl leading-tight">{cat}</h2>
+          {POPULAR_CATS.has(cat) && (
+            <span className="text-[9px] tracking-[0.18em] uppercase font-semibold font-['Inter'] text-accent-gold-deep">Most booked</span>
+          )}
+        </span>
+        {meta.tagline && (
+          <p className="text-stone text-[13px] sm:text-sm font-light font-['Inter'] leading-snug mt-0.5 max-w-xl">{meta.tagline}</p>
+        )}
+        <p className="text-stone/70 text-[11px] font-['Inter'] mt-1">
+          {count} services{availability ? ` · ${availability.toLowerCase()}` : ''}
+        </p>
+      </span>
+      <span className="text-right shrink-0">
+        {minPrice && (
+          <>
+            <span className="block text-[10px] tracking-[0.18em] uppercase font-['Inter'] text-stone">from</span>
+            <span className="block font-['Unbounded'] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight">{formatPrice(minPrice)}</span>
+          </>
+        )}
+        <span className="mt-1.5 inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+          View <ChevronRight className="w-3 h-3" />
+        </span>
+      </span>
+    </Link>
+  )
+}
+
+export default function ServicesClient() {
   return (
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
       <div className="section-shell section-pad min-h-0">
@@ -53,15 +109,16 @@ export default function ServicesClient() {
           </div>
           <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }}
             className="text-body max-w-lg mb-6">
-            From threading to bridal packages — select a category to explore our full menu. Book online in under a minute, or message us on WhatsApp.
+            Thirteen specialities, one hundred plus services — every starting price printed below.
+            Book online in under a minute, or message us on WhatsApp.
           </m.p>
           <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}
             className="flex flex-wrap items-center gap-3">
-            <Link href="/book" className="tap-safe btn-primary text-[10px] sm:text-[11px] !py-2.5 !px-5">
+            <Link href="/book" className="tap-safe btn-primary !py-2.5 !px-5">
               Book online <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
             <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer"
-              className="tap-safe btn-secondary text-[10px] sm:text-[11px] !py-2.5 !px-5">
+              className="tap-safe btn-secondary !py-2.5 !px-5">
               WhatsApp
             </a>
           </m.div>
@@ -69,84 +126,21 @@ export default function ServicesClient() {
 
         <LiveAvailability />
 
-        <div
-          className="tab-scroller mb-6"
-          role="tablist"
-          aria-label="Filter service categories"
-        >
-          {SERVICE_FILTER_TABS.map((tab) => (
-            <button
-              key={tab}
-              type="button"
-              role="tab"
-              aria-selected={activeTab === tab}
-              onClick={() => setActiveTab(tab)}
-              className={`tap-safe tab-pill ${activeTab === tab ? 'tab-pill-active' : ''}`}
-            >
-              {tab}
-            </button>
+        <h2 className="sr-only">Browse all service categories</h2>
+        <div>
+          {MENU_CHAPTERS.map(({ name, caption, cats }) => (
+            <section key={name} aria-label={name}>
+              <div className="flex items-baseline gap-4 pt-10 pb-3 border-b border-ink/30 first:pt-2">
+                <span className="font-['Syne'] italic font-semibold text-accent-gold-deep text-base sm:text-lg">{name}</span>
+                <span className="eyebrow !text-[9px]">{caption}</span>
+              </div>
+              {cats.map((cat) => <MenuRow key={cat} cat={cat} />)}
+            </section>
           ))}
         </div>
-
-        <h2 className="sr-only">Browse all service categories</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-          {visibleCategories.map((cat, i) => {
-            const meta = getCatMeta(cat)
-            const services = SERVICES[cat]
-            const count = services.length
-            const prices = services.map(s => s.pricePkr).filter(Boolean)
-            const minPrice = prices.length ? Math.min(...prices) : null
-            const href = `/services/${CAT_SLUGS[cat]}`
-            const isPopular = POPULAR_CATS.has(cat)
-            const availability = AVAILABILITY_HINTS[cat]
-            return (
-              <m.article key={cat}
-                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="relative overflow-hidden group text-left" style={{ aspectRatio: '3/4' }}
-                onMouseEnter={() => meta.video && activateVideo(cat)}
-                onTouchStart={() => meta.video && activateVideo(cat)}
-                onFocus={() => meta.video && activateVideo(cat)}>
-                <Link href={href} onClick={() => track('ServiceCategoryView', { category: cat })} className="absolute inset-0 z-10" aria-label={`${cat} — ${count} services${minPrice ? `, from ${formatPrice(minPrice)}` : ''}`}>
-                  <span className="sr-only">View {cat} services</span>
-                </Link>
-                <Image src={meta.img} alt={cat} loading="lazy" width={900} height={1200}
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 group-hover:scale-105${meta.video ? ' group-hover:opacity-0' : ''}`} />
-                {meta.video && videoCats.has(cat) && (
-                  <LazyVideo
-                    src={meta.video}
-                    poster={meta.img}
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-ink/5" />
-                <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/20 transition-colors duration-300" />
-                <div className="absolute top-3 right-3 flex flex-col items-end gap-1">
-                  {isPopular && (
-                    <span className="text-[8px] tracking-[0.18em] uppercase font-semibold font-['Inter'] text-[#faf7f5] bg-accent-gold/90 backdrop-blur-sm px-2.5 py-1">Most Booked</span>
-                  )}
-                  <span className="text-[9px] tracking-widest uppercase text-white/50 font-['Inter'] bg-ink/30 backdrop-blur-sm px-2 py-1">{count} services</span>
-                  {minPrice && (
-                    <span className="text-[9px] tracking-wider text-white/80 font-['Inter'] bg-ink/40 backdrop-blur-sm px-2 py-1">From {formatPrice(minPrice)}</span>
-                  )}
-                </div>
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <h2 className="text-white font-['Syne'] font-bold text-xs sm:text-sm uppercase leading-tight mb-1 line-clamp-2">{cat}</h2>
-                  {meta.tagline && (
-                    <p className="text-white/55 text-[10px] font-['Inter'] leading-snug line-clamp-1">{meta.tagline}</p>
-                  )}
-                  {availability && (
-                    <p className="text-white/65 text-[9px] font-['Inter'] mt-1">{availability}</p>
-                  )}
-                  <div className="flex items-center gap-1 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <span className="text-white text-[10px] tracking-widest uppercase font-['Inter']">View services</span>
-                    <ChevronRight className="w-3 h-3 text-white" />
-                  </div>
-                </div>
-              </m.article>
-            )
-          })}
-        </div>
+        <p className="mt-8 text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone/80">
+          Every price is a printed starting figure — final quotes confirmed before your appointment, never after.
+        </p>
       </div>
     </main>
   )

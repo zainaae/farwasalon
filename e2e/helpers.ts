@@ -138,14 +138,18 @@ export async function openNewsletterModal(page: Page) {
     } catch {
       // private mode
     }
-    const originalSetTimeout = window.setTimeout.bind(window)
-    window.setTimeout = ((handler: TimerHandler, timeout?: number, ...args: unknown[]) => {
-      if (typeof timeout === 'number' && timeout >= 20_000) {
-        return originalSetTimeout(handler, 50, ...args)
-      }
-      return originalSetTimeout(handler, timeout, ...args)
-    }) as typeof window.setTimeout
   })
   await page.goto('/')
-  await expect(page.getByRole('dialog', { name: /10% off/i })).toBeVisible({ timeout: 15_000 })
+  // The modal is engagement-gated: it opens at 60% scroll depth. The scroll
+  // listener attaches after hydration, so keep nudging until it reacts.
+  const dialog = page.getByRole('dialog', { name: /10% off/i })
+  for (let i = 0; i < 30; i++) {
+    if (await dialog.isVisible().catch(() => false)) break
+    await page.evaluate(() => {
+      window.scrollTo({ top: document.documentElement.scrollHeight * 0.85, behavior: 'instant' })
+      window.dispatchEvent(new Event('scroll'))
+    })
+    await page.waitForTimeout(250)
+  }
+  await expect(dialog).toBeVisible({ timeout: 5_000 })
 }

@@ -42,8 +42,8 @@ export default function GalleryClient() {
           A sample of the services we offer at our PECHS studio. Authentic client before/after sets will be added here as they become available.
         </p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-6">
-          {GALLERY_SHOWCASE_ITEMS.map((item) => (
-            <WorkShowcaseCard key={item.label} src={item.src} label={item.label} alt={item.alt} video={item.video} />
+          {GALLERY_SHOWCASE_ITEMS.map((item, i) => (
+            <WorkShowcaseCard key={item.label} src={item.src} label={item.label} alt={item.alt} video={item.video} index={i} />
           ))}
         </div>
       </section>
