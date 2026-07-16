@@ -5,11 +5,15 @@ const scriptSrc = isDev
   ? "'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io"
   : "'self' 'unsafe-inline' https://plausible.io"
 
+// script-src keeps 'unsafe-inline': a nonce-based CSP would force every page to
+// render dynamically (middleware per request), losing static/CDN serving — a bad
+// trade for this mostly-static site. Fonts are self-hosted via next/font, so no
+// Google Fonts origins are needed.
 const contentSecurityPolicy = [
   "default-src 'self'",
   `script-src ${scriptSrc}`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
   "img-src 'self' data: https:",
   'frame-src https://www.google.com',
   "connect-src 'self' https://plausible.io https://wa.me",

@@ -50,9 +50,8 @@ jobs:
 
   lighthouse:
     runs-on: ubuntu-latest
-    # Warn-only budgets (see lighthouserc.json) — plan calls for warn->error
-    # rollout once scores stabilize. Never blocks a merge.
-    continue-on-error: true
+    # Category budgets are errors (median of 3 runs, see lighthouserc.json);
+    # individual metric budgets (LCP/CLS/TBT) stay warn — CI runners are noisy.
     steps:
       - name: Checkout
         uses: actions/checkout@v4

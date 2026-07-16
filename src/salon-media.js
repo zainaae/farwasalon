@@ -7,7 +7,7 @@
 
 /** Owned salon footage (not stock). */
 export const SALON_OWNED = {
-  nailsVideo: '/manicurephotography.webm',
+  nailsVideo: '/manicurephotography.mp4',
   nailsPoster: '/pedicure.jpg',
 }
 

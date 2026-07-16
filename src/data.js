@@ -313,7 +313,7 @@ export function getAddonsForService(serviceId) {
 export const GALLERY_SHOWCASE_ITEMS = [
   { src: '/glow3.jpg', label: 'Threading & glow facial', alt: 'Facial glow treatment at Farwa Beauty Salon' },
   { src: '/bridal.jpg', label: 'Bridal styling', alt: 'Bridal makeup and styling at Farwa Beauty Salon' },
-  { src: '/pedicure.jpg', label: 'Manicure & pedicure', alt: 'Nail services at Farwa Beauty Salon', video: '/manicurephotography.webm' },
+  { src: '/pedicure.jpg', label: 'Manicure & pedicure', alt: 'Nail services at Farwa Beauty Salon', video: '/manicurephotography.mp4' },
 ]
 
 /*
@@ -349,7 +349,7 @@ export const CAT_META = {
   'Facials':         { img: '/glow3.jpg',
     tagline: '11 facials for every skin type from Rs 1,400',
     desc: 'Professional facials starting from Rs 1,400 at Farwa Beauty Salon in PECHS, Karachi, with 11 specialised treatments to suit every skin type and concern. Our facial menu ranges from gentle Herbal Organic Facials for sensitive skin to advanced Janssen Whitening Facials using premium German cosmeceuticals for stubborn pigmentation and dullness. Facials are perfect for anyone who wants to maintain healthy, glowing skin, address specific concerns like acne, dark spots, or uneven texture, or simply enjoy a relaxing, rejuvenating skincare experience. Each session includes cleansing, exfoliation, targeted treatment serums, massage, and a finishing mask tailored to your skin\'s unique needs. Expect a brighter, more hydrated complexion with improved tone and texture — visible results from the very first session, with cumulative benefits from regular visits every four to six weeks. For best aftercare, avoid direct sun exposure for 24 hours, skip harsh products for a day, and keep your skin well-moisturised. Our expert team has been delivering glowing results since 2008 — book online at farwasalon.com/book.' },
-  'Nails':           { img: '/pedicure.jpg',       video: '/manicurephotography.webm',
+  'Nails':           { img: '/pedicure.jpg',       video: '/manicurephotography.mp4',
     tagline: 'Manicure, pedicure & nail art from Rs 300',
     desc: 'Professional manicure, pedicure, and nail art services starting from Rs 300 at Farwa Beauty Salon in PECHS, Karachi. Our nail menu covers everything from basic nail paint and filing to luxurious SPA manicures, paraffin treatments, French tips, and whitening pedicures — a complete range for beautifully groomed hands and feet. These services are perfect for clients who want well-maintained nails for daily confidence, special occasions, or as a regular self-care ritual. Each treatment includes careful cuticle care, shaping, and a polished finish, while our premium options add exfoliation, hydrating masks, and massage for the ultimate pampering experience. Expect salon-smooth hands and soft, refreshed feet with long-lasting colour that stays chip-free for days. Our whitening manicure and pedicure options also help even out skin tone on hands and feet for a brighter appearance. For best aftercare, wear gloves when washing dishes, apply cuticle oil daily, and moisturise your hands and feet every night to maintain results between visits. book online at farwasalon.com/book or walk in.' },
   'Bridal':          { img: '/bridal.jpg',

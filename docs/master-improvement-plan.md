@@ -28,8 +28,8 @@ production (15 July 2026):**
 - **Synthetic monitoring** — `.github/workflows/synthetic.yml` probes
   production nightly (12 API scenarios + 48-route crawl). Client errors now
   land in Vercel function logs via `/api/log-error` (see `app/error.jsx`).
-- **Lighthouse CI** — warn-only budgets in `lighthouserc.json`; promote to
-  errors once scores stabilize.
+- **Lighthouse CI** — category budgets promoted to **errors** (median of 3 runs,
+  16 Jul 2026); metric budgets (LCP/CLS/TBT) remain warn-only.
 
 | Phase | Dev work | Ops work (owner: You) |
 |-------|----------|----------------------|
