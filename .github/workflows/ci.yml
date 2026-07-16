@@ -50,8 +50,10 @@ jobs:
 
   lighthouse:
     runs-on: ubuntu-latest
-    # Category budgets are errors (median of 3 runs, see lighthouserc.json);
-    # individual metric budgets (LCP/CLS/TBT) stay warn — CI runners are noisy.
+    # Category budgets are errors (median of 3 runs, see lighthouserc.json).
+    # Perf floor is 0.65: throttled CI runners score ~0.73-0.78 on pages that
+    # do better on real devices, so 0.65 catches regressions without flake.
+    # Individual metric budgets (LCP/CLS/TBT) stay warn — runners are noisy.
     steps:
       - name: Checkout
         uses: actions/checkout@v4

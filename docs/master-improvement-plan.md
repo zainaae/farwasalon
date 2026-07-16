@@ -29,7 +29,8 @@ production (15 July 2026):**
   production nightly (12 API scenarios + 48-route crawl). Client errors now
   land in Vercel function logs via `/api/log-error` (see `app/error.jsx`).
 - **Lighthouse CI** — category budgets promoted to **errors** (median of 3 runs,
-  16 Jul 2026); metric budgets (LCP/CLS/TBT) remain warn-only.
+  16 Jul 2026): a11y 0.9 / SEO 0.95 / best-practices 0.9, perf floor 0.65
+  (throttled CI runners score ~0.73–0.78). Metric budgets (LCP/CLS/TBT) warn-only.
 
 | Phase | Dev work | Ops work (owner: You) |
 |-------|----------|----------------------|
