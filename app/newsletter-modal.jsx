@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { X, Check, ArrowUpRight } from 'lucide-react'
 
 const STORAGE_KEY = 'farwa-newsletter-seen'
@@ -126,7 +126,7 @@ export default function NewsletterModal() {
   return (
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -137,7 +137,7 @@ export default function NewsletterModal() {
           aria-labelledby="newsletter-heading"
           onClick={dismiss}
         >
-          <motion.div
+          <m.div
             initial={{ y: 24, opacity: 0, scale: 0.97 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: 24, opacity: 0 }}
@@ -257,8 +257,8 @@ export default function NewsletterModal() {
                 </>
               )}
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

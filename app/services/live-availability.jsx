@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Clock, ArrowUpRight } from 'lucide-react'
 import { CTA_PRIMARY_LABEL } from '../../src/shared.jsx'
 import { toLocalDateString } from '../../lib/date-local.js'
@@ -49,7 +49,7 @@ export default function LiveAvailability() {
 
   if (state.status === 'closed') {
     return (
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
         className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft max-w-full min-w-0"
@@ -62,7 +62,7 @@ export default function LiveAvailability() {
             <span className="font-medium text-ink">{state.reason}.</span> Browse services and book ahead for the next open day.
           </p>
         </div>
-      </motion.div>
+      </m.div>
     )
   }
 
@@ -76,7 +76,7 @@ export default function LiveAvailability() {
       : { dot: 'bg-[#4a9b3f]', label: 'Slots available today' }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
       className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft max-w-full min-w-0"
@@ -103,6 +103,6 @@ export default function LiveAvailability() {
           {CTA_PRIMARY_LABEL} <ArrowUpRight className="w-3 h-3" />
         </Link>
       )}
-    </motion.div>
+    </m.div>
   )
 }

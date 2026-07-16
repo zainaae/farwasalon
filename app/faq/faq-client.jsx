@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronDown, MessageCircle } from 'lucide-react'
 import { CTA_PRIMARY_LABEL } from '../../src/shared.jsx'
 import { FAQ_GROUPS } from '../../src/faq-data.js'
@@ -11,7 +11,7 @@ import { WA_DEFAULT } from '../../src/data.js'
 function FaqItem({ faq, index }) {
   const [open, setOpen] = useState(false)
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }} transition={{ duration: 0.4, delay: index * 0.03 }}
       className="border-b border-border-soft"
@@ -30,7 +30,7 @@ function FaqItem({ faq, index }) {
       <div id={`faq-panel-${index}`} role="region" className={`overflow-hidden transition-all duration-200 ${open ? 'max-h-[28rem] pb-5 -mt-1' : 'max-h-0'}`}>
         <p className="text-body text-sm">{faq.a}</p>
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 
@@ -42,13 +42,13 @@ export default function FaqClient() {
 
       <section className="bg-white py-16 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="eyebrow mb-3">— Common questions</motion.p>
+          <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+            className="eyebrow mb-3">— Common questions</m.p>
           <div className="overflow-hidden">
-            <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+            <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
               <span className="block">FREQUENTLY</span> <span className="block">ASKED</span>
-            </motion.h1>
+            </m.h1>
           </div>
         </div>
       </section>
@@ -71,15 +71,15 @@ export default function FaqClient() {
 
       <section className="bg-ink py-16 md:py-20">
         <div className="section-shell flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <motion.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
+          <m.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <h2 className="font-['Unbounded'] font-bold text-xl md:text-2xl text-white mb-2">
               Still have questions?
             </h2>
             <p className="text-stone text-sm font-['Inter'] font-light max-w-md">
               WhatsApp us — we usually reply within a few hours during salon hours.
             </p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
+          </m.div>
+          <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
             className="flex flex-wrap items-center gap-4">
             <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
               className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3.5 hover:bg-nude transition-colors duration-300">
@@ -90,7 +90,7 @@ export default function FaqClient() {
               <span className="min-w-0">{CTA_PRIMARY_LABEL}</span>
               <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </section>
     </main>

@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import { useBooking } from '../../src/shared.jsx'
 import { BLOG_POSTS } from '../../src/blog-data.js'
@@ -29,28 +29,28 @@ export default function BlogIndexClient() {
 
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
           <div className="overflow-hidden">
-            <motion.h1
+            <m.h1
               initial={{ y: '60%', opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="display-section text-ink mb-4"
             >
               BEAUTY TIPS<span className="text-border-soft mx-3 font-light italic text-[0.6em]">—</span>&amp; GUIDES
-            </motion.h1>
+            </m.h1>
           </div>
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
             className="text-body max-w-lg"
           >
             Expert advice from our team — bridal prep timelines, skincare for Karachi weather, and professional tips you can use at home.
-          </motion.p>
+          </m.p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           {BLOG_POSTS.map((post, i) => (
-            <motion.article
+            <m.article
               key={post.slug}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ export default function BlogIndexClient() {
                 </span>
                 </div>
               </Link>
-            </motion.article>
+            </m.article>
           ))}
         </div>
 

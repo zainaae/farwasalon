@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ServiceModal, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
@@ -63,9 +63,9 @@ export default function CategoryDetailClient({ categorySlug }) {
   if (!category) {
     return (
       <main id="main" className="page-content">
-        <motion.div className="section-shell section-pad min-h-0">
+        <m.div className="section-shell section-pad min-h-0">
           <p className="text-body">Category not found.</p>
-        </motion.div>
+        </m.div>
       </main>
     )
   }
@@ -102,24 +102,24 @@ export default function CategoryDetailClient({ categorySlug }) {
             </ol>
           </nav>
 
-          <motion.button initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}
+          <m.button initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}
             onClick={onBack}
             className="flex items-center gap-2 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors mb-8">
             <ChevronLeft className="w-3.5 h-3.5" /> All Services
-          </motion.button>
+          </m.button>
 
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+          <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="mb-8 pb-8 border-b border-border-soft">
             <p className="eyebrow mb-2">— {services.length} services</p>
             <h1 id="service-category-title" className="section-title text-2xl md:text-3xl uppercase mb-3">{category}</h1>
             <p id="service-category-desc" className="text-body max-w-lg">{meta.desc}</p>
-          </motion.div>
+          </m.div>
 
           <ul className="divide-y divide-border-soft">
             {services.map((s, i) => {
               const opens = canOpen(s)
               return (
-                <motion.li key={s.id}
+                <m.li key={s.id}
                   initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.025 }}
                   className="flex items-center justify-between py-4 gap-4">
@@ -160,7 +160,7 @@ export default function CategoryDetailClient({ categorySlug }) {
                     className="btn-primary shrink-0 !px-3.5 md:!px-4 !py-2.5 !text-[10px] !tracking-[0.12em]">
                     Book <ArrowUpRight className="w-3 h-3" />
                   </Link>
-                </motion.li>
+                </m.li>
               )
             })}
           </ul>

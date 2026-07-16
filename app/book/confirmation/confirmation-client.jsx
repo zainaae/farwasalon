@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation'
 import { Suspense, useMemo, useState, useEffect } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { Check, ArrowUpRight, CalendarPlus } from 'lucide-react'
 import { buildBookingIcs } from '../../../lib/calendar-ics.js'
 
@@ -68,7 +68,7 @@ function ConfirmationContent() {
   if (!valid) {
     return (
       <main id="main" className="page-content">
-        <motion.div className="section-shell section-pad min-h-screen flex items-center justify-center">
+        <m.div className="section-shell section-pad min-h-screen flex items-center justify-center">
           <div className="max-w-md text-center">
             <h1 className="font-['Syne'] font-bold text-xl text-ink uppercase mb-3">Invalid confirmation link</h1>
             <p className="text-stone text-sm font-['Inter'] font-light mb-6">
@@ -81,15 +81,15 @@ function ConfirmationContent() {
               Book an appointment
             </Link>
           </div>
-        </motion.div>
+        </m.div>
       </main>
     )
   }
 
   return (
     <main id="main" className="page-content">
-      <motion.div className="section-shell section-pad min-h-screen flex items-start justify-center">
-        <motion.div
+      <m.div className="section-shell section-pad min-h-screen flex items-start justify-center">
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -209,8 +209,8 @@ function ConfirmationContent() {
               <span className="text-accent-gold" aria-hidden="true">★★★★★</span>
             </a>
           </div>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
     </main>
   )
 }

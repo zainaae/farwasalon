@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ChevronRight, ArrowUpRight } from 'lucide-react'
 import { CAT_SLUGS, LazyVideo } from '../../src/shared.jsx'
 import { SERVICES, CAT_META, track, formatPrice, SERVICE_FILTER_TABS, filterServiceCategories } from '../../src/data.js'
@@ -46,16 +46,16 @@ export default function ServicesClient() {
       <div className="section-shell section-pad min-h-0">
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
           <div className="overflow-hidden">
-            <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+            <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink mb-4">
               OUR<span className="text-border-soft mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>SERVICES
-            </motion.h1>
+            </m.h1>
           </div>
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }}
+          <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }}
             className="text-body max-w-lg mb-6">
             From threading to bridal packages — select a category to explore our full menu. Book online in under a minute, or message us on WhatsApp.
-          </motion.p>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}
+          </m.p>
+          <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}
             className="flex flex-wrap items-center gap-3">
             <Link href="/book" className="tap-safe btn-primary text-[10px] sm:text-[11px] !py-2.5 !px-5">
               Book online <ArrowUpRight className="w-3.5 h-3.5" />
@@ -64,7 +64,7 @@ export default function ServicesClient() {
               className="tap-safe btn-secondary text-[10px] sm:text-[11px] !py-2.5 !px-5">
               WhatsApp
             </a>
-          </motion.div>
+          </m.div>
         </div>
 
         <LiveAvailability />
@@ -100,7 +100,7 @@ export default function ServicesClient() {
             const isPopular = POPULAR_CATS.has(cat)
             const availability = AVAILABILITY_HINTS[cat]
             return (
-              <motion.article key={cat}
+              <m.article key={cat}
                 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: i * 0.05 }}
                 className="relative overflow-hidden group text-left" style={{ aspectRatio: '3/4' }}
                 onMouseEnter={() => meta.video && activateVideo(cat)}
@@ -143,7 +143,7 @@ export default function ServicesClient() {
                     <ChevronRight className="w-3 h-3 text-white" />
                   </div>
                 </div>
-              </motion.article>
+              </m.article>
             )
           })}
         </div>
