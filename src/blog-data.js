@@ -210,7 +210,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Try finding a published price list from a big-name salon in Karachi. You will find "DM us for rates", "call for details", and price menus that mysteriously change at the counter. At Farwa Beauty Salon in PECHS, we print every starting price online — and this guide puts the whole 2026 list in one place, so you know what salon services actually cost in Karachi before you walk in anywhere.' },
 
       { type: 'h2', text: 'Threading and Face Waxing — Rs 100 to Rs 1,200' },
-      { type: 'p', text: 'Eyebrow [threading](/services/threading) starts at Rs 100 in PECHS, with full-face threading options up to Rs 1,200. If your skin is sensitive, [Rica hot wax](/services/rica-hot-wax) for the face starts at Rs 150 — it is an Italian stripless wax that grips hair, not skin, so it is the gentler option for brows, upper lip, and full face.' },
+      { type: 'p', text: '[Threading](/services/threading) starts at Rs 100 in PECHS — eyebrows are Rs 200, with full-face options up to Rs 1,200. If your skin is sensitive, [Rica hot wax](/services/rica-hot-wax) for the face starts at Rs 150 — it is an Italian stripless wax that grips hair, not skin, so it is the gentler option for brows, upper lip, and full face.' },
 
       { type: 'h2', text: 'Body Waxing — Rs 400 to Rs 3,500' },
       { type: 'p', text: 'Standard [honey wax](/services/honey-wax) starts at Rs 400 for single areas like arms or underarms, with full-body sessions well under Rs 3,000. Premium [Rica body wax](/services/rica-wax) starts at Rs 600 — worth the difference if you wax regularly or have reactive skin, since results last three to four weeks and hair grows back finer over time.' },
@@ -247,7 +247,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: We accept cash, JazzCash, and EasyPaisa at the salon. Every price is in PKR.' },
 
       { type: 'h2', text: 'See the Full Menu' },
-      { type: 'p', text: 'Every service and its starting price is listed on our [services menu](/services) — thirteen specialities, one hundred plus services. Book online at farwasalon.com/book or WhatsApp us at +92 322 2782254.' },
+      { type: 'p', text: 'Every individual service and its exact rate is published on our [complete price list](/prices), with the guided menu at [services](/services) — thirteen specialities, one hundred plus services. Book online at farwasalon.com/book or WhatsApp us at +92 322 2782254.' },
     ],
   },
   {

@@ -121,6 +121,10 @@ export default function ServicesClient() {
               className="tap-safe btn-secondary !py-2.5 !px-5">
               WhatsApp
             </a>
+            <Link href="/prices"
+              className="tap-safe link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors flex items-center">
+              Full price list
+            </Link>
           </m.div>
         </div>
 
