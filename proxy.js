@@ -27,6 +27,7 @@ export function proxy(request) {
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon\\.svg|favicon-32\\.png|logo\\.jpg|.*\\.(?:jpg|jpeg|png|gif|svg|mp4|webp|ico)).*)',
+    // Skip static assets and XML sitemaps/RSS — crawlers hit these hard; keep them off the proxy path.
+    '/((?!_next/static|_next/image|favicon\\.svg|favicon-32\\.png|logo\\.jpg|sitemap.*\\.xml|.*\\.(?:jpg|jpeg|png|gif|svg|mp4|webp|ico|xml)).*)',
   ],
 }
