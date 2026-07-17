@@ -1,12 +1,10 @@
 import Link from 'next/link'
 import { ArrowUpRight, MapPin, Clock, Phone } from 'lucide-react'
-import JsonLd from '../json-ld'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import {
   SALON_ADDRESS_LINES,
   SALON_PHONE_DISPLAY,
   GOOGLE_REVIEW_LINK,
-  buildBeautySalonSchema,
   getAggregateRating,
 } from '../../lib/business-schema.js'
 import { CAT_SLUGS, YEARS_ACTIVE, MAPS_LINK } from '../../src/data.js'
@@ -33,7 +31,9 @@ export default function BeautySalonKarachiPage() {
 
   return (
     <>
-      <JsonLd data={buildBeautySalonSchema()} />
+      {/* The root layout already emits the BeautySalon schema (with its
+          aggregateRating) on every page — emitting it again here made GSC
+          flag "Review has multiple aggregate ratings" on this URL. */}
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
           <p className="eyebrow mb-4">— Karachi beauty salon</p>

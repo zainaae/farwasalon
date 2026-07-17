@@ -113,6 +113,31 @@ export const FAQ_GROUPS = [
       },
     ],
   },
+  {
+    topic: 'Prices',
+    items: [
+      {
+        q: 'How much does bridal makeup cost in Karachi?',
+        a: 'At Farwa Beauty Salon in PECHS, single-event bridal looks — engagement, mehndi, nikkah, or reception — start at Rs 8,000, and the complete full bridal package is around Rs 25,000. Celebrity-name studios in Karachi charge Rs 80,000+ for one day; we deliver the same techniques with 18 years of practice at a fraction of that.',
+      },
+      {
+        q: 'How much does threading cost in PECHS?',
+        a: 'Eyebrow threading starts at Rs 200 at Farwa Beauty Salon in Block 3 PECHS, with full-face threading typically under Rs 1,000. Walk-ins are welcome when slots are available.',
+      },
+      {
+        q: 'How much does a facial cost in Karachi?',
+        a: 'Professional facials at Farwa start at Rs 1,400, ranging up to Rs 5,500 for a Janssen Whitening Facial with German cosmeceutical products. Deep cleansing starts at Rs 1,200. Every price is published on farwasalon.com/services.',
+      },
+      {
+        q: 'How much does microblading or eyebrow tattoo cost in Karachi?',
+        a: 'Semi-permanent brows at Farwa start at Rs 20,000, including the brow-mapping consultation, numbing, the procedure, and an aftercare kit. Results last 12 to 18 months.',
+      },
+      {
+        q: 'Why do you publish all your prices online?',
+        a: 'Because unlisted prices can change per customer — printed prices cannot. Every service on farwasalon.com shows its starting price, and your exact quote is confirmed on WhatsApp before your appointment, never after. We believe transparent pricing is part of good service.',
+      },
+    ],
+  },
 ]
 
 export const FAQS = FAQ_GROUPS.flatMap((g) => g.items)

@@ -1,5 +1,100 @@
 export const BLOG_POSTS = [
   {
+    slug: 'salon-price-list-karachi-2026',
+    title: 'Beauty Salon Price List in Karachi (2026) — What Everything Actually Costs',
+    description: 'A complete, honest 2026 price list for salon services in Karachi — threading, waxing, facials, hair, nails, massage, microblading, and bridal makeup, with real PKR figures.',
+    featuredImage: '/glow3.jpg',
+    date: '2026-07-16',
+    lastModified: '2026-07-16',
+    readTime: '6 min read',
+    author: 'Rubina',
+    category: 'Pricing',
+    relatedCategories: ['Facials', 'Threading', 'Bridal'],
+    content: [
+      { type: 'p', text: 'Try finding a published price list from a big-name salon in Karachi. You will find "DM us for rates", "call for details", and price menus that mysteriously change at the counter. At Farwa Beauty Salon in PECHS, we print every starting price online — and this guide puts the whole 2026 list in one place, so you know what salon services actually cost in Karachi before you walk in anywhere.' },
+
+      { type: 'h2', text: 'Threading and Face Waxing — Rs 150 to Rs 1,000' },
+      { type: 'p', text: 'Eyebrow [threading](/services/threading) starts at Rs 200 in PECHS, with full-face threading typically under Rs 1,000. If your skin is sensitive, [Rica hot wax](/services/rica-hot-wax) for the face starts at Rs 150 — it is an Italian stripless wax that grips hair, not skin, so it is the gentler option for brows, upper lip, and full face.' },
+
+      { type: 'h2', text: 'Body Waxing — Rs 400 to Rs 3,500' },
+      { type: 'p', text: 'Standard [honey wax](/services/honey-wax) starts at Rs 400 for single areas like arms or underarms, with full-body sessions well under Rs 3,000. Premium [Rica body wax](/services/rica-wax) starts at Rs 600 — worth the difference if you wax regularly or have reactive skin, since results last three to four weeks and hair grows back finer over time.' },
+
+      { type: 'h2', text: 'Facials and Cleansing — Rs 1,200 to Rs 5,500' },
+      { type: 'p', text: 'A professional [deep cleansing](/services/cleansing) starts at Rs 1,200 — steam, extraction, and a proper reset for congested skin. Full [facials](/services/facials) run from Rs 1,400 for a classic to around Rs 3,000 for an HD Whitening Facial, topping out near Rs 5,500 for a Janssen Whitening Facial with German cosmeceutical products. Anything dramatically cheaper usually means diluted products; anything pricier in Karachi is usually paying for the postcode, not the facial.' },
+
+      { type: 'h2', text: 'Bleach and Polish — Rs 400 to Rs 1,500' },
+      { type: 'p', text: 'Instant-glow services like [bleach and polish](/services/bleach-polish) start at Rs 400. A Loreal Face Polish at around Rs 900 is the sweet spot before an event — a natural glow with no downtime and no reaction risk.' },
+
+      { type: 'h2', text: 'Hair — Cuts from Rs 1,500, Treatments from Rs 2,000' },
+      { type: 'p', text: 'Professional [cuts, colour, and styling](/services/hair) start at Rs 1,500. Repair-focused [hair treatments](/services/hair-treatments) — protein treatments, hair-fall ampules, Wellaplex bond therapy — start at Rs 2,000, with most sessions around Rs 3,000. If a salon quotes you five figures for a basic protein treatment, ask exactly what is in it.' },
+
+      { type: 'h2', text: 'Nails and Massage — Rs 300 to Rs 1,500' },
+      { type: 'p', text: 'Basic [manicures and pedicures](/services/nails) start at Rs 300, with SPA and paraffin rituals around Rs 1,300. A professional head, back, or full-body [massage](/services/massage) starts at Rs 700.' },
+
+      { type: 'h2', text: 'Semi-Permanent Brows — from Rs 20,000' },
+      { type: 'p', text: 'Microblading and powder brows are the biggest-ticket non-bridal service in any Karachi salon. At Farwa, [eyebrow tattoo](/services/eyebrow-tattoo) starts at Rs 20,000 including consultation, numbing, the procedure, and an aftercare kit. Results last 12 to 18 months. Be wary of Rs 8,000 "deals" — pigment quality and hygiene are exactly the places you do not want a discount on your face.' },
+
+      { type: 'h2', text: 'Bridal Makeup — from Rs 8,000 per event' },
+      { type: 'p', text: 'Single-event bridal looks — engagement, mehndi, nikkah, or reception — start at Rs 8,000 at Farwa, with the complete full bridal package around Rs 25,000. Karachi\'s celebrity-name studios charge Rs 80,000 to Rs 180,000 for one day; our [bridal packages](/services/bridal) are built on the same techniques, eighteen years of practice, and a fraction of the rent. Read our [bridal packages guide](/blog/best-bridal-makeup-packages-karachi-2026) for the full breakdown.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: Why do most Karachi salons hide their prices?' },
+      { type: 'p', text: 'A: Because unlisted prices can flex per customer. Printed prices cannot. We publish every starting figure on farwasalon.com and confirm your exact quote on WhatsApp before your appointment — never after.' },
+      { type: 'h3', text: 'Q: Are these prices final?' },
+      { type: 'p', text: 'A: They are honest starting prices. Longer hair, larger areas, or add-ons can raise a quote, but you will always know before we begin.' },
+      { type: 'h3', text: 'Q: How do Farwa\'s prices compare to Depilex or Nabila?' },
+      { type: 'p', text: 'A: The big chains sit at two to five times these figures for comparable services, and most do not publish rates at all. You are paying for the brand name and the location; the thread, the wax, and the training are the same or better here.' },
+      { type: 'h3', text: 'Q: Do you accept cards?' },
+      { type: 'p', text: 'A: We accept cash, JazzCash, and EasyPaisa at the salon. Every price is in PKR.' },
+
+      { type: 'h2', text: 'See the Full Menu' },
+      { type: 'p', text: 'Every service and its starting price is listed on our [services menu](/services) — thirteen specialities, one hundred plus services. Book online at farwasalon.com/book or WhatsApp us at +92 322 2782254.' },
+    ],
+  },
+  {
+    slug: 'eyebrow-microblading-karachi-guide',
+    title: 'Eyebrow Microblading in Karachi — Cost, Safety, Healing and Honest Answers',
+    description: 'What microblading and powder brows really cost in Karachi, how long they last, whether they are safe, and how to choose an artist — from a salon that has done brows since 2008.',
+    featuredImage: '/eyebrowtattoo.jpg',
+    date: '2026-07-16',
+    lastModified: '2026-07-16',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Brows',
+    relatedCategories: ['Eyebrow Tattoo', 'Threading'],
+    content: [
+      { type: 'p', text: 'Semi-permanent brows are the fastest-growing beauty service in Karachi — and the one with the most misinformation. As a salon that has shaped brows in PECHS since 2008 and offers [eyebrow tattoo services](/services/eyebrow-tattoo) starting at Rs 20,000, here are the straight answers to everything clients ask us.' },
+
+      { type: 'h2', text: 'What Is the Difference Between Microblading, Powder Brows, and Combination Brows?' },
+      { type: 'p', text: 'Microblading uses a fine hand tool to draw individual hair strokes — the most natural finish, ideal for filling sparse or over-plucked brows. Powder brows use a machine to build a soft, filled-in makeup look that suits oily skin better and tends to last longer. Combination brows blend both: hair strokes at the front, powder through the arch and tail. At your consultation we map your bone structure and recommend the technique that fits your skin type and the look you want.' },
+
+      { type: 'h2', text: 'How Much Does Microblading Cost in Karachi?' },
+      { type: 'p', text: 'Legitimate microblading in Karachi runs from Rs 20,000 to Rs 45,000. At Farwa it starts at Rs 20,000 and includes the brow-mapping consultation, topical numbing, the full procedure, and a complete aftercare kit. You will see cheaper offers — Rs 8,000 to Rs 12,000 — and this is one service where cheap is genuinely risky: low-grade pigments turn grey or orange as they fade, and poor hygiene on a procedure that breaks skin is not worth any saving.' },
+
+      { type: 'h2', text: 'Does It Hurt, and Is It Safe?' },
+      { type: 'p', text: 'With proper topical numbing, most clients describe the sensation as light scratching — uncomfortable, not painful. Safety comes down to three things you should verify at any salon: single-use sterile needles opened in front of you, quality pigments, and an artist who maps your brows before touching them. Ask to see all three. If a salon hesitates, walk out.' },
+
+      { type: 'h2', text: 'How Long Does It Last, and What Is Healing Like?' },
+      { type: 'p', text: 'Results last 12 to 18 months, fading gradually — not vanishing overnight. Healing is straightforward: brows look darker and bolder for the first week, then soften to their true shade. Keep them completely dry for seven days, skip makeup on the area while it heals, and apply the aftercare balm as directed. Most clients book a light touch-up after 6 to 8 weeks to perfect any strokes that healed unevenly.' },
+
+      { type: 'h2', text: 'Who Should Not Get Microblading?' },
+      { type: 'p', text: 'If you are pregnant or nursing, on blood thinners, have uncontrolled diabetes, or have active skin conditions around the brow area, wait and consult your doctor first. Very oily skin usually does better with powder brows than hair-stroke microblading — another reason the consultation matters more than the price tag.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How long does a microblading session take?' },
+      { type: 'p', text: 'A: Plan for two to two and a half hours — roughly half of that is mapping and numbing, not tattooing. Good brows are designed before they are drawn.' },
+      { type: 'h3', text: 'Q: Can I still get my brows threaded afterwards?' },
+      { type: 'p', text: 'A: Yes — once fully healed, [threading](/services/threading) keeps stray hairs tidy around your new shape. Many clients maintain both.' },
+      { type: 'h3', text: 'Q: What if I do not like the shape?' },
+      { type: 'p', text: 'A: The shape is agreed at the mapping stage — you approve the drawn outline in the mirror before any pigment is placed. Nothing is permanent until you say yes to the map.' },
+      { type: 'h3', text: 'Q: How do I book a consultation in PECHS?' },
+      { type: 'p', text: 'A: Book online at farwasalon.com/book or WhatsApp +92 322 2782254. Consultations take fifteen minutes and there is no obligation to book the procedure the same day.' },
+
+      { type: 'h2', text: 'Book a Brow Consultation' },
+      { type: 'p', text: 'See our full [eyebrow tattoo services](/services/eyebrow-tattoo) with printed prices, or start with a threading appointment and talk to us in the chair. Semi-permanent brows are an 18-month decision — make it with a salon that has been shaping Karachi\'s brows since 2008.' },
+    ],
+  },
+  {
     slug: 'bridal-beauty-timeline',
     title: 'Complete Bridal Beauty Timeline — When to Start Prep Before Your Wedding',
     description: 'A month-by-month beauty preparation guide for Karachi brides, from skincare routines to the final bridal trial.',

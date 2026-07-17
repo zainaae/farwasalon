@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { computeNextSlot } from './shared.jsx'
+import { computeNextSlot } from './next-slot.js'
 
 // Wed 15 Jul 2026 is a Wednesday; Sat 18 Jul; Sun 19 Jul.
 const at = (dateStr) => new Date(dateStr)

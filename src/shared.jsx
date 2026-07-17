@@ -10,6 +10,7 @@ import { toLocalDateString } from '../lib/date-local.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
 import { SALON_ADDRESS_LINES } from '../lib/business-schema.js'
 import FooterNewsletter from '../app/components/footer-newsletter.jsx'
+import { computeNextSlot } from './next-slot.js'
 
 /** Standard CTA copy — use for primary book actions sitewide. */
 export const CTA_PRIMARY_LABEL = 'Book appointment'
@@ -25,28 +26,6 @@ export function useNextSlot() {
     return () => clearInterval(id)
   }, [])
   return slot
-}
-export function computeNextSlot(now = new Date()) {
-  const day = now.getDay() // 0 Sun..6 Sat
-  if (day === 0) return { label: 'Tomorrow · 11:00am', open: false } // Sunday closed → Monday
-
-  const hr = now.getHours()
-  if (hr < 11) return { label: 'Today · 11:00am', open: false }
-
-  // Same 30-min lead the slots API enforces, rounded up to the next :00/:30.
-  const LAST_SLOT = 18 * 60 + 30 // 6:30pm is the last bookable slot of the day
-  const slotMin = Math.ceil((hr * 60 + now.getMinutes() + 30) / 30) * 30
-  if (slotMin > LAST_SLOT) {
-    return day === 6
-      ? { label: 'Monday · 11:00am', open: false }
-      : { label: 'Tomorrow · 11:00am', open: false }
-  }
-
-  const h = Math.floor(slotMin / 60)
-  const m = slotMin % 60
-  const suffix = h >= 12 ? 'pm' : 'am'
-  const h12 = h > 12 ? h - 12 : h
-  return { label: `Today · ${h12}:${String(m).padStart(2, '0')}${suffix}`, open: true }
 }
 
 /* ─── Skip-to-content link (keyboard a11y) ─────────────────────── */

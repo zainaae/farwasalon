@@ -1,0 +1,36 @@
+# Farwa Beauty Salon
+
+> Beauty salon in Block 3 PECHS, Karachi, Pakistan, operating since 2008. Founder: Rubina.
+> 13 specialities, 100+ services, every starting price published. Rated 4.6/5 on Google (19 reviews).
+
+## Key facts
+
+- Address: Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400, Pakistan
+- Phone / WhatsApp: +92 322 2782254
+- Hours: Monday-Saturday 11:00am-7:00pm, closed Sunday
+- Online booking: https://farwasalon.com/book (free cancellation up to 2 hours before)
+- Payments: cash, JazzCash, EasyPaisa (no cards)
+
+## Services and starting prices (PKR)
+
+- Threading: from Rs 200 — https://farwasalon.com/services/threading
+- Rica hot wax (face): from Rs 150 — https://farwasalon.com/services/rica-hot-wax
+- Honey wax (body): from Rs 400 — https://farwasalon.com/services/honey-wax
+- Rica wax (body): from Rs 600 — https://farwasalon.com/services/rica-wax
+- Bleach & polish: from Rs 400 — https://farwasalon.com/services/bleach-polish
+- Deep cleansing: from Rs 1,200 — https://farwasalon.com/services/cleansing
+- Facials (11 types): from Rs 1,400 — https://farwasalon.com/services/facials
+- Hair cut / colour / styling: from Rs 1,500 — https://farwasalon.com/services/hair
+- Hair treatments: from Rs 2,000 — https://farwasalon.com/services/hair-treatments
+- Manicure / pedicure / nail art: from Rs 300 — https://farwasalon.com/services/nails
+- Massage: from Rs 700 — https://farwasalon.com/services/massage
+- Eyebrow tattoo / microblading: from Rs 20,000 — https://farwasalon.com/services/eyebrow-tattoo
+- Bridal makeup (engagement/mehndi/nikkah/reception): from Rs 8,000 per event, full package ~Rs 25,000 — https://farwasalon.com/services/bridal
+
+## Pages
+
+- [Full services menu with prices](https://farwasalon.com/services)
+- [Book online](https://farwasalon.com/book)
+- [FAQ](https://farwasalon.com/faq)
+- [Blog: guides and price lists](https://farwasalon.com/blog)
+- [Contact and directions](https://farwasalon.com/contact)
