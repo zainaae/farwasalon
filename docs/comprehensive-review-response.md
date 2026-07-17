@@ -113,7 +113,7 @@ Response to the external critical review (7.2/10). Format per section: **Verdict
 | Service | Category + location pages (`lib/service-schema.js`) | ✅ |
 | ItemList | `/services` (`buildServicesItemListSchema`) | ✅ |
 | Article | Blog posts (`buildArticleSchema`) | ✅ |
-| VideoObject | Home hero (`buildHeroVideoSchema`) | ✅ |
+| VideoObject | Not used — home hero is decorative background, not a watch page | ✅ intentionally omitted |
 | AggregateRating | In BeautySalon schema (env-overridable GBP stats) | ✅ |
 
 ---
