@@ -35,7 +35,15 @@ export async function GET(request) {
   const dateCheck = validateBookingDate(date)
   if (!dateCheck.ok) {
     if (dateCheck.closed) {
-      return NextResponse.json({ slots: [], closed: true, reason: dateCheck.message })
+      return NextResponse.json(
+        { slots: [], closed: true, reason: dateCheck.message },
+        {
+          headers: {
+            // Closed-day answers are stable; CDN can hold them briefly.
+            'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+          },
+        },
+      )
     }
     return NextResponse.json({ error: dateCheck.message }, { status: 400 })
   }
@@ -87,5 +95,14 @@ export async function GET(request) {
     return { time, available }
   })
 
-  return NextResponse.json({ slots })
+  // Edge cache collapses concurrent date polls (services widget + book UI).
+  // Book writes invalidate the in-process Sheets cache; 15s CDN staleness is acceptable.
+  return NextResponse.json(
+    { slots },
+    {
+      headers: {
+        'Cache-Control': 'public, s-maxage=15, stale-while-revalidate=45',
+      },
+    },
+  )
 }

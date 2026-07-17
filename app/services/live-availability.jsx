@@ -17,7 +17,8 @@ export default function LiveAvailability() {
     async function load() {
       const today = toLocalDateString(new Date())
       try {
-        const res = await fetch(`/api/slots?date=${today}`, { cache: 'no-store' })
+        // Allow short CDN/browser cache (slots route sets s-maxage=15).
+        const res = await fetch(`/api/slots?date=${today}`)
         if (!active) return
         const data = await res.json().catch(() => ({}))
         if (!res.ok) {
