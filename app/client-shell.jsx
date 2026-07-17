@@ -7,7 +7,6 @@ import { LazyMotion, MotionConfig } from 'framer-motion'
 import {
   SkipLink,
   Navbar,
-  Footer,
   StickyWA,
   StickyMobileCTA,
   shouldShowMobileCtaBar,
@@ -15,6 +14,11 @@ import {
 import { BookingProvider } from '../src/booking-context.jsx'
 
 const loadDomAnimation = () => import('framer-motion').then((mod) => mod.domAnimation)
+
+/** Footer is a separate chunk; SSR keeps location hub links in HTML for SEO. */
+const SiteFooter = dynamic(() => import('./components/site-footer'), {
+  loading: () => <div className="min-h-[28rem] bg-white" aria-hidden />,
+})
 
 const NewsletterModal = dynamic(() => import('./newsletter-modal'), {
   ssr: false,
@@ -79,7 +83,7 @@ export default function ClientShell({ children }) {
           <div className="overflow-x-clip w-full max-w-full min-w-0">
             {children}
           </div>
-          <Footer />
+          <SiteFooter />
           {useMobileCtaBar ? (
             <StickyMobileCTA hidden={hideSticky} />
           ) : (

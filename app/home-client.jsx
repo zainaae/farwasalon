@@ -96,7 +96,8 @@ function Hero() {
         alt=""
         fill
         priority
-        quality={70}
+        fetchPriority="high"
+        quality={65}
         sizes="100vw"
         aria-hidden
         className="object-cover scale-[1.01] pointer-events-none"
@@ -147,33 +148,24 @@ function Hero() {
           <div className="overflow-hidden mb-4 md:mb-6">
             <p
               id="hero-lede"
-              className="hero-rise text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']"
-              style={{ animationDelay: '0.15s', animationDuration: '0.9s' }}>
+              className="hero-lcp text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']">
               Est. 2008 &middot; Farwa Beauty Salon &middot; Bridal &amp; Beauty
             </p>
           </div>
 
           <h1
             id="hero-headline"
-            className="font-['Unbounded'] text-white leading-[0.98] mb-3 md:mb-4 break-words"
+            className="hero-lcp font-['Unbounded'] text-white leading-[0.98] mb-3 md:mb-4 break-words"
             style={{
               fontSize: 'clamp(2.35rem, 8.5vw, 6.75rem)',
               letterSpacing: '-0.025em',
               maxWidth: '14ch',
             }}>
-            <span className="block overflow-hidden">
-              <span
-                className="hero-rise block text-white font-bold"
-                style={{ animationDelay: '0.28s' }}>
-                Beauty Salon in PECHS
-              </span>
+            <span className="block text-white font-bold">
+              Beauty Salon in PECHS
             </span>
-            <span className="block overflow-hidden">
-              <span
-                className="hero-rise block text-white/85 font-light italic font-['Syne']"
-                style={{ animationDelay: '0.4s' }}>
-                Karachi
-              </span>
+            <span className="block text-white/85 font-light italic font-['Syne']">
+              Karachi
             </span>
           </h1>
 
@@ -188,7 +180,7 @@ function Hero() {
               <span key={i} className="block overflow-hidden">
                 <span
                   className={`hero-rise block ${line.em ? 'text-white/95 font-medium' : "text-white/75 font-light italic font-['Syne']"}`}
-                  style={{ animationDelay: `${0.42 + i * 0.18}s` }}>
+                  style={{ animationDelay: `${0.12 + i * 0.1}s` }}>
                   {line.text}
                 </span>
               </span>
@@ -197,7 +189,7 @@ function Hero() {
 
           <div
             className="hero-fade-up flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 max-w-md sm:max-w-none"
-            style={{ animationDelay: '1.35s' }}>
+            style={{ animationDelay: '0.35s' }}>
             <Link href="/book"
               className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2 bg-white text-ink text-[12.5px] md:text-[13px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 md:px-9 py-4 md:py-[1.15rem] hover:bg-nude active:scale-[0.97] transition-all duration-300 shadow-lg shadow-black/25">
               Book an Appointment <ArrowUpRight className="w-4 h-4" />

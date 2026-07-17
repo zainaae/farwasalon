@@ -13,7 +13,7 @@ const NAVIGATE_LINKS = [
   '/bridal',
 ] as const
 
-/** All 13 service category links rendered in Footer (src/shared.jsx). */
+/** All service category links rendered in Footer (app/components/site-footer.jsx). */
 const FOOTER_SERVICE_LINKS = Object.keys(SERVICES).map(
   (cat) => `/services/${CAT_SLUGS[cat as keyof typeof CAT_SLUGS]}`
 )

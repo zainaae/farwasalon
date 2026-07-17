@@ -188,7 +188,7 @@ function ServiceMediaPanel({ hovered }) {
     <div className="relative w-full h-full bg-[#0d0609]">
       <LazyVideo
         src="/ct.mp4"
-        poster="/bridal.jpg"
+        poster="/bridal2.jpg"
         muted
         loop
         playsInline
