@@ -7,6 +7,7 @@ import {
   GOOGLE_REVIEW_LINK,
   getAggregateRating,
 } from '../../lib/business-schema.js'
+import { getPriorityLocationLinks } from '../../lib/location-links.js'
 import { CAT_SLUGS, YEARS_ACTIVE, MAPS_LINK } from '../../src/data.js'
 
 const title = 'Beauty Salon in Karachi — PECHS | Farwa Beauty Salon'
@@ -28,6 +29,7 @@ export const metadata = {
 
 export default function BeautySalonKarachiPage() {
   const rating = getAggregateRating()
+  const areaLinks = getPriorityLocationLinks()
 
   return (
     <>
@@ -128,6 +130,25 @@ export default function BeautySalonKarachiPage() {
                   <Link href={`/services/${slug}`} className="card-link">
                     {label}
                     <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="mb-12" aria-labelledby="areas-heading">
+            <h2 id="areas-heading" className="section-title mb-4">
+              Areas we serve
+            </h2>
+            <p className="text-body max-w-3xl mb-6">
+              One PECHS studio — clients visit us from across Karachi. Explore local pages for popular services
+              near you.
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {areaLinks.map(({ slug, href, label }) => (
+                <li key={slug}>
+                  <Link href={href} className="tab-pill hover:border-ink hover:text-ink">
+                    {label}
                   </Link>
                 </li>
               ))}

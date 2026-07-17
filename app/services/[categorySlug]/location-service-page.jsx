@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, MapPin, Clock, Phone } from 'lucide-react'
 import {
-  WA_DEFAULT,
   waLink,
   SERVICES,
   CAT_SLUGS,
@@ -12,10 +11,13 @@ import {
   getDefaultServiceIdForCategory,
 } from '../../../src/data.js'
 import { CAT_FAQS } from '../../../src/cat-seo-content.js'
-import { TOP_SERVICES } from '../../../src/location-seo.js'
+import { PRIORITY_LOCATION_SLUGS, TOP_SERVICES } from '../../../src/location-seo.js'
+import { getNearbyPriorityLocationLinks } from '../../../lib/location-links.js'
 import { SALON_ADDRESS_LINES, SALON_PHONE_DISPLAY, GOOGLE_REVIEW_LINK, getAggregateRating } from '../../../lib/business-schema.js'
 
-export default function LocationServicePage({ data }) {
+const PRIORITY_SET = new Set(PRIORITY_LOCATION_SLUGS)
+
+export default function LocationServicePage({ data, slug }) {
   const { service, location, prefix } = data
   const heading = prefix === 'best'
     ? `Best ${service.name} in ${location.name}`
@@ -25,10 +27,12 @@ export default function LocationServicePage({ data }) {
   const displayServices = categoryServices.slice(0, 6)
 
   const relatedServices = TOP_SERVICES.filter(s => s.slug !== service.slug).slice(0, 4)
+  const nearbyAreas = getNearbyPriorityLocationLinks(slug)
   const faqs = CAT_FAQS[service.category]?.slice(0, 3) ?? []
   const bookServiceId = getDefaultServiceIdForCategory(service.category)
   const bookHref = bookServiceId ? `/book?serviceId=${bookServiceId}` : '/book'
   const rating = getAggregateRating()
+  const pechsSlug = `${service.slug}-in-pechs-karachi`
 
   return (
     <main id="main" className="page-content">
@@ -141,21 +145,52 @@ export default function LocationServicePage({ data }) {
           </m.section>
         )}
 
+        {nearbyAreas.length > 0 && (
+          <section className="mb-12 pt-8 border-t border-border-soft">
+            <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Nearby areas</h2>
+            <div className="flex flex-wrap gap-2">
+              {nearbyAreas.map((area) => (
+                <Link
+                  key={area.slug}
+                  href={area.href}
+                  className="tab-pill hover:border-ink hover:text-ink"
+                >
+                  {area.label}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className="pt-8 border-t border-border-soft">
           <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Also Available</h2>
           <div className="flex flex-wrap gap-2 mb-6">
-            {relatedServices.map((rs) => (
-              <Link key={rs.slug} href={`/services/${rs.slug}-in-${location.slug}`}
-                className="tab-pill hover:border-ink hover:text-ink">
-                {rs.name} in {location.name}
-              </Link>
-            ))}
+            {relatedServices.map((rs) => {
+              const locSlug = `${rs.slug}-in-${location.slug}`
+              const href = PRIORITY_SET.has(locSlug)
+                ? `/services/${locSlug}`
+                : `/services/${CAT_SLUGS[rs.category]}`
+              const label = PRIORITY_SET.has(locSlug)
+                ? `${rs.name} in ${location.name}`
+                : rs.name
+              return (
+                <Link key={rs.slug} href={href} className="tab-pill hover:border-ink hover:text-ink">
+                  {label}
+                </Link>
+              )
+            })}
           </div>
           <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed max-w-2xl">
             We welcome clients from across Karachi at our PECHS studio — one address, one team.{' '}
-            <Link href={`/services/${service.slug}-in-pechs-karachi`} className="link-underline hover:text-ink text-ink">
-              Visit us in PECHS
-            </Link>
+            {PRIORITY_SET.has(pechsSlug) ? (
+              <Link href={`/services/${pechsSlug}`} className="link-underline hover:text-ink text-ink">
+                Visit us in PECHS
+              </Link>
+            ) : (
+              <Link href="/beauty-salon-karachi" className="link-underline hover:text-ink text-ink">
+                Beauty salon in Karachi
+              </Link>
+            )}
             {' '}or{' '}
             <Link href="/contact" className="link-underline hover:text-ink text-ink">
               get directions

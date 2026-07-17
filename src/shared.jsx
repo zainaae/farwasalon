@@ -9,6 +9,7 @@ import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatD
 import { useBooking } from './booking-context.jsx'
 import { webmSourceFor } from '../lib/video-manifest.js'
 import { SALON_ADDRESS_LINES } from '../lib/business-schema.js'
+import { getPriorityLocationLinks } from '../lib/location-links.js'
 import FooterNewsletter from '../app/components/footer-newsletter.jsx'
 
 /** Standard CTA copy — use for primary book actions sitewide. */
@@ -497,6 +498,7 @@ export function Footer() {
     label,
     slug,
   }))
+  const areaLinks = getPriorityLocationLinks()
   return (
     <footer className="bg-white">
       {/* Top bar — logo + Urdu signature + CTA */}
@@ -588,8 +590,17 @@ export function Footer() {
           <FooterNewsletter />
           <div className="mb-10 pb-8 border-b border-border-soft">
             <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-3">
-              Location
+              Areas we serve
             </p>
+            <ul className="flex flex-wrap gap-x-3 gap-y-2 mb-3">
+              {areaLinks.map(({ slug, href, label }) => (
+                <li key={slug}>
+                  <Link href={href} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
             <p className="text-stone text-xs font-['Inter']">
               PECHS Block 3, Karachi ·{' '}
               <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="link-underline hover:text-ink transition-colors">
