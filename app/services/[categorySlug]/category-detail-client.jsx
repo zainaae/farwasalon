@@ -12,6 +12,7 @@ import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
 import { SITE_ORIGIN, buildSpeakableSchema } from '../../../lib/business-schema.js'
+import { getPriorityLocationLinksForCategory } from '../../../lib/location-links.js'
 
 function getCatMeta(cat) {
   const base = CAT_META[cat] || { img: '/bleachpolish.jpg' }
@@ -65,6 +66,7 @@ export default function CategoryDetailClient({ categorySlug }) {
   const openFor  = s => { if (canOpen(s)) setModal(s) }
   const onBack   = () => router.push('/services')
   const slug     = Object.entries(CAT_SLUGS).find(([k]) => k === category)?.[1]
+  const areaLinks = category ? getPriorityLocationLinksForCategory(category) : []
 
   if (!category) {
     return (
@@ -214,6 +216,19 @@ export default function CategoryDetailClient({ categorySlug }) {
               </section>
             )
           })()}
+
+          {areaLinks.length > 0 && (
+            <section className="mt-10 pt-8 border-t border-border-soft">
+              <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Areas we serve</h2>
+              <div className="flex flex-wrap gap-2">
+                {areaLinks.map(({ slug: areaSlug, href, label }) => (
+                  <Link key={areaSlug} href={href} className="tab-pill hover:border-ink hover:text-ink">
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
 
           {modal && <ServiceModal service={modal} onClose={() => setModal(null)} />}
         </div>

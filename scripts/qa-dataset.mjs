@@ -203,8 +203,8 @@ export const LOCATION_SAMPLE_SLUGS = [
   'facials-in-pechs-karachi',
   'threading-in-gulshan',
   'bridal-makeup-in-clifton-karachi',
-  'best-bridal-makeup-dha',
-  'best-threading-dha',
+  'bridal-makeup-in-dha',
+  'threading-in-dha',
   'threading-in-bahadurabad',
   'waxing-in-tariq-road',
   'hair-in-dha',
@@ -224,7 +224,7 @@ export const SITEMAP_COUNTS = {
     getLocationSitemapEntries().length,
   neighborhoods: NEIGHBORHOODS.length,
   topServices: TOP_SERVICES.length,
-  locationFormula: '6 top services × 10 neighborhoods × 2 patterns (in + best)',
+  locationFormula: '18 priority -in- hubs (legacy best-* → 301)',
 }
 
 export const NAV_FOOTER_MATRIX = {

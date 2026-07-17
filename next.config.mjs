@@ -1,3 +1,5 @@
+import { getBestLocationRedirects } from './src/location-seo.js'
+
 /** @type {import('next').NextConfig} */
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -57,6 +59,8 @@ const nextConfig = {
         'https://search.google.com/local/writereview?placeid=ChIJeVyXMig_szoQEKI0TaSkW-U',
       permanent: false,
     },
+    // Legacy best-* location matrix → canonical -in-* (even if lander is not a priority hub)
+    ...getBestLocationRedirects(),
   ],
   headers: async () => [
     {

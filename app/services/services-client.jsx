@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import { SERVICES, CAT_META, CAT_SLUGS, track, formatPrice } from '../../src/data.js'
+import { getPriorityLocationLinks } from '../../lib/location-links.js'
 import LiveAvailability from './live-availability'
 
 function getCatMeta(cat) {
@@ -97,6 +98,8 @@ function MenuRow({ cat }) {
 }
 
 export default function ServicesClient() {
+  const areaLinks = getPriorityLocationLinks()
+
   return (
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
       <div className="section-shell section-pad min-h-0">
@@ -145,6 +148,24 @@ export default function ServicesClient() {
         <p className="mt-8 text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone/80">
           Every price is a printed starting figure — final quotes confirmed before your appointment, never after.
         </p>
+
+        <section className="mt-12 pt-10 border-t border-border-soft" aria-labelledby="areas-heading">
+          <h2 id="areas-heading" className="font-['Syne'] font-bold text-lg text-ink mb-3">
+            Areas we serve
+          </h2>
+          <p className="text-stone text-sm font-light font-['Inter'] mb-4 max-w-xl">
+            Visit us in PECHS from anywhere in Karachi — local pages for popular treatments nearby.
+          </p>
+          <ul className="flex flex-wrap gap-2">
+            {areaLinks.map(({ slug, href, label }) => (
+              <li key={slug}>
+                <Link href={href} className="tab-pill hover:border-ink hover:text-ink">
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
     </main>
   )
