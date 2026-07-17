@@ -1,12 +1,23 @@
 import ServicesClient from './services-client'
 import JsonLd from '../json-ld'
 import { buildServicesItemListSchema } from '../../lib/business-schema.js'
+import { pageSocialMeta } from '../../lib/page-metadata.js'
+
+const title = 'Salon Services Karachi — 100+ From Rs 100 | Farwa'
+const description =
+  '100+ salon services in PECHS, Karachi from Rs 100 — bridal, facials, threading, Rica wax, nails & microblading. Transparent PKR prices. Book online.'
 
 export const metadata = {
-  title: 'Salon Services in PECHS Karachi — 100+ Treatments',
-  description: '13 service categories, 100+ treatments from Rs 100. Bridal packages, facials, threading, waxing, nails, microblading & more at Farwa Beauty Salon, PECHS, Karachi. Book online.',
+  title: { absolute: title },
+  description,
   alternates: { canonical: '/services' },
-  openGraph: { type: 'website', images: [{ url: '/glow3.jpg', width: 1200, height: 630, alt: 'Salon services menu — 100+ treatments at Farwa Beauty Salon PECHS Karachi' }] },
+  ...pageSocialMeta({
+    title,
+    description,
+    path: '/services',
+    image: '/glow3.jpg',
+    imageAlt: 'Salon services menu — 100+ treatments at Farwa Beauty Salon PECHS Karachi',
+  }),
 }
 
 export default function ServicesPage() {

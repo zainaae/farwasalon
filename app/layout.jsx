@@ -29,11 +29,11 @@ const syne = Syne({
 
 export const metadata = {
   title: {
-    default: "Farwa Beauty Salon — Karachi's trusted beauty home since 2008",
-    template: '%s — Farwa Beauty Salon',
+    default: 'Beauty Salon PECHS Karachi — From Rs 100 | Farwa',
+    template: '%s | Farwa Beauty Salon',
   },
   description:
-    "Beauty salon & parlour in PECHS, Karachi — bridal makeup, facials, threading, waxing, nails since 2008. 100+ services from Rs 100. Book online.",
+    'Beauty salon in PECHS, Karachi — bridal, facials, threading, waxing & nails since 2008. 100+ services from Rs 100. Book online.',
   keywords: [
     'beauty salon Karachi',
     'beauty parlour PECHS',

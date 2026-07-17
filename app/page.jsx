@@ -1,12 +1,11 @@
 import HomeClient from './home-client'
 import JsonLd from './json-ld'
-import { YEARS_ACTIVE } from '../src/site-config.js'
 import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
 import { pageSocialMeta } from '../lib/page-metadata.js'
 import { SITE_ORIGIN, buildSpeakableSchema } from '../lib/business-schema.js'
 
-const title = 'Beauty Salon in PECHS Karachi — Bridal, Facials & Threading | Farwa Beauty Salon'
-const description = `Farwa Beauty Salon in PECHS, Karachi — trusted since 2008. Bridal makeup, facials, threading, waxing, nails & more. ${YEARS_ACTIVE}+ years. Book online or WhatsApp +92 322 278 2254. ★ ${GOOGLE_GBP_STATS.rating} on Google.`
+const title = 'Beauty Salon PECHS Karachi — From Rs 100 | Farwa'
+const description = `Trusted beauty salon in PECHS, Karachi since 2008. Bridal, facials, threading & waxing from Rs 100. ★ ${GOOGLE_GBP_STATS.rating} Google · book online or WhatsApp +92 322 278 2254.`
 
 export const metadata = {
   title: { absolute: title },

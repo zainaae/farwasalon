@@ -1,12 +1,22 @@
 import { Suspense } from 'react'
 import BookClient from './book-client'
+import { pageSocialMeta } from '../../lib/page-metadata.js'
+
+const title = 'Book Online — Beauty Salon PECHS Karachi | Farwa'
+const description =
+  'Book a beauty appointment online at Farwa Beauty Salon, PECHS Karachi. Live slots for threading, facials, bridal, nails & waxing — instant confirmation.'
 
 export const metadata = {
-  title: 'Book an Appointment Online',
-  description:
-    'Book your beauty appointment online at Farwa Beauty Salon, PECHS, Karachi. Choose from 100+ services — threading, facials, bridal, nails, waxing & more. Instant confirmation.',
+  title: { absolute: title },
+  description,
   alternates: { canonical: '/book' },
-  openGraph: { type: 'website', images: [{ url: '/bleachpolish.jpg', width: 1200, height: 630, alt: 'Book an appointment at Farwa Beauty Salon' }] },
+  ...pageSocialMeta({
+    title,
+    description,
+    path: '/book',
+    image: '/bleachpolish.jpg',
+    imageAlt: 'Book an appointment at Farwa Beauty Salon',
+  }),
 }
 
 export default function BookPage() {

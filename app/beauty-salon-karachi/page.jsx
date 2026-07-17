@@ -10,9 +10,9 @@ import {
 import { getPriorityLocationLinks } from '../../lib/location-links.js'
 import { CAT_SLUGS, YEARS_ACTIVE, MAPS_LINK } from '../../src/data.js'
 
-const title = 'Beauty Salon in Karachi — PECHS | Farwa Beauty Salon'
+const title = 'Beauty Salon Karachi — PECHS · From Rs 100 | Farwa'
 const description =
-  'Looking for a trusted beauty salon in Karachi? Farwa Beauty Salon in PECHS offers bridal makeup, facials, threading, waxing, hair and nails since 2008. Book online.'
+  'Looking for a beauty salon in Karachi? Farwa in PECHS — bridal, facials, threading & waxing from Rs 100. Transparent prices, online booking, since 2008.'
 
 export const metadata = {
   title: { absolute: title },

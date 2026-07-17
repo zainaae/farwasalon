@@ -1,8 +1,8 @@
 export const BLOG_POSTS = [
   {
     slug: 'beauty-parlour-near-me-karachi-guide',
-    title: 'Beauty Parlour Near Me in Karachi — How to Actually Choose One (A Checklist)',
-    description: 'Searching "beauty parlour near me" in Karachi? A practical checklist — hygiene, printed prices, booking, reviews — plus what to check before your first visit to any salon.',
+    title: 'Beauty Parlour Near Me Karachi — Checklist',
+    description: 'Searching beauty parlour near me in Karachi? Checklist: printed prices, hygiene, real reviews, booking — plus what to verify before your first visit.',
     featuredImage: '/glow3.jpg',
     date: '2026-07-17',
     lastModified: '2026-07-17',
@@ -83,8 +83,8 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'rica-wax-vs-honey-wax-karachi',
-    title: 'Rica Wax vs Honey Wax — Which One Should You Actually Book?',
-    description: 'The honest difference between Rica and honey wax: pain, price, results, and skin type — from a Karachi salon that offers both, starting at Rs 150.',
+    title: 'Rica Wax vs Honey Wax Karachi — From Rs 150',
+    description: 'Rica vs honey wax in Karachi: pain, price, results & skin type — from a PECHS salon that offers both, starting at Rs 150. Which should you book?',
     featuredImage: '/waxing.jpg',
     date: '2026-07-17',
     lastModified: '2026-07-17',
@@ -121,8 +121,8 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'best-facial-for-acne-oily-skin-karachi',
-    title: 'The Best Facial for Acne and Oily Skin in Karachi — What Works and What Makes It Worse',
-    description: 'Which salon facials actually help acne-prone and oily skin, which ones make breakouts worse, and what a proper acne cleansing involves — from Rs 1,200 in PECHS.',
+    title: 'Best Facial for Acne in Karachi — From Rs 1,200',
+    description: 'Which salon facials help acne-prone & oily skin in Karachi — and which make breakouts worse. Acne cleansing from Rs 1,200 in PECHS.',
     featuredImage: '/facialcleansing.jpg',
     date: '2026-07-17',
     lastModified: '2026-07-17',
@@ -159,8 +159,8 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'hair-fall-treatment-karachi-guide',
-    title: 'Hair Fall Treatment in Karachi — What Salons Can Fix, What They Cannot, and Real Prices',
-    description: 'An honest guide to salon hair fall treatments in Karachi: protein treatments, ampules, and Wellaplex from Rs 2,000 — plus when to see a doctor instead.',
+    title: 'Hair Fall Treatment Karachi — From Rs 2,000',
+    description: 'Salon hair fall treatments in Karachi: protein, ampules & Wellaplex from Rs 2,000 — what salons can fix, what they cannot, and when to see a doctor.',
     featuredImage: '/hairdo.jpg',
     date: '2026-07-17',
     lastModified: '2026-07-17',
@@ -197,8 +197,8 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'salon-price-list-karachi-2026',
-    title: 'Beauty Salon Price List in Karachi (2026) — What Everything Actually Costs',
-    description: 'A complete, honest 2026 price list for salon services in Karachi — threading, waxing, facials, hair, nails, massage, microblading, and bridal makeup, with real PKR figures.',
+    title: 'Beauty Salon Price List Karachi 2026 — Real PKR',
+    description: 'Honest 2026 salon price list for Karachi — threading from Rs 100, facials, waxing, hair, nails, microblading & bridal makeup with real PKR figures.',
     featuredImage: '/glow3.jpg',
     date: '2026-07-16',
     lastModified: '2026-07-16',
@@ -252,8 +252,8 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'eyebrow-microblading-karachi-guide',
-    title: 'Eyebrow Microblading in Karachi — Cost, Safety, Healing and Honest Answers',
-    description: 'What microblading and powder brows really cost in Karachi, how long they last, whether they are safe, and how to choose an artist — from a salon that has done brows since 2008.',
+    title: 'Microblading Karachi Cost — From Rs 20,000',
+    description: 'Microblading & powder brows in Karachi from Rs 20,000 — cost, safety, healing timeline, and how to choose an artist. Honest answers from PECHS since 2008.',
     featuredImage: '/eyebrowtattoo.jpg',
     date: '2026-07-16',
     lastModified: '2026-07-16',
@@ -416,8 +416,8 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'threading-vs-waxing',
-    title: 'Threading vs Waxing: Which Is Better for Your Skin Type?',
-    description: 'A detailed comparison of threading and waxing for facial and body hair removal — pros, cons, and expert recommendations.',
+    title: 'Threading vs Waxing Karachi — Which Is Better?',
+    description: 'Threading vs waxing for face & body in Karachi — pros, cons, skin types, and prices from Rs 100. Expert take from a PECHS salon since 2008.',
     featuredImage: '/threading.jpg',
     date: '2026-04-28',
     lastModified: '2026-04-28',
@@ -551,8 +551,8 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'best-bridal-makeup-packages-karachi-2026',
-    title: 'Best Bridal Makeup Packages in Karachi 2026 — What to Expect and How to Choose',
-    description: 'A complete guide to bridal makeup packages in Karachi for 2026 — what\'s included, how much to budget, when to book, and why a trial matters.',
+    title: 'Bridal Makeup Packages Karachi 2026 — From Rs 8k',
+    description: 'Bridal makeup packages in Karachi 2026 — what\'s included, budgets from Rs 8,000, when to book, and why a trial matters before the wedding day.',
     featuredImage: '/bridal2.jpg',
     date: '2026-05-12',
     lastModified: '2026-05-12',
