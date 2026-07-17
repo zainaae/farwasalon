@@ -93,13 +93,12 @@ function Hero() {
     <section className="relative w-full h-[100svh] min-h-[520px] max-h-[1100px] overflow-hidden bg-[#0d0609]">
       <Image
         src={HERO_POSTER}
-        alt=""
+        alt="Bridal makeup and beauty styling at Farwa Beauty Salon in PECHS Karachi"
         fill
         priority
         fetchPriority="high"
         quality={65}
         sizes="100vw"
-        aria-hidden
         className="object-cover scale-[1.01] pointer-events-none"
         style={{ objectPosition: '50% 35%' }}
       />

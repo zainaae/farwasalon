@@ -17,8 +17,6 @@ const unbounded = Unbounded({
   weight: ['400', '700'],
   variable: '--font-unbounded',
   display: 'swap',
-  // Hero LCP is Inter + image; avoid competing font preloads on mobile.
-  preload: false,
 })
 
 const syne = Syne({
