@@ -6,8 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { useNextSlot } from '../src/shared.jsx'
-import { WA_NUMBER } from '../src/data.js'
+import { useNextSlot } from '../src/use-next-slot.js'
+import { WA_NUMBER } from '../src/site-config.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
 
 const HomeBelowFold = dynamic(() => import('./home-below-fold'), {
@@ -96,6 +96,7 @@ function Hero() {
         alt=""
         fill
         priority
+        quality={70}
         sizes="100vw"
         aria-hidden
         className="object-cover scale-[1.01] pointer-events-none"

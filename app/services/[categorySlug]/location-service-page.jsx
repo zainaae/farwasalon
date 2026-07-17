@@ -9,9 +9,9 @@ import {
   CAT_SLUGS,
   formatPrice,
   YEARS_ACTIVE,
-  CAT_FAQS,
   getDefaultServiceIdForCategory,
 } from '../../../src/data.js'
+import { CAT_FAQS } from '../../../src/cat-seo-content.js'
 import { TOP_SERVICES } from '../../../src/location-seo.js'
 import { SALON_ADDRESS_LINES, SALON_PHONE_DISPLAY, GOOGLE_REVIEW_LINK, getAggregateRating } from '../../../lib/business-schema.js'
 

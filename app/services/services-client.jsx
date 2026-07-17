@@ -4,8 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
-import { CAT_SLUGS } from '../../src/shared.jsx'
-import { SERVICES, CAT_META, track, formatPrice } from '../../src/data.js'
+import { SERVICES, CAT_META, CAT_SLUGS, track, formatPrice } from '../../src/data.js'
 import LiveAvailability from './live-availability'
 
 function getCatMeta(cat) {
@@ -62,6 +61,7 @@ function MenuRow({ cat }) {
             alt=""
             fill
             sizes="72px"
+            quality={60}
             loading="lazy"
             className="object-cover transition-transform duration-700 group-hover:scale-105"
           />

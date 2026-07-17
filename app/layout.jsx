@@ -1,6 +1,5 @@
 import { Inter, Unbounded, Syne } from 'next/font/google'
 import Script from 'next/script'
-import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import ClientShell from './client-shell'
 import JsonLd from './json-ld'
@@ -25,6 +24,7 @@ const syne = Syne({
   weight: ['400', '600', '700'],
   variable: '--font-syne',
   display: 'swap',
+  preload: false,
 })
 
 export const metadata = {
@@ -101,8 +101,6 @@ export default function RootLayout({ children }) {
     >
       <head>
         {/* Fonts are self-hosted via next/font — no runtime Google Fonts connection. */}
-        <link rel="dns-prefetch" href="https://plausible.io" />
-        <link rel="preconnect" href="https://plausible.io" crossOrigin="anonymous" />
         <link rel="manifest" href="/manifest.json" />
         <Script
           defer
@@ -116,7 +114,6 @@ export default function RootLayout({ children }) {
       </head>
       <body className="overflow-x-clip">
         <ClientShell>{children}</ClientShell>
-        <Analytics />
         <JsonLd data={buildBeautySalonSchema()} />
         <JsonLd data={buildWebSiteSchema()} />
       </body>

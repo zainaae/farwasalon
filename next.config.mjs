@@ -23,10 +23,26 @@ const contentSecurityPolicy = [
   "frame-ancestors 'self'",
 ].join('; ')
 
+const securityHeaders = [
+  { key: 'X-Content-Type-Options', value: 'nosniff' },
+  { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+  { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+  {
+    key: 'Content-Security-Policy',
+    value: contentSecurityPolicy,
+  },
+]
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    unoptimized: false,
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
+  },
+  experimental: {
+    optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
   trailingSlash: false,
   redirects: async () => [
@@ -45,13 +61,14 @@ const nextConfig = {
   headers: async () => [
     {
       source: '/(.*)',
+      headers: securityHeaders,
+    },
+    {
+      source: '/:path*\\.(jpg|jpeg|png|webp|avif|svg|ico|mp4|webm|woff2)',
       headers: [
-        { key: 'X-Content-Type-Options', value: 'nosniff' },
-        { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
-        { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
         {
-          key: 'Content-Security-Policy',
-          value: contentSecurityPolicy,
+          key: 'Cache-Control',
+          value: 'public, max-age=2592000, stale-while-revalidate=86400',
         },
       ],
     },

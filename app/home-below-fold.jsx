@@ -181,7 +181,7 @@ function EditorialSlideshow() {
   )
 }
 
-function ServiceMediaPanel({ hovered, categories }) {
+function ServiceMediaPanel({ hovered }) {
   const activeVideo = hovered ? CAT_META[hovered]?.video : null
 
   return (
@@ -196,18 +196,18 @@ function ServiceMediaPanel({ hovered, categories }) {
         className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
         style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
       />
-      {categories.map(cat => (
-        <Image key={cat}
-          src={CAT_META[cat]?.img || '/bleachpolish.jpg'}
-          alt={cat}
+      {hovered && !CAT_META[hovered]?.video && (
+        <Image
+          key={hovered}
+          src={CAT_META[hovered]?.img || '/bleachpolish.jpg'}
+          alt={hovered}
           fill
+          quality={65}
           sizes="(max-width: 768px) 100vw, 45vw"
           className="absolute inset-0 object-cover transition-opacity duration-500 pointer-events-none"
-          style={{ opacity: hovered === cat && !CAT_META[cat]?.video ? 1 : 0 }}
           aria-hidden="true"
-          loading="lazy"
         />
-      ))}
+      )}
       {activeVideo && (
         <video
           key={activeVideo}
@@ -257,7 +257,7 @@ function FeaturedServices() {
         <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-12 items-start">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24">
-            <ServiceMediaPanel hovered={hovered} categories={visibleCategories} />
+            <ServiceMediaPanel hovered={hovered} />
           </m.div>
 
           <div>

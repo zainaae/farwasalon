@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
-import { CAT_SLUGS, CAT_SEO, CAT_META, SERVICES, slugToCategory, formatPrice } from '../../../src/data.js'
+import { CAT_SLUGS, CAT_META, SERVICES, slugToCategory, formatPrice } from '../../../src/data.js'
+import { CAT_SEO } from '../../../src/cat-seo-content.js'
 import { parseLocationSlug, getAllLocationServiceSlugs } from '../../../src/location-seo.js'
 import CategoryDetailClient from './category-detail-client'
 import LocationServicePage from './location-service-page'

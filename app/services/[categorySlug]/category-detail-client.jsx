@@ -6,13 +6,19 @@ import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ServiceModal, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
-import { SERVICES, CAT_META, CAT_FAQS, slugToCategory } from '../../../src/data.js'
+import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
+import { CAT_FAQS } from '../../../src/cat-seo-content.js'
+import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
 import { SITE_ORIGIN, buildSpeakableSchema } from '../../../lib/business-schema.js'
 
 function getCatMeta(cat) {
-  return CAT_META[cat] || { img: '/bleachpolish.jpg', desc: 'Expert beauty services tailored just for you.' }
+  const base = CAT_META[cat] || { img: '/bleachpolish.jpg' }
+  return {
+    ...base,
+    desc: CAT_META_DESC[cat] || 'Expert beauty services tailored just for you.',
+  }
 }
 
 function FaqJsonLd({ faqs }) {

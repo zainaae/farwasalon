@@ -1,7 +1,6 @@
-import { preload } from 'react-dom'
 import HomeClient from './home-client'
 import JsonLd from './json-ld'
-import { YEARS_ACTIVE } from '../src/data.js'
+import { YEARS_ACTIVE } from '../src/site-config.js'
 import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
 import { pageSocialMeta } from '../lib/page-metadata.js'
 import {
@@ -21,7 +20,6 @@ export const metadata = {
 }
 
 export default function HomePage() {
-  preload('/bridal2.jpg', { as: 'image', fetchPriority: 'high' })
   return (
     <>
       <JsonLd

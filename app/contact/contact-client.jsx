@@ -4,7 +4,8 @@ import { useState } from 'react'
 import { m } from 'framer-motion'
 import Link from 'next/link'
 import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, ChevronDown, X } from 'lucide-react'
-import { IgIcon, useNextSlot } from '../../src/shared.jsx'
+import { IgIcon } from '../../src/shared.jsx'
+import { useNextSlot } from '../../src/use-next-slot.js'
 import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track } from '../../src/data.js'
 
 export default function ContactClient() {
