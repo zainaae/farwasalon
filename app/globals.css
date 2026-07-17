@@ -704,15 +704,15 @@ video[aria-hidden="true"] { pointer-events: none; }
   to   { transform: translateY(0);     opacity: 1; }
 }
 
-/* â”€â”€ Hero entrance (replaces framer-motion so first paint doesn't wait
-      for hydration â€” the hero text was the LCP element, painting at ~10s
-      on throttled mobile because JS gated its visibility) â”€â”€ */
+/* Hero entrance — keep LCP text in-view from frame 0.
+   translateY(110%) + overflow-hidden caused ~2.3s element-render-delay
+   (LCP waited for the rise to finish). Decorative CTAs may still fade. */
 @keyframes heroRise {
-  from { transform: translateY(110%); }
+  from { transform: translateY(0.35em); }
   to   { transform: translateY(0); }
 }
 @keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(18px); }
+  from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 @keyframes heroFade {
@@ -720,13 +720,19 @@ video[aria-hidden="true"] { pointer-events: none; }
   to   { opacity: 1; }
 }
 .hero-rise {
-  animation: heroRise 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: heroRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* LCP candidates: no entrance animation (paint immediately). */
+.hero-lcp {
+  animation: none !important;
+  transform: none !important;
+  opacity: 1 !important;
 }
 .hero-fade-up {
-  animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .hero-fade {
-  animation: heroFade 0.7s ease both;
+  animation: heroFade 0.55s ease both;
 }
 
 /* â”€â”€ content-visibility for below-fold sections (paint-holding) â”€â”€ */
