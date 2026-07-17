@@ -112,7 +112,7 @@ export default function ServicesClient() {
           </div>
           <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }}
             className="text-body max-w-lg mb-6">
-            Thirteen specialities, one hundred plus services — every starting price printed below.
+            Thirteen specialities, 100+ services in PECHS, Karachi — every starting price printed from Rs 100.
             Book online in under a minute, or message us on WhatsApp.
           </m.p>
           <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}

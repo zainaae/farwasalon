@@ -7,7 +7,7 @@ import { ArrowUpRight, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ServiceModal, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
-import { CAT_FAQS } from '../../../src/cat-seo-content.js'
+import { CAT_FAQS, CAT_SEO, CAT_RELATED } from '../../../src/cat-seo-content.js'
 import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
@@ -54,6 +54,13 @@ export default function CategoryDetailClient({ categorySlug }) {
   const onBack   = () => router.push('/services')
   const slug     = Object.entries(CAT_SLUGS).find(([k]) => k === category)?.[1]
   const areaLinks = category ? getPriorityLocationLinksForCategory(category) : []
+  const prices = services.map((s) => s.pricePkr).filter(Boolean)
+  const minPrice = prices.length ? Math.min(...prices) : null
+  const seo = CAT_SEO[category]
+  const pageH1 = seo?.h1 || `${category} in PECHS, Karachi`
+  const relatedCats = (CAT_RELATED[category] || [])
+    .filter((cat) => CAT_SLUGS[cat])
+    .slice(0, 4)
 
   if (!category) {
     return (
@@ -108,9 +115,18 @@ export default function CategoryDetailClient({ categorySlug }) {
 
           <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="mb-8 pb-8 border-b border-border-soft">
-            <p className="eyebrow mb-2">— {services.length} services</p>
-            <h1 id="service-category-title" className="section-title text-2xl md:text-3xl uppercase mb-3">{category}</h1>
+            <p className="eyebrow mb-2">
+              — {services.length} services{minPrice != null ? ` · from ${formatPrice(minPrice)}` : ''}
+            </p>
+            <h1 id="service-category-title" className="section-title text-2xl md:text-3xl mb-3">{pageH1}</h1>
             <p id="service-category-desc" className="text-body max-w-lg">{meta.desc}</p>
+            <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] tracking-[0.12em] uppercase font-['Inter']">
+              <Link href="/prices" className="link-underline hover:text-ink text-stone">Full price list</Link>
+              <Link href={`/book?category=${encodeURIComponent(category)}`} className="link-underline hover:text-ink text-stone">Book online</Link>
+              {areaLinks[0] && (
+                <Link href={areaLinks[0].href} className="link-underline hover:text-ink text-stone">{areaLinks[0].label}</Link>
+              )}
+            </p>
           </m.div>
 
           <ul className="divide-y divide-border-soft">
@@ -190,22 +206,27 @@ export default function CategoryDetailClient({ categorySlug }) {
             </button>
           </div>
 
-          {(() => {
-            const related = Object.entries(CAT_SLUGS).filter(([k]) => k !== category).slice(0, 5)
-            return related.length > 0 && (
+          {relatedCats.length > 0 && (
               <section className="mt-10 pt-8 border-t border-border-soft">
                 <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Related Services</h2>
                 <div className="flex flex-wrap gap-2">
-                  {related.map(([cat, catSlug]) => (
-                    <Link key={catSlug} href={`/services/${catSlug}`}
+                  {relatedCats.map((cat) => (
+                    <Link key={cat} href={`/services/${CAT_SLUGS[cat]}`}
                       className="tab-pill hover:border-ink hover:text-ink">
-                      {cat}
+                      {cat === 'Eyebrow Tattoo' ? 'Microblading' : cat}
                     </Link>
                   ))}
+                  <Link href="/prices" className="tab-pill hover:border-ink hover:text-ink">
+                    Price list
+                  </Link>
+                  {category !== 'Bridal' && (
+                    <Link href="/bridal" className="tab-pill hover:border-ink hover:text-ink">
+                      Bridal
+                    </Link>
+                  )}
                 </div>
               </section>
-            )
-          })()}
+            )}
 
           {areaLinks.length > 0 && (
             <section className="mt-10 pt-8 border-t border-border-soft">

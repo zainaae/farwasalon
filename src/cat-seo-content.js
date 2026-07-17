@@ -2,69 +2,99 @@
 export const CAT_SEO = {
   'Threading': {
     title: 'Eyebrow Threading PECHS — From Rs 100',
+    h1: 'Eyebrow Threading in PECHS, Karachi',
     metaDesc:
       'Eyebrow & face threading from Rs 100 at Farwa Beauty Salon, PECHS Karachi. Precise brows since 2008 — walk in or book online today.',
   },
   'Rica Hot Wax': {
     title: 'Rica Hot Wax PECHS — From Rs 150',
+    h1: 'Rica Hot Wax in PECHS, Karachi',
     metaDesc:
       'Gentle Rica hot wax from Rs 150 at Farwa Beauty Salon, PECHS Karachi. Italian stripless wax for face & sensitive skin. Book online.',
   },
   'Honey Wax': {
     title: 'Honey Wax PECHS Karachi — From Rs 400',
+    h1: 'Honey Wax in PECHS, Karachi',
     metaDesc:
       'Honey wax from Rs 400 at Farwa Beauty Salon, PECHS Karachi. Smooth arms, legs & full body — results last 3–4 weeks. Book online.',
   },
   'Rica Wax': {
     title: 'Rica Wax PECHS Karachi — From Rs 600',
+    h1: 'Rica Wax in PECHS, Karachi',
     metaDesc:
       'Premium Rica body wax from Rs 600 at Farwa Beauty Salon, PECHS Karachi. Silky-smooth arms, legs & full body. Book online today.',
   },
   'Bleach & Polish': {
     title: 'Bleach & Polish PECHS — From Rs 400',
+    h1: 'Bleach & Polish in PECHS, Karachi',
     metaDesc:
       'Face bleach & polish from Rs 400 at Farwa Beauty Salon, PECHS Karachi. Instant glow with Loreal & diamond treatments. Book online.',
   },
   'Massage': {
     title: 'Massage PECHS Karachi — From Rs 700',
+    h1: 'Massage in PECHS, Karachi',
     metaDesc:
       'Relaxing massage from Rs 700 at Farwa Beauty Salon, PECHS Karachi. Head, back & full body tension relief. Book online today.',
   },
   'Hair Treatments': {
     title: 'Hair Treatments Karachi — From Rs 2k',
+    h1: 'Hair Treatments in PECHS, Karachi',
     metaDesc:
       'Hair treatments from Rs 2,000 at Farwa Beauty Salon, PECHS Karachi. Protein, hair fall, dandruff & Wellaplex repair. Book online.',
   },
   'Cleansing': {
     title: 'Deep Cleansing PECHS — From Rs 1,200',
+    h1: 'Deep Cleansing in PECHS, Karachi',
     metaDesc:
       'Deep cleansing from Rs 1,200 at Farwa Beauty Salon, PECHS Karachi. HD, acne & Janssen whitening for clear skin. Book online.',
   },
   'Facials': {
     title: 'Facials PECHS Karachi — From Rs 1,400',
+    h1: 'Facials in PECHS, Karachi',
     metaDesc:
       '11 professional facials from Rs 1,400 at Farwa Beauty Salon, PECHS Karachi. Whitening, HD, organic & Janssen. Book your glow-up.',
   },
   'Nails': {
     title: 'Manicure & Pedicure PECHS — From Rs 300',
+    h1: 'Manicure & Pedicure in PECHS, Karachi',
     metaDesc:
       'Manicure & pedicure from Rs 300 at Farwa Beauty Salon, PECHS Karachi. SPA, French, paraffin & nail art. Book online today.',
   },
   'Bridal': {
     title: 'Bridal Makeup PECHS — From Rs 8,000',
+    h1: 'Bridal Makeup in PECHS, Karachi',
     metaDesc:
       'Bridal makeup from Rs 8,000 at Farwa Beauty Salon, PECHS Karachi. Trials, engagement & mehndi looks — 18+ years. Book your trial.',
   },
   'Hair': {
     title: 'Hair Salon PECHS Karachi — From Rs 1.5k',
+    h1: 'Hair Salon in PECHS, Karachi',
     metaDesc:
       'Haircuts, colour & styling from Rs 1,500 at Farwa Beauty Salon, PECHS Karachi. Blowdry, balayage & bridal updos. Book online.',
   },
   'Eyebrow Tattoo': {
     title: 'Microblading Karachi — From Rs 20k',
+    h1: 'Microblading in PECHS, Karachi',
     metaDesc:
       'Microblading & powder brows from Rs 20,000 at Farwa Beauty Salon, PECHS Karachi. Semi-permanent brows lasting 12–18 months. Book online.',
   },
+}
+
+/** Tier-A cross-links between service categories (not a full matrix). */
+export const CAT_RELATED = {
+  Threading: ['Facials', 'Rica Hot Wax', 'Eyebrow Tattoo', 'Bridal'],
+  'Rica Hot Wax': ['Threading', 'Rica Wax', 'Honey Wax', 'Facials'],
+  'Honey Wax': ['Rica Wax', 'Rica Hot Wax', 'Threading', 'Bleach & Polish'],
+  'Rica Wax': ['Honey Wax', 'Rica Hot Wax', 'Threading', 'Facials'],
+  'Bleach & Polish': ['Facials', 'Cleansing', 'Threading', 'Bridal'],
+  Massage: ['Facials', 'Hair Treatments', 'Nails', 'Bridal'],
+  'Hair Treatments': ['Hair', 'Facials', 'Bridal', 'Massage'],
+  Cleansing: ['Facials', 'Bleach & Polish', 'Threading', 'Bridal'],
+  Facials: ['Cleansing', 'Threading', 'Bridal', 'Bleach & Polish'],
+  Nails: ['Bridal', 'Facials', 'Threading', 'Hair'],
+  Bridal: ['Facials', 'Hair', 'Nails', 'Threading'],
+  Hair: ['Hair Treatments', 'Bridal', 'Facials', 'Nails'],
+  'Eyebrow Tattoo': ['Threading', 'Facials', 'Bridal', 'Bleach & Polish'],
 }
 
 /* ─── FAQ content for popular categories (SEO + user value) ──── */
