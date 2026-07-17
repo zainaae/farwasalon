@@ -19,12 +19,26 @@ export const metadata = {
   }),
 }
 
+function BookHeading() {
+  return (
+    <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
+      <h1 className="display-section text-ink mb-4 break-words">
+        BOOK<span className="text-border-soft mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>ONLINE
+      </h1>
+      <p className="text-body max-w-lg">
+        Pick a service, choose a date and time, and confirm your appointment in under a minute.
+      </p>
+    </div>
+  )
+}
+
 export default function BookPage() {
   return (
     <Suspense fallback={
-      <main id="main" className="page-content">
-        <div className="section-shell section-pad flex items-center justify-center min-h-screen">
-          <p className="text-body">Loading booking…</p>
+      <main id="main" className="page-content overflow-x-clip">
+        <div className="section-shell section-pad min-h-0 min-w-0 max-w-full overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
+          <BookHeading />
+          <p className="text-body" aria-live="polite">Loading booking…</p>
         </div>
       </main>
     }>

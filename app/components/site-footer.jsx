@@ -30,11 +30,11 @@ export default function SiteFooter() {
               <Image
                 src="/logo.jpg"
                 alt="Farwa Beauty Salon"
-                width={945}
-                height={945}
+                width={48}
+                height={48}
                 loading="lazy"
                 sizes="48px"
-                className="h-10 md:h-12 w-auto"
+                className="h-10 md:h-12 w-auto max-w-[12rem] object-contain"
                 onError={(e) => {
                   e.currentTarget.style.display = 'none'
                   e.currentTarget.nextSibling.style.display = 'block'

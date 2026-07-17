@@ -18,7 +18,8 @@ test.describe('Blog articles', () => {
       const post = BLOG_POSTS.find((p) => p.slug === slug)
       expect(post).toBeTruthy()
 
-      const res = await page.goto(`/blog/${slug}`)
+      // domcontentloaded avoids CI hangs waiting on lazy images/fonts for long posts
+      const res = await page.goto(`/blog/${slug}`, { waitUntil: 'domcontentloaded', timeout: 60_000 })
       expect(res?.status()).toBe(200)
 
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible()

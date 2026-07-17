@@ -36,7 +36,8 @@ test.describe('Home — mobile CTA bar', () => {
 
   test('sticky mobile CTA hidden on /book', async ({ page }) => {
     await page.goto('/book')
-    await expect(page.getByRole('heading', { name: /book/i })).toBeVisible()
+    // Tier-A H1 is "BOOK — ONLINE" (may render from Suspense fallback before the client form hydrates)
+    await expect(page.getByRole('heading', { level: 1, name: /book|online/i })).toBeVisible()
     await expect(page.getByRole('navigation', { name: 'Quick contact and booking' })).toHaveCount(0)
   })
 

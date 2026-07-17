@@ -7,6 +7,9 @@ import {
   CAT_SLUGS, slugToCategory,
   SERVICES, CATEGORIES, GALLERY_PHOTOS,
   CAT_META, GALLERY_SHOWCASE_ITEMS,
+  filterServiceCategories,
+  getDefaultServiceIdForCategory,
+  getServiceIdByName,
 } from './data.js'
 import { BLOG_POSTS } from './blog-data.js'
 
@@ -176,5 +179,40 @@ describe('GALLERY_PHOTOS', () => {
     for (const photo of GALLERY_PHOTOS) {
       expect(photo.src).toMatch(/\.(jpg|jpeg|png|gif|webp|svg)$/)
     }
+  })
+})
+
+describe('filterServiceCategories', () => {
+  const cats = Object.keys(SERVICES)
+
+  it('returns all categories for All', () => {
+    expect(filterServiceCategories(cats, 'All')).toEqual(cats)
+  })
+
+  it('filters to a single matching category', () => {
+    expect(filterServiceCategories(cats, 'Threading')).toEqual(['Threading'])
+  })
+
+  it('groups waxing categories under Waxing', () => {
+    const wax = filterServiceCategories(cats, 'Waxing')
+    expect(wax.length).toBeGreaterThan(1)
+    expect(wax.every((c) => /wax/i.test(c))).toBe(true)
+  })
+})
+
+describe('service id helpers', () => {
+  it('getDefaultServiceIdForCategory returns the first bookable id', () => {
+    const id = getDefaultServiceIdForCategory('Threading')
+    expect(id).toBe(SERVICES.Threading[0].id)
+  })
+
+  it('getServiceIdByName finds a known service', () => {
+    const id = getServiceIdByName('Eyebrow Threading')
+    expect(id).toBeTruthy()
+    expect(SERVICES.Threading.some((s) => s.id === id)).toBe(true)
+  })
+
+  it('getServiceIdByName returns null for unknown names', () => {
+    expect(getServiceIdByName('Not A Real Service')).toBeNull()
   })
 })

@@ -73,7 +73,7 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
   test('footer shows single salon location', async ({ page }) => {
     await page.goto('/')
     const footer = page.locator('footer')
-    await expect(footer.getByText('Location')).toBeVisible()
+    await expect(footer.getByText('Visit Us')).toBeVisible()
     await expect(footer.getByText(/PECHS Block 3, Karachi/i)).toBeVisible()
     await expect(footer.getByRole('link', { name: /Directions on Google Maps/i })).toBeVisible()
     await expect(footer.getByRole('link', { name: /Beauty salon in Karachi/i })).toHaveAttribute(
