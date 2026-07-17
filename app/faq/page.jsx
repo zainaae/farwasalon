@@ -1,5 +1,7 @@
+import JsonLd from '../json-ld'
 import FaqClient from './faq-client'
 import { FAQS } from '../../src/faq-data.js'
+import { buildFaqPageSchema } from '../../lib/business-schema.js'
 
 export const metadata = {
   title: { absolute: 'Common Questions — Farwa Beauty Salon PECHS Karachi' },
@@ -9,18 +11,10 @@ export const metadata = {
 }
 
 export default function FaqPage() {
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQS.map(f => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  }
+  const faqSchema = buildFaqPageSchema(FAQS)
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      {faqSchema && <JsonLd data={faqSchema} />}
       <FaqClient />
     </>
   )

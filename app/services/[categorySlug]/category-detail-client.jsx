@@ -11,7 +11,7 @@ import { CAT_FAQS } from '../../../src/cat-seo-content.js'
 import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
-import { SITE_ORIGIN, buildSpeakableSchema } from '../../../lib/business-schema.js'
+import { SITE_ORIGIN, buildSpeakableSchema, buildFaqPageSchema } from '../../../lib/business-schema.js'
 import { getPriorityLocationLinksForCategory } from '../../../lib/location-links.js'
 
 function getCatMeta(cat) {
@@ -20,19 +20,6 @@ function getCatMeta(cat) {
     ...base,
     desc: CAT_META_DESC[cat] || 'Expert beauty services tailored just for you.',
   }
-}
-
-function FaqJsonLd({ faqs }) {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map(f => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  }
-  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
 function ServiceJsonLd({ category, services }) {
@@ -98,7 +85,10 @@ export default function CategoryDetailClient({ categorySlug }) {
               cssSelectors: ['#service-category-title', '#service-category-desc'],
             })}
           />
-          {faqs.length > 0 && <FaqJsonLd faqs={faqs} />}
+          {faqs.length > 0 && (() => {
+            const faqSchema = buildFaqPageSchema(faqs)
+            return faqSchema ? <JsonLd data={faqSchema} /> : null
+          })()}
 
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">

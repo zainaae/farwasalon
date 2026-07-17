@@ -8,6 +8,7 @@ import {
   GOOGLE_REVIEW_LINK,
   SITE_ORIGIN,
   buildSpeakableSchema,
+  buildFaqPageSchema,
   getAggregateRating,
 } from '../../lib/business-schema.js'
 import { CAT_SLUGS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice } from '../../src/data.js'
@@ -35,16 +36,7 @@ export default function BridalLandingPage() {
   const packages = SERVICES.Bridal || []
   const trialServiceId = getServiceIdByName('Bridal Trial')
   const faqs = CAT_FAQS.Bridal || []
-
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((f) => ({
-      '@type': 'Question',
-      name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
-    })),
-  }
+  const faqSchema = buildFaqPageSchema(faqs)
 
   return (
     <>
@@ -54,7 +46,7 @@ export default function BridalLandingPage() {
           cssSelectors: ['#bridal-headline', '#bridal-lede'],
         })}
       />
-      <JsonLd data={faqSchema} />
+      {faqSchema && <JsonLd data={faqSchema} />}
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
           <p className="eyebrow mb-4">— Bridal in PECHS</p>

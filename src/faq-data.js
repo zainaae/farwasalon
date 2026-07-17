@@ -23,6 +23,10 @@ export const FAQ_GROUPS = [
         q: 'What are the busiest times in PECHS?',
         a: 'Saturdays and late afternoons (4–7pm) fill up fastest. If you need a specific slot, book online early in the week. Walk-ins are welcome when we have availability.',
       },
+      {
+        q: 'Is Farwa a women-only salon?',
+        a: 'Yes — Farwa Beauty Salon is a women-only studio. Treatments are done in a private, calm setting with fresh disposable applicators and sanitised tools between every client.',
+      },
     ],
   },
   {
@@ -59,7 +63,15 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'How do I book a bridal consultation or trial?',
-        a: 'Book a Bridal Trial online at farwasalon.com/book, or message us on WhatsApp with your wedding date and events (mehndi, nikkah, walima). We recommend booking 2–3 months ahead in peak season and scheduling your trial 2–4 weeks before the wedding.',
+        a: 'Book a Bridal Trial online at farwasalon.com/book, or message us on WhatsApp with your wedding date and events (mehndi, nikkah, barat, walima). We recommend booking 2–3 months ahead in peak season and scheduling your trial 2–4 weeks before the wedding.',
+      },
+      {
+        q: 'What is the difference between Nikkah, Barat, and Walima looks?',
+        a: 'Nikkah looks are usually softer and more elegant for the ceremony. Barat (baraat) looks are fuller glam for the main reception photos and stage. Walima looks sit between the two — polished and radiant for the day-after celebration. At Farwa we currently list Engagement, Mehndi/Dholki, Bridal Trial, and a Full Bridal Package on the menu — tell us which event you need when you book and we style to that mood, outfit, and lighting.',
+      },
+      {
+        q: 'How far ahead should I book the bridal trial?',
+        a: 'Schedule your Bridal Trial (Rs 8,000) about 2–4 weeks before the wedding so there is time to adjust shade, hair, or draping. Lock the wedding date 2–3 months ahead in peak season (October–February).',
       },
       {
         q: 'Do you travel to homes or venues for bridal?',
@@ -88,7 +100,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'Do you offer full-body wax packages?',
-        a: 'We list individual wax services by area (arms, legs, bikini, etc.) with transparent PKR pricing on farwasalon.com/services. For multiple areas in one visit, book the longest service first and note the rest in booking notes — we will confirm total time.',
+        a: 'Yes — Full Body Honey Wax is Rs 2,800 and Full Body Rica Wax is Rs 4,000. We also list individual areas (arms, legs, underarms, hips, stomach, back) with transparent PKR pricing on farwasalon.com/prices. For multiple areas in one visit, book the longest service first and note the rest in booking notes — we will confirm total time.',
       },
     ],
   },
@@ -101,7 +113,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'Are tools sterilised between clients?',
-        a: 'Yes — metal tools are sanitised between every client. Disposable items (wax applicators, nail files where applicable) are single-use. Threading thread is fresh per client.',
+        a: 'Yes — metal tools are sanitised between every client. Disposable items (wax applicators, nail files where applicable) are single-use. Threading thread is fresh per client. We do not double-dip wax spatulas.',
       },
       {
         q: 'Can I request patch tests before facials or bleach?',
@@ -110,6 +122,27 @@ export const FAQ_GROUPS = [
       {
         q: 'Do you use branded products for facials and hair?',
         a: 'We use professional salon-grade products suited to each skin and hair type. If you have a known allergy to a specific ingredient or brand, tell us in advance and we will adjust.',
+      },
+    ],
+  },
+  {
+    topic: 'Brows & Microblading',
+    items: [
+      {
+        q: 'How much does microblading or eyebrow tattoo cost in Karachi?',
+        a: 'Semi-permanent brows at Farwa start at Rs 20,000 (microblading or powder brows); combination brows are Rs 23,000. Every session includes brow-mapping consultation, numbing, the procedure, and an aftercare kit. Results last 12 to 18 months.',
+      },
+      {
+        q: 'Do you include a microblading touch-up, and how much is it?',
+        a: 'A light touch-up is recommended 6–8 weeks after your first session to perfect strokes that heal unevenly. Touch-ups are booked separately — WhatsApp us at +92 322 2782254 for the current touch-up rate and available dates.',
+      },
+      {
+        q: 'What is the microblading healing and aftercare timeline?',
+        a: 'Days 1–3: brows look darker and bolder. Days 4–7: light flaking or peeling — do not pick. Week 2+: colour softens to the true healed shade. Keep brows completely dry for seven days, skip makeup on the area while it heals, and apply the aftercare balm we provide. Avoid swimming, saunas, and heavy sweat for the first week.',
+      },
+      {
+        q: 'What are the risks of microblading, and who should not get it?',
+        a: 'As with any procedure that breaks the skin, risks include temporary redness, uneven pigment take, and (rarely) infection if aftercare is ignored. Do not book if you are pregnant or nursing, on blood thinners, have uncontrolled diabetes, or have an active skin condition on the brow area — wait and check with your doctor first. Very oily skin often heals better with powder brows than hair-stroke microblading; we recommend the right technique at consultation.',
       },
     ],
   },
@@ -133,8 +166,8 @@ export const FAQ_GROUPS = [
         a: 'Yes — the online booking at farwasalon.com/book lets you add add-on services to your appointment, and the time slot adjusts automatically so nothing overlaps. Threading plus a facial, or waxing plus a manicure, are popular combinations.',
       },
       {
-        q: 'Do you offer bridal trials?',
-        a: 'Yes — we strongly recommend a bridal trial about a month before your wedding. You will see the complete look — makeup, hair, dupatta draping — and fine-tune every detail with your artist. See farwasalon.com/services/bridal for packages.',
+        q: 'Do you offer HydraFacial or keratin treatments?',
+        a: 'No — we do not offer HydraFacial machines or keratin/permanent straightening. Our facial menu includes professional options from a classic Normal Facial (Rs 1,400) up to Janssen Whitening Facial (Rs 5,500), and our hair menu covers cuts, colour, blowdry, bridal styling, and protein / Wellaplex / hair-fall treatments. See farwasalon.com/prices for the full list.',
       },
     ],
   },
@@ -143,7 +176,7 @@ export const FAQ_GROUPS = [
     items: [
       {
         q: 'How much does bridal makeup cost in Karachi?',
-        a: 'At Farwa Beauty Salon in PECHS, single-event bridal looks — engagement, mehndi, nikkah, or reception — start at Rs 8,000, and the complete full bridal package is around Rs 25,000. Celebrity-name studios in Karachi charge Rs 80,000+ for one day; we deliver the same techniques with 18 years of practice at a fraction of that.',
+        a: 'At Farwa Beauty Salon in PECHS, bridal services start at Rs 8,000 for a Bridal Trial, with Engagement Look at Rs 12,000, Mehndi/Dholki at Rs 10,000, and the Full Bridal Package at Rs 25,000. Celebrity-name studios in Karachi often charge Rs 80,000+ for one day; we deliver the same techniques with 18 years of practice at transparent published prices.',
       },
       {
         q: 'How much does threading cost in PECHS?',
@@ -151,11 +184,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'How much does a facial cost in Karachi?',
-        a: 'Professional facials at Farwa start at Rs 1,400, ranging up to Rs 5,500 for a Janssen Whitening Facial with German cosmeceutical products. Deep cleansing starts at Rs 1,200. Every price is published on farwasalon.com/services.',
-      },
-      {
-        q: 'How much does microblading or eyebrow tattoo cost in Karachi?',
-        a: 'Semi-permanent brows at Farwa start at Rs 20,000, including the brow-mapping consultation, numbing, the procedure, and an aftercare kit. Results last 12 to 18 months.',
+        a: 'Professional facials at Farwa start at Rs 1,400, ranging up to Rs 5,500 for a Janssen Whitening Facial with German cosmeceutical products. Deep cleansing starts at Rs 1,200. Every price is published on farwasalon.com/prices.',
       },
       {
         q: 'Why do you publish all your prices online?',
@@ -166,3 +195,16 @@ export const FAQ_GROUPS = [
 ]
 
 export const FAQS = FAQ_GROUPS.flatMap((g) => g.items)
+
+/** Visible + JSON-LD FAQs for /prices (price-intent queries). */
+export const PRICES_PAGE_FAQS = [
+  ...FAQ_GROUPS.find((g) => g.topic === 'Prices').items,
+  {
+    q: 'Do your published prices match what I pay in the salon?',
+    a: 'Yes — the rates on farwasalon.com/prices are the same PKR figures we charge in PECHS. Longer hair, larger areas, or add-ons can adjust a quote, and we always confirm that with you before starting.',
+  },
+  {
+    q: 'Where can I see every service rate?',
+    a: 'This page lists every priced service. Category explainers and booking live at farwasalon.com/services, and common questions are at farwasalon.com/faq.',
+  },
+]
