@@ -21,7 +21,7 @@ npm run test:e2e
 | **CSP** | No `unsafe-eval` | No `unsafe-eval` | Match. Dev (`npm run dev`) adds `unsafe-eval` only |
 | **Pages HTTP** | 200 on `/`, `/services`, `/book`, `/gallery`, sitemaps, RSS | 200 all | Pass |
 | **Home HTML size** | ~214 KB | ~226 KB | Drift (minor SSR/content); same tablist + JSON-LD markers |
-| **JSON-LD home** | BeautySalon, Offer, ItemList, VideoObject | Same | Pass |
+| **JSON-LD home** | BeautySalon, Offer, ItemList (no VideoObject — hero is decorative) | Same | Pass |
 | **JSON-LD /services** | BeautySalon, Offer, ItemList | Same | Pass |
 | **JSON-LD /services/threading** | BeautySalon, Offer, ItemList | Same | Pass |
 | **Booking probe** | 5/7 (book past date + invalid time → **409**) | 7/7 (→ **400**) | **Drift** — prod on older `/api/book` validation order |

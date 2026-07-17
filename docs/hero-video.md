@@ -1,6 +1,10 @@
 # Hero background video
 
-`public/hero-mp4.mp4` is compressed (~0.9MB fallback); `public/hero-mp4.webm` is ~0.8MB VP9. Desktop hero prefers WebM when supported (`app/home-client.jsx` + `lib/video-manifest.js`). The site loads **`/bridal2.jpg` as the LCP** (preloaded in `app/page.jsx`). The hero video:
+`public/hero-mp4.mp4` is compressed (~0.9MB fallback); `public/hero-mp4.webm` is ~0.8MB VP9. Desktop hero prefers WebM when supported (`app/home-client.jsx` + `lib/video-manifest.js`). The site loads **`/bridal2.jpg` as the LCP** (preloaded in `app/page.jsx`).
+
+**Do not emit `VideoObject` JSON-LD for this hero.** It is decorative background on the homepage (not a watch page). Marking it as primary video content caused GSC “Video isn’t on a watch page / video is supplementary content” and a bad `embedUrl` pointing at `/`.
+
+The hero video:
 
 - Mounts only on **desktop** when `prefers-reduced-motion` is off
 - Defers mount until **`requestIdleCallback`** (or ~400ms) so the poster wins first paint
