@@ -435,9 +435,9 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Threading is also excellent for shaping — our aestheticians can sculpt brows to frame your face shape perfectly. Whether you want a natural arch, a bold angular look, or a soft feathered brow, threading gives the control that waxing simply cannot match on small facial areas. If you are considering a more permanent brow solution, ask us about our [eyebrow tattoo](/services/eyebrow-tattoo) service as well.' },
 
       { type: 'h2', text: 'Waxing: Speed for Larger Areas' },
-      { type: 'p', text: 'Waxing removes hair in strips, making it far more efficient for arms, legs, and body. [Rica hot wax](/services/rica-hot-wax) is gentler on sensitive areas (face, bikini) because it grips hair without pulling skin. [Honey wax](/services/honey-wax) is effective and affordable for larger body areas like Full Legs (Rs 1,200) or Full Body (Rs 2,800).' },
+      { type: 'p', text: 'Waxing removes hair in strips, making it far more efficient for arms, legs, and body. [Rica hot wax](/services/rica-hot-wax) is gentler on sensitive facial areas because it grips hair without pulling skin. [Honey wax](/services/honey-wax) is effective and affordable for larger body areas like Full Legs (Rs 1,200) or Full Body (Rs 2,800).' },
       { type: 'p', text: 'Best for: Arms, legs, back, underarms, and full body. Waxing also lightly exfoliates, leaving skin smoother than threading.' },
-      { type: 'p', text: 'For clients who prefer a middle ground, our [Rica wax](/services/rica-wax) is formulated with natural pine resin and is hypoallergenic — it causes less irritation than traditional honey wax while still being effective for body areas. It is especially popular for underarms and the bikini area where skin is thinner and more sensitive.' },
+      { type: 'p', text: 'For clients who prefer a middle ground, our [Rica wax](/services/rica-wax) is formulated with natural pine resin and is hypoallergenic — it causes less irritation than traditional honey wax while still being effective for body areas. It is especially popular for underarms and other thinner, more sensitive skin zones.' },
 
       { type: 'h2', text: 'When to Choose What' },
       { type: 'p', text: 'For facial hair: threading wins on precision and gentleness. For body hair: waxing wins on speed and coverage. Many of our regular clients combine both — threading for brows and upper lip, waxing for everything else.' },
@@ -447,7 +447,7 @@ export const BLOG_POSTS = [
         'Upper lip and chin: Threading for sensitive skin, Rica wax if you prefer speed.',
         'Full face (forehead, sideburns, cheeks): Threading is safest; waxing works if your skin is not reactive.',
         'Arms and legs: Waxing — threading would take far too long on large areas.',
-        'Underarms and bikini: Rica hot wax — gentle grip, minimal irritation.',
+        'Underarms: Rica hot wax or Rica wax — gentle grip, minimal irritation.',
         'Full body: Honey wax for affordability, Rica wax for comfort.'
       ]},
 
@@ -467,7 +467,7 @@ export const BLOG_POSTS = [
       ]},
 
       { type: 'h2', text: 'Cost Comparison at Farwa Beauty Salon' },
-      { type: 'p', text: 'Threading is priced per area — Eyebrow Threading at Rs 200, Upper Lip at Rs 100, Full Face at Rs 500. Waxing is priced by body zone — Full Arms Rica Wax at Rs 800, Full Legs at Rs 1,200, Full Body Honey Wax at Rs 2,800. For regular clients, we also offer package deals that combine threading and waxing sessions for the best value.' },
+      { type: 'p', text: 'Threading is priced per area — Eyebrow Threading at Rs 200, Upper Lip at Rs 150, Full Face at Rs 1,200. Waxing is priced by body zone — Full Arms Rica Wax at Rs 900, Full Legs Honey Wax at Rs 1,200, Full Body Honey Wax at Rs 2,800. For multiple areas in one visit, book the longest service first and note the rest — we confirm total time and price.' },
 
       { type: 'h2', text: 'Frequently Asked Questions' },
       { type: 'h3', text: 'Q: Does threading or waxing hurt more?' },
@@ -564,11 +564,11 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Your wedding day deserves a look that is uniquely, unmistakably you. In a city with hundreds of salons, choosing the right bridal makeup package in Karachi can feel overwhelming. Price ranges vary wildly, inclusions differ from studio to studio, and the wrong choice can leave you with regret on the most photographed day of your life. At Farwa Beauty Salon in PECHS, we have been styling Karachi brides since 2008 — here is everything you need to know before you book.' },
 
       { type: 'h2', text: 'What Is Typically Included in a Bridal Package?' },
-      { type: 'p', text: 'A standard bridal makeup package in Karachi usually covers the base makeup application (foundation, concealer, contouring, setting), eye makeup with lashes, lip colour, brow detailing, and dupatta or hijab draping. Higher-tier packages add hairstyling, jewellery setting, a bridal trial session, and touch-up service at the venue. At Farwa, our [Bridal Packages](/services/bridal) begin at Rs 15,000 for nikah looks and go up to Rs 50,000+ for full multi-event coverage including mehndi, barat, and walima looks.' },
+      { type: 'p', text: 'A standard bridal makeup package in Karachi usually covers the base makeup application (foundation, concealer, contouring, setting), eye makeup with lashes, lip colour, brow detailing, and dupatta or hijab draping. Higher-tier packages add hairstyling, jewellery setting, a bridal trial session, and touch-up service at the venue. At Farwa, our [Bridal Packages](/services/bridal) start at Rs 8,000 for a Bridal Trial, with Engagement Look at Rs 12,000, Mehndi/Dholki at Rs 10,000, and the Full Bridal Package at Rs 25,000 — transparent PKR rates for mehndi through barat and walima styling.' },
       { type: 'p', text: 'Some packages also include pre-wedding services like a facial the day before, brow threading, and a finishing skin treatment. Always ask for a written breakdown of what is included so there are no surprises on the day. Verbal promises can be forgotten, but a clear service list ensures accountability.' },
 
       { type: 'h2', text: 'Price Ranges to Expect in 2026' },
-      { type: 'p', text: 'Budget-friendly packages in Karachi typically start around Rs 8,000–15,000 for a single-event bridal look. Mid-range studios like ours charge Rs 15,000–35,000 and include a trial, premium products, and personalised consultations. High-end packages from celebrity artists can run Rs 50,000–150,000 or more. The key difference is not always the products — it is the experience, the attention to detail, and the time dedicated to you.' },
+      { type: 'p', text: 'Budget-friendly packages in Karachi typically start around Rs 8,000–15,000 for a single-event bridal look. At Farwa, published single-event and trial rates sit in that band (trial Rs 8,000; engagement Rs 12,000; mehndi Rs 10,000), with our Full Bridal Package at Rs 25,000. High-end packages from celebrity artists can run Rs 50,000–150,000 or more. The key difference is not always the products — it is the experience, the attention to detail, and the time dedicated to you.' },
       { type: 'p', text: 'When evaluating price, consider what is included beyond just the makeup. Does the package cover hairstyling? Is the trial session separate? Will the artist travel to your venue? Are touch-ups included? A package that seems expensive might actually be better value when you factor in all these extras compared to a cheaper option with hidden add-on fees.' },
 
       { type: 'h2', text: 'Why the Bridal Trial Is Non-Negotiable' },

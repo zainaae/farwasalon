@@ -9,6 +9,21 @@ import { BLOG_POSTS } from '../../../src/blog-data.js'
 import { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildArticleSchema, countBlogWords } from '../../../lib/business-schema.js'
 
+function getRelatedPosts(post, currentSlug, limit = 3) {
+  const others = BLOG_POSTS.filter((p) => p.slug !== currentSlug)
+  const sameCategory = others.filter((p) => p.category === post.category)
+  const relatedCats = new Set(post.relatedCategories || [])
+  const sameCategorySlugs = new Set(sameCategory.map((p) => p.slug))
+  const byServiceOverlap = others.filter(
+    (p) =>
+      !sameCategorySlugs.has(p.slug) &&
+      (p.relatedCategories || []).some((c) => relatedCats.has(c)),
+  )
+  const used = new Set([...sameCategorySlugs, ...byServiceOverlap.map((p) => p.slug)])
+  const rest = others.filter((p) => !used.has(p.slug))
+  return [...sameCategory, ...byServiceOverlap, ...rest].slice(0, limit)
+}
+
 function renderText(text) {
   if (!text) return null
   const parts = []
@@ -241,7 +256,7 @@ export default function BlogArticleClient({ slug }) {
           </div>
 
           {(() => {
-            const related = BLOG_POSTS.filter((p) => p.slug !== slug).slice(0, 3)
+            const related = getRelatedPosts(post, slug, 3)
             return related.length > 0 && (
               <section className="mt-10 pt-8 border-t border-border-soft">
                 <h2 className="font-['Syne'] font-bold text-base text-ink mb-4">Related Articles</h2>
