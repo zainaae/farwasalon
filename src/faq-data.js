@@ -114,6 +114,31 @@ export const FAQ_GROUPS = [
     ],
   },
   {
+    topic: 'Services & Visits',
+    items: [
+      {
+        q: 'How long does a facial take?',
+        a: 'Most facials take 45 to 90 minutes depending on the type — your booking confirmation shows the exact duration for the service you picked. Deep cleansing sessions run similar; threading takes just minutes.',
+      },
+      {
+        q: 'How often should I get a facial or cleansing?',
+        a: 'Every four to six weeks for most skin. Oily or acne-prone skin does best with a professional cleansing every three to four weeks. Your aesthetician will recommend a rhythm for your skin at your first visit.',
+      },
+      {
+        q: 'How often should I wax?',
+        a: 'Every three to four weeks — results from both honey wax and Rica wax last about that long, and regular sessions make each one quicker and more comfortable as hair grows back finer.',
+      },
+      {
+        q: 'Can I book multiple services in one visit?',
+        a: 'Yes — the online booking at farwasalon.com/book lets you add add-on services to your appointment, and the time slot adjusts automatically so nothing overlaps. Threading plus a facial, or waxing plus a manicure, are popular combinations.',
+      },
+      {
+        q: 'Do you offer bridal trials?',
+        a: 'Yes — we strongly recommend a bridal trial about a month before your wedding. You will see the complete look — makeup, hair, dupatta draping — and fine-tune every detail with your artist. See farwasalon.com/services/bridal for packages.',
+      },
+    ],
+  },
+  {
     topic: 'Prices',
     items: [
       {

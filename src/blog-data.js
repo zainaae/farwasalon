@@ -1,5 +1,161 @@
 export const BLOG_POSTS = [
   {
+    slug: 'monsoon-hair-skin-care-karachi',
+    title: 'Monsoon Beauty Survival Guide for Karachi — Frizz, Sticky Skin, and What Actually Works',
+    description: 'How to handle Karachi monsoon humidity: taming hair frizz, keeping oily skin clear, and which salon treatments are worth booking in July and August.',
+    featuredImage: '/hairtreatment.jpg',
+    date: '2026-07-17',
+    lastModified: '2026-07-17',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Seasonal',
+    relatedCategories: ['Hair Treatments', 'Cleansing', 'Facials'],
+    content: [
+      { type: 'p', text: 'Every July, Karachi\'s humidity climbs and the same two complaints walk through our door in PECHS: hair that has doubled in volume for all the wrong reasons, and skin that feels oily by noon no matter what you wash with. After eighteen monsoons at the same salon chair, here is what actually works — and what is a waste of money.' },
+
+      { type: 'h2', text: 'Why Monsoon Wrecks Your Hair' },
+      { type: 'p', text: 'Frizz is not a styling problem — it is a moisture problem. Humid air pushes water into the hair shaft, and damaged or porous hair swells unevenly. That is why serums alone never fix monsoon frizz: they coat the surface without repairing the structure underneath.' },
+      { type: 'p', text: 'The fix is a bond-repair or protein treatment before the worst of the season. A [Wellaplex bond treatment](/services/hair-treatments) (Rs 3,000) rebuilds the internal bonds so hair stops absorbing humidity unevenly. One session in early July typically holds through August. Pair it with a trim to remove split ends — split ends are open doors for humidity.' },
+
+      { type: 'h2', text: 'Sticky, Oily Skin: Wash Less, Cleanse Better' },
+      { type: 'p', text: 'Over-washing in humid weather backfires — stripping oil signals your skin to produce more. Twice-daily gentle cleansing plus one professional [deep cleansing](/services/cleansing) (from Rs 1,200) per month keeps pores clear through the sticky season. If you are breaking out, an Acne Cleansing session targets the congestion directly instead of scrubbing your whole face raw.' },
+      { type: 'p', text: 'Skip heavy cream facials in monsoon. Lighter options — a classic [facial](/services/facials) or an HD Whitening Facial (Rs 3,000) — refresh the skin without leaving a film that humidity turns greasy by evening.' },
+
+      { type: 'h2', text: 'What to Skip Until October' },
+      { type: 'p', text: 'Save your blowdry money — humidity undoes a blowout in hours. If you have an event, book the [styling](/services/hair) for the same day, not the day before. Heavy oil-based treatments and thick masks can also wait for drier weather; they sit on top of humid skin instead of absorbing.' },
+
+      { type: 'h2', text: 'The Monsoon-Proof Booking List' },
+      { type: 'p', text: 'If you book only three things between July and September: a Wellaplex or protein [hair treatment](/services/hair-treatments) early in the season, a monthly [deep cleansing](/services/cleansing), and [threading](/services/threading) as usual — humidity has no effect on threading, which is more than can be said for your eyeliner.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How do I stop frizzy hair in Karachi humidity?' },
+      { type: 'p', text: 'A: Repair the hair structure rather than coating it — a bond-repair treatment like Wellaplex (Rs 3,000 at Farwa in PECHS) stops hair absorbing humidity unevenly, which is what causes frizz. Serums alone only mask it for an hour.' },
+      { type: 'h3', text: 'Q: Should I get facials during monsoon season?' },
+      { type: 'p', text: 'A: Yes, but choose lighter ones. Deep cleansing (from Rs 1,200) and lighter facials work well in humidity; skip heavy cream-based facials until the weather dries out.' },
+      { type: 'h3', text: 'Q: How often should oily skin be professionally cleansed in summer?' },
+      { type: 'p', text: 'A: Once a month is right for most skin. If you are actively breaking out, a targeted acne cleansing every three weeks for two to three cycles usually settles it.' },
+      { type: 'h3', text: 'Q: Does humidity affect threading or waxing results?' },
+      { type: 'p', text: 'A: Not meaningfully — hair removal results last the same three to four weeks. Sweat can irritate freshly waxed skin, so book waxing for a day you can stay cool afterwards.' },
+
+      { type: 'h2', text: 'Book Your Monsoon Reset' },
+      { type: 'p', text: 'Book online at farwasalon.com/book or WhatsApp +92 322 2782254 — and if you are not sure which treatment your hair needs, come in for a consultation and we will tell you honestly.' },
+    ],
+  },
+  {
+    slug: 'rica-wax-vs-honey-wax-karachi',
+    title: 'Rica Wax vs Honey Wax — Which One Should You Actually Book?',
+    description: 'The honest difference between Rica and honey wax: pain, price, results, and skin type — from a Karachi salon that offers both, starting at Rs 150.',
+    featuredImage: '/waxing.jpg',
+    date: '2026-07-17',
+    lastModified: '2026-07-17',
+    readTime: '4 min read',
+    author: 'Rubina',
+    category: 'Waxing',
+    relatedCategories: ['Rica Wax', 'Honey Wax', 'Rica Hot Wax'],
+    content: [
+      { type: 'p', text: 'Clients ask us this almost daily: is Rica wax worth the extra money over regular honey wax? We offer both at Farwa in PECHS — [honey wax](/services/honey-wax) from Rs 400 and [Rica wax](/services/rica-wax) from Rs 600 — so here is the honest comparison with no upselling.' },
+
+      { type: 'h2', text: 'What Honey Wax Does Well' },
+      { type: 'p', text: 'Honey wax is the classic: a natural resin-based strip wax that removes hair efficiently from large areas — arms, legs, underarms, back. It is affordable, fast, and results last three to four weeks. For normal, non-reactive skin on body areas, honey wax remains excellent value, which is why it has never left our menu.' },
+
+      { type: 'h2', text: 'What Makes Rica Different' },
+      { type: 'p', text: 'Rica is an Italian formula built on vegetable resins instead of petroleum derivatives. The practical difference: it grips the hair firmly while sticking less to the skin itself. Less skin-pull means less pain, less redness afterwards, and a much better experience on sensitive areas. It also picks up shorter hair, so you can wax on a shorter growth cycle.' },
+      { type: 'p', text: 'For the face specifically, [Rica hot wax](/services/rica-hot-wax) (from Rs 150) is applied warm and peeled off without strips — the gentlest option we offer for brows, upper lip, and full face, especially for acne-prone or reactive skin.' },
+
+      { type: 'h2', text: 'The Honest Recommendation' },
+      { type: 'p', text: 'Normal skin, body areas, budget in mind: honey wax, no hesitation. Sensitive or reactive skin, facial waxing, or if you have found waxing painful elsewhere: Rica is genuinely worth the Rs 200 difference. Many of our regulars mix both — honey for arms and legs, Rica for face and underarms.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: Is Rica wax less painful than normal wax?' },
+      { type: 'p', text: 'A: Noticeably, yes — Rica adheres to hair rather than skin, so the pull is on the hair only. Most clients who switch for sensitive areas do not switch back.' },
+      { type: 'h3', text: 'Q: How long do Rica wax results last?' },
+      { type: 'p', text: 'A: Three to four weeks, same as honey wax — and because Rica lifts shorter hair, regrowth between sessions can be waxed sooner instead of waiting for full length.' },
+      { type: 'h3', text: 'Q: What does Rica wax cost in Karachi?' },
+      { type: 'p', text: 'A: At Farwa in PECHS, Rica body wax starts at Rs 600 and Rica hot wax for the face starts at Rs 150. Honey wax starts at Rs 400. Every price is printed at farwasalon.com/services.' },
+      { type: 'h3', text: 'Q: Which wax is better before an event or wedding?' },
+      { type: 'p', text: 'A: Rica, booked two to three days before the event — its lower redness matters when photos are involved. Brides on our [bridal packages](/services/bridal) get Rica by default in the final week.' },
+
+      { type: 'h2', text: 'Try Both and Decide' },
+      { type: 'p', text: 'Book either at farwasalon.com/book or WhatsApp +92 322 2782254. Tell us it is your first Rica session and we will start with a small area so you can feel the difference before committing to full body.' },
+    ],
+  },
+  {
+    slug: 'best-facial-for-acne-oily-skin-karachi',
+    title: 'The Best Facial for Acne and Oily Skin in Karachi — What Works and What Makes It Worse',
+    description: 'Which salon facials actually help acne-prone and oily skin, which ones make breakouts worse, and what a proper acne cleansing involves — from Rs 1,200 in PECHS.',
+    featuredImage: '/facialcleansing.jpg',
+    date: '2026-07-17',
+    lastModified: '2026-07-17',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Facials',
+    relatedCategories: ['Cleansing', 'Facials', 'Bleach & Polish'],
+    content: [
+      { type: 'p', text: 'Half the acne we see at Farwa was made worse by the wrong facial. Heavy creams on congested skin, aggressive scrubbing on active breakouts, bleach on inflamed spots — Karachi salons do all three daily. Here is what acne-prone skin actually needs, and what to refuse even if a salon offers it.' },
+
+      { type: 'h2', text: 'Start With Cleansing, Not a Facial' },
+      { type: 'p', text: 'Active congestion — blackheads, whiteheads, small bumps — needs extraction before anything else. A proper [Acne Cleansing](/services/cleansing) (deep cleansing starts at Rs 1,200) uses steam to open pores, manual extraction done hygienically, and a calming finish. That is the workhorse treatment for oily skin: unglamorous, effective, and the right starting point.' },
+
+      { type: 'h2', text: 'Which Facials Help — and When' },
+      { type: 'p', text: 'Once active breakouts settle, monthly [facials](/services/facials) maintain the result. For oily skin we usually recommend lighter formulations over rich cream facials; a Janssen Whitening Facial (Rs 5,500) also addresses the dark marks acne leaves behind — post-inflammatory pigmentation responds well to consistent professional care over two to three months.' },
+      { type: 'p', text: 'What to refuse: harsh scrubs on active acne (they spread bacteria), and [bleach](/services/bleach-polish) directly on inflamed spots. Bleach and polish are excellent for even-toned glow before an event — on calm skin, not on breakouts.' },
+
+      { type: 'h2', text: 'The Routine That Works in Karachi\'s Climate' },
+      { type: 'p', text: 'Oily skin in a humid city needs rhythm, not intensity: professional cleansing every three to four weeks, a suitable facial monthly once skin is calm, gentle home cleansing twice daily, and sunscreen every morning — pigmentation from picked spots darkens fast under Karachi sun. Read our [monsoon skin guide](/blog/monsoon-hair-skin-care-karachi) for the summer-specific adjustments.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: Which facial is best for acne-prone skin?' },
+      { type: 'p', text: 'A: Start with an acne cleansing (from Rs 1,200 at Farwa in PECHS) to clear congestion, then move to monthly lighter facials once breakouts calm down. A facial on top of active congestion wastes money.' },
+      { type: 'h3', text: 'Q: Can a facial remove acne scars and dark spots?' },
+      { type: 'p', text: 'A: Flat dark marks (pigmentation) fade well with consistent whitening facials over two to three months. Pitted scars need dermatological treatment — a salon that promises to remove pits with a facial is overselling.' },
+      { type: 'h3', text: 'Q: How often should oily skin get a professional cleansing?' },
+      { type: 'p', text: 'A: Every three to four weeks. More often than that irritates the skin and triggers more oil production.' },
+      { type: 'h3', text: 'Q: Is bleach safe for acne-prone skin?' },
+      { type: 'p', text: 'A: Not on active breakouts. Once skin is calm, bleach evens tone safely — we always check your skin first and will tell you honestly if today is not the day for it.' },
+
+      { type: 'h2', text: 'Get an Honest Skin Assessment' },
+      { type: 'p', text: 'Book at farwasalon.com/book or WhatsApp +92 322 2782254. If what you booked is not what your skin needs on the day, we will switch you to the right treatment — never upsell an inflamed face.' },
+    ],
+  },
+  {
+    slug: 'hair-fall-treatment-karachi-guide',
+    title: 'Hair Fall Treatment in Karachi — What Salons Can Fix, What They Cannot, and Real Prices',
+    description: 'An honest guide to salon hair fall treatments in Karachi: protein treatments, ampules, and Wellaplex from Rs 2,000 — plus when to see a doctor instead.',
+    featuredImage: '/hairdo.jpg',
+    date: '2026-07-17',
+    lastModified: '2026-07-17',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Hair',
+    relatedCategories: ['Hair Treatments', 'Hair', 'Massage'],
+    content: [
+      { type: 'p', text: 'Hair fall is the most common concern we hear at Farwa — and the one with the most nonsense sold around it. Some hair fall responds beautifully to salon treatment; some needs a doctor, not a salon. An honest salon tells you which is which, so let us do that first.' },
+
+      { type: 'h2', text: 'Breakage vs Shedding — Know Which One You Have' },
+      { type: 'p', text: 'Short broken pieces on your pillow and brush mean breakage — the hair is snapping, not falling from the root. That is damage, and salons fix damage well. Whole strands with a tiny white bulb at the end mean shedding from the root — often stress, hormones, iron deficiency, or post-partum changes. Severe root shedding deserves a doctor visit; treatments help alongside, not instead.' },
+
+      { type: 'h2', text: 'What Actually Works at the Salon' },
+      { type: 'p', text: 'For breakage: protein [hair treatments](/services/hair-treatments) (from Rs 2,000) rebuild strength over a course of monthly sessions, and Wellaplex bond therapy (Rs 3,000) repairs chemically-processed or heat-damaged hair at the structural level. For shedding: a Hair Fall Treatment with Ampule (Rs 3,000) delivers actives to the scalp — three monthly sessions is the honest minimum before judging results.' },
+      { type: 'p', text: 'The underrated helper: a proper head [massage](/services/massage) (from Rs 700) improves scalp circulation, and our head massage and wash combination doubles as maintenance between treatment sessions.' },
+
+      { type: 'h2', text: 'What to Stop Doing at Home' },
+      { type: 'p', text: 'Tight ponytails on wet hair, daily heat styling, and harsh sulphate shampoos undo salon work faster than treatments can build it. After any treatment, wait 48 hours before washing and switch to a sulphate-free shampoo — otherwise you are rinsing your money down the drain, literally.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How much does hair fall treatment cost in Karachi?' },
+      { type: 'p', text: 'A: At Farwa in PECHS, hair treatments start at Rs 2,000; a Hair Fall Ampule Treatment is Rs 3,000 per session and Wellaplex bond therapy is Rs 3,000. Plan for three monthly sessions to see honest results.' },
+      { type: 'h3', text: 'Q: How many sessions before hair fall improves?' },
+      { type: 'p', text: 'A: Visible improvement usually starts after the second monthly session, with the full result at three to four. Anyone promising results in one session is selling hope, not treatment.' },
+      { type: 'h3', text: 'Q: Can salon treatments regrow lost hair?' },
+      { type: 'p', text: 'A: Salon treatments strengthen existing hair and reduce ongoing loss from breakage. Regrowing genuinely lost hair from dormant roots is medical territory — see a dermatologist for that, and use salon care to protect what grows back.' },
+      { type: 'h3', text: 'Q: Does hair fall get worse in Karachi summers?' },
+      { type: 'p', text: 'A: Seasonal shedding is real and humidity-related breakage adds to it — see our [monsoon hair guide](/blog/monsoon-hair-skin-care-karachi). A bond treatment before peak humidity prevents most of the seasonal spike.' },
+
+      { type: 'h2', text: 'Start With a Consultation' },
+      { type: 'p', text: 'Book at farwasalon.com/book or WhatsApp +92 322 2782254. We will look at your hair, tell you whether it is breakage or shedding, and recommend a plan — including a doctor referral if that is what your scalp actually needs.' },
+    ],
+  },
+  {
     slug: 'salon-price-list-karachi-2026',
     title: 'Beauty Salon Price List in Karachi (2026) — What Everything Actually Costs',
     description: 'A complete, honest 2026 price list for salon services in Karachi — threading, waxing, facials, hair, nails, massage, microblading, and bridal makeup, with real PKR figures.',
