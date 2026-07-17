@@ -690,10 +690,22 @@ function CtaBand() {
               Book an Appointment <ArrowUpRight className="w-4 h-4 shrink-0" />
             </Link>
             <Link
-              href="/services"
+              href="/prices"
               className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
             >
-              View Services
+              Price list
+            </Link>
+            <Link
+              href="/bridal"
+              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
+            >
+              Bridal
+            </Link>
+            <Link
+              href="/beauty-salon-karachi"
+              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
+            >
+              Beauty salon Karachi
             </Link>
           </div>
           <a

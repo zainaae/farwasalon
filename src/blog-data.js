@@ -1,8 +1,8 @@
 export const BLOG_POSTS = [
   {
     slug: 'beauty-parlour-near-me-karachi-guide',
-    title: 'Beauty Parlour Near Me Karachi — Checklist',
-    description: 'Searching beauty parlour near me in Karachi? Checklist: printed prices, hygiene, real reviews, booking — plus what to verify before your first visit.',
+    title: 'Beauty Parlour Near Me Karachi — From Rs 100',
+    description: 'Beauty parlour near me in Karachi? Checklist with printed prices from Rs 100, hygiene, real reviews & online booking — Farwa PECHS since 2008.',
     featuredImage: '/glow3.jpg',
     date: '2026-07-17',
     lastModified: '2026-07-17',
@@ -34,9 +34,11 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Choose the most transparent one. Cheap with hidden costs ends up expensive; a salon that prints Rs 100 threading and Rs 1,400 facials and sticks to it will cost you less over a year than one with negotiable rates.' },
       { type: 'h3', text: 'Q: Can I book a salon appointment online in Karachi?' },
       { type: 'p', text: 'A: At Farwa, yes — farwasalon.com/book shows live available slots and takes under a minute, with free cancellation up to two hours before. No calls, no back-and-forth.' },
+      { type: 'h3', text: 'Q: What is the address if I am searching beauty parlour near me near Tariq Road?' },
+      { type: 'p', text: 'A: Farwa Beauty Salon, Plot 165/G-1, Saima Terrace, Block 3 PECHS, Karachi 75400 — a short hop from Tariq Road and Bahadurabad. See beauty salon Karachi for area links and directions on the contact page.' },
 
       { type: 'h2', text: 'Come See the Checklist in Action' },
-      { type: 'p', text: 'Every point above is how we run our own floor. Browse the full [services menu with printed prices](/services), book online, or WhatsApp +92 322 2782254 — and bring your sharpest questions; we like clients who check.' },
+      { type: 'p', text: 'Every point above is how we run our own floor at Plot 165/G-1, Saima Terrace, Block 3 PECHS — Mon–Sat 11am–7pm. Browse the [full price list](/prices) (threading from Rs 100), the [services menu](/services), or [book online](/book) in under a minute. Prefer WhatsApp? +92 322 2782254. Bring your sharpest questions; we like clients who check.' },
     ],
   },
   {
@@ -116,7 +118,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Rica, booked two to three days before the event — its lower redness matters when photos are involved. Brides on our [bridal packages](/services/bridal) get Rica by default in the final week.' },
 
       { type: 'h2', text: 'Try Both and Decide' },
-      { type: 'p', text: 'Book either at farwasalon.com/book or WhatsApp +92 322 2782254. Tell us it is your first Rica session and we will start with a small area so you can feel the difference before committing to full body.' },
+      { type: 'p', text: 'Book either [Rica wax](/services/rica-wax), [honey wax](/services/honey-wax), or [Rica hot wax](/services/rica-hot-wax) at [farwasalon.com/book](/book) — or WhatsApp +92 322 2782254. Tell us it is your first Rica session and we will start with a small area so you can feel the difference before committing to full body. Full rates stay on the [price list](/prices).' },
     ],
   },
   {
@@ -247,7 +249,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: We accept cash, JazzCash, and EasyPaisa at the salon. Every price is in PKR.' },
 
       { type: 'h2', text: 'See the Full Menu' },
-      { type: 'p', text: 'Every individual service and its exact rate is published on our [complete price list](/prices), with the guided menu at [services](/services) — thirteen specialities, one hundred plus services. Book online at farwasalon.com/book or WhatsApp us at +92 322 2782254.' },
+      { type: 'p', text: 'Every individual service and its exact rate is published on our [complete price list](/prices), with the guided menu at [services](/services) — thirteen specialities, one hundred plus services. Ready to book? Use [online booking](/book) (live slots) or WhatsApp +92 322 2782254 — your quote matches the printed list.' },
     ],
   },
   {
@@ -480,7 +482,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Both can cause ingrown hairs, but proper aftercare minimises the risk. Exfoliating two to three days after treatment and moisturising regularly is the best prevention for both methods.' },
 
       { type: 'h2', text: 'Try Both and Decide' },
-      { type: 'p', text: 'Everyone\'s skin responds differently. The best way to know is to experience both with trained professionals. Book a session at Farwa Beauty Salon — we\'ll guide you based on your skin type and preferences. WhatsApp us at +92 322 2782254.' },
+      { type: 'p', text: 'Everyone\'s skin responds differently. Book [eyebrow threading from Rs 200](/services/threading) or waxing on [farwasalon.com/book](/book) — we\'ll guide you based on your skin type. Prefer WhatsApp? +92 322 2782254. Compare every PKR rate on the [salon price list](/prices).' },
     ],
   },
   {
@@ -811,3 +813,12 @@ export const BLOG_POSTS = [
     ],
   },
 ]
+
+/** Blog posts that list a service category in relatedCategories (for category → blog links). */
+export function getRelatedBlogPostsForCategory(category, limit = 3) {
+  if (!category) return []
+  return BLOG_POSTS
+    .filter((p) => (p.relatedCategories || []).includes(category))
+    .slice(0, limit)
+    .map(({ slug, title, description }) => ({ slug, title, description }))
+}

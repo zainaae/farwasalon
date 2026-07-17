@@ -118,6 +118,8 @@ export const CAT_FAQS = {
     { q: 'How long does eyebrow threading take?', a: 'Eyebrow threading at Farwa takes about 10 minutes. A Full Face Threading session takes approximately 25 minutes.' },
     { q: 'Does threading hurt more than waxing?', a: 'Threading involves a brief, sharp sensation but no heat or chemicals touch your skin. Most clients find it less irritating than waxing, especially for facial areas. Any redness typically fades within 30 minutes.' },
     { q: 'How often should I get my eyebrows threaded?', a: 'Most clients come every 2–3 weeks to maintain a clean, defined shape. The timing depends on how quickly your hair grows — we\'ll recommend a schedule that works for your growth pattern.' },
+    { q: 'How much does threading cost, and can I book online?', a: 'Threading starts at Rs 100 (lower lip / chin); eyebrow threading is Rs 200 and full face is Rs 1,200. Walk-ins are welcome when we have room, or book a held slot at farwasalon.com/book in under a minute.' },
+    { q: 'Should I thread or wax my face before a wedding?', a: 'For brows and upper lip we recommend threading — cleaner shape, less redness for photos. Prefer wax on the face? Use Rica hot wax from Rs 150 a few days before the event. See our threading vs waxing guide, then book the look that fits your skin.' },
   ],
   'Nails': [
     { q: 'How long does a manicure or pedicure take?', a: 'A standard manicure takes about 30 minutes, while a pedicure takes around 40 minutes. Spa treatments and nail art sessions may take 45–60 minutes depending on complexity.' },
@@ -167,10 +169,12 @@ export const CAT_FAQS = {
     { q: 'What areas can be treated with honey wax?', a: 'Honey wax is versatile and suitable for arms, legs, underarms, and larger body areas. For facial areas and sensitive zones, we recommend Rica hot wax for a gentler experience.' },
     { q: 'How long do honey wax results last?', a: 'Honey wax results typically last 3–4 weeks. With regular sessions, hair grows back finer and sparser over time. We recommend booking every 3–4 weeks for consistently smooth skin.' },
     { q: 'Is honey wax painful?', a: 'There\'s a brief pulling sensation during strip removal, but it\'s quick. Our aestheticians work efficiently to minimise discomfort. After the first session, most clients find subsequent sessions much easier as the hair becomes finer.' },
+    { q: 'Rica or honey wax — which should I book?', a: 'Normal skin and larger body areas: honey wax from Rs 400 is excellent value. Sensitive skin, face, or lower pain tolerance: choose Rica (body from Rs 600) or Rica hot wax for the face (from Rs 150). Book either online at farwasalon.com/book — tell us it is your first visit and we will start with a small area.' },
   ],
   'Rica Wax': [
     { q: 'What is the difference between Rica Wax and Rica Hot Wax?', a: 'Rica Wax (strip wax) is a premium Italian formula used with cloth strips — ideal for large body areas like arms, legs, and back. Rica Hot Wax is stripless and applied directly — best for small, sensitive areas like face and underarms.' },
     { q: 'How much does full body Rica wax cost?', a: 'Full Body Rica Wax at Farwa Beauty Salon costs Rs 4,000. This includes arms, legs, underarms, and other body areas. Individual area pricing starts from Rs 600.' },
     { q: 'Can I get Rica wax during pregnancy?', a: 'Rica wax is generally safe during pregnancy as it\'s gentle and doesn\'t contain harsh chemicals. However, skin may be more sensitive during pregnancy — please let our team know so we can adjust pressure and temperature accordingly.' },
+    { q: 'How do I book Rica vs honey wax?', a: 'Pick the service that matches your skin on farwasalon.com/book, or WhatsApp +92 322 2782254 with the areas you want done. We publish every rate on /prices — no surprise quotes after you are in the chair.' },
   ],
 }

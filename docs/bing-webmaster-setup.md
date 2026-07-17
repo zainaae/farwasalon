@@ -67,10 +67,19 @@ curl -X POST "https://api.indexnow.org/indexnow" \
   }'
 ```
 
-### Automate with Vercel Deploy Hook (Future)
-Add an IndexNow ping to your Vercel deploy workflow so every deployment automatically notifies search engines. This can be done via:
-- A Vercel serverless function triggered by a deploy hook
-- A GitHub Action that runs after push to master
+### Automate with Vercel / GitHub (recommended)
+
+After pushes to **`master`**, CI runs `npm run ping:indexnow` (see `.github/workflows/ci.yml`, `indexnow` job). Optional secret: `INDEXNOW_KEY` (defaults to the public key file name).
+
+Manual ping anytime:
+
+```bash
+npm run ping:indexnow
+```
+
+Requires `public/farwa-salon-indexnow.txt` live at `https://farwasalon.com/farwa-salon-indexnow.txt`.
+
+Offline organic tasks (GBP Q&A, Shadiyana, reviews): see [organic-tier-a-checklist.md](./organic-tier-a-checklist.md).
 
 ---
 
