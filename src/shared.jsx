@@ -366,11 +366,11 @@ function Logo({ light }) {
     <Image
       src="/logo.jpg"
       alt="Farwa Beauty Salon"
-      width={945}
-      height={945}
+      width={40}
+      height={40}
       sizes="40px"
       onError={() => setErr(true)}
-      className="h-8 md:h-[2.125rem] w-auto object-contain transition-opacity duration-300"
+      className="h-8 md:h-[2.125rem] w-auto max-w-[10rem] object-contain transition-opacity duration-300"
     />
   )
 }

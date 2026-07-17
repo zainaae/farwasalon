@@ -19,7 +19,9 @@ export default defineConfig({
   webServer: {
     command: `npx next start -p ${PORT}`,
     url: baseURL,
-    reuseExistingServer: !process.env.CI,
+    // Default off locally too: a stale `next start` after rebuild 404s CSS/JS chunks
+    // and falsely fails H1/overflow/tab hydration assertions. Opt in with PLAYWRIGHT_REUSE=1.
+    reuseExistingServer: process.env.PLAYWRIGHT_REUSE === '1',
     timeout: 180_000,
   },
 })

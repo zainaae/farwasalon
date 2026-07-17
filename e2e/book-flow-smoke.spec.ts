@@ -33,7 +33,7 @@ test.describe('Booking flow', () => {
 
   test('step 1–3 smoke with mocked APIs', async ({ page }) => {
     await page.goto('/book')
-    await expect(page.getByRole('heading', { name: /book/i })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 1, name: /book|online/i })).toBeVisible()
     await expect(page.getByText('— Choose a service')).toBeVisible()
 
     await selectEyebrowThreading(page)
