@@ -13,7 +13,7 @@
 
 ## Services and starting prices (PKR)
 
-- Threading: from Rs 200 — https://farwasalon.com/services/threading
+- Threading: from Rs 100 — https://farwasalon.com/services/threading
 - Rica hot wax (face): from Rs 150 — https://farwasalon.com/services/rica-hot-wax
 - Honey wax (body): from Rs 400 — https://farwasalon.com/services/honey-wax
 - Rica wax (body): from Rs 600 — https://farwasalon.com/services/rica-wax

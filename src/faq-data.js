@@ -147,7 +147,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'How much does threading cost in PECHS?',
-        a: 'Eyebrow threading starts at Rs 200 at Farwa Beauty Salon in Block 3 PECHS, with full-face threading typically under Rs 1,000. Walk-ins are welcome when slots are available.',
+        a: 'Eyebrow threading starts at Rs 100 at Farwa Beauty Salon in Block 3 PECHS, with full-face threading options up to Rs 1,200. Walk-ins are welcome when slots are available.',
       },
       {
         q: 'How much does a facial cost in Karachi?',

@@ -323,7 +323,7 @@ export const GALLERY_SHOWCASE_ITEMS = [
  */
 export const CAT_META = {
   'Threading':       { img: '/threading.jpg',    video: '/threading.mp4',
-    tagline: 'Precise brow & face threading from Rs 200',
+    tagline: 'Precise brow & face threading from Rs 100',
     desc: 'Professional eyebrow and facial threading starting from Rs 200 at Farwa Beauty Salon in PECHS, Karachi. Threading uses a twisted cotton thread to remove unwanted hair with pinpoint precision, making it the gold standard for shaping brows, upper lip, chin, sideburns, and full face. This gentle technique is perfect for clients with sensitive, acne-prone, or reactive skin because no chemicals, wax, or heat ever touch the face — just a clean thread and our skilled hands. Expect perfectly sculpted, symmetrical brows and silky-smooth skin that lasts two to three weeks between visits. Our experienced aestheticians have been perfecting brow arches since 2008, tailoring every shape to complement your unique face structure and personal style. For best aftercare, avoid touching the freshly threaded area for a few hours and apply a gentle, alcohol-free moisturiser to soothe any temporary redness. Walk-ins are always welcome in PECHS, or book online at farwasalon.com/book for instant confirmation.' },
   'Rica Hot Wax':    { img: '/waxing.jpg',
     tagline: 'Gentle Rica stripless wax for face from Rs 150',

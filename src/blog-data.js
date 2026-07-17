@@ -1,5 +1,45 @@
 export const BLOG_POSTS = [
   {
+    slug: 'beauty-parlour-near-me-karachi-guide',
+    title: 'Beauty Parlour Near Me in Karachi — How to Actually Choose One (A Checklist)',
+    description: 'Searching "beauty parlour near me" in Karachi? A practical checklist — hygiene, printed prices, booking, reviews — plus what to check before your first visit to any salon.',
+    featuredImage: '/glow3.jpg',
+    date: '2026-07-17',
+    lastModified: '2026-07-17',
+    readTime: '6 min read',
+    author: 'Rubina',
+    category: 'Guides',
+    relatedCategories: ['Threading', 'Facials', 'Bridal'],
+    content: [
+      { type: 'p', text: 'If you have ever typed "beauty parlour near me" into Google in Karachi, you know the problem: a wall of listings, no prices, stock photos, and no way to tell a professional salon from a converted living room. After running a salon in PECHS since 2008, here is the checklist we would use ourselves — honest enough that it works whether you end up at Farwa or anywhere else.' },
+
+      { type: 'h2', text: 'The Five-Point Checklist Before You Book Anywhere' },
+      { type: 'p', text: 'One: printed prices. If a salon will not tell you the price before the service, the price depends on how you look when you walk in. Two: real reviews on Google Maps — read the three-star ones, they are the honest ones. Three: hygiene you can see — fresh thread for every client, sanitised metal tools, single-use wax applicators. Four: a real booking system, because a salon that manages time respects yours. Five: an artist who asks questions before starting — anyone who begins a facial without asking about your skin is following a script, not treating you.' },
+
+      { type: 'h2', text: 'Which Areas of Karachi We Serve' },
+      { type: 'p', text: 'Farwa Beauty Salon sits in Block 3 PECHS, a few minutes from Tariq Road and Jheel Park. Clients come to us from Bahadurabad, Gulshan-e-Iqbal, DHA and Clifton, Shahrah-e-Faisal offices, North Nazimabad, and Saddar — PECHS is central enough that most of Karachi reaches us in twenty to thirty minutes. If you are searching for [threading](/services/threading), [facials](/services/facials), [waxing](/services/rica-wax), [nails](/services/nails), or [bridal makeup](/services/bridal) anywhere near central Karachi, we are the salon nearby that publishes every price.' },
+
+      { type: 'h2', text: 'What "Near Me" Should Actually Mean' },
+      { type: 'p', text: 'The nearest salon is not automatically the right one. A parlour ten minutes further that shows its prices, holds your booking time, and uses fresh tools beats the one downstairs that does none of those things. Distance matters least for services you get monthly — for a [deep cleansing](/services/cleansing) or hair treatment, the right salon is worth crossing a few blocks for. It matters most for quick maintenance like threading, which is why we keep walk-ins open for it when slots allow.' },
+
+      { type: 'h2', text: 'Red Flags That Should Send You Elsewhere' },
+      { type: 'p', text: 'Prices that appear only after the service. Wax pots that never seem to be cleaned. Pressure to add services mid-treatment while you are in the chair. "Package deals" that expire today only. A bridal quote that changes every time you call. Any of these means keep searching — Karachi has enough salons that you never need to tolerate one that treats pricing as a negotiation.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How do I find a good beauty parlour near me in Karachi?' },
+      { type: 'p', text: 'A: Check three things on Google before visiting: a rating above 4 with recent reviews, published prices (on their site or listing), and photos of the actual salon rather than stock images. Then confirm hygiene on your first small service — threading is a cheap way to test a salon before trusting it with a facial or bridal booking.' },
+      { type: 'h3', text: 'Q: Which areas does Farwa Beauty Salon serve?' },
+      { type: 'p', text: 'A: We are in Block 3 PECHS, Karachi — minutes from Tariq Road and Bahadurabad, and an easy drive from Gulshan-e-Iqbal, DHA, Clifton, Shahrah-e-Faisal, North Nazimabad, and Saddar. Hours are Monday to Saturday, 11am to 7pm.' },
+      { type: 'h3', text: 'Q: Should I choose the cheapest salon near me?' },
+      { type: 'p', text: 'A: Choose the most transparent one. Cheap with hidden costs ends up expensive; a salon that prints Rs 100 threading and Rs 1,400 facials and sticks to it will cost you less over a year than one with negotiable rates.' },
+      { type: 'h3', text: 'Q: Can I book a salon appointment online in Karachi?' },
+      { type: 'p', text: 'A: At Farwa, yes — farwasalon.com/book shows live available slots and takes under a minute, with free cancellation up to two hours before. No calls, no back-and-forth.' },
+
+      { type: 'h2', text: 'Come See the Checklist in Action' },
+      { type: 'p', text: 'Every point above is how we run our own floor. Browse the full [services menu with printed prices](/services), book online, or WhatsApp +92 322 2782254 — and bring your sharpest questions; we like clients who check.' },
+    ],
+  },
+  {
     slug: 'monsoon-hair-skin-care-karachi',
     title: 'Monsoon Beauty Survival Guide for Karachi — Frizz, Sticky Skin, and What Actually Works',
     description: 'How to handle Karachi monsoon humidity: taming hair frizz, keeping oily skin clear, and which salon treatments are worth booking in July and August.',
@@ -169,8 +209,8 @@ export const BLOG_POSTS = [
     content: [
       { type: 'p', text: 'Try finding a published price list from a big-name salon in Karachi. You will find "DM us for rates", "call for details", and price menus that mysteriously change at the counter. At Farwa Beauty Salon in PECHS, we print every starting price online — and this guide puts the whole 2026 list in one place, so you know what salon services actually cost in Karachi before you walk in anywhere.' },
 
-      { type: 'h2', text: 'Threading and Face Waxing — Rs 150 to Rs 1,000' },
-      { type: 'p', text: 'Eyebrow [threading](/services/threading) starts at Rs 200 in PECHS, with full-face threading typically under Rs 1,000. If your skin is sensitive, [Rica hot wax](/services/rica-hot-wax) for the face starts at Rs 150 — it is an Italian stripless wax that grips hair, not skin, so it is the gentler option for brows, upper lip, and full face.' },
+      { type: 'h2', text: 'Threading and Face Waxing — Rs 100 to Rs 1,200' },
+      { type: 'p', text: 'Eyebrow [threading](/services/threading) starts at Rs 100 in PECHS, with full-face threading options up to Rs 1,200. If your skin is sensitive, [Rica hot wax](/services/rica-hot-wax) for the face starts at Rs 150 — it is an Italian stripless wax that grips hair, not skin, so it is the gentler option for brows, upper lip, and full face.' },
 
       { type: 'h2', text: 'Body Waxing — Rs 400 to Rs 3,500' },
       { type: 'p', text: 'Standard [honey wax](/services/honey-wax) starts at Rs 400 for single areas like arms or underarms, with full-body sessions well under Rs 3,000. Premium [Rica body wax](/services/rica-wax) starts at Rs 600 — worth the difference if you wax regularly or have reactive skin, since results last three to four weeks and hair grows back finer over time.' },
@@ -192,6 +232,9 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: 'Bridal Makeup — from Rs 8,000 per event' },
       { type: 'p', text: 'Single-event bridal looks — engagement, mehndi, nikkah, or reception — start at Rs 8,000 at Farwa, with the complete full bridal package around Rs 25,000. Karachi\'s celebrity-name studios charge Rs 80,000 to Rs 180,000 for one day; our [bridal packages](/services/bridal) are built on the same techniques, eighteen years of practice, and a fraction of the rent. Read our [bridal packages guide](/blog/best-bridal-makeup-packages-karachi-2026) for the full breakdown.' },
+
+      { type: 'h2', text: 'How This Compares to the Big-Name Parlours' },
+      { type: 'p', text: 'Since the famous salons rarely publish rates, third-party price-tracker sites do it for them. Per those published lists, a single bridal event at Kashee\'s runs roughly Rs 23,000 to Rs 33,000 — with multi-event packages from Rs 48,000 — and Mahrose\'s makeup menu starts around Rs 12,000 for a classic look. Nabila and the celebrity studios sit far above both. None of this makes those salons wrong; it makes the comparison simple: at Farwa the complete full bridal package costs about what one event costs at a big name, the techniques and product houses (Janssen, Wella, Rica) are the same professional grade, and the price you read here is the price you pay.' },
 
       { type: 'h2', text: 'Frequently Asked Questions' },
       { type: 'h3', text: 'Q: Why do most Karachi salons hide their prices?' },
