@@ -11,6 +11,7 @@ import {
   buildOccupiedCounts,
   slotsNeededForDuration,
   canFitAtIndex,
+  isSlotInPast,
 } from '../../../lib/booking-slots.js'
 import { signCancelToken, phoneLast4 } from '../../../lib/booking-cancel-token.js'
 import { validateBookingDate, validateTimeInGrid } from '../../../lib/booking-date-rules.js'
@@ -75,6 +76,13 @@ export async function POST(request) {
   const timeCheck = validateTimeInGrid(time)
   if (!timeCheck.ok) {
     return NextResponse.json({ error: timeCheck.message }, { status: 400 })
+  }
+
+  if (isSlotInPast(date, time)) {
+    return NextResponse.json(
+      { error: 'This time has already passed or starts too soon. Please pick a later slot.' },
+      { status: 400 },
+    )
   }
 
   if (!PHONE_RE.test(clientPhone.replace(/\s/g, ''))) {
@@ -173,7 +181,6 @@ export async function POST(request) {
       service: service.name,
       duration,
       clientName,
-      clientPhone,
       cancelToken,
     },
   })

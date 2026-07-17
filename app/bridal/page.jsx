@@ -10,7 +10,8 @@ import {
   buildSpeakableSchema,
   getAggregateRating,
 } from '../../lib/business-schema.js'
-import { CAT_SLUGS, CAT_FAQS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice } from '../../src/data.js'
+import { CAT_SLUGS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice } from '../../src/data.js'
+import { CAT_FAQS } from '../../src/cat-seo-content.js'
 
 const title = 'Bridal Makeup in PECHS Karachi — Trials & Packages | Farwa Beauty Salon'
 const description =

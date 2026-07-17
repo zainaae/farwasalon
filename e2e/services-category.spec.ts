@@ -43,6 +43,20 @@ test.describe('Services pages', () => {
     })
   }
 
+  test('/services menu lists all 13 categories with printed prices', async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem('farwa-newsletter-seen', '1'))
+    await page.goto('/services')
+    await expect(page.getByRole('link', { name: /threading/i }).first()).toBeVisible()
+
+    // Five editorial chapters, thirteen category rows, every row priced.
+    for (const chapter of ['The Face', 'The Brow & The Silk', 'The Hair', 'The Hands & The Calm', 'The Bride']) {
+      await expect(page.locator(`section[aria-label="${chapter}"]`)).toHaveCount(1)
+    }
+    const rows = page.locator('a[href^="/services/"]', { has: page.locator('h2') })
+    await expect(rows).toHaveCount(13)
+    await expect(page.getByText(/^from$/i)).toHaveCount(13)
+  })
+
   test('/services/hair service modal and book link', async ({ page }) => {
     await page.goto('/services/hair')
     await page.getByRole('button', { name: /haircut & blowdry/i }).click()

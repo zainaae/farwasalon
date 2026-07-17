@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useBooking } from '../../src/shared.jsx'
 import { YEARS_ACTIVE, WA_DEFAULT } from '../../src/data.js'
@@ -23,15 +23,15 @@ export default function TeamClient() {
 
       <section className="bg-white py-16 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="eyebrow mb-3">— The people</motion.p>
+          <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+            className="eyebrow mb-3">— The people</m.p>
           <div className="overflow-hidden">
-            <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+            <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
               <span className="block">OUR</span> <span className="block">TEAM</span>
-            </motion.h1>
+            </m.h1>
           </div>
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
@@ -39,7 +39,7 @@ export default function TeamClient() {
           >
             Farwa is led by Rubina, our founder. Additional stylists and aestheticians join by appointment
             depending on your service and the day — we never list staff we cannot guarantee at booking time.
-          </motion.p>
+          </m.p>
         </div>
       </section>
 
@@ -48,7 +48,7 @@ export default function TeamClient() {
           <p className="eyebrow mb-6">— Founder</p>
           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {TEAM.map((member, i) => (
-              <motion.article key={member.name}
+              <m.article key={member.name}
                 initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}
                 className="panel-soft overflow-hidden">
@@ -70,11 +70,11 @@ export default function TeamClient() {
                   ))}
                 </div>
                 </div>
-              </motion.article>
+              </m.article>
             ))}
           </div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -91,21 +91,22 @@ export default function TeamClient() {
               href={WA_DEFAULT}
               target="_blank"
               rel="noreferrer"
-              className="link-underline text-ink text-[11px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1.5"
+              className="link-underline !inline-flex items-center gap-1.5 text-ink text-[11px] tracking-[0.14em] uppercase font-['Inter']"
             >
-              Message us on WhatsApp <ArrowUpRight className="w-3 h-3" />
+              <span className="min-w-0">Message us on WhatsApp</span>
+              <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
             </a>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       <section className="bg-ink py-16 md:py-20">
         <div className="section-shell flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <motion.h2 initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
+          <m.h2 initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
             className="font-['Unbounded'] font-bold text-xl md:text-2xl text-white">
             Book with our expert team today.
-          </motion.h2>
-          <motion.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
+          </m.h2>
+          <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
             className="flex flex-wrap items-center gap-4">
             <button onClick={() => booking.open()}
               className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3.5 hover:bg-nude transition-colors duration-300">
@@ -114,7 +115,7 @@ export default function TeamClient() {
             <Link href="/services" className="link-underline text-white/60 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors">
               Our Services
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </section>
     </main>

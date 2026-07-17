@@ -1,11 +1,31 @@
 import { describe, it, expect } from 'vitest'
+import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 import {
   WA_NUMBER, waLink, waLinkBooking,
   formatPrice, formatDuration,
   CAT_SLUGS, slugToCategory,
   SERVICES, CATEGORIES, GALLERY_PHOTOS,
+  CAT_META, GALLERY_SHOWCASE_ITEMS,
 } from './data.js'
 import { BLOG_POSTS } from './blog-data.js'
+
+describe('CAT_META media files', () => {
+  const publicDir = join(__dirname, '..', 'public')
+  const entries = [
+    ...Object.entries(CAT_META).map(([cat, meta]) => ({ name: cat, ...meta })),
+    ...GALLERY_SHOWCASE_ITEMS.map((item) => ({ name: item.label, img: item.src, video: item.video })),
+  ]
+
+  it.each(entries.filter((e) => e.video))('$name video file exists and is mp4', ({ video }) => {
+    expect(video).toMatch(/\.mp4$/)
+    expect(existsSync(join(publicDir, video))).toBe(true)
+  })
+
+  it.each(entries)('$name poster image exists', ({ img }) => {
+    expect(existsSync(join(publicDir, img))).toBe(true)
+  })
+})
 
 describe('waLink', () => {
   it('uses default message when service is omitted or empty', () => {

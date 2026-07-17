@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, MapPin, Clock, Phone } from 'lucide-react'
 import {
   WA_DEFAULT,
@@ -9,9 +9,9 @@ import {
   CAT_SLUGS,
   formatPrice,
   YEARS_ACTIVE,
-  CAT_FAQS,
   getDefaultServiceIdForCategory,
 } from '../../../src/data.js'
+import { CAT_FAQS } from '../../../src/cat-seo-content.js'
 import { TOP_SERVICES } from '../../../src/location-seo.js'
 import { SALON_ADDRESS_LINES, SALON_PHONE_DISPLAY, GOOGLE_REVIEW_LINK, getAggregateRating } from '../../../lib/business-schema.js'
 
@@ -33,7 +33,7 @@ export default function LocationServicePage({ data }) {
   return (
     <main id="main" className="page-content">
       <div className="section-shell section-pad min-h-0">
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">
               <li><Link href="/" className="hover:text-ink transition-colors">Home</Link></li>
@@ -71,18 +71,18 @@ export default function LocationServicePage({ data }) {
               ★ {rating.ratingValue} ({rating.reviewCount} Google reviews)
             </a>
           </div>
-        </motion.div>
+        </m.div>
 
         {displayServices.length > 0 && (
-          <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
+          <m.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-12">
             <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Our {service.name} Services</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {displayServices.map((svc, i) => (
-                <motion.div key={i} className="card-link !justify-start !flex-col !items-start hover:shadow-soft">
+                <m.div key={i} className="card-link !justify-start !flex-col !items-start hover:shadow-soft">
                   <p className="font-['Syne'] font-semibold text-sm text-ink mb-1">{svc.name}</p>
                   {svc.pricePkr != null && <p className="text-stone text-xs font-['Inter']">{formatPrice(svc.pricePkr)}</p>}
-                </motion.div>
+                </m.div>
               ))}
             </div>
             {categoryKey && (
@@ -91,26 +91,26 @@ export default function LocationServicePage({ data }) {
                 View all {service.name} services <ChevronRight className="w-3 h-3" />
               </Link>
             )}
-          </motion.section>
+          </m.section>
         )}
 
-        <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
+        <m.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-12 panel-soft p-6 md:p-8 shadow-soft">
           <h2 className="font-['Syne'] font-bold text-lg text-ink mb-3">Why Choose Farwa Beauty Salon?</h2>
           <ul className="space-y-2 text-stone text-sm font-light font-['Inter']">
             <li>✓ Serving PECHS since 2008 — {YEARS_ACTIVE}+ years of experience</li>
             <li>✓ Expert {service.name.toLowerCase()} professionals</li>
             <li>✓ Hygienic, comfortable environment in PECHS</li>
-            <li>✓ Book online or on WhatsApp — instant confirmation</li>
+            <li>✓ Book online for instant confirmation — or message us on WhatsApp</li>
             <li>✓ Clients from {location.name} and across Karachi visit us in PECHS</li>
           </ul>
-        </motion.section>
+        </m.section>
 
-        <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
+        <m.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-12">
           <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Getting Here from {location.name}</h2>
           <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed mb-4">
-            Farwa Beauty Salon is located in PECHS, Karachi. {location.detail} We&apos;re open Monday to Saturday, 11 AM to 7 PM. Book your appointment on WhatsApp for instant confirmation.
+            Farwa Beauty Salon is located in PECHS, Karachi. {location.detail} We&apos;re open Monday to Saturday, 11 AM to 7 PM. Book online for instant confirmation, or message us on WhatsApp.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link
@@ -124,10 +124,10 @@ export default function LocationServicePage({ data }) {
               WhatsApp <ArrowUpRight className="w-4 h-4" />
             </a>
           </div>
-        </motion.section>
+        </m.section>
 
         {faqs.length > 0 && (
-          <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }}
+          <m.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }}
             className="mb-12">
             <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Common questions</h2>
             <div className="space-y-4">
@@ -138,7 +138,7 @@ export default function LocationServicePage({ data }) {
                 </div>
               ))}
             </div>
-          </motion.section>
+          </m.section>
         )}
 
         <section className="pt-8 border-t border-border-soft">

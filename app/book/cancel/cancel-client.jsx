@@ -3,7 +3,7 @@
 import { Suspense, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { AlertTriangle, Check, X, ArrowUpRight } from 'lucide-react'
 
 const WA_NUMBER = '923222782254'
@@ -109,7 +109,7 @@ function CancelContent() {
   }
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
@@ -193,7 +193,7 @@ function CancelContent() {
           Keep my appointment
         </Link>
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 

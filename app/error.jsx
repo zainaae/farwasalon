@@ -9,6 +9,18 @@ export default function Error({ error, reset }) {
     if (typeof window !== 'undefined' && window.plausible) {
       window.plausible('ErrorBoundary', { props: { message: msg, digest } })
     }
+    // Server-side record too — Plausible is ad-blockable and may not have
+    // loaded when the error hit. Fire-and-forget; errors here are swallowed.
+    try {
+      fetch('/api/log-error', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg, digest, url: window.location.pathname }),
+        keepalive: true,
+      }).catch(() => {})
+    } catch {
+      // never let reporting break the error page itself
+    }
   }, [error])
 
   return (

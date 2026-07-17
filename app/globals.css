@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -10,6 +10,7 @@
   --stone:  #6b5f57;
   --border-soft: #e4ddd7;
   --accent-gold: #c9a98a;
+  --accent-gold-deep: #82664a; /* gold for text on light bg â€” 5.3:1 on white, 4.9:1 on mist */
   --shadow-soft: 0 2px 12px rgba(13, 13, 13, 0.05);
   --shadow-card: 0 8px 32px rgba(13, 13, 13, 0.08);
 
@@ -70,14 +71,14 @@
   }
 }
 
-/* ── Urdu Nastaliq ── */
+/* â”€â”€ Urdu Nastaliq â”€â”€ */
 .font-nastaliq {
   font-family: 'Noto Nastaliq Urdu', serif;
   font-weight: 400;
   line-height: 1.8;
 }
 
-/* ── Horizontal scroll-snap ── */
+/* â”€â”€ Horizontal scroll-snap â”€â”€ */
 .snap-x-row {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -86,7 +87,7 @@
 .snap-x-row::-webkit-scrollbar { display: none; }
 .snap-center-child > * { scroll-snap-align: center; scroll-snap-stop: always; }
 
-/* ── Colour utilities ── */
+/* â”€â”€ Colour utilities â”€â”€ */
 @layer utilities {
   .bg-ink    { background-color: #0d0d0d !important; }
   .bg-white  { background-color: #ffffff !important; }
@@ -103,11 +104,12 @@
     border-color: var(--border-soft);
   }
   .text-accent-gold { color: var(--accent-gold) !important; }
+  .text-accent-gold-deep { color: var(--accent-gold-deep) !important; }
   .shadow-soft { box-shadow: var(--shadow-soft); }
   .shadow-card { box-shadow: var(--shadow-card); }
 }
 
-/* ── Layout & typography components ── */
+/* â”€â”€ Layout & typography components â”€â”€ */
 @layer components {
   .section-shell {
     width: 100%;
@@ -183,7 +185,7 @@
     min-height: 44px;
     padding: 0.875rem 1.5rem;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 11px;
+    font-size: 12.5px;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -202,7 +204,7 @@
     min-height: 44px;
     padding: 0.875rem 1.5rem;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 11px;
+    font-size: 12.5px;
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -268,7 +270,7 @@
       padding-right: 0;
     }
   }
-  /* Featured Services category filters — equal-width grid (sidebar column narrows at md) */
+  /* Featured Services category filters â€” equal-width grid (sidebar column narrows at md) */
   .service-filter-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -358,6 +360,71 @@
     background: var(--mist);
     border: 1px solid var(--border-soft);
   }
+  .reviews-featured {
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.94) 100%);
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-card);
+  }
+  .reviews-featured-mark {
+    color: rgba(201, 169, 138, 0.38);
+  }
+  .reviews-block-divider {
+    border-top: 1px solid var(--border-soft);
+    padding-top: 1.75rem;
+  }
+  @media (min-width: 640px) {
+    .reviews-block-divider { padding-top: 2rem; }
+  }
+  @media (min-width: 768px) {
+    .reviews-block-divider { padding-top: 2.5rem; }
+  }
+  .reviews-rating-row {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.625rem;
+    padding: 0.5rem 0.75rem;
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid var(--border-soft);
+  }
+  @media (min-width: 640px) {
+    .reviews-rating-row {
+      flex-wrap: nowrap;
+      gap: 0.625rem;
+      padding: 0.5rem 0.875rem;
+    }
+  }
+  .review-excerpt-link {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+    transition: color 0.2s ease;
+  }
+  .review-excerpt-link:hover {
+    color: var(--ink);
+  }
+  .reviews-cta-actions {
+    min-width: 0;
+  }
+  @media (min-width: 640px) {
+    .reviews-cta-actions {
+      flex: 1 1 auto;
+      max-width: 28rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .reviews-cta-actions {
+      flex: 0 0 auto;
+      max-width: none;
+    }
+  }
+  .reviews-cta-btn {
+    min-height: 44px;
+    text-align: center;
+  }
   .page-content {
     padding-top: calc(3.375rem + env(safe-area-inset-top, 0px));
   }
@@ -418,10 +485,10 @@
   }
 }
 
-/* ── Display fonts ── */
+/* â”€â”€ Display fonts â”€â”€ */
 .display-hero {
   font-family: 'Unbounded', sans-serif;
-  font-weight: 900;
+  font-weight: 700;
   font-size: clamp(3.5rem, 12vw, 12rem);
   line-height: 0.9;
   letter-spacing: -0.02em;
@@ -441,10 +508,9 @@
   letter-spacing: -0.01em;
 }
 
-/* ── Underline reveal ── */
+/* â”€â”€ Underline reveal â”€â”€ */
 .link-underline {
   position: relative;
-  display: inline-block;
 }
 .link-underline::after {
   content: '';
@@ -456,7 +522,7 @@
 }
 .link-underline:hover::after { width: 100%; }
 
-/* ── Navbar links (desktop) ── */
+/* â”€â”€ Navbar links (desktop) â”€â”€ */
 .nav-link {
   position: relative;
   display: inline-block;
@@ -492,14 +558,14 @@
   opacity: 1;
 }
 
-/* ── Marquee ── */
+/* â”€â”€ Marquee â”€â”€ */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
 .marquee-track { animation: marquee 22s linear infinite; }
 
-/* ── Loader ── */
+/* â”€â”€ Loader â”€â”€ */
 .loader {
   width: 32px; height: 32px;
   border: 1.5px solid #e4ddd7;
@@ -517,20 +583,20 @@
   animation: fadeIn 0.5s ease forwards;
 }
 
-/* ── Spotlight ── */
+/* â”€â”€ Spotlight â”€â”€ */
 @keyframes spotlight {
   0%   { opacity: 0; transform: translate(-72%,-62%) scale(0.5); }
   100% { opacity: 1; transform: translate(-50%,-40%) scale(1); }
 }
 .animate-spotlight { animation: spotlight 2s ease .75s 1 forwards; }
 
-/* ── String wave (Stringtune fallback) ── */
+/* â”€â”€ String wave (Stringtune fallback) â”€â”€ */
 @keyframes stringWave {
   from { transform: scaleY(1) translateY(0px); }
   to   { transform: scaleY(-1) translateY(-4px); }
 }
 
-/* ── Modal backdrop ── */
+/* â”€â”€ Modal backdrop â”€â”€ */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: 200;
   background: rgba(13,13,13,0.6);
@@ -552,7 +618,7 @@
   display: none;
 }
 
-/* ── Skip-to-content link (a11y) ── */
+/* â”€â”€ Skip-to-content link (a11y) â”€â”€ */
 .skip-link {
   position: absolute;
   top: -60px;
@@ -574,7 +640,7 @@
   outline-offset: 2px;
 }
 
-/* ── Global focus-visible ring ── */
+/* â”€â”€ Global focus-visible ring â”€â”€ */
 *:focus { outline: none; }
 a:focus-visible,
 button:focus-visible,
@@ -588,7 +654,7 @@ textarea:focus-visible,
   border-radius: 1px;
 }
 
-/* ── Responsive FB iframe card ── */
+/* â”€â”€ Responsive FB iframe card â”€â”€ */
 .fb-embed-frame {
   position: relative;
   width: 100%;
@@ -601,7 +667,7 @@ textarea:focus-visible,
   border: 0;
 }
 
-/* ── Image quality ── */
+/* â”€â”€ Image quality â”€â”€ */
 img {
   image-rendering: auto;
   -ms-interpolation-mode: bicubic;
@@ -610,10 +676,10 @@ img[data-max-native] {
   image-rendering: high-quality;
 }
 
-/* ── Prevent video controls interception ── */
+/* â”€â”€ Prevent video controls interception â”€â”€ */
 video[aria-hidden="true"] { pointer-events: none; }
 
-/* ── Reduced motion ── */
+/* â”€â”€ Reduced motion â”€â”€ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -626,25 +692,50 @@ video[aria-hidden="true"] { pointer-events: none; }
   video { playback-rate: 1 !important; }
 }
 
-/* ── Ken Burns hero animation (mobile) ── */
+/* â”€â”€ Ken Burns hero animation (mobile) â”€â”€ */
 @keyframes kenburns {
   0%   { transform: scale(1)    translate(0, 0); }
   100% { transform: scale(1.12) translate(-1.5%, -1%); }
 }
 
-/* ── Navbar slide-in (replaces framer-motion for perf) ── */
+/* â”€â”€ Navbar slide-in (replaces framer-motion for perf) â”€â”€ */
 @keyframes navSlideIn {
   from { transform: translateY(-32px); opacity: 0; }
   to   { transform: translateY(0);     opacity: 1; }
 }
 
-/* ── content-visibility for below-fold sections (paint-holding) ── */
+/* â”€â”€ Hero entrance (replaces framer-motion so first paint doesn't wait
+      for hydration â€” the hero text was the LCP element, painting at ~10s
+      on throttled mobile because JS gated its visibility) â”€â”€ */
+@keyframes heroRise {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.hero-rise {
+  animation: heroRise 1.05s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-fade-up {
+  animation: heroFadeUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-fade {
+  animation: heroFade 0.7s ease both;
+}
+
+/* â”€â”€ content-visibility for below-fold sections (paint-holding) â”€â”€ */
 .cv-auto {
   content-visibility: auto;
   contain-intrinsic-size: auto 600px;
 }
 
-/* ── Touch target floor (WCAG 2.5.5; holds at browser zoom-out) ── */
+/* â”€â”€ Touch target floor (WCAG 2.5.5; holds at browser zoom-out) â”€â”€ */
 .tap-safe {
   min-height: 44px;
 }

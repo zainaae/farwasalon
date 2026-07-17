@@ -1,10 +1,10 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
-import { LazyMotion, domAnimation, MotionConfig } from 'framer-motion'
+import { LazyMotion, MotionConfig } from 'framer-motion'
 import {
-  BookingProvider,
   SkipLink,
   Navbar,
   Footer,
@@ -12,7 +12,13 @@ import {
   StickyMobileCTA,
   shouldShowMobileCtaBar,
 } from '../src/shared'
-import NewsletterModal from './newsletter-modal'
+import { BookingProvider } from '../src/booking-context.jsx'
+
+const loadDomAnimation = () => import('framer-motion').then((mod) => mod.domAnimation)
+
+const NewsletterModal = dynamic(() => import('./newsletter-modal'), {
+  ssr: false,
+})
 
 function ScrollProgress() {
   const barRef = useRef(null)
@@ -63,23 +69,23 @@ export default function ClientShell({ children }) {
   const useMobileCtaBar = shouldShowMobileCtaBar(pathname)
 
   return (
-    <LazyMotion features={domAnimation}>
+    <LazyMotion features={loadDomAnimation} strict>
       <MotionConfig reducedMotion="user">
         <BookingProvider>
-        <ScrollProgress />
-        <ScrollToTop />
-        <SkipLink />
-        <Navbar transparent={isHome} />
-        <div className="overflow-x-clip w-full max-w-full min-w-0">
-          {children}
-        </div>
-        <Footer />
-        {useMobileCtaBar ? (
-          <StickyMobileCTA hidden={hideSticky} />
-        ) : (
-          <StickyWA hidden={hideSticky} />
-        )}
-        <NewsletterModal />
+          <ScrollProgress />
+          <ScrollToTop />
+          <SkipLink />
+          <Navbar transparent={isHome} />
+          <div className="overflow-x-clip w-full max-w-full min-w-0">
+            {children}
+          </div>
+          <Footer />
+          {useMobileCtaBar ? (
+            <StickyMobileCTA hidden={hideSticky} />
+          ) : (
+            <StickyWA hidden={hideSticky} />
+          )}
+          <NewsletterModal />
         </BookingProvider>
       </MotionConfig>
     </LazyMotion>

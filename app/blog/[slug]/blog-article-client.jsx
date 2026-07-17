@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { WA_DEFAULT, YEARS_ACTIVE, CAT_SLUGS, CAT_META } from '../../../src/data.js'
 import { BLOG_POSTS } from '../../../src/blog-data.js'
@@ -81,7 +81,7 @@ export default function BlogArticleClient({ slug }) {
             </ol>
           </nav>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
@@ -92,9 +92,9 @@ export default function BlogArticleClient({ slug }) {
             >
               <ChevronLeft className="w-3.5 h-3.5" /> All Articles
             </Link>
-          </motion.div>
+          </m.div>
 
-          <motion.header
+          <m.header
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -104,7 +104,7 @@ export default function BlogArticleClient({ slug }) {
               <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
                 {post.category}
               </span>
-              <span className="text-stone/50 text-[10px] font-['Inter']">{post.readTime}</span>
+              <span className="text-stone text-[10px] font-['Inter']">{post.readTime}</span>
             </div>
             <h1 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight mb-3">
               {post.title}
@@ -112,16 +112,16 @@ export default function BlogArticleClient({ slug }) {
             <p className="text-stone text-sm font-light">
               By {post.author || 'Rubina'}, Founder · Farwa Beauty Salon · {formatted}
             </p>
-          </motion.header>
+          </m.header>
 
           {post.featuredImage && (
-            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}
+            <m.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}
               className="relative overflow-hidden mb-10 aspect-[16/9]">
               <Image src={post.featuredImage} alt={post.title} fill className="object-cover" priority />
-            </motion.div>
+            </m.div>
           )}
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -181,7 +181,7 @@ export default function BlogArticleClient({ slug }) {
                 </p>
               )
             })}
-          </motion.div>
+          </m.div>
 
           <div className="mt-10 pt-8 border-t border-border-soft">
             <div className="flex items-start gap-4 mb-8">
@@ -208,7 +208,7 @@ export default function BlogArticleClient({ slug }) {
                   if (!meta || !slug) return null
                   return (
                     <Link key={cat} href={`/services/${slug}`} className="group relative overflow-hidden aspect-[4/3]">
-                      <Image src={meta.img} alt={cat} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 50vw, 33vw" />
+                      <Image src={meta.img} alt="" fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 50vw, 33vw" />
                       <div className="absolute inset-0 bg-ink/50 group-hover:bg-ink/60 transition-colors" />
                       <div className="absolute inset-0 flex items-end p-3">
                         <span className="text-white font-['Syne'] font-bold text-xs uppercase">{cat}</span>

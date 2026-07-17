@@ -1,16 +1,18 @@
 # Quality gates — testing, accessibility, SEO, performance
 
-Release-readiness criteria for the Farwa Beauty Salon SPA ([Vite + React](../package.json)). Use as a **pre-deploy checklist** and CI policy.
+Release-readiness criteria for the Farwa Beauty Salon site ([Next.js 16 + React 19](../package.json)). Use as a **pre-deploy checklist** and CI policy.
 
 ## 1. Testing
 
 ### Unit / component
 
-- **Framework:** Vitest + React Testing Library (match Vite).
+- **Framework:** Vitest + React Testing Library (jsdom).
 - **Minimum coverage for critical paths:**
+  - Booking duration incl. add-ons — [booking-duration.js](../lib/booking-duration.js)
+  - Slot generation / overlap — [booking-slots.js](../lib/booking-slots.js)
+  - Cancel-token signing and the 2-hour window — [booking-cancel-token.js](../lib/booking-cancel-token.js)
   - `waLink` / URL encoding in [data.js](../src/data.js)
-  - `computeNextSlot` behavior in [shared.jsx](../src/shared.jsx) (extract to pure function for testability)
-  - Booking sheet reducer / step transitions (if refactored)
+  - Input sanitisation and rate limiting — [sanitize.js](../lib/sanitize.js), [rate-limit.js](../lib/rate-limit.js)
 
 ### End-to-end
 
@@ -51,9 +53,9 @@ Release-readiness criteria for the Farwa Beauty Salon SPA ([Vite + React](../pac
 
 ### Per-page
 
-- Unique **`title`** and **`meta description`** via `usePageMeta` (already) — extend with canonical per route when moving beyond single canonical in [index.html](../index.html).
-- **Sitemap:** [public/sitemap.xml](../public/sitemap.xml) must list `/services`, `/gallery`, `/about`, `/contact` with accurate `lastmod`.
-- **Structured data:** BeautySalon JSON-LD in `index.html`; add **service** or **FAQ** schema when you add deep service pages.
+- Unique **`title`** and **`meta description`** per route via the Next.js Metadata API — helpers in [page-metadata.js](../lib/page-metadata.js). Each route sets its own canonical.
+- **Sitemaps:** generated, not static — [app/sitemap.xml](../app/sitemap.xml) plus the `sitemap-static` / `sitemap-services` / `sitemap-locations` / `sitemap-blog` children, built from [sitemap-data.js](../lib/sitemap-data.js). Check `lastmod` is fresh after a content push.
+- **Structured data:** JSON-LD via [json-ld.jsx](../app/json-ld.jsx) — BeautySalon from [business-schema.js](../lib/business-schema.js), plus service and FAQ schema from [service-schema.js](../lib/service-schema.js).
 
 ### Gate
 
@@ -72,7 +74,7 @@ Release-readiness criteria for the Farwa Beauty Salon SPA ([Vite + React](../pac
 
 ### Actions aligned with this codebase
 
-- Hero video: `poster`, `preload` strategy, consider `prefers-reduced-motion` to swap to image ([Home.jsx](../src/pages/Home.jsx)).
+- Hero video: `poster`, `preload` strategy, consider `prefers-reduced-motion` to swap to image ([home-client.jsx](../app/home-client.jsx)). Heavy below-fold video is lazy-loaded via `LazyVideo`.
 - Lazy-load below-fold media; ensure `width`/`height` or aspect boxes for images.
 - Throttle **scroll** listeners in Navbar / `ScrollProgress` if profiler shows jank.
 
@@ -82,12 +84,12 @@ Release-readiness criteria for the Farwa Beauty Salon SPA ([Vite + React](../pac
 
 ## 5. Security & privacy
 
-- All external `window.open` uses `noopener,noreferrer` where applicable (audit [Contact.jsx](../src/pages/Contact.jsx) contact form handler).
-- No secrets in frontend bundle; only public IDs for analytics.
+- All external `window.open` uses `noopener,noreferrer` where applicable (audit [contact-client.jsx](../app/contact/contact-client.jsx) contact form handler).
+- No secrets in the client bundle; server-only env vars must never be prefixed `NEXT_PUBLIC_`. `GOOGLE_PLACES_API_KEY` is used only in [google-places.js](../lib/google-places.js) on the server.
 
 ## 6. Observability
 
-- **Error monitoring** (e.g. Sentry): `ErrorBoundary` in [App.jsx](../src/App.jsx) reports `componentStack`.
+- **Error monitoring** (e.g. Sentry): route error boundary in [error.jsx](../app/error.jsx).
 - **Plausible goals** aligned with [conversion-flow-and-kpis.md](./conversion-flow-and-kpis.md).
 
 ## Rollback

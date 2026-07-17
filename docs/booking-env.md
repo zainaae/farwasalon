@@ -25,3 +25,14 @@ Cancel links look like: `/book/cancel?token=…&id=FBS-…&date=…` (display fi
 | Variable | Description |
 |----------|-------------|
 | `INDEXNOW_SECRET` | Protects `/api/indexnow` |
+
+## Google Places (homepage reviews)
+
+| Variable | Description |
+|----------|-------------|
+| `GOOGLE_PLACES_API_KEY` | Server-only Places API (New) key — **never** `NEXT_PUBLIC_` |
+| `GOOGLE_PLACE_ID` | GBP Place ID, e.g. `ChIJeVyXMig_szoQEKI0TaSkW-U` |
+| `SALON_GBP_RATING` | JSON-LD override; sync from `/api/reviews` when live |
+| `SALON_GBP_REVIEW_COUNT` | JSON-LD override; sync from `/api/reviews` when live |
+
+See `.env.example` and `docs/integrations-execution.md`.

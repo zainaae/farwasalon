@@ -6,8 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { useNextSlot } from '../src/shared.jsx'
-import { WA_NUMBER } from '../src/data.js'
+import { useNextSlot } from '../src/use-next-slot.js'
+import { WA_NUMBER } from '../src/site-config.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
 
 const HomeBelowFold = dynamic(() => import('./home-below-fold'), {
@@ -96,6 +96,7 @@ function Hero() {
         alt=""
         fill
         priority
+        quality={70}
         sizes="100vw"
         aria-hidden
         className="object-cover scale-[1.01] pointer-events-none"
@@ -144,40 +145,35 @@ function Hero() {
         style={{ textShadow: '0 1px 12px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.25)' }}>
         <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
           <div className="overflow-hidden mb-4 md:mb-6">
-            <m.p
+            <p
               id="hero-lede"
-              initial={{ y: '100%' }} animate={{ y: 0 }}
-              transition={{ delay: 0.15, duration: 0.9, ease: [0.16,1,0.3,1] }}
-              className="text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']">
+              className="hero-rise text-white/70 text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter']"
+              style={{ animationDelay: '0.15s', animationDuration: '0.9s' }}>
               Est. 2008 &middot; Farwa Beauty Salon &middot; Bridal &amp; Beauty
-            </m.p>
+            </p>
           </div>
 
           <h1
             id="hero-headline"
-            className="font-['Unbounded'] text-white leading-[1.02] mb-3 md:mb-4 break-words"
+            className="font-['Unbounded'] text-white leading-[0.98] mb-3 md:mb-4 break-words"
             style={{
-              fontSize: 'clamp(1.65rem, 5.2vw, 3.25rem)',
-              letterSpacing: '-0.02em',
-              maxWidth: '22ch',
+              fontSize: 'clamp(2.35rem, 8.5vw, 6.75rem)',
+              letterSpacing: '-0.025em',
+              maxWidth: '14ch',
             }}>
             <span className="block overflow-hidden">
-              <m.span
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ delay: 0.28, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-white font-semibold">
+              <span
+                className="hero-rise block text-white font-bold"
+                style={{ animationDelay: '0.28s' }}>
                 Beauty Salon in PECHS
-              </m.span>
+              </span>
             </span>
             <span className="block overflow-hidden">
-              <m.span
-                initial={{ y: '110%' }}
-                animate={{ y: 0 }}
-                transition={{ delay: 0.4, duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
-                className="block text-white/85 font-light italic font-['Syne']">
+              <span
+                className="hero-rise block text-white/85 font-light italic font-['Syne']"
+                style={{ animationDelay: '0.4s' }}>
                 Karachi
-              </m.span>
+              </span>
             </span>
           </h1>
 
@@ -190,31 +186,28 @@ function Hero() {
             }}>
             {thesis.map((line, i) => (
               <span key={i} className="block overflow-hidden">
-                <m.span
-                  initial={{ y: '110%' }}
-                  animate={{ y: 0 }}
-                  transition={{ delay: 0.42 + i * 0.18, duration: 1.05, ease: [0.16,1,0.3,1] }}
-                  className={`block ${line.em ? 'text-white/95 font-medium' : "text-white/75 font-light italic font-['Syne']"}`}>
+                <span
+                  className={`hero-rise block ${line.em ? 'text-white/95 font-medium' : "text-white/75 font-light italic font-['Syne']"}`}
+                  style={{ animationDelay: `${0.42 + i * 0.18}s` }}>
                   {line.text}
-                </m.span>
+                </span>
               </span>
             ))}
           </p>
 
-          <m.div
-            initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.35, duration: 0.75, ease: [0.16,1,0.3,1] }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 max-w-md sm:max-w-none">
+          <div
+            className="hero-fade-up flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5 max-w-md sm:max-w-none"
+            style={{ animationDelay: '1.35s' }}>
             <Link href="/book"
-              className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2 bg-white text-ink text-[11px] md:text-[12px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-all duration-300 shadow-lg shadow-black/25">
+              className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2 bg-white text-ink text-[12.5px] md:text-[13px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 md:px-9 py-4 md:py-[1.15rem] hover:bg-nude active:scale-[0.97] transition-all duration-300 shadow-lg shadow-black/25">
               Book an Appointment <ArrowUpRight className="w-4 h-4" />
             </Link>
             <Link href="/services"
-              className="tap-safe link-underline text-white/80 text-[11px] md:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
+              className="tap-safe link-underline text-white/80 text-[12.5px] md:text-[13px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
               Explore Services
             </Link>
             <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noreferrer"
-              className="tap-safe text-white/40 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white/70 transition-colors flex items-center justify-center sm:justify-start">
+              className="tap-safe text-white/60 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
               Or message us on WhatsApp
             </a>
             <div className="hidden sm:flex items-center gap-2 ml-auto">
@@ -223,29 +216,28 @@ function Hero() {
                 Next slot <span className="text-white font-medium ml-1">{slot.label}</span>
               </span>
             </div>
-          </m.div>
+          </div>
 
-          <m.p
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.6, duration: 0.7 }}
-            className="sm:hidden mt-4 text-white/55 text-[10px] tracking-[0.22em] uppercase font-['Inter'] flex items-center gap-2">
+          <p
+            className="hero-fade sm:hidden mt-4 text-white/55 text-[10px] tracking-[0.22em] uppercase font-['Inter'] flex items-center gap-2"
+            style={{ animationDelay: '1.6s' }}>
             <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#9cd48c]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
             Next slot <span className="text-white font-medium">{slot.label}</span>
-          </m.p>
+          </p>
         </div>
       </div>
 
-      <m.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-        transition={{ delay: 2.4, duration: 1 }}
+      <div
         aria-hidden="true"
-        className="hidden md:flex absolute bottom-10 right-10 z-10 flex-col items-center gap-1.5">
+        className="hero-fade hidden md:flex absolute bottom-10 right-10 z-10 flex-col items-center gap-1.5"
+        style={{ animationDelay: '2.4s', animationDuration: '1s' }}>
         <div className="w-px h-10 bg-white/25 relative overflow-hidden">
           <m.div className="absolute top-0 left-0 w-full bg-white"
             animate={{ y: ['-100%','200%'] }} transition={{ duration: 1.6, repeat: Infinity, ease: 'linear' }}
             style={{ height: '40%' }} />
         </div>
-        <span className="text-white/45 text-[9px] tracking-[0.2em] uppercase font-['Inter'] rotate-90 origin-center mt-2">scroll</span>
-      </m.div>
+        <span className="text-white/60 text-[9px] tracking-[0.2em] uppercase font-['Inter'] rotate-90 origin-center mt-2">scroll</span>
+      </div>
     </section>
   )
 }

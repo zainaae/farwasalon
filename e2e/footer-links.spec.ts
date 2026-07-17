@@ -9,7 +9,6 @@ const NAVIGATE_LINKS = [
   '/blog',
   '/about',
   '/contact',
-  '/team',
   '/faq',
   '/bridal',
 ] as const

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
 import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE, getAddonsForService } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
@@ -101,7 +101,7 @@ function FirstVisitHint() {
       </button>
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -117,12 +117,12 @@ function FirstVisitHint() {
                 'Walk-ins welcome — book online to skip the wait',
               ].map(tip => (
                 <li key={tip} className="flex items-start gap-2 text-stone text-xs font-['Inter'] font-light">
-                  <Check className="w-3.5 h-3.5 text-accent-gold shrink-0 mt-0.5" />
+                  <Check className="w-3.5 h-3.5 text-accent-gold-deep shrink-0 mt-0.5" />
                   {tip}
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>
@@ -291,7 +291,15 @@ export default function BookClient() {
       })
       const data = await res.json()
       if (!res.ok) {
-        setError(data.error || 'Something went wrong. Please try again.')
+        let msg = data.error || 'Something went wrong. Please try again.'
+        if (res.status === 429) {
+          msg = 'Too many booking attempts — please wait a minute and try again.'
+        } else if (res.status === 400 && /closed|sunday/i.test(String(data.error || ''))) {
+          msg = 'We are closed that day. Please choose another date or message us on WhatsApp.'
+        } else if (res.status === 409) {
+          msg = 'That time was just taken. Please pick another slot.'
+        }
+        setError(msg)
         setSubmitting(false)
         return
       }
@@ -348,30 +356,33 @@ export default function BookClient() {
       <div className="section-shell section-pad min-h-0 min-w-0 max-w-full overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
 
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
-          <motion.div className="overflow-hidden">
-            <motion.h1
+          <m.div className="overflow-hidden">
+            <m.h1
               initial={{ y: '60%', opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="display-section text-ink mb-4 break-words"
             >
               BOOK<span className="text-border-soft mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>ONLINE
-            </motion.h1>
-          </motion.div>
-          <motion.p
+            </m.h1>
+          </m.div>
+          <m.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
             className="text-body max-w-lg"
           >
             Pick a service, choose a date and time, and confirm your appointment in under a minute.
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Step indicator */}
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-2 sm:gap-4 mb-8 min-w-0">
+        <p className="sr-only" aria-live="polite">
+          Step {step + 1} of 3: {['Choose a service', 'Pick date and time', 'Enter your details'][step]}
+        </p>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-2 sm:gap-4 mb-8 min-w-0" role="list" aria-label="Booking steps">
           {['Service', 'Date & Time', 'Details'].map((label, i) => (
-            <div key={label} className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <div key={label} className="flex items-center gap-1.5 sm:gap-2 shrink-0" role="listitem">
               <span className={`w-7 h-7 flex items-center justify-center text-[11px] font-['Inter'] font-bold transition-colors ${
                 i < step ? 'bg-ink text-white' :
                 i === step ? 'bg-ink text-white' :
@@ -379,18 +390,18 @@ export default function BookClient() {
               }`}>
                 {i < step ? <Check className="w-3.5 h-3.5" /> : i + 1}
               </span>
-              <span className={`text-[11px] tracking-[0.12em] uppercase font-['Inter'] hidden sm:inline ${
+              <span className={`text-[10px] sm:text-[11px] tracking-[0.1em] sm:tracking-[0.12em] uppercase font-['Inter'] ${
                 i === step ? 'text-ink font-medium' : 'text-stone'
               }`}>
                 {label}
               </span>
-              {i < 2 && <span className="w-8 h-px bg-border-soft hidden sm:block" />}
+              {i < 2 && <span className="w-4 sm:w-8 h-px bg-border-soft" aria-hidden="true" />}
             </div>
           ))}
         </div>
 
         <div className="h-[2px] bg-border-soft w-full mb-8">
-          <motion.div
+          <m.div
             className="h-full bg-gradient-to-r from-accent-gold to-[#8b6d59]"
             animate={{ width: `${((step + 1) / 3) * 100}%` }}
             transition={{ duration: 0.4 }}
@@ -401,7 +412,7 @@ export default function BookClient() {
 
         <AnimatePresence mode="wait" custom={direction}>
           {step === 0 && (
-            <motion.div
+            <m.div
               key="step0"
               custom={direction}
               variants={stepVariants}
@@ -426,7 +437,13 @@ export default function BookClient() {
                           className="tap-safe book-category-btn group"
                         >
                           <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight break-words">{cat}</p>
-                          <p className="text-stone text-[10px] font-['Inter'] mt-1">{services.length} services</p>
+                          <p className="text-stone text-[10px] font-['Inter'] mt-1">
+                            {services.length} services
+                            {(() => {
+                              const prices = services.map((s) => s.pricePkr).filter(Boolean)
+                              return prices.length ? ` · from ${formatPrice(Math.min(...prices))}` : ''
+                            })()}
+                          </p>
                         </button>
                       ) : (
                         <div className="panel-soft p-5 md:p-6 shadow-soft">
@@ -463,7 +480,7 @@ export default function BookClient() {
                                     </span>
                                   </div>
                                   {s.pricePkr != null && (
-                                    <span className="shrink-0 text-accent-gold text-sm font-['Inter'] font-semibold">
+                                    <span className="shrink-0 text-accent-gold-deep text-sm font-['Inter'] font-semibold">
                                       {formatPrice(s.pricePkr)}
                                     </span>
                                   )}
@@ -505,11 +522,11 @@ export default function BookClient() {
                   </div>
                 </div>
               )}
-            </motion.div>
+            </m.div>
           )}
 
           {step === 1 && (
-            <motion.div
+            <m.div
               key="step1"
               custom={direction}
               variants={stepVariants}
@@ -527,7 +544,7 @@ export default function BookClient() {
               </p>
 
               {selectedService && getAddonsForService(selectedService.id).length > 0 && (
-                <motion.div className="mb-6 max-w-md">
+                <m.div className="mb-6 max-w-md">
                   <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-3">
                     Optional add-ons (affects time slots)
                   </p>
@@ -566,7 +583,7 @@ export default function BookClient() {
                       )
                     })}
                   </div>
-                </motion.div>
+                </m.div>
               )}
 
               <p className="eyebrow mb-4">— Pick a date</p>
@@ -621,7 +638,7 @@ export default function BookClient() {
                       <span className="text-stone text-sm font-['Inter'] ml-2">Checking availability…</span>
                     </div>
                   ) : slotsError || slots.length === 0 ? (
-                    <motion.div
+                    <m.div
                       role="status"
                       className="panel-muted px-4 py-8 text-center shadow-soft"
                     >
@@ -634,7 +651,7 @@ export default function BookClient() {
                       >
                         WhatsApp the salon
                       </a>
-                    </motion.div>
+                    </m.div>
                   ) : (
                     <div className="grid grid-cols-3 min-[420px]:grid-cols-4 md:grid-cols-6 gap-2">
                       {slots.map(({ time, available }) => {
@@ -681,11 +698,11 @@ export default function BookClient() {
                   </button>
                 )}
               </div>
-            </motion.div>
+            </m.div>
           )}
 
           {step === 2 && (
-            <motion.div
+            <m.div
               key="step2"
               custom={direction}
               variants={stepVariants}
@@ -703,7 +720,7 @@ export default function BookClient() {
                   {formatDateNice(selectedDate)} · {formatTime12(selectedTime)} · {formatDuration(totalDurationMinutes)}
                 </p>
                 {selectedService?.pricePkr != null && (
-                  <p className="text-accent-gold text-xs font-['Inter'] font-medium mt-0.5">
+                  <p className="text-accent-gold-deep text-xs font-['Inter'] font-medium mt-0.5">
                     {formatPrice(selectedService.pricePkr)}
                   </p>
                 )}
@@ -731,7 +748,7 @@ export default function BookClient() {
                 />
                 <div>
                   <label htmlFor="bk-name" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
-                    Name <span className="text-accent-gold">*</span>
+                    Name <span className="text-accent-gold-deep">*</span>
                   </label>
                   <input
                     id="bk-name"
@@ -746,7 +763,7 @@ export default function BookClient() {
                 </div>
                 <div>
                   <label htmlFor="bk-phone" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
-                    Phone <span className="text-accent-gold">*</span>
+                    Phone <span className="text-accent-gold-deep">*</span>
                   </label>
                   <input
                     id="bk-phone"
@@ -766,7 +783,7 @@ export default function BookClient() {
                 </div>
                 <div>
                   <label htmlFor="bk-notes" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
-                    Notes <span className="text-stone/40">(optional)</span>
+                    Notes <span className="text-stone">(optional)</span>
                   </label>
                   <textarea
                     id="bk-notes"
@@ -811,7 +828,7 @@ export default function BookClient() {
                   )}
                 </button>
               </div>
-            </motion.div>
+            </m.div>
           )}
         </AnimatePresence>
       </div>

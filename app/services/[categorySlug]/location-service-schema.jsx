@@ -1,6 +1,6 @@
 import JsonLd from '../../json-ld.jsx'
 import { buildLocationPageGraph } from '../../../lib/business-schema.js'
-import { CAT_FAQS } from '../../../src/data.js'
+import { CAT_FAQS } from '../../../src/cat-seo-content.js'
 
 export default function LocationServiceSchema({ data, slug }) {
   const faqs = CAT_FAQS[data.service.category]?.slice(0, 3) ?? []

@@ -8,7 +8,6 @@ const SERVICE_COUNT = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 const MARKETING_PAGES = [
   { path: '/about', heading: /our story/i },
   { path: '/faq', heading: /frequently asked/i },
-  { path: '/team', heading: /our team/i },
   { path: '/privacy', heading: /privacy policy/i },
 ] as const
 
@@ -36,5 +35,12 @@ test.describe('Marketing pages @ 390px', () => {
     await expect(srOnly.nth(0)).toHaveText(`${YEARS_ACTIVE}+ Years of expertise`)
     await expect(srOnly.nth(1)).toHaveText(`${CATEGORY_COUNT} Service categories`)
     await expect(srOnly.nth(2)).toHaveText(`${SERVICE_COUNT}+ Services on the menu`)
+  })
+
+  test('/team permanently redirects to /about', async ({ page }) => {
+    const res = await page.goto('/team', { waitUntil: 'commit' })
+    expect(res?.status()).toBe(200)
+    expect(page.url()).toMatch(/\/about$/)
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(/our story/i)
   })
 })

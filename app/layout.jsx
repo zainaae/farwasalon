@@ -1,6 +1,5 @@
-import { Inter, Unbounded, Syne, Noto_Nastaliq_Urdu } from 'next/font/google'
+import { Inter, Unbounded, Syne } from 'next/font/google'
 import Script from 'next/script'
-import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 import ClientShell from './client-shell'
 import JsonLd from './json-ld'
@@ -15,7 +14,7 @@ const inter = Inter({
 
 const unbounded = Unbounded({
   subsets: ['latin'],
-  weight: ['400', '700', '900'],
+  weight: ['400', '700'],
   variable: '--font-unbounded',
   display: 'swap',
 })
@@ -25,13 +24,7 @@ const syne = Syne({
   weight: ['400', '600', '700'],
   variable: '--font-syne',
   display: 'swap',
-})
-
-const nastaliq = Noto_Nastaliq_Urdu({
-  subsets: ['arabic'],
-  weight: ['400'],
-  variable: '--font-nastaliq',
-  display: 'optional',
+  preload: false,
 })
 
 export const metadata = {
@@ -104,15 +97,10 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${unbounded.variable} ${syne.variable} ${nastaliq.variable}`}
+      className={`${inter.variable} ${unbounded.variable} ${syne.variable}`}
     >
       <head>
-        <link rel="dns-prefetch" href="https://plausible.io" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        <link rel="preconnect" href="https://plausible.io" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Fonts are self-hosted via next/font — no runtime Google Fonts connection. */}
         <link rel="manifest" href="/manifest.json" />
         <Script
           defer
@@ -126,7 +114,6 @@ export default function RootLayout({ children }) {
       </head>
       <body className="overflow-x-clip">
         <ClientShell>{children}</ClientShell>
-        <Analytics />
         <JsonLd data={buildBeautySalonSchema()} />
         <JsonLd data={buildWebSiteSchema()} />
       </body>

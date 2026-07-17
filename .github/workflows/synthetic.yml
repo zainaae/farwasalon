@@ -1,0 +1,24 @@
+name: Synthetic monitoring
+
+# Nightly probe of production: 12 booking-API scenarios + 48-route crawl.
+# Read-only (no QA_WRITE) — books nothing. Fails loudly if farwasalon.com
+# regresses, which otherwise only surfaces when a customer WhatsApps.
+on:
+  schedule:
+    - cron: '30 2 * * *' # 07:30 PKT daily
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Probe production
+        run: BASE_URL=https://farwasalon.com node scripts/qa-workflow-run.mjs

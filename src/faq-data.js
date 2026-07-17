@@ -59,7 +59,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'How do I book a bridal consultation or trial?',
-        a: 'Message us on WhatsApp with your wedding date and events (mehndi, nikkah, walima), or book a Bridal Trial online at farwasalon.com/book. We recommend booking 2–3 months ahead in peak season and scheduling your trial 2–4 weeks before the wedding.',
+        a: 'Book a Bridal Trial online at farwasalon.com/book, or message us on WhatsApp with your wedding date and events (mehndi, nikkah, walima). We recommend booking 2–3 months ahead in peak season and scheduling your trial 2–4 weeks before the wedding.',
       },
       {
         q: 'Do you travel to homes or venues for bridal?',
@@ -67,7 +67,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'How far in advance should I book bridal makeup?',
-        a: 'For peak wedding season (Oct–Feb), book 2–3 months ahead. Trials should be scheduled 2–4 weeks before your event. Last-minute dates are sometimes available — WhatsApp us with your date.',
+        a: 'For peak wedding season (Oct–Feb), book online at farwasalon.com/book 2–3 months ahead. Trials should be scheduled 2–4 weeks before your event. Last-minute dates are sometimes available — WhatsApp us with your date.',
       },
     ],
   },
@@ -110,6 +110,56 @@ export const FAQ_GROUPS = [
       {
         q: 'Do you use branded products for facials and hair?',
         a: 'We use professional salon-grade products suited to each skin and hair type. If you have a known allergy to a specific ingredient or brand, tell us in advance and we will adjust.',
+      },
+    ],
+  },
+  {
+    topic: 'Services & Visits',
+    items: [
+      {
+        q: 'How long does a facial take?',
+        a: 'Most facials take 45 to 90 minutes depending on the type — your booking confirmation shows the exact duration for the service you picked. Deep cleansing sessions run similar; threading takes just minutes.',
+      },
+      {
+        q: 'How often should I get a facial or cleansing?',
+        a: 'Every four to six weeks for most skin. Oily or acne-prone skin does best with a professional cleansing every three to four weeks. Your aesthetician will recommend a rhythm for your skin at your first visit.',
+      },
+      {
+        q: 'How often should I wax?',
+        a: 'Every three to four weeks — results from both honey wax and Rica wax last about that long, and regular sessions make each one quicker and more comfortable as hair grows back finer.',
+      },
+      {
+        q: 'Can I book multiple services in one visit?',
+        a: 'Yes — the online booking at farwasalon.com/book lets you add add-on services to your appointment, and the time slot adjusts automatically so nothing overlaps. Threading plus a facial, or waxing plus a manicure, are popular combinations.',
+      },
+      {
+        q: 'Do you offer bridal trials?',
+        a: 'Yes — we strongly recommend a bridal trial about a month before your wedding. You will see the complete look — makeup, hair, dupatta draping — and fine-tune every detail with your artist. See farwasalon.com/services/bridal for packages.',
+      },
+    ],
+  },
+  {
+    topic: 'Prices',
+    items: [
+      {
+        q: 'How much does bridal makeup cost in Karachi?',
+        a: 'At Farwa Beauty Salon in PECHS, single-event bridal looks — engagement, mehndi, nikkah, or reception — start at Rs 8,000, and the complete full bridal package is around Rs 25,000. Celebrity-name studios in Karachi charge Rs 80,000+ for one day; we deliver the same techniques with 18 years of practice at a fraction of that.',
+      },
+      {
+        q: 'How much does threading cost in PECHS?',
+        a: 'Threading at Farwa Beauty Salon in Block 3 PECHS starts at Rs 100, with eyebrow threading at Rs 200 and full-face options up to Rs 1,200. Walk-ins are welcome when slots are available.',
+      },
+      {
+        q: 'How much does a facial cost in Karachi?',
+        a: 'Professional facials at Farwa start at Rs 1,400, ranging up to Rs 5,500 for a Janssen Whitening Facial with German cosmeceutical products. Deep cleansing starts at Rs 1,200. Every price is published on farwasalon.com/services.',
+      },
+      {
+        q: 'How much does microblading or eyebrow tattoo cost in Karachi?',
+        a: 'Semi-permanent brows at Farwa start at Rs 20,000, including the brow-mapping consultation, numbing, the procedure, and an aftercare kit. Results last 12 to 18 months.',
+      },
+      {
+        q: 'Why do you publish all your prices online?',
+        a: 'Because unlisted prices can change per customer — printed prices cannot. Every service on farwasalon.com shows its starting price, and your exact quote is confirmed on WhatsApp before your appointment, never after. We believe transparent pricing is part of good service.',
       },
     ],
   },

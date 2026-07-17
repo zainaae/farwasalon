@@ -33,12 +33,13 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     }
   })
 
-  test('/gallery before/after slider renders', async ({ page }) => {
+  test('/gallery work showcase renders', async ({ page }) => {
     await page.goto('/gallery')
     await expect(page.locator('#main')).toBeVisible()
-    const slider = page.getByRole('slider').first()
-    await expect(slider).toBeVisible()
-    await expect(slider).toHaveAttribute('aria-valuenow', /.*/)
+    await expect(page.getByRole('heading', { name: /Results showcase/i })).toBeVisible()
+    await expect(page.getByText('Threading & glow facial')).toBeVisible()
+    await expect(page.getByText('Bridal styling')).toBeVisible()
+    await expect(page.getByText('Manicure & pedicure')).toBeVisible()
   })
 
   test('accessibility smoke — no empty buttons, images have alt on home', async ({ page }) => {

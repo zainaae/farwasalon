@@ -1,5 +1,299 @@
 export const BLOG_POSTS = [
   {
+    slug: 'beauty-parlour-near-me-karachi-guide',
+    title: 'Beauty Parlour Near Me in Karachi — How to Actually Choose One (A Checklist)',
+    description: 'Searching "beauty parlour near me" in Karachi? A practical checklist — hygiene, printed prices, booking, reviews — plus what to check before your first visit to any salon.',
+    featuredImage: '/glow3.jpg',
+    date: '2026-07-17',
+    lastModified: '2026-07-17',
+    readTime: '6 min read',
+    author: 'Rubina',
+    category: 'Guides',
+    relatedCategories: ['Threading', 'Facials', 'Bridal'],
+    content: [
+      { type: 'p', text: 'If you have ever typed "beauty parlour near me" into Google in Karachi, you know the problem: a wall of listings, no prices, stock photos, and no way to tell a professional salon from a converted living room. After running a salon in PECHS since 2008, here is the checklist we would use ourselves — honest enough that it works whether you end up at Farwa or anywhere else.' },
+
+      { type: 'h2', text: 'The Five-Point Checklist Before You Book Anywhere' },
+      { type: 'p', text: 'One: printed prices. If a salon will not tell you the price before the service, the price depends on how you look when you walk in. Two: real reviews on Google Maps — read the three-star ones, they are the honest ones. Three: hygiene you can see — fresh thread for every client, sanitised metal tools, single-use wax applicators. Four: a real booking system, because a salon that manages time respects yours. Five: an artist who asks questions before starting — anyone who begins a facial without asking about your skin is following a script, not treating you.' },
+
+      { type: 'h2', text: 'Which Areas of Karachi We Serve' },
+      { type: 'p', text: 'Farwa Beauty Salon sits in Block 3 PECHS, a few minutes from Tariq Road and Jheel Park. Clients come to us from Bahadurabad, Gulshan-e-Iqbal, DHA and Clifton, Shahrah-e-Faisal offices, North Nazimabad, and Saddar — PECHS is central enough that most of Karachi reaches us in twenty to thirty minutes. If you are searching for [threading](/services/threading), [facials](/services/facials), [waxing](/services/rica-wax), [nails](/services/nails), or [bridal makeup](/services/bridal) anywhere near central Karachi, we are the salon nearby that publishes every price.' },
+
+      { type: 'h2', text: 'What "Near Me" Should Actually Mean' },
+      { type: 'p', text: 'The nearest salon is not automatically the right one. A parlour ten minutes further that shows its prices, holds your booking time, and uses fresh tools beats the one downstairs that does none of those things. Distance matters least for services you get monthly — for a [deep cleansing](/services/cleansing) or hair treatment, the right salon is worth crossing a few blocks for. It matters most for quick maintenance like threading, which is why we keep walk-ins open for it when slots allow.' },
+
+      { type: 'h2', text: 'Red Flags That Should Send You Elsewhere' },
+      { type: 'p', text: 'Prices that appear only after the service. Wax pots that never seem to be cleaned. Pressure to add services mid-treatment while you are in the chair. "Package deals" that expire today only. A bridal quote that changes every time you call. Any of these means keep searching — Karachi has enough salons that you never need to tolerate one that treats pricing as a negotiation.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How do I find a good beauty parlour near me in Karachi?' },
+      { type: 'p', text: 'A: Check three things on Google before visiting: a rating above 4 with recent reviews, published prices (on their site or listing), and photos of the actual salon rather than stock images. Then confirm hygiene on your first small service — threading is a cheap way to test a salon before trusting it with a facial or bridal booking.' },
+      { type: 'h3', text: 'Q: Which areas does Farwa Beauty Salon serve?' },
+      { type: 'p', text: 'A: We are in Block 3 PECHS, Karachi — minutes from Tariq Road and Bahadurabad, and an easy drive from Gulshan-e-Iqbal, DHA, Clifton, Shahrah-e-Faisal, North Nazimabad, and Saddar. Hours are Monday to Saturday, 11am to 7pm.' },
+      { type: 'h3', text: 'Q: Should I choose the cheapest salon near me?' },
+      { type: 'p', text: 'A: Choose the most transparent one. Cheap with hidden costs ends up expensive; a salon that prints Rs 100 threading and Rs 1,400 facials and sticks to it will cost you less over a year than one with negotiable rates.' },
+      { type: 'h3', text: 'Q: Can I book a salon appointment online in Karachi?' },
+      { type: 'p', text: 'A: At Farwa, yes — farwasalon.com/book shows live available slots and takes under a minute, with free cancellation up to two hours before. No calls, no back-and-forth.' },
+
+      { type: 'h2', text: 'Come See the Checklist in Action' },
+      { type: 'p', text: 'Every point above is how we run our own floor. Browse the full [services menu with printed prices](/services), book online, or WhatsApp +92 322 2782254 — and bring your sharpest questions; we like clients who check.' },
+    ],
+  },
+  {
+    slug: 'monsoon-hair-skin-care-karachi',
+    title: 'Monsoon Beauty Survival Guide for Karachi — Frizz, Sticky Skin, and What Actually Works',
+    description: 'How to handle Karachi monsoon humidity: taming hair frizz, keeping oily skin clear, and which salon treatments are worth booking in July and August.',
+    featuredImage: '/hairtreatment.jpg',
+    date: '2026-07-17',
+    lastModified: '2026-07-17',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Seasonal',
+    relatedCategories: ['Hair Treatments', 'Cleansing', 'Facials'],
+    content: [
+      { type: 'p', text: 'Every July, Karachi\'s humidity climbs and the same two complaints walk through our door in PECHS: hair that has doubled in volume for all the wrong reasons, and skin that feels oily by noon no matter what you wash with. After eighteen monsoons at the same salon chair, here is what actually works — and what is a waste of money.' },
+
+      { type: 'h2', text: 'Why Monsoon Wrecks Your Hair' },
+      { type: 'p', text: 'Frizz is not a styling problem — it is a moisture problem. Humid air pushes water into the hair shaft, and damaged or porous hair swells unevenly. That is why serums alone never fix monsoon frizz: they coat the surface without repairing the structure underneath.' },
+      { type: 'p', text: 'The fix is a bond-repair or protein treatment before the worst of the season. A [Wellaplex bond treatment](/services/hair-treatments) (Rs 3,000) rebuilds the internal bonds so hair stops absorbing humidity unevenly. One session in early July typically holds through August. Pair it with a trim to remove split ends — split ends are open doors for humidity.' },
+
+      { type: 'h2', text: 'Sticky, Oily Skin: Wash Less, Cleanse Better' },
+      { type: 'p', text: 'Over-washing in humid weather backfires — stripping oil signals your skin to produce more. Twice-daily gentle cleansing plus one professional [deep cleansing](/services/cleansing) (from Rs 1,200) per month keeps pores clear through the sticky season. If you are breaking out, an Acne Cleansing session targets the congestion directly instead of scrubbing your whole face raw.' },
+      { type: 'p', text: 'Skip heavy cream facials in monsoon. Lighter options — a classic [facial](/services/facials) or an HD Whitening Facial (Rs 3,000) — refresh the skin without leaving a film that humidity turns greasy by evening.' },
+
+      { type: 'h2', text: 'What to Skip Until October' },
+      { type: 'p', text: 'Save your blowdry money — humidity undoes a blowout in hours. If you have an event, book the [styling](/services/hair) for the same day, not the day before. Heavy oil-based treatments and thick masks can also wait for drier weather; they sit on top of humid skin instead of absorbing.' },
+
+      { type: 'h2', text: 'The Monsoon-Proof Booking List' },
+      { type: 'p', text: 'If you book only three things between July and September: a Wellaplex or protein [hair treatment](/services/hair-treatments) early in the season, a monthly [deep cleansing](/services/cleansing), and [threading](/services/threading) as usual — humidity has no effect on threading, which is more than can be said for your eyeliner.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How do I stop frizzy hair in Karachi humidity?' },
+      { type: 'p', text: 'A: Repair the hair structure rather than coating it — a bond-repair treatment like Wellaplex (Rs 3,000 at Farwa in PECHS) stops hair absorbing humidity unevenly, which is what causes frizz. Serums alone only mask it for an hour.' },
+      { type: 'h3', text: 'Q: Should I get facials during monsoon season?' },
+      { type: 'p', text: 'A: Yes, but choose lighter ones. Deep cleansing (from Rs 1,200) and lighter facials work well in humidity; skip heavy cream-based facials until the weather dries out.' },
+      { type: 'h3', text: 'Q: How often should oily skin be professionally cleansed in summer?' },
+      { type: 'p', text: 'A: Once a month is right for most skin. If you are actively breaking out, a targeted acne cleansing every three weeks for two to three cycles usually settles it.' },
+      { type: 'h3', text: 'Q: Does humidity affect threading or waxing results?' },
+      { type: 'p', text: 'A: Not meaningfully — hair removal results last the same three to four weeks. Sweat can irritate freshly waxed skin, so book waxing for a day you can stay cool afterwards.' },
+
+      { type: 'h2', text: 'Book Your Monsoon Reset' },
+      { type: 'p', text: 'Book online at farwasalon.com/book or WhatsApp +92 322 2782254 — and if you are not sure which treatment your hair needs, come in for a consultation and we will tell you honestly.' },
+    ],
+  },
+  {
+    slug: 'rica-wax-vs-honey-wax-karachi',
+    title: 'Rica Wax vs Honey Wax — Which One Should You Actually Book?',
+    description: 'The honest difference between Rica and honey wax: pain, price, results, and skin type — from a Karachi salon that offers both, starting at Rs 150.',
+    featuredImage: '/waxing.jpg',
+    date: '2026-07-17',
+    lastModified: '2026-07-17',
+    readTime: '4 min read',
+    author: 'Rubina',
+    category: 'Waxing',
+    relatedCategories: ['Rica Wax', 'Honey Wax', 'Rica Hot Wax'],
+    content: [
+      { type: 'p', text: 'Clients ask us this almost daily: is Rica wax worth the extra money over regular honey wax? We offer both at Farwa in PECHS — [honey wax](/services/honey-wax) from Rs 400 and [Rica wax](/services/rica-wax) from Rs 600 — so here is the honest comparison with no upselling.' },
+
+      { type: 'h2', text: 'What Honey Wax Does Well' },
+      { type: 'p', text: 'Honey wax is the classic: a natural resin-based strip wax that removes hair efficiently from large areas — arms, legs, underarms, back. It is affordable, fast, and results last three to four weeks. For normal, non-reactive skin on body areas, honey wax remains excellent value, which is why it has never left our menu.' },
+
+      { type: 'h2', text: 'What Makes Rica Different' },
+      { type: 'p', text: 'Rica is an Italian formula built on vegetable resins instead of petroleum derivatives. The practical difference: it grips the hair firmly while sticking less to the skin itself. Less skin-pull means less pain, less redness afterwards, and a much better experience on sensitive areas. It also picks up shorter hair, so you can wax on a shorter growth cycle.' },
+      { type: 'p', text: 'For the face specifically, [Rica hot wax](/services/rica-hot-wax) (from Rs 150) is applied warm and peeled off without strips — the gentlest option we offer for brows, upper lip, and full face, especially for acne-prone or reactive skin.' },
+
+      { type: 'h2', text: 'The Honest Recommendation' },
+      { type: 'p', text: 'Normal skin, body areas, budget in mind: honey wax, no hesitation. Sensitive or reactive skin, facial waxing, or if you have found waxing painful elsewhere: Rica is genuinely worth the Rs 200 difference. Many of our regulars mix both — honey for arms and legs, Rica for face and underarms.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: Is Rica wax less painful than normal wax?' },
+      { type: 'p', text: 'A: Noticeably, yes — Rica adheres to hair rather than skin, so the pull is on the hair only. Most clients who switch for sensitive areas do not switch back.' },
+      { type: 'h3', text: 'Q: How long do Rica wax results last?' },
+      { type: 'p', text: 'A: Three to four weeks, same as honey wax — and because Rica lifts shorter hair, regrowth between sessions can be waxed sooner instead of waiting for full length.' },
+      { type: 'h3', text: 'Q: What does Rica wax cost in Karachi?' },
+      { type: 'p', text: 'A: At Farwa in PECHS, Rica body wax starts at Rs 600 and Rica hot wax for the face starts at Rs 150. Honey wax starts at Rs 400. Every price is printed at farwasalon.com/services.' },
+      { type: 'h3', text: 'Q: Which wax is better before an event or wedding?' },
+      { type: 'p', text: 'A: Rica, booked two to three days before the event — its lower redness matters when photos are involved. Brides on our [bridal packages](/services/bridal) get Rica by default in the final week.' },
+
+      { type: 'h2', text: 'Try Both and Decide' },
+      { type: 'p', text: 'Book either at farwasalon.com/book or WhatsApp +92 322 2782254. Tell us it is your first Rica session and we will start with a small area so you can feel the difference before committing to full body.' },
+    ],
+  },
+  {
+    slug: 'best-facial-for-acne-oily-skin-karachi',
+    title: 'The Best Facial for Acne and Oily Skin in Karachi — What Works and What Makes It Worse',
+    description: 'Which salon facials actually help acne-prone and oily skin, which ones make breakouts worse, and what a proper acne cleansing involves — from Rs 1,200 in PECHS.',
+    featuredImage: '/facialcleansing.jpg',
+    date: '2026-07-17',
+    lastModified: '2026-07-17',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Facials',
+    relatedCategories: ['Cleansing', 'Facials', 'Bleach & Polish'],
+    content: [
+      { type: 'p', text: 'Half the acne we see at Farwa was made worse by the wrong facial. Heavy creams on congested skin, aggressive scrubbing on active breakouts, bleach on inflamed spots — Karachi salons do all three daily. Here is what acne-prone skin actually needs, and what to refuse even if a salon offers it.' },
+
+      { type: 'h2', text: 'Start With Cleansing, Not a Facial' },
+      { type: 'p', text: 'Active congestion — blackheads, whiteheads, small bumps — needs extraction before anything else. A proper [Acne Cleansing](/services/cleansing) (deep cleansing starts at Rs 1,200) uses steam to open pores, manual extraction done hygienically, and a calming finish. That is the workhorse treatment for oily skin: unglamorous, effective, and the right starting point.' },
+
+      { type: 'h2', text: 'Which Facials Help — and When' },
+      { type: 'p', text: 'Once active breakouts settle, monthly [facials](/services/facials) maintain the result. For oily skin we usually recommend lighter formulations over rich cream facials; a Janssen Whitening Facial (Rs 5,500) also addresses the dark marks acne leaves behind — post-inflammatory pigmentation responds well to consistent professional care over two to three months.' },
+      { type: 'p', text: 'What to refuse: harsh scrubs on active acne (they spread bacteria), and [bleach](/services/bleach-polish) directly on inflamed spots. Bleach and polish are excellent for even-toned glow before an event — on calm skin, not on breakouts.' },
+
+      { type: 'h2', text: 'The Routine That Works in Karachi\'s Climate' },
+      { type: 'p', text: 'Oily skin in a humid city needs rhythm, not intensity: professional cleansing every three to four weeks, a suitable facial monthly once skin is calm, gentle home cleansing twice daily, and sunscreen every morning — pigmentation from picked spots darkens fast under Karachi sun. Read our [monsoon skin guide](/blog/monsoon-hair-skin-care-karachi) for the summer-specific adjustments.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: Which facial is best for acne-prone skin?' },
+      { type: 'p', text: 'A: Start with an acne cleansing (from Rs 1,200 at Farwa in PECHS) to clear congestion, then move to monthly lighter facials once breakouts calm down. A facial on top of active congestion wastes money.' },
+      { type: 'h3', text: 'Q: Can a facial remove acne scars and dark spots?' },
+      { type: 'p', text: 'A: Flat dark marks (pigmentation) fade well with consistent whitening facials over two to three months. Pitted scars need dermatological treatment — a salon that promises to remove pits with a facial is overselling.' },
+      { type: 'h3', text: 'Q: How often should oily skin get a professional cleansing?' },
+      { type: 'p', text: 'A: Every three to four weeks. More often than that irritates the skin and triggers more oil production.' },
+      { type: 'h3', text: 'Q: Is bleach safe for acne-prone skin?' },
+      { type: 'p', text: 'A: Not on active breakouts. Once skin is calm, bleach evens tone safely — we always check your skin first and will tell you honestly if today is not the day for it.' },
+
+      { type: 'h2', text: 'Get an Honest Skin Assessment' },
+      { type: 'p', text: 'Book at farwasalon.com/book or WhatsApp +92 322 2782254. If what you booked is not what your skin needs on the day, we will switch you to the right treatment — never upsell an inflamed face.' },
+    ],
+  },
+  {
+    slug: 'hair-fall-treatment-karachi-guide',
+    title: 'Hair Fall Treatment in Karachi — What Salons Can Fix, What They Cannot, and Real Prices',
+    description: 'An honest guide to salon hair fall treatments in Karachi: protein treatments, ampules, and Wellaplex from Rs 2,000 — plus when to see a doctor instead.',
+    featuredImage: '/hairdo.jpg',
+    date: '2026-07-17',
+    lastModified: '2026-07-17',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Hair',
+    relatedCategories: ['Hair Treatments', 'Hair', 'Massage'],
+    content: [
+      { type: 'p', text: 'Hair fall is the most common concern we hear at Farwa — and the one with the most nonsense sold around it. Some hair fall responds beautifully to salon treatment; some needs a doctor, not a salon. An honest salon tells you which is which, so let us do that first.' },
+
+      { type: 'h2', text: 'Breakage vs Shedding — Know Which One You Have' },
+      { type: 'p', text: 'Short broken pieces on your pillow and brush mean breakage — the hair is snapping, not falling from the root. That is damage, and salons fix damage well. Whole strands with a tiny white bulb at the end mean shedding from the root — often stress, hormones, iron deficiency, or post-partum changes. Severe root shedding deserves a doctor visit; treatments help alongside, not instead.' },
+
+      { type: 'h2', text: 'What Actually Works at the Salon' },
+      { type: 'p', text: 'For breakage: protein [hair treatments](/services/hair-treatments) (from Rs 2,000) rebuild strength over a course of monthly sessions, and Wellaplex bond therapy (Rs 3,000) repairs chemically-processed or heat-damaged hair at the structural level. For shedding: a Hair Fall Treatment with Ampule (Rs 3,000) delivers actives to the scalp — three monthly sessions is the honest minimum before judging results.' },
+      { type: 'p', text: 'The underrated helper: a proper head [massage](/services/massage) (from Rs 700) improves scalp circulation, and our head massage and wash combination doubles as maintenance between treatment sessions.' },
+
+      { type: 'h2', text: 'What to Stop Doing at Home' },
+      { type: 'p', text: 'Tight ponytails on wet hair, daily heat styling, and harsh sulphate shampoos undo salon work faster than treatments can build it. After any treatment, wait 48 hours before washing and switch to a sulphate-free shampoo — otherwise you are rinsing your money down the drain, literally.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How much does hair fall treatment cost in Karachi?' },
+      { type: 'p', text: 'A: At Farwa in PECHS, hair treatments start at Rs 2,000; a Hair Fall Ampule Treatment is Rs 3,000 per session and Wellaplex bond therapy is Rs 3,000. Plan for three monthly sessions to see honest results.' },
+      { type: 'h3', text: 'Q: How many sessions before hair fall improves?' },
+      { type: 'p', text: 'A: Visible improvement usually starts after the second monthly session, with the full result at three to four. Anyone promising results in one session is selling hope, not treatment.' },
+      { type: 'h3', text: 'Q: Can salon treatments regrow lost hair?' },
+      { type: 'p', text: 'A: Salon treatments strengthen existing hair and reduce ongoing loss from breakage. Regrowing genuinely lost hair from dormant roots is medical territory — see a dermatologist for that, and use salon care to protect what grows back.' },
+      { type: 'h3', text: 'Q: Does hair fall get worse in Karachi summers?' },
+      { type: 'p', text: 'A: Seasonal shedding is real and humidity-related breakage adds to it — see our [monsoon hair guide](/blog/monsoon-hair-skin-care-karachi). A bond treatment before peak humidity prevents most of the seasonal spike.' },
+
+      { type: 'h2', text: 'Start With a Consultation' },
+      { type: 'p', text: 'Book at farwasalon.com/book or WhatsApp +92 322 2782254. We will look at your hair, tell you whether it is breakage or shedding, and recommend a plan — including a doctor referral if that is what your scalp actually needs.' },
+    ],
+  },
+  {
+    slug: 'salon-price-list-karachi-2026',
+    title: 'Beauty Salon Price List in Karachi (2026) — What Everything Actually Costs',
+    description: 'A complete, honest 2026 price list for salon services in Karachi — threading, waxing, facials, hair, nails, massage, microblading, and bridal makeup, with real PKR figures.',
+    featuredImage: '/glow3.jpg',
+    date: '2026-07-16',
+    lastModified: '2026-07-16',
+    readTime: '6 min read',
+    author: 'Rubina',
+    category: 'Pricing',
+    relatedCategories: ['Facials', 'Threading', 'Bridal'],
+    content: [
+      { type: 'p', text: 'Try finding a published price list from a big-name salon in Karachi. You will find "DM us for rates", "call for details", and price menus that mysteriously change at the counter. At Farwa Beauty Salon in PECHS, we print every starting price online — and this guide puts the whole 2026 list in one place, so you know what salon services actually cost in Karachi before you walk in anywhere.' },
+
+      { type: 'h2', text: 'Threading and Face Waxing — Rs 100 to Rs 1,200' },
+      { type: 'p', text: '[Threading](/services/threading) starts at Rs 100 in PECHS — eyebrows are Rs 200, with full-face options up to Rs 1,200. If your skin is sensitive, [Rica hot wax](/services/rica-hot-wax) for the face starts at Rs 150 — it is an Italian stripless wax that grips hair, not skin, so it is the gentler option for brows, upper lip, and full face.' },
+
+      { type: 'h2', text: 'Body Waxing — Rs 400 to Rs 3,500' },
+      { type: 'p', text: 'Standard [honey wax](/services/honey-wax) starts at Rs 400 for single areas like arms or underarms, with full-body sessions well under Rs 3,000. Premium [Rica body wax](/services/rica-wax) starts at Rs 600 — worth the difference if you wax regularly or have reactive skin, since results last three to four weeks and hair grows back finer over time.' },
+
+      { type: 'h2', text: 'Facials and Cleansing — Rs 1,200 to Rs 5,500' },
+      { type: 'p', text: 'A professional [deep cleansing](/services/cleansing) starts at Rs 1,200 — steam, extraction, and a proper reset for congested skin. Full [facials](/services/facials) run from Rs 1,400 for a classic to around Rs 3,000 for an HD Whitening Facial, topping out near Rs 5,500 for a Janssen Whitening Facial with German cosmeceutical products. Anything dramatically cheaper usually means diluted products; anything pricier in Karachi is usually paying for the postcode, not the facial.' },
+
+      { type: 'h2', text: 'Bleach and Polish — Rs 400 to Rs 1,500' },
+      { type: 'p', text: 'Instant-glow services like [bleach and polish](/services/bleach-polish) start at Rs 400. A Loreal Face Polish at around Rs 900 is the sweet spot before an event — a natural glow with no downtime and no reaction risk.' },
+
+      { type: 'h2', text: 'Hair — Cuts from Rs 1,500, Treatments from Rs 2,000' },
+      { type: 'p', text: 'Professional [cuts, colour, and styling](/services/hair) start at Rs 1,500. Repair-focused [hair treatments](/services/hair-treatments) — protein treatments, hair-fall ampules, Wellaplex bond therapy — start at Rs 2,000, with most sessions around Rs 3,000. If a salon quotes you five figures for a basic protein treatment, ask exactly what is in it.' },
+
+      { type: 'h2', text: 'Nails and Massage — Rs 300 to Rs 1,500' },
+      { type: 'p', text: 'Basic [manicures and pedicures](/services/nails) start at Rs 300, with SPA and paraffin rituals around Rs 1,300. A professional head, back, or full-body [massage](/services/massage) starts at Rs 700.' },
+
+      { type: 'h2', text: 'Semi-Permanent Brows — from Rs 20,000' },
+      { type: 'p', text: 'Microblading and powder brows are the biggest-ticket non-bridal service in any Karachi salon. At Farwa, [eyebrow tattoo](/services/eyebrow-tattoo) starts at Rs 20,000 including consultation, numbing, the procedure, and an aftercare kit. Results last 12 to 18 months. Be wary of Rs 8,000 "deals" — pigment quality and hygiene are exactly the places you do not want a discount on your face.' },
+
+      { type: 'h2', text: 'Bridal Makeup — from Rs 8,000 per event' },
+      { type: 'p', text: 'Single-event bridal looks — engagement, mehndi, nikkah, or reception — start at Rs 8,000 at Farwa, with the complete full bridal package around Rs 25,000. Karachi\'s celebrity-name studios charge Rs 80,000 to Rs 180,000 for one day; our [bridal packages](/services/bridal) are built on the same techniques, eighteen years of practice, and a fraction of the rent. Read our [bridal packages guide](/blog/best-bridal-makeup-packages-karachi-2026) for the full breakdown.' },
+
+      { type: 'h2', text: 'How This Compares to the Big-Name Parlours' },
+      { type: 'p', text: 'Since the famous salons rarely publish rates, third-party price-tracker sites do it for them. Per those published lists, a single bridal event at Kashee\'s runs roughly Rs 23,000 to Rs 33,000 — with multi-event packages from Rs 48,000 — and Mahrose\'s makeup menu starts around Rs 12,000 for a classic look. Nabila and the celebrity studios sit far above both. None of this makes those salons wrong; it makes the comparison simple: at Farwa the complete full bridal package costs about what one event costs at a big name, the techniques and product houses (Janssen, Wella, Rica) are the same professional grade, and the price you read here is the price you pay.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: Why do most Karachi salons hide their prices?' },
+      { type: 'p', text: 'A: Because unlisted prices can flex per customer. Printed prices cannot. We publish every starting figure on farwasalon.com and confirm your exact quote on WhatsApp before your appointment — never after.' },
+      { type: 'h3', text: 'Q: Are these prices final?' },
+      { type: 'p', text: 'A: They are honest starting prices. Longer hair, larger areas, or add-ons can raise a quote, but you will always know before we begin.' },
+      { type: 'h3', text: 'Q: How do Farwa\'s prices compare to Depilex or Nabila?' },
+      { type: 'p', text: 'A: The big chains sit at two to five times these figures for comparable services, and most do not publish rates at all. You are paying for the brand name and the location; the thread, the wax, and the training are the same or better here.' },
+      { type: 'h3', text: 'Q: Do you accept cards?' },
+      { type: 'p', text: 'A: We accept cash, JazzCash, and EasyPaisa at the salon. Every price is in PKR.' },
+
+      { type: 'h2', text: 'See the Full Menu' },
+      { type: 'p', text: 'Every individual service and its exact rate is published on our [complete price list](/prices), with the guided menu at [services](/services) — thirteen specialities, one hundred plus services. Book online at farwasalon.com/book or WhatsApp us at +92 322 2782254.' },
+    ],
+  },
+  {
+    slug: 'eyebrow-microblading-karachi-guide',
+    title: 'Eyebrow Microblading in Karachi — Cost, Safety, Healing and Honest Answers',
+    description: 'What microblading and powder brows really cost in Karachi, how long they last, whether they are safe, and how to choose an artist — from a salon that has done brows since 2008.',
+    featuredImage: '/eyebrowtattoo.jpg',
+    date: '2026-07-16',
+    lastModified: '2026-07-16',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Brows',
+    relatedCategories: ['Eyebrow Tattoo', 'Threading'],
+    content: [
+      { type: 'p', text: 'Semi-permanent brows are the fastest-growing beauty service in Karachi — and the one with the most misinformation. As a salon that has shaped brows in PECHS since 2008 and offers [eyebrow tattoo services](/services/eyebrow-tattoo) starting at Rs 20,000, here are the straight answers to everything clients ask us.' },
+
+      { type: 'h2', text: 'What Is the Difference Between Microblading, Powder Brows, and Combination Brows?' },
+      { type: 'p', text: 'Microblading uses a fine hand tool to draw individual hair strokes — the most natural finish, ideal for filling sparse or over-plucked brows. Powder brows use a machine to build a soft, filled-in makeup look that suits oily skin better and tends to last longer. Combination brows blend both: hair strokes at the front, powder through the arch and tail. At your consultation we map your bone structure and recommend the technique that fits your skin type and the look you want.' },
+
+      { type: 'h2', text: 'How Much Does Microblading Cost in Karachi?' },
+      { type: 'p', text: 'Legitimate microblading in Karachi runs from Rs 20,000 to Rs 45,000. At Farwa it starts at Rs 20,000 and includes the brow-mapping consultation, topical numbing, the full procedure, and a complete aftercare kit. You will see cheaper offers — Rs 8,000 to Rs 12,000 — and this is one service where cheap is genuinely risky: low-grade pigments turn grey or orange as they fade, and poor hygiene on a procedure that breaks skin is not worth any saving.' },
+
+      { type: 'h2', text: 'Does It Hurt, and Is It Safe?' },
+      { type: 'p', text: 'With proper topical numbing, most clients describe the sensation as light scratching — uncomfortable, not painful. Safety comes down to three things you should verify at any salon: single-use sterile needles opened in front of you, quality pigments, and an artist who maps your brows before touching them. Ask to see all three. If a salon hesitates, walk out.' },
+
+      { type: 'h2', text: 'How Long Does It Last, and What Is Healing Like?' },
+      { type: 'p', text: 'Results last 12 to 18 months, fading gradually — not vanishing overnight. Healing is straightforward: brows look darker and bolder for the first week, then soften to their true shade. Keep them completely dry for seven days, skip makeup on the area while it heals, and apply the aftercare balm as directed. Most clients book a light touch-up after 6 to 8 weeks to perfect any strokes that healed unevenly.' },
+
+      { type: 'h2', text: 'Who Should Not Get Microblading?' },
+      { type: 'p', text: 'If you are pregnant or nursing, on blood thinners, have uncontrolled diabetes, or have active skin conditions around the brow area, wait and consult your doctor first. Very oily skin usually does better with powder brows than hair-stroke microblading — another reason the consultation matters more than the price tag.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How long does a microblading session take?' },
+      { type: 'p', text: 'A: Plan for two to two and a half hours — roughly half of that is mapping and numbing, not tattooing. Good brows are designed before they are drawn.' },
+      { type: 'h3', text: 'Q: Can I still get my brows threaded afterwards?' },
+      { type: 'p', text: 'A: Yes — once fully healed, [threading](/services/threading) keeps stray hairs tidy around your new shape. Many clients maintain both.' },
+      { type: 'h3', text: 'Q: What if I do not like the shape?' },
+      { type: 'p', text: 'A: The shape is agreed at the mapping stage — you approve the drawn outline in the mirror before any pigment is placed. Nothing is permanent until you say yes to the map.' },
+      { type: 'h3', text: 'Q: How do I book a consultation in PECHS?' },
+      { type: 'p', text: 'A: Book online at farwasalon.com/book or WhatsApp +92 322 2782254. Consultations take fifteen minutes and there is no obligation to book the procedure the same day.' },
+
+      { type: 'h2', text: 'Book a Brow Consultation' },
+      { type: 'p', text: 'See our full [eyebrow tattoo services](/services/eyebrow-tattoo) with printed prices, or start with a threading appointment and talk to us in the chair. Semi-permanent brows are an 18-month decision — make it with a salon that has been shaping Karachi\'s brows since 2008.' },
+    ],
+  },
+  {
     slug: 'bridal-beauty-timeline',
     title: 'Complete Bridal Beauty Timeline — When to Start Prep Before Your Wedding',
     description: 'A month-by-month beauty preparation guide for Karachi brides, from skincare routines to the final bridal trial.',

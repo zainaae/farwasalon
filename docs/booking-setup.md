@@ -76,6 +76,8 @@ GOOGLE_SHEET_ID=your_spreadsheet_id_here
 
 ## 7. Email Notification (Google Apps Script)
 
+**Quick checklist:** see [booking-email-setup.md](./booking-email-setup.md) for salon-owner steps to verify alerts work.
+
 The website appends bookings via the Sheets API. **`onEdit` does not run for API writes**, so email alerts use a **time-driven trigger** that scans column **M (Notified)**.
 
 ### Sheet column M

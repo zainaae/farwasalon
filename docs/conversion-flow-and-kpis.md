@@ -1,18 +1,21 @@
 # Conversion flow and KPIs — Farwa Beauty Salon site
 
-This document maps the **current** visitor-to-booking journey in the React SPA and defines **measurable KPIs** and recommended analytics events for a professional salon funnel.
+This document maps the **current** visitor-to-booking journey and defines **measurable KPIs** and recommended analytics events for a professional salon funnel.
 
 ## Routes (entry points)
 
-| Path | Page component | Primary intent |
-|------|----------------|----------------|
-| `/` | `Home.jsx` | Awareness, brand trust, push to services / booking |
-| `/services` | `Services.jsx` | Service discovery by category; per-service detail modal |
-| `/gallery` | `Gallery.jsx` | Visual proof; social (Instagram) |
-| `/about` | `About.jsx` | Trust, story, longevity |
-| `/contact` | `Contact.jsx` | Location, hours, **structured booking form → WhatsApp** |
+| Path | Route file | Primary intent |
+|------|------------|----------------|
+| `/` | `app/page.jsx` | Awareness, brand trust, push to services / booking |
+| `/services`, `/services/[categorySlug]` | `app/services/` | Service discovery by category; location-aware SEO variants |
+| `/book` | `app/book/` | **Online booking — the primary conversion** (service → date → time → confirm) |
+| `/gallery` | `app/gallery/` | Visual proof; social (Instagram) |
+| `/about` | `app/about/` | Trust, story, longevity |
+| `/contact` | `app/contact/` | Location, hours, Book-online CTA, WhatsApp fallback |
+| `/beauty-salon-karachi` | `app/beauty-salon-karachi/` | Local-SEO hub page |
 
-Global shell: [src/App.jsx](src/App.jsx) wraps all routes in `BookingProvider` (from [src/shared.jsx](src/shared.jsx)).
+Global shell: [app/layout.jsx](../app/layout.jsx) — shared chrome, analytics, and JSON-LD.
+Booking online (`/book`) is the primary path; **WhatsApp is the fallback everywhere.**
 
 ## Conversion flow (as implemented)
 
@@ -71,7 +74,7 @@ Use these **stage names** consistently in analytics:
 
 ## Suggested Plausible custom events
 
-Site already loads Plausible with tagged events ([index.html](../index.html)). When implementing `plausible('EventName', { props: { ... } })`, align names with this table:
+Site already loads Plausible with tagged events, plus Vercel Analytics ([app/layout.jsx](../app/layout.jsx)). When implementing `plausible('EventName', { props: { ... } })`, align names with this table:
 
 | Event name | When | Useful props |
 |------------|------|----------------|

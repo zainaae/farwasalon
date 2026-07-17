@@ -10,9 +10,12 @@ import {
   WordmarkDivider,
 } from '../src/shared.jsx'
 import { formatPrice } from '../src/data.js'
+import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories } from '../src/data.js'
+import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK } from '../src/data.js'
+import { EDITORIAL_PHOTOS } from '../src/salon-media.js'
+import { getGbpStatsForDisplay, getManualReviewsPayload } from '../lib/google-reviews.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
@@ -50,7 +53,7 @@ const FB_POSTS = [
   },
 ]
 
-const FEATURED_REVIEWS = [
+const FALLBACK_FEATURED_REVIEWS = [
   {
     name: 'Tathira B.',
     quote: 'Farwa Aapi ne itni care aur detail se kaam kiya ke har visit pe ghar jaisa lagta hai. Best salon in Karachi, hands down.',
@@ -65,21 +68,27 @@ const FEATURED_REVIEWS = [
   },
 ]
 
-const EDITORIAL_PHOTOS = [
-  { src: '/bridal.jpg',           label: 'Bridal' },
-  { src: '/eyebrowtattoo.jpg',    label: 'Eyebrow Tattoo' },
-  { src: '/pedicure.jpg',         label: 'Nail Craft' },
-  { src: '/glow3.jpg',            label: 'Facials' },
-  { src: '/threading.jpg',        label: 'Threading' },
-  { src: '/hairdo.jpg',           label: 'Hair' },
-  { src: '/oilwax.jpg',           label: 'Rica Wax' },
-  { src: '/facialcleansing.jpg',  label: 'Cleansing' },
-  { src: '/massage.jpg',          label: 'Massage' },
-  { src: '/pedicure.jpg',         label: 'Nail Finish' },
-  { src: '/wax2.jpg',             label: 'Honey Wax' },
-  { src: '/hairtreatment.jpg',    label: 'Hair Treatments' },
-  { src: '/bleachpolish.jpg',     label: 'Bleach & Polish' },
-]
+function EditorialMedia({ item, className = '' }) {
+  if (item.video) {
+    return (
+      <video
+        src={item.video}
+        poster={item.src}
+        muted
+        loop
+        playsInline
+        preload="none"
+        className={`w-full h-full object-cover ${className}`}
+        aria-hidden
+      />
+    )
+  }
+  return (
+    <Image src={item.src} alt={item.label} loading="lazy"
+      width={330} height={440}
+      className={`w-full h-full object-cover ${className}`} />
+  )
+}
 
 function StatsStrip() {
   return (
@@ -90,7 +99,7 @@ function StatsStrip() {
             <m.div initial={{ y: '40%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}>
               <p className="eyebrow mb-3">— Est. 2008 · PECHS</p>
-              <h2 className="section-title text-2xl md:text-3xl max-w-md">
+              <h2 className="display-section max-w-2xl">
                 A beauty studio with {YEARS_ACTIVE} years of care
               </h2>
             </m.div>
@@ -101,17 +110,20 @@ function StatsStrip() {
             <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
               For over {YEARS_ACTIVE} years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
             </p>
-            <div className="grid grid-cols-3 max-[380px]:grid-cols-1 gap-3 sm:gap-4 border-t border-border-soft pt-6 sm:pt-7">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-4 border-t border-border-soft pt-6 sm:pt-7">
               {[
                 { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
-                { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
-                { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services on the menu' },
+                { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Specialities, one roof' },
+                { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services, every price printed' },
+                { display: `${GOOGLE_GBP_STATS.rating}★`, final: null, label: 'Rated by Karachi on Google' },
               ].map(({ display, final, label }) => (
                 <div key={label} className="min-w-0">
-                  <p className="font-['Unbounded'] font-bold text-lg sm:text-xl md:text-2xl text-ink mb-1 leading-none">
-                    <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
+                  <p className="font-['Unbounded'] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none">
+                    {final !== null
+                      ? <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
+                      : display}
                   </p>
-                  <p className="text-stone text-[10px] sm:text-[11px] tracking-wide font-['Inter'] leading-tight">{label}</p>
+                  <p className="text-stone text-[11px] tracking-wide font-['Inter'] leading-tight">{label}</p>
                 </div>
               ))}
             </div>
@@ -137,15 +149,13 @@ function EditorialSlideshow() {
             <figure key={i}
               className="relative shrink-0 overflow-hidden mx-[5px]"
               style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)' }}>
-              <Image src={p.src} alt={p.label} loading="lazy"
-                width={230} height={306}
-                className="w-full h-full object-cover" />
+              <EditorialMedia item={p} />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
               <figcaption className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
                 <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
                   {p.label}
                 </span>
-                <span className="text-white/40 text-[9px] font-['Inter'] tabular-nums">
+                <span className="text-white/60 text-[9px] font-['Inter'] tabular-nums">
                   {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
                 </span>
               </figcaption>
@@ -158,9 +168,7 @@ function EditorialSlideshow() {
         <div className="flex w-max max-w-none will-change-transform" style={{ animation: 'marquee 65s linear infinite' }}>
           {doubled.map((p, i) => (
             <div key={i} className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group cursor-default">
-              <Image src={p.src} alt={p.label} loading="lazy"
-                width={330} height={440}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
               <span className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
                 {p.label}
@@ -173,7 +181,7 @@ function EditorialSlideshow() {
   )
 }
 
-function ServiceMediaPanel({ hovered, categories }) {
+function ServiceMediaPanel({ hovered }) {
   const activeVideo = hovered ? CAT_META[hovered]?.video : null
 
   return (
@@ -188,18 +196,18 @@ function ServiceMediaPanel({ hovered, categories }) {
         className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
         style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
       />
-      {categories.map(cat => (
-        <Image key={cat}
-          src={CAT_META[cat]?.img || '/bleachpolish.jpg'}
-          alt={cat}
+      {hovered && !CAT_META[hovered]?.video && (
+        <Image
+          key={hovered}
+          src={CAT_META[hovered]?.img || '/bleachpolish.jpg'}
+          alt={hovered}
           fill
+          quality={65}
           sizes="(max-width: 768px) 100vw, 45vw"
           className="absolute inset-0 object-cover transition-opacity duration-500 pointer-events-none"
-          style={{ opacity: hovered === cat && !CAT_META[cat]?.video ? 1 : 0 }}
           aria-hidden="true"
-          loading="lazy"
         />
-      ))}
+      )}
       {activeVideo && (
         <video
           key={activeVideo}
@@ -235,7 +243,7 @@ function FeaturedServices() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-10 md:mb-12">
           <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <p className="eyebrow mb-2">— What we do</p>
-            <h2 className="section-title text-2xl md:text-3xl">Our Services</h2>
+            <h2 className="display-section">Our Services</h2>
           </m.div>
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="shrink-0 self-start sm:self-auto">
@@ -249,7 +257,7 @@ function FeaturedServices() {
         <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-12 items-start">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24">
-            <ServiceMediaPanel hovered={hovered} categories={visibleCategories} />
+            <ServiceMediaPanel hovered={hovered} />
           </m.div>
 
           <div>
@@ -287,7 +295,7 @@ function FeaturedServices() {
                     onMouseLeave={() => setHovered(null)}
                     className="group flex items-center justify-between py-4 md:py-5 gap-4">
                     <div className="flex items-center gap-4 min-w-0">
-                      <span className="font-['Unbounded'] text-[10px] text-stone/40 shrink-0 w-5 tabular-nums">
+                      <span className="font-['Unbounded'] text-[10px] text-stone shrink-0 w-5 tabular-nums">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="min-w-0">
@@ -295,14 +303,14 @@ function FeaturedServices() {
                           {cat}
                         </span>
                         {CAT_META[cat]?.tagline && (
-                          <span className="block text-stone text-[10px] font-['Inter'] font-light mt-0.5 truncate">
+                          <span className="block text-stone text-[11px] font-['Inter'] mt-0.5 truncate">
                             {CAT_META[cat].tagline}
                           </span>
                         )}
                       </span>
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
-                      <span className="text-stone text-[10px] font-['Inter'] hidden sm:block">
+                      <span className="text-stone text-[11px] font-['Inter'] hidden sm:block">
                         {(() => {
                           const prices = SERVICES[cat].map((s) => s.pricePkr).filter(Boolean)
                           return prices.length
@@ -335,7 +343,7 @@ function TrustPillars() {
     <section className="cv-auto bg-ink py-14 md:py-16 px-4 sm:px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto">
         <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</m.p>
+          className="text-accent-gold text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</m.p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-10">
           {[
             { num: '01', title: `${YEARS_ACTIVE} Years in PECHS`, desc: 'Since 2008 — the same chair-side standard whether you are in for ten minutes or a full bridal day.' },
@@ -345,9 +353,9 @@ function TrustPillars() {
             <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
               className="border-t border-white/10 pt-7">
-              <p className="font-['Unbounded'] text-[10px] text-stone mb-4">{p.num}</p>
+              <p className="font-['Unbounded'] text-[10px] text-accent-gold mb-4">{p.num}</p>
               <h3 className="font-['Syne'] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
-              <p className="text-stone text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
+              <p className="text-nude/90 text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
             </m.div>
           ))}
         </div>
@@ -356,10 +364,17 @@ function TrustPillars() {
   )
 }
 
-function ReviewCard({ post, compact = false }) {
+function ReviewCard({ post, compact = false, excerpt = false }) {
+  const sourceLabel = post.source === 'google' ? 'Google' : 'Facebook'
+  const clampQuote = excerpt || compact
+
   return (
-    <article className={`group panel-soft shadow-soft flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-card ${compact ? 'shrink-0 snap-start w-[85vw] max-w-[320px]' : 'h-full'}`}>
-      <header className="flex items-center justify-between px-5 py-4 border-b border-border-soft">
+    <article
+      className={`group panel-soft shadow-soft flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-card ${
+        compact ? 'shrink-0 snap-start w-[85vw] max-w-[320px]' : 'h-full min-h-[260px] sm:min-h-[272px]'
+      }`}
+    >
+      <header className="flex items-center justify-between px-5 py-3.5 sm:py-4 border-b border-border-soft">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-9 h-9 bg-mist border border-border-soft flex items-center justify-center shrink-0">
             <span className="text-ink font-['Syne'] font-semibold text-[11px]">{post.initials}</span>
@@ -370,28 +385,43 @@ function ReviewCard({ post, compact = false }) {
               <div className="flex gap-0.5 text-stone/70" aria-hidden="true">
                 {[...Array(5)].map((_, s) => <Star key={s} className="w-2 h-2 fill-current" />)}
               </div>
-              <span className="text-stone/70 text-[9px] font-['Inter']">· {post.date}</span>
+              <span className="text-stone text-[9px] font-['Inter']">· {post.date}</span>
             </div>
           </div>
         </div>
         <a href={post.link} target="_blank" rel="noreferrer"
-          aria-label={`View ${post.name}'s review on Facebook`}
+          aria-label={`View ${post.name}'s review on ${sourceLabel}`}
           className="shrink-0 text-stone/50 group-hover:text-ink transition-colors">
           <ArrowUpRight className="w-4 h-4" />
         </a>
       </header>
 
-      <div className="flex-1 px-5 py-5 flex flex-col bg-white">
-        <Quote className="w-4 h-4 text-stone/25 mb-3 rotate-180 shrink-0" aria-hidden="true" />
-        <blockquote className="text-stone text-[13px] md:text-sm font-light leading-relaxed font-['Inter'] flex-1">
+      <div className="flex-1 px-5 py-4 sm:py-5 flex flex-col bg-white min-h-0">
+        <Quote className="w-3.5 h-3.5 text-accent-gold/35 mb-2.5 rotate-180 shrink-0" aria-hidden="true" />
+        <blockquote
+          className={`text-stone text-[13px] md:text-sm font-light leading-relaxed font-['Inter'] flex-1 ${
+            clampQuote ? 'line-clamp-4 sm:line-clamp-5' : ''
+          }`}
+        >
           {post.quote}
         </blockquote>
-        <div className="flex items-center justify-between gap-3 mt-5 pt-4 border-t border-border-soft">
-          <span className="text-stone/80 text-[9px] tracking-[0.18em] uppercase font-['Inter']">
+        {clampQuote && (
+          <a
+            href={post.link}
+            target="_blank"
+            rel="noreferrer"
+            className="review-excerpt-link mt-3 inline-flex items-center gap-1 self-start"
+          >
+            Read on {sourceLabel}
+            <ArrowUpRight className="w-2.5 h-2.5" />
+          </a>
+        )}
+        <div className="flex items-center justify-between gap-3 mt-auto pt-4 border-t border-border-soft">
+          <span className="text-stone text-[9px] tracking-[0.18em] uppercase font-['Inter'] truncate">
             {post.service}
           </span>
-          <span className="inline-flex items-center gap-1 text-stone/60 text-[9px] tracking-[0.16em] uppercase font-['Inter']">
-            Facebook
+          <span className="inline-flex items-center gap-1 text-stone text-[9px] tracking-[0.16em] uppercase font-['Inter'] shrink-0">
+            {sourceLabel}
           </span>
         </div>
       </div>
@@ -399,66 +429,183 @@ function ReviewCard({ post, compact = false }) {
   )
 }
 
+function reviewInitials(name) {
+  const parts = String(name).trim().split(/\s+/).filter(Boolean)
+  if (parts.length >= 2) return `${parts[0][0]}${parts[1][0]}`.toUpperCase()
+  return (parts[0]?.slice(0, 2) || '??').toUpperCase()
+}
+
+function toFbCard(post) {
+  return {
+    name: post.name,
+    initials: post.initials || reviewInitials(post.name),
+    date: post.date || post.relativeTime || '',
+    service: post.service || (post.source === 'google' ? 'Google review' : 'Facebook'),
+    quote: post.quote,
+    link: post.link,
+    source: post.source || 'facebook',
+  }
+}
+
+function toGoogleCards(reviews) {
+  return reviews.slice(0, 6).map((r) =>
+    toFbCard({
+      ...r,
+      service: r.relativeTime || 'Google review',
+      source: 'google',
+    }),
+  )
+}
+
+const FB_GRID_POSTS = FB_POSTS.map((post) => toFbCard(post))
+
+const manualPayload = getManualReviewsPayload()
+const gbpStats = getGbpStatsForDisplay()
+const initialRatingLabel =
+  gbpStats.rating != null && gbpStats.reviewCount != null
+    ? `${gbpStats.rating}★ · ${gbpStats.reviewCount} Google reviews`
+    : 'Reviews on Google'
+
+const initialGoogleGrid = manualPayload?.reviews?.length
+  ? toGoogleCards(manualPayload.reviews)
+  : []
+
+function ReviewGridSection({ label, viewAllHref, posts, className = '', divided = true }) {
+  if (!posts.length) return null
+
+  const desktopCols = posts.length >= 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'
+  const desktopLimit = posts.length >= 3 ? posts.length : 2
+
+  return (
+    <div className={`reviews-block-divider ${divided ? '' : 'border-t-0 pt-0'} ${className}`}>
+      <div className="flex items-center justify-between gap-4 mb-4 sm:mb-5 md:mb-6">
+        <p className="eyebrow mb-0">— {label}</p>
+        <a href={viewAllHref} target="_blank" rel="noreferrer"
+          className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1 shrink-0">
+          View all <ArrowUpRight className="w-2.5 h-2.5" />
+        </a>
+      </div>
+
+      <p className="md:hidden text-stone text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2.5">
+        Swipe for more reviews →
+      </p>
+      <div className="md:hidden flex gap-3.5 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
+        {posts.map((post) => (
+          <ReviewCard key={`${label}-${post.name}-${post.quote.slice(0, 24)}`} post={post} compact excerpt />
+        ))}
+      </div>
+
+      <div className={`hidden md:grid ${desktopCols} gap-4 sm:gap-5 max-w-5xl items-stretch`}>
+        {posts.slice(0, desktopLimit).map((post, i) => (
+          <m.div key={`${label}-${post.name}`} className="h-full"
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}>
+            <ReviewCard post={post} excerpt />
+          </m.div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function TestimonialsPreview() {
   const [reviewIdx, setReviewIdx] = useState(0)
+  const [ratingLabel, setRatingLabel] = useState(initialRatingLabel)
+  const [featuredReviews, setFeaturedReviews] = useState(
+    manualPayload?.reviews?.length ? manualPayload.reviews : FALLBACK_FEATURED_REVIEWS,
+  )
+  const [googleGridPosts, setGoogleGridPosts] = useState(initialGoogleGrid)
 
   useEffect(() => {
-    if (FEATURED_REVIEWS.length <= 1) return undefined
-    const id = setInterval(() => {
-      setReviewIdx((i) => (i + 1) % FEATURED_REVIEWS.length)
-    }, 8000)
-    return () => clearInterval(id)
+    let cancelled = false
+
+    async function loadReviews() {
+      try {
+        const res = await fetch('/api/reviews')
+        if (!res.ok || cancelled) return
+        const data = await res.json()
+        if (cancelled) return
+        const isGoogle =
+          (data.source === 'google' || data.source === 'google-manual') &&
+          data.reviews?.length
+        if (!isGoogle) return
+
+        setFeaturedReviews(data.reviews)
+        setGoogleGridPosts(toGoogleCards(data.reviews))
+        if (data.rating != null && data.reviewCount != null) {
+          setRatingLabel(`${data.rating}★ · ${data.reviewCount} Google reviews`)
+        }
+      } catch {
+        /* keep manual / Facebook fallback */
+      }
+    }
+
+    loadReviews()
+    return () => {
+      cancelled = true
+    }
   }, [])
 
-  const featured = FEATURED_REVIEWS[reviewIdx]
+  useEffect(() => {
+    if (featuredReviews.length <= 1) return undefined
+    const id = setInterval(() => {
+      setReviewIdx((i) => (i + 1) % featuredReviews.length)
+    }, 8000)
+    return () => clearInterval(id)
+  }, [featuredReviews.length])
+
+  const featured = featuredReviews[reviewIdx]
+  const featuredSourceLabel = featured.source === 'google' ? 'Google' : 'Facebook'
 
   return (
     <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-mist border-t border-border-soft">
       <div className="relative max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
         <m.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
-          className="flex flex-col sm:flex-row sm:items-end md:justify-between gap-5 mb-8 md:mb-10">
+          className="flex flex-col gap-4 sm:gap-5 sm:flex-row sm:items-end sm:justify-between mb-8 sm:mb-10 md:mb-12">
           <div className="min-w-0">
             <p className="eyebrow mb-2">— Client reviews</p>
-            <h2 className="section-title text-2xl md:text-3xl">What clients say</h2>
+            <h2 className="display-section">What clients say</h2>
           </div>
-          <div className="flex items-center gap-2 shrink-0 pb-0.5">
-            <div className="flex gap-0.5 text-stone/75" aria-label="4.9 out of 5 stars">
-              {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 fill-current" />)}
+          <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
+            <div className="flex gap-0.5 text-stone/80" role="img" aria-label={`${GOOGLE_GBP_STATS.rating} out of 5 stars`}>
+              {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />)}
             </div>
-            <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug">
-              4.9★ · 6 Google reviews
+            <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug whitespace-nowrap">
+              {ratingLabel}
             </span>
           </div>
         </m.div>
 
         <m.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-          className="relative panel-soft bg-white shadow-soft px-6 py-8 md:px-12 md:py-10 mb-6 md:mb-8"
+          className="reviews-featured relative px-6 py-9 sm:px-9 sm:py-10 md:px-12 md:py-11 mb-8 sm:mb-10 md:mb-12"
           aria-live="polite">
-          <Quote className="absolute top-5 left-5 md:top-7 md:left-8 w-5 h-5 md:w-6 md:h-6 text-stone/20 rotate-180" aria-hidden="true" />
-          <blockquote className="font-['Syne'] italic font-light text-ink leading-[1.45] text-center max-w-2xl mx-auto text-lg md:text-xl">
+          <Quote className="reviews-featured-mark absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 sm:w-10 sm:h-10 rotate-180 pointer-events-none" aria-hidden="true" />
+          <blockquote className={`relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6 sm:line-clamp-none' : ''}`}>
             {featured.quote}
           </blockquote>
           {featured.translation && (
-            <p className="text-stone text-center text-sm font-light mt-4 font-['Inter'] max-w-xl mx-auto">
+            <p className="relative z-[1] text-stone text-center text-sm font-light mt-4 sm:mt-5 font-['Inter'] max-w-xl mx-auto leading-relaxed">
               {featured.translation}
             </p>
           )}
-          <figcaption className="flex flex-col items-center gap-3 mt-6">
-            <div className="flex items-center justify-center gap-2">
+          <figcaption className="relative z-[1] flex flex-col items-center gap-3.5 mt-7 sm:mt-8">
+            <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
               <span className="text-stone text-[10px] tracking-[0.2em] uppercase font-['Inter']">
                 {featured.name}
               </span>
-              <span className="text-stone/40" aria-hidden="true">·</span>
+              <span className="text-stone/40 hidden sm:inline" aria-hidden="true">·</span>
               <a href={featured.link} target="_blank" rel="noreferrer"
                 className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
-                Facebook <ArrowUpRight className="w-2.5 h-2.5" />
+                {featuredSourceLabel}{' '}
+                <ArrowUpRight className="w-2.5 h-2.5" />
               </a>
             </div>
-            {FEATURED_REVIEWS.length > 1 && (
+            {featuredReviews.length > 1 && (
               <div className="flex items-center gap-1.5" role="tablist" aria-label="Featured reviews">
-                {FEATURED_REVIEWS.map((r, i) => (
+                {featuredReviews.map((r, i) => (
                   <button
                     key={r.name}
                     type="button"
@@ -474,51 +621,32 @@ function TestimonialsPreview() {
           </figcaption>
         </m.figure>
 
-        <div className="mb-10 md:mb-12">
-          <div className="flex items-baseline justify-between mb-4 md:mb-5 px-0.5">
-            <p className="eyebrow">
-              — From Facebook
-            </p>
-            <a href="https://www.facebook.com/farwasalon/reviews" target="_blank" rel="noreferrer"
-              className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1">
-              View all <ArrowUpRight className="w-2.5 h-2.5" />
-            </a>
-          </div>
-
-          <p className="md:hidden text-stone/70 text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2 px-0.5">
-            Swipe for more reviews →
-          </p>
-          <div className="md:hidden flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
-            {FB_POSTS.map((post) => (
-              <ReviewCard key={post.name} post={post} compact />
-            ))}
-          </div>
-
-          <div className="hidden md:grid md:grid-cols-2 gap-3 max-w-3xl">
-            {FB_POSTS.slice(0, 2).map((post, i) => (
-              <m.div key={post.name}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}>
-                <ReviewCard post={post} />
-              </m.div>
-            ))}
-          </div>
-        </div>
+        <ReviewGridSection
+          label="From Google"
+          viewAllHref={GOOGLE_REVIEW_LINK}
+          posts={googleGridPosts}
+          className={googleGridPosts.length ? 'mb-6 sm:mb-8 md:mb-10' : ''}
+        />
+        <ReviewGridSection
+          label="From Facebook"
+          viewAllHref="https://www.facebook.com/farwasalon/reviews"
+          posts={FB_GRID_POSTS}
+          className="mb-8 sm:mb-10 md:mb-12"
+        />
 
         <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="pt-8 border-t border-border-soft flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-          <p className="text-stone text-[11px] font-light font-['Inter'] tracking-wide">
+          className="reviews-cta-row pt-8 sm:pt-10 border-t border-border-soft flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 sm:gap-6">
+          <p className="text-stone text-[11px] sm:text-xs font-light font-['Inter'] tracking-wide max-w-sm">
             Loved your visit? Help us spread the word.
           </p>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
-            <a href="https://g.page/r/CRCiNE2kpFvlEBM/review" target="_blank" rel="noreferrer"
-              className="tap-safe inline-flex items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-6 py-3 hover:bg-stone transition-colors duration-300">
-              Write a Google review <ArrowUpRight className="w-3.5 h-3.5" />
+          <div className="reviews-cta-actions flex flex-col min-[480px]:flex-row sm:flex-row items-stretch gap-3 w-full lg:w-auto lg:max-w-xl">
+            <a href={GOOGLE_REVIEW_LINK} target="_blank" rel="noreferrer"
+              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-5 sm:px-6 py-3 hover:bg-stone transition-colors duration-300">
+              Write a Google review <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
             </a>
             <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
-              className="tap-safe inline-flex items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-6 py-3 bg-white">
-              Follow on Facebook <ArrowUpRight className="w-3 h-3" />
+              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-5 sm:px-6 py-3 bg-white">
+              Follow on Facebook <ArrowUpRight className="w-3 h-3 shrink-0" />
             </a>
           </div>
         </m.div>
@@ -539,10 +667,10 @@ function CtaBand() {
           transition={{ duration: 0.8 }}
           className="w-full lg:flex-1 lg:min-w-0"
         >
-          <p className="text-stone text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
+          <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
           <h2
-            className="font-['Unbounded'] font-bold text-white leading-tight text-balance max-w-2xl lg:max-w-none"
-            style={{ fontSize: 'clamp(1.5rem, 4vw + 0.5rem, 2.75rem)' }}
+            className="font-['Unbounded'] font-bold text-white leading-[1.05] text-balance max-w-2xl lg:max-w-none"
+            style={{ fontSize: 'clamp(1.9rem, 5.5vw + 0.5rem, 4rem)' }}
           >
             Ready for your glow? We&apos;re ready for you.
           </h2>
@@ -572,11 +700,30 @@ function CtaBand() {
             href={`https://wa.me/${WA_NUMBER}`}
             target="_blank"
             rel="noreferrer"
-            className="tap-safe text-white/40 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white/70 transition-colors flex items-center justify-center sm:justify-start lg:justify-end min-w-0"
+            className="tap-safe text-white/60 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start lg:justify-end min-w-0"
           >
             Or reach us on WhatsApp
           </a>
         </m.div>
+      </div>
+    </section>
+  )
+}
+
+function FounderNote() {
+  return (
+    <section className="cv-auto bg-mist border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
+      <div className="max-w-3xl mx-auto text-center">
+        <p className="eyebrow mb-6">— The House</p>
+        <blockquote
+          className="font-['Syne'] italic text-ink text-balance leading-[1.3]"
+          style={{ fontSize: 'clamp(1.35rem, 3.6vw, 2.25rem)' }}>
+          &ldquo;Trends visit Karachi every season. Grace stays. I opened this
+          salon in 2008 to give every woman on this street both.&rdquo;
+        </blockquote>
+        <p className="mt-6 text-[11px] tracking-[0.28em] uppercase font-['Inter'] text-stone">
+          Rubina · Founder, Farwa Beauty Salon
+        </p>
       </div>
     </section>
   )
@@ -592,6 +739,7 @@ export default function HomeBelowFold() {
       <FeaturedServices />
       <TrustPillars />
       <SalonLocalBlock />
+      <FounderNote />
       <TestimonialsPreview />
       <CtaBand />
     </>

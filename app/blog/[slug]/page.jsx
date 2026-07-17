@@ -1,4 +1,5 @@
 import { BLOG_POSTS } from '../../../src/blog-data.js'
+import { buildBlogFaqSchema } from '../../../lib/blog-faq.js'
 import BlogArticleClient from './blog-article-client'
 
 export const dynamicParams = false
@@ -23,5 +24,14 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogArticlePage({ params }) {
   const { slug } = await params
-  return <BlogArticleClient slug={slug} />
+  const post = BLOG_POSTS.find((p) => p.slug === slug)
+  const faqSchema = post ? buildBlogFaqSchema(post) : null
+  return (
+    <>
+      {faqSchema && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      )}
+      <BlogArticleClient slug={slug} />
+    </>
+  )
 }

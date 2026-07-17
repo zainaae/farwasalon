@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import Link from 'next/link'
 import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, ChevronDown, X } from 'lucide-react'
-import { IgIcon, useNextSlot } from '../../src/shared.jsx'
+import { IgIcon } from '../../src/shared.jsx'
+import { useNextSlot } from '../../src/use-next-slot.js'
 import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track } from '../../src/data.js'
 
 export default function ContactClient() {
@@ -48,15 +49,15 @@ export default function ContactClient() {
 
       <section className="bg-white py-14 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="eyebrow mb-3">— Ready?</motion.p>
+          <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+            className="eyebrow mb-3">— Ready?</m.p>
           <div className="overflow-hidden">
-            <motion.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+            <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
               <span className="block">BOOK YOUR</span> <span className="block">APPOINTMENT</span>
-            </motion.h1>
+            </m.h1>
           </div>
-          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}
+          <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}
             className="mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
             <span className="inline-flex items-center gap-2 border border-border-soft px-3 py-2 text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone">
               <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#6b9b5f]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
@@ -65,14 +66,14 @@ export default function ContactClient() {
             <Link href="/book" className="tap-safe btn-primary text-[10px] sm:text-[11px] !py-2.5 !px-5">
               <Sparkles className="w-3 h-3" /> Book online
             </Link>
-          </motion.div>
+          </m.div>
         </div>
       </section>
 
       <section className="py-14 md:py-20">
         <div className="section-shell grid md:grid-cols-[1.2fr_1fr] gap-14 md:gap-20">
 
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
+          <m.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
             <p className="eyebrow mb-6">— Find us</p>
 
             <div className="flex flex-col gap-5 mb-10">
@@ -145,9 +146,9 @@ export default function ContactClient() {
                 Open in Maps <ArrowUpRight className="w-3 h-3" />
               </a>
             </div>
-          </motion.div>
+          </m.div>
 
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
+          <m.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }}>
             <div className="mb-8 p-6 md:p-8 bg-mist border border-border-soft">
               <p className="eyebrow mb-3">— Instant confirmation</p>
               <p className="text-body text-sm mb-5">
@@ -261,7 +262,7 @@ export default function ContactClient() {
                 </span>
               ))}
             </div>
-          </motion.div>
+          </m.div>
 
         </div>
       </section>

@@ -1,6 +1,6 @@
 # CMS / managed content migration — from `src/data.js`
 
-Today, marketing and catalog content live in **[src/data.js](../src/data.js)** (services, categories, gallery items, testimonials seeds, links). This plan moves **editable** content to a **CMS or database** while keeping the SPA **resilient** when the remote source fails.
+Today, marketing and catalog content live in **[src/data.js](../src/data.js)** (services, categories, gallery items, testimonials seeds, links). This plan moves **editable** content to a **CMS or database** while keeping the site **resilient** when the remote source fails.
 
 ## Objectives
 
@@ -17,7 +17,7 @@ Today, marketing and catalog content live in **[src/data.js](../src/data.js)** (
 | Category media/copy | `CAT_META` | CMS (media field + rich text) |
 | Gallery | `GALLERY_PHOTOS` | CMS gallery collection |
 | Testimonials | Mixed / static in components | CMS or reviews integration |
-| SEO per page | `usePageMeta` + `index.html` | CMS or framework metadata API |
+| SEO per page | Next.js Metadata API + `lib/page-metadata.js` | CMS-driven metadata |
 
 ## Recommended stacks (pick one)
 

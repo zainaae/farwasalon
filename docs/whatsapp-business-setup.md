@@ -274,6 +274,125 @@ Would you like to reschedule for another time? 📅
 
 ---
 
+## 5b. The Review Engine ⭐ (highest-impact routine in this doc)
+
+The salons above Farwa in Google's map pack have 400–1,100 reviews; Farwa has ~19.
+Closing that gap is the single biggest growth lever available, it costs nothing,
+and it is purely a habit. **Ask every happy client, the same day, while they still
+feel great about their look.**
+
+### The rules
+
+1. **Ask everyone, same day.** End of each day, message every client who visited
+   (numbers are in the bookings sheet). Sooner = better.
+2. **Replace `{name}` by hand** before sending — WhatsApp quick replies don't
+   auto-fill it, and a name doubles the response rate.
+3. **Never offer discounts or gifts for reviews** — against Google policy and can
+   get reviews (or the whole listing) removed.
+4. **Unhappy client? Don't send the review ask.** Send the recovery message
+   instead — a complaint handled on WhatsApp never becomes a 1-star review.
+5. **One follow-up maximum,** ~3 days later. Never nag past that.
+6. **Reply to every Google review within a week** (templates below). Owner
+   replies are themselves a ranking signal.
+
+### Save these as quick replies
+
+### `/review-en` — Review ask (English)
+```
+Thank you for visiting Farwa Beauty Salon today, {name}! 🌸 It was lovely having you.
+
+If you enjoyed your visit, would you take 30 seconds to leave us a Google review? It genuinely helps our small salon grow:
+
+⭐ https://farwasalon.com/review
+
+— Rubina & team 💕
+```
+
+### `/review-ur` — Review ask (Roman Urdu)
+```
+Aaj Farwa Beauty Salon aane ka shukriya, {name}! 🌸 Umeed hai aap ko apna look pasand aaya.
+
+Agar aap ka tajurba acha raha ho to please 30 second nikaal kar Google review de dein — is se hamare salon ko bohat madad milti hai:
+
+⭐ https://farwasalon.com/review
+
+— Rubina & team 💕
+```
+
+### `/review-bridal` — Review ask (brides — the best reviews come from here)
+```
+It was an honour being part of your special day, {name}! 💍✨ You looked absolutely stunning.
+
+When things settle down, we'd love a short Google review about your bridal experience — it means the world to brides choosing their salon:
+
+⭐ https://farwasalon.com/review
+
+— Rubina & team 🌸
+```
+
+### `/review-nudge` — One gentle follow-up (send once, ~3 days later)
+```
+Salaam {name}! Just a gentle reminder 🌸 — if you have 30 seconds, we'd love your Google review:
+
+⭐ https://farwasalon.com/review
+
+Aur agar visit mein koi bhi masla raha ho, to please yahin bata dein — hum usay zaroor theek karenge. 💕
+```
+
+### `/recover` — Unhappy client (instead of the review ask)
+```
+{name}, thank you for telling us — we're really sorry your visit wasn't perfect. 🙏
+
+Please share what went wrong, and Rubina will personally make it right on your next visit. Your experience matters more to us than anything.
+```
+
+### Replying to Google reviews (do this weekly)
+
+**5-star reply:**
+```
+Thank you so much, {name}! 🌸 It was a pleasure having you at Farwa. See you next time! — Rubina
+```
+
+**Critical review reply (public, short, take it offline):**
+```
+Thank you for the feedback, {name} — we're sorry your visit fell short. Please WhatsApp us at +92 322 2782254 so we can make it right. — Rubina
+```
+
+### ⚡ Automated: the daily Review Digest email
+
+The booking sheet's Apps Script bot (`google-apps-script/EmailBot.gs`) now sends
+the salon inbox an email **every day at 7 PM** listing that day's clients — each
+with **one-tap buttons** that open WhatsApp with the review ask already typed,
+name filled in, bridal variant auto-selected. It also lists clients from 3 days
+ago for the follow-up nudge. Nothing to type, nothing to remember.
+
+**One-time setup (2 minutes):**
+1. Open the Bookings Google Sheet → **Extensions → Apps Script**
+2. Replace the whole file with the current `google-apps-script/EmailBot.gs`
+3. In the editor, select **`setupTriggers`** from the function dropdown → **Run**
+   (authorize when prompted) — this creates the daily 7 PM digest alongside the
+   existing 5-minute booking check
+4. Test it: select **`sendReviewDigest`** → **Run** — the digest for today
+   arrives in the salon inbox immediately
+
+**Daily use:** open the 7 PM email *on the salon phone* → tap a button per
+client → WhatsApp opens with the personalized message → press send. Skip anyone
+who seemed unhappy (send `/recover` instead). The quick replies above remain the
+manual fallback.
+
+### The weekly rhythm
+
+| When | What |
+|------|------|
+| 7 PM daily (automatic) | Digest email arrives — tap through the day's review asks |
+| In the same digest | "Nudge" section lists 3-day-old visits — once only, skip repliers |
+| Friday | Count total Google reviews; aim for +2–3 per week |
+| Friday | Reply to any new Google reviews |
+
+**Milestones:** 50 reviews → competitive for PECHS-area map pack · 100+ → competitive city-wide. At 2–3/week, 50 is roughly 3 months away.
+
+---
+
 ## 6. WhatsApp Channel Setup
 
 WhatsApp Channels allow broadcast updates to followers without seeing their numbers.
