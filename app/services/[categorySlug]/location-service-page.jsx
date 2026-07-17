@@ -25,6 +25,9 @@ export default function LocationServicePage({ data, slug }) {
   const categoryKey = Object.keys(SERVICES).find(k => k === service.category)
   const categoryServices = categoryKey ? SERVICES[categoryKey] : []
   const displayServices = categoryServices.slice(0, 6)
+  const locPrices = categoryServices.map((s) => s.pricePkr).filter(Boolean)
+  const locMin = locPrices.length ? Math.min(...locPrices) : null
+  const priceFloor = locMin != null ? formatPrice(locMin) : null
 
   const relatedServices = TOP_SERVICES.filter(s => s.slug !== service.slug).slice(0, 4)
   const nearbyAreas = getNearbyPriorityLocationLinks(slug)
@@ -51,6 +54,7 @@ export default function LocationServicePage({ data, slug }) {
           <h1 className="font-['Unbounded'] font-bold text-2xl md:text-4xl text-ink leading-tight mb-4">{heading}</h1>
           <p className="text-body md:text-base max-w-2xl mb-4">
             {service.description} {location.detail}
+            {priceFloor ? ` Published prices from ${priceFloor}.` : ''}
           </p>
           <p className="text-xs text-stone font-['Inter'] font-light max-w-2xl mb-6 border-l-2 border-accent-gold/40 pl-3">
             One studio in PECHS — we welcome clients from {location.name} and nearby areas. All appointments are at our PECHS address below.
@@ -122,6 +126,9 @@ export default function LocationServicePage({ data, slug }) {
               className="btn-primary"
             >
               Book online <ArrowUpRight className="w-4 h-4" />
+            </Link>
+            <Link href="/prices" className="btn-secondary">
+              Price list
             </Link>
             <a href={waLink(service.name)} target="_blank" rel="noreferrer"
               className="btn-secondary">

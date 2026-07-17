@@ -1,10 +1,21 @@
 import ContactClient from './contact-client'
+import { pageSocialMeta } from '../../lib/page-metadata.js'
+
+const title = 'Contact Beauty Salon PECHS — Directions | Farwa'
+const description =
+  'Visit Farwa Beauty Salon in PECHS Block 3, Karachi. Mon–Sat 11am–7pm. WhatsApp +92 322 278 2254 — or book online for threading, facials, bridal & more.'
 
 export const metadata = {
-  title: 'Book Appointment — Beauty Salon PECHS Karachi',
-  description: 'Book your appointment at Farwa Beauty Salon, PECHS, Karachi. WhatsApp +92 322 2782254. Mon–Sat 11 AM – 7 PM. Bridal, facials, threading & more.',
+  title: { absolute: title },
+  description,
   alternates: { canonical: '/contact' },
-  openGraph: { type: 'website', images: [{ url: '/logo.jpg', width: 1200, height: 630, alt: 'Book an appointment at Farwa Beauty Salon PECHS Karachi' }] },
+  ...pageSocialMeta({
+    title,
+    description,
+    path: '/contact',
+    image: '/logo.jpg',
+    imageAlt: 'Contact Farwa Beauty Salon — PECHS Karachi',
+  }),
 }
 
 export default function ContactPage() {

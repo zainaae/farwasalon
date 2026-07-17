@@ -52,8 +52,14 @@ export default function BeautySalonKarachiPage() {
             <Link href="/book" className="btn-primary">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
+            <Link href="/prices" className="btn-secondary">
+              Price list
+            </Link>
+            <Link href="/bridal" className="btn-secondary">
+              Bridal makeup
+            </Link>
             <Link href="/services" className="btn-secondary">
-              View All Services
+              All services
             </Link>
           </div>
 
@@ -119,10 +125,10 @@ export default function BeautySalonKarachiPage() {
             </h2>
             <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
               {[
-                ['Bridal', CAT_SLUGS.Bridal],
+                ['Bridal makeup', CAT_SLUGS.Bridal],
                 ['Threading', CAT_SLUGS.Threading],
                 ['Facials', CAT_SLUGS.Facials],
-                ['Hair', CAT_SLUGS.Hair],
+                ['Microblading', CAT_SLUGS['Eyebrow Tattoo']],
                 ['Nails', CAT_SLUGS.Nails],
                 ['Rica Wax', CAT_SLUGS['Rica Wax']],
               ].map(([label, slug]) => (
@@ -156,6 +162,14 @@ export default function BeautySalonKarachiPage() {
             <p className="mt-8 pt-6 border-t border-border-soft text-xs text-stone font-['Inter']">
               <Link href="/" className="link-underline hover:text-ink font-medium">
                 Back to home
+              </Link>
+              {' · '}
+              <Link href="/blog/beauty-parlour-near-me-karachi-guide" className="link-underline hover:text-ink font-medium">
+                Beauty parlour near me guide
+              </Link>
+              {' · '}
+              <Link href="/services/threading-in-pechs-karachi" className="link-underline hover:text-ink font-medium">
+                Threading in PECHS
               </Link>
             </p>
           </section>

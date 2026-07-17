@@ -32,13 +32,13 @@ export default function PricesPage() {
     <main id="main" className="page-content">
       {faqSchema && <JsonLd data={faqSchema} />}
       <div className="section-shell section-pad min-h-0">
-        <p className="eyebrow mb-4">— Rate list · updated {UPDATED}</p>
+        <p className="eyebrow mb-4">— Rate list · updated {UPDATED} · from Rs 100</p>
         <h1 className="display-section text-ink mb-5 max-w-3xl">
-          The Full Price List
+          Salon Price List in Karachi
         </h1>
         <p className="text-body md:text-lg max-w-2xl mb-4">
-          Most salons in Karachi make you call to ask. This is our complete rate list —
-          every service, every price, in PKR, published. Your exact quote is confirmed
+          Most salons in Karachi make you call to ask. This is our complete PECHS rate list —
+          every service, every price, in PKR, published from Rs 100. Your exact quote is confirmed
           before your appointment, never after.
         </p>
         <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-8">
@@ -106,6 +106,14 @@ export default function PricesPage() {
         <p className="mt-10 text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone/80 max-w-2xl">
           All prices in Pakistani Rupees. Cash, JazzCash and EasyPaisa accepted at the salon.
           Longer hair, larger areas or add-ons can adjust a quote — always confirmed with you first.
+        </p>
+        <p className="mt-6 pt-6 border-t border-border-soft text-xs text-stone font-['Inter'] flex flex-wrap gap-x-3 gap-y-2">
+          <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>
+          <Link href="/bridal" className="link-underline hover:text-ink font-medium">Bridal makeup</Link>
+          <Link href="/services/threading" className="link-underline hover:text-ink font-medium">Threading</Link>
+          <Link href="/services/facials" className="link-underline hover:text-ink font-medium">Facials</Link>
+          <Link href="/services/eyebrow-tattoo" className="link-underline hover:text-ink font-medium">Microblading</Link>
+          <Link href="/beauty-salon-karachi" className="link-underline hover:text-ink font-medium">Beauty salon Karachi</Link>
         </p>
       </div>
     </main>

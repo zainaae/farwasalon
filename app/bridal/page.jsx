@@ -49,13 +49,13 @@ export default function BridalLandingPage() {
       {faqSchema && <JsonLd data={faqSchema} />}
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
-          <p className="eyebrow mb-4">— Bridal in PECHS</p>
+          <p className="eyebrow mb-4">— Bridal in PECHS · from Rs 8,000</p>
           <h1 id="bridal-headline" className="font-['Unbounded'] font-bold text-3xl md:text-[2.5rem] text-ink mb-6 max-w-3xl leading-tight tracking-tight">
-            Bridal Makeup &amp; Styling in Karachi
+            Bridal Makeup in PECHS, Karachi
           </h1>
           <p id="bridal-lede" className="text-body md:text-lg max-w-3xl mb-8">
             Farwa has styled PECHS brides since 2008 — from mehndi and engagement to nikkah and walima.
-            Transparent PKR pricing, a dedicated trial, and a calm studio in Saima Terrace Block 3.
+            Packages from Rs 8,000, a dedicated trial, and a calm studio in Saima Terrace Block 3.
           </p>
 
           <div className="flex flex-wrap gap-3 mb-12">
@@ -67,6 +67,9 @@ export default function BridalLandingPage() {
             </Link>
             <Link href={`/services/${CAT_SLUGS.Bridal}`} className="btn-secondary">
               Full Bridal Menu
+            </Link>
+            <Link href="/prices" className="btn-secondary">
+              Price list
             </Link>
           </div>
 
@@ -182,6 +185,14 @@ export default function BridalLandingPage() {
             {' · '}
             <Link href={`/services/${CAT_SLUGS.Bridal}`} className="link-underline hover:text-ink font-medium">
               All bridal services
+            </Link>
+            {' · '}
+            <Link href="/services/bridal-makeup-in-pechs-karachi" className="link-underline hover:text-ink font-medium">
+              Bridal makeup in PECHS
+            </Link>
+            {' · '}
+            <Link href="/book" className="link-underline hover:text-ink font-medium">
+              Book online
             </Link>
           </p>
         </div>
