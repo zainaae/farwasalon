@@ -897,6 +897,7 @@ export function Navbar({ transparent = false }) {
   const navLinks = [
     { label: 'Home',         href: '/', wideOnly: false },
     { label: 'Services',     href: '/services', wideOnly: false },
+    { label: 'Prices',       href: '/prices', wideOnly: false },
     { label: 'Book',         href: '/book', wideOnly: false, hideOnDesktop: true },
     { label: 'Gallery',      href: '/gallery', wideOnly: false },
     { label: 'Blog',         href: '/blog', wideOnly: true },
@@ -1031,7 +1032,7 @@ export function Footer() {
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">Navigate</p>
               <ul className="flex flex-col gap-2.5">
-                {[['Home','/'],['Services','/services'],['Book','/book'],['Bridal','/bridal'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['FAQ','/faq']].map(([l,href]) => (
+                {[['Home','/'],['Services','/services'],['Price List','/prices'],['Book','/book'],['Bridal','/bridal'],['Gallery','/gallery'],['Blog','/blog'],['About','/about'],['Contact','/contact'],['FAQ','/faq']].map(([l,href]) => (
                   <li key={l}><Link href={href} className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors">{l}</Link></li>
                 ))}
               </ul>
