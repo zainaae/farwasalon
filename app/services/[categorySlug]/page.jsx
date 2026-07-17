@@ -22,20 +22,28 @@ export async function generateMetadata({ params }) {
   const locationData = parseLocationSlug(categorySlug)
   if (locationData) {
     const { service, location, prefix } = locationData
-    const title = prefix === 'best'
-      ? `Best ${service.name} in ${location.name}`
-      : `${service.name} ${prefix === 'near' ? 'Near' : 'in'} ${location.name}`
+    const catServices = SERVICES[service.category] || []
+    const locPrices = catServices.map((s) => s.pricePkr).filter(Boolean)
+    const locMin = locPrices.length ? Math.min(...locPrices) : 100
+    const priceFloor = formatPrice(locMin)
+    const placeShort = location.name.includes('Karachi')
+      ? location.name.replace(', Karachi', '')
+      : location.name
+    const titleCore = prefix === 'best'
+      ? `Best ${service.name} in ${placeShort}`
+      : `${service.name} ${prefix === 'near' ? 'Near' : 'in'} ${placeShort}`
+    const title = `${titleCore} — From ${priceFloor} | Farwa`
     const canonicalSlug = prefix === 'best'
       ? `${service.slug}-in-${location.slug}`
       : categorySlug
     const locality = location.name.includes('Karachi') ? location.name : `${location.name}, Karachi`
-    const description = `${service.name} in ${locality} — ${service.description} Book online at Farwa Beauty Salon, PECHS. From Rs 100. ★ ${GOOGLE_GBP_STATS.rating} Google rating.`
+    const description = `${service.name} in ${locality} — ${service.description} At Farwa Beauty Salon, PECHS. From ${priceFloor}. ★ ${GOOGLE_GBP_STATS.rating} Google. Book online.`
     return {
-      title,
+      title: { absolute: title },
       description,
       alternates: { canonical: `/services/${canonicalSlug}` },
       ...pageSocialMeta({
-        title: `${title} — Farwa Beauty Salon`,
+        title,
         description,
         path: `/services/${canonicalSlug}`,
         image: '/logo.jpg',
@@ -52,12 +60,23 @@ export async function generateMetadata({ params }) {
   const minPrice = prices.length ? Math.min(...prices) : null
   const priceHint = minPrice ? ` — From ${formatPrice(minPrice)}` : ''
   const catImg = CAT_META[category]?.img || '/logo.jpg'
+  const seo = CAT_SEO[category]
+  const title = seo?.title
+    ? `${seo.title} | Farwa`
+    : `${category} PECHS Karachi${priceHint} | Farwa`
+  const description = seo?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS, Karachi. Book online.`
 
   return {
-    title: `${category} in PECHS Karachi${priceHint}`,
-    description: CAT_SEO[category]?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS, Karachi. Book online.`,
+    title: { absolute: title },
+    description,
     alternates: { canonical: `/services/${categorySlug}` },
-    openGraph: { type: 'website', images: [{ url: catImg, width: 1200, height: 630, alt: `${category} services at Farwa Beauty Salon PECHS Karachi` }] },
+    ...pageSocialMeta({
+      title,
+      description,
+      path: `/services/${categorySlug}`,
+      image: catImg,
+      imageAlt: `${category} services at Farwa Beauty Salon PECHS Karachi`,
+    }),
   }
 }
 

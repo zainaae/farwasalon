@@ -1,18 +1,70 @@
-/* ─── Unique meta descriptions per service category (SEO) ──── */
+/* ─── Unique SERP title + meta description per service category ──── */
 export const CAT_SEO = {
-  'Threading':       { metaDesc: 'Expert eyebrow & face threading from Rs 200 at Farwa Salon, PECHS Karachi. Flawless brows since 2008. Book online today!' },
-  'Rica Hot Wax':    { metaDesc: 'Gentle Rica hot wax from Rs 150 at Farwa Salon, PECHS Karachi. Italian stripless wax for face & sensitive skin. Book online today!' },
-  'Honey Wax':       { metaDesc: 'Honey wax from Rs 400 at Farwa Salon, PECHS Karachi. Smooth arms, legs & full body — results last 3\u20134 weeks. Book online now!' },
-  'Rica Wax':        { metaDesc: 'Premium Rica body wax from Rs 600 at Farwa Salon, PECHS Karachi. Silky-smooth arms, legs & full body. Book online today!' },
-  'Bleach & Polish': { metaDesc: 'Face bleach & polish from Rs 400 at Farwa Salon, PECHS Karachi. Instant glow with Loreal & diamond treatments. Book online today!' },
-  'Massage':         { metaDesc: 'Relaxing massage from Rs 700 at Farwa Salon, PECHS Karachi. Head, back & full body tension relief by experts. Book online today!' },
-  'Hair Treatments': { metaDesc: 'Hair treatments from Rs 2,000 at Farwa Salon, PECHS Karachi. Protein, hair fall, dandruff & Wellaplex repair. Book online today!' },
-  'Cleansing':       { metaDesc: 'Deep cleansing from Rs 1,200 at Farwa Salon, PECHS Karachi. HD, acne & Janssen whitening for clear, glowing skin. Book online now!' },
-  'Facials':         { metaDesc: '11 professional facials from Rs 1,400 at Farwa Salon, PECHS Karachi. Whitening, HD, organic & Janssen options. Book your glow-up today!' },
-  'Nails':           { metaDesc: 'Manicure & pedicure from Rs 300 at Farwa Salon, PECHS Karachi. SPA, French, paraffin & nail art for perfect nails. Book online!' },
-  'Bridal':          { metaDesc: 'Bridal makeup from Rs 8,000 at Farwa Salon, PECHS Karachi. Trials, engagement & mehndi looks — 18+ years expertise. Book your trial now!' },
-  'Hair':            { metaDesc: 'Haircuts, colour & styling from Rs 1,500 at Farwa Salon, PECHS Karachi. Cuts, blowdry, balayage & bridal updos. Book online today!' },
-  'Eyebrow Tattoo':  { metaDesc: 'Microblading & powder brows from Rs 20,000 at Farwa Salon, PECHS Karachi. Semi-permanent brows lasting 12\u201318 months. Book online!' },
+  'Threading': {
+    title: 'Eyebrow Threading PECHS — From Rs 100',
+    metaDesc:
+      'Eyebrow & face threading from Rs 100 at Farwa Beauty Salon, PECHS Karachi. Precise brows since 2008 — walk in or book online today.',
+  },
+  'Rica Hot Wax': {
+    title: 'Rica Hot Wax PECHS — From Rs 150',
+    metaDesc:
+      'Gentle Rica hot wax from Rs 150 at Farwa Beauty Salon, PECHS Karachi. Italian stripless wax for face & sensitive skin. Book online.',
+  },
+  'Honey Wax': {
+    title: 'Honey Wax PECHS Karachi — From Rs 400',
+    metaDesc:
+      'Honey wax from Rs 400 at Farwa Beauty Salon, PECHS Karachi. Smooth arms, legs & full body — results last 3–4 weeks. Book online.',
+  },
+  'Rica Wax': {
+    title: 'Rica Wax PECHS Karachi — From Rs 600',
+    metaDesc:
+      'Premium Rica body wax from Rs 600 at Farwa Beauty Salon, PECHS Karachi. Silky-smooth arms, legs & full body. Book online today.',
+  },
+  'Bleach & Polish': {
+    title: 'Bleach & Polish PECHS — From Rs 400',
+    metaDesc:
+      'Face bleach & polish from Rs 400 at Farwa Beauty Salon, PECHS Karachi. Instant glow with Loreal & diamond treatments. Book online.',
+  },
+  'Massage': {
+    title: 'Massage PECHS Karachi — From Rs 700',
+    metaDesc:
+      'Relaxing massage from Rs 700 at Farwa Beauty Salon, PECHS Karachi. Head, back & full body tension relief. Book online today.',
+  },
+  'Hair Treatments': {
+    title: 'Hair Treatments Karachi — From Rs 2k',
+    metaDesc:
+      'Hair treatments from Rs 2,000 at Farwa Beauty Salon, PECHS Karachi. Protein, hair fall, dandruff & Wellaplex repair. Book online.',
+  },
+  'Cleansing': {
+    title: 'Deep Cleansing PECHS — From Rs 1,200',
+    metaDesc:
+      'Deep cleansing from Rs 1,200 at Farwa Beauty Salon, PECHS Karachi. HD, acne & Janssen whitening for clear skin. Book online.',
+  },
+  'Facials': {
+    title: 'Facials PECHS Karachi — From Rs 1,400',
+    metaDesc:
+      '11 professional facials from Rs 1,400 at Farwa Beauty Salon, PECHS Karachi. Whitening, HD, organic & Janssen. Book your glow-up.',
+  },
+  'Nails': {
+    title: 'Manicure & Pedicure PECHS — From Rs 300',
+    metaDesc:
+      'Manicure & pedicure from Rs 300 at Farwa Beauty Salon, PECHS Karachi. SPA, French, paraffin & nail art. Book online today.',
+  },
+  'Bridal': {
+    title: 'Bridal Makeup PECHS — From Rs 8,000',
+    metaDesc:
+      'Bridal makeup from Rs 8,000 at Farwa Beauty Salon, PECHS Karachi. Trials, engagement & mehndi looks — 18+ years. Book your trial.',
+  },
+  'Hair': {
+    title: 'Hair Salon PECHS Karachi — From Rs 1.5k',
+    metaDesc:
+      'Haircuts, colour & styling from Rs 1,500 at Farwa Beauty Salon, PECHS Karachi. Blowdry, balayage & bridal updos. Book online.',
+  },
+  'Eyebrow Tattoo': {
+    title: 'Microblading Karachi — From Rs 20k',
+    metaDesc:
+      'Microblading & powder brows from Rs 20,000 at Farwa Beauty Salon, PECHS Karachi. Semi-permanent brows lasting 12–18 months. Book online.',
+  },
 }
 
 /* ─── FAQ content for popular categories (SEO + user value) ──── */

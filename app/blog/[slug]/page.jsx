@@ -1,5 +1,6 @@
 import { BLOG_POSTS } from '../../../src/blog-data.js'
 import { buildBlogFaqSchema } from '../../../lib/blog-faq.js'
+import { pageSocialMeta } from '../../../lib/page-metadata.js'
 import BlogArticleClient from './blog-article-client'
 
 export const dynamicParams = false
@@ -14,11 +15,19 @@ export async function generateMetadata({ params }) {
   if (!post) {
     return { title: 'Article Not Found' }
   }
+  const title = `${post.title} | Farwa`
   return {
-    title: post.title,
+    title: { absolute: title },
     description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: { type: 'article', images: [{ url: post.featuredImage || '/logo.jpg', width: 1200, height: 630, alt: post.title }] },
+    ...pageSocialMeta({
+      title,
+      description: post.description,
+      path: `/blog/${post.slug}`,
+      image: post.featuredImage || '/logo.jpg',
+      imageAlt: post.title,
+      type: 'article',
+    }),
   }
 }
 

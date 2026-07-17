@@ -6,9 +6,9 @@ import JsonLd from '../json-ld'
 import { buildFaqPageSchema } from '../../lib/business-schema.js'
 import { PRICES_PAGE_FAQS } from '../../src/faq-data.js'
 
-const title = 'Salon Price List Karachi 2026 — Full Rate List | Farwa Beauty Salon'
+const title = 'Salon Price List Karachi 2026 — From Rs 100 | Farwa'
 const description =
-  'The complete published price list of Farwa Beauty Salon, PECHS Karachi — every service and rate: threading from Rs 100, facials from Rs 1,400, bridal from Rs 8,000. No hidden charges.'
+  'Full published price list — PECHS Karachi. Threading from Rs 100, facials from Rs 1,400, bridal from Rs 8,000. Every rate on the page. No hidden charges.'
 
 export const metadata = {
   title: { absolute: title },
