@@ -48,6 +48,30 @@ jobs:
       - name: Audit production dependencies
         run: npm audit --omit=dev --audit-level=high
 
+  indexnow:
+    name: IndexNow ping (master only)
+    needs: verify
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Ping IndexNow priority URLs
+        run: npm run ping:indexnow
+        env:
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+
   lighthouse:
     runs-on: ubuntu-latest
     # Category budgets are errors (median of 3 runs, see lighthouserc.json).

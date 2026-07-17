@@ -56,6 +56,9 @@ export default function LocationServicePage({ data, slug }) {
             {service.description} {location.detail}
             {priceFloor ? ` Published prices from ${priceFloor}.` : ''}
           </p>
+          {location.blurb ? (
+            <p className="text-body text-sm max-w-2xl mb-4">{location.blurb}</p>
+          ) : null}
           <p className="text-xs text-stone font-['Inter'] font-light max-w-2xl mb-6 border-l-2 border-accent-gold/40 pl-3">
             One studio in PECHS — we welcome clients from {location.name} and nearby areas. All appointments are at our PECHS address below.
           </p>
@@ -118,7 +121,9 @@ export default function LocationServicePage({ data, slug }) {
           className="mb-12">
           <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Getting Here from {location.name}</h2>
           <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed mb-4">
-            Farwa Beauty Salon is located in PECHS, Karachi. {location.detail} We&apos;re open Monday to Saturday, 11 AM to 7 PM. Book online for instant confirmation, or message us on WhatsApp.
+            Farwa Beauty Salon — Plot 165/G-1, Saima Terrace, Block 3 PECHS, Karachi 75400.
+            {' '}{location.blurb || location.detail}
+            {' '}Open Monday to Saturday, 11 AM to 7 PM. Book online for instant confirmation, or WhatsApp +92 322 278 2254.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link

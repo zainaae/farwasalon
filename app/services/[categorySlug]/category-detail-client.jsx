@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { ServiceModal, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
 import { CAT_FAQS, CAT_SEO, CAT_RELATED } from '../../../src/cat-seo-content.js'
+import { getRelatedBlogPostsForCategory } from '../../../src/blog-data.js'
 import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
@@ -61,6 +62,7 @@ export default function CategoryDetailClient({ categorySlug }) {
   const relatedCats = (CAT_RELATED[category] || [])
     .filter((cat) => CAT_SLUGS[cat])
     .slice(0, 4)
+  const relatedBlogs = category ? getRelatedBlogPostsForCategory(category, 3) : []
 
   if (!category) {
     return (
@@ -227,6 +229,31 @@ export default function CategoryDetailClient({ categorySlug }) {
                 </div>
               </section>
             )}
+
+          {relatedBlogs.length > 0 && (
+            <section className="mt-10 pt-8 border-t border-border-soft">
+              <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Related Guides</h2>
+              <ul className="space-y-3">
+                {relatedBlogs.map((post) => (
+                  <li key={post.slug}>
+                    <Link href={`/blog/${post.slug}`} className="group block">
+                      <span className="font-['Syne'] font-bold text-sm text-ink group-hover:text-stone transition-colors leading-snug">
+                        {post.title}
+                      </span>
+                      <span className="block text-stone text-xs font-['Inter'] mt-0.5 line-clamp-1">
+                        {post.description}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] tracking-[0.12em] uppercase font-['Inter']">
+                <Link href="/prices" className="link-underline hover:text-ink text-stone">Price list</Link>
+                <Link href="/book" className="link-underline hover:text-ink text-stone">Book online</Link>
+                <Link href="/beauty-salon-karachi" className="link-underline hover:text-ink text-stone">Beauty salon Karachi</Link>
+              </p>
+            </section>
+          )}
 
           {areaLinks.length > 0 && (
             <section className="mt-10 pt-8 border-t border-border-soft">

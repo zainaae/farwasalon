@@ -4,7 +4,11 @@ export default function robots() {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/'],
+        disallow: [
+          '/api/',
+          '/book/confirmation',
+          '/book/cancel',
+        ],
       },
     ],
     sitemap: 'https://farwasalon.com/sitemap.xml',

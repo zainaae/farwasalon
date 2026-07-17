@@ -45,7 +45,7 @@ describe('CAT_SEO', () => {
 
 describe('CAT_FAQS', () => {
   it('keeps FAQ answers for high-intent categories', () => {
-    for (const key of ['Threading', 'Facials', 'Bridal', 'Eyebrow Tattoo']) {
+    for (const key of ['Threading', 'Facials', 'Bridal', 'Eyebrow Tattoo', 'Honey Wax', 'Rica Wax']) {
       expect(CAT_FAQS[key]?.length).toBeGreaterThan(2)
     }
   })

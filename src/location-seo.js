@@ -1,16 +1,64 @@
 import { CAT_SLUGS } from './data.js'
 
 export const NEIGHBORHOODS = [
-  { slug: 'pechs-karachi', name: 'PECHS, Karachi', detail: 'Our home salon is in PECHS — visit us for all services.' },
-  { slug: 'gulshan', name: 'Gulshan-e-Iqbal', detail: 'Many of our regular clients travel from Gulshan — and say it\'s worth every minute.' },
-  { slug: 'clifton-karachi', name: 'Clifton, Karachi', detail: 'We welcome clients from Clifton for bridal and special occasion bookings.' },
-  { slug: 'bahadurabad', name: 'Bahadurabad', detail: 'A short drive through PECHS brings you to our door from Bahadurabad.' },
-  { slug: 'dha', name: 'DHA (Defence)', detail: 'Clients from DHA trust us for premium bridal, hair, and skincare.' },
-  { slug: 'tariq-road', name: 'Tariq Road', detail: 'Our nearest shopping neighbours — stop by before or after your errands on Tariq Road.' },
-  { slug: 'shahrah-e-faisal', name: 'Shahrah-e-Faisal', detail: 'Just minutes away via the main arterial road.' },
-  { slug: 'north-nazimabad', name: 'North Nazimabad', detail: 'Worth the trip — clients from North Nazimabad have been coming for years.' },
-  { slug: 'saddar', name: 'Saddar', detail: 'Accessible from Saddar via any main route to PECHS.' },
-  { slug: 'korangi', name: 'Korangi', detail: 'We serve clients from across Karachi including Korangi.' },
+  {
+    slug: 'pechs-karachi',
+    name: 'PECHS, Karachi',
+    detail: 'Our home salon is in PECHS — visit us for all services.',
+    blurb:
+      'We are at Plot 165/G-1, Saima Terrace, Block 3 PECHS — minutes from Tariq Road and Jheel Park. Same studio since 2008: printed PKR prices, online booking, and a calm women-only floor for threading, facials, bridal, wax, and hair.',
+  },
+  {
+    slug: 'gulshan',
+    name: 'Gulshan-e-Iqbal',
+    detail: 'Many of our regular clients travel from Gulshan — and say it\'s worth every minute.',
+    blurb:
+      'From Gulshan-e-Iqbal, PECHS is typically a 20–30 minute drive via University Road / Shahrah-e-Quaideen. Gulshan clients book us for monthly threading and facials plus bridal trials — transparent rates beat guessing at a parlour that will not publish prices.',
+  },
+  {
+    slug: 'clifton-karachi',
+    name: 'Clifton, Karachi',
+    detail: 'We welcome clients from Clifton for bridal and special occasion bookings.',
+    blurb:
+      'Clifton and Sea View clients come to PECHS for bridal packages, microblading, and pre-event facials. Expect a calm trial, published starting prices from Rs 100, and one address — Plot 165/G-1, Saima Terrace Block 3 — rather than a rotating home setup.',
+  },
+  {
+    slug: 'bahadurabad',
+    name: 'Bahadurabad',
+    detail: 'A short drive through PECHS brings you to our door from Bahadurabad.',
+  },
+  {
+    slug: 'dha',
+    name: 'DHA (Defence)',
+    detail: 'Clients from DHA trust us for premium bridal, hair, and skincare.',
+    blurb:
+      'DHA Phases reach our PECHS studio via Shahrah-e-Faisal in about 25–40 minutes depending on traffic. Defence clients book bridal trials, Janssen facials, and Rica wax here because every PKR rate is printed online and the appointment time is held.',
+  },
+  {
+    slug: 'tariq-road',
+    name: 'Tariq Road',
+    detail: 'Our nearest shopping neighbours — stop by before or after your errands on Tariq Road.',
+  },
+  {
+    slug: 'shahrah-e-faisal',
+    name: 'Shahrah-e-Faisal',
+    detail: 'Just minutes away via the main arterial road.',
+  },
+  {
+    slug: 'north-nazimabad',
+    name: 'North Nazimabad',
+    detail: 'Worth the trip — clients from North Nazimabad have been coming for years.',
+  },
+  {
+    slug: 'saddar',
+    name: 'Saddar',
+    detail: 'Accessible from Saddar via any main route to PECHS.',
+  },
+  {
+    slug: 'korangi',
+    name: 'Korangi',
+    detail: 'We serve clients from across Karachi including Korangi.',
+  },
 ]
 
 export const TOP_SERVICES = [

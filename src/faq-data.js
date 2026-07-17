@@ -207,4 +207,8 @@ export const PRICES_PAGE_FAQS = [
     q: 'Where can I see every service rate?',
     a: 'This page lists every priced service. Category explainers and booking live at farwasalon.com/services, and common questions are at farwasalon.com/faq.',
   },
+  {
+    q: 'How do I book after checking the price list?',
+    a: 'Open farwasalon.com/book, pick the service (threading from Rs 100, facials from Rs 1,400, bridal from Rs 8,000), choose a live slot, and confirm — or WhatsApp +92 322 2782254 if you need a custom combination.',
+  },
 ]
