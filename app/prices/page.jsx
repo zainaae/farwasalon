@@ -1,9 +1,13 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { SERVICES, CAT_SLUGS, formatPrice, formatDuration } from '../../src/data.js'
+import { SERVICES, CAT_SLUGS, formatPrice, formatDuration, YEARS_ACTIVE } from '../../src/data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
-import { buildFaqPageSchema } from '../../lib/business-schema.js'
+import {
+  buildFaqPageSchema,
+  SALON_NAP,
+  getAggregateRating,
+} from '../../lib/business-schema.js'
 import { PRICES_PAGE_FAQS } from '../../src/faq-data.js'
 
 const title = 'Salon Price List Karachi 2026 — From Rs 100 | Farwa'
@@ -23,28 +27,52 @@ export const metadata = {
   }),
 }
 
-const UPDATED = '17 July 2026'
+const UPDATED = '24 July 2026'
 
 export default function PricesPage() {
   const categories = Object.keys(SERVICES)
   const faqSchema = buildFaqPageSchema(PRICES_PAGE_FAQS)
+  const rating = getAggregateRating()
   return (
     <main id="main" className="page-content">
       {faqSchema && <JsonLd data={faqSchema} />}
       <div className="section-shell section-pad min-h-0">
-        <p className="eyebrow mb-4">— Rate list · updated {UPDATED} · from Rs 100</p>
-        <h1 className="display-section text-ink mb-5 max-w-3xl">
-          Salon Price List in Karachi
+        <p className="eyebrow mb-4">— Salon price list Karachi · updated {UPDATED} · from Rs 100</p>
+        <h1 className="display-section text-ink mb-4 max-w-3xl">
+          Salon Price List Karachi 2026 — From Rs 100
         </h1>
-        <p className="text-body md:text-lg max-w-2xl mb-4">
-          Most salons in Karachi make you call to ask. This is our complete PECHS rate list —
-          every service, every price, in PKR, published from Rs 100. Your exact quote is confirmed
-          before your appointment, never after.
+        <p className="text-stone text-xs font-['Inter'] font-light max-w-3xl mb-3">
+          {YEARS_ACTIVE}+ years · PECHS women-only studio · {rating.ratingValue}★ Google ({rating.reviewCount}+ reviews)
         </p>
-        <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-8">
-          New here? Join the newsletter at the bottom of any page for 10% off your first facial.
+        <p className="text-body md:text-lg max-w-2xl mb-3">
+          Searching for a salon price list in Karachi? This is our complete PECHS rate card —
+          every service, every starting price in PKR as Rs 1,200-style figures. No &ldquo;DM for rates.&rdquo;
+          Your exact quote is confirmed before your appointment, never after.
         </p>
-        <div className="flex flex-wrap items-center gap-3 mb-12">
+        <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-4">
+          Published starting prices in PKR. Not a tax invoice — GST/sales tax is not added on these
+          listed rates. Longer hair, larger areas, or add-ons can adjust a quote; we confirm before starting.
+        </p>
+        <nav aria-label="Price list categories" className="mb-6 max-w-3xl">
+          <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2">Jump to category</p>
+          <ul className="flex flex-wrap gap-x-3 gap-y-2 text-sm font-['Inter']">
+            {categories.map((cat) => (
+              <li key={cat}>
+                <a href={`#prices-${CAT_SLUGS[cat]}`} className="link-underline hover:text-ink text-ink font-medium">
+                  {cat === 'Eyebrow Tattoo' ? 'Microblading' : cat}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-3 text-stone text-sm font-light">
+            How to read a rate list:{' '}
+            <Link href="/blog/salon-price-list-karachi-2026" className="link-underline hover:text-ink text-ink font-medium">
+              Salon Price List Karachi 2026 guide
+            </Link>
+          </p>
+        </nav>
+
+        <div className="flex flex-wrap items-center gap-3 mb-3">
           <Link href="/book" className="tap-safe btn-primary !py-2.5 !px-5">
             Book online <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
@@ -53,6 +81,23 @@ export default function PricesPage() {
             Ask on WhatsApp
           </a>
         </div>
+        <p className="text-stone text-xs font-['Inter'] font-light max-w-2xl mb-6">
+          Payments: cash, JazzCash, EasyPaisa · Hours: Mon–Sat 11–7 (closed Sunday)
+        </p>
+        <p className="text-stone text-xs font-['Inter'] font-light max-w-2xl mb-10">{SALON_NAP}</p>
+
+        <section className="mb-12 panel-soft p-5 md:p-6 shadow-soft max-w-3xl" aria-labelledby="prices-bridal-strip">
+          <h2 id="prices-bridal-strip" className="font-['Syne'] font-semibold text-ink text-lg mb-2">
+            Bridal packages
+          </h2>
+          <p className="text-body text-sm mb-3">
+            Bridal Trial Rs 8,000 · Mehndi Rs 10,000 · Engagement Rs 12,000 · Full Bridal Package Rs 25,000 —
+            inclusions and event mapping on the bridal page.
+          </p>
+          <Link href="/bridal" className="btn-secondary !py-2 !px-4">
+            Bridal makeup packages <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+        </section>
 
         <div className="grid gap-12 md:gap-14">
           {categories.map((cat) => (
@@ -104,15 +149,16 @@ export default function PricesPage() {
         </section>
 
         <p className="mt-10 text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone/80 max-w-2xl">
-          All prices in Pakistani Rupees. Cash, JazzCash and EasyPaisa accepted at the salon.
-          Longer hair, larger areas or add-ons can adjust a quote — always confirmed with you first.
+          All prices in Pakistani Rupees (Rs). Cash, JazzCash and EasyPaisa accepted at the salon.
+          Listed rates are starting prices, not a tax invoice.
         </p>
         <p className="mt-6 pt-6 border-t border-border-soft text-xs text-stone font-['Inter'] flex flex-wrap gap-x-3 gap-y-2">
           <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>
           <Link href="/bridal" className="link-underline hover:text-ink font-medium">Bridal makeup</Link>
-          <Link href="/services/threading" className="link-underline hover:text-ink font-medium">Threading</Link>
-          <Link href="/services/facials" className="link-underline hover:text-ink font-medium">Facials</Link>
-          <Link href="/services/eyebrow-tattoo" className="link-underline hover:text-ink font-medium">Microblading</Link>
+          <Link href="/blog/manicure-pedicure-price-list-karachi" className="link-underline hover:text-ink font-medium">Nails price guide</Link>
+          <Link href="/blog/face-bleach-karachi-loreal" className="link-underline hover:text-ink font-medium">Face bleach</Link>
+          <Link href="/blog/full-body-massage-karachi-women-salon" className="link-underline hover:text-ink font-medium">Massage</Link>
+          <Link href="/blog/haircut-blowdry-hair-colour-cost-karachi" className="link-underline hover:text-ink font-medium">Haircut &amp; colour</Link>
           <Link href="/beauty-salon-karachi" className="link-underline hover:text-ink font-medium">Beauty salon Karachi</Link>
         </p>
       </div>

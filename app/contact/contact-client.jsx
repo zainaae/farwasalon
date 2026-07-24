@@ -84,7 +84,12 @@ export default function ContactClient() {
                 </div>
                 <div>
                   <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">Location</p>
-                  <p className="text-stone text-sm font-light font-['Inter']">PECHS, Karachi</p>
+                  <p className="text-stone text-sm font-light font-['Inter']">
+                    Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400
+                  </p>
+                  <p className="text-stone text-[11px] font-['Inter'] mt-0.5">
+                    Women-only PECHS studio · one branch · not an at-home parlour
+                  </p>
                   <p className="text-stone text-[11px] font-['Inter'] mt-0.5 hover:text-ink transition-colors">Get directions →</p>
                 </div>
               </a>
@@ -95,7 +100,7 @@ export default function ContactClient() {
                 </div>
                 <div>
                   <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">Phone</p>
-                  <p className="text-stone text-sm font-light font-['Inter']">+92 322 2782254</p>
+                  <p className="text-stone text-sm font-light font-['Inter']">+92 322 278 2254</p>
                   <p className="text-stone text-[11px] font-['Inter'] mt-0.5 group-hover:text-ink transition-colors">Tap to call →</p>
                 </div>
               </a>
@@ -106,7 +111,7 @@ export default function ContactClient() {
                 </div>
                 <div>
                   <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">WhatsApp</p>
-                  <p className="text-stone text-sm font-light font-['Inter']">+92 322 2782254</p>
+                  <p className="text-stone text-sm font-light font-['Inter']">+92 322 278 2254</p>
                 </div>
               </a>
               <a href={IG_LINK} target="_blank" rel="noreferrer"
@@ -126,8 +131,11 @@ export default function ContactClient() {
                 <div>
                   <p className="font-['Syne'] font-bold text-sm text-ink mb-1">Opening Hours</p>
                   <p className="text-stone text-sm font-light font-['Inter']">Monday – Saturday</p>
-                  <p className="text-stone text-sm font-['Inter']">11:00 am – 7:00 pm</p>
+                  <p className="text-stone text-sm font-['Inter']">11–7</p>
                   <p className="text-stone text-sm font-light font-['Inter'] mt-1">Closed Sunday</p>
+                  <p className="text-stone text-[11px] font-['Inter'] mt-2">
+                    Book online · WhatsApp · walk-ins when free. Minutes from Tariq Road.
+                  </p>
                 </div>
               </div>
             </div>

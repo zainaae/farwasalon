@@ -69,19 +69,19 @@ describe('formatPrice', () => {
     expect(formatPrice(999)).toBe('Rs 999')
   })
 
-  it('formats 1000 as Rs 1k', () => {
-    expect(formatPrice(1000)).toBe('Rs 1k')
+  it('formats 1000 as Rs 1,000', () => {
+    expect(formatPrice(1000)).toBe('Rs 1,000')
   })
 
   it('formats prices over 1000 with decimal when needed', () => {
-    expect(formatPrice(1500)).toBe('Rs 1.5k')
-    expect(formatPrice(2800)).toBe('Rs 2.8k')
-    expect(formatPrice(5500)).toBe('Rs 5.5k')
+    expect(formatPrice(1500)).toBe('Rs 1,500')
+    expect(formatPrice(2800)).toBe('Rs 2,800')
+    expect(formatPrice(5500)).toBe('Rs 5,500')
   })
 
   it('formats even thousands without decimal', () => {
-    expect(formatPrice(2000)).toBe('Rs 2k')
-    expect(formatPrice(4000)).toBe('Rs 4k')
+    expect(formatPrice(2000)).toBe('Rs 2,000')
+    expect(formatPrice(4000)).toBe('Rs 4,000')
   })
 })
 

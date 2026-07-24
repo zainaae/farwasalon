@@ -39,7 +39,7 @@ function renderText(text) {
         ? <Link key={key++} href={href} className="text-ink underline underline-offset-2 hover:text-stone transition-colors">{label}</Link>
         : <a key={key++} href={href} target="_blank" rel="noreferrer" className="text-ink underline underline-offset-2 hover:text-stone transition-colors">{label}</a>
     )
-    lastIndex = regex.lastIndex
+    lastIndex = match.index + match[0].length
   }
   if (lastIndex < text.length) parts.push(text.slice(lastIndex))
   return parts.length ? parts : text

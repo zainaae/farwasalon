@@ -42,24 +42,30 @@ export default function BeautySalonKarachiPage() {
           <h1 className="font-['Unbounded'] font-bold text-3xl md:text-[2.5rem] text-ink mb-6 max-w-3xl leading-tight tracking-tight">
             Beauty Salon in Karachi — PECHS
           </h1>
-          <p className="text-body md:text-lg max-w-3xl mb-8">
+          <p className="text-body md:text-lg max-w-3xl mb-4">
             Farwa Beauty Salon has been a home for bridal makeup, facials, threading, waxing, hair, and nail
-            services in PECHS Block 3 since 2008. Transparent pricing from Rs 100, a calm studio, and online
-            booking — one address, one team you can trust.
+            services in PECHS Block 3 since 2008. Transparent pricing from Rs 100, a calm women-only studio,
+            and online booking — one PECHS address (not an at-home parlour), one team you can trust.
+          </p>
+          <p className="text-stone text-sm font-['Inter'] font-light max-w-3xl mb-8">
+            {SALON_ADDRESS_LINES[0]} · {SALON_ADDRESS_LINES[1]} · {SALON_PHONE_DISPLAY}
           </p>
 
           <div className="flex flex-wrap gap-3 mb-12">
             <Link href="/book" className="btn-primary">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
+            <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer" className="btn-secondary">
+              WhatsApp
+            </a>
+            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="btn-secondary">
+              Directions
+            </a>
             <Link href="/prices" className="btn-secondary">
               Price list
             </Link>
             <Link href="/bridal" className="btn-secondary">
               Bridal makeup
-            </Link>
-            <Link href="/services" className="btn-secondary">
-              All services
             </Link>
           </div>
 
@@ -80,7 +86,8 @@ export default function BeautySalonKarachiPage() {
                 <strong className="font-medium text-ink">{rating.ratingValue}★ Google rating</strong> (
                 {rating.reviewCount}+ reviews) — book online or WhatsApp.
               </li>
-              <li>Mon–Sat 11am–7pm; closed Sunday. Real-time slot availability when you book online.</li>
+              <li>Mon–Sat 11–7; closed Sunday. Real-time slot availability when you book online.</li>
+              <li>Women-only PECHS studio — we do not operate other branches or daily at-home parlour visits.</li>
             </ul>
           </section>
 
@@ -164,8 +171,24 @@ export default function BeautySalonKarachiPage() {
                 Back to home
               </Link>
               {' · '}
+              <Link href="/bridal" className="link-underline hover:text-ink font-medium">
+                Bridal makeup
+              </Link>
+              {' · '}
+              <Link href="/prices" className="link-underline hover:text-ink font-medium">
+                Price list
+              </Link>
+              {' · '}
               <Link href="/blog/beauty-parlour-near-me-karachi-guide" className="link-underline hover:text-ink font-medium">
                 Beauty parlour near me guide
+              </Link>
+              {' · '}
+              <Link href="/blog/threading-near-me-karachi-pechs" className="link-underline hover:text-ink font-medium">
+                Threading near me
+              </Link>
+              {' · '}
+              <Link href="/blog/facials-near-me-karachi-pechs" className="link-underline hover:text-ink font-medium">
+                Facials near me
               </Link>
               {' · '}
               <Link href="/services/threading-in-pechs-karachi" className="link-underline hover:text-ink font-medium">

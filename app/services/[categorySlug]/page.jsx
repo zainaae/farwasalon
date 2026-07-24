@@ -46,7 +46,7 @@ export async function generateMetadata({ params }) {
         title,
         description,
         path: `/services/${canonicalSlug}`,
-        image: '/logo.jpg',
+        image: CAT_META[service.category]?.img || '/bridal.jpg',
         imageAlt: `${service.name} near ${location.name} — Farwa Beauty Salon`,
       }),
     }

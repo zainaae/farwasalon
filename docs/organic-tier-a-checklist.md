@@ -2,40 +2,81 @@
 
 Site/code work lives in the repo. Do these manually (owner / marketing). Check boxes as you go.
 
+## Why the sitemap got smaller (and how impressions grow)
+
+We **intentionally** cut ~120 thin `best-*` / duplicate location URLs down to curated hubs with unique copy. Thin duplicates hurt crawl quality more than raw URL count helps.
+
+**GSC queries / clicks / impressions grow from:**
+
+1. **Quality indexable URLs** (bridal, prices, near-me blogs, PECHS/Tariq hubs) — not blank templates.
+2. **Stronger titles, H1s, FAQs, CTAs** on money pages so CTR rises when you already rank.
+3. **Fresh commercial blogs** (bleach, massage, nails, haircut/colour, cleansing, wax packages).
+4. **GBP + directory claims** with **identical NAP** everywhere.
+
+Do **not** restore the pruned thin location matrix. Grow hubs only with real unique blurbs. Do **not** invent HydraFacial / keratin / lash SKUs.
+
+**Sitemap after this ship (approx.):** static 12 · service categories 13 · blog **27** · locations **36** · **~88** total URLs (was ~58 after prune; thin matrix was ~180+).
+
+### Locked NAP (copy exactly)
+
+`Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400 · Mon–Sat 11–7 · +92 322 278 2254`
+
+Women-only PECHS **studio** — one branch; not an at-home parlour for daily services.
+
+## Directory claim list (same NAP everywhere)
+
+Claim/update each listing; hours, phone, and address must match the locked NAP above. Prefer deep links to farwasalon.com/book, /bridal, /prices.
+
+- [ ] **Google Business Profile (GBP)** — primary; photos, Q&A, posts
+- [ ] **Bing Places** — claim from GBP
+- [ ] **Lookup.pk** (or Lookup Karachi)
+- [ ] **Hamariweb** business / salon listing
+- [ ] **Ypages.pk**
+- [ ] **Beautyparlour.com.pk**
+- [ ] **Wheree**
+- [ ] **Shehnai** (wedding directory)
+- [ ] **Shadiyana** — bridal packages + /bridal + /book
+- [ ] **Fresha** (if listed) — prices/hours match site; prefer farwasalon.com/book over a second live calendar
+
+## After this deploy — request indexing (GSC)
+
+URL Inspection → **Request indexing** for:
+
+- `https://farwasalon.com/bridal`
+- `https://farwasalon.com/prices`
+- `https://farwasalon.com/blog/mehndi-engagement-makeup-karachi`
+- `https://farwasalon.com/blog/threading-near-me-karachi-pechs`
+- `https://farwasalon.com/blog/facials-near-me-karachi-pechs`
+- `https://farwasalon.com/blog/face-bleach-karachi-loreal`
+- `https://farwasalon.com/blog/full-body-massage-karachi-women-salon`
+- `https://farwasalon.com/blog/manicure-pedicure-price-list-karachi`
+- `https://farwasalon.com/blog/haircut-blowdry-hair-colour-cost-karachi`
+- `https://farwasalon.com/blog/deep-cleansing-vs-facial-karachi`
+- `https://farwasalon.com/blog/salon-near-tariq-road-pechs`
+- New hubs e.g. `/services/waxing-in-pechs-karachi`, `/services/bridal-makeup-in-tariq-road`, `/services/threading-in-tariq-road`
+
+Confirm sitemaps: `/sitemap.xml` + children. IndexNow on `master` deploy (`npm run ping:indexnow` if needed).
+
 ## Google Business Profile (GBP)
 
-- [ ] Keep **NAP** identical to the site: Plot 165/G-1, Saima Terrace, Block 3 PECHS, Karachi 75400 · +92 322 278 2254 · Mon–Sat 11:00–19:00
-- [ ] Primary category: **Beauty salon** (or Beauty parlour); add Bridal / Waxing / Hair if available
-- [ ] Upload fresh photos monthly (exterior, waiting area, chair work — no stock)
-- [ ] Post weekly GBP updates (offer, bridal season tip, or “book online” with farwasalon.com/book)
-- [ ] Answer every review within 48h (thank + soft CTA to book)
-- [ ] Add **Q&A** (seed then monitor):
-  - Price of eyebrow threading? → From Rs 200 (full list on farwasalon.com/prices; lowest threading Rs 100)
-  - Bridal makeup cost? → From Rs 8,000; Full Bridal Package Rs 25,000
-  - Do you do walk-ins? → Yes when free; book online to hold a slot
-  - Women-only? → Yes
-  - Parking? → Street parking nearby in PECHS
+- [ ] NAP identical to locked string above
+- [ ] Primary category: **Beauty salon**; add Bridal / Hair / Waxing if available
+- [ ] Upload fresh photos monthly (no stock)
+- [ ] Post weekly (offer, bridal tip, or book online)
+- [ ] Answer every review within 48h
+- [ ] Seed Q&A: threading from Rs 100/200; bridal from Rs 8,000; walk-ins when free; women-only; parking nearby
 
 ## Reviews
 
-- [ ] Ask happy clients (bridal + regulars) for Google reviews via short WhatsApp template
-- [ ] Never incentivize reviews; do not gatekeep negative feedback
-- [ ] Flag spam/fake reviews in GBP when they appear
-
-## Directories & wedding platforms
-
-- [ ] **Shadiyana** — claim/update listing; NAP + bridal packages + link to /bridal and /book
-- [ ] **Shehnai** (or current PK wedding directory) — same NAP + portfolio photos
-- [ ] **Fresha** / other booking directories — if listed, prices and hours must match the site; prefer deep-link to farwasalon.com/book rather than a second live calendar
-- [ ] Bing Places — claim from GBP; match NAP
+- [ ] Ask happy bridal + regular clients via WhatsApp (never incentivize)
+- [ ] Flag spam/fake reviews in GBP
 
 ## Search Console / Bing (monthly)
 
-- [ ] GSC → Performance: check CTR on home, /beauty-salon-karachi, /bridal, /prices, /services/threading, /book
-- [ ] Fix “Duplicate aggregate rating” / soft-404 if any new URLs appear
-- [ ] After major content deploys: `npm run ping:indexnow` (or wait for CI IndexNow step on `master`)
-- [ ] Confirm key file: https://farwasalon.com/farwa-salon-indexnow.txt
+- [ ] Performance CTR on home, /beauty-salon-karachi, /bridal, /prices, /services/*, /book
+- [ ] Fix duplicate aggregate rating / soft-404 if they appear
+- [ ] Impressions should track Tier A queries — not raw sitemap size
 
 ## Do not invent on-menu services
 
-Site and GBP copy must stay accurate to the published menu (no HydraFacial / lash extensions unless added to `src/data.js` first).
+No HydraFacial, keratin-as-SKU, or lash extensions unless added to `src/data.js` first. Educational mentions only.
