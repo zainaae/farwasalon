@@ -1,4 +1,5 @@
 import { test, expect, type Page } from '@playwright/test'
+import { visibleMain } from './helpers'
 
 const PAGES = ['/', '/book', '/services', '/services/threading', '/gallery', '/contact'] as const
 
@@ -37,7 +38,7 @@ async function gotoAndSettle(page: Page, path: string) {
   if (path === '/book') {
     await expect(page.getByText('— Choose a service')).toBeVisible({ timeout: 15_000 })
   } else {
-    await expect(page.locator('#main')).toBeVisible()
+    await expect(visibleMain(page)).toBeVisible()
   }
   await page.waitForTimeout(300)
 }

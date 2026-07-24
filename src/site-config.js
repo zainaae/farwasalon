@@ -39,9 +39,10 @@ export const FOUNDING_YEAR = 2008
 export const YEARS_ACTIVE  = new Date().getFullYear() - FOUNDING_YEAR
 
 /* ─── Price / duration formatting ─────────────────────────────── */
+/** Display PKR as Rs 1,200 (comma-separated) for rate lists and SERP clarity. */
 export const formatPrice = (pkr) => {
   if (pkr == null) return null
-  return pkr >= 1000 ? `Rs ${(pkr / 1000).toFixed(pkr % 1000 ? 1 : 0)}k` : `Rs ${pkr}`
+  return `Rs ${Number(pkr).toLocaleString('en-US')}`
 }
 export const formatDuration = (min) => {
   if (min == null) return null

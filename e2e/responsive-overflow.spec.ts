@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test'
+import { visibleMain } from './helpers'
 
 const PAGES = ['/', '/services', '/services/threading', '/book', '/gallery'] as const
 
@@ -45,7 +46,7 @@ for (const viewport of VIEWPORTS) {
       for (const path of PAGES) {
         test(`${path} has no horizontal overflow`, async ({ page }) => {
           await page.goto(path, { waitUntil: 'load' })
-          await expect(page.locator('#main')).toBeVisible({ timeout: 15_000 })
+          await expect(visibleMain(page)).toBeVisible({ timeout: 15_000 })
           if (path === '/book') {
             await expect(page.getByRole('heading', { level: 1 })).toContainText(/BOOK/i)
           }

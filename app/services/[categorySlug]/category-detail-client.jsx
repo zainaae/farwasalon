@@ -7,13 +7,14 @@ import { ArrowUpRight, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ServiceModal, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
-import { CAT_FAQS, CAT_SEO, CAT_RELATED } from '../../../src/cat-seo-content.js'
+import { CAT_FAQS, CAT_SEO, CAT_RELATED, CAT_PAGE_BLOCKS } from '../../../src/cat-seo-content.js'
 import { getRelatedBlogPostsForCategory } from '../../../src/blog-data.js'
 import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
-import { SITE_ORIGIN, buildSpeakableSchema, buildFaqPageSchema } from '../../../lib/business-schema.js'
+import { SITE_ORIGIN, SALON_NAP, buildSpeakableSchema, buildFaqPageSchema } from '../../../lib/business-schema.js'
 import { getPriorityLocationLinksForCategory } from '../../../lib/location-links.js'
+import { WA_DEFAULT, MAPS_LINK } from '../../../src/site-config.js'
 
 function getCatMeta(cat) {
   const base = CAT_META[cat] || { img: '/bleachpolish.jpg' }
@@ -63,6 +64,7 @@ export default function CategoryDetailClient({ categorySlug }) {
     .filter((cat) => CAT_SLUGS[cat])
     .slice(0, 4)
   const relatedBlogs = category ? getRelatedBlogPostsForCategory(category, 3) : []
+  const pageBlocks = CAT_PAGE_BLOCKS[category] || []
 
   if (!category) {
     return (
@@ -122,14 +124,56 @@ export default function CategoryDetailClient({ categorySlug }) {
             </p>
             <h1 id="service-category-title" className="section-title text-2xl md:text-3xl mb-3">{pageH1}</h1>
             <p id="service-category-desc" className="text-body max-w-lg">{meta.desc}</p>
+            <p className="mt-3 text-stone text-xs font-['Inter'] font-light max-w-lg">{SALON_NAP}</p>
+            <p className="mt-1 text-stone text-xs font-['Inter'] font-light max-w-lg">
+              Women-only PECHS studio — appointments in-salon only (not an at-home parlour).
+            </p>
+            <div className="mt-5 flex flex-wrap gap-3">
+              <Link href={`/book?category=${encodeURIComponent(category)}`} className="btn-primary">
+                Book online <ArrowUpRight className="w-4 h-4" />
+              </Link>
+              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="btn-secondary">
+                WhatsApp
+              </a>
+              <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="btn-secondary">
+                Directions
+              </a>
+            </div>
             <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] tracking-[0.12em] uppercase font-['Inter']">
               <Link href="/prices" className="link-underline hover:text-ink text-stone">Full price list</Link>
-              <Link href={`/book?category=${encodeURIComponent(category)}`} className="link-underline hover:text-ink text-stone">Book online</Link>
               {areaLinks[0] && (
                 <Link href={areaLinks[0].href} className="link-underline hover:text-ink text-stone">{areaLinks[0].label}</Link>
               )}
             </p>
           </m.div>
+
+          {pageBlocks.length > 0 && (
+            <section className="mb-10 space-y-4 max-w-2xl">
+              {pageBlocks.map((block, i) => {
+                if (block.type === 'h2') {
+                  return (
+                    <h2 key={i} className="font-['Syne'] font-bold text-lg text-ink pt-2">
+                      {block.text}
+                    </h2>
+                  )
+                }
+                if (block.type === 'ul' && Array.isArray(block.items)) {
+                  return (
+                    <ul key={i} className="list-disc pl-5 space-y-1 text-stone text-sm font-['Inter'] font-light">
+                      {block.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  )
+                }
+                return (
+                  <p key={i} className="text-body text-sm">
+                    {block.text}
+                  </p>
+                )
+              })}
+            </section>
+          )}
 
           <ul className="divide-y divide-border-soft">
             {services.map((s, i) => {

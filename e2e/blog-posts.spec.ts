@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 import { BLOG_POSTS } from '../src/blog-data.js'
-import { BLOG_SLUGS } from './helpers'
+import { BLOG_SLUGS, visibleMain } from './helpers'
 
 test.describe('Blog articles', () => {
   test.describe.configure({ mode: 'serial' })
@@ -24,7 +24,7 @@ test.describe('Blog articles', () => {
 
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
       await expect(page.getByRole('heading', { level: 1 })).toContainText(post!.title.slice(0, 20))
-      await expect(page.locator('#main')).not.toContainText(/article not found/i)
+      await expect(visibleMain(page)).not.toContainText(/article not found/i)
     })
   }
 })

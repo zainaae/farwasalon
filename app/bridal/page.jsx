@@ -5,13 +5,14 @@ import { pageSocialMeta } from '../../lib/page-metadata.js'
 import {
   SALON_ADDRESS_LINES,
   SALON_PHONE_DISPLAY,
+  SALON_NAP,
   GOOGLE_REVIEW_LINK,
   SITE_ORIGIN,
   buildSpeakableSchema,
   buildFaqPageSchema,
   getAggregateRating,
 } from '../../lib/business-schema.js'
-import { CAT_SLUGS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice } from '../../src/data.js'
+import { CAT_SLUGS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice, WA_DEFAULT } from '../../src/data.js'
 import { CAT_FAQS } from '../../src/cat-seo-content.js'
 
 const title = 'Bridal Makeup Karachi — From Rs 8,000 | Farwa'
@@ -31,12 +32,32 @@ export const metadata = {
   }),
 }
 
+const EVENT_TAXONOMY = [
+  { event: 'Mehndi / Dholki', look: 'Festive colour, lasting set', mapsTo: 'Mehndi / Dholki Look', price: 10000 },
+  { event: 'Engagement', look: 'Glam portraits & stage', mapsTo: 'Engagement Look', price: 12000 },
+  { event: 'Nikkah', look: 'Softer elegant ceremony', mapsTo: 'Full Bridal Package (nikkah mood)', price: 25000 },
+  { event: 'Barat / HD glam', look: 'Full stage & photo glam', mapsTo: 'Full Bridal Package', price: 25000 },
+  { event: 'Walima', look: 'Polished day-after radiance', mapsTo: 'Full Bridal Package (walima mood)', price: 25000 },
+  { event: 'Trial', look: 'Full preview + reference photos', mapsTo: 'Bridal Trial', price: 8000 },
+]
+
+const BRIDAL_FAQS = [
+  {
+    q: 'How much does bridal makeup cost in Karachi?',
+    a: 'Market bands for a single bridal event often run roughly Rs 8,000–35,000+ at published parlours, with celebrity studios far higher. At Farwa in PECHS: Bridal Trial Rs 8,000, Mehndi Rs 10,000, Engagement Rs 12,000, Full Bridal Package Rs 25,000 — printed PKR on farwasalon.com/prices.',
+  },
+  ...(CAT_FAQS.Bridal || []),
+  {
+    q: 'Do you travel for bridal, or is it studio-only?',
+    a: 'We are a women-only PECHS studio (one address). The Full Bridal Package includes event presence / on-site touch-ups by arrangement — WhatsApp your venue when you book. We do not operate as a rotating at-home parlour for daily services.',
+  },
+]
+
 export default function BridalLandingPage() {
   const rating = getAggregateRating()
   const packages = SERVICES.Bridal || []
   const trialServiceId = getServiceIdByName('Bridal Trial')
-  const faqs = CAT_FAQS.Bridal || []
-  const faqSchema = buildFaqPageSchema(faqs)
+  const faqSchema = buildFaqPageSchema(BRIDAL_FAQS)
 
   return (
     <>
@@ -49,13 +70,17 @@ export default function BridalLandingPage() {
       {faqSchema && <JsonLd data={faqSchema} />}
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
-          <p className="eyebrow mb-4">— Bridal in PECHS · from Rs 8,000</p>
+          <p className="eyebrow mb-4">— Bridal makeup Karachi · from Rs 8,000</p>
           <h1 id="bridal-headline" className="font-['Unbounded'] font-bold text-3xl md:text-[2.5rem] text-ink mb-6 max-w-3xl leading-tight tracking-tight">
-            Bridal Makeup in PECHS, Karachi
+            Bridal Makeup Karachi — Packages from Rs 8,000
           </h1>
-          <p id="bridal-lede" className="text-body md:text-lg max-w-3xl mb-8">
-            Farwa has styled PECHS brides since 2008 — from mehndi and engagement to nikkah and walima.
-            Packages from Rs 8,000, a dedicated trial, and a calm studio in Saima Terrace Block 3.
+          <p id="bridal-lede" className="text-body md:text-lg max-w-3xl mb-4">
+            Looking for bridal makeup in Karachi with printed prices? Farwa in PECHS has styled
+            weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000, Engagement Rs 12,000,
+            Full Bridal Package Rs 25,000. Women-only studio in Saima Terrace Block 3.
+          </p>
+          <p className="text-stone text-sm font-['Inter'] font-light max-w-3xl mb-6">
+            {SALON_NAP}
           </p>
 
           <div className="flex flex-wrap gap-3 mb-12">
@@ -65,17 +90,54 @@ export default function BridalLandingPage() {
             >
               Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <Link href={`/services/${CAT_SLUGS.Bridal}`} className="btn-secondary">
-              Full Bridal Menu
-            </Link>
+            <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="btn-secondary">
+              WhatsApp
+            </a>
+            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="btn-secondary">
+              Directions
+            </a>
             <Link href="/prices" className="btn-secondary">
               Price list
             </Link>
           </div>
 
+          <section className="mb-12" aria-labelledby="event-taxonomy-heading">
+            <h2 id="event-taxonomy-heading" className="section-title mb-4">
+              Event looks → Farwa packages
+            </h2>
+            <p className="text-body text-sm max-w-3xl mb-4">
+              Marketplace-style mapping for mehndi, engagement, nikkah, barat/HD glam, and walima —
+              each maps to a published menu SKU (no invented à-la-carte rows).
+            </p>
+            <div className="overflow-x-auto max-w-4xl">
+              <table className="w-full border-collapse text-sm font-['Inter']">
+                <thead>
+                  <tr className="border-b border-ink/30 text-left">
+                    <th className="py-2 pr-3 font-['Syne'] text-ink">Event</th>
+                    <th className="py-2 pr-3 font-['Syne'] text-ink">Look</th>
+                    <th className="py-2 pr-3 font-['Syne'] text-ink">Maps to</th>
+                    <th className="py-2 text-right font-['Syne'] text-ink">From</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {EVENT_TAXONOMY.map((row) => (
+                    <tr key={row.event} className="border-b border-border-soft">
+                      <td className="py-2.5 pr-3 text-ink font-medium">{row.event}</td>
+                      <td className="py-2.5 pr-3 text-stone">{row.look}</td>
+                      <td className="py-2.5 pr-3 text-stone">{row.mapsTo}</td>
+                      <td className="py-2.5 text-right text-ink font-['Unbounded'] font-bold text-xs">
+                        {formatPrice(row.price)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
           <section className="mb-12" aria-labelledby="packages-heading">
             <h2 id="packages-heading" className="section-title mb-4">
-              Bridal packages (PKR)
+              Bridal packages (PKR) — what&apos;s included
             </h2>
             <ul className="grid md:grid-cols-2 gap-4 max-w-4xl">
               {packages.map((pkg) => (
@@ -87,12 +149,66 @@ export default function BridalLandingPage() {
                   </p>
                   {pkg.desc && <p className="text-body text-sm mb-3">{pkg.desc}</p>}
                   {Array.isArray(pkg.includes) && pkg.includes.length > 0 && (
-                    <ul className="text-stone text-xs font-['Inter'] list-disc pl-4 space-y-1">
-                      {pkg.includes.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
+                    <>
+                      <p className="text-[10px] tracking-[0.14em] uppercase text-stone mb-1">Included</p>
+                      <ul className="text-stone text-xs font-['Inter'] list-disc pl-4 space-y-1 mb-3">
+                        {pkg.includes.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </>
                   )}
+                  <p className="text-[10px] tracking-[0.14em] uppercase text-stone mb-1">Not included by default</p>
+                  <ul className="text-stone text-xs font-['Inter'] list-disc pl-4 space-y-1">
+                    <li>Guest / family makeup (book separately)</li>
+                    <li>Pre-wedding facials &amp; threading (add from the menu)</li>
+                    <li>Jewellery hire or outfit draping beyond dupatta/hijab styling listed</li>
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <section className="mb-12" aria-labelledby="timeline-heading">
+            <h2 id="timeline-heading" className="section-title mb-4">
+              Pre-bridal timeline
+            </h2>
+            <ol className="max-w-3xl space-y-3 text-body text-sm list-decimal pl-5 marker:text-accent-gold">
+              <li><strong className="text-ink font-medium">3–6 months out</strong> — monthly facials / cleansing; lock peak-season dates.</li>
+              <li><strong className="text-ink font-medium">6–8 weeks out</strong> — book Bridal Trial (Rs 8,000); plan mehndi &amp; engagement slots.</li>
+              <li><strong className="text-ink font-medium">2–4 weeks out</strong> — complete trial; refine shade &amp; hair; continue threading.</li>
+              <li><strong className="text-ink font-medium">Wedding week</strong> — light services only; avoid new skincare experiments.</li>
+            </ol>
+            <p className="mt-4 text-sm font-['Inter']">
+              Full guide:{' '}
+              <Link href="/blog/bridal-beauty-timeline" className="link-underline hover:text-ink text-ink font-medium">
+                bridal beauty timeline
+              </Link>
+              {' · '}
+              <Link href="/blog/best-bridal-makeup-packages-karachi-2026" className="link-underline hover:text-ink text-ink font-medium">
+                packages &amp; cost
+              </Link>
+            </p>
+          </section>
+
+          <section className="mb-12" aria-labelledby="catchment-heading">
+            <h2 id="catchment-heading" className="section-title mb-4">
+              Brides from across Karachi
+            </h2>
+            <p className="text-body max-w-3xl mb-4">
+              One PECHS studio — brides visit from Tariq Road, Bahadurabad, Gulshan, DHA, Clifton,
+              Saddar, North Nazimabad, and Shahrah-e-Faisal. We do not claim other branches.
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {[
+                ['Bridal in PECHS', '/services/bridal-makeup-in-pechs-karachi'],
+                ['Bridal near Tariq Road', '/services/bridal-makeup-in-tariq-road'],
+                ['Bridal from Gulshan', '/services/bridal-makeup-in-gulshan'],
+                ['Bridal from DHA', '/services/bridal-makeup-in-dha'],
+                ['Bridal from Clifton', '/services/bridal-makeup-in-clifton-karachi'],
+              ].map(([label, href]) => (
+                <li key={href}>
+                  <Link href={href} className="tab-pill hover:border-ink hover:text-ink">{label}</Link>
                 </li>
               ))}
             </ul>
@@ -110,7 +226,7 @@ export default function BridalLandingPage() {
                 <strong className="font-medium text-ink">{rating.ratingValue}★ on Google</strong> ({rating.reviewCount}+ reviews) — honest social proof, not inflated claims.
               </li>
               <li>Book online with real-time slots, or WhatsApp for multi-event wedding plans.</li>
-              <li>Skincare prep, threading, and facials available under the same roof before your wedding week.</li>
+              <li>Skincare prep, threading, and facials under the same women-only roof before wedding week.</li>
             </ul>
           </section>
 
@@ -144,13 +260,13 @@ export default function BridalLandingPage() {
             </div>
           </section>
 
-          {faqs.length > 0 && (
+          {BRIDAL_FAQS.length > 0 && (
             <section className="mb-12" aria-labelledby="bridal-faq-heading">
               <h2 id="bridal-faq-heading" className="section-title mb-4">
                 Bridal FAQ
               </h2>
               <dl className="max-w-3xl space-y-6">
-                {faqs.map((f) => (
+                {BRIDAL_FAQS.map((f) => (
                   <div key={f.q}>
                     <dt className="font-['Syne'] font-bold text-sm text-ink mb-1">{f.q}</dt>
                     <dd className="text-body text-sm">{f.a}</dd>
@@ -166,33 +282,35 @@ export default function BridalLandingPage() {
             </h2>
             <ul className="flex flex-col gap-2 text-sm font-['Inter']">
               <li>
+                <Link href="/blog/best-bridal-makeup-packages-karachi-2026" className="link-underline hover:text-ink">
+                  Bridal packages &amp; cost in Karachi 2026
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog/mehndi-engagement-makeup-karachi" className="link-underline hover:text-ink">
+                  Mehndi &amp; engagement makeup — from Rs 10,000
+                </Link>
+              </li>
+              <li>
                 <Link href="/blog/bridal-beauty-timeline" className="link-underline hover:text-ink">
                   Complete bridal beauty timeline
                 </Link>
               </li>
               <li>
-                <Link href="/blog/best-bridal-makeup-packages-karachi-2026" className="link-underline hover:text-ink">
-                  Bridal packages in Karachi — what to expect
+                <Link href={`/services/${CAT_SLUGS.Bridal}`} className="link-underline hover:text-ink">
+                  Full bridal service menu
                 </Link>
               </li>
             </ul>
           </section>
 
           <p className="pt-6 border-t border-border-soft text-xs text-stone font-['Inter']">
-            <Link href="/" className="link-underline hover:text-ink font-medium">
-              Back to home
-            </Link>
+            <Link href="/" className="link-underline hover:text-ink font-medium">Back to home</Link>
             {' · '}
-            <Link href={`/services/${CAT_SLUGS.Bridal}`} className="link-underline hover:text-ink font-medium">
-              All bridal services
-            </Link>
+            <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>
             {' · '}
             <Link href="/services/bridal-makeup-in-pechs-karachi" className="link-underline hover:text-ink font-medium">
               Bridal makeup in PECHS
-            </Link>
-            {' · '}
-            <Link href="/book" className="link-underline hover:text-ink font-medium">
-              Book online
             </Link>
           </p>
         </div>

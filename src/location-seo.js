@@ -26,6 +26,8 @@ export const NEIGHBORHOODS = [
     slug: 'bahadurabad',
     name: 'Bahadurabad',
     detail: 'A short drive through PECHS brings you to our door from Bahadurabad.',
+    blurb:
+      'Bahadurabad is one of our closest catchments — often under 10 minutes to Plot 165/G-1, Saima Terrace Block 3. Neighbours book monthly threading, walk-in brow tidy-ups, and bridal trials without the mall-parking circus, and every PKR rate stays published online.',
   },
   {
     slug: 'dha',
@@ -38,26 +40,36 @@ export const NEIGHBORHOODS = [
     slug: 'tariq-road',
     name: 'Tariq Road',
     detail: 'Our nearest shopping neighbours — stop by before or after your errands on Tariq Road.',
+    blurb:
+      'Tariq Road shopping and PECHS sit side by side — our studio is a short hop from the main stretch. Pair a wax or threading slot with errands, keep the quote you saw on farwasalon.com/prices, and skip salons that only reveal rates after you sit down.',
   },
   {
     slug: 'shahrah-e-faisal',
     name: 'Shahrah-e-Faisal',
     detail: 'Just minutes away via the main arterial road.',
+    blurb:
+      'Offices and apartments along Shahrah-e-Faisal reach Block 3 PECHS in roughly 10–20 minutes off-peak. Lunch-break threading and after-work facials are common — book a held slot online so you are not waiting on a walk-in queue.',
   },
   {
     slug: 'north-nazimabad',
     name: 'North Nazimabad',
     detail: 'Worth the trip — clients from North Nazimabad have been coming for years.',
+    blurb:
+      'From North Nazimabad, PECHS is typically 25–40 minutes via Shahrah-e-Quaideen / University Road depending on traffic. Regulars still make the trip for bridal trials, eyebrow threading from Rs 200, and published facial rates — one calm women-only floor instead of guessing at a neighbourhood parlour.',
   },
   {
     slug: 'saddar',
     name: 'Saddar',
     detail: 'Accessible from Saddar via any main route to PECHS.',
+    blurb:
+      'Saddar and MA Jinnah Road clients reach our PECHS studio in about 15–25 minutes. Book bridal makeup, facials from Rs 1,400, or a quick thread after city errands — same printed PKR menu, same Plot 165/G-1 address every visit.',
   },
   {
     slug: 'korangi',
     name: 'Korangi',
     detail: 'We serve clients from across Karachi including Korangi.',
+    blurb:
+      'Korangi and Landhi clients reach PECHS via Shahrah-e-Faisal in roughly 30–50 minutes. Worth the trip for bridal trials, published facial rates, and a women-only floor — one Plot 165/G-1 address, no rotating home parlour.',
   },
 ]
 
@@ -71,8 +83,9 @@ export const TOP_SERVICES = [
 ]
 
 /**
- * Curated local landing pages (~18 hubs). Sitemap + static generation use this
+ * Curated local landing pages (36 hubs). Sitemap + static generation use this
  * allowlist only — not the full service × neighborhood matrix.
+ * Growth rule: add hubs only with unique neighborhood blurbs (no blank templates).
  */
 export const PRIORITY_LOCATION_SLUGS = [
   'threading-in-pechs-karachi',
@@ -80,19 +93,37 @@ export const PRIORITY_LOCATION_SLUGS = [
   'facials-in-pechs-karachi',
   'hair-in-pechs-karachi',
   'nails-in-pechs-karachi',
+  'waxing-in-pechs-karachi',
   'threading-in-gulshan',
   'facials-in-gulshan',
   'bridal-makeup-in-gulshan',
+  'hair-in-gulshan',
+  'nails-in-gulshan',
   'bridal-makeup-in-clifton-karachi',
   'facials-in-clifton-karachi',
   'hair-in-clifton-karachi',
+  'threading-in-clifton-karachi',
   'bridal-makeup-in-dha',
   'threading-in-dha',
   'hair-in-dha',
   'facials-in-dha',
+  'nails-in-dha',
   'threading-in-bahadurabad',
+  'bridal-makeup-in-bahadurabad',
+  'facials-in-bahadurabad',
   'waxing-in-tariq-road',
+  'threading-in-tariq-road',
+  'facials-in-tariq-road',
+  'bridal-makeup-in-tariq-road',
   'threading-in-shahrah-e-faisal',
+  'facials-in-shahrah-e-faisal',
+  'bridal-makeup-in-north-nazimabad',
+  'threading-in-north-nazimabad',
+  'facials-in-north-nazimabad',
+  'bridal-makeup-in-saddar',
+  'facials-in-saddar',
+  'threading-in-saddar',
+  'hair-in-saddar',
 ]
 
 export function parseLocationSlug(slug) {

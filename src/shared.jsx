@@ -483,7 +483,16 @@ const CATEGORY_SLUG_SET = new Set(Object.values(CAT_SLUGS))
 
 /** Paths that show the 3-action mobile CTA bar (call / WhatsApp / book). */
 export function shouldShowMobileCtaBar(pathname) {
-  if (pathname === '/' || pathname === '/services') return true
+  if (
+    pathname === '/' ||
+    pathname === '/services' ||
+    pathname === '/bridal' ||
+    pathname === '/prices' ||
+    pathname === '/beauty-salon-karachi' ||
+    pathname === '/contact'
+  ) {
+    return true
+  }
   const m = pathname.match(/^\/services\/([^/]+)$/)
   if (!m) return false
   const slug = m[1]

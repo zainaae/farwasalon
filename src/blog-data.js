@@ -1,4 +1,208 @@
+import { GROWTH_POSTS } from './blog-growth-2026-07.js'
+
 export const BLOG_POSTS = [
+  ...GROWTH_POSTS,
+  {
+    slug: 'mehndi-engagement-makeup-karachi',
+    title: 'Mehndi & Engagement Makeup Karachi — From Rs 10k',
+    description:
+      'Mehndi and engagement makeup in Karachi from Rs 10,000 — festive looks, what is included, and how Farwa in PECHS styles pre-wedding events with printed prices.',
+    featuredImage: '/bridal2.jpg',
+    date: '2026-07-24',
+    lastModified: '2026-07-24',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Bridal',
+    relatedCategories: ['Bridal', 'Facials', 'Threading'],
+    content: [
+      {
+        type: 'p',
+        text: 'Mehndi and engagement are the most photographed pre-wedding days after the barat — and the ones Karachi brides most often under-plan. At Farwa Beauty Salon in PECHS, a [Mehndi / Dholki Look](/services/bridal) is Rs 10,000 and an [Engagement Look](/services/bridal) is Rs 12,000: festive colour, lasting set for humidity, and the same artists who do full bridal. Here is how to book the right look without overpaying a celebrity studio for a dholki.',
+      },
+
+      { type: 'h2', text: 'What Mehndi Makeup Should Feel Like' },
+      {
+        type: 'p',
+        text: 'Mehndi and dholki nights are colourful, loud, and long. Makeup needs to hold through dancing, hugs, and phone flash — not just the stage walk. Our Mehndi / Dholki Look (Rs 10,000, ~2 hours) includes festive makeup, flower or jewellery hair styling, and setting spray. Think warmer tones, brighter eyes, and hair that survives the evening, not a soft nikkah face copied onto a party.',
+      },
+
+      { type: 'h2', text: 'Engagement Look — Glam Without Full Barat Drama' },
+      {
+        type: 'p',
+        text: 'Engagement portraits and stage photos sit between soft and bridal glam. The Engagement Look (Rs 12,000, ~2.5 hours) covers makeup, hair set, and lashes — romantic and camera-ready without the Full Bridal Package timeline. Many clients book engagement first, then trial and barat later; rates stay on the [bridal landing page](/bridal) and the [published price list](/prices).',
+      },
+
+      { type: 'h2', text: 'How These Compare to the Full Bridal Package' },
+      {
+        type: 'p',
+        text: 'Single-event mehndi and engagement looks are priced per function. The [Full Bridal Package](/bridal) (Rs 25,000) is the all-day signature — hair, makeup, draping, touch-up kit, and event presence. Bridal Trial is Rs 8,000 and should sit 2–4 weeks before the wedding. Read the full package breakdown in our [bridal makeup packages guide](/blog/best-bridal-makeup-packages-karachi-2026).',
+      },
+
+      { type: 'h2', text: 'Prep That Actually Helps Pre-Wedding Events' },
+      {
+        type: 'p',
+        text: 'Book [threading](/services/threading) a day or two before mehndi (brows Rs 200). A light [facial](/services/facials) a week out — not the night before — keeps skin calm under heavier colour. Skip new skincare experiments in the final week; Karachi humidity plus a surprise serum is how breakouts show up on camera.',
+      },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How much does mehndi makeup cost in Karachi?' },
+      {
+        type: 'p',
+        text: 'A: At Farwa in PECHS, Mehndi / Dholki Look is Rs 10,000. Celebrity studios often charge several times that for one pre-wedding event; we publish the rate and confirm before you sit down.',
+      },
+      { type: 'h3', text: 'Q: What is included in an engagement makeup package?' },
+      {
+        type: 'p',
+        text: 'A: Our Engagement Look (Rs 12,000) includes makeup application, hair set, and lash application. Dupatta or jewellery styling can be arranged when you WhatsApp your outfit details.',
+      },
+      { type: 'h3', text: 'Q: Should I book a trial for mehndi or only for barat?' },
+      {
+        type: 'p',
+        text: 'A: A Bridal Trial (Rs 8,000) is essential before the main wedding look. For mehndi, bring reference photos and your outfit colour — many brides skip a separate mehndi trial if they already know the artist from engagement.',
+      },
+      { type: 'h3', text: 'Q: Can I book mehndi and engagement on different days?' },
+      {
+        type: 'p',
+        text: 'A: Yes — book each event online at farwasalon.com/book or WhatsApp +92 322 2782254 with dates. Peak season (October–March) fills fast; lock both early.',
+      },
+
+      { type: 'h2', text: 'Book Your Pre-Wedding Look' },
+      {
+        type: 'p',
+        text: 'See every bridal rate on the [bridal page](/bridal) and [price list](/prices), or [book online](/book). Studio: Plot 165/G-1, Saima Terrace, Block 3 PECHS — Mon–Sat 11am–7pm.',
+      },
+    ],
+  },
+  {
+    slug: 'threading-near-me-karachi-pechs',
+    title: 'Threading Near Me Karachi — PECHS From Rs 100',
+    description:
+      'Searching threading near me in Karachi? Farwa in PECHS — eyebrow threading Rs 200, from Rs 100, fresh thread, walk-ins when free, online booking held slots.',
+    featuredImage: '/eyebrowtattoo.jpg',
+    date: '2026-07-24',
+    lastModified: '2026-07-24',
+    readTime: '4 min read',
+    author: 'Rubina',
+    category: 'Threading',
+    relatedCategories: ['Threading', 'Rica Hot Wax', 'Eyebrow Tattoo'],
+    content: [
+      {
+        type: 'p',
+        text: '“Threading near me” in Karachi should mean a clean chair, a price you already saw online, and brows that match the shape you asked for — not a parlour that quotes after the cotton is out. Farwa Beauty Salon sits in Block 3 PECHS: [threading](/services/threading) from Rs 100, eyebrows Rs 200, full face up to Rs 1,200, with walk-ins when the floor is free and held slots at farwasalon.com/book.',
+      },
+
+      { type: 'h2', text: 'Why PECHS Is a Practical “Near Me” for Central Karachi' },
+      {
+        type: 'p',
+        text: 'Plot 165/G-1, Saima Terrace is minutes from Tariq Road and Bahadurabad, and an easy drive from Gulshan, DHA, Clifton, Saddar, and Shahrah-e-Faisal offices. If you are comparing [threading in PECHS](/services/threading-in-pechs-karachi) with a listing closer to home, weigh hygiene and published rates — a ten-minute further drive beats a double-dipped stick and a surprise bill.',
+      },
+
+      { type: 'h2', text: 'What You Pay (Printed, Not Negotiated)' },
+      {
+        type: 'p',
+        text: 'Lower lip / chin from Rs 100; eyebrows Rs 200; fuller face options up to Rs 1,200. Every figure is on the [salon price list](/prices). Prefer wax on the face? [Rica hot wax](/services/rica-hot-wax) starts at Rs 150. For a lasting brow shape without monthly threading, see [microblading](/services/eyebrow-tattoo) from Rs 20,000.',
+      },
+
+      { type: 'h2', text: 'Walk-In vs Booked Slot' },
+      {
+        type: 'p',
+        text: 'Quick brow tidy-ups often work as walk-ins Mon–Sat 11am–7pm. Lunch breaks and pre-event days fill up — book online if you cannot wait. Same-day WhatsApp (+92 322 2782254) works when there is a gap on the floor.',
+      },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How much is eyebrow threading near me in Karachi?' },
+      {
+        type: 'p',
+        text: 'A: At Farwa in PECHS, eyebrow threading is Rs 200 and threading starts at Rs 100. We publish the full list so “near me” does not mean “price unknown”.',
+      },
+      { type: 'h3', text: 'Q: Do you take threading walk-ins?' },
+      {
+        type: 'p',
+        text: 'A: Yes, when a chair is free. For a guaranteed time, book at farwasalon.com/book — it takes under a minute.',
+      },
+      { type: 'h3', text: 'Q: Is threading better than waxing for brows?' },
+      {
+        type: 'p',
+        text: 'A: For precision brows, yes — thread shapes hair by hair without heat on the skin. Read our [threading vs waxing guide](/blog/threading-vs-waxing) if you are unsure.',
+      },
+      { type: 'h3', text: 'Q: Where exactly is the salon?' },
+      {
+        type: 'p',
+        text: 'A: Farwa Beauty Salon, Plot 165/G-1, Saima Terrace, Block 3 PECHS, Karachi 75400. Directions and area pages live on [beauty salon Karachi](/beauty-salon-karachi).',
+      },
+
+      { type: 'h2', text: 'Book Your Thread' },
+      {
+        type: 'p',
+        text: 'Open [threading services](/services/threading), check [prices](/prices), or [book online](/book). Fresh thread every client — that is the “near me” standard we hold ourselves to.',
+      },
+    ],
+  },
+  {
+    slug: 'facials-near-me-karachi-pechs',
+    title: 'Facials Near Me Karachi — From Rs 1,400 in PECHS',
+    description:
+      'Facials near me in Karachi? Farwa PECHS — classic from Rs 1,400, deep cleansing from Rs 1,200, HD & Janssen options. Printed rates, book online.',
+    featuredImage: '/facialcleansing.jpg',
+    date: '2026-07-24',
+    lastModified: '2026-07-24',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Facials',
+    relatedCategories: ['Facials', 'Cleansing', 'Bridal'],
+    content: [
+      {
+        type: 'p',
+        text: 'A “facials near me” search in Karachi returns dozens of parlours and almost no honest menus. At Farwa in PECHS we publish every starting rate: [deep cleansing](/services/cleansing) from Rs 1,200, classic [facials](/services/facials) from Rs 1,400, HD Whitening Rs 3,000, Janssen Whitening Rs 5,500. Same studio since 2008 — Plot 165/G-1, Saima Terrace, Block 3.',
+      },
+
+      { type: 'h2', text: 'Which Facial If You Are Booking Nearby' },
+      {
+        type: 'p',
+        text: 'Congested or oily skin: start with cleansing, not a heavy cream facial. Dull or uneven tone: HD or Janssen whitening. Sensitive skin: ask for the herbal / organic option (from Rs 1,600). Our [facials in PECHS](/services/facials-in-pechs-karachi) page lists the local landing detail; the full compare lives in the [gold vs whitening guide](/blog/gold-facial-vs-whitening-facial) and the [acne facial guide](/blog/best-facial-for-acne-oily-skin-karachi).',
+      },
+
+      { type: 'h2', text: 'Why Drive to PECHS Instead of the Closest Parlour' },
+      {
+        type: 'p',
+        text: 'Nearest is not safest. We assess skin before product goes on, use single-use where it matters, and confirm your quote from the [price list](/prices) before the steam starts. Clients come from Gulshan, DHA, Clifton, Saddar, and North Nazimabad for that reason — transparency beats a five-minute shorter drive.',
+      },
+
+      { type: 'h2', text: 'How Often Near-Me Regulars Book' },
+      {
+        type: 'p',
+        text: 'Most skin types do well with a professional facial every 4–6 weeks, plus cleansing when pores clog in humid months. Brides should start monthly facials months out — see the [bridal beauty timeline](/blog/bridal-beauty-timeline) — and avoid new actives in the final fortnight.',
+      },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How much do facials cost near me in Karachi?' },
+      {
+        type: 'p',
+        text: 'A: At Farwa in PECHS, facials start at Rs 1,400 and deep cleansing at Rs 1,200. Premium brightening options run to Rs 5,500. Every rate is printed on farwasalon.com/prices.',
+      },
+      { type: 'h3', text: 'Q: Do you offer HydraFacial?' },
+      {
+        type: 'p',
+        text: 'A: No — we do not use HydraFacial machines. Our menu covers classic through Janssen whitening with German cosmeceuticals; pick from what we actually offer, not a buzzword we do not stock.',
+      },
+      { type: 'h3', text: 'Q: Can I book a facial online today?' },
+      {
+        type: 'p',
+        text: 'A: Yes — farwasalon.com/book shows live slots Mon–Sat 11am–7pm. WhatsApp +92 322 2782254 if you need help choosing a protocol.',
+      },
+      { type: 'h3', text: 'Q: Where is Farwa if I searched facials near Tariq Road?' },
+      {
+        type: 'p',
+        text: 'A: Block 3 PECHS, a short hop from Tariq Road and Bahadurabad. See [beauty salon Karachi](/beauty-salon-karachi) for directions and area links.',
+      },
+
+      { type: 'h2', text: 'Book a Facial in PECHS' },
+      {
+        type: 'p',
+        text: 'Browse the [facials menu](/services/facials), compare [rates](/prices), or [book online](/book). Transparent Karachi facials — that is the near-me result worth clicking.',
+      },
+    ],
+  },
   {
     slug: 'beauty-parlour-near-me-karachi-guide',
     title: 'Beauty Parlour Near Me Karachi — From Rs 100',
@@ -203,22 +407,32 @@ export const BLOG_POSTS = [
     description: 'Honest 2026 salon price list for Karachi — threading from Rs 100, facials, waxing, hair, nails, microblading & bridal makeup with real PKR figures.',
     featuredImage: '/glow3.jpg',
     date: '2026-07-16',
-    lastModified: '2026-07-16',
-    readTime: '6 min read',
+    lastModified: '2026-07-24',
+    readTime: '7 min read',
     author: 'Rubina',
     category: 'Pricing',
     relatedCategories: ['Facials', 'Threading', 'Bridal'],
     content: [
-      { type: 'p', text: 'Try finding a published price list from a big-name salon in Karachi. You will find "DM us for rates", "call for details", and price menus that mysteriously change at the counter. At Farwa Beauty Salon in PECHS, we print every starting price online — and this guide puts the whole 2026 list in one place, so you know what salon services actually cost in Karachi before you walk in anywhere.' },
+      { type: 'p', text: 'Try finding a published price list from a big-name salon in Karachi. You will find "DM us for rates", "call for details", and price menus that mysteriously change at the counter. At Farwa Beauty Salon in PECHS, we print every starting price online — and this guide puts the whole 2026 list in one place, so you know what salon services actually cost in Karachi before you walk in anywhere. The live menu always matches [farwasalon.com/prices](/prices).' },
+
+      { type: 'h2', text: 'Quick 2026 Rate Snapshot (PKR)' },
+      { type: 'ul', items: [
+        'Threading from Rs 100 · eyebrows Rs 200',
+        'Rica hot wax (face) from Rs 150 · honey wax from Rs 400 · Rica body from Rs 600',
+        'Deep cleansing from Rs 1,200 · facials from Rs 1,400',
+        'Haircut & blowdry from Rs 2,000 · hair colour from Rs 4,000',
+        'Microblading / powder brows from Rs 20,000',
+        'Bridal trial Rs 8,000 · mehndi Rs 10,000 · engagement Rs 12,000 · full bridal Rs 25,000',
+      ]},
 
       { type: 'h2', text: 'Threading and Face Waxing — Rs 100 to Rs 1,200' },
-      { type: 'p', text: '[Threading](/services/threading) starts at Rs 100 in PECHS — eyebrows are Rs 200, with full-face options up to Rs 1,200. If your skin is sensitive, [Rica hot wax](/services/rica-hot-wax) for the face starts at Rs 150 — it is an Italian stripless wax that grips hair, not skin, so it is the gentler option for brows, upper lip, and full face.' },
+      { type: 'p', text: '[Threading](/services/threading) starts at Rs 100 in PECHS — eyebrows are Rs 200, with full-face options up to Rs 1,200. If your skin is sensitive, [Rica hot wax](/services/rica-hot-wax) for the face starts at Rs 150 — it is an Italian stripless wax that grips hair, not skin, so it is the gentler option for brows, upper lip, and full face. Searching nearby? See [threading near me in PECHS](/blog/threading-near-me-karachi-pechs).' },
 
       { type: 'h2', text: 'Body Waxing — Rs 400 to Rs 3,500' },
       { type: 'p', text: 'Standard [honey wax](/services/honey-wax) starts at Rs 400 for single areas like arms or underarms, with full-body sessions well under Rs 3,000. Premium [Rica body wax](/services/rica-wax) starts at Rs 600 — worth the difference if you wax regularly or have reactive skin, since results last three to four weeks and hair grows back finer over time.' },
 
       { type: 'h2', text: 'Facials and Cleansing — Rs 1,200 to Rs 5,500' },
-      { type: 'p', text: 'A professional [deep cleansing](/services/cleansing) starts at Rs 1,200 — steam, extraction, and a proper reset for congested skin. Full [facials](/services/facials) run from Rs 1,400 for a classic to around Rs 3,000 for an HD Whitening Facial, topping out near Rs 5,500 for a Janssen Whitening Facial with German cosmeceutical products. Anything dramatically cheaper usually means diluted products; anything pricier in Karachi is usually paying for the postcode, not the facial.' },
+      { type: 'p', text: 'A professional [deep cleansing](/services/cleansing) starts at Rs 1,200 — steam, extraction, and a proper reset for congested skin. Full [facials](/services/facials) run from Rs 1,400 for a classic to around Rs 3,000 for an HD Whitening Facial, topping out near Rs 5,500 for a Janssen Whitening Facial with German cosmeceutical products. Anything dramatically cheaper usually means diluted products; anything pricier in Karachi is usually paying for the postcode, not the facial. Local guide: [facials near me Karachi](/blog/facials-near-me-karachi-pechs).' },
 
       { type: 'h2', text: 'Bleach and Polish — Rs 400 to Rs 1,500' },
       { type: 'p', text: 'Instant-glow services like [bleach and polish](/services/bleach-polish) start at Rs 400. A Loreal Face Polish at around Rs 900 is the sweet spot before an event — a natural glow with no downtime and no reaction risk.' },
@@ -233,12 +447,14 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Microblading and powder brows are the biggest-ticket non-bridal service in any Karachi salon. At Farwa, [eyebrow tattoo](/services/eyebrow-tattoo) starts at Rs 20,000 including consultation, numbing, the procedure, and an aftercare kit. Results last 12 to 18 months. Be wary of Rs 8,000 "deals" — pigment quality and hygiene are exactly the places you do not want a discount on your face.' },
 
       { type: 'h2', text: 'Bridal Makeup — from Rs 8,000 per event' },
-      { type: 'p', text: 'Single-event bridal looks — engagement, mehndi, nikkah, or reception — start at Rs 8,000 at Farwa, with the complete full bridal package around Rs 25,000. Karachi\'s celebrity-name studios charge Rs 80,000 to Rs 180,000 for one day; our [bridal packages](/services/bridal) are built on the same techniques, eighteen years of practice, and a fraction of the rent. Read our [bridal packages guide](/blog/best-bridal-makeup-packages-karachi-2026) for the full breakdown.' },
+      { type: 'p', text: 'Bridal Trial Rs 8,000 · Mehndi / Dholki Rs 10,000 · Engagement Rs 12,000 · Full Bridal Package Rs 25,000. Karachi celebrity studios often charge Rs 80,000+ for one day; our [bridal packages](/bridal) use the same professional techniques at printed rates. Deep dives: [bridal packages guide](/blog/best-bridal-makeup-packages-karachi-2026) and [mehndi & engagement makeup](/blog/mehndi-engagement-makeup-karachi).' },
 
       { type: 'h2', text: 'How This Compares to the Big-Name Parlours' },
       { type: 'p', text: 'Since the famous salons rarely publish rates, third-party price-tracker sites do it for them. Per those published lists, a single bridal event at Kashee\'s runs roughly Rs 23,000 to Rs 33,000 — with multi-event packages from Rs 48,000 — and Mahrose\'s makeup menu starts around Rs 12,000 for a classic look. Nabila and the celebrity studios sit far above both. None of this makes those salons wrong; it makes the comparison simple: at Farwa the complete full bridal package costs about what one event costs at a big name, the techniques and product houses (Janssen, Wella, Rica) are the same professional grade, and the price you read here is the price you pay.' },
 
       { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: Where is the full salon price list for Karachi 2026?' },
+      { type: 'p', text: 'A: Every service and starting PKR rate is on farwasalon.com/prices — updated for 2026 and matching what we charge in the PECHS studio.' },
       { type: 'h3', text: 'Q: Why do most Karachi salons hide their prices?' },
       { type: 'p', text: 'A: Because unlisted prices can flex per customer. Printed prices cannot. We publish every starting figure on farwasalon.com and confirm your exact quote on WhatsApp before your appointment — never after.' },
       { type: 'h3', text: 'Q: Are these prices final?' },
@@ -557,16 +773,25 @@ export const BLOG_POSTS = [
     description: 'Bridal makeup packages in Karachi 2026 — what\'s included, budgets from Rs 8,000, when to book, and why a trial matters before the wedding day.',
     featuredImage: '/bridal2.jpg',
     date: '2026-05-12',
-    lastModified: '2026-05-12',
-    readTime: '6 min read',
+    lastModified: '2026-07-24',
+    readTime: '7 min read',
     author: 'Rubina',
     category: 'Bridal',
     relatedCategories: ['Bridal', 'Facials', 'Threading'],
     content: [
-      { type: 'p', text: 'Your wedding day deserves a look that is uniquely, unmistakably you. In a city with hundreds of salons, choosing the right bridal makeup package in Karachi can feel overwhelming. Price ranges vary wildly, inclusions differ from studio to studio, and the wrong choice can leave you with regret on the most photographed day of your life. At Farwa Beauty Salon in PECHS, we have been styling Karachi brides since 2008 — here is everything you need to know before you book.' },
+      { type: 'p', text: 'Your wedding day deserves a look that is uniquely, unmistakably you. In a city with hundreds of salons, choosing the right bridal makeup package in Karachi can feel overwhelming. Price ranges vary wildly, inclusions differ from studio to studio, and the wrong choice can leave you with regret on the most photographed day of your life. At Farwa Beauty Salon in PECHS, we have been styling Karachi brides since 2008 — here is everything you need to know before you book. Live rates and booking: [farwasalon.com/bridal](/bridal).' },
+
+      { type: 'h2', text: 'Bridal Makeup Cost in Karachi (Farwa 2026)' },
+      { type: 'ul', items: [
+        'Bridal Trial — Rs 8,000 (~2 hours)',
+        'Mehndi / Dholki Look — Rs 10,000 (~2 hours)',
+        'Engagement Look — Rs 12,000 (~2.5 hours)',
+        'Full Bridal Package — Rs 25,000 (all-day signature)',
+      ]},
+      { type: 'p', text: 'These are the same PKR figures on our [price list](/prices) and [bridal page](/bridal). For mehndi and engagement detail, read [mehndi & engagement makeup Karachi](/blog/mehndi-engagement-makeup-karachi).' },
 
       { type: 'h2', text: 'What Is Typically Included in a Bridal Package?' },
-      { type: 'p', text: 'A standard bridal makeup package in Karachi usually covers the base makeup application (foundation, concealer, contouring, setting), eye makeup with lashes, lip colour, brow detailing, and dupatta or hijab draping. Higher-tier packages add hairstyling, jewellery setting, a bridal trial session, and touch-up service at the venue. At Farwa, our [Bridal Packages](/services/bridal) start at Rs 8,000 for a Bridal Trial, with Engagement Look at Rs 12,000, Mehndi/Dholki at Rs 10,000, and the Full Bridal Package at Rs 25,000 — transparent PKR rates for mehndi through barat and walima styling.' },
+      { type: 'p', text: 'A standard bridal makeup package in Karachi usually covers the base makeup application (foundation, concealer, contouring, setting), eye makeup with lashes, lip colour, brow detailing, and dupatta or hijab draping. Higher-tier packages add hairstyling, jewellery setting, a bridal trial session, and touch-up service at the venue. At Farwa, our Full Bridal Package (Rs 25,000) includes bridal makeup, hair styling, dupatta draping, a touch-up kit, and event presence — transparent PKR rates for mehndi through barat and walima styling.' },
       { type: 'p', text: 'Some packages also include pre-wedding services like a facial the day before, brow threading, and a finishing skin treatment. Always ask for a written breakdown of what is included so there are no surprises on the day. Verbal promises can be forgotten, but a clear service list ensures accountability.' },
 
       { type: 'h2', text: 'Price Ranges to Expect in 2026' },
@@ -602,6 +827,8 @@ export const BLOG_POSTS = [
       ]},
 
       { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How much does bridal makeup cost in Karachi?' },
+      { type: 'p', text: 'A: At Farwa in PECHS, bridal starts at Rs 8,000 for a trial, with mehndi Rs 10,000, engagement Rs 12,000, and the Full Bridal Package Rs 25,000. Celebrity studios often charge Rs 80,000+ for one day — we publish every rate on farwasalon.com/bridal.' },
       { type: 'h3', text: 'Q: Can I request specific brands for my bridal makeup?' },
       { type: 'p', text: 'A: Absolutely. At Farwa, we work with MAC, Huda Beauty, Charlotte Tilbury, Kryolan, and other premium brands. If you have a preference or an allergy to certain ingredients, let us know during your consultation and we will accommodate your request.' },
       { type: 'h3', text: 'Q: How long does bridal makeup take?' },
@@ -612,7 +839,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Yes. We offer makeup services for mothers, sisters, and bridal party members as well. These can be booked alongside your bridal package at discounted rates. Contact us for family package pricing.' },
 
       { type: 'h2', text: 'Ready to Start Planning?' },
-      { type: 'p', text: 'Every bride\'s journey is different, and we love helping you find the perfect look. WhatsApp us at +92 322 2782254 to schedule your bridal consultation at our PECHS studio. Browse our full [Bridal services](/services/bridal) to see what we offer.' },
+      { type: 'p', text: 'Every bride\'s journey is different, and we love helping you find the perfect look. WhatsApp us at +92 322 2782254 or [book a Bridal Trial online](/book). Browse [bridal makeup in PECHS](/services/bridal-makeup-in-pechs-karachi) and the full [Bridal services](/services/bridal) menu — packages from Rs 8,000, printed and ready.' },
     ],
   },
   {

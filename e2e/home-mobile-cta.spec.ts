@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test'
+import { visibleMain } from './helpers'
 
 test.describe('Home — mobile CTA bar', () => {
   test.use({ viewport: { width: 390, height: 844 } })
 
   test('hero, service tabs, and sticky tel/wa/book CTAs', async ({ page }) => {
     await page.goto('/')
-    await expect(page.locator('#main')).toBeVisible()
+    await expect(visibleMain(page)).toBeVisible()
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
 
     await expect(page.getByRole('navigation', { name: 'Quick contact and booking' })).toBeVisible({
