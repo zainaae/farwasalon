@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
+import { visibleMain } from './helpers'
 
 const A11Y_PAGES = [
   { path: '/', name: 'home' },
@@ -12,7 +13,7 @@ const A11Y_PAGES = [
 for (const { path, name } of A11Y_PAGES) {
   test(`accessibility — ${name} has no serious axe violations`, async ({ page }) => {
     await page.goto(path, { waitUntil: 'domcontentloaded' })
-    await page.waitForSelector('#main', { state: 'visible' })
+    await expect(visibleMain(page)).toBeVisible()
 
     // Scroll through the page so whileInView animations fire and settle.
     // Without this, axe scans elements mid-fade (diluted computed colors →

@@ -5,6 +5,7 @@ import {
   mockSlotsApi,
   pickDateAndTime,
   selectEyebrowThreading,
+  visibleMain,
 } from './helpers'
 
 test.describe('Book pages smoke', () => {
@@ -134,7 +135,7 @@ test.describe('Booking flow', () => {
   test('mobile viewport 390px — book step 1 layout', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
     await page.goto('/book?category=Threading')
-    await expect(page.locator('#main')).toBeVisible()
+    await expect(visibleMain(page)).toBeVisible()
     await expect(page.getByText('— Choose a service')).toBeVisible()
     await expect(page.getByRole('button', { name: /Eyebrow Threading/i })).toBeVisible()
   })

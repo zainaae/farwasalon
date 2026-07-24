@@ -1,14 +1,15 @@
 import { test, expect } from '@playwright/test'
+import { visibleMain } from './helpers'
 
 test.describe('Blog, SEO feeds, gallery, accessibility', () => {
   test('/blog index and article', async ({ page }) => {
     await page.goto('/blog')
-    await expect(page.locator('#main')).toBeVisible()
+    await expect(visibleMain(page)).toBeVisible()
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/beauty tips/i)
     await expect(page.getByRole('link', { name: /Read article/i }).first()).toBeVisible()
 
     await page.goto('/blog/bridal-beauty-timeline')
-    await expect(page.locator('#main')).toBeVisible()
+    await expect(visibleMain(page)).toBeVisible()
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
   })
 
@@ -35,7 +36,7 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
 
   test('/gallery work showcase renders', async ({ page }) => {
     await page.goto('/gallery')
-    await expect(page.locator('#main')).toBeVisible()
+    await expect(visibleMain(page)).toBeVisible()
     await expect(page.getByRole('heading', { name: /Results showcase/i })).toBeVisible()
     await expect(page.getByText('Threading & glow facial')).toBeVisible()
     await expect(page.getByText('Bridal styling')).toBeVisible()

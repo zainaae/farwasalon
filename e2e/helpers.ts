@@ -22,6 +22,19 @@ export const SAMPLE_LOCATION_LINKS = getPriorityLocationLinks().filter(({ slug }
   ].includes(slug),
 )
 
+/**
+ * Next 16 / React 19 can briefly keep a hidden duplicate of the route in the DOM
+ * (Activity / Suspense reveal). ID selectors then match 2 nodes and Playwright
+ * strict mode fails — prefer visibility-filtered locators.
+ */
+export function visibleMain(page: Page) {
+  return page.locator('#main').filter({ visible: true })
+}
+
+export function visibleById(page: Page, id: string) {
+  return page.locator(`#${id}`).filter({ visible: true })
+}
+
 export async function assertNoHorizontalOverflow(page: Page) {
   const metrics = await page.evaluate(() => {
     const doc = document.documentElement

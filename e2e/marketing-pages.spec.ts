@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { assertNoHorizontalOverflow } from './helpers'
+import { assertNoHorizontalOverflow, visibleMain } from './helpers'
 import { SERVICES, YEARS_ACTIVE } from '../src/data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
@@ -21,7 +21,7 @@ test.describe('Marketing pages @ 390px', () => {
 
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
       await expect(page.getByRole('heading', { level: 1 })).toContainText(heading)
-      await expect(page.locator('#main')).toBeVisible()
+      await expect(visibleMain(page)).toBeVisible()
 
       await page.waitForTimeout(300)
       await assertNoHorizontalOverflow(page)
@@ -30,7 +30,7 @@ test.describe('Marketing pages @ 390px', () => {
 
   test('/about stats expose sr-only labels for screen readers', async ({ page }) => {
     await page.goto('/about')
-    const srOnly = page.locator('#main .sr-only')
+    const srOnly = visibleMain(page).locator('.sr-only')
     await expect(srOnly).toHaveCount(3)
     await expect(srOnly.nth(0)).toHaveText(`${YEARS_ACTIVE}+ Years of expertise`)
     await expect(srOnly.nth(1)).toHaveText(`${CATEGORY_COUNT} Service categories`)

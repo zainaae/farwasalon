@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { ALL_CATEGORY_SLUGS } from './helpers'
+import { ALL_CATEGORY_SLUGS, visibleById, visibleMain } from './helpers'
 
 test.describe('Services pages', () => {
   test('/services shows category grid and ItemList schema', async ({ page }) => {
@@ -21,8 +21,8 @@ test.describe('Services pages', () => {
     })
 
     await page.goto('/services/threading')
-    await expect(page.locator('#service-category-title')).toContainText(/threading/i)
-    await expect(page.locator('#service-category-desc')).toBeVisible()
+    await expect(visibleById(page, 'service-category-title')).toContainText(/threading/i)
+    await expect(visibleById(page, 'service-category-desc')).toBeVisible()
     await expect(page.getByText(/Rs/i).first()).toBeVisible()
 
     const html = await page.content()
@@ -30,14 +30,14 @@ test.describe('Services pages', () => {
     expect(html).toMatch(/SpeakableSpecification/)
     expect(html).toContain('service-category-title')
 
-    await expect(page.locator('#main')).toBeVisible()
+    await expect(visibleMain(page)).toBeVisible()
   })
 
   for (const slug of ALL_CATEGORY_SLUGS) {
     test(`/services/${slug} loads with heading and prices`, async ({ page }) => {
       const res = await page.goto(`/services/${slug}`)
       expect(res?.status()).toBe(200)
-      await expect(page.locator('#service-category-title')).toBeVisible()
+      await expect(visibleById(page, 'service-category-title')).toBeVisible()
       await expect(page.getByText(/Rs/i).first()).toBeVisible()
       await expect(page.locator('ul li').first()).toBeVisible()
     })
@@ -81,7 +81,7 @@ test.describe('Services pages', () => {
 
   test('/services/facials lists services with book links', async ({ page }) => {
     await page.goto('/services/facials')
-    await expect(page.locator('#service-category-title')).toContainText(/facials/i)
+    await expect(visibleById(page, 'service-category-title')).toContainText(/facials/i)
 
     const bookLink = page.getByRole('link', { name: /book normal facial/i })
     await expect(bookLink).toHaveAttribute('href', /\/book\?serviceId=\d+/)
