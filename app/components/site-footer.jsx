@@ -84,7 +84,7 @@ export default function SiteFooter() {
                 <li className="pt-1">
                   <Link
                     href="/services"
-                    className="link-underline text-ink text-xs font-['Inter'] font-medium hover:text-stone transition-colors"
+                    className="link-underline tap-safe inline-flex items-center min-h-[44px] text-ink text-xs font-['Inter'] font-medium hover:text-stone transition-colors"
                   >
                     All services →
                   </Link>
@@ -141,7 +141,7 @@ export default function SiteFooter() {
                     href={WA_DEFAULT}
                     target="_blank"
                     rel="noreferrer"
-                    className="link-underline !inline-flex items-center gap-2 text-stone text-xs leading-snug font-['Inter'] hover:text-ink"
+                    className="link-underline tap-safe !inline-flex items-center gap-2 min-h-[44px] text-stone text-xs leading-snug font-['Inter'] hover:text-ink"
                   >
                     <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span className="min-w-0">WhatsApp</span>
@@ -152,7 +152,7 @@ export default function SiteFooter() {
                     href={IG_LINK}
                     target="_blank"
                     rel="noreferrer"
-                    className="link-underline !inline-flex items-center gap-2 text-stone text-xs leading-snug font-['Inter'] hover:text-ink"
+                    className="link-underline tap-safe !inline-flex items-center gap-2 min-h-[44px] text-stone text-xs leading-snug font-['Inter'] hover:text-ink"
                   >
                     <IgIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span className="min-w-0">@farwasalon</span>
@@ -163,7 +163,7 @@ export default function SiteFooter() {
                     href={MAPS_LINK}
                     target="_blank"
                     rel="noreferrer"
-                    className="link-underline !inline-flex items-center gap-2 text-stone text-xs leading-snug font-['Inter'] hover:text-ink"
+                    className="link-underline tap-safe !inline-flex items-center gap-2 min-h-[44px] text-stone text-xs leading-snug font-['Inter'] hover:text-ink"
                   >
                     <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span className="min-w-0">Google Maps</span>
@@ -174,7 +174,7 @@ export default function SiteFooter() {
                     href="https://g.page/farwasalon/review"
                     target="_blank"
                     rel="noreferrer"
-                    className="link-underline !inline-flex items-center gap-2 text-stone text-xs leading-snug font-['Inter'] hover:text-ink"
+                    className="link-underline tap-safe !inline-flex items-center gap-2 min-h-[44px] text-stone text-xs leading-snug font-['Inter'] hover:text-ink"
                   >
                     <Star className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span className="min-w-0">Leave a review</span>
@@ -202,7 +202,7 @@ export default function SiteFooter() {
               <li>
                 <Link
                   href={AREAS_HUB_HREF}
-                  className="link-underline text-ink text-xs font-['Inter'] font-medium hover:text-stone transition-colors"
+                  className="link-underline tap-safe inline-flex items-center min-h-[44px] text-ink text-xs font-['Inter'] font-medium hover:text-stone transition-colors"
                 >
                   See all areas →
                 </Link>
