@@ -69,24 +69,18 @@ const FALLBACK_FEATURED_REVIEWS = [
 ]
 
 function EditorialMedia({ item, className = '' }) {
-  if (item.video) {
-    return (
-      <video
-        src={item.video}
-        poster={item.src}
-        muted
-        loop
-        playsInline
-        preload="none"
-        className={`w-full h-full object-cover ${className}`}
-        aria-hidden
-      />
-    )
-  }
+  // Still via next/image only — raw <video poster> was pulling ~80KB JPEGs on first paint.
   return (
-    <Image src={item.src} alt={item.label} loading="lazy"
-      width={330} height={440}
-      className={`w-full h-full object-cover ${className}`} />
+    <Image
+      src={item.src}
+      alt={item.label}
+      loading="lazy"
+      width={330}
+      height={440}
+      quality={55}
+      sizes="(max-width: 768px) 70vw, 330px"
+      className={`w-full h-full object-cover ${className}`}
+    />
   )
 }
 
@@ -186,9 +180,18 @@ function ServiceMediaPanel({ hovered }) {
 
   return (
     <div className="relative w-full h-full bg-[#0d0609]">
+      <Image
+        src="/bridal2.jpg"
+        alt=""
+        fill
+        quality={50}
+        sizes="(max-width: 768px) 100vw, 45vw"
+        className="object-cover object-center transition-opacity duration-500 pointer-events-none"
+        style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
+        aria-hidden
+      />
       <LazyVideo
         src="/ct.mp4"
-        poster="/bridal2.jpg"
         muted
         loop
         playsInline

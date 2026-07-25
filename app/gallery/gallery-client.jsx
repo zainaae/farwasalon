@@ -13,10 +13,10 @@ export default function GalleryClient() {
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
 
       <div className="section-shell section-pad">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border-soft pb-8 md:pb-10">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border-soft pb-10 md:pb-12">
           <div>
             <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-              className="eyebrow mb-3">— Our work</m.p>
+              className="eyebrow mb-4">— Gallery</m.p>
             <div className="overflow-hidden">
               <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
                 className="display-section text-ink">
@@ -28,19 +28,15 @@ export default function GalleryClient() {
             href={IG_LINK} target="_blank" rel="noreferrer"
             className="link-underline !inline-flex items-center gap-2 shrink-0 text-ink text-xs tracking-wide font-['Inter']">
             <IgIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
-            <span className="min-w-0">@farwasalon on Instagram</span>
+            <span className="min-w-0">@farwasalon</span>
           </m.a>
         </div>
       </div>
 
-      <section className="section-shell mb-10 md:mb-14" aria-labelledby="gallery-showcase-heading">
-        <p className="eyebrow mb-3 text-center">— Work we do</p>
-        <h2 id="gallery-showcase-heading" className="section-title text-xl md:text-2xl text-center mb-2">
+      <section className="section-shell mb-12 md:mb-16" aria-labelledby="gallery-showcase-heading">
+        <h2 id="gallery-showcase-heading" className="section-title text-xl md:text-2xl text-center mb-8">
           Studio highlights
         </h2>
-        <p className="text-stone text-sm font-['Inter'] font-light text-center max-w-xl mx-auto mb-8">
-          Real treatments from our PECHS studio — threading, bridal, and nails. More looks live on Instagram.
-        </p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-6">
           {GALLERY_SHOWCASE_ITEMS.map((item, i) => (
             <WorkShowcaseCard key={item.label} src={item.src} label={item.label} alt={item.alt} video={item.video} index={i} />

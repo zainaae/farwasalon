@@ -48,7 +48,7 @@
     margin: 0;
     background: #ffffff;
     color: #0d0d0d;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -434,7 +434,7 @@
   /* Mobile Call/WA/Book bar: keep /prices jump chips + anchors clear of the fixed CTA */
   @media (max-width: 767px) {
     html {
-      scroll-padding-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+      scroll-padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
     }
     .page-content nav[aria-label="Price list categories"] {
       position: sticky;
@@ -524,14 +524,14 @@
 
 /* â”€â”€ Display fonts â”€â”€ */
 .display-hero {
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   font-size: clamp(3.5rem, 12vw, 12rem);
   line-height: 0.9;
   letter-spacing: -0.02em;
 }
 .display-section {
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   font-size: clamp(1.75rem, 4.5vw, 5.5rem);
   line-height: 0.95;
@@ -539,10 +539,34 @@
   overflow-wrap: anywhere;
 }
 .display-card {
-  font-family: 'Syne', sans-serif;
+  font-family: var(--font-syne), 'Syne', sans-serif;
   font-weight: 700;
   font-size: clamp(1.2rem, 2.5vw, 2rem);
   letter-spacing: -0.01em;
+}
+@keyframes heroScrollBar {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(200%); }
+}
+.hero-scroll-bar {
+  animation: heroScrollBar 1.6s linear infinite;
+}
+@keyframes stickyCtaIn {
+  from { opacity: 0; transform: translateY(80px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.sticky-cta-enter {
+  animation: stickyCtaIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-bar,
+  .sticky-cta-enter {
+    animation: none;
+  }
+  .sticky-cta-enter {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* â”€â”€ Underline reveal â”€â”€ */

@@ -10,6 +10,7 @@ const inter = Inter({
   weight: ['300', '400', '500'],
   variable: '--font-inter',
   display: 'swap',
+  preload: true,
 })
 
 const unbounded = Unbounded({
@@ -17,11 +18,12 @@ const unbounded = Unbounded({
   weight: ['400', '700'],
   variable: '--font-unbounded',
   display: 'swap',
+  preload: true,
 })
 
 const syne = Syne({
   subsets: ['latin'],
-  weight: ['400', '600', '700'],
+  weight: ['600', '700'],
   variable: '--font-syne',
   display: 'swap',
   preload: false,

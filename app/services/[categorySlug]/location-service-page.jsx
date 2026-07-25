@@ -8,6 +8,7 @@ import {
   CAT_SLUGS,
   formatPrice,
   YEARS_ACTIVE,
+  MAPS_LINK,
   getDefaultServiceIdForCategory,
 } from '../../../src/data.js'
 import { CAT_FAQS } from '../../../src/cat-seo-content.js'
@@ -41,13 +42,21 @@ export default function LocationServicePage({ data, slug }) {
     <main id="main" className="page-content">
       <div className="section-shell section-pad min-h-0">
         <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">
-              <li><Link href="/" className="hover:text-ink transition-colors">Home</Link></li>
-              <li><ChevronRight className="w-2.5 h-2.5" /></li>
-              <li><Link href="/services" className="hover:text-ink transition-colors">Services</Link></li>
-              <li><ChevronRight className="w-2.5 h-2.5" /></li>
-              <li className="text-ink">{heading}</li>
+          <nav aria-label="Breadcrumb" className="mb-5">
+            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-['Inter']">
+              <li>
+                <Link href="/" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden className="text-stone/50">/</li>
+              <li>
+                <Link href="/services" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
+                  Services
+                </Link>
+              </li>
+              <li aria-hidden className="text-stone/50">/</li>
+              <li className="text-ink px-1 line-clamp-1">{heading}</li>
             </ol>
           </nav>
 
@@ -59,29 +68,37 @@ export default function LocationServicePage({ data, slug }) {
           {location.blurb ? (
             <p className="text-body text-sm max-w-2xl mb-4">{location.blurb}</p>
           ) : null}
-          <p className="text-xs text-stone font-['Inter'] font-light max-w-2xl mb-6 border-l-2 border-accent-gold/40 pl-3">
+          <p className="text-xs text-stone font-['Inter'] font-light max-w-2xl mb-5 border-l-2 border-accent-gold/40 pl-3">
             One studio in PECHS — we welcome clients from {location.name} and nearby areas. All appointments are at our PECHS address below.
           </p>
 
-          <div className="flex flex-wrap gap-3 mb-10">
-            <div className="flex items-center gap-2 text-stone text-sm font-['Inter']">
-              <MapPin className="w-4 h-4 shrink-0" /> {SALON_ADDRESS_LINES[0]}
-            </div>
-            <div className="flex items-center gap-2 text-stone text-sm font-['Inter']">
-              <Clock className="w-4 h-4 shrink-0" /> {SALON_ADDRESS_LINES[1]} · {SALON_ADDRESS_LINES[2]}
-            </div>
-            <div className="flex items-center gap-2 text-stone text-sm font-['Inter']">
-              <Phone className="w-4 h-4 shrink-0" /> {SALON_PHONE_DISPLAY}
-            </div>
+          <div className="cta-cluster mb-4">
+            <Link href={bookHref} className="btn-primary">
+              Book online <ArrowUpRight className="w-4 h-4" />
+            </Link>
+            <a href={waLink(service.name)} target="_blank" rel="noreferrer" className="btn-secondary">
+              WhatsApp
+            </a>
+          </div>
+          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter'] text-stone mb-10">
+            <span className="inline-flex items-center gap-1.5 min-h-[44px]">
+              <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden /> {SALON_ADDRESS_LINES[0]}
+            </span>
+            <span className="inline-flex items-center gap-1.5 min-h-[44px]">
+              <Clock className="w-3.5 h-3.5 shrink-0" aria-hidden /> {SALON_ADDRESS_LINES[1]}
+            </span>
+            <a href="tel:+923222782254" className="tap-safe inline-flex items-center gap-1.5 min-h-[44px] link-underline hover:text-ink">
+              <Phone className="w-3.5 h-3.5 shrink-0" aria-hidden /> {SALON_PHONE_DISPLAY}
+            </a>
             <a
               href={GOOGLE_REVIEW_LINK}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 text-stone text-sm font-['Inter'] hover:text-ink"
+              className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink"
             >
-              ★ {rating.ratingValue} ({rating.reviewCount} Google reviews)
+              ★ {rating.ratingValue} ({rating.reviewCount} reviews)
             </a>
-          </div>
+          </p>
         </m.div>
 
         {displayServices.length > 0 && (
@@ -125,21 +142,14 @@ export default function LocationServicePage({ data, slug }) {
             {' '}{location.blurb || location.detail}
             {' '}Open Monday to Saturday, 11 AM to 7 PM. Book online for instant confirmation, or WhatsApp +92 322 278 2254.
           </p>
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href={bookHref}
-              className="btn-primary"
-            >
-              Book online <ArrowUpRight className="w-4 h-4" />
-            </Link>
-            <Link href="/prices" className="btn-secondary">
+          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter']">
+            <Link href="/prices" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Price list
             </Link>
-            <a href={waLink(service.name)} target="_blank" rel="noreferrer"
-              className="btn-secondary">
-              WhatsApp <ArrowUpRight className="w-4 h-4" />
+            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+              Directions
             </a>
-          </div>
+          </p>
         </m.section>
 
         {faqs.length > 0 && (

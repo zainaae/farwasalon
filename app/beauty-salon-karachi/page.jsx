@@ -51,23 +51,25 @@ export default function BeautySalonKarachiPage() {
             {SALON_ADDRESS_LINES[0]} · {SALON_ADDRESS_LINES[1]} · {SALON_PHONE_DISPLAY}
           </p>
 
-          <div className="flex flex-wrap gap-3 mb-12">
+          <div className="cta-cluster mb-4">
             <Link href="/book" className="btn-primary">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
             <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer" className="btn-secondary">
               WhatsApp
             </a>
-            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="btn-secondary">
+          </div>
+          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter'] mb-12">
+            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Directions
             </a>
-            <Link href="/prices" className="btn-secondary">
+            <Link href="/prices" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Price list
             </Link>
-            <Link href="/bridal" className="btn-secondary">
+            <Link href="/bridal" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Bridal makeup
             </Link>
-          </div>
+          </p>
 
           <section className="mb-12" aria-labelledby="why-heading">
             <h2 id="why-heading" className="section-title mb-4">
