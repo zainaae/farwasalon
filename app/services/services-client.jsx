@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import { SERVICES, CAT_META, CAT_SLUGS, track, formatPrice } from '../../src/data.js'
-import { getPriorityLocationLinks } from '../../lib/location-links.js'
+import { AREAS_HUB_HREF, getClientFacingAreaLinks } from '../../lib/location-links.js'
 import LiveAvailability from './live-availability'
 
 function getCatMeta(cat) {
@@ -98,7 +98,7 @@ function MenuRow({ cat }) {
 }
 
 export default function ServicesClient() {
-  const areaLinks = getPriorityLocationLinks()
+  const areaLinks = getClientFacingAreaLinks()
 
   return (
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
@@ -154,16 +154,21 @@ export default function ServicesClient() {
             Areas we serve
           </h2>
           <p className="text-stone text-sm font-light font-['Inter'] mb-4 max-w-xl">
-            Visit us in PECHS from anywhere in Karachi — local pages for popular treatments nearby.
+            One PECHS studio — clients visit from across Karachi.
           </p>
-          <ul className="flex flex-wrap gap-2">
+          <ul className="flex flex-wrap gap-x-4 gap-y-1">
             {areaLinks.map(({ slug, href, label }) => (
               <li key={slug}>
-                <Link href={href} className="tab-pill hover:border-ink hover:text-ink">
+                <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink">
                   {label}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href={AREAS_HUB_HREF} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-['Inter'] font-medium hover:text-stone">
+                See all areas →
+              </Link>
+            </li>
           </ul>
         </section>
       </div>

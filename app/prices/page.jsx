@@ -37,30 +37,44 @@ export default function PricesPage() {
     <main id="main" className="page-content">
       {faqSchema && <JsonLd data={faqSchema} />}
       <div className="section-shell section-pad min-h-0">
-        <p className="eyebrow mb-4">— Salon price list Karachi · updated {UPDATED} · from Rs 100</p>
-        <h1 className="display-section text-ink mb-4 max-w-3xl">
+        <p className="eyebrow mb-3">— Salon price list Karachi · updated {UPDATED} · from Rs 100</p>
+        <h1 className="display-section text-ink mb-3 max-w-3xl">
           Salon Price List Karachi 2026 — From Rs 100
         </h1>
-        <p className="text-stone text-xs font-['Inter'] font-light max-w-3xl mb-3">
+        <p className="text-stone text-xs font-['Inter'] font-light max-w-3xl mb-4">
           {YEARS_ACTIVE}+ years · PECHS women-only studio · {rating.ratingValue}★ Google ({rating.reviewCount}+ reviews)
         </p>
         <p className="text-body md:text-lg max-w-2xl mb-3">
-          Searching for a salon price list in Karachi? This is our complete PECHS rate card —
-          every service, every starting price in PKR as Rs 1,200-style figures. No &ldquo;DM for rates.&rdquo;
-          Your exact quote is confirmed before your appointment, never after.
+          Complete PECHS rate card — every service with a starting price in PKR. No hidden quotes.
+          Your exact amount is confirmed before your appointment, never after.
         </p>
-        <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-4">
+        <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-5">
           Published starting prices in PKR. Not a tax invoice — GST/sales tax is not added on these
           listed rates. Longer hair, larger areas, or add-ons can adjust a quote; we confirm before starting.
         </p>
-        <nav aria-label="Price list categories" className="mb-6 max-w-3xl">
+
+        <div className="cta-cluster mb-5">
+          <Link href="/book" className="tap-safe btn-primary w-full sm:w-auto justify-center">
+            Book online <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+          <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer"
+            className="tap-safe btn-secondary w-full sm:w-auto justify-center">
+            Ask on WhatsApp
+          </a>
+        </div>
+        <p className="text-stone text-xs font-['Inter'] font-light max-w-2xl mb-2">
+          Payments: cash, JazzCash, EasyPaisa · Hours: Mon–Sat 11–7 (closed Sunday)
+        </p>
+        <p className="text-stone text-xs font-['Inter'] font-light max-w-2xl mb-8">{SALON_NAP}</p>
+
+        <nav aria-label="Price list categories" className="mb-10 max-w-4xl">
           <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2">Jump to category</p>
-          <ul className="flex flex-wrap gap-2 text-sm font-['Inter']">
+          <ul className="tab-scroller text-sm font-['Inter'] pb-1">
             {categories.map((cat) => (
               <li key={cat}>
                 <a
                   href={`#prices-${CAT_SLUGS[cat]}`}
-                  className="tap-safe inline-flex min-h-[44px] items-center px-2.5 py-2 border border-border-soft hover:border-ink text-ink font-medium transition-colors"
+                  className="tap-safe tab-pill inline-flex items-center"
                 >
                   {cat === 'Eyebrow Tattoo' ? 'Microblading' : cat}
                 </a>
@@ -74,20 +88,6 @@ export default function PricesPage() {
             </Link>
           </p>
         </nav>
-
-        <div className="flex flex-wrap items-center gap-3 mb-3">
-          <Link href="/book" className="tap-safe btn-primary !py-2.5 !px-5">
-            Book online <ArrowUpRight className="w-3.5 h-3.5" />
-          </Link>
-          <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer"
-            className="tap-safe btn-secondary !py-2.5 !px-5">
-            Ask on WhatsApp
-          </a>
-        </div>
-        <p className="text-stone text-xs font-['Inter'] font-light max-w-2xl mb-6">
-          Payments: cash, JazzCash, EasyPaisa · Hours: Mon–Sat 11–7 (closed Sunday)
-        </p>
-        <p className="text-stone text-xs font-['Inter'] font-light max-w-2xl mb-10">{SALON_NAP}</p>
 
         <section className="mb-12 panel-soft p-5 md:p-6 shadow-soft max-w-3xl" aria-labelledby="prices-bridal-strip">
           <h2 id="prices-bridal-strip" className="font-['Syne'] font-semibold text-ink text-lg mb-2">

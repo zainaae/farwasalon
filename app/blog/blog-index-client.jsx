@@ -64,14 +64,12 @@ export default function BlogIndexClient() {
                   </div>
                 )}
                 <div className="p-6 md:p-8">
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4">
-                  <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
-                    {post.category}
-                  </span>
-                  <time dateTime={post.date} className="text-stone text-[10px] font-['Inter']">
-                    {formatBlogDate(post.date)}
-                  </time>
-                  <span className="text-stone text-[10px] font-['Inter']">{post.readTime}</span>
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4 text-stone text-[10px] font-['Inter']">
+                  <span className="tracking-[0.18em] uppercase">{post.category}</span>
+                  <span aria-hidden="true" className="text-border-soft">·</span>
+                  <time dateTime={post.date}>{formatBlogDate(post.date)}</time>
+                  <span aria-hidden="true" className="text-border-soft">·</span>
+                  <span>{post.readTime}</span>
                 </div>
                 <h2 className="font-['Syne'] font-bold text-base md:text-lg text-ink leading-snug mb-3 group-hover:text-stone transition-colors">
                   {post.title}

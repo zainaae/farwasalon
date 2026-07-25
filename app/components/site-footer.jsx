@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { ArrowUpRight, MessageCircle, Star } from 'lucide-react'
 import { WA_DEFAULT, IG_LINK, MAPS_LINK, CAT_SLUGS } from '../../src/site-config.js'
 import { SALON_ADDRESS_LINES } from '../../lib/business-schema.js'
-import { getPriorityLocationLinks } from '../../lib/location-links.js'
+import { AREAS_HUB_HREF, getClientFacingAreaLinks } from '../../lib/location-links.js'
 import FooterNewsletter from './footer-newsletter.jsx'
 import {
   UrduSignature,
@@ -20,7 +20,7 @@ export default function SiteFooter() {
     label,
     slug,
   }))
-  const areaLinks = getPriorityLocationLinks()
+  const areaLinks = getClientFacingAreaLinks()
   return (
     <footer className="bg-white">
       <div className="border-t border-border-soft px-5 md:px-10 py-8 md:py-10">
@@ -199,6 +199,14 @@ export default function SiteFooter() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href={AREAS_HUB_HREF}
+                  className="link-underline text-ink text-xs font-['Inter'] font-medium hover:text-stone transition-colors"
+                >
+                  See all areas →
+                </Link>
+              </li>
             </ul>
             <p className="text-stone text-xs font-['Inter']">
               PECHS Block 3, Karachi ·{' '}
@@ -212,7 +220,7 @@ export default function SiteFooter() {
               </a>
               {' · '}
               <Link
-                href="/beauty-salon-karachi"
+                href={AREAS_HUB_HREF}
                 className="link-underline hover:text-ink transition-colors"
               >
                 Beauty salon in Karachi

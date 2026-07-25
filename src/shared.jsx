@@ -7,6 +7,7 @@ import { m, AnimatePresence } from 'framer-motion'
 import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Phone, MessageCircle } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatDuration, track, CAT_SLUGS } from './site-config.js'
 import { useBooking } from './booking-context.jsx'
+import { useNextSlot } from './use-next-slot.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
 import {
   CTA_PRIMARY_LABEL,
@@ -458,15 +459,15 @@ export function Navbar({ transparent = false }) {
         {mobileOpen && (
           <m.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }}
             className="md:hidden overflow-hidden bg-white border-t border-border-soft">
-            <div className="px-5 py-5 flex flex-col gap-4">
+            <div className="px-5 py-5 flex flex-col gap-1">
               {navLinks.map(({ label, href }) => (
                 <Link key={href} href={href} onClick={() => setMobileOpen(false)}
-                  className="text-[11px] tracking-[0.18em] uppercase text-stone hover:text-ink font-['Inter']">
+                  className="tap-safe inline-flex items-center min-h-[44px] text-[11px] tracking-[0.18em] uppercase text-stone hover:text-ink font-['Inter']">
                   {label}
                 </Link>
               ))}
               <Link href="/book" onClick={() => setMobileOpen(false)}
-                className="inline-flex items-center justify-center bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-5 py-3 w-fit mt-1">
+                className="tap-safe inline-flex items-center justify-center min-h-[44px] bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-5 py-3 w-full sm:w-fit mt-3">
                 Book an Appointment
               </Link>
             </div>
@@ -503,11 +504,17 @@ export function shouldShowMobileCtaBar(pathname) {
 
 /* ─── Mobile CTA bar: tel + WhatsApp + book (key landing pages) ─ */
 export function StickyMobileCTA({ hidden = false }) {
+  const pathname = usePathname()
+  const slot = useNextSlot()
+  const showSlotHint = pathname === '/'
   if (hidden) return null
   return (
     <>
       {/* flow spacer so page content never hides behind the fixed bar on mobile */}
-      <div aria-hidden className="h-[calc(5.5rem+env(safe-area-inset-bottom,0px))] md:hidden shrink-0" />
+      <div
+        aria-hidden
+        className={`md:hidden shrink-0 ${showSlotHint ? 'h-[calc(6.5rem+env(safe-area-inset-bottom,0px))]' : 'h-[calc(5.5rem+env(safe-area-inset-bottom,0px))]'}`}
+      />
       <nav
         className="fixed z-50 left-0 right-0 md:hidden max-w-[100vw] pointer-events-none"
         style={{ bottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}
@@ -517,34 +524,45 @@ export function StickyMobileCTA({ hidden = false }) {
           initial={{ y: 80, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.0, duration: 0.55, ease: [0.16,1,0.3,1] }}
-          className="pointer-events-auto mx-3 flex items-stretch gap-1.5 rounded-xl bg-ink/95 backdrop-blur-md shadow-2xl shadow-ink/40 border border-white/10 p-1.5 min-w-0 max-w-[calc(100vw-1.5rem)]"
+          className="pointer-events-auto mx-3 flex flex-col rounded-xl bg-ink/95 backdrop-blur-md shadow-2xl shadow-ink/40 border border-white/10 min-w-0 max-w-[calc(100vw-1.5rem)] overflow-hidden"
         >
-          <a
-            href={`tel:+${WA_NUMBER}`}
-            aria-label="Call the salon"
-            className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/85 hover:text-white active:scale-[0.97] text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] py-3.5 transition-colors"
-          >
-            <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
-            Call
-          </a>
-          <span aria-hidden="true" className="w-px bg-white/15 my-1.5" />
-          <a
-            href={WA_DEFAULT}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Message the salon on WhatsApp"
-            className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/85 hover:text-white active:scale-[0.97] text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] py-3.5 transition-colors"
-          >
-            <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
-            WhatsApp
-          </a>
-          <Link
-            href="/book"
-            aria-label="Book an appointment online"
-            className="tap-safe min-h-[44px] flex-[1.4] inline-flex items-center justify-center gap-1.5 bg-white text-ink active:scale-[0.97] text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] rounded-lg py-3.5 shadow-inner"
-          >
-            Book <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-          </Link>
+          {showSlotHint && (
+            <p className="px-3 pt-2 pb-0.5 text-center text-[9px] tracking-[0.16em] uppercase text-white/45 font-['Inter'] leading-none">
+              <span
+                className={`inline-block w-1.5 h-1.5 rounded-full mr-1.5 align-middle ${slot.open ? 'bg-[#9cd48c]' : 'bg-[#c9a98a]'}`}
+                aria-hidden="true"
+              />
+              Next slot <span className="text-white/75 font-medium">{slot.label}</span>
+            </p>
+          )}
+          <div className="flex items-stretch gap-1 p-1.5">
+            <a
+              href={`tel:+${WA_NUMBER}`}
+              aria-label="Call the salon"
+              className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/85 hover:text-white active:scale-[0.97] text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] py-3 transition-colors"
+            >
+              <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
+              Call
+            </a>
+            <span aria-hidden="true" className="w-px bg-white/15 my-1.5" />
+            <a
+              href={WA_DEFAULT}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Message the salon on WhatsApp"
+              className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/85 hover:text-white active:scale-[0.97] text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] py-3 transition-colors"
+            >
+              <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
+              WhatsApp
+            </a>
+            <Link
+              href="/book"
+              aria-label="Book an appointment online"
+              className="tap-safe min-h-[44px] flex-[1.35] inline-flex items-center justify-center gap-1.5 bg-white text-ink active:scale-[0.97] text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] rounded-lg py-3"
+            >
+              Book <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+            </Link>
+          </div>
         </m.div>
       </nav>
     </>
@@ -556,13 +574,13 @@ export function StickyWA({ hidden = false }) {
   if (hidden) return null
   return (
     <>
-      <div aria-hidden className="h-[calc(5.25rem+env(safe-area-inset-bottom,0px))] md:hidden" />
+      <div aria-hidden className="h-[calc(5rem+env(safe-area-inset-bottom,0px))] md:hidden shrink-0" />
       <div className="fixed z-50 left-0 right-0 flex justify-center md:hidden pointer-events-none px-4"
-        style={{ bottom: 'max(1.25rem, env(safe-area-inset-bottom, 0px))' }}>
+        style={{ bottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}>
         <m.div
           initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2, duration: 0.6, ease: [0.16,1,0.3,1] }}>
           <Link href="/book"
-            className="tap-safe min-h-[44px] pointer-events-auto inline-flex items-center gap-2 bg-ink text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 shadow-2xl shadow-ink/30">
+            className="tap-safe min-h-[44px] pointer-events-auto inline-flex items-center gap-2 bg-ink/95 backdrop-blur-md text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 rounded-xl border border-white/10 shadow-2xl shadow-ink/30">
             Book Online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
         </m.div>

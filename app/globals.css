@@ -433,15 +433,33 @@
   }
   .input-field {
     width: 100%;
+    min-height: 44px;
     padding: 0.75rem 1rem;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 300;
     color: var(--ink);
     background: #fff;
     border: 1px solid var(--border-soft);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
+  .cta-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  @media (max-width: 639px) {
+    .cta-cluster > .btn-primary,
+    .cta-cluster > .btn-secondary,
+    .cta-cluster > a.btn-primary,
+    .cta-cluster > a.btn-secondary {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  .footer-areas summary::-webkit-details-marker { display: none; }
+  .footer-areas summary::marker { content: ''; }
   .input-field::placeholder {
     color: rgba(107, 95, 87, 0.55);
   }

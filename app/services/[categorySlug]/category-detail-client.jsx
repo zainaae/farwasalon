@@ -13,7 +13,7 @@ import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
 import { SITE_ORIGIN, SALON_NAP, buildSpeakableSchema, buildFaqPageSchema } from '../../../lib/business-schema.js'
-import { getPriorityLocationLinksForCategory } from '../../../lib/location-links.js'
+import { AREAS_HUB_HREF, getClientFacingAreaLinksForCategory } from '../../../lib/location-links.js'
 import { WA_DEFAULT, MAPS_LINK } from '../../../src/site-config.js'
 
 function getCatMeta(cat) {
@@ -55,7 +55,7 @@ export default function CategoryDetailClient({ categorySlug }) {
   const openFor  = s => { if (canOpen(s)) setModal(s) }
   const onBack   = () => router.push('/services')
   const slug     = Object.entries(CAT_SLUGS).find(([k]) => k === category)?.[1]
-  const areaLinks = category ? getPriorityLocationLinksForCategory(category) : []
+  const areaLinks = category ? getClientFacingAreaLinksForCategory(category, 5) : []
   const prices = services.map((s) => s.pricePkr).filter(Boolean)
   const minPrice = prices.length ? Math.min(...prices) : null
   const seo = CAT_SEO[category]
@@ -128,21 +128,25 @@ export default function CategoryDetailClient({ categorySlug }) {
             <p className="mt-1 text-stone text-xs font-['Inter'] font-light max-w-lg">
               Women-only PECHS studio — appointments in-salon only (not an at-home parlour).
             </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Link href={`/book?category=${encodeURIComponent(category)}`} className="btn-primary">
+            <div className="cta-cluster mt-5">
+              <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">
                 Book online <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="btn-secondary">
+              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe btn-secondary">
                 WhatsApp
               </a>
-              <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="btn-secondary">
+            </div>
+            <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter']">
+              <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
                 Directions
               </a>
-            </div>
-            <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] tracking-[0.12em] uppercase font-['Inter']">
-              <Link href="/prices" className="link-underline hover:text-ink text-stone">Full price list</Link>
+              <Link href="/prices" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+                Full price list
+              </Link>
               {areaLinks[0] && (
-                <Link href={areaLinks[0].href} className="link-underline hover:text-ink text-stone">{areaLinks[0].label}</Link>
+                <Link href={areaLinks[0].href} className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+                  {areaLinks[0].label}
+                </Link>
               )}
             </p>
           </m.div>
@@ -300,15 +304,24 @@ export default function CategoryDetailClient({ categorySlug }) {
           )}
 
           {areaLinks.length > 0 && (
-            <section className="mt-10 pt-8 border-t border-border-soft">
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Areas we serve</h2>
-              <div className="flex flex-wrap gap-2">
+            <section className="mt-10 pt-8 border-t border-border-soft" aria-labelledby="cat-areas-heading">
+              <h2 id="cat-areas-heading" className="font-['Syne'] font-bold text-base text-ink mb-3">
+                Areas we serve
+              </h2>
+              <ul className="flex flex-wrap gap-x-4 gap-y-1">
                 {areaLinks.map(({ slug: areaSlug, href, label }) => (
-                  <Link key={areaSlug} href={href} className="tab-pill hover:border-ink hover:text-ink">
-                    {label}
-                  </Link>
+                  <li key={areaSlug}>
+                    <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink">
+                      {label}
+                    </Link>
+                  </li>
                 ))}
-              </div>
+                <li>
+                  <Link href={AREAS_HUB_HREF} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-['Inter'] font-medium hover:text-stone">
+                    See all areas →
+                  </Link>
+                </li>
+              </ul>
             </section>
           )}
 

@@ -12,7 +12,7 @@ import {
 } from '../../../src/data.js'
 import { CAT_FAQS } from '../../../src/cat-seo-content.js'
 import { PRIORITY_LOCATION_SLUGS, TOP_SERVICES } from '../../../src/location-seo.js'
-import { getNearbyPriorityLocationLinks } from '../../../lib/location-links.js'
+import { AREAS_HUB_HREF, getNearbyPriorityLocationLinks } from '../../../lib/location-links.js'
 import { SALON_ADDRESS_LINES, SALON_PHONE_DISPLAY, GOOGLE_REVIEW_LINK, getAggregateRating } from '../../../lib/business-schema.js'
 
 const PRIORITY_SET = new Set(PRIORITY_LOCATION_SLUGS)
@@ -160,38 +160,46 @@ export default function LocationServicePage({ data, slug }) {
         {nearbyAreas.length > 0 && (
           <section className="mb-12 pt-8 border-t border-border-soft">
             <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Nearby areas</h2>
-            <div className="flex flex-wrap gap-2">
-              {nearbyAreas.map((area) => (
-                <Link
-                  key={area.slug}
-                  href={area.href}
-                  className="tab-pill hover:border-ink hover:text-ink"
-                >
-                  {area.label}
-                </Link>
+            <ul className="flex flex-wrap gap-x-4 gap-y-1">
+              {nearbyAreas.slice(0, 5).map((area) => (
+                <li key={area.slug}>
+                  <Link
+                    href={area.href}
+                    className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink"
+                  >
+                    {area.label}
+                  </Link>
+                </li>
               ))}
-            </div>
+              <li>
+                <Link
+                  href={AREAS_HUB_HREF}
+                  className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-['Inter'] font-medium hover:text-stone"
+                >
+                  See all areas →
+                </Link>
+              </li>
+            </ul>
           </section>
         )}
 
         <section className="pt-8 border-t border-border-soft">
           <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Also Available</h2>
-          <div className="flex flex-wrap gap-2 mb-6">
+          <ul className="flex flex-wrap gap-x-4 gap-y-1 mb-6">
             {relatedServices.map((rs) => {
               const locSlug = `${rs.slug}-in-${location.slug}`
               const href = PRIORITY_SET.has(locSlug)
                 ? `/services/${locSlug}`
                 : `/services/${CAT_SLUGS[rs.category]}`
-              const label = PRIORITY_SET.has(locSlug)
-                ? `${rs.name} in ${location.name}`
-                : rs.name
               return (
-                <Link key={rs.slug} href={href} className="tab-pill hover:border-ink hover:text-ink">
-                  {label}
-                </Link>
+                <li key={rs.slug}>
+                  <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink">
+                    {rs.name}
+                  </Link>
+                </li>
               )
             })}
-          </div>
+          </ul>
           <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed max-w-2xl">
             We welcome clients from across Karachi at our PECHS studio — one address, one team.{' '}
             {PRIORITY_SET.has(pechsSlug) ? (

@@ -141,7 +141,7 @@ function Hero() {
 
       <div
         ref={textRef}
-        className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(4.5rem,env(safe-area-inset-bottom,0px)+3rem)] sm:pb-12 md:pb-14"
+        className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-6 md:px-10 pb-[max(7.25rem,env(safe-area-inset-bottom,0px)+5.5rem)] sm:pb-12 md:pb-14"
         style={{ textShadow: '0 1px 12px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.25)' }}>
         <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
           <div className="overflow-hidden mb-4 md:mb-6">
@@ -198,7 +198,7 @@ function Hero() {
               Explore Services
             </Link>
             <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noreferrer"
-              className="tap-safe text-white/60 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start">
+              className="tap-safe hidden sm:inline-flex text-white/60 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white transition-colors items-center justify-start">
               Or message us on WhatsApp
             </a>
             <div className="hidden sm:flex items-center gap-2 ml-auto">
@@ -208,13 +208,6 @@ function Hero() {
               </span>
             </div>
           </div>
-
-          <p
-            className="hero-fade sm:hidden mt-4 text-white/55 text-[10px] tracking-[0.22em] uppercase font-['Inter'] flex items-center gap-2"
-            style={{ animationDelay: '1.6s' }}>
-            <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#9cd48c]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
-            Next slot <span className="text-white font-medium">{slot.label}</span>
-          </p>
         </div>
       </div>
 
