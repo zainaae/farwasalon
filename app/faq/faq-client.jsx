@@ -19,7 +19,7 @@ function FaqItem({ faq, index }) {
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
-        className="w-full flex items-center justify-between gap-4 py-5 text-left"
+        className="tap-safe w-full flex items-center justify-between gap-4 min-h-[44px] py-5 text-left"
         aria-expanded={open}
         aria-controls={`faq-panel-${index}`}
         aria-label={faq.q}

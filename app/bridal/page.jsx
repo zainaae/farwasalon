@@ -70,11 +70,11 @@ export default function BridalLandingPage() {
       {faqSchema && <JsonLd data={faqSchema} />}
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
-          <p className="eyebrow mb-4">— Bridal makeup Karachi · from Rs 8,000</p>
-          <h1 id="bridal-headline" className="font-['Unbounded'] font-bold text-3xl md:text-[2.5rem] text-ink mb-6 max-w-3xl leading-tight tracking-tight">
+          <p className="eyebrow mb-3">— Bridal makeup Karachi · from Rs 8,000</p>
+          <h1 id="bridal-headline" className="font-['Unbounded'] font-bold text-[1.75rem] sm:text-3xl md:text-[2.5rem] text-ink mb-4 max-w-3xl leading-[1.15] tracking-tight">
             Bridal Makeup Karachi — Packages from Rs 8,000
           </h1>
-          <p id="bridal-lede" className="text-body md:text-lg max-w-3xl mb-4">
+          <p id="bridal-lede" className="text-body md:text-lg max-w-3xl mb-3">
             Looking for bridal makeup in Karachi with printed prices? Farwa in PECHS has styled
             weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000, Engagement Rs 12,000,
             Full Bridal Package Rs 25,000. Women-only studio in Saima Terrace Block 3.
@@ -83,23 +83,25 @@ export default function BridalLandingPage() {
             {SALON_NAP}
           </p>
 
-          <div className="flex flex-wrap gap-3 mb-12">
+          <div className="cta-cluster mb-3">
             <Link
               href={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
-              className="tap-safe btn-primary"
+              className="tap-safe btn-primary w-full sm:w-auto justify-center"
             >
               Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe btn-secondary">
-              WhatsApp wedding plan
-            </a>
-            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe btn-secondary">
-              Directions
-            </a>
-            <Link href="/prices" className="tap-safe btn-secondary">
+            <Link href="/prices" className="tap-safe btn-secondary w-full sm:w-auto justify-center">
               Full price list
             </Link>
           </div>
+          <p className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-['Inter'] mb-12">
+            <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
+              WhatsApp wedding plan
+            </a>
+            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
+              Directions
+            </a>
+          </p>
 
           <section className="mb-12" aria-labelledby="event-taxonomy-heading">
             <h2 id="event-taxonomy-heading" className="section-title mb-4">
@@ -205,7 +207,7 @@ export default function BridalLandingPage() {
               One PECHS studio — brides visit from Tariq Road, Bahadurabad, Gulshan, DHA, Clifton,
               Saddar, North Nazimabad, and Shahrah-e-Faisal. We do not claim other branches.
             </p>
-            <ul className="flex flex-wrap gap-2">
+            <ul className="flex flex-wrap gap-x-4 gap-y-1">
               {[
                 ['Bridal in PECHS', '/services/bridal-makeup-in-pechs-karachi'],
                 ['Bridal near Tariq Road', '/services/bridal-makeup-in-tariq-road'],
@@ -214,7 +216,9 @@ export default function BridalLandingPage() {
                 ['Bridal from Clifton', '/services/bridal-makeup-in-clifton-karachi'],
               ].map(([label, href]) => (
                 <li key={href}>
-                  <Link href={href} className="tab-pill hover:border-ink hover:text-ink">{label}</Link>
+                  <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink">
+                    {label}
+                  </Link>
                 </li>
               ))}
             </ul>

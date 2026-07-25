@@ -185,22 +185,30 @@ export default function SiteFooter() {
           </div>
           <FooterNewsletter />
           <div className="mb-10 pb-8 border-b border-border-soft">
-            <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-3">
-              Areas we serve
-            </p>
-            <ul className="flex flex-wrap gap-x-3 gap-y-2 mb-3">
-              {areaLinks.map(({ slug, href, label }) => (
-                <li key={slug}>
-                  <Link
-                    href={href}
-                    className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <p className="text-stone text-xs font-['Inter']">
+            <details className="footer-areas group">
+              <summary className="tap-safe flex items-center justify-between gap-3 min-h-[44px] cursor-pointer list-none text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink select-none">
+                <span>Areas we serve</span>
+                <span
+                  className="text-stone text-[11px] tracking-normal normal-case font-normal transition-transform duration-200 group-open:rotate-180"
+                  aria-hidden="true"
+                >
+                  ▾
+                </span>
+              </summary>
+              <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2">
+                {areaLinks.map(({ slug, href, label }) => (
+                  <li key={slug}>
+                    <Link
+                      href={href}
+                      className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </details>
+            <p className="text-stone text-xs font-['Inter'] mt-4">
               PECHS Block 3, Karachi ·{' '}
               <a
                 href={MAPS_LINK}

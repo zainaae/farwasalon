@@ -128,21 +128,25 @@ export default function CategoryDetailClient({ categorySlug }) {
             <p className="mt-1 text-stone text-xs font-['Inter'] font-light max-w-lg">
               Women-only PECHS studio — appointments in-salon only (not an at-home parlour).
             </p>
-            <div className="mt-5 flex flex-wrap gap-3">
-              <Link href={`/book?category=${encodeURIComponent(category)}`} className="btn-primary">
+            <div className="cta-cluster mt-5">
+              <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">
                 Book online <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="btn-secondary">
+              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe btn-secondary">
                 WhatsApp
               </a>
-              <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="btn-secondary">
+            </div>
+            <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter']">
+              <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
                 Directions
               </a>
-            </div>
-            <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] tracking-[0.12em] uppercase font-['Inter']">
-              <Link href="/prices" className="link-underline hover:text-ink text-stone">Full price list</Link>
+              <Link href="/prices" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+                Full price list
+              </Link>
               {areaLinks[0] && (
-                <Link href={areaLinks[0].href} className="link-underline hover:text-ink text-stone">{areaLinks[0].label}</Link>
+                <Link href={areaLinks[0].href} className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+                  {areaLinks[0].label}
+                </Link>
               )}
             </p>
           </m.div>
@@ -301,14 +305,26 @@ export default function CategoryDetailClient({ categorySlug }) {
 
           {areaLinks.length > 0 && (
             <section className="mt-10 pt-8 border-t border-border-soft">
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Areas we serve</h2>
-              <div className="flex flex-wrap gap-2">
-                {areaLinks.map(({ slug: areaSlug, href, label }) => (
-                  <Link key={areaSlug} href={href} className="tab-pill hover:border-ink hover:text-ink">
-                    {label}
-                  </Link>
-                ))}
-              </div>
+              <details className="footer-areas group">
+                <summary className="tap-safe flex items-center justify-between gap-3 min-h-[44px] cursor-pointer list-none select-none">
+                  <h2 className="font-['Syne'] font-bold text-base text-ink">Areas we serve</h2>
+                  <span
+                    className="text-stone text-[11px] transition-transform duration-200 group-open:rotate-180"
+                    aria-hidden="true"
+                  >
+                    ▾
+                  </span>
+                </summary>
+                <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+                  {areaLinks.map(({ slug: areaSlug, href, label }) => (
+                    <li key={areaSlug}>
+                      <Link href={href} className="tap-safe inline-flex items-center min-h-[40px] link-underline text-stone text-sm font-['Inter'] hover:text-ink">
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </details>
             </section>
           )}
 

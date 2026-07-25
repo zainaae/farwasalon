@@ -33,7 +33,7 @@ export default function GalleryClient() {
         </div>
       </div>
 
-      <section className="section-shell mb-12 md:mb-16" aria-labelledby="gallery-showcase-heading">
+      <section className="section-shell mb-10 md:mb-14" aria-labelledby="gallery-showcase-heading">
         <p className="eyebrow mb-3 text-center">— Work we do</p>
         <h2 id="gallery-showcase-heading" className="section-title text-xl md:text-2xl text-center mb-2">
           Studio highlights
@@ -48,20 +48,13 @@ export default function GalleryClient() {
         </div>
       </section>
 
-      <div className="overflow-hidden pb-4">
+      <div className="overflow-hidden pb-2">
         <SmoothyGallery photos={GALLERY_PHOTOS} />
       </div>
-      <div className="section-shell mt-4 mb-8 max-w-2xl mx-auto text-center">
-        <p className="text-body text-sm mb-2">
-          A curated sample from the chair — follow{' '}
-          <a href={IG_LINK} target="_blank" rel="noreferrer" className="link-underline text-ink">
-            @farwasalon on Instagram
-          </a>{' '}
-          for daily updates, or visit the PECHS studio to see the full portfolio in person.
+      <div className="section-shell mt-3 mb-14">
+        <p id="gallery-swipe-hint" className="text-body text-[10px] text-center sm:text-left">
+          Swipe or drag to explore · visit the PECHS studio for the full portfolio
         </p>
-      </div>
-      <div className="section-shell mt-4 mb-16">
-        <p id="gallery-swipe-hint" className="text-body text-[10px]">Swipe or drag to explore; focus the carousel and use arrow keys.</p>
       </div>
 
       <section className="bg-ink py-20 md:py-24">

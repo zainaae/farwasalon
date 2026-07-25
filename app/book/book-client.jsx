@@ -735,7 +735,7 @@ export default function BookClient() {
                     ))}
               </div>
 
-              <div className="flex flex-col gap-3 max-w-md relative">
+              <div className="flex flex-col gap-4 max-w-md relative">
                 <input
                   type="text"
                   name="website"
@@ -747,7 +747,7 @@ export default function BookClient() {
                   className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden"
                 />
                 <div>
-                  <label htmlFor="bk-name" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
+                  <label htmlFor="bk-name" className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5 block">
                     Name <span className="text-accent-gold-deep">*</span>
                   </label>
                   <input
@@ -762,7 +762,7 @@ export default function BookClient() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="bk-phone" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
+                  <label htmlFor="bk-phone" className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5 block">
                     Phone <span className="text-accent-gold-deep">*</span>
                   </label>
                   <input
@@ -782,7 +782,7 @@ export default function BookClient() {
                   {phoneError && <p id="bk-phone-error" role="alert" className="text-red-600 text-xs font-['Inter'] mt-1">{phoneError}</p>}
                 </div>
                 <div>
-                  <label htmlFor="bk-notes" className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-1.5 block">
+                  <label htmlFor="bk-notes" className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5 block">
                     Notes <span className="text-stone">(optional)</span>
                   </label>
                   <textarea

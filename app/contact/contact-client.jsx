@@ -173,16 +173,24 @@ export default function ContactClient() {
               Prefer WhatsApp? Fill in the details below and we&apos;ll open a pre-filled message. We confirm within a few hours.
             </p>
 
-            <form onSubmit={handleWhatsApp} className="flex flex-col gap-3" aria-label="Booking request form">
-              <label htmlFor="booking-name" className="sr-only">Your name</label>
-              <input id="booking-name" name="name" type="text" placeholder="Your name" autoComplete="name"
-                value={name} onChange={e => setName(e.target.value)} required
-                className="input-field" />
+            <form onSubmit={handleWhatsApp} className="flex flex-col gap-4" aria-label="Booking request form">
+              <div>
+                <label htmlFor="booking-name" className="block text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5">
+                  Your name
+                </label>
+                <input id="booking-name" name="name" type="text" placeholder="Your name" autoComplete="name"
+                  value={name} onChange={e => setName(e.target.value)} required
+                  className="input-field" />
+              </div>
 
-              <label htmlFor="booking-phone" className="sr-only">Phone number</label>
-              <input id="booking-phone" name="phone" type="tel" placeholder="03xx-xxxxxxx" autoComplete="tel"
-                value={phone} onChange={e => setPhone(e.target.value)} required
-                className="input-field" />
+              <div>
+                <label htmlFor="booking-phone" className="block text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5">
+                  Phone number
+                </label>
+                <input id="booking-phone" name="phone" type="tel" placeholder="03xx-xxxxxxx" autoComplete="tel"
+                  value={phone} onChange={e => setPhone(e.target.value)} required
+                  className="input-field" />
+              </div>
 
               <fieldset className="panel-soft px-5 py-4">
                 <legend className="text-[11px] font-['Inter'] text-stone px-1">Services (add one or more)</legend>
