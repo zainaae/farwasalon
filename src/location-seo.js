@@ -83,7 +83,7 @@ export const TOP_SERVICES = [
 ]
 
 /**
- * Curated local landing pages (36 hubs). Sitemap + static generation use this
+ * Curated local landing pages (54 hubs). Sitemap + static generation use this
  * allowlist only — not the full service × neighborhood matrix.
  * Growth rule: add hubs only with unique neighborhood blurbs (no blank templates).
  */
@@ -99,31 +99,49 @@ export const PRIORITY_LOCATION_SLUGS = [
   'bridal-makeup-in-gulshan',
   'hair-in-gulshan',
   'nails-in-gulshan',
+  'waxing-in-gulshan',
   'bridal-makeup-in-clifton-karachi',
   'facials-in-clifton-karachi',
   'hair-in-clifton-karachi',
   'threading-in-clifton-karachi',
+  'nails-in-clifton-karachi',
+  'waxing-in-clifton-karachi',
   'bridal-makeup-in-dha',
   'threading-in-dha',
   'hair-in-dha',
   'facials-in-dha',
   'nails-in-dha',
+  'waxing-in-dha',
   'threading-in-bahadurabad',
   'bridal-makeup-in-bahadurabad',
   'facials-in-bahadurabad',
+  'hair-in-bahadurabad',
+  'nails-in-bahadurabad',
+  'waxing-in-bahadurabad',
   'waxing-in-tariq-road',
   'threading-in-tariq-road',
   'facials-in-tariq-road',
   'bridal-makeup-in-tariq-road',
+  'hair-in-tariq-road',
+  'nails-in-tariq-road',
   'threading-in-shahrah-e-faisal',
   'facials-in-shahrah-e-faisal',
+  'bridal-makeup-in-shahrah-e-faisal',
+  'hair-in-shahrah-e-faisal',
   'bridal-makeup-in-north-nazimabad',
   'threading-in-north-nazimabad',
   'facials-in-north-nazimabad',
+  'hair-in-north-nazimabad',
+  'waxing-in-north-nazimabad',
   'bridal-makeup-in-saddar',
   'facials-in-saddar',
   'threading-in-saddar',
   'hair-in-saddar',
+  'nails-in-saddar',
+  'waxing-in-saddar',
+  'threading-in-korangi',
+  'facials-in-korangi',
+  'bridal-makeup-in-korangi',
 ]
 
 export function parseLocationSlug(slug) {

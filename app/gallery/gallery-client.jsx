@@ -36,10 +36,10 @@ export default function GalleryClient() {
       <section className="section-shell mb-12 md:mb-16" aria-labelledby="gallery-showcase-heading">
         <p className="eyebrow mb-3 text-center">— Work we do</p>
         <h2 id="gallery-showcase-heading" className="section-title text-xl md:text-2xl text-center mb-2">
-          Results showcase
+          Studio highlights
         </h2>
         <p className="text-stone text-sm font-['Inter'] font-light text-center max-w-xl mx-auto mb-8">
-          A sample of the services we offer at our PECHS studio. Authentic client before/after sets will be added here as they become available.
+          Real treatments from our PECHS studio — threading, bridal, and nails. More looks live on Instagram.
         </p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-6">
           {GALLERY_SHOWCASE_ITEMS.map((item, i) => (
@@ -53,12 +53,11 @@ export default function GalleryClient() {
       </div>
       <div className="section-shell mt-4 mb-8 max-w-2xl mx-auto text-center">
         <p className="text-body text-sm mb-2">
-          This gallery shows a sample of our work — we are actively adding fresh client photos from the PECHS
-          studio. Follow{' '}
+          A curated sample from the chair — follow{' '}
           <a href={IG_LINK} target="_blank" rel="noreferrer" className="link-underline text-ink">
             @farwasalon on Instagram
           </a>{' '}
-          for the latest looks, or visit us in person to see the full portfolio.
+          for daily updates, or visit the PECHS studio to see the full portfolio in person.
         </p>
       </div>
       <div className="section-shell mt-4 mb-16">

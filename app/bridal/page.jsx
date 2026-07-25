@@ -86,18 +86,18 @@ export default function BridalLandingPage() {
           <div className="flex flex-wrap gap-3 mb-12">
             <Link
               href={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
-              className="btn-primary"
+              className="tap-safe btn-primary"
             >
               Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="btn-secondary">
-              WhatsApp
+            <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe btn-secondary">
+              WhatsApp wedding plan
             </a>
-            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="btn-secondary">
+            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe btn-secondary">
               Directions
             </a>
-            <Link href="/prices" className="btn-secondary">
-              Price list
+            <Link href="/prices" className="tap-safe btn-secondary">
+              Full price list
             </Link>
           </div>
 
@@ -141,7 +141,7 @@ export default function BridalLandingPage() {
             </h2>
             <ul className="grid md:grid-cols-2 gap-4 max-w-4xl">
               {packages.map((pkg) => (
-                <li key={pkg.id} className="panel-soft p-5 shadow-soft">
+                <li key={pkg.id} className="panel-soft p-5 shadow-soft flex flex-col">
                   <h3 className="font-['Syne'] font-bold text-sm text-ink uppercase mb-1">{pkg.name}</h3>
                   <p className="text-stone text-xs font-['Inter'] mb-2">
                     {formatPrice(pkg.pricePkr)}
@@ -159,11 +159,17 @@ export default function BridalLandingPage() {
                     </>
                   )}
                   <p className="text-[10px] tracking-[0.14em] uppercase text-stone mb-1">Not included by default</p>
-                  <ul className="text-stone text-xs font-['Inter'] list-disc pl-4 space-y-1">
+                  <ul className="text-stone text-xs font-['Inter'] list-disc pl-4 space-y-1 mb-4">
                     <li>Guest / family makeup (book separately)</li>
                     <li>Pre-wedding facials &amp; threading (add from the menu)</li>
                     <li>Jewellery hire or outfit draping beyond dupatta/hijab styling listed</li>
                   </ul>
+                  <Link
+                    href={`/book?serviceId=${pkg.id}`}
+                    className="tap-safe btn-primary !py-2.5 !px-4 mt-auto w-full sm:w-auto justify-center"
+                  >
+                    Book {pkg.name} <ArrowUpRight className="w-3.5 h-3.5" />
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -275,6 +281,26 @@ export default function BridalLandingPage() {
               </dl>
             </section>
           )}
+
+          <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft max-w-3xl" aria-labelledby="bridal-book-cta">
+            <h2 id="bridal-book-cta" className="section-title text-lg mb-2">
+              Lock your bridal date
+            </h2>
+            <p className="text-body text-sm mb-5">
+              Start with a Bridal Trial (Rs 8,000) or WhatsApp your wedding week — we confirm slots before you travel to PECHS.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
+                className="tap-safe btn-primary"
+              >
+                Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
+              </Link>
+              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe btn-secondary">
+                WhatsApp wedding plan
+              </a>
+            </div>
+          </section>
 
           <section className="mb-8" aria-labelledby="bridal-read-heading">
             <h2 id="bridal-read-heading" className="section-title mb-4">

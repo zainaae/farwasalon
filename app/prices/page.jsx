@@ -55,10 +55,13 @@ export default function PricesPage() {
         </p>
         <nav aria-label="Price list categories" className="mb-6 max-w-3xl">
           <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2">Jump to category</p>
-          <ul className="flex flex-wrap gap-x-3 gap-y-2 text-sm font-['Inter']">
+          <ul className="flex flex-wrap gap-2 text-sm font-['Inter']">
             {categories.map((cat) => (
               <li key={cat}>
-                <a href={`#prices-${CAT_SLUGS[cat]}`} className="link-underline hover:text-ink text-ink font-medium">
+                <a
+                  href={`#prices-${CAT_SLUGS[cat]}`}
+                  className="tap-safe inline-flex min-h-[44px] items-center px-2.5 py-2 border border-border-soft hover:border-ink text-ink font-medium transition-colors"
+                >
                   {cat === 'Eyebrow Tattoo' ? 'Microblading' : cat}
                 </a>
               </li>
@@ -102,14 +105,22 @@ export default function PricesPage() {
         <div className="grid gap-12 md:gap-14">
           {categories.map((cat) => (
             <section key={cat} aria-labelledby={`prices-${CAT_SLUGS[cat]}`}>
-              <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-ink/30 pb-2.5 mb-1">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink/30 pb-2.5 mb-1">
                 <h2 id={`prices-${CAT_SLUGS[cat]}`} className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl">
                   {cat}
                 </h2>
-                <Link href={`/services/${CAT_SLUGS[cat]}`}
-                  className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone hover:text-ink transition-colors">
-                  About {cat} →
-                </Link>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+                  <Link
+                    href={`/book?category=${encodeURIComponent(cat)}`}
+                    className="tap-safe inline-flex min-h-[44px] items-center text-[11px] tracking-[0.14em] uppercase font-['Inter'] font-semibold text-ink hover:text-stone transition-colors"
+                  >
+                    Book {cat === 'Eyebrow Tattoo' ? 'brows' : cat}
+                  </Link>
+                  <Link href={`/services/${CAT_SLUGS[cat]}`}
+                    className="tap-safe inline-flex min-h-[44px] items-center text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone hover:text-ink transition-colors">
+                    About →
+                  </Link>
+                </div>
               </div>
               <table className="w-full border-collapse">
                 <caption className="sr-only">{cat} prices at Farwa Beauty Salon, PECHS Karachi</caption>
@@ -133,6 +144,24 @@ export default function PricesPage() {
             </section>
           ))}
         </div>
+
+        <section className="mt-14 panel-soft p-6 md:p-8 shadow-soft max-w-3xl" aria-labelledby="prices-book-cta">
+          <h2 id="prices-book-cta" className="font-['Syne'] font-semibold text-ink text-lg md:text-xl mb-2">
+            Ready to book?
+          </h2>
+          <p className="text-body text-sm mb-5 max-w-xl">
+            Pick a service online — real-time slots, printed PKR rates, confirmation on the spot.
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <Link href="/book" className="tap-safe btn-primary">
+              Book online <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
+            <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer"
+              className="tap-safe btn-secondary">
+              Ask on WhatsApp
+            </a>
+          </div>
+        </section>
 
         <section className="mt-14 pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
           <h2 id="prices-faq-heading" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-6">
