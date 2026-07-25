@@ -212,12 +212,20 @@ export function SmoothyGallery({ photos }) {
         </button>
       </div>
 
-      {/* Progress dots */}
-      <div className="flex items-center justify-center gap-1.5 mt-5" role="group" aria-label="Choose photo">
+      <div className="flex items-center justify-center gap-0.5 mt-5" role="group" aria-label="Choose photo">
         {photos.map((_, i) => (
-          <button key={i} type="button" onClick={() => scrollTo(i)}
-            aria-current={idx === i ? 'true' : undefined} aria-label={`Photo ${i + 1}`}
-            className={`h-[2px] transition-all duration-300 ${idx === i ? 'w-8 bg-ink' : 'w-3 bg-stone/30 hover:bg-stone/60'}`} />
+          <button
+            key={i}
+            type="button"
+            onClick={() => scrollTo(i)}
+            aria-current={idx === i ? 'true' : undefined}
+            aria-label={`Photo ${i + 1}`}
+            className="tap-safe min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+          >
+            <span
+              className={`block h-[2px] transition-all duration-300 ${idx === i ? 'w-8 bg-ink' : 'w-3 bg-stone/30'}`}
+            />
+          </button>
         ))}
       </div>
     </div>
@@ -236,7 +244,7 @@ export function WordmarkDivider() {
           F · B · S
         </span>
         <span className="hidden sm:inline text-[#c9a98a] text-xs" aria-hidden="true">✦</span>
-        <span className="font-['Syne'] italic font-light text-stone text-[11px] md:text-[13px] shrink-0 tracking-wide">
+        <span className="font-['Unbounded'] italic font-light text-stone text-[11px] md:text-[13px] shrink-0 tracking-wide">
           Since 2008
         </span>
         <span className="flex-1 h-px bg-gradient-to-l from-transparent via-[#c9a98a]/50 to-[#c9a98a]" />
@@ -414,11 +422,11 @@ export function Navbar({ transparent = false }) {
       className={`fixed top-0 left-0 right-0 z-[100] transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300 pt-[env(safe-area-inset-top,0px)] isolate [backface-visibility:hidden] animate-[navSlideIn_0.55s_cubic-bezier(0.16,1,0.3,1)_both] ${headerSurface}`}
     >
       <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-6 lg:px-10 h-[3.375rem] md:h-14 flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between md:justify-normal gap-3 min-w-0">
-        <Link href="/" className="justify-self-start shrink-0 min-w-0">
+        <Link href="/" className="justify-self-start shrink-0 min-w-0 inline-flex items-center min-h-[44px]">
           <Logo light={light} />
         </Link>
         <nav
-          className="hidden md:flex items-center justify-center gap-x-3 md:gap-x-4 lg:gap-x-5 min-w-0 max-w-[min(100%,42rem)] justify-self-center px-1"
+          className="hidden md:flex items-center justify-center gap-x-2 md:gap-x-3 lg:gap-x-4 min-w-0 max-w-[min(100%,42rem)] justify-self-center px-1"
           aria-label="Main navigation"
         >
           {navLinks.map(({ label, href, wideOnly, hideOnDesktop }) => {
@@ -426,9 +434,9 @@ export function Navbar({ transparent = false }) {
             return (
               <Link key={href} href={href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`nav-link shrink-0 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors duration-200 whitespace-nowrap
+                className={`nav-link shrink-0 inline-flex items-center min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors duration-200 whitespace-nowrap
                 ${hideOnDesktop ? 'md:hidden' : ''}
-                ${wideOnly ? 'hidden lg:inline-block' : ''}
+                ${wideOnly ? 'hidden lg:inline-flex' : ''}
                 ${isActive ? `nav-link--active ${light ? 'nav-link--on-light text-ink' : 'nav-link--on-dark text-white'}` : (light ? 'text-stone hover:text-ink' : 'text-white/65 hover:text-white')}`}>
                 {label}
               </Link>
@@ -510,60 +518,54 @@ export function StickyMobileCTA({ hidden = false }) {
   if (hidden) return null
   return (
     <>
-      {/* flow spacer so page content never hides behind the fixed bar on mobile */}
       <div
         aria-hidden
-        className={`md:hidden shrink-0 ${showSlotHint ? 'h-[calc(6.5rem+env(safe-area-inset-bottom,0px))]' : 'h-[calc(5.5rem+env(safe-area-inset-bottom,0px))]'}`}
+        className={`md:hidden shrink-0 ${showSlotHint ? 'h-[calc(5.75rem+env(safe-area-inset-bottom,0px))]' : 'h-[calc(4.75rem+env(safe-area-inset-bottom,0px))]'}`}
       />
       <nav
         className="fixed z-50 left-0 right-0 md:hidden max-w-[100vw] pointer-events-none"
-        style={{ bottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}
+        style={{ bottom: 'max(0.6rem, env(safe-area-inset-bottom, 0px))' }}
         aria-label="Quick contact and booking"
       >
-        <m.div
-          initial={{ y: 80, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 1.0, duration: 0.55, ease: [0.16,1,0.3,1] }}
-          className="pointer-events-auto mx-3 flex flex-col rounded-xl bg-ink/95 backdrop-blur-md shadow-2xl shadow-ink/40 border border-white/10 min-w-0 max-w-[calc(100vw-1.5rem)] overflow-hidden"
-        >
+        <div className="sticky-cta-enter pointer-events-auto mx-3.5 flex flex-col rounded-lg bg-ink/92 backdrop-blur-md shadow-lg shadow-ink/25 border border-white/[0.08] min-w-0 max-w-[calc(100vw-1.75rem)] overflow-hidden">
           {showSlotHint && (
-            <p className="px-3 pt-2 pb-0.5 text-center text-[9px] tracking-[0.16em] uppercase text-white/45 font-['Inter'] leading-none">
+            <p className="px-3 pt-1.5 pb-0 text-center text-[8.5px] tracking-[0.14em] uppercase text-white/40 font-['Inter'] leading-none">
               <span
-                className={`inline-block w-1.5 h-1.5 rounded-full mr-1.5 align-middle ${slot.open ? 'bg-[#9cd48c]' : 'bg-[#c9a98a]'}`}
+                className={`inline-block w-1 h-1 rounded-full mr-1.5 align-middle ${slot.open ? 'bg-[#9cd48c]' : 'bg-[#c9a98a]'}`}
                 aria-hidden="true"
               />
-              Next slot <span className="text-white/75 font-medium">{slot.label}</span>
+              Next slot <span className="text-white/70 font-medium">{slot.label}</span>
             </p>
           )}
-          <div className="flex items-stretch gap-1 p-1.5">
+          <div className="flex items-stretch gap-0.5 p-1">
             <a
               href={`tel:+${WA_NUMBER}`}
               aria-label="Call the salon"
-              className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/85 hover:text-white active:scale-[0.97] text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] py-3 transition-colors"
+              className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/80 hover:text-white active:scale-[0.98] text-[10px] tracking-[0.12em] uppercase font-medium font-['Inter'] py-2.5 transition-colors"
             >
-              <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <Phone className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
               Call
             </a>
-            <span aria-hidden="true" className="w-px bg-white/15 my-1.5" />
+            <span aria-hidden="true" className="w-px bg-white/10 my-2" />
             <a
               href={WA_DEFAULT}
               target="_blank"
               rel="noreferrer"
               aria-label="Message the salon on WhatsApp"
-              className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/85 hover:text-white active:scale-[0.97] text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] py-3 transition-colors"
+              className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/80 hover:text-white active:scale-[0.98] text-[10px] tracking-[0.12em] uppercase font-medium font-['Inter'] py-2.5 transition-colors"
             >
-              <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
+              <MessageCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
               WhatsApp
             </a>
             <Link
               href="/book"
               aria-label="Book an appointment online"
-              className="tap-safe min-h-[44px] flex-[1.35] inline-flex items-center justify-center gap-1.5 bg-white text-ink active:scale-[0.97] text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] rounded-lg py-3"
+              className="tap-safe min-h-[44px] flex-[1.3] inline-flex items-center justify-center gap-1.5 bg-white text-ink active:scale-[0.98] text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] rounded-md py-2.5"
             >
               Book <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
             </Link>
           </div>
-        </m.div>
+        </div>
       </nav>
     </>
   )
@@ -574,16 +576,15 @@ export function StickyWA({ hidden = false }) {
   if (hidden) return null
   return (
     <>
-      <div aria-hidden className="h-[calc(5rem+env(safe-area-inset-bottom,0px))] md:hidden shrink-0" />
+      <div aria-hidden className="h-[calc(4.5rem+env(safe-area-inset-bottom,0px))] md:hidden shrink-0" />
       <div className="fixed z-50 left-0 right-0 flex justify-center md:hidden pointer-events-none px-4"
-        style={{ bottom: 'max(0.75rem, env(safe-area-inset-bottom, 0px))' }}>
-        <m.div
-          initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 1.2, duration: 0.6, ease: [0.16,1,0.3,1] }}>
+        style={{ bottom: 'max(0.6rem, env(safe-area-inset-bottom, 0px))' }}>
+        <div className="sticky-cta-enter">
           <Link href="/book"
-            className="tap-safe min-h-[44px] pointer-events-auto inline-flex items-center gap-2 bg-ink/95 backdrop-blur-md text-white text-[10px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-3.5 rounded-xl border border-white/10 shadow-2xl shadow-ink/30">
+            className="tap-safe min-h-[44px] pointer-events-auto inline-flex items-center gap-2 bg-ink/92 backdrop-blur-md text-white text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-3 rounded-lg border border-white/[0.08] shadow-lg shadow-ink/25">
             Book Online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
-        </m.div>
+        </div>
       </div>
     </>
   )
@@ -615,16 +616,16 @@ export function LazyVideo({ src, poster, className, autoPlay, ...props }) {
   return (
     <video
       ref={ref}
-      poster={poster}
-      preload={visible ? 'auto' : 'none'}
+      poster={visible ? poster : undefined}
+      preload={visible ? 'metadata' : 'none'}
       muted
       loop
       playsInline
       className={className}
       {...props}
     >
-      {webm && <source src={webm} type="video/webm" />}
-      <source src={src} type="video/mp4" />
+      {visible && webm && <source src={webm} type="video/webm" />}
+      {visible && <source src={src} type="video/mp4" />}
     </video>
   )
 }

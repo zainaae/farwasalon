@@ -12,7 +12,7 @@ import { getRelatedBlogPostsForCategory } from '../../../src/blog-data.js'
 import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
-import { SITE_ORIGIN, SALON_NAP, buildSpeakableSchema, buildFaqPageSchema } from '../../../lib/business-schema.js'
+import { SITE_ORIGIN, buildSpeakableSchema, buildFaqPageSchema } from '../../../lib/business-schema.js'
 import { AREAS_HUB_HREF, getClientFacingAreaLinksForCategory } from '../../../lib/location-links.js'
 import { WA_DEFAULT, MAPS_LINK } from '../../../src/site-config.js'
 
@@ -101,21 +101,23 @@ export default function CategoryDetailClient({ categorySlug }) {
             return faqSchema ? <JsonLd data={faqSchema} /> : null
           })()}
 
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">
-              <li><Link href="/" className="hover:text-ink transition-colors">Home</Link></li>
-              <li><ChevronLeft className="w-2.5 h-2.5 rotate-180" /></li>
-              <li><Link href="/services" className="hover:text-ink transition-colors">Services</Link></li>
-              <li><ChevronLeft className="w-2.5 h-2.5 rotate-180" /></li>
-              <li className="text-ink">{category}</li>
+          <nav aria-label="Breadcrumb" className="mb-5">
+            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-['Inter']">
+              <li>
+                <Link href="/" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden className="text-stone/50">/</li>
+              <li>
+                <Link href="/services" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
+                  Services
+                </Link>
+              </li>
+              <li aria-hidden className="text-stone/50">/</li>
+              <li className="text-ink px-1">{category}</li>
             </ol>
           </nav>
-
-          <m.button initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}
-            onClick={onBack}
-            className="flex items-center gap-2 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors mb-8">
-            <ChevronLeft className="w-3.5 h-3.5" /> All Services
-          </m.button>
 
           <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="mb-8 pb-8 border-b border-border-soft">
@@ -123,11 +125,7 @@ export default function CategoryDetailClient({ categorySlug }) {
               — {services.length} services{minPrice != null ? ` · from ${formatPrice(minPrice)}` : ''}
             </p>
             <h1 id="service-category-title" className="section-title text-2xl md:text-3xl mb-3">{pageH1}</h1>
-            <p id="service-category-desc" className="text-body max-w-lg">{meta.desc}</p>
-            <p className="mt-3 text-stone text-xs font-['Inter'] font-light max-w-lg">{SALON_NAP}</p>
-            <p className="mt-1 text-stone text-xs font-['Inter'] font-light max-w-lg">
-              Women-only PECHS studio — appointments in-salon only (not an at-home parlour).
-            </p>
+            <p id="service-category-desc" className="text-body max-w-prose leading-[1.7]">{meta.desc}</p>
             <div className="cta-cluster mt-5">
               <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">
                 Book online <ArrowUpRight className="w-4 h-4" />
@@ -250,8 +248,11 @@ export default function CategoryDetailClient({ categorySlug }) {
               className="btn-primary">
               Book a {category} Service <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <button onClick={onBack}
-              className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
+            <button
+              type="button"
+              onClick={onBack}
+              className="tap-safe inline-flex items-center text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
+            >
               ← Back to all categories
             </button>
           </div>

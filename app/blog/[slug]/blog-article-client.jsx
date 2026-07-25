@@ -86,13 +86,21 @@ export default function BlogArticleClient({ slug }) {
         ]} />
 
         <div className="max-w-2xl">
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">
-              <li><Link href="/" className="hover:text-ink transition-colors">Home</Link></li>
-              <li><ChevronRight className="w-2.5 h-2.5" /></li>
-              <li><Link href="/blog" className="hover:text-ink transition-colors">Blog</Link></li>
-              <li><ChevronRight className="w-2.5 h-2.5" /></li>
-              <li className="text-ink line-clamp-1">{post.title}</li>
+          <nav aria-label="Breadcrumb" className="mb-5">
+            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-['Inter']">
+              <li>
+                <Link href="/" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden className="text-stone/50">/</li>
+              <li>
+                <Link href="/blog" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li aria-hidden className="text-stone/50">/</li>
+              <li className="text-ink px-1 line-clamp-1">{post.title}</li>
             </ol>
           </nav>
 
@@ -103,7 +111,7 @@ export default function BlogArticleClient({ slug }) {
           >
             <Link
               href="/blog"
-              className="flex items-center gap-2 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors mb-8"
+              className="tap-safe inline-flex items-center gap-2 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors mb-7"
             >
               <ChevronLeft className="w-3.5 h-3.5" /> All Articles
             </Link>

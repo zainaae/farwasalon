@@ -5,7 +5,6 @@ import { pageSocialMeta } from '../../lib/page-metadata.js'
 import {
   SALON_ADDRESS_LINES,
   SALON_PHONE_DISPLAY,
-  SALON_NAP,
   GOOGLE_REVIEW_LINK,
   SITE_ORIGIN,
   buildSpeakableSchema,
@@ -70,19 +69,16 @@ export default function BridalLandingPage() {
       {faqSchema && <JsonLd data={faqSchema} />}
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
-          <p className="eyebrow mb-3">— Bridal makeup Karachi · from Rs 8,000</p>
-          <h1 id="bridal-headline" className="font-['Unbounded'] font-bold text-[1.75rem] sm:text-3xl md:text-[2.5rem] text-ink mb-4 max-w-3xl leading-[1.15] tracking-tight">
+          <p className="eyebrow mb-4">— Bridal · from Rs 8,000</p>
+          <h1 id="bridal-headline" className="font-['Unbounded'] font-bold text-[1.85rem] sm:text-3xl md:text-[2.6rem] text-ink mb-5 max-w-2xl leading-[1.12] tracking-tight">
             Bridal Makeup Karachi — Packages from Rs 8,000
           </h1>
-          <p id="bridal-lede" className="text-body md:text-lg max-w-3xl mb-3">
+          <p id="bridal-lede" className="text-body md:text-lg max-w-2xl mb-8 leading-relaxed">
             Farwa in PECHS has styled weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000,
-            Engagement Rs 12,000, Full Bridal Package Rs 25,000. Women-only studio in Saima Terrace Block 3.
-          </p>
-          <p className="text-stone text-sm font-['Inter'] font-light max-w-3xl mb-6">
-            {SALON_NAP}
+            Engagement Rs 12,000, Full Bridal Package Rs 25,000.
           </p>
 
-          <div className="cta-cluster mb-3">
+          <div className="cta-cluster mb-4">
             <Link
               href={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
               className="tap-safe btn-primary w-full sm:w-auto justify-center"
@@ -93,7 +89,7 @@ export default function BridalLandingPage() {
               Full price list
             </Link>
           </div>
-          <p className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-['Inter'] mb-12">
+          <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-['Inter'] mb-14">
             <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
               WhatsApp wedding plan
             </a>
@@ -102,11 +98,11 @@ export default function BridalLandingPage() {
             </a>
           </p>
 
-          <section className="mb-12" aria-labelledby="event-taxonomy-heading">
-            <h2 id="event-taxonomy-heading" className="section-title mb-4">
+          <section className="mb-14" aria-labelledby="event-taxonomy-heading">
+            <h2 id="event-taxonomy-heading" className="section-title mb-3">
               Event looks → Farwa packages
             </h2>
-            <p className="text-body text-sm max-w-3xl mb-4">
+            <p className="text-body text-sm max-w-2xl mb-5 leading-relaxed">
               Mehndi, engagement, nikkah, barat, and walima — each maps to a published package with a clear starting price.
             </p>
             <div className="overflow-x-auto max-w-4xl">

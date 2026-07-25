@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
 import { LazyMotion, MotionConfig } from 'framer-motion'
@@ -15,7 +15,6 @@ import { BookingProvider } from '../src/booking-context.jsx'
 
 const loadDomAnimation = () => import('framer-motion').then((mod) => mod.domAnimation)
 
-/** Footer is a separate chunk; SSR keeps location hub links in HTML for SEO. */
 const SiteFooter = dynamic(() => import('./components/site-footer'), {
   loading: () => <div className="min-h-[28rem] bg-white" aria-hidden />,
 })
@@ -71,6 +70,17 @@ export default function ClientShell({ children }) {
   const isHome = pathname === '/'
   const hideSticky = pathname.startsWith('/book')
   const useMobileCtaBar = shouldShowMobileCtaBar(pathname)
+  const [showNewsletter, setShowNewsletter] = useState(false)
+
+  useEffect(() => {
+    const enable = () => setShowNewsletter(true)
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(enable, { timeout: 2500 })
+      return () => cancelIdleCallback(id)
+    }
+    const t = setTimeout(enable, 1500)
+    return () => clearTimeout(t)
+  }, [])
 
   return (
     <LazyMotion features={loadDomAnimation} strict>
@@ -89,7 +99,7 @@ export default function ClientShell({ children }) {
           ) : (
             <StickyWA hidden={hideSticky} />
           )}
-          <NewsletterModal />
+          {showNewsletter ? <NewsletterModal /> : null}
         </BookingProvider>
       </MotionConfig>
     </LazyMotion>

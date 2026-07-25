@@ -5,7 +5,6 @@ import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import {
   buildFaqPageSchema,
-  SALON_NAP,
   getAggregateRating,
 } from '../../lib/business-schema.js'
 import { PRICES_PAGE_FAQS } from '../../src/faq-data.js'
@@ -37,23 +36,18 @@ export default function PricesPage() {
     <main id="main" className="page-content">
       {faqSchema && <JsonLd data={faqSchema} />}
       <div className="section-shell section-pad min-h-0">
-        <p className="eyebrow mb-3">— Salon price list Karachi · updated {UPDATED} · from Rs 100</p>
-        <h1 className="display-section text-ink mb-3 max-w-3xl">
+        <p className="eyebrow mb-4">— Price list · updated {UPDATED}</p>
+        <h1 className="display-section text-ink mb-4 max-w-3xl">
           Salon Price List Karachi 2026 — From Rs 100
         </h1>
-        <p className="text-stone text-xs font-['Inter'] font-light max-w-3xl mb-4">
-          {YEARS_ACTIVE}+ years · PECHS women-only studio · {rating.ratingValue}★ Google ({rating.reviewCount}+ reviews)
-        </p>
-        <p className="text-body md:text-lg max-w-2xl mb-3">
+        <p className="text-body md:text-lg max-w-2xl mb-3 leading-relaxed">
           Complete PECHS rate card — every service with a starting price in PKR. No hidden quotes.
-          Your exact amount is confirmed before your appointment, never after.
         </p>
-        <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-5">
-          Published starting prices in PKR. Not a tax invoice — GST/sales tax is not added on these
-          listed rates. Longer hair, larger areas, or add-ons can adjust a quote; we confirm before starting.
+        <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-6 leading-relaxed">
+          {YEARS_ACTIVE}+ years · women-only studio · {rating.ratingValue}★ Google · cash, JazzCash, EasyPaisa · Mon–Sat 11–7
         </p>
 
-        <div className="cta-cluster mb-5">
+        <div className="cta-cluster mb-7">
           <Link href="/book" className="tap-safe btn-primary w-full sm:w-auto justify-center">
             Book online <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
@@ -62,13 +56,9 @@ export default function PricesPage() {
             Ask on WhatsApp
           </a>
         </div>
-        <p className="text-stone text-xs font-['Inter'] font-light max-w-2xl mb-2">
-          Payments: cash, JazzCash, EasyPaisa · Hours: Mon–Sat 11–7 (closed Sunday)
-        </p>
-        <p className="text-stone text-xs font-['Inter'] font-light max-w-2xl mb-8">{SALON_NAP}</p>
 
-        <nav aria-label="Price list categories" className="mb-10 max-w-4xl">
-          <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2">Jump to category</p>
+        <nav aria-label="Price list categories" className="mb-12 max-w-4xl">
+          <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2.5">Jump to category</p>
           <ul className="tab-scroller text-sm font-['Inter'] pb-1">
             {categories.map((cat) => (
               <li key={cat}>

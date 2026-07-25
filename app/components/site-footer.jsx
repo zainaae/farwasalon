@@ -75,7 +75,7 @@ export default function SiteFooter() {
                   <li key={sl.label}>
                     <Link
                       href={`/services/${sl.slug}`}
-                      className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
+                      className="link-underline tap-safe inline-flex items-center min-h-[44px] text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
                     >
                       {sl.label}
                     </Link>
@@ -111,7 +111,7 @@ export default function SiteFooter() {
                   <li key={l}>
                     <Link
                       href={href}
-                      className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
+                      className="link-underline tap-safe inline-flex items-center min-h-[44px] text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
                     >
                       {l}
                     </Link>
@@ -193,7 +193,7 @@ export default function SiteFooter() {
                 <li key={slug}>
                   <Link
                     href={href}
-                    className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
+                    className="link-underline tap-safe inline-flex items-center min-h-[44px] text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
                   >
                     {label}
                   </Link>
