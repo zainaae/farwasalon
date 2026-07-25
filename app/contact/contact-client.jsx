@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { m } from 'framer-motion'
 import Link from 'next/link'
-import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, ChevronDown, X } from 'lucide-react'
+import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, MessageCircle, ChevronDown, X } from 'lucide-react'
 import { IgIcon } from '../../src/shared.jsx'
 import { useNextSlot } from '../../src/use-next-slot.js'
 import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track } from '../../src/data.js'
@@ -107,11 +107,12 @@ export default function ContactClient() {
               <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
                 className="flex items-start gap-4 group">
                 <div className="w-9 h-9 border border-border-soft flex items-center justify-center shrink-0 group-hover:border-ink transition-colors">
-                  <Sparkles className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
+                  <MessageCircle className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
                 </div>
                 <div>
                   <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">WhatsApp</p>
                   <p className="text-stone text-sm font-light font-['Inter']">+92 322 278 2254</p>
+                  <p className="text-stone text-[11px] font-['Inter'] mt-0.5 group-hover:text-ink transition-colors">Message us →</p>
                 </div>
               </a>
               <a href={IG_LINK} target="_blank" rel="noreferrer"

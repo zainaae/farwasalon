@@ -359,33 +359,40 @@ export function ServiceModal({ service, onClose }) {
 /* ─── Logo ─────────────────────────────────────────────────────── */
 function Logo({ light }) {
   const [err, setErr] = useState(false)
+  /* Fixed-height shell so wordmark ↔ image swap never shifts the header row. */
+  const shell = 'inline-flex items-center justify-center h-8 w-auto max-w-[10rem]'
+  const wordmark =
+    "font-['Unbounded'] font-bold text-[12px] md:text-[13px] lg:text-[14px] tracking-[0.14em] md:tracking-[0.16em] leading-none"
+
   /* On dark transparent hero: white text looks cleaner than inverting the JPG
      (JPG has white background so brightness-0+invert turns it into a flat white blob) */
   if (!light) {
     return (
-      <span className="font-['Unbounded'] font-bold text-[12px] md:text-[13px] lg:text-[14px] tracking-[0.14em] md:tracking-[0.16em] text-white">
+      <span className={`${shell} ${wordmark} text-white`}>
         FARWA
       </span>
     )
   }
   if (err) {
-    return <span className="font-['Unbounded'] font-bold text-[12px] md:text-[13px] lg:text-[14px] tracking-[0.14em] md:tracking-[0.16em] text-ink">FARWA</span>
+    return <span className={`${shell} ${wordmark} text-ink`}>FARWA</span>
   }
   return (
-    <Image
-      src="/logo.jpg"
-      alt="Farwa Beauty Salon"
-      width={40}
-      height={40}
-      sizes="40px"
-      onError={() => setErr(true)}
-      className="h-8 md:h-[2.125rem] w-auto max-w-[10rem] object-contain transition-opacity duration-300"
-    />
+    <span className={shell}>
+      <Image
+        src="/logo.jpg"
+        alt="Farwa Beauty Salon"
+        width={40}
+        height={40}
+        sizes="40px"
+        onError={() => setErr(true)}
+        className="h-7 w-auto max-h-full object-contain object-left translate-y-px"
+      />
+    </span>
   )
 }
 
 /* ─── Navbar ───────────────────────────────────────────────────── */
-export function Navbar({ transparent = false }) {
+export function Navbar({ transparent = false, onMobileOpenChange }) {
   const [scrolled,   setScrolled]   = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
@@ -397,6 +404,13 @@ export function Navbar({ transparent = false }) {
   useEffect(() => {
     setMobileOpen(false) // eslint-disable-line react-hooks/set-state-in-effect -- intentional: close mobile nav on route change
   }, [pathname])
+  useEffect(() => {
+    onMobileOpenChange?.(mobileOpen)
+  }, [mobileOpen, onMobileOpenChange])
+  const setMenuOpen = (next) => {
+    setMobileOpen(next)
+    onMobileOpenChange?.(next)
+  }
   const light = scrolled || !transparent
 
   const navLinks = [
@@ -411,22 +425,23 @@ export function Navbar({ transparent = false }) {
     { label: 'Contact',      href: '/contact', wideOnly: false },
   ]
 
+  /* Always keep a 1px border slot so scroll color-swap never changes bar height. */
   const headerSurface = scrolled
-    ? 'bg-white/95 backdrop-blur-md shadow-[0_1px_0_0_#e4ddd7]'
+    ? 'bg-white/95 backdrop-blur-md border-b border-[#e4ddd7]'
     : transparent
       ? 'bg-ink/35 backdrop-blur-md border-b border-white/[0.08]'
-      : 'bg-white/95 backdrop-blur-md'
+      : 'bg-white/95 backdrop-blur-md border-b border-[#e4ddd7]'
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-[100] transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300 pt-[env(safe-area-inset-top,0px)] isolate [backface-visibility:hidden] animate-[navSlideIn_0.55s_cubic-bezier(0.16,1,0.3,1)_both] ${headerSurface}`}
     >
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-6 lg:px-10 h-[3.375rem] md:h-14 flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between md:justify-normal gap-3 min-w-0">
-        <Link href="/" className="justify-self-start shrink-0 min-w-0 inline-flex items-center min-h-[44px]">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-6 lg:px-10 h-14 flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between md:justify-normal gap-3 min-w-0">
+        <Link href="/" className="justify-self-start shrink-0 min-w-0 inline-flex items-center h-11">
           <Logo light={light} />
         </Link>
         <nav
-          className="hidden md:flex items-center justify-center gap-x-2 md:gap-x-3 lg:gap-x-4 min-w-0 max-w-[min(100%,42rem)] justify-self-center px-1"
+          className="hidden md:flex items-center justify-center gap-x-2 md:gap-x-3 lg:gap-x-4 min-w-0 max-w-[min(100%,42rem)] justify-self-center self-center h-11 px-1"
           aria-label="Main navigation"
         >
           {navLinks.map(({ label, href, wideOnly, hideOnDesktop }) => {
@@ -434,7 +449,7 @@ export function Navbar({ transparent = false }) {
             return (
               <Link key={href} href={href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`nav-link shrink-0 inline-flex items-center min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors duration-200 whitespace-nowrap
+                className={`nav-link shrink-0 h-11 min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors duration-200 whitespace-nowrap
                 ${hideOnDesktop ? 'md:hidden' : ''}
                 ${wideOnly ? 'hidden lg:inline-flex' : ''}
                 ${isActive ? `nav-link--active ${light ? 'nav-link--on-light text-ink' : 'nav-link--on-dark text-white'}` : (light ? 'text-stone hover:text-ink' : 'text-white/65 hover:text-white')}`}>
@@ -443,9 +458,9 @@ export function Navbar({ transparent = false }) {
             )
           })}
         </nav>
-        <div className="justify-self-end flex items-center gap-2 sm:gap-3 shrink-0 min-w-0">
+        <div className="justify-self-end flex items-center gap-2 sm:gap-3 shrink-0 min-w-0 h-11">
           <Link href="/book"
-            className={`hidden md:inline-flex items-center gap-1.5 text-[11px] lg:text-[12px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-4 lg:px-5 py-2.5 rounded-sm border transition-all duration-300 whitespace-nowrap active:scale-[0.98] ${
+            className={`hidden md:inline-flex items-center justify-center gap-1.5 h-11 min-h-[44px] text-[11px] lg:text-[12px] tracking-[0.14em] uppercase font-semibold font-['Inter'] leading-none px-4 lg:px-5 rounded-sm border transition-colors duration-300 whitespace-nowrap active:scale-[0.98] ${
               light
                 ? 'bg-ink text-white border-ink hover:bg-stone hover:border-stone'
                 : 'bg-transparent text-white border-white/70 hover:bg-white hover:text-ink hover:border-white'
@@ -455,8 +470,8 @@ export function Navbar({ transparent = false }) {
           </Link>
           <button
             type="button"
-            className={`md:hidden p-2 -m-1 min-w-[44px] min-h-[44px] flex items-center justify-center ${light ? 'text-ink' : 'text-white'}`}
-            onClick={() => setMobileOpen((o) => !o)}
+            className={`md:hidden min-w-[44px] min-h-[44px] h-11 w-11 flex items-center justify-center ${light ? 'text-ink' : 'text-white'}`}
+            onClick={() => setMenuOpen(!mobileOpen)}
             aria-label={mobileOpen ? 'Close menu' : 'Menu'}
             aria-expanded={mobileOpen}>
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -469,12 +484,12 @@ export function Navbar({ transparent = false }) {
             className="md:hidden overflow-hidden bg-white border-t border-border-soft">
             <div className="px-5 py-5 flex flex-col gap-1">
               {navLinks.map(({ label, href }) => (
-                <Link key={href} href={href} onClick={() => setMobileOpen(false)}
+                <Link key={href} href={href} onClick={() => setMenuOpen(false)}
                   className="tap-safe inline-flex items-center min-h-[44px] text-[11px] tracking-[0.18em] uppercase text-stone hover:text-ink font-['Inter']">
                   {label}
                 </Link>
               ))}
-              <Link href="/book" onClick={() => setMobileOpen(false)}
+              <Link href="/book" onClick={() => setMenuOpen(false)}
                 className="tap-safe inline-flex items-center justify-center min-h-[44px] bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-5 py-3 w-full sm:w-fit mt-3">
                 Book an Appointment
               </Link>
