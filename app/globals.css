@@ -431,6 +431,25 @@
   @media (min-width: 768px) {
     .page-content { padding-top: calc(3.5rem + env(safe-area-inset-top, 0px)); }
   }
+  /* Mobile Call/WA/Book bar: keep /prices jump chips + anchors clear of the fixed CTA */
+  @media (max-width: 767px) {
+    html {
+      scroll-padding-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+    }
+    .page-content nav[aria-label="Price list categories"] {
+      position: sticky;
+      top: calc(3.375rem + env(safe-area-inset-top, 0px));
+      z-index: 40;
+      background: #fff;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+    }
+    .page-content [id^="prices-"] {
+      scroll-margin-top: calc(3.375rem + env(safe-area-inset-top, 0px) + 5.75rem);
+      scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
   .input-field {
     width: 100%;
     min-height: 44px;
