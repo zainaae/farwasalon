@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { ArrowUpRight, MessageCircle, Star } from 'lucide-react'
 import { WA_DEFAULT, IG_LINK, MAPS_LINK, CAT_SLUGS } from '../../src/site-config.js'
 import { SALON_ADDRESS_LINES } from '../../lib/business-schema.js'
-import { getPriorityLocationLinks } from '../../lib/location-links.js'
+import { AREAS_HUB_HREF, getClientFacingAreaLinks } from '../../lib/location-links.js'
 import FooterNewsletter from './footer-newsletter.jsx'
 import {
   UrduSignature,
@@ -20,7 +20,7 @@ export default function SiteFooter() {
     label,
     slug,
   }))
-  const areaLinks = getPriorityLocationLinks()
+  const areaLinks = getClientFacingAreaLinks()
   return (
     <footer className="bg-white">
       <div className="border-t border-border-soft px-5 md:px-10 py-8 md:py-10">
@@ -185,30 +185,30 @@ export default function SiteFooter() {
           </div>
           <FooterNewsletter />
           <div className="mb-10 pb-8 border-b border-border-soft">
-            <details className="footer-areas group">
-              <summary className="tap-safe flex items-center justify-between gap-3 min-h-[44px] cursor-pointer list-none text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink select-none">
-                <span>Areas we serve</span>
-                <span
-                  className="text-stone text-[11px] tracking-normal normal-case font-normal transition-transform duration-200 group-open:rotate-180"
-                  aria-hidden="true"
+            <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-3">
+              Areas we serve
+            </p>
+            <ul className="flex flex-wrap gap-x-3 gap-y-2 mb-3">
+              {areaLinks.map(({ slug, href, label }) => (
+                <li key={slug}>
+                  <Link
+                    href={href}
+                    className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link
+                  href={AREAS_HUB_HREF}
+                  className="link-underline text-ink text-xs font-['Inter'] font-medium hover:text-stone transition-colors"
                 >
-                  ▾
-                </span>
-              </summary>
-              <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-2">
-                {areaLinks.map(({ slug, href, label }) => (
-                  <li key={slug}>
-                    <Link
-                      href={href}
-                      className="link-underline text-stone text-xs font-['Inter'] hover:text-ink transition-colors"
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </details>
-            <p className="text-stone text-xs font-['Inter'] mt-4">
+                  See all areas →
+                </Link>
+              </li>
+            </ul>
+            <p className="text-stone text-xs font-['Inter']">
               PECHS Block 3, Karachi ·{' '}
               <a
                 href={MAPS_LINK}
@@ -220,7 +220,7 @@ export default function SiteFooter() {
               </a>
               {' · '}
               <Link
-                href="/beauty-salon-karachi"
+                href={AREAS_HUB_HREF}
                 className="link-underline hover:text-ink transition-colors"
               >
                 Beauty salon in Karachi

@@ -45,9 +45,8 @@ export default function PricesPage() {
           {YEARS_ACTIVE}+ years · PECHS women-only studio · {rating.ratingValue}★ Google ({rating.reviewCount}+ reviews)
         </p>
         <p className="text-body md:text-lg max-w-2xl mb-3">
-          Searching for a salon price list in Karachi? This is our complete PECHS rate card —
-          every service, every starting price in PKR as Rs 1,200-style figures. No &ldquo;DM for rates.&rdquo;
-          Your exact quote is confirmed before your appointment, never after.
+          Complete PECHS rate card — every service with a starting price in PKR. No hidden quotes.
+          Your exact amount is confirmed before your appointment, never after.
         </p>
         <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-5">
           Published starting prices in PKR. Not a tax invoice — GST/sales tax is not added on these

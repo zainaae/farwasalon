@@ -75,9 +75,8 @@ export default function BridalLandingPage() {
             Bridal Makeup Karachi — Packages from Rs 8,000
           </h1>
           <p id="bridal-lede" className="text-body md:text-lg max-w-3xl mb-3">
-            Looking for bridal makeup in Karachi with printed prices? Farwa in PECHS has styled
-            weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000, Engagement Rs 12,000,
-            Full Bridal Package Rs 25,000. Women-only studio in Saima Terrace Block 3.
+            Farwa in PECHS has styled weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000,
+            Engagement Rs 12,000, Full Bridal Package Rs 25,000. Women-only studio in Saima Terrace Block 3.
           </p>
           <p className="text-stone text-sm font-['Inter'] font-light max-w-3xl mb-6">
             {SALON_NAP}
@@ -108,8 +107,7 @@ export default function BridalLandingPage() {
               Event looks → Farwa packages
             </h2>
             <p className="text-body text-sm max-w-3xl mb-4">
-              Marketplace-style mapping for mehndi, engagement, nikkah, barat/HD glam, and walima —
-              each maps to a published menu SKU (no invented à-la-carte rows).
+              Mehndi, engagement, nikkah, barat, and walima — each maps to a published package with a clear starting price.
             </p>
             <div className="overflow-x-auto max-w-4xl">
               <table className="w-full border-collapse text-sm font-['Inter']">
