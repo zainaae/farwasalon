@@ -42,6 +42,15 @@ test.describe('Home — mobile CTA bar', () => {
     await expect(page.getByRole('navigation', { name: 'Quick contact and booking' })).toHaveCount(0)
   })
 
+  test('gallery uses 3-action sticky CTA (not book-only pill)', async ({ page }) => {
+    await page.goto('/gallery')
+    await expect(page.getByRole('navigation', { name: 'Quick contact and booking' })).toBeVisible({
+      timeout: 15_000,
+    })
+    await expect(page.getByRole('link', { name: 'Book an appointment online' })).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Call the salon' })).toBeVisible()
+  })
+
   test('footer Book Online links point to /book', async ({ page }) => {
     await page.goto('/')
     const bookLinks = page.locator('footer a[href="/book"], footer a[href^="/book?"]')

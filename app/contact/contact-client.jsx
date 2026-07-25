@@ -145,13 +145,14 @@ export default function ContactClient() {
                 title="Farwa Beauty Salon location — PECHS, Karachi"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3620.5!2d67.0584185!3d24.8797532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33f2832975c79%3A0xe55ba4a44d34a210!2sFarwa%20beauty%20salon!5e0!3m2!1sen!2spk!4v1"
                 loading="lazy"
+                allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
                 className="absolute inset-0 w-full h-full grayscale-[0.15]"
                 style={{ border: 0 }}
               />
               <a href={MAPS_LINK} target="_blank" rel="noreferrer"
-                className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 bg-white text-ink text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-3 py-2 shadow-md hover:bg-nude transition-colors">
-                Open in Maps <ArrowUpRight className="w-3 h-3" />
+                className="tap-safe absolute bottom-3 right-3 inline-flex min-h-[44px] items-center gap-1.5 bg-white text-ink text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-3.5 py-2.5 shadow-md hover:bg-nude transition-colors">
+                Open in Maps <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
           </m.div>
@@ -222,26 +223,40 @@ export default function ContactClient() {
                 </div>
               </fieldset>
 
-              <label htmlFor="booking-date" className="sr-only">Preferred date</label>
-              <input id="booking-date" name="date" type="date" value={date} onChange={e => setDate(e.target.value)}
-                className="input-field" />
-
-              <label htmlFor="booking-time" className="sr-only">Preferred time</label>
-              <div className="relative">
-                <select id="booking-time" name="time" value={time} onChange={e => setTime(e.target.value)}
-                  className="input-field appearance-none pr-10">
-                  <option value="">Preferred time</option>
-                  {['11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'].map(t => (
-                    <option key={t} value={t}>{t}</option>
-                  ))}
-                </select>
-                <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone pointer-events-none" aria-hidden="true" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="booking-date" className="block text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5">
+                    Preferred date
+                  </label>
+                  <input id="booking-date" name="date" type="date" value={date} onChange={e => setDate(e.target.value)}
+                    className="input-field" />
+                </div>
+                <div>
+                  <label htmlFor="booking-time" className="block text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5">
+                    Preferred time
+                  </label>
+                  <div className="relative">
+                    <select id="booking-time" name="time" value={time} onChange={e => setTime(e.target.value)}
+                      className="input-field appearance-none pr-10">
+                      <option value="">Select a time</option>
+                      {['11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'].map(t => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                    <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone pointer-events-none" aria-hidden="true" />
+                  </div>
+                </div>
               </div>
 
               <button type="submit" disabled={picked.length === 0} aria-label="Send booking request on WhatsApp"
-                className="mt-2 btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-ink">
+                className="tap-safe mt-2 btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-ink">
                 Send on WhatsApp <ArrowUpRight className="w-4 h-4" />
               </button>
+              {picked.length === 0 && (
+                <p className="text-stone text-xs font-['Inter'] font-light -mt-1">
+                  Add at least one service above to send your WhatsApp request.
+                </p>
+              )}
             </form>
 
             {submitted && (
