@@ -35,7 +35,7 @@ export default function BlogIndexClient() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="display-section text-ink mb-4"
             >
-              BEAUTY TIPS<span className="text-border-soft mx-3 font-light italic text-[0.6em]">—</span>&amp; GUIDES
+              BEAUTY TIPS<span className="text-border-soft mx-3 font-light italic text-[0.6em]">—</span>GUIDES
             </m.h1>
           </div>
           <m.p

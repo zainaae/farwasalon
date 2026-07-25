@@ -71,6 +71,7 @@ export default function ClientShell({ children }) {
   const hideSticky = pathname.startsWith('/book')
   const useMobileCtaBar = shouldShowMobileCtaBar(pathname)
   const [showNewsletter, setShowNewsletter] = useState(false)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
   useEffect(() => {
     const enable = () => setShowNewsletter(true)
@@ -82,6 +83,8 @@ export default function ClientShell({ children }) {
     return () => clearTimeout(t)
   }, [])
 
+  const stickyHidden = hideSticky || mobileNavOpen
+
   return (
     <LazyMotion features={loadDomAnimation} strict>
       <MotionConfig reducedMotion="user">
@@ -89,15 +92,15 @@ export default function ClientShell({ children }) {
           <ScrollProgress />
           <ScrollToTop />
           <SkipLink />
-          <Navbar transparent={isHome} />
+          <Navbar transparent={isHome} onMobileOpenChange={setMobileNavOpen} />
           <div className="overflow-x-clip w-full max-w-full min-w-0">
             {children}
           </div>
           <SiteFooter />
           {useMobileCtaBar ? (
-            <StickyMobileCTA hidden={hideSticky} />
+            <StickyMobileCTA hidden={stickyHidden} />
           ) : (
-            <StickyWA hidden={hideSticky} />
+            <StickyWA hidden={stickyHidden} />
           )}
           {showNewsletter ? <NewsletterModal /> : null}
         </BookingProvider>

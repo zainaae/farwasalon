@@ -583,24 +583,29 @@
 }
 .link-underline:hover::after { width: 100%; }
 
-/* â”€â”€ Navbar links (desktop) â”€â”€ */
+/* Navbar links — flex-centered so label baseline matches logo + Book CTA */
 .nav-link {
   position: relative;
-  display: inline-block;
-  padding-bottom: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  padding-bottom: 0;
 }
 .nav-link::after {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  /* Sit just under the centered label inside the 44px tap target — not at box bottom */
+  bottom: calc(50% - 0.72em);
   height: 1px;
   background: currentColor;
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
   opacity: 0.55;
+  pointer-events: none;
 }
 .nav-link:hover::after {
   transform: scaleX(1);
