@@ -542,7 +542,7 @@ export function StickyMobileCTA({ hidden = false }) {
         style={{ bottom: 'max(0.6rem, env(safe-area-inset-bottom, 0px))' }}
         aria-label="Quick contact and booking"
       >
-        <div className="sticky-cta-enter pointer-events-auto mx-3.5 flex flex-col rounded-lg bg-ink/92 backdrop-blur-md shadow-lg shadow-ink/25 border border-white/[0.08] min-w-0 max-w-[calc(100vw-1.75rem)] overflow-hidden">
+        <div className="sticky-cta-enter pointer-events-auto mx-3.5 flex flex-col rounded-lg bg-ink/[0.92] backdrop-blur-md shadow-lg shadow-ink/25 border border-white/[0.08] min-w-0 max-w-[calc(100vw-1.75rem)] overflow-hidden">
           {showSlotHint && (
             <p className="px-3 pt-1.5 pb-0 text-center text-[8.5px] tracking-[0.14em] uppercase text-white/40 font-['Inter'] leading-none">
               <span
@@ -596,7 +596,7 @@ export function StickyWA({ hidden = false }) {
         style={{ bottom: 'max(0.6rem, env(safe-area-inset-bottom, 0px))' }}>
         <div className="sticky-cta-enter">
           <Link href="/book"
-            className="tap-safe min-h-[44px] pointer-events-auto inline-flex items-center gap-2 bg-ink/92 backdrop-blur-md text-white text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-3 rounded-lg border border-white/[0.08] shadow-lg shadow-ink/25">
+            className="tap-safe min-h-[44px] pointer-events-auto inline-flex items-center gap-2 bg-ink/[0.92] backdrop-blur-md text-white text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-3 rounded-lg border border-white/[0.08] shadow-lg shadow-ink/25">
             Book Online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
         </div>
