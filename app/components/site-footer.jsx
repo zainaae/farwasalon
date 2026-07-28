@@ -100,6 +100,7 @@ export default function SiteFooter() {
                   ['Home', '/'],
                   ['Services', '/services'],
                   ['Price List', '/prices'],
+                  ['Deals', '/deals'],
                   ['Book', '/book'],
                   ['Bridal', '/bridal'],
                   ['Gallery', '/gallery'],

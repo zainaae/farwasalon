@@ -37,7 +37,17 @@ export async function generateMetadata({ params }) {
       ? `${service.slug}-in-${location.slug}`
       : categorySlug
     const locality = location.name.includes('Karachi') ? location.name : `${location.name}, Karachi`
-    const description = `${service.name} in ${locality} — ${service.description} At Farwa Beauty Salon, PECHS. From ${priceFloor}. ★ ${GOOGLE_GBP_STATS.rating} Google. Book online.`
+    /* Google truncates around 155-160 chars, so build the description from the
+       highest-CTR parts first (service + area + price + rating) and only spend
+       what is left on the service blurb — trimmed at a word boundary. */
+    const descTail = ` at Farwa Beauty Salon, PECHS. From ${priceFloor}. ★ ${GOOGLE_GBP_STATS.rating} Google. Book online.`
+    const descHead = `${service.name} in ${locality} — `
+    const blurbBudget = 155 - descHead.length - descTail.length
+    const blurb =
+      service.description.length <= blurbBudget
+        ? service.description
+        : `${service.description.slice(0, Math.max(0, blurbBudget - 1)).replace(/[\s,;—-]+\S*$/, '')}…`
+    const description = `${descHead}${blurb}${descTail}`
     return {
       title: { absolute: title },
       description,
