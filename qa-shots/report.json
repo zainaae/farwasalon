@@ -1,0 +1,722 @@
+[
+  {
+    "vp": "m375",
+    "route": "/",
+    "file": "m375_home.png",
+    "title": "Beauty Salon PECHS Karachi — From Rs 100 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      "All 39x44",
+      "reach us on WhatsApp 127x15",
+      "+92 322 278 2254 123x20",
+      "4.6★ · 19+ reviews on Go 192x20",
+      "Open in Google Maps 101x12",
+      "Google 64x15",
+      "Show review by Sukoon mu 24x6",
+      "Show review by Shehla Na 6x6"
+    ],
+    "issues": [
+      "tiny taps: All 39x44; reach us on WhatsApp 127x15; +92 322 278 2254 123x20; 4.6★ · 19+ reviews on Go 192x20; Open in Google Maps 101x12"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/book",
+    "file": "m375_book.png",
+    "title": "Book Online — Beauty Salon PECHS Karachi | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Or message us on WhatsAp 210x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44",
+      "Home 33x44",
+      "Book 28x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Or message us on WhatsAp 210x15; Facials 38x44; Nails 28x44; Bridal 32x44"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/bridal",
+    "file": "m375_bridal.png",
+    "title": "Bridal Makeup Karachi — From Rs 8,000 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "bridal beauty timeline 144x17",
+      "packages & cost 111x17",
+      "+92 322 278 2254 124x20",
+      "Directions on Google Map 151x16",
+      "Leave a review 84x16",
+      "Bridal packages & cost i 254x17",
+      "Mehndi & engagement make 322x17"
+    ],
+    "issues": [
+      "tiny taps:  28x44; bridal beauty timeline 144x17; packages & cost 111x17; +92 322 278 2254 124x20; Directions on Google Map 151x16"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/prices",
+    "file": "m375_prices.png",
+    "title": "Salon Price List Karachi 2026 — From Rs 100 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Book online 67x16",
+      "Bridal makeup 82x16",
+      "Nails price guide 96x16",
+      "Face bleach 69x16",
+      "Massage 52x16",
+      "Haircut & colour 92x16",
+      "Beauty salon Karachi 121x16"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Book online 67x16; Bridal makeup 82x16; Nails price guide 96x16; Face bleach 69x16"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/services",
+    "file": "m375_services.png",
+    "title": "Salon Services Karachi — 100+ From Rs 100 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Or message us on WhatsAp 210x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44",
+      "Home 33x44",
+      "Book 28x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Or message us on WhatsAp 210x15; Facials 38x44; Nails 28x44; Bridal 32x44"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/services/facials",
+    "file": "m375_services_facials.png",
+    "title": "Facials PECHS Karachi — From Rs 1,400 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Home 39x44",
+      "Price list 71x17",
+      "Book online 89x17",
+      "Beauty salon Karachi 161x17",
+      "Or message us on WhatsAp 210x15",
+      "Facials 38x44",
+      "Nails 28x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Home 39x44; Price list 71x17; Book online 89x17; Beauty salon Karachi 161x17"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/services/threading",
+    "file": "m375_services_threading.png",
+    "title": "Eyebrow Threading PECHS — From Rs 100 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Home 39x44",
+      "Price list 71x17",
+      "Book online 89x17",
+      "Beauty salon Karachi 161x17",
+      "Or message us on WhatsAp 210x15",
+      "Facials 38x44",
+      "Nails 28x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Home 39x44; Price list 71x17; Book online 89x17; Beauty salon Karachi 161x17"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/services/bridal-makeup-in-pechs-karachi",
+    "file": "m375_services_bridal-makeup-in-pechs-karachi.png",
+    "title": "Bridal Makeup in PECHS — From Rs 8,000 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Home 39x44",
+      "View all Bridal Makeup s 268x17",
+      "get directions 88x17",
+      "Or message us on WhatsAp 210x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Home 39x44; View all Bridal Makeup s 268x17; get directions 88x17; Or message us on WhatsAp 210x15"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/gallery",
+    "file": "m375_gallery.png",
+    "title": "Salon Work Gallery — Bridal, Hair & Facials in Karachi | Farwa Beauty Salon",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "@farwasalon 343x16",
+      "Or message us on WhatsAp 210x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44",
+      "Home 33x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; @farwasalon 343x16; Or message us on WhatsAp 210x15; Facials 38x44; Nails 28x44"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/contact",
+    "file": "m375_contact.png",
+    "title": "Contact Beauty Salon PECHS — Directions | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Or message us on WhatsAp 210x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44",
+      "Home 33x44",
+      "Book 28x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Or message us on WhatsAp 210x15; Facials 38x44; Nails 28x44; Bridal 32x44"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/about",
+    "file": "m375_about.png",
+    "title": "About Us — 18+ Years of Beauty Expertise in PECHS Karachi | Farwa Beauty Salon",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Our Services 97x17",
+      "+92 322 278 2254 123x20",
+      "4.6★ · 19+ reviews on Go 192x20",
+      "Open in Google Maps 101x12",
+      "Or message us on WhatsAp 210x15",
+      "Facials 38x44",
+      "Nails 28x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Our Services 97x17; +92 322 278 2254 123x20; 4.6★ · 19+ reviews on Go 192x20; Open in Google Maps 101x12"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/faq",
+    "file": "m375_faq.png",
+    "title": "Salon FAQ Karachi — Prices, Parking & Booking | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Book appointment 156x17",
+      "Or message us on WhatsAp 210x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44",
+      "Home 33x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Book appointment 156x17; Or message us on WhatsAp 210x15; Facials 38x44; Nails 28x44"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/blog",
+    "file": "m375_blog.png",
+    "title": "Beauty Tips Karachi — Bridal, Skin & Prices | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Or message us on WhatsAp 210x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44",
+      "Home 33x44",
+      "Book 28x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Or message us on WhatsAp 210x15; Facials 38x44; Nails 28x44; Bridal 32x44"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/blog/salon-price-list-karachi-2026",
+    "file": "m375_blog_salon-price-list-karachi-2026.png",
+    "title": "Beauty Salon Price List Karachi 2026 — Real PKR | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "Home 39x44",
+      "Blog 31x44",
+      "farwasalon.com/prices 159x19",
+      "Threading 71x19",
+      "Rica hot wax 89x19",
+      "threading near me in PEC 198x19",
+      "honey wax 76x19"
+    ],
+    "issues": [
+      "tiny taps:  28x44; Home 39x44; Blog 31x44; farwasalon.com/prices 159x19; Threading 71x19"
+    ]
+  },
+  {
+    "vp": "m375",
+    "route": "/beauty-salon-karachi",
+    "file": "m375_beauty-salon-karachi.png",
+    "title": "Beauty Salon Karachi — PECHS · From Rs 100 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 375,
+    "clientWidth": 375,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "+92 322 278 2254 124x20",
+      "Directions on Google Map 151x16",
+      "Leave a review 84x16",
+      "Threading in PECHS, Kara 219x30",
+      "Bridal Makeup in PECHS,  247x30",
+      "Facials in PECHS, Karach 199x30",
+      "Hair Services in PECHS,  241x30"
+    ],
+    "issues": [
+      "tiny taps:  28x44; +92 322 278 2254 124x20; Directions on Google Map 151x16; Leave a review 84x16; Threading in PECHS, Kara 219x30"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/",
+    "file": "d1280_home.png",
+    "title": "Beauty Salon PECHS Karachi — From Rs 100 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      "FAQ 38x44",
+      "All 39x44",
+      "reach us on WhatsApp 127x15",
+      "+92 322 278 2254 123x20",
+      "4.6★ · 19+ reviews on Go 192x20",
+      "Open in Google Maps 101x12",
+      "Google 64x15",
+      "Show review by Sukoon mu 24x6"
+    ],
+    "issues": [
+      "tiny taps: FAQ 38x44; All 39x44; reach us on WhatsApp 127x15; +92 322 278 2254 123x20; 4.6★ · 19+ reviews on Go 192x20"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/book",
+    "file": "d1280_book.png",
+    "title": "Book Online — Beauty Salon PECHS Karachi | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Or message us on WhatsAp 142x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44",
+      "Home 33x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Or message us on WhatsAp 142x15; Facials 38x44; Nails 28x44"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/bridal",
+    "file": "d1280_bridal.png",
+    "title": "Bridal Makeup Karachi — From Rs 8,000 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "bridal beauty timeline 144x17",
+      "packages & cost 111x17",
+      "+92 322 278 2254 124x20",
+      "Directions on Google Map 151x16",
+      "Leave a review 84x16",
+      "Bridal packages & cost i 254x17"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; bridal beauty timeline 144x17; packages & cost 111x17; +92 322 278 2254 124x20"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/prices",
+    "file": "d1280_prices.png",
+    "title": "Salon Price List Karachi 2026 — From Rs 100 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Salon Price List Karachi 238x17",
+      "Book online 67x16",
+      "Bridal makeup 82x16",
+      "Nails price guide 96x16",
+      "Face bleach 69x16",
+      "Massage 52x16"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Salon Price List Karachi 238x17; Book online 67x16; Bridal makeup 82x16"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/services",
+    "file": "d1280_services.png",
+    "title": "Salon Services Karachi — 100+ From Rs 100 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Or message us on WhatsAp 142x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44",
+      "Home 33x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Or message us on WhatsAp 142x15; Facials 38x44; Nails 28x44"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/services/facials",
+    "file": "d1280_services_facials.png",
+    "title": "Facials PECHS Karachi — From Rs 1,400 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Home 39x44",
+      "Price list 71x17",
+      "Book online 89x17",
+      "Beauty salon Karachi 161x17",
+      "Or message us on WhatsAp 142x15",
+      "Facials 38x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Home 39x44; Price list 71x17; Book online 89x17"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/services/threading",
+    "file": "d1280_services_threading.png",
+    "title": "Eyebrow Threading PECHS — From Rs 100 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Home 39x44",
+      "Price list 71x17",
+      "Book online 89x17",
+      "Beauty salon Karachi 161x17",
+      "Or message us on WhatsAp 142x15",
+      "Facials 38x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Home 39x44; Price list 71x17; Book online 89x17"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/services/bridal-makeup-in-pechs-karachi",
+    "file": "d1280_services_bridal-makeup-in-pechs-karachi.png",
+    "title": "Bridal Makeup in PECHS — From Rs 8,000 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Home 39x44",
+      "View all Bridal Makeup s 268x17",
+      "get directions 88x17",
+      "Or message us on WhatsAp 142x15",
+      "Facials 38x44",
+      "Nails 28x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Home 39x44; View all Bridal Makeup s 268x17; get directions 88x17"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/gallery",
+    "file": "d1280_gallery.png",
+    "title": "Salon Work Gallery — Bridal, Hair & Facials in Karachi | Farwa Beauty Salon",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "@farwasalon 100x16",
+      "Or message us on WhatsAp 142x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; @farwasalon 100x16; Or message us on WhatsAp 142x15; Facials 38x44"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/contact",
+    "file": "d1280_contact.png",
+    "title": "Contact Beauty Salon PECHS — Directions | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Or message us on WhatsAp 142x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44",
+      "Home 33x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Or message us on WhatsAp 142x15; Facials 38x44; Nails 28x44"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/about",
+    "file": "d1280_about.png",
+    "title": "About Us — 18+ Years of Beauty Expertise in PECHS Karachi | Farwa Beauty Salon",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Our Services 97x17",
+      "+92 322 278 2254 123x20",
+      "4.6★ · 19+ reviews on Go 192x20",
+      "Open in Google Maps 101x12",
+      "Or message us on WhatsAp 142x15",
+      "Facials 38x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Our Services 97x17; +92 322 278 2254 123x20; 4.6★ · 19+ reviews on Go 192x20"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/faq",
+    "file": "d1280_faq.png",
+    "title": "Salon FAQ Karachi — Prices, Parking & Booking | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Book appointment 156x17",
+      "Or message us on WhatsAp 142x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Book appointment 156x17; Or message us on WhatsAp 142x15; Facials 38x44"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/blog",
+    "file": "d1280_blog.png",
+    "title": "Beauty Tips Karachi — Bridal, Skin & Prices | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Or message us on WhatsAp 142x15",
+      "Facials 38x44",
+      "Nails 28x44",
+      "Bridal 32x44",
+      "Hair 23x44",
+      "Home 33x44"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Or message us on WhatsAp 142x15; Facials 38x44; Nails 28x44"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/blog/salon-price-list-karachi-2026",
+    "file": "d1280_blog_salon-price-list-karachi-2026.png",
+    "title": "Beauty Salon Price List Karachi 2026 — Real PKR | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 0,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "Home 39x44",
+      "Blog 31x44",
+      "farwasalon.com/prices 159x19",
+      "Threading 71x19",
+      "Rica hot wax 89x19",
+      "threading near me in PEC 198x19"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; Home 39x44; Blog 31x44; farwasalon.com/prices 159x19"
+    ]
+  },
+  {
+    "vp": "d1280",
+    "route": "/beauty-salon-karachi",
+    "file": "d1280_beauty-salon-karachi.png",
+    "title": "Beauty Salon Karachi — PECHS · From Rs 100 | Farwa",
+    "h1Count": 1,
+    "scrollWidth": 1280,
+    "clientWidth": 1280,
+    "stickyCount": 1,
+    "hasSeoDump": false,
+    "tinyTaps": [
+      " 28x44",
+      "FAQ 38x44",
+      "+92 322 278 2254 124x20",
+      "Directions on Google Map 151x16",
+      "Leave a review 84x16",
+      "Threading in PECHS, Kara 219x30",
+      "Bridal Makeup in PECHS,  247x30",
+      "Facials in PECHS, Karach 199x30"
+    ],
+    "issues": [
+      "tiny taps:  28x44; FAQ 38x44; +92 322 278 2254 124x20; Directions on Google Map 151x16; Leave a review 84x16"
+    ]
+  }
+]

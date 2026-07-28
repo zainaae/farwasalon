@@ -8,6 +8,7 @@ import {
   getAggregateRating,
 } from '../../lib/business-schema.js'
 import { PRICES_PAGE_FAQS } from '../../src/faq-data.js'
+import QuoteBuilder from './quote-builder'
 
 const title = 'Salon Price List Karachi 2026 — From Rs 100 | Farwa'
 const description =
@@ -78,6 +79,8 @@ export default function PricesPage() {
             </Link>
           </p>
         </nav>
+
+        <QuoteBuilder />
 
         <section className="mb-12 panel-soft p-5 md:p-6 shadow-soft max-w-3xl" aria-labelledby="prices-bridal-strip">
           <h2 id="prices-bridal-strip" className="font-['Syne'] font-semibold text-ink text-lg mb-2">
@@ -170,6 +173,12 @@ export default function PricesPage() {
         <p className="mt-10 text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone/80 max-w-2xl">
           All prices in Pakistani Rupees (Rs). Cash, JazzCash and EasyPaisa accepted at the salon.
           Listed rates are starting prices, not a tax invoice.
+        </p>
+        <p className="mt-4 text-[12px] text-stone font-['Inter'] font-light max-w-2xl">
+          The special works — <Link href="/blog/party-makeup-karachi-guide" className="link-underline text-ink font-medium">party makeup</Link>,
+          custom looks, event hairdos, and <Link href="/blog/keratin-treatment-price-karachi" className="link-underline text-ink font-medium">keratin</Link> —
+          are quoted per person because they genuinely vary.{' '}
+          <a href="#quote" className="link-underline text-ink font-medium">Construct your quote above</a> — it arrives in minutes and is binding once given.
         </p>
         <p className="mt-6 pt-6 border-t border-border-soft text-xs text-stone font-['Inter'] flex flex-wrap gap-x-3 gap-y-2">
           <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>

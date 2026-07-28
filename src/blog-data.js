@@ -3,6 +3,85 @@ import { GROWTH_POSTS } from './blog-growth-2026-07.js'
 export const BLOG_POSTS = [
   ...GROWTH_POSTS,
   {
+    slug: 'party-makeup-karachi-guide',
+    title: 'Party Makeup in Karachi — What It Costs, What You Get, and How to Book',
+    description: 'Party makeup rates in Karachi explained: what published salon lists charge, what a look includes, and how Farwa in PECHS quotes yours over WhatsApp in minutes.',
+    featuredImage: '/bridal.jpg',
+    date: '2026-07-24',
+    lastModified: '2026-07-24',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Makeup',
+    relatedCategories: ['Bridal', 'Hair', 'Facials'],
+    content: [
+      { type: 'p', text: 'Party makeup is the most quoted-by-phone service in Karachi — and the one where the price you hear first is least likely to be the price you pay. Yes, we do party makeup at Farwa in PECHS: soft glam for a dholki, full glam for a shaadi guest look, hair styling and dupatta setting included on request. Here is how the pricing really works, everywhere.' },
+
+      { type: 'h2', text: 'What Party Makeup Costs in Karachi' },
+      { type: 'p', text: 'Per the published lists that exist, mid-range Karachi salons run party looks between Rs 3,500 and Rs 8,000, while big-name parlours like Mahrose start classic makeup around Rs 12,000 and climb from there. Most salons, however, publish nothing — the rate materialises when they see you. That is the game we refuse to play.' },
+
+      { type: 'h2', text: 'Why We Quote Party Makeup Individually — When Everything Else Is Printed' },
+      { type: 'p', text: 'Our [price list](/prices) prints every fixed service — all 100+ of them. Party makeup is one of two services we quote per person, for an honest reason: the price genuinely depends on the look (soft glam vs full glam), lashes, hair styling, and whether you want the look built to last a five-hour event. A single printed number would either overcharge the simple looks or undercharge the elaborate ones.' },
+      { type: 'p', text: 'So the deal is this: [message us on WhatsApp](https://wa.me/923222782254?text=Party%20makeup%20quote%20please) with your event date and a reference photo if you have one. You get an exact quote in minutes, before you book — and that quote is final. No revisions at the counter, no surprise add-ons. The same promise that covers our printed menu covers your quote.' },
+
+      { type: 'h2', text: 'What a Farwa Party Look Includes' },
+      { type: 'p', text: 'Skin prep and base matched to Karachi weather (a look that survives humidity is a technique, not a product), eyes and lashes to your brief, and finishing that photographs well in event lighting. Add [hair styling](/services/hair) or a fresh [threading](/services/threading) the same visit — combined appointments are handled cleanly by the booking system.' },
+
+      { type: 'h2', text: 'When to Book' },
+      { type: 'p', text: 'Wedding-season weekends (October to March) fill first — book three to five days ahead for those. Off-season weekday looks can often be done same-day; check live slots at farwasalon.com/book or ask on WhatsApp.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How much does party makeup cost in Karachi?' },
+      { type: 'p', text: 'A: Published mid-range rates run Rs 3,500 to Rs 8,000, with big-name parlours from Rs 12,000. At Farwa in PECHS we quote each look individually on WhatsApp — the quote arrives in minutes, is confirmed before you book, and never changes at the counter.' },
+      { type: 'h3', text: 'Q: Does the quote include hair styling?' },
+      { type: 'p', text: 'A: Tell us on WhatsApp if you want hair included and the quote covers both — no add-on surprises on the day.' },
+      { type: 'h3', text: 'Q: How long does party makeup take?' },
+      { type: 'p', text: 'A: Plan for 60 to 90 minutes depending on the look, plus hair time if added. We schedule so you leave with time to spare before the event.' },
+      { type: 'h3', text: 'Q: Can I see the artist\'s work first?' },
+      { type: 'p', text: 'A: Ask on WhatsApp and we will send recent looks in the style you want — soft glam, smoky, or full glam.' },
+
+      { type: 'h2', text: 'Get Your Quote' },
+      { type: 'p', text: 'WhatsApp +92 322 2782254 with your date and reference look. For everything with a fixed price, the [full price list](/prices) is already printed — as always.' },
+    ],
+  },
+  {
+    slug: 'keratin-treatment-price-karachi',
+    title: 'Keratin Treatment in Karachi — Real Price Ranges, and What Actually Determines Yours',
+    description: 'What keratin really costs in Karachi, why quotes vary by hair length, keratin vs protein vs Wellaplex — and how Farwa in PECHS quotes yours before you book.',
+    featuredImage: '/hairtreatment.jpg',
+    date: '2026-07-24',
+    lastModified: '2026-07-24',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Hair',
+    relatedCategories: ['Hair Treatments', 'Hair'],
+    content: [
+      { type: 'p', text: 'Keratin is the most asked-about hair treatment in Karachi and the hardest to get a straight price for. Yes, we offer keratin smoothing at Farwa in PECHS. Here is the honest economics of it — including why any salon that quotes a flat keratin price before seeing your hair is guessing.' },
+
+      { type: 'h2', text: 'Why Keratin Has No Single Price' },
+      { type: 'p', text: 'Keratin is dosed by hair length and density — a chin-length bob and waist-length hair can differ by two to three times the product and time. Karachi salons advertise anywhere from Rs 6,000 teaser rates (usually short hair, diluted product) to Rs 30,000+ at premium chains. The number that matters is the one quoted for YOUR hair.' },
+      { type: 'p', text: 'That is why keratin is one of only two services not printed on our [price list](/prices): a single number would be dishonest in one direction or the other. Instead, [send us a photo of your hair length on WhatsApp](https://wa.me/923222782254?text=Keratin%20quote%20please) — you get an exact quote in minutes, confirmed before you book, unchanged at the counter.' },
+
+      { type: 'h2', text: 'Keratin vs Protein vs Wellaplex — Which Do You Actually Need?' },
+      { type: 'p', text: 'These get confused constantly, and the wrong choice wastes money. Keratin smooths — it fights frizz and cuts styling time for three to five months; ideal for thick, wavy, humidity-fighting hair. Protein treatments (printed from Rs 2,000 on our menu) rebuild strength in damaged, brittle hair. Wellaplex (Rs 3,000, printed) repairs bond damage from colouring and heat. If your problem is breakage or shedding, start with our [hair treatments](/services/hair-treatments) and read the [hair fall guide](/blog/hair-fall-treatment-karachi-guide) — keratin will not fix hair fall.' },
+
+      { type: 'h2', text: 'How to Not Get Burned on Keratin in Karachi' },
+      { type: 'p', text: 'Ask which formula is used and whether it is formaldehyde-free. Ask if the quote includes the blow-dry and seal (cheap quotes often exclude it). Confirm aftercare: no washing for 48 to 72 hours, sulphate-free shampoo after — if a salon does not mention aftercare unprompted, they are selling product, not results. And get the price in writing before you sit down; a WhatsApp quote is exactly that.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: How much does keratin treatment cost in Karachi?' },
+      { type: 'p', text: 'A: Advertised rates run from Rs 6,000 teasers to Rs 30,000+ at premium chains, and the honest answer depends on your hair length and density. At Farwa in PECHS, WhatsApp us a photo of your hair and you get a binding quote in minutes, before you book.' },
+      { type: 'h3', text: 'Q: How long does keratin last?' },
+      { type: 'p', text: 'A: Three to five months with sulphate-free care. Karachi humidity is exactly what it is built for — expect dramatically less frizz and faster styling throughout.' },
+      { type: 'h3', text: 'Q: Is keratin safe for coloured hair?' },
+      { type: 'p', text: 'A: Generally yes — done two weeks after colouring, it can even help seal colour. Tell us your colour history on WhatsApp so the quote uses the right formula.' },
+      { type: 'h3', text: 'Q: Keratin or protein treatment — which should I get?' },
+      { type: 'p', text: 'A: Frizz and styling time: keratin. Breakage, dryness, or damage: protein or Wellaplex, printed on our menu from Rs 2,000. Unsure? Send a photo — we will tell you honestly, including when the cheaper printed option is the right one.' },
+
+      { type: 'h2', text: 'Get Your Keratin Quote' },
+      { type: 'p', text: 'WhatsApp +92 322 2782254 with a photo of your hair down. Every fixed-price service stays printed on the [full price list](/prices) — keratin is quoted per head because that is the only honest way to price it.' },
+    ],
+  },
+  {
     slug: 'mehndi-engagement-makeup-karachi',
     title: 'Mehndi & Engagement Makeup Karachi — From Rs 10k',
     description:

@@ -167,7 +167,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'Do you offer HydraFacial or keratin treatments?',
-        a: 'No — we do not offer HydraFacial machines or keratin/permanent straightening. Our facial menu includes professional options from a classic Normal Facial (Rs 1,400) up to Janssen Whitening Facial (Rs 5,500), and our hair menu covers cuts, colour, blowdry, bridal styling, and protein / Wellaplex / hair-fall treatments. See farwasalon.com/prices for the full list.',
+        a: 'HydraFacial machines, no. Keratin smoothing, yes — it is quoted per head because the price honestly depends on hair length and density; WhatsApp a photo of your hair to +92 322 2782254 for a binding quote in minutes. Fixed-price options stay printed: facials from a Normal Facial (Rs 1,400) to Janssen Whitening (Rs 5,500), and protein / Wellaplex / hair-fall treatments from Rs 2,000. See farwasalon.com/prices for the full list.',
       },
     ],
   },
@@ -187,8 +187,16 @@ export const FAQ_GROUPS = [
         a: 'Professional facials at Farwa start at Rs 1,400, ranging up to Rs 5,500 for a Janssen Whitening Facial with German cosmeceutical products. Deep cleansing starts at Rs 1,200. Every price is published on farwasalon.com/prices.',
       },
       {
+        q: 'How much is party makeup at Farwa?',
+        a: 'Party makeup is one of only two services we quote per person — the price honestly depends on the look (soft glam vs full glam), lashes, and whether hair styling is included. WhatsApp +92 322 2782254 with your event date for an exact quote in minutes; it is confirmed before you book and never changes at the counter.',
+      },
+      {
+        q: 'How much is keratin treatment at Farwa?',
+        a: 'Keratin is quoted per head because the price depends on hair length and density. WhatsApp a photo of your hair to +92 322 2782254 for a binding quote in minutes. Fixed-price repair treatments (protein from Rs 2,000, Wellaplex Rs 3,000) are printed on farwasalon.com/prices.',
+      },
+      {
         q: 'Why do you publish all your prices online?',
-        a: 'Because unlisted prices can change per customer — printed prices cannot. Every service on farwasalon.com shows its starting price, and your exact quote is confirmed on WhatsApp before your appointment, never after. We believe transparent pricing is part of good service.',
+        a: 'Because unlisted prices can change per customer — printed prices cannot. Every fixed-price service on farwasalon.com shows its rate; only party makeup and keratin are quoted individually (they genuinely vary per person), and those quotes are binding once given. We believe transparent pricing is part of good service.',
       },
     ],
   },
