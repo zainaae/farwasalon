@@ -1,6 +1,48 @@
 /** P0 commercial blogs — menu-accurate PKR (Jul 2026 growth ship). Prepended in blog-data.js. */
 export const GROWTH_POSTS = [
   {
+    slug: 'eid-salon-booking-guide-karachi',
+    title: 'Eid Salon Booking in Karachi — When to Book and What It Costs',
+    description: 'Chand Raat is the busiest salon night of the year in Karachi. When to book threading, facials and mehndi-night looks, what each costs at Farwa in PECHS, and how to avoid the queue.',
+    featuredImage: '/glow3.jpg',
+    date: '2026-07-29',
+    lastModified: '2026-07-29',
+    readTime: '5 min read',
+    author: 'Rubina',
+    category: 'Seasonal',
+    relatedCategories: ['Threading', 'Facials', 'Nails'],
+    content: [
+      { type: 'p', text: 'Every year the same thing happens in Karachi: the salon is calm all month, then Chand Raat arrives and every chair in PECHS is full until well past midnight. After eighteen Eids at the same address, here is the honest guide to booking around it — what to get, when to get it, and what each thing costs.' },
+
+      { type: 'h2', text: 'The Booking Timeline That Actually Works' },
+      { type: 'p', text: 'Ten days before Eid is the sweet spot for anything that needs to settle: [facials](/services/facials) (from Rs 1,400) and [deep cleansing](/services/cleansing) (from Rs 1,200). Skin needs a few days after a proper cleanse before it looks its best, so a facial the night before Eid is the one mistake we see most.' },
+      { type: 'p', text: 'Two to three days before is right for [threading](/services/threading) (from Rs 100) and [waxing](/services/rica-hot-wax) (from Rs 150) — long enough for any redness to settle, short enough to still look sharp on the day.' },
+      { type: 'p', text: 'Chand Raat itself is for [nails](/services/nails) (from Rs 300) and hair. Nails hold beautifully for the whole of Eid, and a blowdry the night before still looks fresh in the morning.' },
+
+      { type: 'h2', text: 'Why Chand Raat Is Not the Night for Everything' },
+      { type: 'p', text: 'It is the single busiest night of the salon year across Karachi. Every salon runs late, every chair is booked, and walk-ins wait. That is fine for nails and hair, which look best fresh. It is the wrong night for a first-time facial, a first-time bleach, or anything you have not had before — a reaction on Chand Raat has nowhere to go before morning.' },
+
+      { type: 'h2', text: 'The Practical Eid Plan' },
+      { type: 'p', text: 'If you want one visit instead of three: book a combined appointment ten days out for facial plus threading, then a short nails-and-hair slot on Chand Raat. Our booking system handles combined services and adjusts the time slot automatically, so nothing overlaps. Full rates for everything are on the [price list](/prices) — no Eid surcharge, ever.' },
+
+      { type: 'h2', text: 'Booking Around the Rush' },
+      { type: 'p', text: 'Slots for the last three days before Eid usually go a week ahead. Book online at farwasalon.com/book where you can see live availability, rather than calling and hoping. If nothing suits, WhatsApp us at +92 322 2782254 and we will tell you honestly what is left instead of taking a booking we cannot honour.' },
+
+      { type: 'h2', text: 'Frequently Asked Questions' },
+      { type: 'h3', text: 'Q: When should I book my salon appointment before Eid in Karachi?' },
+      { type: 'p', text: 'A: Facials and cleansing ten days before, threading and waxing two to three days before, nails and hair on Chand Raat itself. Booking for the final three days usually needs to happen a week in advance.' },
+      { type: 'h3', text: 'Q: Do salon prices go up for Eid?' },
+      { type: 'p', text: 'A: Not at Farwa. Every rate on farwasalon.com/prices is the rate you pay on Chand Raat, the same as any other day. Salons that quote higher for Eid are the same salons that do not publish prices the rest of the year.' },
+      { type: 'h3', text: 'Q: Can I get a facial the night before Eid?' },
+      { type: 'p', text: 'A: You can, but we would rather you did not. Skin looks its best three to five days after a deep cleanse. If you only have the one night, choose a lighter facial or a bleach and polish instead.' },
+      { type: 'h3', text: 'Q: Do you take walk-ins on Chand Raat?' },
+      { type: 'p', text: 'A: Only if a slot opens, and it rarely does. Book online in advance — Chand Raat is the one night of the year we genuinely cannot fit everyone in.' },
+
+      { type: 'h2', text: 'Book Your Eid Slot' },
+      { type: 'p', text: 'See live availability at farwasalon.com/book, or read the [full price list](/prices) first. Mon–Sat, 11am–7pm, Block 3 PECHS.' },
+    ],
+  },
+  {
     slug: 'face-bleach-karachi-loreal',
     title: 'Face Bleach Karachi — Loreal From Rs 650',
     description:
