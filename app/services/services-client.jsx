@@ -137,7 +137,7 @@ export default function ServicesClient() {
           {MENU_CHAPTERS.map(({ name, caption, cats }) => (
             <section key={name} aria-label={name}>
               <div className="flex items-baseline gap-4 pt-10 pb-3 border-b border-ink/30 first:pt-2">
-                <span className="font-['Syne'] italic font-semibold text-accent-gold-deep text-base sm:text-lg">{name}</span>
+                <span className="font-['Syne'] font-semibold text-accent-gold-deep text-base sm:text-lg">{name}</span>
                 <span className="eyebrow !text-[9px]">{caption}</span>
               </div>
               {cats.map((cat) => <MenuRow key={cat} cat={cat} />)}

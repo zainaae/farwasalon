@@ -586,7 +586,7 @@ function TestimonialsPreview() {
           className="reviews-featured relative px-6 py-9 sm:px-9 sm:py-10 md:px-12 md:py-11 mb-8 sm:mb-10 md:mb-12"
           aria-live="polite">
           <Quote className="reviews-featured-mark absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 sm:w-10 sm:h-10 rotate-180 pointer-events-none" aria-hidden="true" />
-          <blockquote className={`relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6 sm:line-clamp-none' : ''}`}>
+          <blockquote className={`relative z-[1] font-['Syne'] font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6 sm:line-clamp-none' : ''}`}>
             {featured.quote}
           </blockquote>
           {featured.translation && (
@@ -731,7 +731,7 @@ function FounderNote() {
       <div className="max-w-3xl mx-auto text-center">
         <p className="eyebrow mb-6">— The House</p>
         <blockquote
-          className="font-['Syne'] italic text-ink text-balance leading-[1.3]"
+          className="font-['Syne'] text-ink text-balance leading-[1.3]"
           style={{ fontSize: 'clamp(1.35rem, 3.6vw, 2.25rem)' }}>
           &ldquo;Trends visit Karachi every season. Grace stays. I opened this
           salon in 2008 to give every woman on this street both.&rdquo;

@@ -65,7 +65,14 @@ export default function SiteFooter() {
       </div>
       <div className="border-t border-border-soft px-5 md:px-10 py-10 md:py-12">
         <div className="max-w-screen-xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-10">
+          {/* Ft7 newsletter-first: the form leads the footer; links sit beneath
+              in muted type. Replaces the 4-titled-column index shape, which is
+              the AI footer fingerprint (hallmark gate 43). Every link is kept —
+              they are crawl paths, not decoration. */}
+          <div className="mb-10 pb-10 border-b border-border-soft">
+            <FooterNewsletter />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-10 text-[12px]">
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">
                 Services
@@ -184,7 +191,6 @@ export default function SiteFooter() {
               </ul>
             </div>
           </div>
-          <FooterNewsletter />
           <div className="mb-10 pb-8 border-b border-border-soft">
             <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-3">
               Areas we serve

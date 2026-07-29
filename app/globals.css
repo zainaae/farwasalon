@@ -4,13 +4,37 @@
 
 :root {
   --white:  #ffffff;
+  /* Page surface. Pure #fff reads synthetic (hallmark gate 7), so paper is
+     tinted a half-step toward the nude anchor — still lighter than --mist,
+     which keeps panel/page separation intact. */
+  --paper:  #fcfaf7;
   --ink:    #0d0d0d;
+  --ink-warm: #0d0609;      /* warm ink for media wells behind imagery */
   --nude:   #e8ddd5;
   --mist:   #f8f5f1;
   --stone:  #6b5f57;
   --border-soft: #e4ddd7;
   --accent-gold: #c9a98a;
   --accent-gold-deep: #82664a; /* gold for text on light bg â€” 5.3:1 on white, 4.9:1 on mist */
+  --gold-deep-2: #8b6d59;   /* progress fill / second gold stop */
+  --gold-pale:  #e4c7a8;
+  --gold-tint:  #faf7f5;    /* faintest gold wash for panel fills */
+
+  /* Status + channel colours — named so nothing improvises mid-render
+     (hallmark gate 48). Values unchanged from the inline hexes they replace. */
+  --status-open:      #9cd48c;
+  --status-open-ink:  #6b9b5f;
+  --status-open-bg:   #f4faf2;
+  --success:          #4a9b3f;
+  --success-bg:       #e8f5e3;
+  --danger:           #c44a4a;
+  --danger-ink:       #a83a3a;
+  --danger-bg:        #fbeaea;
+  --whatsapp:         #25d366;
+  --whatsapp-hover:   #20bd5a;
+  /* Header height — single source of truth. The desktop masthead (two rows)
+     is taller than the mobile bar, so every offset below derives from this. */
+  --nav-h: 3.5625rem;   /* 57px: 56px bar + 1px rule */
   --shadow-soft: 0 2px 12px rgba(13, 13, 13, 0.05);
   --shadow-card: 0 8px 32px rgba(13, 13, 13, 0.08);
 
@@ -37,6 +61,10 @@
   --radius: 0.125rem;
 }
 
+@media (min-width: 768px) {
+  :root { --nav-h: 6.625rem; }  /* 106px: wordmark row + link row + rule */
+}
+
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
   html {
@@ -46,8 +74,8 @@
   }
   body {
     margin: 0;
-    background: #ffffff;
-    color: #0d0d0d;
+    background: var(--paper);
+    color: var(--ink);
     font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
@@ -90,7 +118,7 @@
 /* â”€â”€ Colour utilities â”€â”€ */
 @layer utilities {
   .bg-ink    { background-color: #0d0d0d !important; }
-  .bg-white  { background-color: #ffffff !important; }
+  .bg-white  { background-color: var(--paper) !important; }
   .bg-mist   { background-color: #f8f5f1 !important; }
   .bg-nude   { background-color: #e8ddd5 !important; }
   .text-ink  { color: #0d0d0d !important; }
@@ -426,10 +454,7 @@
     text-align: center;
   }
   .page-content {
-    padding-top: calc(3.375rem + env(safe-area-inset-top, 0px));
-  }
-  @media (min-width: 768px) {
-    .page-content { padding-top: calc(3.5rem + env(safe-area-inset-top, 0px)); }
+    padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
   }
   /* Mobile Call/WA/Book bar: keep /prices jump chips + anchors clear of the fixed CTA */
   @media (max-width: 767px) {
@@ -438,15 +463,15 @@
     }
     .page-content nav[aria-label="Price list categories"] {
       position: sticky;
-      top: calc(3.375rem + env(safe-area-inset-top, 0px));
+      top: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
       z-index: 40;
-      background: #fff;
+      background: var(--paper);
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
       scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
     }
     .page-content [id^="prices-"] {
-      scroll-margin-top: calc(3.375rem + env(safe-area-inset-top, 0px) + 5.75rem);
+      scroll-margin-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px) + 5.75rem);
       scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
     }
   }

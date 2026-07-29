@@ -436,12 +436,24 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
     <header
       className={`fixed top-0 left-0 right-0 z-[100] transition-[background-color,box-shadow,border-color,backdrop-filter] duration-300 pt-[env(safe-area-inset-top,0px)] isolate [backface-visibility:hidden] animate-[navSlideIn_0.55s_cubic-bezier(0.16,1,0.3,1)_both] ${headerSurface}`}
     >
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-6 lg:px-10 h-14 flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between md:justify-normal gap-3 min-w-0">
-        <Link href="/" className="justify-self-start shrink-0 min-w-0 inline-flex items-center h-11">
+      {/* Desktop masthead row: centred wordmark + place/est. line, links beneath.
+          Replaces the wordmark-left / links-centre / CTA-right bar (hallmark
+          gate 42 — the most-recognised AI nav fingerprint). Mobile keeps the
+          compact bar + sheet, which was never that pattern. */}
+      <div className="hidden md:flex flex-col items-center justify-center gap-1 pt-2.5 max-w-screen-xl mx-auto px-6 lg:px-10">
+        <Link href="/" className="inline-flex items-center" aria-label="Farwa Beauty Salon — home">
+          <Logo light={light} />
+        </Link>
+        <p className={`text-[9px] tracking-[0.34em] uppercase font-['Inter'] leading-none ${light ? 'text-stone' : 'text-white/55'}`}>
+          PECHS, Karachi <span aria-hidden="true">·</span> Est. 2008
+        </p>
+      </div>
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-6 lg:px-10 h-14 md:h-auto md:pb-1.5 flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between md:justify-normal gap-3 min-w-0">
+        <Link href="/" className="md:hidden justify-self-start shrink-0 min-w-0 inline-flex items-center h-11">
           <Logo light={light} />
         </Link>
         <nav
-          className="hidden md:flex items-center justify-center gap-x-2 md:gap-x-3 lg:gap-x-4 min-w-0 max-w-[min(100%,42rem)] justify-self-center self-center h-11 px-1"
+          className="hidden md:flex items-center justify-center gap-x-2 md:gap-x-3 lg:gap-x-4 min-w-0 max-w-[min(100%,42rem)] col-start-2 justify-self-center self-center h-9 px-1"
           aria-label="Main navigation"
         >
           {navLinks.map(({ label, href, wideOnly, hideOnDesktop }) => {
@@ -449,7 +461,7 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
             return (
               <Link key={href} href={href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`nav-link shrink-0 h-11 min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors duration-200 whitespace-nowrap
+                className={`nav-link shrink-0 h-9 inline-flex items-center px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors duration-200 whitespace-nowrap
                 ${hideOnDesktop ? 'md:hidden' : ''}
                 ${wideOnly ? 'hidden lg:inline-flex' : ''}
                 ${isActive ? `nav-link--active ${light ? 'nav-link--on-light text-ink' : 'nav-link--on-dark text-white'}` : (light ? 'text-stone hover:text-ink' : 'text-white/65 hover:text-white')}`}>
@@ -458,7 +470,7 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
             )
           })}
         </nav>
-        <div className="justify-self-end flex items-center gap-2 sm:gap-3 shrink-0 min-w-0 h-11">
+        <div className="justify-self-end col-start-3 flex items-center gap-2 sm:gap-3 shrink-0 min-w-0 h-11">
           <Link href="/book"
             className={`hidden md:inline-flex items-center justify-center gap-1.5 h-11 min-h-[44px] text-[11px] lg:text-[12px] tracking-[0.14em] uppercase font-semibold font-['Inter'] leading-none px-4 lg:px-5 rounded-sm border transition-colors duration-300 whitespace-nowrap active:scale-[0.98] ${
               light
