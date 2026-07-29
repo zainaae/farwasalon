@@ -109,13 +109,15 @@ export default function AzadiSalePage() {
               <p className="sr-only">20 percent off</p>
 
               <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-xl mb-3" style={{ '--i': 3 }}>
-                <strong className="font-semibold">20% off when your visit totals Rs 1,400 or more.</strong>{' '}
-                Jashn-e-Azadi at Farwa Beauty Salon, Block 3 PECHS — threading, facials, hair,
-                nails, waxing and bridal all count toward the total.
+                <strong className="font-semibold">Flat 20% off once your visit reaches Rs 1,400.</strong>{' '}
+                Not &ldquo;up to&rdquo; 20%. Not a package someone else decided for you — pick whatever
+                you actually came in for, and if it adds up to Rs 1,400, the whole visit is 20% less.
               </p>
               <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-xl mb-7" style={{ '--i': 4 }}>
-                The 20% comes off our printed price — the same rate published on this site all
-                year, not one raised for the occasion.
+                Our rates have been printed on this website since January. We didn&rsquo;t raise them in
+                July to discount them in August — you can scroll the{' '}
+                <Link href="/prices" className="underline underline-offset-2 hover:no-underline">price list</Link>{' '}
+                and check.
               </p>
 
               <p className="azadi-dates azadi-in mb-8" style={{ '--i': 5 }}>
@@ -156,25 +158,31 @@ export default function AzadiSalePage() {
       <div className="section-shell section-pad min-h-0">
         <section aria-labelledby="azadi-qualifying" className="mb-14">
           <h2 id="azadi-qualifying" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-4">
-            What qualifies
+            How it works
           </h2>
+          <p className="text-body text-sm md:text-[15px] mb-4 max-w-2xl leading-relaxed">
+            The Rs 1,400 is the total for your visit — not something one service has to cost on
+            its own. Come in for a cleansing and add a threading, or a manicure and a massage;
+            once the bill reaches Rs 1,400, the 20% applies to all of it. Nothing on the menu is
+            left out.
+          </p>
           <p className="text-body text-sm md:text-[15px] mb-5 max-w-2xl leading-relaxed">
-            Nothing on the menu is excluded. The Rs 1,400 is the total for your visit, not a
-            price any single service has to reach — so a few smaller treatments together qualify
-            just as well as one larger one. Everything is on the{' '}
+            Most salons run Azadi offers as a fixed package — one facial, one mani-pedi, one
+            price, take it or leave it. We would rather you booked what you actually wanted.
+            Everything, with its price, is on the{' '}
             <Link href="/prices" className="link-underline text-ink font-medium">price list</Link>.
           </p>
           <p className="text-stone text-[13px] font-['Inter'] font-light max-w-2xl">
-            Not sure whether your booking clears Rs 1,400?{' '}
+            Not sure whether your booking gets there?{' '}
             <a
-              href="https://wa.me/923222782254?text=Azadi%20offer%20—%20does%20my%20booking%20qualify%3F"
+              href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20does%20my%20booking%20qualify%3F"
               target="_blank"
               rel="noreferrer"
               className="link-underline text-ink font-medium"
             >
-              Ask on WhatsApp
+              Message us
             </a>{' '}
-            and we will confirm before you come.
+            and we will add it up for you before you come.
           </p>
         </section>
 

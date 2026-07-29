@@ -22,6 +22,9 @@
   --azadi-green: #1c7d47;
   --azadi-deep:  #102d1b;
   --azadi-mid:   #174926;
+  --azadi-lift:  #f6ffe6;   /* gradient high stop */
+  --azadi-fall:  #e6f7c8;   /* gradient low stop */
+  --azadi-fall2: #e9f8ce;   /* strip low stop */
 
   /* Motion language — exponential ease-out for entrances, three duration
      buckets. Browser defaults (ease, ease-in-out) read as uncrafted. */
@@ -853,7 +856,7 @@ button.tap-safe,
   background:
     radial-gradient(70% 85% at 88% 8%, rgba(28, 125, 71, 0.20) 0%, rgba(28, 125, 71, 0) 62%),
     radial-gradient(90% 70% at 4% 96%, rgba(23, 73, 38, 0.10) 0%, rgba(23, 73, 38, 0) 58%),
-    linear-gradient(158deg, #f6ffe6 0%, var(--azadi-paper) 46%, #e6f7c8 100%);
+    linear-gradient(158deg, var(--azadi-lift) 0%, var(--azadi-paper) 46%, var(--azadi-fall) 100%);
   border-bottom: 1px solid var(--azadi-tint);
 }
 /* Grain — texture you can barely see, not decoration (0.055 opacity). */
@@ -967,7 +970,7 @@ button.tap-safe,
 .azadi-strip {
   background:
     radial-gradient(80% 150% at 88% 50%, rgba(28, 125, 71, 0.18) 0%, rgba(28, 125, 71, 0) 62%),
-    linear-gradient(100deg, #f6ffe6 0%, var(--azadi-paper) 55%, #e9f8ce 100%);
+    linear-gradient(100deg, var(--azadi-lift) 0%, var(--azadi-paper) 55%, var(--azadi-fall2) 100%);
   border-top: 1px solid var(--azadi-tint);
   border-bottom: 1px solid var(--azadi-tint);
 }
