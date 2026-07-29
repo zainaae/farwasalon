@@ -482,10 +482,17 @@
   .input-field::placeholder {
     color: rgba(107, 95, 87, 0.55);
   }
+  /* Pointer focus keeps the quiet ink ring. Keyboard focus must still get the
+     site-standard 2px gold outline — this rule outranks the global
+     input:focus-visible (0,2,0 vs 0,1,1), so it has to restore it itself. */
   .input-field:focus {
     outline: none;
     border-color: var(--ink);
     box-shadow: 0 0 0 1px var(--ink);
+  }
+  .input-field:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 3px;
   }
   .panel-muted {
     background: rgba(248, 245, 241, 0.85);
