@@ -88,49 +88,71 @@ export default function AzadiSalePage() {
       {offerSchema && <JsonLd data={offerSchema} />}
       <JsonLd data={buildFaqPageSchema(FAQS)} />
 
-      <div className="section-shell section-pad min-h-0">
-        <p className="eyebrow mb-4">
-          — {live ? 'Live now' : upcoming ? 'Announced' : 'Independence Day'} · {range} 2026
-        </p>
-        <h1 className="display-section text-ink mb-5 max-w-3xl">
-          Freedom Deal — 20% Off
-        </h1>
-        <p className="text-body md:text-lg max-w-2xl mb-4 leading-relaxed">
-          Jashn-e-Azadi at Farwa Beauty Salon, Block 3 PECHS: <strong className="text-ink font-semibold">20% off
-          when your visit totals Rs 1,400 or more</strong>, from 5 to 14 August 2026. Mix any
-          services to get there — a threading with a cleansing, a manicure with a massage.
-        </p>
-        <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-8 leading-relaxed">
-          The discount comes off our printed price — the same rate published on this site all
-          year, not one raised for the occasion. That is the whole point.
-        </p>
+      {/* Campaign hero — poster palette, poster artwork, and the discount itself
+          as the visual anchor. Deliberately off-brand for the ten days it runs:
+          the site is ink/nude/gold, this is the flag. */}
+      <section className="azadi-hero">
+        <div className="section-shell py-12 md:py-16">
+          <div className="grid gap-10 md:gap-14 md:grid-cols-[1.15fr_0.85fr] items-center">
+            <div className="min-w-0">
+              <p className="inline-flex items-center gap-2 text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-['Inter'] text-[color:var(--azadi-green)] mb-5">
+                <span className="azadi-dot" aria-hidden="true" />
+                {live ? 'Live now' : upcoming ? `Starts ${range}` : 'Independence Day'}
+              </p>
 
-        <div className="flex flex-wrap items-center gap-3 mb-12">
-          <Link href="/book" className="tap-safe btn-primary">
-            Book your slot <ArrowUpRight className="w-3.5 h-3.5" />
-          </Link>
-          <a
-            href="https://wa.me/923222782254?text=Azadi%20offer%20—%20I%20want%20to%20book"
-            target="_blank"
-            rel="noreferrer"
-            className="tap-safe btn-secondary"
-          >
-            Ask on WhatsApp
-          </a>
+              <h1 className="azadi-display mb-4">
+                <span className="block">Freedom</span>
+                <span className="block">Deal</span>
+              </h1>
+
+              <p className="azadi-figure mb-5" aria-hidden="true">20<span>%</span></p>
+              <p className="sr-only">20 percent off</p>
+
+              <p className="text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-xl mb-3">
+                <strong className="font-semibold">20% off when your visit totals Rs 1,400 or more.</strong>{' '}
+                Jashn-e-Azadi at Farwa Beauty Salon, Block 3 PECHS — threading, facials, hair,
+                nails, waxing and bridal all count toward the total.
+              </p>
+              <p className="text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-xl mb-7">
+                The 20% comes off our printed price — the same rate published on this site all
+                year, not one raised for the occasion.
+              </p>
+
+              <p className="azadi-dates mb-8">
+                5 <span>—</span> 14 August 2026
+              </p>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <Link href="/book" className="tap-safe azadi-btn">
+                  Book your slot <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                </Link>
+                <a
+                  href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20I%20want%20to%20book"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="tap-safe azadi-btn azadi-btn--ghost"
+                >
+                  Ask on WhatsApp
+                </a>
+              </div>
+            </div>
+
+            {DEAL?.image && (
+              <Image
+                src={DEAL.image}
+                alt={DEAL.imageAlt}
+                width={1000}
+                height={1414}
+                priority
+                sizes="(max-width: 768px) 92vw, 420px"
+                className="w-full max-w-[420px] mx-auto h-auto shadow-card"
+              />
+            )}
+          </div>
         </div>
+      </section>
 
-        {DEAL?.image && (
-          <Image
-            src={DEAL.image}
-            alt={DEAL.imageAlt}
-            width={1000}
-            height={1414}
-            priority
-            sizes="(max-width: 768px) 100vw, 460px"
-            className="w-full max-w-[460px] h-auto border border-border-soft mb-14"
-          />
-        )}
-
+      <div className="section-shell section-pad min-h-0">
         <section aria-labelledby="azadi-qualifying" className="mb-14">
           <h2 id="azadi-qualifying" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-4">
             What qualifies

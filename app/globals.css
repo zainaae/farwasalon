@@ -14,6 +14,15 @@
   --shadow-soft: 0 2px 12px rgba(13, 13, 13, 0.05);
   --shadow-card: 0 8px 32px rgba(13, 13, 13, 0.08);
 
+  /* Independence Day campaign — sampled from the Freedom Deal poster so the
+     page and the artwork share one palette. Used only by /freedom-deal and the
+     home strip, both of which stop rendering after 14 Aug. */
+  --azadi-paper: #f0ffd8;
+  --azadi-tint:  #d4ecba;
+  --azadi-green: #1c7d47;
+  --azadi-deep:  #102d1b;
+  --azadi-mid:   #174926;
+
   /* shadcn tokens */
   --background: 30 20% 99%;
   --foreground: 0 0% 5%;
@@ -823,3 +832,96 @@ button.tap-safe,
 [role="tab"].tap-safe {
   min-width: 44px;
 }
+
+/* ── Independence Day campaign (/freedom-deal + home strip) ──────────
+   Scoped, seasonal, and self-removing: the components that use these
+   classes stop rendering after 14 Aug, so the styles go unused rather
+   than needing a cleanup pass. */
+.azadi-hero {
+  background:
+    radial-gradient(120% 90% at 12% 0%, rgba(28, 125, 71, 0.10) 0%, rgba(28, 125, 71, 0) 55%),
+    var(--azadi-paper);
+  border-bottom: 1px solid var(--azadi-tint);
+}
+.azadi-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--azadi-green);
+  display: inline-block;
+}
+.azadi-display {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--azadi-deep);
+  overflow-wrap: anywhere;
+}
+.azadi-figure {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(4.5rem, 16vw, 9rem);
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  color: var(--azadi-green);
+}
+.azadi-figure span {
+  font-size: 0.42em;
+  vertical-align: super;
+  margin-left: 0.06em;
+  letter-spacing: 0;
+}
+.azadi-dates {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+  letter-spacing: 0.02em;
+  color: var(--azadi-deep);
+  padding-top: 1rem;
+  border-top: 2px solid var(--azadi-mid);
+  display: inline-block;
+}
+.azadi-dates span { color: var(--azadi-green); margin: 0 0.35rem; }
+.azadi-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.95rem 1.75rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--azadi-paper);
+  background: var(--azadi-deep);
+  border: 1px solid var(--azadi-deep);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.azadi-btn:hover { background: var(--azadi-green); border-color: var(--azadi-green); }
+.azadi-btn--ghost {
+  color: var(--azadi-deep);
+  background: transparent;
+}
+.azadi-btn--ghost:hover { background: var(--azadi-tint); border-color: var(--azadi-deep); color: var(--azadi-deep); }
+
+/* Home strip — same language, compressed to a band */
+.azadi-strip {
+  background:
+    radial-gradient(100% 140% at 85% 50%, rgba(28, 125, 71, 0.12) 0%, rgba(28, 125, 71, 0) 60%),
+    var(--azadi-paper);
+  border-top: 1px solid var(--azadi-tint);
+  border-bottom: 1px solid var(--azadi-tint);
+}
+.azadi-strip-figure {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.75rem, 9vw, 4.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--azadi-green);
+}
+.azadi-strip-figure span { font-size: 0.4em; vertical-align: super; letter-spacing: 0; }

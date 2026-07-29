@@ -1,5 +1,5 @@
 import HomeHero from './home-hero'
-import DealBanner from './components/deal-banner'
+import DealStrip from './components/deal-strip'
 import HomeClient from './home-client'
 import JsonLd from './json-ld'
 import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
@@ -27,7 +27,7 @@ export default function HomePage() {
       />
       <main id="main" className="overflow-x-clip max-w-full min-w-0">
         <HomeHero />
-        <DealBanner />
+        <DealStrip />
         <HomeClient />
       </main>
     </>
