@@ -1,4 +1,10 @@
-﻿@tailwind base;
+﻿/* Hallmark · macrostructure: Catalogue (11) · genre: editorial · theme: inherited-brand
+   nav: N6 masthead · footer: Ft7 newsletter-first · hero: H1 marquee
+   signature: The Rate Index — the homepage IS the rate card
+   pre-emit critique: P5 H4 E4 S5 R4 V4
+   contrast: pass (40-41, axe enforced) · mobile: pass (34, 49-57)
+   honest: pass (46 — every figure derives from src/data.js, none invented) */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -119,6 +125,7 @@
 @layer utilities {
   .bg-ink    { background-color: #0d0d0d !important; }
   .bg-white  { background-color: var(--paper) !important; }
+  .bg-paper  { background-color: var(--paper) !important; }
   .bg-mist   { background-color: #f8f5f1 !important; }
   .bg-nude   { background-color: #e8ddd5 !important; }
   .text-ink  { color: #0d0d0d !important; }

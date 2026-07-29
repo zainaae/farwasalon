@@ -1,4 +1,5 @@
 import HomeHero from './home-hero'
+import HomeRateIndex from './home-rate-index'
 import HomeClient from './home-client'
 import JsonLd from './json-ld'
 import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
@@ -26,6 +27,7 @@ export default function HomePage() {
       />
       <main id="main" className="overflow-x-clip max-w-full min-w-0">
         <HomeHero />
+        <HomeRateIndex />
         <HomeClient />
       </main>
     </>

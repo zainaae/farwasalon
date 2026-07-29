@@ -6,9 +6,8 @@ import HomeHeroVideo from './home-hero-video'
 const HERO_POSTER = '/bridal2.jpg'
 
 const thesis = [
-  { text: 'Bridal. Hair. Skin. ', em: true },
-  { text: 'Rubina\u2019s studio ', em: false },
-  { text: 'since 2008.', em: true },
+  { text: '100+ services, every rate on the page. ', em: true },
+  { text: 'Rubina\u2019s PECHS studio, since 2008.', em: false },
 ]
 
 export default function HomeHero() {
@@ -68,7 +67,7 @@ export default function HomeHero() {
             id="hero-lede"
             className="hero-lcp text-white/65 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-['Inter'] mb-5 md:mb-7"
           >
-            Farwa Beauty Salon &middot; Est. 2008
+            Farwa Beauty Salon &middot; PECHS, Karachi
           </p>
 
           <h1
@@ -81,8 +80,14 @@ export default function HomeHero() {
               maxWidth: '13ch',
             }}
           >
-            <span className="block text-white font-bold">Beauty Salon in PECHS</span>
-            <span className="block text-white/80 font-light italic mt-1">Karachi</span>
+            <span className="block text-white font-bold">Every price,</span>
+            <span className="block text-accent-gold font-bold">printed.</span>
+            <span
+              className="block text-white/85 font-light mt-3 md:mt-4"
+              style={{ fontSize: 'clamp(0.95rem, 2vw, 1.35rem)', letterSpacing: '-0.01em', maxWidth: '26ch' }}
+            >
+              Beauty salon in PECHS, Karachi — since 2008.
+            </span>
           </h1>
 
           <p
@@ -97,7 +102,7 @@ export default function HomeHero() {
             {thesis.map((line) => (
               <span
                 key={line.text}
-                className={`block ${line.em ? 'text-white/95 font-medium' : 'text-white/70 font-light italic'}`}
+                className={`block ${line.em ? 'text-white/95 font-medium' : 'text-white/70 font-light'}`}
               >
                 {line.text}
               </span>
