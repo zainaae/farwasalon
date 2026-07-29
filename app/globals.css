@@ -883,16 +883,6 @@ button.tap-safe,
 @keyframes azadiIn {
   to { opacity: 1; transform: none; }
 }
-/* The figure is the anchor, so it gets the one distinct entrance. */
-.azadi-figure.azadi-in {
-  transform: translateY(14px) scale(0.965);
-  transform-origin: left bottom;
-  animation-name: azadiFigureIn;
-  animation-duration: 560ms;
-}
-@keyframes azadiFigureIn {
-  to { opacity: 1; transform: none; }
-}
 .azadi-dot {
   width: 7px;
   height: 7px;
@@ -909,31 +899,6 @@ button.tap-safe,
   color: var(--azadi-deep);
   overflow-wrap: anywhere;
 }
-.azadi-figure {
-  font-family: 'Unbounded', sans-serif;
-  font-weight: 700;
-  font-size: clamp(4.5rem, 16vw, 9rem);
-  line-height: 0.82;
-  letter-spacing: -0.05em;
-  color: var(--azadi-green);
-}
-.azadi-figure span {
-  font-size: 0.42em;
-  vertical-align: super;
-  margin-left: 0.06em;
-  letter-spacing: 0;
-}
-.azadi-dates {
-  font-family: 'Unbounded', sans-serif;
-  font-weight: 700;
-  font-size: clamp(0.95rem, 2.4vw, 1.2rem);
-  letter-spacing: 0.02em;
-  color: var(--azadi-deep);
-  padding-top: 1rem;
-  border-top: 2px solid var(--azadi-mid);
-  display: inline-block;
-}
-.azadi-dates span { color: var(--azadi-green); margin: 0 0.35rem; }
 .azadi-btn {
   display: inline-flex;
   align-items: center;
@@ -985,12 +950,26 @@ button.tap-safe,
 .azadi-strip-figure span { font-size: 0.4em; vertical-align: super; letter-spacing: 0; }
 
 @media (prefers-reduced-motion: reduce) {
-  .azadi-in,
-  .azadi-figure.azadi-in {
+  .azadi-in {
     animation: azadiInReduced 150ms linear forwards;
     animation-delay: 0s;
     transform: none;
   }
   @keyframes azadiInReduced { to { opacity: 1; } }
   .azadi-btn:hover, .azadi-btn:active { transform: none; }
+}
+
+/* Poster mat — the artwork is pale green on a pale green field, so it needs a
+   paper edge to read as a printed object rather than dissolving into the page. */
+.azadi-mat {
+  background: #fff;
+  padding: 0.55rem;
+  max-width: 460px;
+  box-shadow:
+    0 1px 2px rgba(16, 45, 27, 0.10),
+    0 12px 28px -8px rgba(16, 45, 27, 0.22);
+  border: 1px solid var(--azadi-tint);
+}
+@media (min-width: 768px) {
+  .azadi-mat { padding: 0.7rem; }
 }

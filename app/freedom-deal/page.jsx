@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
-import { DEALS, getActiveDeals, getUpcomingDeals, formatDealRange } from '../../src/deals-data.js'
+import { DEALS } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import { SITE_ORIGIN, SALON_ID, buildFaqPageSchema } from '../../lib/business-schema.js'
@@ -66,9 +66,6 @@ const FAQS = [
 ]
 
 export default function AzadiSalePage() {
-  const live = getActiveDeals().some((d) => d.id === DEAL?.id)
-  const upcoming = getUpcomingDeals().some((d) => d.id === DEAL?.id)
-  const range = DEAL ? formatDealRange(DEAL) : ''
 
   const offerSchema = DEAL && {
     '@context': 'https://schema.org',
@@ -91,40 +88,47 @@ export default function AzadiSalePage() {
       {/* Campaign hero — poster palette, poster artwork, and the discount itself
           as the visual anchor. Deliberately off-brand for the ten days it runs:
           the site is ink/nude/gold, this is the flag. */}
+      {/* Poster-led. The artwork is real, human-made and culturally specific —
+          it outranks anything generated, so it carries the fold and the words
+          annotate it. No eyebrow, no repeated date block: the dates are on the
+          poster and stated once in the copy. */}
       <section className="azadi-hero">
-        <div className="section-shell py-12 md:py-16">
-          <div className="grid gap-10 md:gap-14 md:grid-cols-[1.15fr_0.85fr] items-center">
-            <div className="min-w-0">
-              <p className="azadi-in inline-flex items-center gap-2 text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-['Inter'] text-[color:var(--azadi-green)] mb-5" style={{ '--i': 0 }}>
-                <span className="azadi-dot" aria-hidden="true" />
-                {live ? 'Live now' : upcoming ? `Starts ${range}` : 'Independence Day'}
-              </p>
+        <div className="section-shell py-10 md:py-16">
+          <div className="grid gap-8 md:gap-14 md:grid-cols-[0.95fr_1.05fr] items-center">
+            {DEAL?.image && (
+              <div className="azadi-mat mx-auto md:mx-0">
+              <Image
+                src={DEAL.image}
+                alt={DEAL.imageAlt}
+                width={1000}
+                height={1414}
+                priority
+                sizes="(max-width: 768px) 82vw, 460px"
+                className="azadi-in w-full h-auto"
+                style={{ '--i': 0 }}
+              />
+              </div>
+            )}
 
-              <h1 className="azadi-display azadi-in mb-4" style={{ '--i': 1 }}>
-                <span className="block">Freedom</span>
-                <span className="block">Deal</span>
+            <div className="min-w-0">
+              <h1 className="azadi-display azadi-in mb-5" style={{ '--i': 1 }}>
+                20% off.<br />No asterisk.
               </h1>
 
-              <p className="azadi-figure azadi-in mb-5" style={{ '--i': 2 }} aria-hidden="true">20<span>%</span></p>
-              <p className="sr-only">20 percent off</p>
-
-              <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-xl mb-3" style={{ '--i': 3 }}>
-                <strong className="font-semibold">Flat 20% off once your visit reaches Rs 1,400.</strong>{' '}
-                Not &ldquo;up to&rdquo; 20%. Not a package someone else decided for you — pick whatever
-                you actually came in for, and if it adds up to Rs 1,400, the whole visit is 20% less.
+              <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 2 }}>
+                Once your visit reaches Rs 1,400, the whole bill is 20% less — 5 to 14
+                August. Not &ldquo;up to&rdquo; 20%. Not a package someone else chose for you.
+                Book what you actually came in for.
               </p>
-              <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-xl mb-7" style={{ '--i': 4 }}>
-                Our rates have been printed on this website since January. We didn&rsquo;t raise them in
-                July to discount them in August — you can scroll the{' '}
+
+              <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-lg mb-8" style={{ '--i': 3 }}>
+                Our rates have been printed on this website since January. We didn&rsquo;t raise
+                them in July to discount them in August — scroll the{' '}
                 <Link href="/prices" className="underline underline-offset-2 hover:no-underline">price list</Link>{' '}
                 and check.
               </p>
 
-              <p className="azadi-dates azadi-in mb-8" style={{ '--i': 5 }}>
-                5 <span>—</span> 14 August 2026
-              </p>
-
-              <div className="azadi-in flex flex-wrap items-center gap-3" style={{ '--i': 6 }}>
+              <div className="azadi-in flex flex-wrap items-center gap-3" style={{ '--i': 4 }}>
                 <Link href="/book" className="tap-safe azadi-btn">
                   Book your slot <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
@@ -138,19 +142,6 @@ export default function AzadiSalePage() {
                 </a>
               </div>
             </div>
-
-            {DEAL?.image && (
-              <Image
-                src={DEAL.image}
-                alt={DEAL.imageAlt}
-                width={1000}
-                height={1414}
-                priority
-                sizes="(max-width: 768px) 92vw, 420px"
-                className="azadi-in w-full max-w-[420px] mx-auto h-auto shadow-card"
-                style={{ '--i': 3 }}
-              />
-            )}
           </div>
         </div>
       </section>
