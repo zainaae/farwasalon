@@ -95,34 +95,34 @@ export default function AzadiSalePage() {
         <div className="section-shell py-12 md:py-16">
           <div className="grid gap-10 md:gap-14 md:grid-cols-[1.15fr_0.85fr] items-center">
             <div className="min-w-0">
-              <p className="inline-flex items-center gap-2 text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-['Inter'] text-[color:var(--azadi-green)] mb-5">
+              <p className="azadi-in inline-flex items-center gap-2 text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-['Inter'] text-[color:var(--azadi-green)] mb-5" style={{ '--i': 0 }}>
                 <span className="azadi-dot" aria-hidden="true" />
                 {live ? 'Live now' : upcoming ? `Starts ${range}` : 'Independence Day'}
               </p>
 
-              <h1 className="azadi-display mb-4">
+              <h1 className="azadi-display azadi-in mb-4" style={{ '--i': 1 }}>
                 <span className="block">Freedom</span>
                 <span className="block">Deal</span>
               </h1>
 
-              <p className="azadi-figure mb-5" aria-hidden="true">20<span>%</span></p>
+              <p className="azadi-figure azadi-in mb-5" style={{ '--i': 2 }} aria-hidden="true">20<span>%</span></p>
               <p className="sr-only">20 percent off</p>
 
-              <p className="text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-xl mb-3">
+              <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-xl mb-3" style={{ '--i': 3 }}>
                 <strong className="font-semibold">20% off when your visit totals Rs 1,400 or more.</strong>{' '}
                 Jashn-e-Azadi at Farwa Beauty Salon, Block 3 PECHS — threading, facials, hair,
                 nails, waxing and bridal all count toward the total.
               </p>
-              <p className="text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-xl mb-7">
+              <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-xl mb-7" style={{ '--i': 4 }}>
                 The 20% comes off our printed price — the same rate published on this site all
                 year, not one raised for the occasion.
               </p>
 
-              <p className="azadi-dates mb-8">
+              <p className="azadi-dates azadi-in mb-8" style={{ '--i': 5 }}>
                 5 <span>—</span> 14 August 2026
               </p>
 
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="azadi-in flex flex-wrap items-center gap-3" style={{ '--i': 6 }}>
                 <Link href="/book" className="tap-safe azadi-btn">
                   Book your slot <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
@@ -145,7 +145,8 @@ export default function AzadiSalePage() {
                 height={1414}
                 priority
                 sizes="(max-width: 768px) 92vw, 420px"
-                className="w-full max-w-[420px] mx-auto h-auto shadow-card"
+                className="azadi-in w-full max-w-[420px] mx-auto h-auto shadow-card"
+                style={{ '--i': 3 }}
               />
             )}
           </div>

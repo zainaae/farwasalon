@@ -23,6 +23,14 @@
   --azadi-deep:  #102d1b;
   --azadi-mid:   #174926;
 
+  /* Motion language — exponential ease-out for entrances, three duration
+     buckets. Browser defaults (ease, ease-in-out) read as uncrafted. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.7, 0, 0.84, 0);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long:  420ms;
+
   /* shadcn tokens */
   --background: 30 20% 99%;
   --foreground: 0 0% 5%;
@@ -838,10 +846,49 @@ button.tap-safe,
    classes stop rendering after 14 Aug, so the styles go unused rather
    than needing a cleanup pass. */
 .azadi-hero {
+  position: relative;
+  isolation: isolate;
+  /* Two-stop field + a single soft bloom behind the figure. Deliberately not
+     an aurora mesh: one hue, low chroma, bloom confined to the upper right. */
   background:
-    radial-gradient(120% 90% at 12% 0%, rgba(28, 125, 71, 0.10) 0%, rgba(28, 125, 71, 0) 55%),
-    var(--azadi-paper);
+    radial-gradient(70% 85% at 88% 8%, rgba(28, 125, 71, 0.20) 0%, rgba(28, 125, 71, 0) 62%),
+    radial-gradient(90% 70% at 4% 96%, rgba(23, 73, 38, 0.10) 0%, rgba(23, 73, 38, 0) 58%),
+    linear-gradient(158deg, #f6ffe6 0%, var(--azadi-paper) 46%, #e6f7c8 100%);
   border-bottom: 1px solid var(--azadi-tint);
+}
+/* Grain — texture you can barely see, not decoration (0.055 opacity). */
+.azadi-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 170px;
+}
+
+/* ── Page-load orchestration — one sequence, staggered by DOM index,
+      capped under 500ms. transform + opacity only. ── */
+.azadi-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: azadiIn var(--dur-long) var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+@keyframes azadiIn {
+  to { opacity: 1; transform: none; }
+}
+/* The figure is the anchor, so it gets the one distinct entrance. */
+.azadi-figure.azadi-in {
+  transform: translateY(14px) scale(0.965);
+  transform-origin: left bottom;
+  animation-name: azadiFigureIn;
+  animation-duration: 560ms;
+}
+@keyframes azadiFigureIn {
+  to { opacity: 1; transform: none; }
 }
 .azadi-dot {
   width: 7px;
@@ -901,7 +948,15 @@ button.tap-safe,
   border: 1px solid var(--azadi-deep);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
-.azadi-btn:hover { background: var(--azadi-green); border-color: var(--azadi-green); }
+.azadi-btn {
+  transition:
+    background-color var(--dur-short) var(--ease-out),
+    border-color var(--dur-short) var(--ease-out),
+    color var(--dur-short) var(--ease-out),
+    transform var(--dur-micro) var(--ease-out);
+}
+.azadi-btn:hover { background: var(--azadi-green); border-color: var(--azadi-green); transform: translateY(-1px); }
+.azadi-btn:active { transform: translateY(0); }
 .azadi-btn--ghost {
   color: var(--azadi-deep);
   background: transparent;
@@ -911,8 +966,8 @@ button.tap-safe,
 /* Home strip — same language, compressed to a band */
 .azadi-strip {
   background:
-    radial-gradient(100% 140% at 85% 50%, rgba(28, 125, 71, 0.12) 0%, rgba(28, 125, 71, 0) 60%),
-    var(--azadi-paper);
+    radial-gradient(80% 150% at 88% 50%, rgba(28, 125, 71, 0.18) 0%, rgba(28, 125, 71, 0) 62%),
+    linear-gradient(100deg, #f6ffe6 0%, var(--azadi-paper) 55%, #e9f8ce 100%);
   border-top: 1px solid var(--azadi-tint);
   border-bottom: 1px solid var(--azadi-tint);
 }
@@ -925,3 +980,14 @@ button.tap-safe,
   color: var(--azadi-green);
 }
 .azadi-strip-figure span { font-size: 0.4em; vertical-align: super; letter-spacing: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .azadi-in,
+  .azadi-figure.azadi-in {
+    animation: azadiInReduced 150ms linear forwards;
+    animation-delay: 0s;
+    transform: none;
+  }
+  @keyframes azadiInReduced { to { opacity: 1; } }
+  .azadi-btn:hover, .azadi-btn:active { transform: none; }
+}
