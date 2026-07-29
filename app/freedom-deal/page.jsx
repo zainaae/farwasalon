@@ -10,15 +10,18 @@ const DEAL = DEALS.find((d) => d.id === 'freedom-deal-2026')
 
 /* Pakistani users search this offer in several spellings — azadi, azaadi,
    jashn-e-azadi, "14 august sale", "independence day offer". They are the same
-   intent, so they get one page rather than five thin ones. */
-const title = 'Azadi Sale 2026 — 20% Off | 14 August Offer, Farwa Salon Karachi'
+   intent, so they get one page rather than five thin ones. The page is branded
+   "Freedom Deal" to match the poster customers receive, while azadi / azaadi /
+   "14 august sale" stay in the title, description and keywords because those
+   are the words people actually search. */
+const title = 'Freedom Deal — Azadi Sale 2026 | 20% Off, 14 August, Farwa Karachi'
 const description =
-  'Azaadi / Independence Day salon offer in PECHS Karachi: 20% off when your visit totals Rs 1,400 or more, 5–14 August 2026. Combine any services — threading, facials, hair, nails, bridal.'
+  'Azadi sale / Independence Day deal in PECHS Karachi: 20% off when your visit totals Rs 1,400 or more, 5–14 August 2026. Combine any services — threading, facials, hair, nails, bridal.'
 
 export const metadata = {
   title: { absolute: title },
   description,
-  alternates: { canonical: '/azadi-sale' },
+  alternates: { canonical: '/freedom-deal' },
   keywords: [
     'azadi sale', 'azaadi sale', 'azadi offer Karachi', 'jashn e azadi sale',
     '14 august sale', '14 august offer', 'independence day sale Karachi',
@@ -27,7 +30,7 @@ export const metadata = {
   ...pageSocialMeta({
     title,
     description,
-    path: '/azadi-sale',
+    path: '/freedom-deal',
     image: '/freedom-deal-og.jpg',
     imageAlt: DEAL?.imageAlt || 'Freedom Deal — Farwa Beauty Salon',
   }),
@@ -37,7 +40,7 @@ export const revalidate = 86400
 
 const FAQS = [
   {
-    q: 'What is the Azadi sale at Farwa Beauty Salon?',
+    q: 'What is the Freedom Deal at Farwa Beauty Salon?',
     a: 'From 5 to 14 August 2026, any visit totalling Rs 1,400 or more gets 20% off at Farwa Beauty Salon in Block 3 PECHS, Karachi. You can reach the total with one service or several combined. The discount comes off our published prices, which have been printed on farwasalon.com all year.',
   },
   {
@@ -70,9 +73,9 @@ export default function AzadiSalePage() {
   const offerSchema = DEAL && {
     '@context': 'https://schema.org',
     '@type': 'Offer',
-    name: 'Azadi Sale 2026 — Freedom Deal, 20% off',
+    name: 'Freedom Deal 2026 — Azadi offer, 20% off',
     description: DEAL.description,
-    url: `${SITE_ORIGIN}/azadi-sale`,
+    url: `${SITE_ORIGIN}/freedom-deal`,
     priceCurrency: 'PKR',
     offeredBy: { '@id': SALON_ID },
     validFrom: DEAL.validFrom,
@@ -90,7 +93,7 @@ export default function AzadiSalePage() {
           — {live ? 'Live now' : upcoming ? 'Announced' : 'Independence Day'} · {range} 2026
         </p>
         <h1 className="display-section text-ink mb-5 max-w-3xl">
-          Azadi Sale 2026 — 20% Off
+          Freedom Deal — 20% Off
         </h1>
         <p className="text-body md:text-lg max-w-2xl mb-4 leading-relaxed">
           Jashn-e-Azadi at Farwa Beauty Salon, Block 3 PECHS: <strong className="text-ink font-semibold">20% off

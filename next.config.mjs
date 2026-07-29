@@ -49,6 +49,12 @@ const nextConfig = {
   },
   trailingSlash: false,
   redirects: async () => [
+    /* /azadi-sale shipped first and was submitted to IndexNow; the campaign is
+       branded Freedom Deal to match the poster, so the old URL redirects
+       rather than 404s. Both spellings people might type land in the right
+       place. */
+    { source: '/azadi-sale', destination: '/freedom-deal', permanent: true },
+    { source: '/azadi-deal', destination: '/freedom-deal', permanent: true },
     {
       source: '/team',
       destination: '/about',
