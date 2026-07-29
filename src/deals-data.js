@@ -5,17 +5,20 @@
  *  Shape: validUntil (YYYY-MM-DD, inclusive) or null for evergreen. */
 export const DEALS = [
   {
-    id: 'independence-14',
-    title: '14% off for Independence Day',
+    /* Terms taken from the published poster (public/freedom-deal-2026.jpg):
+       20% off services Rs 1,400 and above, 5–14 August 2026. */
+    id: 'freedom-deal-2026',
+    title: 'Freedom Deal — 20% off',
     description:
-      'Pakistan turns 79 on 14 August, so every service comes down by 14% for the fortnight around it. The discount applies to the printed rate — the same rate that has been on this page all year, not one raised for the occasion.',
-    priceNote: 'Applies to every printed service price. Party makeup and keratin stay individually quoted.',
-    category: 'All services',
+      'For Pakistan’s Independence Day, every service priced Rs 1,400 and above comes down by 20% from 5 to 14 August. The discount comes off the printed rate — the same rate that has been on this page all year, not one raised for the occasion.',
+    priceNote: 'All services Rs 1,400 and above. Party makeup and keratin stay individually quoted.',
+    category: 'Independence Day',
     href: '/prices',
+    image: '/freedom-deal-2026.jpg',
+    imageAlt: 'Farwa Beauty Salon Freedom Deal — 20% off services Rs 1,400 and above, 5 to 14 August 2026',
     validFrom: '2026-08-05',
-    validUntil: '2026-08-19',
-    /* Set the day the flag goes up so the page can tease the offer before it
-       opens; teaser copy only, never a claimable discount. */
+    validUntil: '2026-08-14',
+    /* Announce from today; teaser copy only, never claimable before the 5th. */
     teaseFrom: '2026-07-29',
     accent: true,
   },

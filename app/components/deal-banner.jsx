@@ -32,7 +32,7 @@ export default function DealBanner() {
           <span className="text-white/70">{range}</span>
         </p>
         <Link
-          href="/deals"
+          href={deal.id === 'freedom-deal-2026' ? '/azadi-sale' : '/deals'}
           className="tap-safe inline-flex items-center gap-1 text-[11px] md:text-xs tracking-[0.14em] uppercase font-semibold font-['Inter'] text-white underline underline-offset-4 decoration-accent-gold hover:decoration-white transition-colors"
         >
           {live ? 'See the offer' : 'Details'}

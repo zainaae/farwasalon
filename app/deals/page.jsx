@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { getActiveDeals, getUpcomingDeals, formatDealRange } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
@@ -17,8 +18,8 @@ export const metadata = {
     title,
     description,
     path: '/deals',
-    image: '/glow3.jpg',
-    imageAlt: 'Salon deals at Farwa Beauty Salon PECHS Karachi',
+    image: '/freedom-deal-og.jpg',
+    imageAlt: 'Freedom Deal — 20% off services Rs 1,400 and above, 5–14 August 2026',
   }),
 }
 
@@ -75,6 +76,16 @@ export default function DealsPage() {
               <h2 id={`deal-${d.id}`} className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-2">
                 {d.title}
               </h2>
+              {d.image && (
+                <Image
+                  src={d.image}
+                  alt={d.imageAlt || d.title}
+                  width={1000}
+                  height={1414}
+                  sizes="(max-width: 768px) 100vw, 420px"
+                  className="w-full max-w-[420px] h-auto border border-border-soft mb-5"
+                />
+              )}
               <p className="text-body text-sm mb-2 max-w-xl">{d.description}</p>
               <p className="text-stone text-[12px] font-['Inter'] mb-5">{d.priceNote}</p>
               <div className="flex flex-wrap items-center gap-3">
