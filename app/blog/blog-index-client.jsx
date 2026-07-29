@@ -77,7 +77,7 @@ export default function BlogIndexClient() {
                 <p className="text-body line-clamp-2 mb-4">
                   {post.description}
                 </p>
-                <span className="inline-flex items-center gap-1 text-[10px] tracking-[0.16em] uppercase font-medium font-['Inter'] text-ink group-hover:gap-2 transition-all">
+                <span className="inline-flex items-center gap-1 text-[10px] tracking-[0.16em] uppercase font-medium font-['Inter'] text-ink group-hover:gap-2 transition-[gap]">
                   Read article <ChevronRight className="w-3 h-3" />
                 </span>
                 </div>

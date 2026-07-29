@@ -124,10 +124,10 @@ export default function PricesPage() {
                   {SERVICES[cat].map((s) => (
                     <tr key={s.id} className="border-b border-border-soft">
                       <td className="py-2.5 pr-3 text-ink text-[14px] sm:text-[15px] font-['Inter'] font-light">{s.name}</td>
-                      <td className="py-2.5 pr-3 text-right text-stone/80 text-[12px] font-['Inter'] whitespace-nowrap hidden sm:table-cell">
+                      <td className="py-2.5 pr-3 text-right text-stone/80 text-[12px] font-['Inter'] whitespace-nowrap tabular-nums hidden sm:table-cell">
                         {s.durationMinutes ? formatDuration(s.durationMinutes) : ''}
                       </td>
-                      <td className="py-2.5 text-right font-['Unbounded'] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap">
+                      <td className="py-2.5 text-right font-['Unbounded'] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap tabular-nums">
                         {formatPrice(s.pricePkr)}
                       </td>
                     </tr>

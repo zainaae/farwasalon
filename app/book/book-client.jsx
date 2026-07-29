@@ -606,7 +606,7 @@ export default function BookClient() {
                       disabled={blocked}
                       title={blockReason || undefined}
                       aria-label={blocked ? `${dayName} ${dateNum} ${monthName} — ${blockReason}` : `${dayName} ${dateNum} ${monthName}`}
-                      className={`tap-safe snap-center shrink-0 min-w-[4.25rem] w-[4.5rem] py-3 border text-center transition-all ${
+                      className={`tap-safe snap-center shrink-0 min-w-[4.25rem] w-[4.5rem] py-3 border text-center transition-colors ${
                         sel
                           ? 'bg-ink text-white border-ink'
                           : blocked
@@ -662,7 +662,7 @@ export default function BookClient() {
                             type="button"
                             onClick={() => available && setSelectedTime(time)}
                             disabled={!available}
-                            className={`tap-safe min-h-[44px] py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-all ${
+                            className={`tap-safe min-h-[44px] py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-colors ${
                               sel
                                 ? 'bg-ink text-white border-ink'
                                 : available

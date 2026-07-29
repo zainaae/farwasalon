@@ -221,10 +221,10 @@ function ServiceMediaPanel({ hovered }) {
         />
       )}
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 bg-gradient-to-t from-ink/80 to-transparent z-10">
-        <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-all duration-300">
+        <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-colors duration-300">
           {hovered ?? 'Farwa Beauty Salon'}
         </p>
-        <p className="text-white font-['Syne'] font-bold text-sm transition-all duration-300">
+        <p className="text-white font-['Syne'] font-bold text-sm transition-colors duration-300">
           {hovered ? `${SERVICES[hovered]?.length} services` : 'PECHS, Karachi'}
         </p>
       </div>
@@ -251,7 +251,7 @@ function FeaturedServices() {
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="shrink-0 self-start sm:self-auto">
             <Link href="/services"
-              className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-all duration-300">
+              className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-colors duration-300">
               View All <ArrowUpRight className="w-3 h-3" />
             </Link>
           </m.div>
@@ -321,7 +321,7 @@ function FeaturedServices() {
                             : `${SERVICES[cat].length} services`
                         })()}
                       </span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-stone/40 group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                      <ArrowUpRight className="w-3.5 h-3.5 text-stone/40 group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-[transform,color] duration-200" />
                     </div>
                   </Link>
                 </m.div>
@@ -616,7 +616,7 @@ function TestimonialsPreview() {
                     aria-selected={reviewIdx === i}
                     aria-label={`Show review by ${r.name}`}
                     onClick={() => setReviewIdx(i)}
-                    className={`h-1.5 rounded-full transition-all ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30 hover:bg-stone/50'}`}
+                    className={`h-1.5 rounded-full transition-[width,background-color] ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30 hover:bg-stone/50'}`}
                   />
                 ))}
               </div>
@@ -688,7 +688,7 @@ function CtaBand() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
             <Link
               href="/book"
-              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-all duration-300 w-full sm:w-auto justify-center sm:justify-start"
+              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-[background-color,transform] duration-300 w-full sm:w-auto justify-center sm:justify-start"
             >
               Book an Appointment <ArrowUpRight className="w-4 h-4 shrink-0" />
             </Link>

@@ -75,7 +75,7 @@ function MonthCalendar({ value, onChange }) {
               aria-label={disabled ? undefined : strFor(day)}
               aria-pressed={sel}
               className={[
-                'aspect-square flex items-center justify-center text-[12px] font-[\'Inter\'] transition-all duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#c9a98a]',
+                'aspect-square flex items-center justify-center text-[12px] font-[\'Inter\'] transition-colors duration-150 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#c9a98a]',
                 disabled
                   ? 'text-stone/20 cursor-not-allowed'
                   : 'hover:bg-[#f0ebe6] cursor-pointer text-ink',
@@ -267,7 +267,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
 
             <div className="h-[2px] bg-[#e4ddd7] w-full">
               <div
-                className="h-full bg-gradient-to-r from-[#c9a98a] to-[#8b6d59] transition-all duration-400"
+                className="h-full bg-gradient-to-r from-[#c9a98a] to-[#8b6d59] transition-[width] duration-400"
                 style={{ width: `${((step + 1) / 3) * 100}%` }}
               />
             </div>
@@ -299,7 +299,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                             key={c}
                             type="button"
                             onClick={() => setCat(c)}
-                            className="tap-safe p-3 border border-border-soft hover:border-ink hover:bg-mist transition-all text-left"
+                            className="tap-safe p-3 border border-border-soft hover:border-ink hover:bg-mist transition-colors text-left"
                           >
                             <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight">{c}</p>
                             <p className="text-stone text-[10px] font-['Inter'] mt-1">{SERVICES[c].length} services</p>
@@ -421,7 +421,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                         key={t}
                         type="button"
                         onClick={() => setTime(t)}
-                        className={`tap-safe py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-all ${
+                        className={`tap-safe py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-colors ${
                           time === t
                             ? 'bg-ink text-white border-ink'
                             : 'border-border-soft text-ink hover:border-ink hover:bg-mist'

@@ -223,7 +223,7 @@ export function SmoothyGallery({ photos }) {
             className="tap-safe min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
           >
             <span
-              className={`block h-[2px] transition-all duration-300 ${idx === i ? 'w-8 bg-ink' : 'w-3 bg-stone/30'}`}
+              className={`block h-[2px] transition-[width,background-color] duration-300 ${idx === i ? 'w-8 bg-ink' : 'w-3 bg-stone/30'}`}
             />
           </button>
         ))}
@@ -341,11 +341,11 @@ export function ServiceModal({ service, onClose }) {
             <div className="mt-auto flex flex-col gap-2">
               <button type="button"
                 onClick={() => { booking.addService(service, 'modal'); onClose() }}
-                className="inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone active:scale-[0.98] transition-all duration-300">
+                className="inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone active:scale-[0.98] transition-[background-color,transform] duration-300">
                 <Sparkles className="w-3.5 h-3.5" /> Add to Booking
               </button>
               <a href={waLink(service.name)} target="_blank" rel="noreferrer" onClick={onClose}
-                className="inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-all duration-300">
+                className="inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
                 Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>

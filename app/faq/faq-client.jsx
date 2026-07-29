@@ -27,7 +27,7 @@ function FaqItem({ faq, index }) {
         <span className="font-['Syne'] font-bold text-sm text-ink leading-snug">{faq.q}</span>
         <ChevronDown className={`w-4 h-4 text-stone shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
-      <div id={`faq-panel-${index}`} role="region" className={`overflow-hidden transition-all duration-200 ${open ? 'max-h-[28rem] pb-5 -mt-1' : 'max-h-0'}`}>
+      <div id={`faq-panel-${index}`} role="region" className={`overflow-hidden transition-[max-height,padding,margin] duration-200 ${open ? 'max-h-[28rem] pb-5 -mt-1' : 'max-h-0'}`}>
         <p className="text-body text-sm">{faq.a}</p>
       </div>
     </m.div>
