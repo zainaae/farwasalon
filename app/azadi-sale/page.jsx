@@ -2,7 +2,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { DEALS, getActiveDeals, getUpcomingDeals, formatDealRange } from '../../src/deals-data.js'
-import { SERVICES } from '../../src/data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import { SITE_ORIGIN, SALON_ID, buildFaqPageSchema } from '../../lib/business-schema.js'
@@ -51,7 +50,7 @@ const FAQS = [
   },
   {
     q: 'Can I combine services to reach Rs 1,400?',
-    a: 'Yes — that is the point. Eyebrow threading at Rs 200 with a White Glow Cleansing at Rs 1,200 reaches exactly Rs 1,400 and qualifies. So does a Jessica Manicure at Rs 1,200 with a Nail Paint at Rs 300. Add the services to one booking and the total is what counts.',
+    a: 'Yes — that is the point. Add the services you want to one booking; if the total reaches Rs 1,400 or more, the 20% applies to the visit. It does not matter whether that is one treatment or several small ones.',
   },
   {
     q: 'Do I need to pay in advance?',
@@ -63,48 +62,10 @@ const FAQS = [
   },
 ]
 
-/* The Rs 1,400 bar is a basket total, not a per-service floor — so the useful
-   thing to show is how easily ordinary combinations clear it. Every pair below
-   is looked up live from the menu, so the figures can never drift from what we
-   actually charge. */
-const COMBOS = [
-  [
-    { cat: 'Cleansing', name: 'White Glow Cleansing' },
-    { cat: 'Threading', name: 'Eyebrow Threading' },
-  ],
-  [
-    { cat: 'Nails', name: 'Jessica Manicure' },
-    { cat: 'Nails', name: 'Nail Paint' },
-  ],
-  [
-    { cat: 'Massage', name: 'Full Legs Massage' },
-    { cat: 'Threading', name: 'Upper Lip Threading' },
-  ],
-  [
-    { cat: 'Bleach & Polish', name: 'Sandal Face Polish' },
-    { cat: 'Rica Hot Wax', name: 'Eyebrows Rica Wax' },
-  ],
-]
-
-function priceOf({ cat, name }) {
-  return SERVICES[cat]?.find((s) => s.name === name)?.pricePkr ?? null
-}
-
-function buildCombos() {
-  return COMBOS.map((pair) => {
-    const items = pair.map((p) => ({ ...p, price: priceOf(p) })).filter((p) => p.price !== null)
-    if (items.length !== pair.length) return null
-    const total = items.reduce((n, p) => n + p.price, 0)
-    if (total < 1400) return null
-    return { items, total, saving: Math.round(total * 0.2) }
-  }).filter(Boolean)
-}
-
 export default function AzadiSalePage() {
   const live = getActiveDeals().some((d) => d.id === DEAL?.id)
   const upcoming = getUpcomingDeals().some((d) => d.id === DEAL?.id)
   const range = DEAL ? formatDealRange(DEAL) : ''
-  const combos = buildCombos()
 
   const offerSchema = DEAL && {
     '@context': 'https://schema.org',
@@ -171,40 +132,14 @@ export default function AzadiSalePage() {
           <h2 id="azadi-qualifying" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-4">
             What qualifies
           </h2>
-          <p className="text-body text-sm mb-6 max-w-2xl">
+          <p className="text-body text-sm md:text-[15px] mb-5 max-w-2xl leading-relaxed">
             Nothing on the menu is excluded. The Rs 1,400 is the total for your visit, not a
-            price any single service has to reach — so two small treatments together qualify
-            just as well as one big one. A few real examples from the{' '}
-            <Link href="/prices" className="link-underline text-ink font-medium">price list</Link>:
+            price any single service has to reach — so a few smaller treatments together qualify
+            just as well as one larger one. Everything is on the{' '}
+            <Link href="/prices" className="link-underline text-ink font-medium">price list</Link>.
           </p>
-          <ul className="border-t border-ink/25 max-w-2xl">
-            {combos.map(({ items, total, saving }) => (
-              <li key={items.map((i) => i.name).join('+')} className="py-3.5 border-b border-border-soft">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <span className="text-ink text-sm sm:text-[15px] font-['Inter'] min-w-0">
-                    {items.map((i, n) => (
-                      <span key={i.name}>
-                        {n > 0 && <span className="text-stone" aria-hidden="true"> + </span>}
-                        {i.name}{' '}
-                        <span className="text-stone tabular-nums">Rs {i.price.toLocaleString('en-PK')}</span>
-                      </span>
-                    ))}
-                  </span>
-                  <span className="whitespace-nowrap text-right">
-                    <span className="font-['Unbounded'] font-bold text-ink text-sm tabular-nums">
-                      Rs {total.toLocaleString('en-PK')}
-                    </span>
-                    <span className="block text-[11px] font-['Inter'] text-accent-gold-deep tabular-nums">
-                      save Rs {saving.toLocaleString('en-PK')}
-                    </span>
-                  </span>
-                </div>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-5 text-stone text-[13px] font-['Inter'] font-light max-w-2xl">
-            Add both services to one booking and the total is what counts. Not sure if your
-            basket clears Rs 1,400?{' '}
+          <p className="text-stone text-[13px] font-['Inter'] font-light max-w-2xl">
+            Not sure whether your booking clears Rs 1,400?{' '}
             <a
               href="https://wa.me/923222782254?text=Azadi%20offer%20—%20does%20my%20booking%20qualify%3F"
               target="_blank"
@@ -213,7 +148,7 @@ export default function AzadiSalePage() {
             >
               Ask on WhatsApp
             </a>{' '}
-            and we will tell you before you come.
+            and we will confirm before you come.
           </p>
         </section>
 
