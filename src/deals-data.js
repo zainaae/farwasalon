@@ -5,6 +5,21 @@
  *  Shape: validUntil (YYYY-MM-DD, inclusive) or null for evergreen. */
 export const DEALS = [
   {
+    id: 'independence-14',
+    title: '14% off for Independence Day',
+    description:
+      'Pakistan turns 79 on 14 August, so every service comes down by 14% for the fortnight around it. The discount applies to the printed rate — the same rate that has been on this page all year, not one raised for the occasion.',
+    priceNote: 'Applies to every printed service price. Party makeup and keratin stay individually quoted.',
+    category: 'All services',
+    href: '/prices',
+    validFrom: '2026-08-05',
+    validUntil: '2026-08-19',
+    /* Set the day the flag goes up so the page can tease the offer before it
+       opens; teaser copy only, never a claimable discount. */
+    teaseFrom: '2026-07-29',
+    accent: true,
+  },
+  {
     id: 'first-facial-10',
     title: '10% off your first facial',
     description:
@@ -23,4 +38,37 @@ export function getActiveDeals(now = new Date()) {
   return DEALS.filter(
     (d) => (!d.validFrom || d.validFrom <= today) && (!d.validUntil || d.validUntil >= today),
   )
+}
+
+/** Deals announced but not yet open — shown as "starts <date>", never claimable. */
+export function getUpcomingDeals(now = new Date()) {
+  const today = now.toISOString().slice(0, 10)
+  return DEALS.filter(
+    (d) =>
+      d.teaseFrom &&
+      d.teaseFrom <= today &&
+      d.validFrom > today &&
+      (!d.validUntil || d.validUntil >= today),
+  )
+}
+
+/** The one deal worth announcing sitewide right now: live first, else upcoming. */
+export function getHeadlineDeal(now = new Date()) {
+  return getActiveDeals(now).find((d) => d.accent) ?? getUpcomingDeals(now).find((d) => d.accent) ?? null
+}
+
+/** "5–19 August" / "14 August" — compact human range for banner copy. */
+export function formatDealRange(deal) {
+  if (!deal?.validFrom) return ''
+  const fmt = (iso, withMonth = true) => {
+    const d = new Date(`${iso}T00:00:00Z`)
+    const day = d.getUTCDate()
+    const month = d.toLocaleDateString('en-GB', { month: 'long', timeZone: 'UTC' })
+    return withMonth ? `${day} ${month}` : String(day)
+  }
+  if (!deal.validUntil) return `from ${fmt(deal.validFrom)}`
+  const sameMonth = deal.validFrom.slice(0, 7) === deal.validUntil.slice(0, 7)
+  return sameMonth
+    ? `${fmt(deal.validFrom, false)}–${fmt(deal.validUntil)}`
+    : `${fmt(deal.validFrom)} – ${fmt(deal.validUntil)}`
 }

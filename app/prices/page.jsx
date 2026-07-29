@@ -9,6 +9,7 @@ import {
 } from '../../lib/business-schema.js'
 import { PRICES_PAGE_FAQS } from '../../src/faq-data.js'
 import QuoteBuilder from './quote-builder'
+import DealBanner from '../components/deal-banner'
 
 const title = 'Salon Price List Karachi 2026 — From Rs 100 | Farwa'
 const description =
@@ -56,6 +57,10 @@ export default function PricesPage() {
             className="tap-safe btn-secondary w-full sm:w-auto justify-center">
             Ask on WhatsApp
           </a>
+        </div>
+
+        <div className="-mx-4 sm:-mx-5 md:-mx-10 mb-10">
+          <DealBanner />
         </div>
 
         <nav aria-label="Price list categories" className="mb-12 max-w-4xl">

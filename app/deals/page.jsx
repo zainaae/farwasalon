@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { getActiveDeals } from '../../src/deals-data.js'
+import { getActiveDeals, getUpcomingDeals, formatDealRange } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import { SITE_ORIGIN, SALON_ID } from '../../lib/business-schema.js'
@@ -44,7 +44,10 @@ function buildDealsSchema(deals) {
 }
 
 export default function DealsPage() {
-  const deals = getActiveDeals()
+  const live = getActiveDeals()
+  const upcoming = getUpcomingDeals()
+  // Announced-but-not-open offers appear too, clearly labelled — never claimable early.
+  const deals = [...upcoming, ...live]
   return (
     <main id="main" className="page-content">
       <JsonLd data={buildDealsSchema(deals)} />
@@ -66,7 +69,8 @@ export default function DealsPage() {
           {deals.map((d) => (
             <section key={d.id} className="panel-soft p-6 md:p-7 shadow-soft" aria-labelledby={`deal-${d.id}`}>
               <p className="text-[10px] tracking-[0.24em] uppercase font-['Inter'] text-accent-gold-deep mb-2">
-                {d.category}{d.validUntil ? ` · ends ${d.validUntil}` : ' · ongoing welcome offer'}
+                {upcoming.some((u) => u.id === d.id) ? `Starts ${formatDealRange(d)}` : d.category}
+                {d.validUntil ? ` · ${formatDealRange(d)}` : ' · ongoing welcome offer'}
               </p>
               <h2 id={`deal-${d.id}`} className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-2">
                 {d.title}
