@@ -14,7 +14,13 @@ export const DEALS = [
     priceNote: 'Any combination of services totalling Rs 1,400+. Party makeup and keratin stay individually quoted.',
     category: 'Independence Day',
     href: '/prices',
-    image: '/freedom-deal-2026.jpg',
+    /* Filename carries the rate on purpose. The 20% version shipped first and
+       Next serves optimised images with max-age=2592000, so every browser that
+       loaded the site that day held the wrong poster for thirty days — the URL
+       never changed, so nothing invalidated it. Renaming is the only thing that
+       reaches a cache already on someone's phone. Rename again if the offer
+       changes. */
+    image: '/freedom-deal-2026-14pc.jpg',
     imageAlt: 'Farwa Beauty Salon Freedom Deal — 14% off when your visit totals Rs 1,400 or more, 5 to 14 August 2026',
     validFrom: '2026-08-05',
     validUntil: '2026-08-14',

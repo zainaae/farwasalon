@@ -32,7 +32,7 @@ export const metadata = {
     title,
     description,
     path: '/freedom-deal',
-    image: '/freedom-deal-og.jpg',
+    image: '/freedom-deal-og-14pc.jpg',
     imageAlt: DEAL?.imageAlt || 'Freedom Deal — Farwa Beauty Salon',
   }),
 }

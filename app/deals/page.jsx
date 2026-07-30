@@ -18,7 +18,7 @@ export const metadata = {
     title,
     description,
     path: '/deals',
-    image: '/freedom-deal-og.jpg',
+    image: '/freedom-deal-og-14pc.jpg',
     imageAlt: 'Freedom Deal — 14% off when your visit totals Rs 1,400 or more, 5–14 August 2026',
   }),
 }

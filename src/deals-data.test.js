@@ -44,7 +44,7 @@ describe('Freedom Deal lifecycle', () => {
     expect(deal.validUntil).toBe('2026-08-14')
     expect(deal.title).toMatch(/14%/)
     expect(deal.priceNote).toMatch(/1,400/)
-    expect(deal.image).toBe('/freedom-deal-2026.jpg')
+    expect(deal.image).toBe('/freedom-deal-2026-14pc.jpg')
   })
 
   it('teases before it opens, runs during, and disappears after', () => {
@@ -88,5 +88,27 @@ describe('the deals page can never render an empty grid', () => {
   it('stops showing the Independence Day deal the day after it ends', () => {
     const after = getActiveDeals(new Date('2026-08-15T12:00:00Z'))
     expect(after.some((d) => d.id === 'freedom-deal-2026')).toBe(false)
+  })
+})
+
+describe('poster asset and headline rate cannot drift apart', () => {
+  /* The 20% poster shipped, then the rate became 14%, and the image URL stayed
+     the same — so browsers kept serving the wrong promise from a 30-day cache.
+     Discount rates live in the filename now, and this checks the file, the
+     title and the description all state the same number. */
+  const deal = DEALS.find((d) => d.id === 'freedom-deal-2026')
+
+  it('names the discount rate in the poster filename', () => {
+    const pct = deal.title.match(/(\d+)%/)?.[1]
+    expect(pct).toBeTruthy()
+    expect(deal.image, 'poster filename must carry the rate').toContain(`${pct}pc`)
+  })
+
+  it('states one rate consistently across title, description and priceNote', () => {
+    const pct = deal.title.match(/(\d+)%/)[1]
+    const others = `${deal.description} ${deal.imageAlt ?? ''}`.match(/(\d+)%/g) ?? []
+    for (const found of others) {
+      expect(found, `"${found}" contradicts the ${pct}% headline`).toBe(`${pct}%`)
+    }
   })
 })
