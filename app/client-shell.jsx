@@ -12,6 +12,7 @@ import {
   shouldShowMobileCtaBar,
 } from '../src/shared'
 import { BookingProvider } from '../src/booking-context.jsx'
+import { captureAttribution } from '../lib/attribution.js'
 
 const loadDomAnimation = () => import('framer-motion').then((mod) => mod.domAnimation)
 
@@ -66,6 +67,13 @@ function ScrollToTop() {
 }
 
 export default function ClientShell({ children }) {
+  /* First-touch attribution: record the campaign that earned this session on
+     whichever page the visitor lands on, before any internal navigation can
+     overwrite the referrer. */
+  useEffect(() => {
+    captureAttribution()
+  }, [])
+
   const pathname = usePathname()
   const isHome = pathname === '/'
   const hideSticky = pathname.startsWith('/book')

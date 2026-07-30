@@ -62,11 +62,18 @@ export async function POST(request) {
   const notesField = requireStringField(body, 'notes', { required: false, maxLen: 500 })
   if (notesField.error) return NextResponse.json({ error: notesField.error }, { status: 400 })
 
+  /* Lead source, e.g. "meta/paid · freedom-deal-2026 · /freedom-deal". Optional
+     and never trusted for logic — it is recorded so the sheet can answer which
+     campaign produced which booking. Validated like any other client string. */
+  const sourceField = requireStringField(body, 'source', { required: false, maxLen: 200 })
+  if (sourceField.error) return NextResponse.json({ error: sourceField.error }, { status: 400 })
+
   const { value: clientName } = nameField
   const { value: clientPhone } = phoneField
   const { value: date } = dateField
   const { value: time } = timeField
   const { value: notes } = notesField
+  const { value: source } = sourceField
 
   const dateCheck = validateBookingDate(date)
   if (!dateCheck.ok) {
@@ -142,6 +149,7 @@ export async function POST(request) {
       status: 'Confirmed',
       bookedAt: new Date().toISOString(),
       notes,
+      source,
     })
   } catch (err) {
     logger.error('/api/book', 'sheets-write-failed', { ip: hashIp(ip), date, serviceId: service.id, ...errCtx(err) })

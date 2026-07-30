@@ -8,6 +8,7 @@ import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_R
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { toLocalDateString } from '../../lib/date-local.js'
 import { computeBookingDurationMinutes } from '../../lib/booking-duration.js'
+import { getAttribution, formatAttributionCell } from '../../lib/attribution.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
 
@@ -295,6 +296,7 @@ export default function BookClient() {
           clientName: clientName.trim(),
           clientPhone: clientPhone.trim(),
           notes: combinedNotes,
+          source: formatAttributionCell(getAttribution()),
           website,
         }),
       })
