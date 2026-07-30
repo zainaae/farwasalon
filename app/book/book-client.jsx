@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
-import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE, getAddonsForService } from '../../src/data.js'
+import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE, getAddonsForService, track } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { toLocalDateString } from '../../lib/date-local.js'
 import { computeBookingDurationMinutes } from '../../lib/booking-duration.js'
@@ -202,6 +202,15 @@ export default function BookClient() {
   const totalDurationMinutes = selectedService
     ? computeBookingDurationMinutes(selectedService, addonIdsList)
     : 0
+  /* Basket value in PKR — used for the BookingCompleted conversion event, and
+     it is what decides whether the Freedom Deal's Rs 1,400 threshold is met. */
+  const totalPricePkr = selectedService
+    ? (selectedService.pricePkr || 0) +
+      addonIdsList.reduce(
+        (sum, id) => sum + (ALL_SERVICES.find((a) => a.id === id)?.pricePkr || 0),
+        0,
+      )
+    : 0
 
   useEffect(() => {
     if (step !== 1 || !selectedDate || !selectedService) return
@@ -328,6 +337,17 @@ export default function BookClient() {
         duration: String(confirmPayload.duration),
       })
       if (data.booking.cancelToken) params.set('token', data.booking.cancelToken)
+
+      /* The conversion. BookingStarted was already tracked at step 1, so this
+         is what makes booking completion rate measurable at all. Fired before
+         the redirect so it survives the navigation. */
+      track('BookingCompleted', {
+        service: data.booking.service,
+        category: selectedService?.category,
+        addons: selectedAddonIds.length,
+        value: totalPricePkr,
+      })
+
       router.push(`/book/confirmation?${params.toString()}`)
     } catch (err) {
       const aborted = err?.name === 'AbortError'

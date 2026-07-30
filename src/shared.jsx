@@ -556,6 +556,7 @@ export function StickyMobileCTA({ hidden = false }) {
             <a
               href={`tel:+${WA_NUMBER}`}
               aria-label="Call the salon"
+              onClick={() => track('CallIntent', { from: 'sticky-bar' })}
               className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/80 hover:text-white active:scale-[0.98] text-[10px] tracking-[0.12em] uppercase font-medium font-['Inter'] py-2.5 transition-colors"
             >
               <Phone className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
