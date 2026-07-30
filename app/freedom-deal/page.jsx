@@ -14,9 +14,9 @@ const DEAL = DEALS.find((d) => d.id === 'freedom-deal-2026')
    "Freedom Deal" to match the poster customers receive, while azadi / azaadi /
    "14 august sale" stay in the title, description and keywords because those
    are the words people actually search. */
-const title = 'Freedom Deal — Azadi Sale 2026 | 20% Off, 14 August, Farwa Karachi'
+const title = 'Freedom Deal — Azadi Sale 2026 | 14% Off, 14 August, Farwa Karachi'
 const description =
-  'Azadi sale / Independence Day deal in PECHS Karachi: 20% off when your visit totals Rs 1,400 or more, 5–14 August 2026. Combine any services — threading, facials, hair, nails, bridal.'
+  'Azadi sale / Independence Day deal in PECHS Karachi: 14% off when your visit totals Rs 1,400 or more, 5–14 August 2026. Combine any services — threading, facials, hair, nails, bridal.'
 
 export const metadata = {
   title: { absolute: title },
@@ -41,7 +41,7 @@ export const revalidate = 86400
 const FAQS = [
   {
     q: 'What is the Freedom Deal at Farwa Beauty Salon?',
-    a: 'From 5 to 14 August 2026, any visit totalling Rs 1,400 or more gets 20% off at Farwa Beauty Salon in Block 3 PECHS, Karachi. You can reach the total with one service or several combined. The discount comes off our published prices, which have been printed on farwasalon.com all year.',
+    a: 'From 5 to 14 August 2026, any visit totalling Rs 1,400 or more gets 14% off at Farwa Beauty Salon in Block 3 PECHS, Karachi. You can reach the total with one service or several combined. The discount comes off our published prices, which have been printed on farwasalon.com all year.',
   },
   {
     q: 'Which services are included in the 14 August offer?',
@@ -49,11 +49,11 @@ const FAQS = [
   },
   {
     q: 'How do I claim the Azaadi discount?',
-    a: 'Nothing to claim — book between 5 and 14 August and if your services total Rs 1,400 or more, the 20% comes off at the counter. Book online at farwasalon.com/book or WhatsApp +92 322 2782254.',
+    a: 'Nothing to claim — book between 5 and 14 August and if your services total Rs 1,400 or more, the 14% comes off at the counter. Book online at farwasalon.com/book or WhatsApp +92 322 2782254.',
   },
   {
     q: 'Can I combine services to reach Rs 1,400?',
-    a: 'Yes — that is the point. Add the services you want to one booking; if the total reaches Rs 1,400 or more, the 20% applies to the visit. It does not matter whether that is one treatment or several small ones.',
+    a: 'Yes — that is the point. Add the services you want to one booking; if the total reaches Rs 1,400 or more, the 14% applies to the visit. It does not matter whether that is one treatment or several small ones.',
   },
   {
     q: 'Do I need to pay in advance?',
@@ -70,7 +70,7 @@ export default function AzadiSalePage() {
   const offerSchema = DEAL && {
     '@context': 'https://schema.org',
     '@type': 'Offer',
-    name: 'Freedom Deal 2026 — Azadi offer, 20% off',
+    name: 'Freedom Deal 2026 — Azadi offer, 14% off',
     description: DEAL.description,
     url: `${SITE_ORIGIN}/freedom-deal`,
     priceCurrency: 'PKR',
@@ -112,12 +112,12 @@ export default function AzadiSalePage() {
 
             <div className="min-w-0">
               <h1 className="azadi-display azadi-in mb-5" style={{ '--i': 1 }}>
-                20% off.<br />No asterisk.
+                14% off.<br />No asterisk.
               </h1>
 
               <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 2 }}>
-                Once your visit reaches Rs 1,400, the whole bill is 20% less — 5 to 14
-                August. Not &ldquo;up to&rdquo; 20%. Not a package someone else chose for you.
+                Once your visit reaches Rs 1,400, the whole bill is 14% less — 5 to 14
+                August. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
                 Book what you actually came in for.
               </p>
 
@@ -154,7 +154,7 @@ export default function AzadiSalePage() {
           <p className="text-body text-sm md:text-[15px] mb-4 max-w-2xl leading-relaxed">
             The Rs 1,400 is the total for your visit — not something one service has to cost on
             its own. Come in for a cleansing and add a threading, or a manicure and a massage;
-            once the bill reaches Rs 1,400, the 20% applies to all of it. Nothing on the menu is
+            once the bill reaches Rs 1,400, the 14% applies to all of it. Nothing on the menu is
             left out.
           </p>
           <p className="text-body text-sm md:text-[15px] mb-5 max-w-2xl leading-relaxed">

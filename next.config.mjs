@@ -53,8 +53,20 @@ const nextConfig = {
        branded Freedom Deal to match the poster, so the old URL redirects
        rather than 404s. Both spellings people might type land in the right
        place. */
+    /* Campaign name aliases. All 301 to the single canonical page rather than
+       existing as separate pages: five near-identical pages competing for the
+       same query is keyword cannibalisation, and Google treats thin
+       location/name variants of one offer as doorway pages. Redirects capture
+       typed traffic, printed URLs and any inbound link with none of that risk. */
     { source: '/azadi-sale', destination: '/freedom-deal', permanent: true },
     { source: '/azadi-deal', destination: '/freedom-deal', permanent: true },
+    { source: '/azaadi-sale', destination: '/freedom-deal', permanent: true },
+    { source: '/azadi-offer', destination: '/freedom-deal', permanent: true },
+    { source: '/jashn-e-azadi', destination: '/freedom-deal', permanent: true },
+    { source: '/independence-day-offer', destination: '/freedom-deal', permanent: true },
+    { source: '/independence-sale', destination: '/freedom-deal', permanent: true },
+    { source: '/14-august-sale', destination: '/freedom-deal', permanent: true },
+    { source: '/14-august-offer', destination: '/freedom-deal', permanent: true },
     {
       source: '/team',
       destination: '/about',

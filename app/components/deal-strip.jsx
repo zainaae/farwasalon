@@ -37,7 +37,7 @@ export default function DealStrip() {
           )}
 
           <p className="azadi-strip-figure shrink-0" aria-hidden="true">
-            20<span>%</span>
+            14<span>%</span>
           </p>
 
           <div className="min-w-0 flex-1">
@@ -45,7 +45,7 @@ export default function DealStrip() {
               {live ? 'Now on' : 'Coming'} · {range}
             </p>
             <p className="font-['Unbounded'] font-bold text-[color:var(--azadi-deep)] text-lg md:text-2xl leading-tight mb-1.5">
-              Freedom Deal — 20% off
+              Freedom Deal — 14% off
             </p>
             <p className="text-[color:var(--azadi-deep)]/70 text-[13px] md:text-sm font-['Inter'] font-light max-w-md">
               Independence Day offer — when your visit totals Rs 1,400 or more.

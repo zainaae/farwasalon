@@ -38,11 +38,11 @@ describe('Freedom Deal lifecycle', () => {
   const at = (d) => new Date(`${d}T09:00:00Z`)
   const deal = DEALS.find((d) => d.id === 'freedom-deal-2026')
 
-  it('matches the published poster: 20% off Rs 1,400+, 5-14 August', () => {
+  it('is 14% off on a Rs 1,400+ basket, 5-14 August', () => {
     expect(deal).toBeDefined()
     expect(deal.validFrom).toBe('2026-08-05')
     expect(deal.validUntil).toBe('2026-08-14')
-    expect(deal.title).toMatch(/20%/)
+    expect(deal.title).toMatch(/14%/)
     expect(deal.priceNote).toMatch(/1,400/)
     expect(deal.image).toBe('/freedom-deal-2026.jpg')
   })
