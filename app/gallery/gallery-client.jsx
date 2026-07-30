@@ -20,9 +20,14 @@ export default function GalleryClient() {
             <div className="overflow-hidden">
               <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
                 className="display-section text-ink">
-                <span className="block">THE WORK</span> <span className="block">SPEAKS</span>
+                <span className="block">WHAT WE</span> <span className="block">DO</span>
               </m.h1>
             </div>
+            <m.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-body max-w-xl mt-5">
+              Every service we offer, in one place. Finished looks on real clients go up on
+              our Instagram — we would rather show you those than restage them here.
+            </m.p>
           </div>
           <m.a initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
             href={IG_LINK} target="_blank" rel="noreferrer"
@@ -35,7 +40,7 @@ export default function GalleryClient() {
 
       <section className="section-shell mb-12 md:mb-16" aria-labelledby="gallery-showcase-heading">
         <h2 id="gallery-showcase-heading" className="section-title text-xl md:text-2xl text-center mb-8">
-          Studio highlights
+          Services we offer
         </h2>
         <div className="grid md:grid-cols-3 gap-8 md:gap-6">
           {GALLERY_SHOWCASE_ITEMS.map((item, i) => (

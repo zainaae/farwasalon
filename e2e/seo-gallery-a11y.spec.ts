@@ -37,7 +37,9 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
   test('/gallery work showcase renders', async ({ page }) => {
     await page.goto('/gallery')
     await expect(visibleMain(page)).toBeVisible()
-    await expect(page.getByRole('heading', { name: /Studio highlights/i })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /Services we offer/i })).toBeVisible()
+    // The page must not claim the stock imagery is the salon's own client work.
+    await expect(page.getByText(/real clients go up on\s+our Instagram/i)).toBeVisible()
     await expect(page.getByText('Threading & glow facial')).toBeVisible()
     await expect(page.getByText('Bridal styling')).toBeVisible()
     await expect(page.getByText('Manicure & pedicure')).toBeVisible()

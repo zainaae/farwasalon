@@ -66,3 +66,27 @@ describe('Freedom Deal lifecycle', () => {
     expect(formatDealRange(deal)).toBe('5–14 August')
   })
 })
+
+describe('the deals page can never render an empty grid', () => {
+  /* /deals opens with "If a deal is listed here, it is honoured at the counter"
+     and then maps over the list. With no evergreen offer the promise would sit
+     above a hole — and it would happen silently, on a date, with nobody
+     watching. This is the guard for that. */
+  it('always has at least one claimable deal, on any date after launch', () => {
+    /* Dates before the 2026-05-14 launch legitimately have none. */
+    const dates = ['2026-05-14', '2026-08-04', '2026-08-14', '2026-08-15', '2027-06-30', '2030-12-31']
+    for (const d of dates) {
+      expect(getActiveDeals(new Date(`${d}T12:00:00Z`)).length, `no active deal on ${d}`).toBeGreaterThan(0)
+    }
+  })
+
+  it('keeps an evergreen offer — the one that makes the above true', () => {
+    const evergreen = DEALS.filter((d) => d.validUntil === null)
+    expect(evergreen.length).toBeGreaterThan(0)
+  })
+
+  it('stops showing the Independence Day deal the day after it ends', () => {
+    const after = getActiveDeals(new Date('2026-08-15T12:00:00Z'))
+    expect(after.some((d) => d.id === 'freedom-deal-2026')).toBe(false)
+  })
+})
