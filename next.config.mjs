@@ -68,6 +68,14 @@ const nextConfig = {
     { source: '/14-august-sale', destination: '/freedom-deal', permanent: true },
     { source: '/14-august-offer', destination: '/freedom-deal', permanent: true },
     {
+      /* Retired: a 151-word post competing with the substantial Rica-vs-honey
+         guide for the same query. Its full-body angle was absorbed there, so
+         this 301 consolidates the signal instead of splitting it. */
+      source: '/blog/full-body-wax-honey-vs-rica-karachi',
+      destination: '/blog/rica-wax-vs-honey-wax-karachi',
+      permanent: true,
+    },
+    {
       source: '/team',
       destination: '/about',
       permanent: true,

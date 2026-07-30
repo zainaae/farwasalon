@@ -155,6 +155,38 @@ describe('BLOG_POSTS', () => {
     const slugs = BLOG_POSTS.map(p => p.slug)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
+
+  /* Nine posts once shipped at 108–236 words. Thin content is the leading cause
+     of "Crawled - currently not indexed", it drags quality signals across the
+     whole domain, and it is invisible in review because the page looks fine.
+     This is the floor that keeps stubs from shipping again. */
+  const wordsIn = (post) =>
+    post.content.reduce((n, b) => {
+      if (b.text) n += b.text.split(/\s+/).filter(Boolean).length
+      if (b.items) for (const i of b.items) n += String(i).split(/\s+/).filter(Boolean).length
+      return n
+    }, 0)
+
+  it('no post is thin enough to be a stub', () => {
+    for (const post of BLOG_POSTS) {
+      expect(wordsIn(post), `${post.slug} is only ${wordsIn(post)} words`).toBeGreaterThan(380)
+    }
+  })
+
+  it('readTime is consistent with the actual length', () => {
+    for (const post of BLOG_POSTS) {
+      const claimed = Number(String(post.readTime).match(/\d+/)?.[0])
+      const actual = Math.ceil(wordsIn(post) / 200)
+      expect(Math.abs(claimed - actual), `${post.slug} claims ${claimed} min, reads ~${actual}`).toBeLessThanOrEqual(2)
+    }
+  })
+
+  it('lastModified is never before the publish date', () => {
+    for (const post of BLOG_POSTS) {
+      if (!post.lastModified) continue
+      expect(post.lastModified >= post.date, `${post.slug}`).toBe(true)
+    }
+  })
 })
 
 describe('GALLERY_PHOTOS', () => {
