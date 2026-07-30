@@ -1,6 +1,7 @@
 # Farwa Salon — Indexation Worklist
 
-Generated 2026-07-30 from the deployed sitemaps. 110 URLs total.
+Generated 2026-07-30 from the deployed sitemaps. 62 URLs total
+(was 110 before the 48 near-duplicate location hubs were retired).
 
 > I cannot read your Search Console. This is the full inventory of what the site
 > *asks* to be indexed, grouped by what to do about it. Diff it against the GSC
@@ -32,87 +33,37 @@ Also worth a slot — campaign page, opens 5 August:
 
 ---
 
-## 2. Decide, then act — 48 location pages Google folded
+## 2. Resolved — 48 location pages retired
 
-This is your "Alternative page with proper canonical: 48". The arithmetic is
+This was your "Alternative page with proper canonical: 48". The arithmetic was
 exact: 54 location pages minus 6 kept (one per service group) = 48 folded.
 
-They are 84-91% similar to each other within each service group. All declare
-a self-canonical; Google is overriding that and folding them anyway, which is
-what it does with near-duplicates. Requesting indexing on these will NOT work —
-the issue is the content, not the crawl.
+Measured on the built HTML, pages sharing a service were 84-91% identical to
+each other — one template with the area name swapped. Every one declared a
+self-canonical and Google overrode it, which is what it does with
+near-duplicates.
 
-### bridal-makeup (10 pages)
+**Action taken (2026-07-30):** the 48 now 301 to their service category. Six
+PECHS hubs survive, because those differ by service rather than by area —
+58% similarity against each other, not 91%. Nothing 404s.
 
-    https://farwasalon.com/services/bridal-makeup-in-bahadurabad
-    https://farwasalon.com/services/bridal-makeup-in-clifton-karachi
-    https://farwasalon.com/services/bridal-makeup-in-dha
-    https://farwasalon.com/services/bridal-makeup-in-gulshan
-    https://farwasalon.com/services/bridal-makeup-in-korangi
-    https://farwasalon.com/services/bridal-makeup-in-north-nazimabad
-    https://farwasalon.com/services/bridal-makeup-in-pechs-karachi
-    https://farwasalon.com/services/bridal-makeup-in-saddar
-    https://farwasalon.com/services/bridal-makeup-in-shahrah-e-faisal
-    https://farwasalon.com/services/bridal-makeup-in-tariq-road
+You do not need to do anything with these in Search Console. As Google
+recrawls it will follow the 301s; the "Alternative page" count should fall
+toward zero over the following weeks and the signal consolidates onto the
+category pages.
 
-### facials (10 pages)
+Kept:
 
-    https://farwasalon.com/services/facials-in-bahadurabad
-    https://farwasalon.com/services/facials-in-clifton-karachi
-    https://farwasalon.com/services/facials-in-dha
-    https://farwasalon.com/services/facials-in-gulshan
-    https://farwasalon.com/services/facials-in-korangi
-    https://farwasalon.com/services/facials-in-north-nazimabad
-    https://farwasalon.com/services/facials-in-pechs-karachi
-    https://farwasalon.com/services/facials-in-saddar
-    https://farwasalon.com/services/facials-in-shahrah-e-faisal
-    https://farwasalon.com/services/facials-in-tariq-road
-
-### hair (9 pages)
-
-    https://farwasalon.com/services/hair-in-bahadurabad
-    https://farwasalon.com/services/hair-in-clifton-karachi
-    https://farwasalon.com/services/hair-in-dha
-    https://farwasalon.com/services/hair-in-gulshan
-    https://farwasalon.com/services/hair-in-north-nazimabad
-    https://farwasalon.com/services/hair-in-pechs-karachi
-    https://farwasalon.com/services/hair-in-saddar
-    https://farwasalon.com/services/hair-in-shahrah-e-faisal
-    https://farwasalon.com/services/hair-in-tariq-road
-
-### nails (7 pages)
-
-    https://farwasalon.com/services/nails-in-bahadurabad
-    https://farwasalon.com/services/nails-in-clifton-karachi
-    https://farwasalon.com/services/nails-in-dha
-    https://farwasalon.com/services/nails-in-gulshan
-    https://farwasalon.com/services/nails-in-pechs-karachi
-    https://farwasalon.com/services/nails-in-saddar
-    https://farwasalon.com/services/nails-in-tariq-road
-
-### threading (10 pages)
-
-    https://farwasalon.com/services/threading-in-bahadurabad
-    https://farwasalon.com/services/threading-in-clifton-karachi
-    https://farwasalon.com/services/threading-in-dha
-    https://farwasalon.com/services/threading-in-gulshan
-    https://farwasalon.com/services/threading-in-korangi
-    https://farwasalon.com/services/threading-in-north-nazimabad
     https://farwasalon.com/services/threading-in-pechs-karachi
-    https://farwasalon.com/services/threading-in-saddar
-    https://farwasalon.com/services/threading-in-shahrah-e-faisal
-    https://farwasalon.com/services/threading-in-tariq-road
-
-### waxing (8 pages)
-
-    https://farwasalon.com/services/waxing-in-bahadurabad
-    https://farwasalon.com/services/waxing-in-clifton-karachi
-    https://farwasalon.com/services/waxing-in-dha
-    https://farwasalon.com/services/waxing-in-gulshan
-    https://farwasalon.com/services/waxing-in-north-nazimabad
+    https://farwasalon.com/services/bridal-makeup-in-pechs-karachi
+    https://farwasalon.com/services/facials-in-pechs-karachi
+    https://farwasalon.com/services/hair-in-pechs-karachi
+    https://farwasalon.com/services/nails-in-pechs-karachi
     https://farwasalon.com/services/waxing-in-pechs-karachi
-    https://farwasalon.com/services/waxing-in-saddar
-    https://farwasalon.com/services/waxing-in-tariq-road
+
+Adjacent areas are now served by real writing rather than a template — see
+/blog/salon-near-tariq-road-pechs. Add an area hub back only when there is a
+page's worth of genuinely different things to say about it.
 
 ---
 

@@ -1,4 +1,4 @@
-import { getBestLocationRedirects } from './src/location-seo.js'
+import { getBestLocationRedirects, getRetiredLocationRedirects } from './src/location-seo.js'
 
 /** @type {import('next').NextConfig} */
 const isDev = process.env.NODE_ENV === 'development'
@@ -92,6 +92,7 @@ const nextConfig = {
       permanent: false,
     },
     // Legacy best-* location matrix → canonical -in-* (even if lander is not a priority hub)
+    ...getRetiredLocationRedirects(),
     ...getBestLocationRedirects(),
   ],
   headers: async () => [

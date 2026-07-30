@@ -83,9 +83,23 @@ export const TOP_SERVICES = [
 ]
 
 /**
- * Curated local landing pages (54 hubs). Sitemap + static generation use this
- * allowlist only — not the full service × neighborhood matrix.
- * Growth rule: add hubs only with unique neighborhood blurbs (no blank templates).
+ * Local landing pages — PECHS only, one per service.
+ *
+ * This was 54 hubs: six services across ten neighbourhoods. Measured on the
+ * built HTML, pages sharing a service were 84–91% identical to each other —
+ * the same template with an area name swapped in. Google was folding 48 of
+ * them under a canonical it chose itself, which is what it does with
+ * near-duplicates, and Search Console reported exactly that number.
+ *
+ * What survives is the set where the difference is real: PECHS is where the
+ * salon actually is, and the six pages differ by service rather than by
+ * neighbourhood — 58% similarity against each other, not 91%. Everything else
+ * 301s to its service category.
+ *
+ * Adjacent areas are now served by real writing instead of a template —
+ * /blog/salon-near-tariq-road-pechs is the model. Add a hub back only when
+ * there is a page's worth of genuinely different things to say about that
+ * area, not because the matrix has a gap.
  */
 export const PRIORITY_LOCATION_SLUGS = [
   'threading-in-pechs-karachi',
@@ -94,54 +108,6 @@ export const PRIORITY_LOCATION_SLUGS = [
   'hair-in-pechs-karachi',
   'nails-in-pechs-karachi',
   'waxing-in-pechs-karachi',
-  'threading-in-gulshan',
-  'facials-in-gulshan',
-  'bridal-makeup-in-gulshan',
-  'hair-in-gulshan',
-  'nails-in-gulshan',
-  'waxing-in-gulshan',
-  'bridal-makeup-in-clifton-karachi',
-  'facials-in-clifton-karachi',
-  'hair-in-clifton-karachi',
-  'threading-in-clifton-karachi',
-  'nails-in-clifton-karachi',
-  'waxing-in-clifton-karachi',
-  'bridal-makeup-in-dha',
-  'threading-in-dha',
-  'hair-in-dha',
-  'facials-in-dha',
-  'nails-in-dha',
-  'waxing-in-dha',
-  'threading-in-bahadurabad',
-  'bridal-makeup-in-bahadurabad',
-  'facials-in-bahadurabad',
-  'hair-in-bahadurabad',
-  'nails-in-bahadurabad',
-  'waxing-in-bahadurabad',
-  'waxing-in-tariq-road',
-  'threading-in-tariq-road',
-  'facials-in-tariq-road',
-  'bridal-makeup-in-tariq-road',
-  'hair-in-tariq-road',
-  'nails-in-tariq-road',
-  'threading-in-shahrah-e-faisal',
-  'facials-in-shahrah-e-faisal',
-  'bridal-makeup-in-shahrah-e-faisal',
-  'hair-in-shahrah-e-faisal',
-  'bridal-makeup-in-north-nazimabad',
-  'threading-in-north-nazimabad',
-  'facials-in-north-nazimabad',
-  'hair-in-north-nazimabad',
-  'waxing-in-north-nazimabad',
-  'bridal-makeup-in-saddar',
-  'facials-in-saddar',
-  'threading-in-saddar',
-  'hair-in-saddar',
-  'nails-in-saddar',
-  'waxing-in-saddar',
-  'threading-in-korangi',
-  'facials-in-korangi',
-  'bridal-makeup-in-korangi',
 ]
 
 export function parseLocationSlug(slug) {
@@ -180,6 +146,31 @@ export function parseLocationSlug(slug) {
 /** Crawlable location landers — priority hubs only. */
 export function getAllLocationServiceSlugs() {
   return [...PRIORITY_LOCATION_SLUGS]
+}
+
+/**
+ * 301s for the retired `-in-<area>` hubs.
+ *
+ * These URLs were live and are in Google's index as folded duplicates, so they
+ * must not 404. Each one points at the service category it was a thin variant
+ * of, which is where its signal was already being consolidated anyway.
+ */
+export function getRetiredLocationRedirects() {
+  const kept = new Set(PRIORITY_LOCATION_SLUGS)
+  const redirects = []
+  for (const svc of TOP_SERVICES) {
+    const categorySlug = CAT_SLUGS[svc.category] || 'services'
+    for (const loc of NEIGHBORHOODS) {
+      const slug = `${svc.slug}-in-${loc.slug}`
+      if (kept.has(slug)) continue
+      redirects.push({
+        source: `/services/${slug}`,
+        destination: `/services/${categorySlug}`,
+        permanent: true,
+      })
+    }
+  }
+  return redirects
 }
 
 /**

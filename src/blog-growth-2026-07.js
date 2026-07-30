@@ -429,7 +429,7 @@ export const GROWTH_POSTS = [
     content: [
       { type: 'p', text: 'Need a beauty salon near Tariq Road? Farwa Beauty Salon is in Block 3 PECHS — Plot 165/G-1, Saima Terrace — a short hop from the Tariq Road stretch. Women-only studio, one PECHS branch only (no at-home setup), prices from Rs 100 on [/prices](/prices).' },
       { type: 'h2', text: 'What Neighbours Book After Shopping' },
-      { type: 'p', text: '[Threading](/services/threading) and [waxing near Tariq Road](/services/waxing-in-tariq-road), quick [bleach](/blog/face-bleach-karachi-loreal), or a [facial](/services/facials). Bridal trials for PECHS / Bahadurabad brides stay on [/bridal](/bridal).' },
+      { type: 'p', text: '[Threading](/services/threading) and [waxing](/services/rica-wax), quick [bleach](/blog/face-bleach-karachi-loreal), or a [facial](/services/facials). Bridal trials for PECHS / Bahadurabad brides stay on [/bridal](/bridal).' },
 
       { type: 'h2', text: 'Finding Us From Tariq Road' },
       { type: 'p', text: 'We are at Plot 165/G-1, Saima Terrace, Block 3 PECHS. Coming off the Tariq Road shopping stretch it is a few minutes by car, staying inside PECHS rather than heading out toward Shahrah-e-Faisal. Saima Terrace is the building name to look for, and the salon is signposted at street level. The [contact page](/contact) has the Google Maps pin, which is more reliable than any written directions we could give you — Block 3 numbering confuses people who have lived here for years.' },
