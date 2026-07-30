@@ -60,11 +60,16 @@ export const CAT_SEO = {
     metaDesc:
       'Manicure & pedicure price list Karachi — SPA Rs 1,400, French Rs 1,600 at Farwa PECHS. Commercial rates, book online today.',
   },
+  /* Title deliberately differs from /bridal, which owns the head term
+     "Bridal Makeup Karachi" with its packages hero. This page is the service
+     menu — mehndi, nikah, trials priced individually — so it targets the
+     itemised and area-qualified intent instead. Both pages self-canonicalise;
+     an identical title had them splitting the signal on the same query. */
   'Bridal': {
-    title: 'Bridal Makeup Karachi — From Rs 8,000',
+    title: 'Bridal Makeup PECHS — Mehndi & Nikah from Rs 8,000',
     h1: 'Bridal Makeup in PECHS, Karachi',
     metaDesc:
-      'Bridal makeup Karachi from Rs 8,000 — trials, mehndi, engagement & full package Rs 25,000 at Farwa PECHS. Women-only studio.',
+      'Every bridal service priced individually at Farwa PECHS — mehndi, nikah, engagement looks and trials from Rs 8,000. Women-only studio in Block 3.',
   },
   'Hair': {
     title: 'Haircut Colour Karachi — From Rs 1,500',
