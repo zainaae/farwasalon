@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { NEIGHBORHOODS } from '../../src/location-seo.js'
+import { AREA_CONTENT } from '../../src/area-content.js'
 import { ArrowUpRight, MapPin, Clock, Phone } from 'lucide-react'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import {
@@ -7,7 +9,6 @@ import {
   GOOGLE_REVIEW_LINK,
   getAggregateRating,
 } from '../../lib/business-schema.js'
-import { getPriorityLocationLinks } from '../../lib/location-links.js'
 import { CAT_SLUGS, YEARS_ACTIVE, MAPS_LINK } from '../../src/data.js'
 
 const title = 'Beauty Salon Karachi — PECHS · From Rs 100 | Farwa'
@@ -29,7 +30,6 @@ export const metadata = {
 
 export default function BeautySalonKarachiPage() {
   const rating = getAggregateRating()
-  const areaLinks = getPriorityLocationLinks()
 
   return (
     <>
@@ -156,14 +156,16 @@ export default function BeautySalonKarachiPage() {
               Areas we serve
             </h2>
             <p className="text-body max-w-3xl mb-6">
-              One PECHS studio — clients visit us from across Karachi. Explore local pages for popular services
-              near you.
+              One PECHS studio — clients visit us from across Karachi. Each page below has the
+              road you would actually take, an honest drive time, and what is worth booking
+              given that journey.
             </p>
             <ul className="flex flex-wrap gap-2">
-              {areaLinks.map(({ slug, href, label }) => (
-                <li key={slug}>
-                  <Link href={href} className="tab-pill hover:border-ink hover:text-ink">
-                    {label}
+              {NEIGHBORHOODS.filter((n) => AREA_CONTENT[n.slug]).map((n) => (
+                <li key={n.slug}>
+                  <Link href={`/areas/${n.slug}`} className="tab-pill hover:border-ink hover:text-ink">
+                    {n.name}
+                    <span className="text-stone ml-1.5">{AREA_CONTENT[n.slug].driveTime}</span>
                   </Link>
                 </li>
               ))}
