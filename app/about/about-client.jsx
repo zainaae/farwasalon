@@ -81,8 +81,10 @@ export default function AboutClient() {
                 ))}
               </div>
             </div>
-            <m.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-              className="flex flex-col gap-6 pt-2 md:pt-10">
+            {/* id="rubina" is the target of FOUNDER_ID in the schema graph and of
+                every article byline — the anchor is load-bearing, not decorative. */}
+            <m.div id="rubina" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+              className="flex flex-col gap-6 pt-2 md:pt-10 scroll-mt-28">
               <p className="text-ink text-lg md:text-xl font-light leading-relaxed">
                 &ldquo;It started in 2008 — a single chair, a steady hand, and a belief that beauty was worth doing well.&rdquo;
               </p>
