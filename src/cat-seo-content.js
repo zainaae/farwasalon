@@ -72,7 +72,7 @@ export const CAT_SEO = {
       'Every bridal service priced individually at Farwa PECHS — mehndi, nikah, engagement looks and trials from Rs 8,000. Women-only studio in Block 3.',
   },
   'Hair': {
-    title: 'Haircut Colour Karachi — From Rs 1,500',
+    title: 'Haircut & Colour Karachi — Cuts from Rs 2,000',
     h1: 'Haircut, Colour & Blowdry in PECHS',
     metaDesc:
       'Haircut & blowdry Rs 2,000 · colour/balayage from Rs 4,000 at Farwa PECHS. Women hair salon Karachi — book online today.',
@@ -127,7 +127,7 @@ export const CAT_FAQS = {
     { q: 'Should I thread or wax my face before a wedding?', a: 'For brows and upper lip we recommend threading — cleaner shape, less redness for photos. Prefer wax on the face? Use Rica hot wax from Rs 150 a few days before the event. See our threading vs waxing guide, then book the look that fits your skin.' },
   ],
   'Nails': [
-    { q: 'How long does a manicure or pedicure take?', a: 'A standard manicure takes about 30 minutes, while a pedicure takes around 40 minutes. SPA Manicure and SPA Pedicure (Rs 1,400 each) take about 45 minutes.' },
+    { q: 'How long does a manicure or pedicure take?', a: 'A standard manicure takes about 30 minutes, while a pedicure takes around 35 minutes. SPA Manicure and SPA Pedicure (Rs 1,400 each) take about 45 minutes.' },
     { q: 'What is included in the SPA Pedicure?', a: 'Our SPA Pedicure (Rs 1,400) includes a foot soak, exfoliation scrub, cuticle care, callus removal, hydrating mask, massage, and polish application. It\'s a full pampering experience for tired feet.' },
     { q: 'What is included in the SPA Manicure?', a: 'SPA Manicure (Rs 1,400, ~45 min) covers soak, scrub, cuticle care, mask, hand massage, and polish — the upgrade from Normal Manicure (Rs 900).' },
     { q: 'Do you offer nail art and custom designs?', a: 'Yes — our nail artists create custom designs, French tips, ombre, marble effects, and seasonal styles. Bring reference photos or let our team design something unique for you.' },
@@ -138,7 +138,7 @@ export const CAT_FAQS = {
     { q: 'Do you do bridal hair styling?', a: 'Yes — bridal hair styling (Rs 8,000) includes a style consultation, blowout prep, full styling (updos, curls, braids, or sleek looks), and finishing spray. It\'s also part of our Full Bridal Package.' },
     { q: 'What hair colouring options do you offer?', a: 'We offer full-colour, highlights, balayage, and toning starting at Rs 4,000. Colour consultations are included to ensure the perfect shade for your skin tone and hair type.' },
     { q: 'How much is a blowdry only?', a: 'Blowdry & Styling is Rs 1,500 (~45 min). Haircut & Blowdry is Rs 2,000 when you want a cut in the same visit.' },
-    { q: 'Do you offer keratin treatments?', a: 'Keratin is not a listed SKU on our menu. We offer protein treatments, Wellaplex bond repair, and hair-fall protocols — see Hair Treatments and ask us what fits your hair without inventing services we do not run.' },
+    { q: 'Do you offer keratin treatments?', a: 'Yes — but it is quoted per head rather than printed, because the honest price depends on your hair length and density. WhatsApp us a photo for a binding quote. Fixed-price repair options are printed: protein treatment Rs 2,000, Wellaplex Rs 3,000, hair-fall protocols Rs 3,000.' },
   ],
   'Eyebrow Tattoo': [
     { q: 'How long does microblading last?', a: 'Microblading typically lasts 12–18 months depending on skin type, sun exposure, and aftercare. Oily skin types may need a touch-up sooner. We provide a complete aftercare kit with every session.' },
@@ -223,7 +223,7 @@ export const CAT_PAGE_BLOCKS = {
   ],
   Hair: [
     { type: 'h2', text: 'Cut, colour & balayage' },
-    { type: 'p', text: 'Haircut & blowdry Rs 2,000. Blowdry only Rs 1,500. Colour / highlights / balayage from Rs 4,000. Bridal hair Rs 8,000. Keratin is not a listed SKU — ask about protein and Wellaplex instead.' },
+    { type: 'p', text: 'Haircut & blowdry Rs 2,000. Blowdry only Rs 1,500. Colour / highlights / balayage from Rs 4,000. Bridal hair Rs 8,000. Keratin is offered but quoted per head, not printed — send a photo on WhatsApp. Protein Rs 2,000 and Wellaplex Rs 3,000 are printed.' },
   ],
   'Eyebrow Tattoo': [
     { type: 'h2', text: 'What every session includes' },

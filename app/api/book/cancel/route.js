@@ -5,6 +5,7 @@ import { isAllowedOrigin } from '../../../../lib/origin-check.js'
 import { verifyCancelToken, phoneLast4 } from '../../../../lib/booking-cancel-token.js'
 import { CANCELLATION_MIN_HOURS } from '../../../../lib/booking-duration.js'
 import { logger, hashIp, errCtx } from '../../../../lib/logger.js'
+import { salonNow, timeToMinutes } from '../../../../lib/booking-slots.js'
 
 export async function POST(request) {
   if (!isAllowedOrigin(request)) {
@@ -40,8 +41,13 @@ export async function POST(request) {
     date = payload.date
     tokenPhoneLast4 = payload.phoneLast4
   } else {
-    bookingId = body?.bookingId
-    date = body?.date
+    /* No tokenless path. This branch trusted a bookingId supplied by the caller
+       and skipped the phone-last-4 ownership check entirely — and the id is
+       printed on the confirmation page, in the pre-filled WhatsApp message and
+       in the salon's notification email, so it leaks by screenshot. Nothing in
+       the app ever reached it: /api/book only succeeds when Sheets is
+       configured, which guarantees a signed token is issued. */
+    return NextResponse.json({ error: 'A valid cancellation link is required.' }, { status: 401 })
   }
 
   if (!bookingId || typeof bookingId !== 'string' || !/^FBS-[A-F0-9]{4,16}$/i.test(bookingId)) {
@@ -82,9 +88,16 @@ export async function POST(request) {
     return NextResponse.json({ error: 'This booking is already cancelled.' }, { status: 400 })
   }
 
-  const bookingTime = new Date(`${booking.date}T${booking.timeSlot}:00`)
-  const now = new Date()
-  const hoursAway = (bookingTime.getTime() - now.getTime()) / 3600000
+  /* Sheet times are Karachi wall-clock; Vercel runs UTC. Parsing them as
+     server-local made every appointment look 5 hours further away than it was,
+     so the 2-hour policy was never enforced and a client could cancel a slot
+     she was already sitting in. salonNow() is the primitive the slots API
+     already uses for exactly this. */
+  const nowSalon = salonNow()
+  const bookingMinutes = timeToMinutes(booking.timeSlot)
+  const daysApart =
+    (Date.parse(`${booking.date}T00:00:00Z`) - Date.parse(`${nowSalon.date}T00:00:00Z`)) / 86400000
+  const hoursAway = (daysApart * 1440 + bookingMinutes - nowSalon.minutes) / 60
   if (hoursAway < CANCELLATION_MIN_HOURS) {
     return NextResponse.json(
       { error: `Cancellations must be made at least ${CANCELLATION_MIN_HOURS} hours before the appointment. Please WhatsApp the salon.` },

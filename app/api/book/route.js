@@ -38,6 +38,13 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
+  /* `null` is valid JSON, so request.json() resolves and the catch above never
+     fires — then the first field read throws and the route 500s. `[]` and a
+     bare string reach here too. */
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
+  }
+
   if (body?.website?.trim?.() || body?._hp?.trim?.()) {
     return NextResponse.json({ error: 'Invalid submission' }, { status: 400 })
   }
@@ -160,7 +167,14 @@ export async function POST(request) {
   }
 
   try {
-    const freshBookings = await getSheetRows(date)
+    /* Count everyone EXCEPT the row we just wrote. Including it made the check
+       compare occupied >= capacity against a total that already had us in it,
+       so the last free station at any slot always failed: pre-check saw 1 of 2,
+       the append made it 2 of 2, and the customer was told someone else had
+       taken a slot that was hers. Half of online capacity was unbookable, and
+       every attempt left a ghost Cancelled row. This now detects only a genuine
+       race — someone else booking between our pre-check and our write. */
+    const freshBookings = (await getSheetRows(date)).filter((b) => b.bookingId !== bookingId)
     const freshOccupied = buildOccupiedCounts(freshBookings)
     if (!canFitAtIndex(freshOccupied, startIdx, needed, maxWorkers)) {
       await updateBookingStatus(bookingId, 'Cancelled')

@@ -4,8 +4,8 @@ import { getBestLocationRedirects, getRetiredLocationRedirects } from './src/loc
 const isDev = process.env.NODE_ENV === 'development'
 
 const scriptSrc = isDev
-  ? "'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io"
-  : "'self' 'unsafe-inline' https://plausible.io"
+  ? "'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io https://connect.facebook.net"
+  : "'self' 'unsafe-inline' https://plausible.io https://connect.facebook.net"
 
 // script-src keeps 'unsafe-inline': a nonce-based CSP would force every page to
 // render dynamically (middleware per request), losing static/CDN serving — a bad
@@ -18,7 +18,11 @@ const contentSecurityPolicy = [
   "font-src 'self'",
   "img-src 'self' data: https:",
   'frame-src https://www.google.com',
-  "connect-src 'self' https://plausible.io https://wa.me",
+  /* connect.facebook.net is listed even though the pixel is not enabled yet:
+     the moment NEXT_PUBLIC_META_PIXEL_ID is set in Vercel the pixel injects a
+     script from that host, and without these entries CSP blocks it silently —
+     no error, no events, and nothing obvious to debug. */
+  "connect-src 'self' https://plausible.io https://wa.me https://connect.facebook.net https://www.facebook.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",

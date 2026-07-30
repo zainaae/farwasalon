@@ -392,7 +392,7 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: 'Full Body: Where the Gap Gets Real' },
       { type: 'p', text: 'On small areas the price difference between the two waxes is a couple of hundred rupees and barely worth arguing about. On full body it stops being a rounding error: [Full Body Honey Wax](/services/honey-wax) is Rs 2,800 and [Full Body Rica Wax](/services/rica-wax) is Rs 4,000. That Rs 1,200 gap is the single most common thing we get asked to justify at the counter.' },
-      { type: 'p', text: 'Here is how we actually answer it. If you wax your whole body every month and your skin has never given you trouble, honey at Rs 2,800 is the sensible standing appointment — you would be paying Rs 14,400 a year extra for a comfort upgrade you may not need. If you have reactive skin, or you are waxing before a wedding week, or you have quietly dreaded the appointment for years, book the Rica. Half our full-body regulars split it: Rica on underarms, face and bikini, honey everywhere else. That lands around Rs 3,200 and is, in our experience, the combination most women stay with once they have tried it.' },
+      { type: 'p', text: 'Here is how we actually answer it. If you wax your whole body every month and your skin has never given you trouble, honey at Rs 2,800 is the sensible standing appointment — you would be paying Rs 14,400 a year extra for a comfort upgrade you may not need. If you have reactive skin, or you are waxing before a wedding week, or you have quietly dreaded the appointment for years, book the Rica. Half our full-body regulars split it: Rica on underarms and face, honey everywhere else. That lands around Rs 3,200 and is, in our experience, the combination most women stay with once they have tried it.' },
       { type: 'p', text: 'One practical thing nobody mentions: hair needs about 5mm — roughly two weeks of growth — for either wax to grip properly. Coming in too early is the most common reason a full body session feels patchy afterwards, and it has nothing to do with which wax you chose.' },
       { type: 'h3', text: 'A note on hygiene, since you cannot see it from the chair' },
       { type: 'p', text: 'Wax is never returned to the pot from your skin, and spatulas are single-use. Rica is a stripless system, so there is no cloth to reuse in the first place. If you are ever unsure in any salon, ask to watch the first application — a salon doing this properly will not mind, and one that minds has told you what you needed to know.' },
@@ -514,19 +514,19 @@ export const BLOG_POSTS = [
       { type: 'h2', text: 'Threading and Face Waxing — Rs 100 to Rs 1,200' },
       { type: 'p', text: '[Threading](/services/threading) starts at Rs 100 in PECHS — eyebrows are Rs 200, with full-face options up to Rs 1,200. If your skin is sensitive, [Rica hot wax](/services/rica-hot-wax) for the face starts at Rs 150 — it is an Italian stripless wax that grips hair, not skin, so it is the gentler option for brows, upper lip, and full face. Searching nearby? See [threading near me in PECHS](/blog/threading-near-me-karachi-pechs).' },
 
-      { type: 'h2', text: 'Body Waxing — Rs 400 to Rs 3,500' },
-      { type: 'p', text: 'Standard [honey wax](/services/honey-wax) starts at Rs 400 for single areas like arms or underarms, with full-body sessions well under Rs 3,000. Premium [Rica body wax](/services/rica-wax) starts at Rs 600 — worth the difference if you wax regularly or have reactive skin, since results last three to four weeks and hair grows back finer over time.' },
+      { type: 'h2', text: 'Body Waxing — Rs 400 to Rs 4,000' },
+      { type: 'p', text: 'Standard [honey wax](/services/honey-wax) starts at Rs 400 for single areas like arms or underarms, with full-body honey sessions under Rs 3,000 and Rica at Rs 4,000. Premium [Rica body wax](/services/rica-wax) starts at Rs 600 — worth the difference if you wax regularly or have reactive skin, since results last three to four weeks and hair grows back finer over time.' },
 
       { type: 'h2', text: 'Facials and Cleansing — Rs 1,200 to Rs 5,500' },
       { type: 'p', text: 'A professional [deep cleansing](/services/cleansing) starts at Rs 1,200 — steam, extraction, and a proper reset for congested skin. Full [facials](/services/facials) run from Rs 1,400 for a classic to around Rs 3,000 for an HD Whitening Facial, topping out near Rs 5,500 for a Janssen Whitening Facial with German cosmeceutical products. Anything dramatically cheaper usually means diluted products; anything pricier in Karachi is usually paying for the postcode, not the facial. Local guide: [facials near me Karachi](/blog/facials-near-me-karachi-pechs).' },
 
-      { type: 'h2', text: 'Bleach and Polish — Rs 400 to Rs 1,500' },
+      { type: 'h2', text: 'Bleach and Polish — Rs 400 to Rs 4,000' },
       { type: 'p', text: 'Instant-glow services like [bleach and polish](/services/bleach-polish) start at Rs 400. A Loreal Face Polish at around Rs 900 is the sweet spot before an event — a natural glow with no downtime and no reaction risk.' },
 
-      { type: 'h2', text: 'Hair — Cuts from Rs 1,500, Treatments from Rs 2,000' },
+      { type: 'h2', text: 'Hair — Cuts from Rs 2,000, Treatments from Rs 2,000' },
       { type: 'p', text: 'Professional [cuts, colour, and styling](/services/hair) start at Rs 1,500. Repair-focused [hair treatments](/services/hair-treatments) — protein treatments, hair-fall ampules, Wellaplex bond therapy — start at Rs 2,000, with most sessions around Rs 3,000. If a salon quotes you five figures for a basic protein treatment, ask exactly what is in it.' },
 
-      { type: 'h2', text: 'Nails and Massage — Rs 300 to Rs 1,500' },
+      { type: 'h2', text: 'Nails and Massage — Rs 300 to Rs 2,500' },
       { type: 'p', text: 'Basic [manicures and pedicures](/services/nails) start at Rs 300, with SPA and paraffin rituals around Rs 1,300. A professional head, back, or full-body [massage](/services/massage) starts at Rs 700.' },
 
       { type: 'h2', text: 'Semi-Permanent Brows — from Rs 20,000' },
@@ -614,11 +614,11 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: '6 Months Before: Start Your Skincare Routine' },
       { type: 'p', text: 'Begin with a professional facial consultation. Our aestheticians will assess your skin type and create a customised plan. For Karachi\'s humid climate, we typically recommend monthly HD Whitening Facials (Rs 3,000) or Janssen Whitening Facials (Rs 5,500) to build a luminous base. Consistency is key — your skin needs time to respond to treatments.' },
-      { type: 'p', text: 'This is also the time to address any stubborn concerns like acne scars, pigmentation, or melasma. Treatments like chemical peels and targeted facials work best when you give them several cycles to show results. Explore our full [facials menu](/services/facials) to find the right protocol for your skin. If you are prone to breakouts, avoid experimenting with new skincare products — stick to what your aesthetician recommends.' },
+      { type: 'p', text: 'This is also the time to address any stubborn concerns like acne scars, pigmentation, or melasma. Targeted facials work best when you give them several cycles to show results — the Janssen line (Rs 5,500) is the one we use for pigmentation over a course. Explore our full [facials menu](/services/facials) to find the right protocol for your skin. If you are prone to breakouts, avoid experimenting with new skincare products — stick to what your aesthetician recommends.' },
 
       { type: 'h2', text: '4 Months Before: Body Care and Hair Health' },
       { type: 'p', text: 'Start a regular body care routine. Monthly full-body waxing sessions help refine hair growth so that by the time your wedding week arrives, the process is quicker and less painful. Our [Rica hot wax](/services/rica-hot-wax) is gentle enough for sensitive skin and perfect for building a waxing routine. Pair it with a monthly body polish to keep your skin smooth and even-toned.' },
-      { type: 'p', text: 'For your hair, begin a strengthening regimen. If you notice thinning or breakage, start a monthly [hair treatment](/services/hair-treatments) now. Protein treatments, hair spas, and Wellaplex sessions compound over time — four months of consistent care can transform dull, brittle hair into thick, glossy locks that hold any bridal style beautifully.' },
+      { type: 'p', text: 'For your hair, begin a strengthening regimen. If you notice thinning or breakage, start a monthly [hair treatment](/services/hair-treatments) now. Protein treatments (Rs 2,000) and Wellaplex sessions (Rs 3,000) compound over time — four months of consistent care can transform dull, brittle hair into thick, glossy locks that hold any bridal style beautifully.' },
 
       { type: 'h2', text: '3 Months Before: Hair Treatments & Colour Planning' },
       { type: 'p', text: 'If you\'re planning a colour change, now is the time. This gives you enough room for adjustments. Book a Wellaplex treatment (Rs 3,000) to strengthen your hair before any chemical processes. If hair fall is a concern, start a monthly Hair Fall Treatment with Ampule (Rs 3,000) — three sessions can make a visible difference.' },
@@ -893,7 +893,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Avoid trying any new skincare products or treatments in the final two weeks before the wedding. Stick to your proven routine to avoid unexpected breakouts or reactions. If you are prone to stress breakouts (very common for brides), your aesthetician can recommend calming facials that soothe inflammation without introducing new active ingredients.' },
 
       { type: 'h2', text: 'When Should You Book?' },
-      { type: 'p', text: 'Peak wedding season in Karachi runs from October through March. If your wedding falls in this window, book your bridal package at least two to three months in advance. Off-season weddings (April through September) give you more flexibility, but we still recommend locking in your dates at least six weeks ahead. Early booking also ensures time for a proper skincare preparation plan — facials, peels, and treatments that build a luminous base over weeks.' },
+      { type: 'p', text: 'Peak wedding season in Karachi runs from October through March. If your wedding falls in this window, book your bridal package at least two to three months in advance. Off-season weddings (April through September) give you more flexibility, but we still recommend locking in your dates at least six weeks ahead. Early booking also ensures time for a proper skincare preparation plan — facials and treatments that build a luminous base over weeks.' },
 
       { type: 'h2', text: 'How to Choose the Right Studio' },
       { type: 'p', text: 'Look at recent work, not just portfolio highlights from years ago. Ask about the specific products used — MAC, Huda Beauty, Charlotte Tilbury, and Kryolan are reliable choices for Karachi humidity. Read Facebook and Google reviews from real brides. Visit the studio in person to check hygiene and ambiance. A good bridal artist will listen to your vision, offer honest advice, and never rush the process.' },
@@ -930,69 +930,50 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'gold-facial-vs-whitening-facial',
-    title: 'Gold Facial vs Whitening Facial — Which One Is Right for Your Skin?',
-    description: 'A detailed comparison of gold facials and whitening facials — ingredients, benefits, ideal skin types, and pricing at Farwa Beauty Salon Karachi.',
+    title: 'Gold Facial vs Whitening Facial in Karachi — and Why We Do Not Do Gold',
+    description: 'Gold facials are on nearly every Karachi salon menu. They are not on ours, and this is the honest reason why — plus which of our whitening facials actually does what you wanted the gold one for.',
     featuredImage: '/glow.jpg',
     date: '2026-05-08',
-    lastModified: '2026-05-08',
-    readTime: '6 min read',
+    lastModified: '2026-07-30',
+    readTime: '4 min read',
     author: 'Rubina',
     category: 'Skincare',
     relatedCategories: ['Facials', 'Cleansing'],
     content: [
-      { type: 'p', text: 'Walk into any salon in Karachi and you will find gold facials and whitening facials near the top of the menu. Both promise glowing skin, but they work in fundamentally different ways and suit different skin concerns. At Farwa Beauty Salon in PECHS, these two treatments are among our most requested — here is an honest comparison to help you choose.' },
+      { type: 'p', text: 'Gold facial is one of the most searched salon terms in Karachi, and almost every menu in the city carries one. Ours does not. People ask us about it often enough that the honest answer deserves a page of its own — along with what to book instead, because the thing you actually want is usually on our menu under a different name.' },
 
-      { type: 'h2', text: 'What Is a Gold Facial?' },
-      { type: 'p', text: 'A gold facial uses products infused with colloidal gold particles. Gold has been used in skincare for centuries — Cleopatra reportedly slept in a gold mask. In modern formulations, the gold particles stimulate blood circulation, promote cell renewal, and give skin a warm, luminous finish. Our Gold Facial at Farwa (Rs 2,500) includes deep cleansing, gold-infused serum, a gold sheet mask, and a finishing moisturiser. The entire session takes about 60 to 75 minutes.' },
-      { type: 'p', text: 'Gold also has mild anti-inflammatory properties, which makes this facial surprisingly soothing despite its luxurious reputation. It helps firm the skin, reduce fine lines, and restore elasticity — making it a favourite among women over 30 who want visible anti-ageing results without invasive procedures. The warm glow lasts several days and photographs beautifully, which is why it is a popular pre-event treatment.' },
+      { type: 'h2', text: 'Why Gold Is Not on Our Menu' },
+      { type: 'p', text: 'A gold facial is a facial containing colloidal gold particles. The cleansing, the massage, the mask and the serum are the same steps as any other facial — gold is the ingredient in the mask, not a different treatment. That matters, because the part of a facial that changes your skin is the exfoliation, the actives and the extraction, and those are identical whether or not there is gold in the bowl.' },
+      { type: 'p', text: 'What we have never been able to find is credible evidence that colloidal gold does something for skin that a well-formulated brightening serum does not. It photographs beautifully, it feels luxurious, and it justifies a higher price. Those are real reasons salons carry it. They are not skincare reasons, and we would rather not charge you for the difference.' },
+      { type: 'p', text: 'We are not telling you gold facials are a scam. If you have had one and loved it, you probably did — a good facial with a nice mask is a good facial. We are telling you that at Farwa the money is better spent on the actives, and that is a choice we would rather explain than hide behind a menu line.' },
 
-      { type: 'h2', text: 'What Is a Whitening Facial?' },
-      { type: 'p', text: 'Whitening facials target uneven skin tone, dark spots, sun damage, and dullness. They use active ingredients like vitamin C, kojic acid, arbutin, and niacinamide to inhibit melanin production and brighten existing pigmentation. Our HD Whitening Facial (Rs 3,000) and Janssen Whitening Facial (Rs 5,500) are formulated specifically for South Asian skin tones and Karachi\'s intense UV exposure. Sessions run 60 to 90 minutes depending on the protocol.' },
-      { type: 'p', text: 'Unlike home-use brightening creams that sit on the surface, professional whitening facials penetrate deeper with the help of steam, massage, and specialised serums. The [cleansing](/services/cleansing) phase removes dead cells and buildup so active ingredients can reach the layers where pigmentation actually forms. This is why salon whitening facials deliver noticeably better results than over-the-counter products.' },
+      { type: 'h2', text: 'What You Probably Wanted It For' },
+      { type: 'p', text: 'Almost everyone who asks us for a gold facial wants one of two things: a bright, lit-from-within look before an event, or something done about uneven tone and pigmentation. Those are different problems with different answers, and neither needs gold.' },
+      { type: 'p', text: 'For the event glow, book the [HD Whitening Facial](/services/facials) at Rs 3,000. It brightens visibly the same day and holds for two to three weeks, which is the exact effect people describe when they praise a gold facial. If Rs 3,000 is more than you wanted to spend, [Whitening Facial](/services/facials) at Rs 1,900 or White Glow at Rs 2,000 do a gentler version of the same job.' },
+      { type: 'p', text: 'For pigmentation you have had for years — melasma, post-acne marks, sun damage — the answer is a course rather than a session. [Janssen Whitening Facial](/services/facials) at Rs 5,500 uses German cosmeceutical actives that work below the surface, and most clients see the change around the third visit. Booking one and expecting an overnight result is the way to feel cheated by a treatment that was never designed to work that way. There is a fuller comparison in our [Janssen vs HD guide](/blog/janssen-vs-hd-whitening-facial-karachi).' },
 
-      { type: 'h2', text: 'Which Skin Types Benefit Most?' },
-      { type: 'p', text: 'Gold facials are ideal for mature, dry, or dull skin. The gold particles boost collagen production and restore radiance — perfect for women over 30 who want that "lit from within" glow. Whitening facials suit oily, combination, or pigmentation-prone skin. If you struggle with melasma, post-acne marks, or uneven tone from sun exposure, the whitening protocol will deliver more targeted results.' },
-      { type: 'p', text: 'That said, skin concerns are not always black and white. A woman in her 40s might have both dullness and pigmentation. A younger woman might have dry skin but also struggle with dark spots from acne. In such cases, we often recommend alternating treatments — and this is where a professional skin assessment at Farwa makes all the difference. Your aesthetician will evaluate your primary concern and design a protocol that addresses it.' },
-
-      { type: 'h2', text: 'Results and Frequency' },
-      { type: 'p', text: 'A single gold facial gives an immediate glow that lasts about a week — making it a popular pre-event choice for weddings and parties. For lasting anti-aging benefits, we recommend one session every four to six weeks. Whitening facials show cumulative results. The first session brightens noticeably, but the real transformation happens after three to four monthly sessions as melanin production steadily decreases.' },
-
-      { type: 'h2', text: 'Price Comparison at Farwa Beauty Salon' },
-      { type: 'p', text: 'Our Gold Facial starts at Rs 2,500. Whitening facials range from Rs 3,000 (HD Whitening) to Rs 5,500 (Janssen Whitening) depending on the product line. Both represent excellent value compared to Karachi averages — and all our [facials](/services/facials) include a complimentary skin assessment so you never pay for a treatment that is not right for you.' },
-
-      { type: 'h2', text: 'Can You Combine Both?' },
-      { type: 'p', text: 'Yes — alternating between the two is one of our favourite protocols for brides. We typically recommend a whitening facial one month, followed by a gold facial the next. This addresses pigmentation while maintaining that warm glow. Your aesthetician at Farwa will design a schedule based on your skin goals and timeline.' },
-      { type: 'p', text: 'For brides following a six-month [bridal beauty timeline](/services/bridal), we often create a customised facial plan that includes both gold and whitening treatments alongside targeted treatments like our Acne Facial or Anti-Aging Facial. This layered approach delivers dramatically better results than sticking to a single treatment type.' },
-
-      { type: 'h2', text: 'Aftercare Tips for Maximum Results' },
-      { type: 'p', text: 'Getting the most from your facial does not end when you leave the salon. Follow these aftercare guidelines:' },
-      { type: 'ul', items: [
-        'Avoid direct sun exposure for at least 24 hours after a whitening facial — UV reverses the brightening effect.',
-        'Apply SPF 30+ daily, especially after whitening treatments. Sunscreen is the single most important step for maintaining results.',
-        'Do not exfoliate or use AHA/BHA products for 48 hours after either facial.',
-        'Skip heavy makeup for the rest of the day — let the serums absorb fully.',
-        'Drink plenty of water to support your skin\'s recovery and hydration.',
-        'After a gold facial, apply a hydrating sleeping mask at night to lock in the benefits.'
-      ]},
+      { type: 'h2', text: 'What Any Brightening Facial Cannot Do' },
+      { type: 'p', text: 'None of these will lighten your natural skin tone, and we would not offer something that claimed to. They work on dullness, unevenness and pigmentation — bringing your skin back to its own best tone rather than changing what that tone is. Any salon in Karachi promising otherwise is selling a result nobody can deliver.' },
+      { type: 'p', text: 'They also will not survive daily unprotected sun. Sunscreen is what makes a Rs 5,500 course hold; without it you are paying to undo damage you re-apply every afternoon. And if your skin is congested, a [deep cleansing](/services/cleansing) from Rs 1,200 a week beforehand makes any facial work substantially better — the reasoning is in our [cleansing versus facial guide](/blog/deep-cleansing-vs-facial-karachi).' },
 
       { type: 'h2', text: 'Frequently Asked Questions' },
-      { type: 'h3', text: 'Q: Can I get a gold or whitening facial if I have sensitive skin?' },
-      { type: 'p', text: 'A: Gold facials are generally well-tolerated by sensitive skin due to gold\'s anti-inflammatory properties. Whitening facials with active acids may need to be customised for sensitive types — our aestheticians will adjust the product concentration and application time accordingly.' },
-      { type: 'h3', text: 'Q: How soon before an event should I book a facial?' },
-      { type: 'p', text: 'A: For a single pre-event glow, book your gold facial three to five days before the event. For whitening, book five to seven days before since some skin types experience mild purging. If you are preparing for a wedding, start your facial routine three to six months in advance.' },
-      { type: 'h3', text: 'Q: Will a whitening facial make my skin look unnatural or "bleached"?' },
-      { type: 'p', text: 'A: No. Professional whitening facials even out your skin tone and brighten dullness — they do not change your natural complexion. The goal is radiant, even-toned skin, not a drastic colour change. The results look natural and healthy.' },
-      { type: 'h3', text: 'Q: Can men get gold or whitening facials?' },
-      { type: 'p', text: 'A: Absolutely. Skincare is not gender-specific. We welcome male clients for facials, and the treatments are adjusted for typically thicker, oilier male skin. A gold facial before a wedding or important event is popular with grooms as well.' },
+      { type: 'h3', text: 'Q: Do you offer a gold facial at Farwa?' },
+      { type: 'p', text: 'A: No. Every facial we offer is printed with its price on the [price list](/prices), and gold is not among them. We would rather turn away the booking than invent a menu line for a search term.' },
+      { type: 'h3', text: 'Q: Which facial gives the fastest glow before an event?' },
+      { type: 'p', text: 'A: HD Whitening Facial, Rs 3,000, booked three to four days before — not the morning of. Skin looks its best a couple of days after rather than immediately.' },
+      { type: 'h3', text: 'Q: Is the expensive one always better?' },
+      { type: 'p', text: 'A: No, and we will say so at the counter. Janssen at Rs 5,500 earns its price on stubborn pigmentation across a course. For a single pre-wedding glow it is more product than the job needs, and HD at Rs 3,000 is the workhorse.' },
+      { type: 'h3', text: 'Q: What if I have sensitive skin?' },
+      { type: 'p', text: 'A: Start with the Herbal Organic Facial at Rs 1,600 and see how your skin responds before going near a cosmeceutical course. Tell us if you use a prescription retinoid — that changes the recommendation entirely.' },
 
-      { type: 'h2', text: 'Book Your Skin Consultation' },
-      { type: 'p', text: 'Not sure which facial is right for you? Let our team assess your skin in person. WhatsApp us at +92 322 2782254 to book at our PECHS studio. Explore our full [Facials menu](/services/facials) for all available treatments and pricing.' },
+      { type: 'h2', text: 'Book a Facial' },
+      { type: 'p', text: 'All eleven facials with their prices are on the [facials menu](/services/facials). [Book online](/book) or WhatsApp +92 322 2782254 — tell us what you are trying to fix rather than which facial you want, and we will point you at the cheapest one that does it.' },
     ],
   },
   {
     slug: 'complete-guide-hair-treatments-karachi',
     title: 'Complete Guide to Hair Treatments in Karachi — From Keratin to Protein',
-    description: 'Everything you need to know about professional hair treatments in Karachi — keratin, protein, hair spa, and more with pricing and aftercare tips.',
+    description: 'Everything you need to know about professional hair treatments in Karachi — protein Rs 2,000, Wellaplex Rs 3,000, hair-fall and dandruff protocols, plus how keratin is quoted.',
     featuredImage: '/hairtreatment.jpg',
     date: '2026-05-03',
     lastModified: '2026-05-03',
@@ -1012,9 +993,9 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'If your hair feels elastic, gummy, or breaks easily when wet, it likely needs protein. Protein treatments like our Hair Fall Treatment with Ampule (Rs 3,000) replenish the structural building blocks of the hair shaft. Unlike keratin, protein treatments work from inside the strand rather than coating the surface. They are perfect for chemically treated, coloured, or heat-damaged hair. Results are cumulative — we recommend a session every four to six weeks for best results.' },
       { type: 'p', text: 'A simple test: pull a wet strand of hair gently. If it stretches and stretches before snapping, you need protein. If it snaps immediately with no stretch, you need moisture. If you are unsure, our stylist will perform this assessment during your consultation. Many Karachi women who colour their hair regularly or use straighteners daily are protein-deficient without realising it.' },
 
-      { type: 'h2', text: 'Hair Spa' },
-      { type: 'p', text: 'A professional hair spa combines deep conditioning with scalp massage and steam therapy. It is the gentlest option and works for all hair types. Our hair spa treatments address dryness, dandruff, and scalp tension. The steam opens hair cuticles so the conditioning mask penetrates deeply. Sessions take about 45 to 60 minutes and leave hair noticeably softer immediately. Think of a hair spa as the maintenance treatment — ideal monthly or between more intensive keratin or protein sessions.' },
-      { type: 'p', text: 'The scalp massage component of a hair spa is not just relaxing — it stimulates blood flow to hair follicles, promoting healthier growth over time. For women experiencing stress-related hair fall (extremely common in Karachi\'s fast-paced lifestyle), the combination of deep conditioning and scalp stimulation addresses both the symptom and the cause.' },
+      { type: 'h2', text: 'Olorchee Treatment' },
+      { type: 'p', text: 'Olorchee (Rs 2,500, about 45 minutes) is our deep-conditioning option, and the one we reach for when hair is dry and dull rather than damaged. It is the gentlest treatment on the menu and works for all hair types. Think of it as maintenance — sensible between more intensive protein or keratin sessions rather than instead of them. If you want the scalp-massage element too, add a [Head Massage and Wash](/services/massage) at Rs 1,500 and you leave with clean, dried hair rather than oiled hair to deal with at home.' },
+      { type: 'p', text: 'For hair fall specifically, the honest answer is not a conditioning treatment. Our [Hair Fall Treatment with Ampule](/services/hair-treatments) is Rs 3,000 and targets the problem directly. Persistent shedding is worth seeing a dermatologist about rather than treating in a salon chair — conditioning makes hair look and feel better, but it does not change how much of it falls.' },
 
       { type: 'h2', text: 'Wellaplex and Bond Repair' },
       { type: 'p', text: 'If you colour or bleach your hair regularly, Wellaplex (Rs 3,000 at Farwa) is essential. It works at the molecular level to rebuild the disulphide bonds that chemical processing breaks. This is not a surface-level treatment — it genuinely repairs structural damage. We always recommend Wellaplex alongside any [hair colouring service](/services/hair) to protect hair integrity from the start.' },
@@ -1023,12 +1004,12 @@ export const BLOG_POSTS = [
       { type: 'ul', items: [
         'Keratin: Best for frizz control and smoothing. Lasts 3–5 months. Takes 2–3 hours.',
         'Protein: Best for breakage and weakness. Cumulative results. Takes 45–60 minutes.',
-        'Hair Spa: Best for dryness, dullness, and scalp health. Immediate softness. Takes 45–60 minutes.',
+        'Olorchee (Rs 2,500): Best for dryness and dullness. Immediate softness. Takes about 45 minutes.',
         'Wellaplex: Best for chemically treated hair. Rebuilds bonds. Takes 30–45 minutes (often combined with colour).'
       ]},
 
       { type: 'h2', text: 'How to Choose the Right Treatment' },
-      { type: 'p', text: 'Start by identifying your primary concern. Frizz and unmanageability? Go with keratin. Breakage and elasticity loss? Protein is your answer. General dryness and dullness? A hair spa will refresh you. Chemical damage from colouring? Wellaplex. If you are unsure, book a consultation at Farwa — we will assess your hair type, porosity, and damage level before recommending anything.' },
+      { type: 'p', text: 'Start by identifying your primary concern. Frizz and unmanageability? Go with keratin. Breakage and elasticity loss? Protein is your answer. General dryness and dullness? Olorchee at Rs 2,500 will refresh you. Chemical damage from colouring? Wellaplex. If you are unsure, book a consultation at Farwa — we will assess your hair type, porosity, and damage level before recommending anything.' },
       { type: 'p', text: 'Many women benefit from a combination approach. For example, a bride preparing for her wedding might start with Wellaplex to repair existing damage, follow up with monthly protein treatments to rebuild strength, and finish with a keratin smoothing treatment two weeks before the event for that camera-ready sleekness. Check out our [bridal packages](/services/bridal) for bundled treatment plans.' },
 
       { type: 'h2', text: 'Aftercare Tips for Longer-Lasting Results' },
@@ -1046,7 +1027,7 @@ export const BLOG_POSTS = [
       { type: 'h3', text: 'Q: Can I colour my hair and get a keratin treatment at the same time?' },
       { type: 'p', text: 'A: We recommend colouring first and waiting at least two weeks before keratin treatment. Keratin seals the cuticle, which can lock out colour applied afterward. If you need both, plan your timeline so colour comes first. Your stylist at Farwa will help you schedule them correctly.' },
       { type: 'h3', text: 'Q: How often should I get a hair treatment in Karachi?' },
-      { type: 'p', text: 'A: For maintenance, a hair spa or protein treatment every four to six weeks is ideal. Keratin treatments last three to five months before needing a redo. Wellaplex should accompany every chemical service. If your hair is in good condition, a monthly hair spa is sufficient to maintain it.' },
+      { type: 'p', text: 'A: For maintenance, an Olorchee or protein treatment every four to six weeks is ideal. Keratin treatments last three to five months before needing a redo. Wellaplex should accompany every chemical service. If your hair is in good condition, a monthly Olorchee is sufficient to maintain it.' },
       { type: 'h3', text: 'Q: Are hair treatments safe during pregnancy?' },
       { type: 'p', text: 'A: Hair spas and basic protein treatments are generally safe. Keratin treatments containing formaldehyde should be avoided during pregnancy — always inform your stylist if you are pregnant or breastfeeding so we can choose appropriate products.' },
       { type: 'h3', text: 'Q: Will keratin treatment make my hair completely straight?' },
@@ -1079,10 +1060,10 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Not sure what to book for your first visit? Here are the services our first-time clients most commonly start with:' },
       { type: 'ul', items: [
         'Eyebrow threading (Rs 200) — Quick, painless shaping that instantly frames your face. See our [threading services](/services/threading).',
-        'Basic facial (starting Rs 900) — A cleansing facial refreshes your skin and introduces you to professional skincare. Browse our [facials menu](/services/facials).',
+        'Basic facial (starting Rs 1,400) — A cleansing facial refreshes your skin and introduces you to professional skincare. Browse our [facials menu](/services/facials).',
         'Manicure or pedicure (starting Rs 900) — A relaxing way to experience salon care. Check out our [nail services](/services/nails).',
-        'Full face threading (Rs 500) — Great if you want a complete facial hair cleanup.',
-        'Arms wax (starting Rs 500) — A common entry point for body waxing that is quick and manageable.'
+        'Full face threading (Rs 1,200) — Great if you want a complete facial hair cleanup. Individual areas are far cheaper: eyebrows Rs 200, upper lip Rs 150, chin Rs 100.',
+        'Arms wax (starting Rs 600) — A common entry point for body waxing that is quick and manageable.'
       ]},
 
       { type: 'h2', text: 'What to Expect When You Arrive' },
@@ -1097,7 +1078,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Pay attention to cleanliness. Fresh towels for each client, sanitised tools, sealed wax sticks (never double-dipped), and clean workstations are non-negotiable. Threading cotton should be new. Wax applicators should be single-use. At Farwa, we follow strict hygiene protocols and are happy to show you our sanitisation process if you ask. A salon that gets defensive about hygiene questions is a red flag.' },
 
       { type: 'h2', text: 'Budgeting and Tipping' },
-      { type: 'p', text: 'Ask for a price list before booking or check the salon\'s website. At Farwa, our threading starts at Rs 200 and facials range from Rs 900 to Rs 5,500 depending on the treatment. Tipping is appreciated but not mandatory in Pakistan — Rs 100 to 500 is a kind gesture depending on the service. If a staff member went above and beyond, a tip lets them know you noticed.' },
+      { type: 'p', text: 'Ask for a price list before booking or check the salon\'s website. At Farwa, our threading starts at Rs 100 and facials range from Rs 1,400 to Rs 5,500 depending on the treatment. Tipping is appreciated but not mandatory in Pakistan — Rs 100 to 500 is a kind gesture depending on the service. If a staff member went above and beyond, a tip lets them know you noticed.' },
       { type: 'p', text: 'A practical first-visit budget for Karachi salons ranges from Rs 500 (just threading) to Rs 3,000 (a facial plus threading plus a basic manicure). You do not have to do everything at once — start with one or two services, see how you feel, and build from there. Regular clients often settle into a routine of monthly visits that they plan and budget for in advance.' },
 
       { type: 'h2', text: 'After Your Visit' },

@@ -55,7 +55,7 @@ export const NEIGHBORHOODS = [
     name: 'North Nazimabad',
     detail: 'Worth the trip — clients from North Nazimabad have been coming for years.',
     blurb:
-      'From North Nazimabad, PECHS is typically 25–40 minutes via Shahrah-e-Quaideen / University Road depending on traffic. Regulars still make the trip for bridal trials, eyebrow threading from Rs 200, and published facial rates — one calm women-only floor instead of guessing at a neighbourhood parlour.',
+      'From North Nazimabad, PECHS is typically 25–40 minutes via Shahrah-e-Quaideen / University Road depending on traffic. Regulars still make the trip for bridal trials, eyebrow threading at Rs 200, and published facial rates — one calm women-only floor instead of guessing at a neighbourhood parlour.',
   },
   {
     slug: 'saddar',

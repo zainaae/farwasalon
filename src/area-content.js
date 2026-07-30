@@ -54,7 +54,7 @@ export const AREA_CONTENT = {
     gettingHere:
       'The offices and apartment blocks along Shahrah-e-Faisal reach us in roughly ten to twenty minutes when the road is moving. The caveat is the road itself: Shahrah-e-Faisal at 6pm on a weekday is a different proposition to Shahrah-e-Faisal at 11am, and the difference can be half an hour.',
     worthTheTrip:
-      'This is our most common lunch-break catchment. Threading from Rs 200 and a face bleach at Rs 650 both fit inside an hour with travel either side. Anything on the facials menu needs 45 minutes in the chair alone, so save those for a Saturday.',
+      'This is our most common lunch-break catchment. Threading from Rs 100 and a face bleach at Rs 650 both fit inside an hour with travel either side. Anything on the facials menu needs 45 minutes in the chair alone, so save those for a Saturday.',
     timing:
       'Book a held slot rather than walking in — the whole point of coming on a work break is not queueing. If you are travelling after 5pm, add twenty minutes to whatever the map tells you and tell us, so we hold the chair rather than giving it away.',
   },
@@ -90,7 +90,7 @@ export const AREA_CONTENT = {
     gettingHere:
       'Clifton and the Sea View side reach us in around twenty to twenty-five minutes. The run is easier outside office hours in either direction, and the last stretch into Block 3 is quiet residential road rather than main-artery traffic.',
     worthTheTrip:
-      'Most of what brings Clifton clients across is bridal and pre-event work, where the trial matters more than the distance. A [Bridal Trial](/services/bridal) at Rs 8,000 is two hours and worth planning a clear afternoon around — you will want to sit with the look rather than rush off.',
+      'Most of what brings Clifton clients across is bridal and pre-event work, where the trial matters more than the distance. A Bridal Trial at Rs 8,000 is two hours and worth planning a clear afternoon around — you will want to sit with the look rather than rush off.',
     timing:
       'For bridal, book the trial four to six weeks out and the main appointment as early as you can; wedding season fills our diary before anything else does. For a single facial, a weekday morning is a far easier drive than a Saturday.',
   },
@@ -136,7 +136,7 @@ export const AREA_CONTENT = {
     driveTime: 'walking distance for much of the block',
     route: 'Plot 165/G-1, Saima Terrace, Block 3',
     gettingHere:
-      'This is home. The salon has been at Plot 165/G-1, Saima Terrace in Block 3 since it outgrew Rubina&rsquo;s house, and PECHS clients are the reason it did. A good number of the faces we see monthly have been coming since 2008.',
+      'This is home. The salon has been at Plot 165/G-1, Saima Terrace in Block 3 since it outgrew Rubina’s house, and PECHS clients are the reason it did. A good number of the faces we see monthly have been coming since 2008.',
     worthTheTrip:
       'There is no trip. Book a Rs 100 lower-lip threading on its own if that is what you need — the whole point of a neighbourhood salon is that nothing has to be justified by the journey.',
     timing:

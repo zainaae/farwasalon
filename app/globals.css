@@ -729,7 +729,10 @@
 }
 .skip-link:focus-visible {
   top: 12px;
-  outline: 2px solid #c9a98a;
+  /* --accent-gold-deep, 5.3:1 on white. #c9a98a measured 2.20:1, under the
+     3:1 WCAG 2.4.11 floor for focus indicators — and this is the ring on almost
+     every interactive element on the site. */
+  outline: 2px solid var(--accent-gold-deep);
   outline-offset: 2px;
 }
 
@@ -742,7 +745,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #c9a98a;
+  outline: 2px solid var(--accent-gold-deep);
   outline-offset: 3px;
   border-radius: 1px;
 }
