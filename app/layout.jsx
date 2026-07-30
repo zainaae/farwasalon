@@ -2,6 +2,7 @@ import { Inter, Unbounded, Syne } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import ClientShell from './client-shell'
+import MetaPixel from './components/meta-pixel'
 import JsonLd from './json-ld'
 import { buildBeautySalonSchema, buildWebSiteSchema } from '../lib/business-schema.js'
 
@@ -115,6 +116,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body className="overflow-x-clip">
+        <MetaPixel />
         <ClientShell>{children}</ClientShell>
         <JsonLd data={buildBeautySalonSchema()} />
         <JsonLd data={buildWebSiteSchema()} />

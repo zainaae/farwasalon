@@ -53,8 +53,28 @@ export const formatDuration = (min) => {
 }
 
 /* ─── Analytics helper ────────────────────────────────────────── */
+/* Events that mean money. Mapped to Meta's standard event names so the pixel
+   can optimise delivery toward them; everything else stays Plausible-only. */
+const META_EVENTS = {
+  BookingCompleted: 'Schedule',
+  BookingStarted: 'InitiateCheckout',
+  WhatsAppIntent: 'Contact',
+  CallIntent: 'Contact',
+}
+
 export function track(event, props) {
   window.plausible?.(event, { props })
+
+  const metaEvent = META_EVENTS[event]
+  if (metaEvent && typeof window.fbq === 'function') {
+    /* Value + currency only where a real basket exists — Meta uses them to
+       optimise for higher-value bookings, and inventing them would poison it. */
+    const payload =
+      props?.value != null
+        ? { value: Number(props.value) || 0, currency: 'PKR', content_name: props.service }
+        : { content_name: props?.service || props?.from }
+    window.fbq('track', metaEvent, payload)
+  }
 }
 
 /* ─── Deep-link slugs ─────────────────────────────────────────── */

@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react'
 import { DEALS } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
+import WaCta from '../components/wa-cta'
 import { SITE_ORIGIN, SALON_ID, buildFaqPageSchema } from '../../lib/business-schema.js'
 
 const DEAL = DEALS.find((d) => d.id === 'freedom-deal-2026')
@@ -132,14 +133,13 @@ export default function AzadiSalePage() {
                 <Link href="/book" className="tap-safe azadi-btn">
                   Book your slot <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
-                <a
+                <WaCta
                   href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20I%20want%20to%20book"
-                  target="_blank"
-                  rel="noreferrer"
+                  from="freedom-deal-hero"
                   className="tap-safe azadi-btn azadi-btn--ghost"
                 >
                   Ask on WhatsApp
-                </a>
+                </WaCta>
               </div>
             </div>
           </div>
@@ -165,14 +165,13 @@ export default function AzadiSalePage() {
           </p>
           <p className="text-stone text-[13px] font-['Inter'] font-light max-w-2xl">
             Not sure whether your booking gets there?{' '}
-            <a
+            <WaCta
               href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20does%20my%20booking%20qualify%3F"
-              target="_blank"
-              rel="noreferrer"
+              from="freedom-deal-qualify"
               className="link-underline text-ink font-medium"
             >
               Message us
-            </a>{' '}
+            </WaCta>{' '}
             and we will add it up for you before you come.
           </p>
         </section>
