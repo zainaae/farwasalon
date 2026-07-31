@@ -12,6 +12,7 @@ import {
   getServiceIdByName,
 } from './data.js'
 import { BLOG_POSTS } from './blog-data.js'
+import { formatServicePrice } from './data.js'
 
 describe('CAT_META media files', () => {
   const publicDir = join(__dirname, '..', 'public')
@@ -246,5 +247,34 @@ describe('service id helpers', () => {
 
   it('getServiceIdByName returns null for unknown names', () => {
     expect(getServiceIdByName('Not A Real Service')).toBeNull()
+  })
+})
+
+/* Hair services depend on length and density, so their printed rate is a floor
+   rather than a quote. The qualifier has to be everywhere a price is shown — a
+   menu that says "from Rs 4,000" and a booking screen that says "Rs 4,000" is
+   the surprise-at-the-counter this site exists to avoid. */
+describe('hair prices are marked as starting prices', () => {
+  it('every Hair and Hair Treatments service carries fromPrice', () => {
+    for (const cat of ['Hair', 'Hair Treatments']) {
+      for (const svc of SERVICES[cat]) {
+        expect(svc.fromPrice, `${cat} / ${svc.name}`).toBe(true)
+      }
+    }
+  })
+
+  it('no fixed-price category is marked as variable', () => {
+    for (const cat of ['Threading', 'Nails', 'Massage', 'Facials', 'Cleansing']) {
+      for (const svc of SERVICES[cat]) {
+        expect(svc.fromPrice, `${cat} / ${svc.name} should be a fixed price`).toBeUndefined()
+      }
+    }
+  })
+
+  it('formatServicePrice prefixes only the variable ones', () => {
+    expect(formatServicePrice(SERVICES['Hair'].find((s) => s.name === 'Hair Colour'))).toBe('from Rs 4,000')
+    expect(formatServicePrice(SERVICES['Threading'][0])).toBe('Rs 200')
+    expect(formatServicePrice(null)).toBeNull()
+    expect(formatServicePrice({ pricePkr: null })).toBeNull()
   })
 })

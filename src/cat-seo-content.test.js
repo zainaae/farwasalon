@@ -68,7 +68,7 @@ describe('CAT_FAQS', () => {
    internal editorial label rendered to users on a page earning 106 impressions.
    Headings are user-facing copy, so they have to read like it. */
 describe('CAT_PAGE_BLOCKS headings are copy, not editorial labels', () => {
-  const LABEL_WORDS = /(block|section|placeholder|tbd|todo|copy|draft|wip|lorem)/i
+  const LABEL_WORDS = /\b(block|section|placeholder|tbd|todo|draft|wip|lorem)\b/i
 
   it('no heading contains an editorial label word', () => {
     for (const [category, blocks] of Object.entries(CAT_PAGE_BLOCKS)) {

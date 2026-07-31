@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
 import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Phone, MessageCircle } from 'lucide-react'
-import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatDuration, track, CAT_SLUGS } from './site-config.js'
+import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatServicePrice, formatDuration, track, CAT_SLUGS } from './site-config.js'
 import { useBooking } from './booking-context.jsx'
 import { useNextSlot } from './use-next-slot.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
@@ -318,7 +318,7 @@ export function ServiceModal({ service, onClose }) {
             </h2>
             {(service.pricePkr != null || service.durationMinutes != null) && (
               <p className="text-[#c9a98a] text-sm font-['Inter'] font-medium mb-4 flex items-center gap-2">
-                {service.pricePkr != null && <span>{formatPrice(service.pricePkr)}</span>}
+                {service.pricePkr != null && <span>{formatServicePrice(service)}</span>}
                 {service.pricePkr != null && service.durationMinutes != null && <span className="text-stone/30">·</span>}
                 {service.durationMinutes != null && <span>{formatDuration(service.durationMinutes)}</span>}
               </p>
@@ -654,6 +654,6 @@ export function LazyVideo({ src, poster, className, autoPlay, ...props }) {
 }
 
 /* ─── Re-exports ───────────────────────────────────────────────── */
-export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatDuration, CAT_SLUGS }
+export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS }
 export { BookingProvider, useBooking } from './booking-context.jsx'
 export { useNextSlot } from './use-next-slot.js'

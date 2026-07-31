@@ -13,10 +13,10 @@ export const CAT_SEO = {
       'Gentle Rica hot wax from Rs 150 at Farwa Beauty Salon, PECHS Karachi. Italian stripless wax for face & sensitive skin. Book online.',
   },
   'Honey Wax': {
-    title: 'Honey Wax PECHS — From Rs 400',
-    h1: 'Honey Wax in PECHS, Karachi',
+    title: 'Full Body Wax Karachi Rs 2,800 — Honey Wax',
+    h1: 'Full Body & Honey Wax in PECHS, Karachi',
     metaDesc:
-      'Honey wax from Rs 400 · full body Rs 2,800 at Farwa PECHS. Compare with Rica body wax — printed PKR, women-only studio. Book online.',
+      'Full body honey wax Rs 2,800 (60 min) at Farwa PECHS — against Rs 4,999 at at-home services. Arms, legs, underarms, stomach, back. Women-only studio.',
   },
   'Rica Wax': {
     title: 'Rica Wax PECHS Karachi — From Rs 600',
@@ -84,7 +84,7 @@ export const CAT_SEO = {
     title: 'Haircut & Colour Karachi — Cuts from Rs 2,000',
     h1: 'Haircut, Colour & Blowdry in PECHS',
     metaDesc:
-      'Haircut & blowdry Rs 2,000 · colour/balayage from Rs 4,000 at Farwa PECHS. Women hair salon Karachi — book online today.',
+      'Haircut & blowdry from Rs 2,000 · colour from Rs 4,000 at Farwa PECHS. Hair rates start there — length and density decide the rest.',
   },
   'Eyebrow Tattoo': {
     title: 'Microblading Karachi — Rs 20,000, 12-18 Months',
@@ -215,6 +215,11 @@ export const CAT_PAGE_BLOCKS = {
     { type: 'p', text: 'White Glow / Acne cleansing ~35 min (from Rs 1,200 / Rs 1,400). HD Cleansing ~40 min (Rs 1,700). Janssen Whitening Cleansing ~45 min (Rs 3,000). Congested skin: cleanse before a full facial.' },
   ],
   'Honey Wax': [
+    { type: 'h2', text: 'Full body wax: what it costs and what it covers' },
+    { type: 'p', text: 'Full Body Honey Wax is Rs 2,800 and takes about an hour. That covers arms, legs, underarms, stomach, back, hips and the back of the neck — the whole body in one appointment rather than area by area. Full Body Rica Wax is Rs 4,000 if you want the gentler stripless system.' },
+    { type: 'p', text: 'Worth knowing what the market charges: the at-home services advertising full body waxing in Karachi are around Rs 4,999 for honey and Rs 6,999 for Rica. We are a studio rather than a home visit, so you travel to us — but you pay Rs 2,800 and the price is printed rather than quoted on the phone.' },
+    { type: 'h2', text: 'Before you book' },
+    { type: 'p', text: 'Hair needs about 5mm, roughly two weeks of growth, or the wax cannot grip and the session feels patchy. That is the single most common reason a full body appointment disappoints, and it has nothing to do with which wax you chose. Book two to three days before an event rather than the morning of.' },
     { type: 'h2', text: 'Honey vs Rica — pick clearly' },
     { type: 'p', text: 'Honey wax is strip wax for body zones (full body Rs 2,800). Prefer less pull or sensitive skin? Book Rica body wax (full body Rs 4,000) or Rica hot wax for the face. See the Rica wax menu for the premium strip option.' },
   ],
@@ -232,7 +237,7 @@ export const CAT_PAGE_BLOCKS = {
   ],
   Hair: [
     { type: 'h2', text: 'Cut, colour & balayage' },
-    { type: 'p', text: 'Haircut & blowdry Rs 2,000. Blowdry only Rs 1,500. Colour / highlights / balayage from Rs 4,000. Bridal hair Rs 8,000. Keratin is offered but quoted per head, not printed — send a photo on WhatsApp. Protein Rs 2,000 and Wellaplex Rs 3,000 are printed.' },
+    { type: 'p', text: 'Haircut & blowdry from Rs 2,000. Blowdry only from Rs 1,500. Colour / highlights / balayage from Rs 4,000. Bridal hair from Rs 8,000. Hair rates start there and depend on length and density — we confirm before we start. Keratin is offered but quoted per head, not printed — send a photo on WhatsApp. Protein Rs 2,000 and Wellaplex Rs 3,000 are printed.' },
   ],
   'Eyebrow Tattoo': [
     { type: 'h2', text: 'What every session includes' },

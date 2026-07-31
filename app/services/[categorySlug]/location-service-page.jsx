@@ -6,7 +6,7 @@ import {
   waLink,
   SERVICES,
   CAT_SLUGS,
-  formatPrice,
+  formatPrice, formatServicePrice,
   YEARS_ACTIVE,
   MAPS_LINK,
   getDefaultServiceIdForCategory,
@@ -23,9 +23,13 @@ export default function LocationServicePage({ data, slug }) {
   const heading = prefix === 'best'
     ? `Best ${service.name} in ${location.name}`
     : `${service.name} ${prefix === 'near' ? 'Near' : 'in'} ${location.name}`
-  const categoryKey = Object.keys(SERVICES).find(k => k === service.category)
-  const categoryServices = categoryKey ? SERVICES[categoryKey] : []
-  const displayServices = categoryServices.slice(0, 6)
+  /* A service may span several menu categories (waxing covers Rica, honey and
+     Rica hot). Falls back to the single `category` for everything else. */
+  const categoryKeys = service.categories?.length ? service.categories : [service.category]
+  const categoryKey = categoryKeys.find((k) => SERVICES[k]) ?? null
+  const categoryServices = categoryKeys.flatMap((k) => SERVICES[k] ?? [])
+  // Cheapest first, so the six shown include the price that wins the query.
+  const displayServices = [...categoryServices].sort((a, b) => a.pricePkr - b.pricePkr).slice(0, 6)
   const locPrices = categoryServices.map((s) => s.pricePkr).filter(Boolean)
   const locMin = locPrices.length ? Math.min(...locPrices) : null
   const priceFloor = locMin != null ? formatPrice(locMin) : null
@@ -109,7 +113,7 @@ export default function LocationServicePage({ data, slug }) {
               {displayServices.map((svc, i) => (
                 <m.div key={i} className="card-link !justify-start !flex-col !items-start hover:shadow-soft">
                   <p className="font-['Syne'] font-semibold text-sm text-ink mb-1">{svc.name}</p>
-                  {svc.pricePkr != null && <p className="text-stone text-xs font-['Inter']">{formatPrice(svc.pricePkr)}</p>}
+                  {svc.pricePkr != null && <p className="text-stone text-xs font-['Inter']">{formatServicePrice(svc)}</p>}
                 </m.div>
               ))}
             </div>

@@ -79,7 +79,12 @@ export const TOP_SERVICES = [
   { slug: 'facials', name: 'Facials', category: 'Facials', description: 'Organic, whitening, HD, and anti-ageing facials for every skin type.' },
   { slug: 'hair', name: 'Hair Services', category: 'Hair', description: 'Haircuts, colour, blowdry, styling, and treatments for all hair types.' },
   { slug: 'nails', name: 'Nail Services', category: 'Nails', description: 'Manicures, pedicures, nail art, French tips, and paraffin treatments.' },
-  { slug: 'waxing', name: 'Waxing', category: 'Rica Wax', description: 'Rica hot wax, honey wax, and body waxing for smooth, lasting results.' },
+  /* `categories` because this page promises "Rica hot wax, honey wax and body
+     waxing" and used to render only the Rica menu — so the ten waxing location
+     pages showed Rs 4,000 as the sole full-body price and hid the Rs 2,800
+     honey option, which is the cheapest full body in the Karachi SERP and the
+     reason to click. `category` stays as the primary for schema and slugs. */
+  { slug: 'waxing', name: 'Waxing', category: 'Rica Wax', categories: ['Rica Wax', 'Honey Wax', 'Rica Hot Wax'], description: 'Rica hot wax, honey wax and body waxing — full body from Rs 2,800.' },
 ]
 
 /**

@@ -51,6 +51,16 @@ export const formatPrice = (pkr) => {
   if (pkr == null) return null
   return `Rs ${Number(pkr).toLocaleString('en-US')}`
 }
+/** Price for display, honouring `fromPrice`. Hair services depend on length and
+ *  density, so their printed rate is a floor. Everywhere a price is shown uses
+ *  this rather than formatPrice directly, so the qualifier cannot appear on the
+ *  menu but go missing in the booking flow. */
+export const formatServicePrice = (service) => {
+  if (!service || service.pricePkr == null) return null
+  const price = formatPrice(service.pricePkr)
+  return service.fromPrice ? `from ${price}` : price
+}
+
 export const formatDuration = (min) => {
   if (min == null) return null
   if (min < 60) return `${min} min`

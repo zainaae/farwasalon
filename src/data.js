@@ -13,6 +13,7 @@ export {
   YEARS_ACTIVE,
   MONTHLY_APPOINTMENTS,
   formatPrice,
+  formatServicePrice,
   formatDuration,
   track,
   CAT_SLUGS,
@@ -21,7 +22,16 @@ export {
 
 /* ─── Services ────────────────────────────────────────────────── */
 let _id = 1
-const s = (name, category, pricePkr = null, durationMinutes = null) => ({ id: _id++, name, category, pricePkr, durationMinutes })
+/* `fromPrice` marks a service whose final cost genuinely depends on the head it
+   is done on — hair length and density change how much product and chair time a
+   colour or a treatment takes. Those prices are a floor, not a quote, and the
+   site says so everywhere a price is shown rather than surprising someone at the
+   counter. The blog already explained this ("Why Colour Says From Rs 4,000");
+   the menu now matches it. */
+const s = (name, category, pricePkr = null, durationMinutes = null, opts = {}) => ({
+  id: _id++, name, category, pricePkr, durationMinutes, ...opts,
+})
+const HAIR_DEPENDENT = { fromPrice: true }
 
 export const SERVICES = {
 
@@ -97,11 +107,11 @@ export const SERVICES = {
   ],
 
   'Hair Treatments': [
-    s('Normal Protein Treatment',        'Hair Treatments', 2000, 45),
-    s('Hair Fall Treatment with Ampule', 'Hair Treatments', 3000, 40),
-    s('Dandruff Treatment with Ampule',  'Hair Treatments', 3000, 40),
-    s('Olorchee Treatment',              'Hair Treatments', 2500, 45),
-    s('Wellaplex Stand-Alone Treatment', 'Hair Treatments', 3000, 60),
+    s('Normal Protein Treatment',        'Hair Treatments', 2000, 45, HAIR_DEPENDENT),
+    s('Hair Fall Treatment with Ampule', 'Hair Treatments', 3000, 40, HAIR_DEPENDENT),
+    s('Dandruff Treatment with Ampule',  'Hair Treatments', 3000, 40, HAIR_DEPENDENT),
+    s('Olorchee Treatment',              'Hair Treatments', 2500, 45, HAIR_DEPENDENT),
+    s('Wellaplex Stand-Alone Treatment', 'Hair Treatments', 3000, 60, HAIR_DEPENDENT),
   ],
 
   'Cleansing': [
@@ -162,16 +172,16 @@ export const SERVICES = {
   ],
 
   'Hair': [
-    { id: _id++, name: 'Haircut & Blowdry', category: 'Hair', pricePkr: 2000, durationMinutes: 60,
+    { id: _id++, name: 'Haircut & Blowdry', category: 'Hair', pricePkr: 2000, durationMinutes: 60, fromPrice: true,
       desc: 'A precision cut and professional blowdry tailored to your face shape and hair texture.',
       includes: ['Consultation', 'Shampoo & condition', 'Cut & blowdry'] },
-    { id: _id++, name: 'Hair Colour', category: 'Hair', pricePkr: 4000, durationMinutes: 120,
+    { id: _id++, name: 'Hair Colour', category: 'Hair', pricePkr: 4000, durationMinutes: 120, fromPrice: true,
       desc: 'Full-colour, highlights, balayage, or toning — rich, lasting colour applied with care.',
       includes: ['Colour consultation', 'Application', 'Toning & blowdry'] },
-    { id: _id++, name: 'Blowdry & Styling', category: 'Hair', pricePkr: 1500, durationMinutes: 45,
+    { id: _id++, name: 'Blowdry & Styling', category: 'Hair', pricePkr: 1500, durationMinutes: 45, fromPrice: true,
       desc: 'A salon-quality blowdry and finish — smooth, voluminous, or styled exactly as you like.',
       includes: ['Shampoo', 'Blowdry', 'Style & finish'] },
-    { id: _id++, name: 'Bridal Hair Styling', category: 'Hair', pricePkr: 8000, durationMinutes: 120,
+    { id: _id++, name: 'Bridal Hair Styling', category: 'Hair', pricePkr: 8000, durationMinutes: 120, fromPrice: true,
       desc: 'Elegant updos, curls, braids or sleek styles — your perfect wedding hair, exactly as you envisioned.',
       includes: ['Style consultation', 'Blowout prep', 'Full styling', 'Finishing spray'] },
   ],

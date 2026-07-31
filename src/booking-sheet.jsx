@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, Clock, Check, Sparkles } from 'lucide-react'
-import { SERVICES, formatPrice, formatDuration, track, waLinkBooking } from './data.js'
+import { SERVICES, formatServicePrice, formatDuration, track, waLinkBooking } from './data.js'
 import { toLocalDateString } from '../lib/date-local.js'
 
 /* ─── Visual month calendar (used inside BookingSheet) ─────────── */
@@ -337,7 +337,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                                 <span className="font-['Syne'] font-bold text-[13px] text-ink uppercase block">{s.name}</span>
                                 {(s.pricePkr != null || s.durationMinutes != null) && (
                                   <span className="text-stone text-[10px] font-['Inter'] mt-0.5 block">
-                                    {s.pricePkr != null && formatPrice(s.pricePkr)}
+                                    {s.pricePkr != null && formatServicePrice(s)}
                                     {s.pricePkr != null && s.durationMinutes != null && ' · '}
                                     {s.durationMinutes != null && formatDuration(s.durationMinutes)}
                                   </span>

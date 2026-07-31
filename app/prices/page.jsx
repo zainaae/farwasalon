@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { SERVICES, CAT_SLUGS, formatPrice, formatDuration, YEARS_ACTIVE } from '../../src/data.js'
+import { SERVICES, CAT_SLUGS, formatServicePrice, formatDuration, YEARS_ACTIVE } from '../../src/data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import {
@@ -133,7 +133,7 @@ export default function PricesPage() {
                         {s.durationMinutes ? formatDuration(s.durationMinutes) : ''}
                       </td>
                       <td className="py-2.5 text-right font-['Unbounded'] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap tabular-nums">
-                        {formatPrice(s.pricePkr)}
+                        {formatServicePrice(s)}
                       </td>
                     </tr>
                   ))}

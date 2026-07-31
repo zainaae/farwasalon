@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
-import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE, getAddonsForService, track } from '../../src/data.js'
+import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { toLocalDateString } from '../../lib/date-local.js'
 import { computeBookingDurationMinutes } from '../../lib/booking-duration.js'
@@ -507,7 +507,7 @@ export default function BookClient() {
                                   </div>
                                   {s.pricePkr != null && (
                                     <span className="shrink-0 text-accent-gold-deep text-sm font-['Inter'] font-semibold">
-                                      {formatPrice(s.pricePkr)}
+                                      {formatServicePrice(s)}
                                     </span>
                                   )}
                                   <span
@@ -535,7 +535,7 @@ export default function BookClient() {
                     <div className="min-w-0">
                       <p className="font-['Syne'] font-bold text-sm text-ink uppercase truncate">{selectedService.name}</p>
                       <p className="text-stone text-[10px] font-['Inter']">
-                        {formatPrice(selectedService.pricePkr)} · {formatDuration(selectedService.durationMinutes)}
+                        {formatServicePrice(selectedService)} · {formatDuration(selectedService.durationMinutes)}
                       </p>
                     </div>
                     <button
@@ -747,7 +747,7 @@ export default function BookClient() {
                 </p>
                 {selectedService?.pricePkr != null && (
                   <p className="text-accent-gold-deep text-xs font-['Inter'] font-medium mt-0.5">
-                    {formatPrice(selectedService.pricePkr)}
+                    {formatServicePrice(selectedService)}
                   </p>
                 )}
                 {selectedService &&
