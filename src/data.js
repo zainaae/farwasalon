@@ -122,17 +122,17 @@ export const SERVICES = {
   ],
 
   'Facials': [
-    s('Normal Facial',            'Facials', 1400, 45),
-    s('Herbal Organic Facial',    'Facials', 1600, 50),
-    s('Acne Facial',              'Facials', 1800, 50),
-    s('Whitening Facial',         'Facials', 1900, 55),
-    s('White Glow Facial',        'Facials', 2000, 55),
+    s('Normal Facial',            'Facials', 1400, 45, { desc: "The classic cleanse, exfoliate, massage and mask. Where to start if your skin is behaving and you want it looking rested rather than treated." }),
+    s('Herbal Organic Facial',    'Facials', 1600, 50, { desc: "The gentlest facial on the menu, and what we use on skin that reacts easily or has found other facials too brisk." }),
+    s('Acne Facial',              'Facials', 1800, 50, { desc: "Formulated for congested, breakout-prone skin, with anti-bacterial products. If blackheads are the main problem, a cleansing beforehand does more than moving up this list." }),
+    s('Whitening Facial',         'Facials', 1900, 55, { desc: "Entry-level brightening for dullness and mild unevenness. A noticeable lift without the cost of the cosmeceutical tiers." }),
+    s('White Glow Facial',        'Facials', 2000, 55, { desc: "Brightening with a richer finish than the standard Whitening — the one to pick when you want the glow to read in photographs." }),
     s("T.J's Facial",             'Facials', 2500, 60),
-    s('Whitening Fruit Facial',   'Facials', 2600, 60),
-    s('Oxy Glow Facial',          'Facials', 2800, 60),
-    s('HD Whitening Facial',      'Facials', 3000, 65),
-    s('Ultra Brightening Facial', 'Facials', 3500, 70),
-    s('Janssen Whitening Facial', 'Facials', 5500, 75),
+    s('Whitening Fruit Facial',   'Facials', 2600, 60, { desc: "Fruit-enzyme based brightening, lighter on the skin than the stronger actives further up the menu. Suits skin that wants radiance without intensity." }),
+    s('Oxy Glow Facial',          'Facials', 2800, 60, { desc: "An oxygenating facial for tired, city-dulled skin. The one most clients book when they cannot name what is wrong but the skin looks flat." }),
+    s('HD Whitening Facial',      'Facials', 3000, 65, { desc: "Our most-booked facial above Rs 2,000. High-definition brightening serums give a visible result in a single session that holds two to three weeks — the pre-event choice." }),
+    s('Ultra Brightening Facial', 'Facials', 3500, 70, { desc: "A step up from HD in strength and time, for uneven tone that has not shifted with the lighter tiers." }),
+    s('Janssen Whitening Facial', 'Facials', 5500, 75, { desc: "German cosmeceutical actives that work below the surface rather than on it. Built for long-standing pigmentation across a course of visits — most clients see the change around the third. Not the one to book for a single pre-wedding glow." }),
   ],
 
   'Nails': [
