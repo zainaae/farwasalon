@@ -5,6 +5,7 @@ import { NEIGHBORHOODS, TOP_SERVICES } from '../../../src/location-seo.js'
 import { AREA_CONTENT } from '../../../src/area-content.js'
 import { CAT_SLUGS, SERVICES, formatPrice, YEARS_ACTIVE, MAPS_LINK } from '../../../src/data.js'
 import JsonLd from '../../json-ld'
+import { pageSocialMeta } from '../../../lib/page-metadata.js'
 import { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import {
   SITE_ORIGIN,
@@ -36,21 +37,32 @@ export async function generateMetadata({ params }) {
   const area = areaFor(slug)
   const content = AREA_CONTENT[slug]
   if (!area || !content) return {}
+  /* These shipped with a bare `title` string, so the root template appended
+     " | Farwa Beauty Salon" and every one of the ten ran 76-77 chars — Google
+     truncates around 60. `absolute` is what the rest of the site uses. The
+     description was unbudgeted too and ran 183-201 chars against a ~155 limit,
+     so the drive time — the one fact that distinguishes these pages — was
+     being cut off. Both now match the convention in
+     app/services/[categorySlug]/page.jsx. */
+  const title = `Beauty Salon for ${area.name} | Farwa PECHS`
+  const descHead = `Coming from ${area.name}? Farwa Beauty Salon is ${content.driveTime} away, `
+  const descTail = ` Women-only studio in Block 3 PECHS, 100+ services from Rs 100.`
+  const routeBudget = 155 - descHead.length - descTail.length
+  const route =
+    content.route.length <= routeBudget
+      ? `${content.route}.`
+      : `${content.route.slice(0, Math.max(0, routeBudget - 1)).replace(/[\s,;—-]+\S*$/, '')}….`
+
   return {
-    title: `Beauty Salon for ${area.name} — Farwa, Block 3 PECHS`,
-    description: `Coming to Farwa Beauty Salon from ${area.name}? ${content.driveTime} ${content.route}. Women-only studio in PECHS, 100+ services with printed prices from Rs 100.`,
+    title: { absolute: title },
+    description: `${descHead}${route}${descTail}`,
     alternates: { canonical: `/areas/${slug}` },
-    openGraph: {
-      type: 'website',
-      images: [
-        {
-          url: '/bridal.jpg',
-          width: 1200,
-          height: 630,
-          alt: `Farwa Beauty Salon, PECHS Karachi — serving clients from ${area.name}`,
-        },
-      ],
-    },
+    ...pageSocialMeta({
+      title,
+      description: `${descHead}${route}${descTail}`,
+      path: `/areas/${slug}`,
+      imageAlt: `Farwa Beauty Salon, PECHS Karachi — serving clients from ${area.name}`,
+    }),
   }
 }
 
