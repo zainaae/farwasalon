@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { CAT_SEO, CAT_FAQS, CAT_RELATED } from './cat-seo-content.js'
+import { CAT_SEO, CAT_FAQS, CAT_RELATED, CAT_PAGE_BLOCKS } from './cat-seo-content.js'
 import { SERVICES } from './data.js'
 
 describe('CAT_SEO', () => {
@@ -60,6 +60,40 @@ describe('CAT_FAQS', () => {
   it('keeps FAQ answers for high-intent categories', () => {
     for (const key of ['Threading', 'Facials', 'Bridal', 'Eyebrow Tattoo', 'Honey Wax', 'Rica Wax']) {
       expect(CAT_FAQS[key]?.length).toBeGreaterThan(2)
+    }
+  })
+})
+
+/* "Hygiene block" shipped as a visible <h2> on /services/threading — an
+   internal editorial label rendered to users on a page earning 106 impressions.
+   Headings are user-facing copy, so they have to read like it. */
+describe('CAT_PAGE_BLOCKS headings are copy, not editorial labels', () => {
+  const LABEL_WORDS = /(block|section|placeholder|tbd|todo|copy|draft|wip|lorem)/i
+
+  it('no heading contains an editorial label word', () => {
+    for (const [category, blocks] of Object.entries(CAT_PAGE_BLOCKS)) {
+      for (const b of blocks) {
+        if (!/^h[23]$/.test(b.type)) continue
+        expect(b.text, `${category}: "${b.text}" reads like an internal label`).not.toMatch(LABEL_WORDS)
+        expect(b.text.length, `${category}: "${b.text}" is too short to be a real heading`).toBeGreaterThan(8)
+      }
+    }
+  })
+})
+
+/* Titles quote prices; a wrong one sends a customer in expecting the wrong bill.
+   "Face Rs 100" shipped on the threading title while Full Face Threading is
+   Rs 1,200 — Rs 100 is chin/lower-lip. Every price in a title must exist on the
+   menu for that category. */
+describe('prices quoted in SERP titles exist on the menu', () => {
+  it('every Rs figure in a title matches a real service price in that category', () => {
+    for (const [category, seo] of Object.entries(CAT_SEO)) {
+      const quoted = [...seo.title.matchAll(/Rs\s?([\d,]+)/gi)].map((m) => Number(m[1].replace(/,/g, '')))
+      if (!quoted.length) continue
+      const menu = new Set((SERVICES[category] ?? []).map((s) => s.pricePkr))
+      for (const price of quoted) {
+        expect(menu.has(price), `${category} title quotes Rs ${price}, absent from its menu`).toBe(true)
+      }
     }
   })
 })

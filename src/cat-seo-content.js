@@ -1,10 +1,10 @@
 /* ─── Unique SERP title + meta description per service category ──── */
 export const CAT_SEO = {
   'Threading': {
-    title: 'Eyebrow Threading Karachi — Rs 200, Face Rs 100',
+    title: 'Eyebrow Threading Karachi Rs 200 — Women-Only',
     h1: 'Eyebrow Threading in PECHS, Karachi',
     metaDesc:
-      'Eyebrow & face threading from Rs 100 at Farwa Beauty Salon, PECHS Karachi. Precise brows since 2008 — walk in or book online today.',
+      'Eyebrow threading Rs 200, upper lip Rs 150, full face Rs 1,200 at Farwa PECHS — a women-only studio since 2008. Walk in or book online.',
   },
   'Rica Hot Wax': {
     title: 'Rica Hot Wax PECHS — From Rs 150',
@@ -245,7 +245,7 @@ export const CAT_PAGE_BLOCKS = {
     { type: 'p', text: 'Humid + congested: cleanse first. Event glow: HD Whitening Rs 3,000. Stubborn pigmentation: Janssen Whitening Rs 5,500. Sensitive: Herbal Organic Rs 1,600. Many clients add eyebrow threading in the same visit when timing allows — book both online.' },
   ],
   Threading: [
-    { type: 'h2', text: 'Hygiene block' },
+    { type: 'h2', text: 'Hygiene, and thread vs wax on the face' },
     { type: 'p', text: 'Fresh cotton thread for every client, sanitised scissors/tweezers, and a clean chair between guests. Threading vs face wax: choose thread for precision brows; Rica hot wax from Rs 150 if you prefer wax on the face.' },
   ],
 }
