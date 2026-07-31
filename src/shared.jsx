@@ -615,6 +615,13 @@ export function LazyVideo({ src, poster, className, autoPlay, ...props }) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    /* A looping autoplay video with no pause control is exactly what
+       prefers-reduced-motion exists to stop (WCAG 2.2.2). The hero video already
+       checks this; this component did not, so the same user got the animation
+       anyway — and paid for the download. Bailing here also means the source is
+       never attached, so nothing is fetched. */
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
+
     const io = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setVisible(true)

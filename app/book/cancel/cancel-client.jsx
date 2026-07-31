@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { m } from 'framer-motion'
@@ -24,12 +24,33 @@ function formatTime12(t) {
 
 function CancelContent() {
   const params = useSearchParams()
-  const token = params.get('token') || ''
   const id = params.get('id') || ''
-  const service = params.get('service') || ''
-  const date = params.get('date') || ''
-  const time = params.get('time') || ''
-  const name = params.get('name') || ''
+
+  /* Everything except the booking id now comes from the payload the confirmation
+     page wrote. Keeping the token and the customer's name out of the URL means
+     analytics and the pixel — both of which report location.href verbatim —
+     never see them. */
+  const [details, setDetails] = useState(null)
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    // queueMicrotask, matching the confirmation page — a synchronous setState in
+    // an effect triggers the cascading-render lint rule.
+    queueMicrotask(() => {
+      if (!id) return setDetails({})
+      try {
+        const raw = sessionStorage.getItem(`farwa-confirm-${id}`)
+        setDetails(raw ? JSON.parse(raw) : {})
+      } catch {
+        setDetails({})
+      }
+    })
+  }, [id])
+
+  const token = details?.cancelToken || ''
+  const service = details?.service || ''
+  const date = details?.date || ''
+  const time = details?.time || ''
+  const name = details?.name || ''
 
   const [state, setState] = useState('idle')
   const [error, setError] = useState('')
@@ -41,9 +62,7 @@ function CancelContent() {
       const res = await fetch('/api/book/cancel', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(
-          token ? { token } : { bookingId: id, date },
-        ),
+        body: JSON.stringify({ token }),
       })
       const data = await res.json()
       if (!res.ok) {
@@ -62,7 +81,11 @@ function CancelContent() {
     `Hi! I'd like to cancel my booking.\nBooking ID: ${id}\nService: ${service}\nDate: ${formatDateNice(date)}\nTime: ${formatTime12(time)}\nName: ${name}`,
   )}`
 
-  if ((!token && !id) || !date) {
+  if (details === null) {
+    return <p className="text-body text-sm" aria-live="polite">Loading your booking…</p>
+  }
+
+  if (!token) {
     return (
       <div className="w-full max-w-lg text-center">
         <div className="w-16 h-16 mx-auto mb-6 bg-mist flex items-center justify-center rounded-full">

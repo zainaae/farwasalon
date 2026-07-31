@@ -175,8 +175,28 @@ function EditorialSlideshow() {
   )
 }
 
+/** The panel's video exists only to answer a hover. A touch device never
+ *  hovers, so on mobile it was 753 KB of metered data — more than three times
+ *  the page's entire gzipped JS — downloaded to sit still behind a text list.
+ *  `(hover: hover)` is the exact capability it depends on, so that is the gate.
+ *  Same reduced-motion and desktop checks as the hero video, for the same
+ *  reasons. */
+function useHoverVideoEnabled() {
+  const [enabled, setEnabled] = useState(false)
+  useEffect(() => {
+    queueMicrotask(() => {
+      const canHover = window.matchMedia('(hover: hover)').matches
+      const desktop = window.matchMedia('(min-width: 768px)').matches
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (canHover && desktop && !reduce) setEnabled(true)
+    })
+  }, [])
+  return enabled
+}
+
 function ServiceMediaPanel({ hovered }) {
   const activeVideo = hovered ? CAT_META[hovered]?.video : null
+  const videoEnabled = useHoverVideoEnabled()
 
   return (
     <div className="relative w-full h-full bg-[#0d0609]">
@@ -190,15 +210,17 @@ function ServiceMediaPanel({ hovered }) {
         style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
         aria-hidden
       />
-      <LazyVideo
-        src="/ct.mp4"
-        muted
-        loop
-        playsInline
-        aria-hidden
-        className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
-        style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
-      />
+      {videoEnabled && (
+        <LazyVideo
+          src="/ct.mp4"
+          muted
+          loop
+          playsInline
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
+          style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
+        />
+      )}
       {hovered && !CAT_META[hovered]?.video && (
         <Image
           key={hovered}
@@ -211,7 +233,7 @@ function ServiceMediaPanel({ hovered }) {
           aria-hidden="true"
         />
       )}
-      {activeVideo && (
+      {activeVideo && videoEnabled && (
         <video
           key={activeVideo}
           src={activeVideo}

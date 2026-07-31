@@ -327,18 +327,22 @@ export default function BookClient() {
       try {
         sessionStorage.setItem(
           `farwa-confirm-${data.booking.id}`,
-          JSON.stringify(confirmPayload),
+          JSON.stringify({ ...confirmPayload, cancelToken: data.booking.cancelToken || '' }),
         )
       } catch {
         // ignore private mode
       }
+      /* The cancel token stays out of the URL. Plausible and the Meta Pixel both
+         transmit location.href, so a token in the query string is a bearer
+         credential handed to third parties on every confirmation view — and the
+         customer's name went with it. It is never emailed or written to the
+         sheet, so sessionStorage loses nothing. */
       const params = new URLSearchParams({
         id: data.booking.id,
         date: data.booking.date,
         time: data.booking.time,
         duration: String(confirmPayload.duration),
       })
-      if (data.booking.cancelToken) params.set('token', data.booking.cancelToken)
 
       /* The conversion. BookingStarted was already tracked at step 1, so this
          is what makes booking completion rate measurable at all. Fired before

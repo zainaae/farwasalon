@@ -28,7 +28,7 @@ function ConfirmationContent() {
   const id      = searchParams.get('id') || ''
   const date    = searchParams.get('date') || ''
   const time    = searchParams.get('time') || ''
-  const cancelToken = searchParams.get('token') || ''
+  const [cancelToken, setCancelToken] = useState('')
   const duration = parseInt(searchParams.get('duration') || '60', 10) || 60
 
   const [service, setService] = useState(() => searchParams.get('service') || '')
@@ -43,6 +43,7 @@ function ConfirmationContent() {
         const stored = JSON.parse(raw)
         if (stored.service) setService(stored.service)
         if (stored.name) setName(stored.name)
+        if (stored.cancelToken) setCancelToken(stored.cancelToken)
       } catch {
         // ignore
       }
@@ -175,14 +176,11 @@ function ConfirmationContent() {
             <p className="mt-4 text-stone text-[10px] font-['Inter']">
               Need to cancel? (at least 2 hours before your appointment){' '}
               <Link
-                href={`/book/cancel?${new URLSearchParams({
-                  token: cancelToken,
-                  id,
-                  service,
-                  date,
-                  time,
-                  name,
-                }).toString()}`}
+                /* Only the booking id travels. Everything else — token,
+                   service, customer name — is read from sessionStorage on the
+                   other side, so none of it lands in a URL that analytics and
+                   the pixel report verbatim. */
+                href={`/book/cancel?${new URLSearchParams({ id }).toString()}`}
                 className="underline underline-offset-2 hover:text-ink transition-colors"
               >
                 Cancel this appointment
