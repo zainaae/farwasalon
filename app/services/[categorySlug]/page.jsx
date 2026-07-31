@@ -74,7 +74,16 @@ export async function generateMetadata({ params }) {
   const title = seo?.title
     ? `${seo.title} | Farwa`
     : `${category} PECHS Karachi${priceHint} | Farwa`
-  const description = seo?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS, Karachi. Book online.`
+  /* Location pages have appended "★ 4.6 Google" to their description since
+     launch (see the descTail above); the plain category pages never did — so
+     the highest-impression service pages on the site shipped the weakest
+     snippets. /services/eyebrow-tattoo is 241 impressions at 1.7% CTR. Appended
+     only when it fits the ~155-char budget, so no hand-written description
+     gets truncated to make room for it. */
+  const baseDesc = seo?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS, Karachi. Book online.`
+  const ratingSuffix = ` ★ ${GOOGLE_GBP_STATS.rating} on Google.`
+  const description =
+    baseDesc.length + ratingSuffix.length <= 158 ? `${baseDesc}${ratingSuffix}` : baseDesc
 
   return {
     title: { absolute: title },

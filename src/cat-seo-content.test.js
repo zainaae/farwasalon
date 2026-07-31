@@ -27,9 +27,22 @@ describe('CAT_SEO', () => {
     }
   })
 
-  it('includes a price floor cue in every title', () => {
-    for (const seo of Object.values(CAT_SEO)) {
-      expect(seo.title).toMatch(/Rs\s/i)
+  /* A price in the SERP title lifts CTR, so it is the default. Bridal is a
+     documented exception: its cheapest item is the Rs 8,000 trial while the
+     package is Rs 25,000, so a "from Rs 8,000" title advertised a number the
+     page does not sell. Accuracy wins over the tactic. Any future exemption
+     needs a reason here, not a quiet deletion of the assertion. */
+  const PRICE_CUE_EXEMPT = {
+    Bridal: 'cheapest item is the trial, not the package — "from" would mislead',
+  }
+
+  it('includes a price floor cue in every title, or a documented reason not to', () => {
+    for (const [category, seo] of Object.entries(CAT_SEO)) {
+      if (PRICE_CUE_EXEMPT[category]) {
+        expect(seo.title, `${category} is exempt but still shows a price`).not.toMatch(/Rs\s/i)
+        continue
+      }
+      expect(seo.title, category).toMatch(/Rs\s/i)
     }
   })
 

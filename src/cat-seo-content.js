@@ -62,13 +62,20 @@ export const CAT_SEO = {
   },
   /* /bridal owns "bridal makeup Karachi" with its packages hero; this page is
      the itemised menu, so the titles must not collide.
-     Retitled 2026-07-31 from "Bridal Makeup PECHS — Mehndi & Nikah from
-     Rs 8,000", which drew 126 impressions at position 7.5 and ZERO clicks. The
-     queries feeding it are "bridal services", "bridal services list" and
-     "bridal service package" — none contain PECHS, and leading with a
-     neighbourhood nobody searched for spent the first third of the title. */
+     Retitled twice on 2026-07-31. The original led with PECHS, which none of
+     the feeding queries contain. The first replacement, "Bridal Services List
+     Karachi — From Rs 8,000", fixed that and introduced two worse problems:
+     "Services List" is warehouse vocabulary no bride types, and Rs 8,000 is the
+     TRIAL price — the full package is Rs 25,000, so the cheapest number on the
+     menu was being used as the headline on a page about packages. That is the
+     same bait the threading "from Rs 100" title was, and it was fixed the same
+     morning it was introduced.
+     Mehndi, Nikah and Barat are the words Karachi brides actually search, and
+     verified competitor research found almost no salon publishing rates against
+     them — Kashee's, Nabila and Nisha are all call-for-price. That gap is the
+     thing worth owning. */
   'Bridal': {
-    title: 'Bridal Services List Karachi — From Rs 8,000',
+    title: 'Bridal Karachi — Mehndi, Nikah & Barat Rates',
     h1: 'Bridal Makeup in PECHS, Karachi',
     metaDesc:
       'Every bridal service priced individually at Farwa PECHS — mehndi, nikah, engagement looks and trials from Rs 8,000. Women-only studio in Block 3.',
