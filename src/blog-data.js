@@ -17,7 +17,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Party makeup is the most quoted-by-phone service in Karachi — and the one where the price you hear first is least likely to be the price you pay. Yes, we do party makeup at Farwa in PECHS: soft glam for a dholki, full glam for a shaadi guest look, hair styling and dupatta setting included on request. Here is how the pricing really works, everywhere.' },
 
       { type: 'h2', text: 'What Party Makeup Costs in Karachi' },
-      { type: 'p', text: 'Per the published lists that exist, mid-range Karachi salons run party looks between Rs 3,500 and Rs 8,000, while big-name parlours like Mahrose start classic makeup around Rs 12,000 and climb from there. Most salons, however, publish nothing — the rate materialises when they see you. That is the game we refuse to play.' },
+      { type: 'p', text: 'Per the published lists that exist, mid-range Karachi salons run party looks between Rs 3,500 and Rs 8,000, while the big-name parlours start classic makeup around Rs 12,000 and climb from there. Most salons, however, publish nothing — the rate materialises when they see you. That is the game we refuse to play.' },
 
       { type: 'h2', text: 'Why We Quote Party Makeup Individually — When Everything Else Is Printed' },
       { type: 'p', text: 'Our [price list](/prices) prints every fixed service — all 100+ of them. Party makeup is one of two services we quote per person, for an honest reason: the price genuinely depends on the look (soft glam vs full glam), lashes, hair styling, and whether you want the look built to last a five-hour event. A single printed number would either overcharge the simple looks or undercharge the elaborate ones.' },
@@ -533,10 +533,10 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Microblading and powder brows are the biggest-ticket non-bridal service in any Karachi salon. At Farwa, [eyebrow tattoo](/services/eyebrow-tattoo) starts at Rs 20,000 including consultation, numbing, the procedure, and an aftercare kit. Results last 12 to 18 months. Be wary of Rs 8,000 "deals" — pigment quality and hygiene are exactly the places you do not want a discount on your face.' },
 
       { type: 'h2', text: 'Bridal Makeup — from Rs 8,000 per event' },
-      { type: 'p', text: 'Bridal Trial Rs 8,000 · Mehndi / Dholki Rs 10,000 · Engagement Rs 12,000 · Full Bridal Package Rs 25,000. Karachi celebrity studios often charge Rs 80,000+ for one day; our [bridal packages](/bridal) use the same professional techniques at printed rates. Deep dives: [bridal packages guide](/blog/best-bridal-makeup-packages-karachi-2026) and [mehndi & engagement makeup](/blog/mehndi-engagement-makeup-karachi).' },
+      { type: 'p', text: 'Bridal Trial Rs 8,000 · Mehndi / Dholki Rs 10,000 · Engagement Rs 12,000 · Full Bridal Package Rs 25,000. Premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event; our [bridal packages](/bridal) use the same professional techniques at printed rates. Deep dives: [bridal packages guide](/blog/best-bridal-makeup-packages-karachi-2026) and [mehndi & engagement makeup](/blog/mehndi-engagement-makeup-karachi).' },
 
       { type: 'h2', text: 'How This Compares to the Big-Name Parlours' },
-      { type: 'p', text: 'Since the famous salons rarely publish rates, third-party price-tracker sites do it for them. Per those published lists, a single bridal event at Kashee\'s runs roughly Rs 23,000 to Rs 33,000 — with multi-event packages from Rs 48,000 — and Mahrose\'s makeup menu starts around Rs 12,000 for a classic look. Nabila and the celebrity studios sit far above both. None of this makes those salons wrong; it makes the comparison simple: at Farwa the complete full bridal package costs about what one event costs at a big name, the techniques and product houses (Janssen, Wella, Rica) are the same professional grade, and the price you read here is the price you pay.' },
+      { type: 'p', text: 'Since the famous salons rarely publish rates, third-party price-tracker sites do it for them. Per those published lists, a single bridal event at the best-known Karachi parlours runs roughly Rs 23,000 to Rs 33,000, multi-event packages start around Rs 48,000, and a classic look starts around Rs 12,000. The premium studios publish roughly Rs 30,000 to Rs 45,000 per event. None of this makes those salons wrong; it makes the comparison simple: at Farwa the complete full bridal package costs about what one event costs at a big name, the techniques and product houses (Janssen, Wella, Rica) are the same professional grade, and the price you read here is the price you pay.' },
 
       { type: 'h2', text: 'Frequently Asked Questions' },
       { type: 'h3', text: 'Q: Where is the full salon price list for Karachi 2026?' },
@@ -545,8 +545,8 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Because unlisted prices can flex per customer. Printed prices cannot. We publish every starting figure on farwasalon.com and confirm your exact quote on WhatsApp before your appointment — never after.' },
       { type: 'h3', text: 'Q: Are these prices final?' },
       { type: 'p', text: 'A: They are honest starting prices. Longer hair, larger areas, or add-ons can raise a quote, but you will always know before we begin.' },
-      { type: 'h3', text: 'Q: How do Farwa\'s prices compare to Depilex or Nabila?' },
-      { type: 'p', text: 'A: The big chains sit at two to five times these figures for comparable services, and most do not publish rates at all. You are paying for the brand name and the location; the thread, the wax, and the training are the same or better here.' },
+      { type: 'h3', text: 'Q: How do your prices compare to the big-name Karachi salons?' },
+      { type: 'p', text: 'A: The honest answer varies by service, and we would rather give you the real numbers than a slogan. On threading the market around us starts near Rs 500 against our Rs 200. On bridal the premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event against our Rs 25,000 full package. The bigger difference is that most of them publish nothing at all — the rate appears when they see you. The thread, the wax and the product houses are the same professional grade.' },
       { type: 'h3', text: 'Q: Do you accept cards?' },
       { type: 'p', text: 'A: We accept cash, JazzCash, and EasyPaisa at the salon. Every price is in PKR.' },
 
@@ -914,7 +914,7 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: 'Frequently Asked Questions' },
       { type: 'h3', text: 'Q: How much does bridal makeup cost in Karachi?' },
-      { type: 'p', text: 'A: At Farwa in PECHS, bridal starts at Rs 8,000 for a trial, with mehndi Rs 10,000, engagement Rs 12,000, and the Full Bridal Package Rs 25,000. Celebrity studios often charge Rs 80,000+ for one day — we publish every rate on farwasalon.com/bridal.' },
+      { type: 'p', text: 'A: At Farwa in PECHS, bridal starts at Rs 8,000 for a trial, with mehndi Rs 10,000, engagement Rs 12,000, and the Full Bridal Package Rs 25,000. Premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event — we publish every rate on farwasalon.com/bridal.' },
       { type: 'h3', text: 'Q: Can I request specific brands for my bridal makeup?' },
       { type: 'p', text: 'A: Absolutely. At Farwa, we work with MAC, Huda Beauty, Charlotte Tilbury, Kryolan, and other premium brands. If you have a preference or an allergy to certain ingredients, let us know during your consultation and we will accommodate your request.' },
       { type: 'h3', text: 'Q: How long does bridal makeup take?' },

@@ -16,7 +16,7 @@ export const CAT_SEO = {
     title: 'Full Body Wax Karachi Rs 2,800 — Honey Wax',
     h1: 'Full Body & Honey Wax in PECHS, Karachi',
     metaDesc:
-      'Full body honey wax Rs 2,800 (60 min) at Farwa PECHS — against Rs 4,999 at at-home services. Arms, legs, underarms, stomach, back. Women-only studio.',
+      'Full body honey wax Rs 2,800 (60 min) at Farwa PECHS — arms, legs, underarms, stomach, back, hips. Women-only studio, printed rates, book online.',
   },
   'Rica Wax': {
     title: 'Rica Wax PECHS Karachi — From Rs 600',
