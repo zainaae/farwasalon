@@ -13,7 +13,7 @@ import { formatPrice } from '../src/data.js'
 import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK } from '../src/data.js'
+import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK, MONTHLY_APPOINTMENTS } from '../src/data.js'
 import { EDITORIAL_PHOTOS } from '../src/salon-media.js'
 import { getGbpStatsForDisplay, getManualReviewsPayload } from '../lib/google-reviews.js'
 
@@ -108,8 +108,8 @@ function StatsStrip() {
               {[
                 { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
                 { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Specialities, one roof' },
-                { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services, every price printed' },
-                { display: `${GOOGLE_GBP_STATS.rating}★`, final: null, label: 'Rated by Karachi on Google' },
+                { display: String(SERVICE_COUNT), final: SERVICE_COUNT, label: 'Services, every price printed' },
+                { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-PK')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
               ].map(({ display, final, label }) => (
                 <div key={label} className="min-w-0">
                   <p className="font-['Unbounded'] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none">

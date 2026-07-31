@@ -5,7 +5,7 @@ import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { AnimatedNumber } from '../../src/shared.jsx'
 import SalonLocalBlock from '../components/salon-local-block.jsx'
-import { SERVICES, YEARS_ACTIVE } from '../../src/data.js'
+import { SERVICES, YEARS_ACTIVE, MONTHLY_APPOINTMENTS } from '../../src/data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
@@ -33,7 +33,8 @@ export default function AboutClient() {
             {[
               { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
               { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
-              { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services on the menu' },
+              { display: String(SERVICE_COUNT), final: SERVICE_COUNT, label: 'Services on the menu' },
+              { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-PK')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
             ].map(({ display, final, label }) => (
               <m.div key={label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
                 <p className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink mb-1">

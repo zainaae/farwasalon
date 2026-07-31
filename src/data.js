@@ -11,6 +11,7 @@ export {
   PHONE_RE,
   FOUNDING_YEAR,
   YEARS_ACTIVE,
+  MONTHLY_APPOINTMENTS,
   formatPrice,
   formatDuration,
   track,

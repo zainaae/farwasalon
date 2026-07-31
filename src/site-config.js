@@ -35,6 +35,13 @@ export function waLinkBooking(names = [], extra = {}) {
 export const PHONE_RE = /^(\+?92|0)?3\d{2}[\s-]?\d{7}$/
 
 /* ─── Founding ─────────────────────────────────────────────────── */
+/** Monthly appointments, from the salon's own appointment book (owner-supplied,
+ *  July 2026). Stated as appointments rather than "happy customers" because the
+ *  book records appointments — satisfaction is not a number anyone can check,
+ *  and this site's whole position is that its numbers are checkable.
+ *  Update when the real figure moves. Do not round it upward. */
+export const MONTHLY_APPOINTMENTS = 1000
+
 export const FOUNDING_YEAR = 2008
 export const YEARS_ACTIVE  = new Date().getFullYear() - FOUNDING_YEAR
 
