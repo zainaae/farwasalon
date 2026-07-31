@@ -83,32 +83,34 @@ export const TOP_SERVICES = [
 ]
 
 /**
- * Local landing pages — PECHS only, one per service.
+ * Curated local landing pages (54 hubs).
  *
- * This was 54 hubs: six services across ten neighbourhoods. Measured on the
- * built HTML, pages sharing a service were 84–91% identical to each other —
- * the same template with an area name swapped in. Google was folding 48 of
- * them under a canonical it chose itself, which is what it does with
- * near-duplicates, and Search Console reported exactly that number.
+ * These were retired on 2026-07-30 on the theory that Google was folding them:
+ * pages sharing a service measured 84-91% identical, and Search Console's
+ * "Alternative page with proper canonical: 48" matched 54 minus the 6 kept
+ * exactly. That arithmetic was a coincidence and the conclusion was wrong.
  *
- * What survives is the set where the difference is real: PECHS is where the
- * salon actually is, and the six pages differ by service rather than by
- * neighbourhood — 58% similarity against each other, not 91%. Everything else
- * 301s to its service category.
+ * The Performance export for 2026-07-14..28 shows these pages earning 321
+ * impressions (13.5% of the site) and 12 clicks (19.7%) at an average position
+ * of 6.4, with 37 of 38 on page one. The six PECHS hubs kept in their place
+ * earned 36 impressions and zero clicks. Restored on 2026-07-31.
  *
- * Adjacent areas are now served by real writing instead of a template —
- * /blog/salon-near-tariq-road-pechs is the model. Add a hub back only when
- * there is a page's worth of genuinely different things to say about that
- * area, not because the matrix has a gap.
- */
-export const PRIORITY_LOCATION_SLUGS = [
-  'threading-in-pechs-karachi',
-  'bridal-makeup-in-pechs-karachi',
-  'facials-in-pechs-karachi',
-  'hair-in-pechs-karachi',
-  'nails-in-pechs-karachi',
-  'waxing-in-pechs-karachi',
-]
+ * The near-duplicate risk is real and unresolved — it is simply outweighed by
+ * measured page-one rankings. Differentiate them if you want to reduce it; do
+ * not delete them again without query data showing they have stopped earning.
+ *
+ * Derived from the full service x neighbourhood matrix rather than hand-listed.
+ * The hand-maintained list had drifted to 54 of the 60 combinations, and all six
+ * it omitted were live in Google's index and earning — nails-in-korangi at
+ * position 2.5, waxing-in-shahrah-e-faisal at 1.7 — so they were serving 404s
+ * to six clicks' worth of traffic. Every neighbourhood carries a unique blurb,
+ * so there is no combination that cannot be generated honestly.
+ *
+ * Growth rule: a new neighbourhood needs a unique blurb before it is added to
+ * NEIGHBORHOODS; the matrix does the rest.
+ */export const PRIORITY_LOCATION_SLUGS = TOP_SERVICES.flatMap((svc) =>
+  NEIGHBORHOODS.map((loc) => `${svc.slug}-in-${loc.slug}`),
+)
 
 export function parseLocationSlug(slug) {
   const inMatch = slug.match(/^(.+)-in-(.+)$/)
@@ -148,30 +150,6 @@ export function getAllLocationServiceSlugs() {
   return [...PRIORITY_LOCATION_SLUGS]
 }
 
-/**
- * 301s for the retired `-in-<area>` hubs.
- *
- * These URLs were live and are in Google's index as folded duplicates, so they
- * must not 404. Each one points at the service category it was a thin variant
- * of, which is where its signal was already being consolidated anyway.
- */
-export function getRetiredLocationRedirects() {
-  const kept = new Set(PRIORITY_LOCATION_SLUGS)
-  const redirects = []
-  for (const svc of TOP_SERVICES) {
-    const categorySlug = CAT_SLUGS[svc.category] || 'services'
-    for (const loc of NEIGHBORHOODS) {
-      const slug = `${svc.slug}-in-${loc.slug}`
-      if (kept.has(slug)) continue
-      redirects.push({
-        source: `/services/${slug}`,
-        destination: `/services/${categorySlug}`,
-        permanent: true,
-      })
-    }
-  }
-  return redirects
-}
 
 /**
  * Permanent redirects for legacy `best-*` matrix URLs.
