@@ -31,10 +31,12 @@ test.describe('Marketing pages @ 390px', () => {
   test('/about stats expose sr-only labels for screen readers', async ({ page }) => {
     await page.goto('/about')
     const srOnly = visibleMain(page).locator('.sr-only')
-    await expect(srOnly).toHaveCount(3)
+    await expect(srOnly).toHaveCount(4)
     await expect(srOnly.nth(0)).toHaveText(`${YEARS_ACTIVE}+ Years of expertise`)
     await expect(srOnly.nth(1)).toHaveText(`${CATEGORY_COUNT} Service categories`)
-    await expect(srOnly.nth(2)).toHaveText(`${SERVICE_COUNT}+ Services on the menu`)
+    // No "+": the count is computed from SERVICES, so it is exactly this number.
+    await expect(srOnly.nth(2)).toHaveText(`${SERVICE_COUNT} Services on the menu`)
+    await expect(srOnly.nth(3)).toHaveText('1,000+ Appointments a month')
   })
 
   test('/team permanently redirects to /about', async ({ page }) => {
