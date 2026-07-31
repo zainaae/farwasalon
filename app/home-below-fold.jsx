@@ -766,6 +766,17 @@ function FounderNote() {
   )
 }
 
+/* Server-rendered. This used to load through a `dynamic(..., { ssr: false })`
+   wrapper behind a requestIdleCallback gate, which meant the site's most
+   important URL shipped 55 words of HTML and not a single <h2> — no services,
+   no reviews, no internal links — while every other page on the site rendered
+   its content server-side. The Performance export has / at 262 impressions and
+   3.4% CTR, the highest-impression page on the site.
+
+   It is still a client component (filter state, the review carousel), and
+   client components server-render unless you opt out. The opt-out was the
+   whole problem. The eight sections already carry `.cv-auto`
+   (content-visibility: auto), so offscreen ones cost nothing to render. */
 export default function HomeBelowFold() {
   return (
     <>

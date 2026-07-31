@@ -100,3 +100,34 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     expect([200, 400, 503]).toContain(res.status())
   })
 })
+
+/* The homepage once shipped 55 words and zero <h2> because its below-fold
+   content loaded through dynamic(..., { ssr: false }) behind an idle callback.
+   It is the site's highest-impression URL. This asserts the content is in the
+   server-rendered HTML, not assembled after hydration — so a well-meaning perf
+   change cannot quietly empty it again. */
+test('homepage server-renders its content, not an empty shell', async ({ page }) => {
+  // JS disabled: exactly what a crawler and the first paint receive.
+  const ctx = await page.context().browser()!.newContext({ javaScriptEnabled: false })
+  const raw = await ctx.newPage()
+  await raw.goto('/', { waitUntil: 'domcontentloaded' })
+
+  /* Assert against the HTML source, not innerText. Eight sections carry
+     content-visibility: auto, so innerText returns only what is on screen —
+     240 words — while the markup carries 2,000+. Google parses the markup. */
+  const html = await raw.content()
+  const main = html.slice(html.indexOf('<main'), html.indexOf('</main>'))
+  const words = main
+    .replace(/<script[\s\S]*?<\/script>/g, '')
+    .replace(/<[^>]+>/g, ' ')
+    .split(/\s+/)
+    .filter(Boolean).length
+
+  expect(words, 'words of server-rendered content in <main>').toBeGreaterThan(800)
+  expect((main.match(/<h2/g) || []).length, '<h2> headings').toBeGreaterThanOrEqual(4)
+  expect(main).toContain('href="/prices"')
+  expect(main).toContain('href="/book"')
+  expect((main.match(/href="\/services/g) || []).length, 'service links').toBeGreaterThan(3)
+
+  await ctx.close()
+})
