@@ -1,7 +1,7 @@
 /* ─── Unique SERP title + meta description per service category ──── */
 export const CAT_SEO = {
   'Threading': {
-    title: 'Eyebrow Threading PECHS — From Rs 100',
+    title: 'Eyebrow Threading Karachi — Rs 200, Face Rs 100',
     h1: 'Eyebrow Threading in PECHS, Karachi',
     metaDesc:
       'Eyebrow & face threading from Rs 100 at Farwa Beauty Salon, PECHS Karachi. Precise brows since 2008 — walk in or book online today.',
@@ -55,18 +55,20 @@ export const CAT_SEO = {
       '11 professional facials from Rs 1,400 at Farwa Beauty Salon, PECHS Karachi. Whitening, HD, organic & Janssen. Book your glow-up.',
   },
   'Nails': {
-    title: 'Manicure Pedicure Karachi — From Rs 300',
+    title: 'Mani & Pedi Karachi — 18 Options from Rs 300',
     h1: 'Manicure & Pedicure in PECHS, Karachi',
     metaDesc:
       'Manicure & pedicure price list Karachi — SPA Rs 1,400, French Rs 1,600 at Farwa PECHS. Commercial rates, book online today.',
   },
-  /* Title deliberately differs from /bridal, which owns the head term
-     "Bridal Makeup Karachi" with its packages hero. This page is the service
-     menu — mehndi, nikah, trials priced individually — so it targets the
-     itemised and area-qualified intent instead. Both pages self-canonicalise;
-     an identical title had them splitting the signal on the same query. */
+  /* /bridal owns "bridal makeup Karachi" with its packages hero; this page is
+     the itemised menu, so the titles must not collide.
+     Retitled 2026-07-31 from "Bridal Makeup PECHS — Mehndi & Nikah from
+     Rs 8,000", which drew 126 impressions at position 7.5 and ZERO clicks. The
+     queries feeding it are "bridal services", "bridal services list" and
+     "bridal service package" — none contain PECHS, and leading with a
+     neighbourhood nobody searched for spent the first third of the title. */
   'Bridal': {
-    title: 'Bridal Makeup PECHS — Mehndi & Nikah from Rs 8,000',
+    title: 'Bridal Services List Karachi — From Rs 8,000',
     h1: 'Bridal Makeup in PECHS, Karachi',
     metaDesc:
       'Every bridal service priced individually at Farwa PECHS — mehndi, nikah, engagement looks and trials from Rs 8,000. Women-only studio in Block 3.',
@@ -78,7 +80,7 @@ export const CAT_SEO = {
       'Haircut & blowdry Rs 2,000 · colour/balayage from Rs 4,000 at Farwa PECHS. Women hair salon Karachi — book online today.',
   },
   'Eyebrow Tattoo': {
-    title: 'Microblading Karachi — From Rs 20,000',
+    title: 'Microblading Karachi — Rs 20,000, 12-18 Months',
     h1: 'Microblading in PECHS, Karachi',
     metaDesc:
       'Microblading & powder brows from Rs 20,000 at Farwa Beauty Salon, PECHS Karachi. Semi-permanent brows lasting 12–18 months. Book online.',
