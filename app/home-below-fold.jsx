@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { m } from 'framer-motion'
@@ -10,63 +10,36 @@ import {
   WordmarkDivider,
 } from '../src/shared.jsx'
 import { formatPrice } from '../src/data.js'
-import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
+import { GOOGLE_GBP_STATS, FACEBOOK_TESTIMONIALS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
 import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK, MONTHLY_APPOINTMENTS } from '../src/data.js'
 import { EDITORIAL_PHOTOS } from '../src/salon-media.js'
-import { getGbpStatsForDisplay, getManualReviewsPayload } from '../lib/google-reviews.js'
+import {
+  getGbpStatsForDisplay,
+  getManualReviewsPayload,
+  describeReviewAge,
+  formatReviewDate,
+  sortByRecency,
+  newestPostedAt,
+} from '../lib/google-reviews.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 
-const FB_POSTS = [
-  {
-    name: 'Tathira B.', initials: 'TB', date: 'Aug 2024', service: 'Bridal',
-    quote: 'Farwa Aapi ne itni care aur detail se kaam kiya ke har visit pe ghar jaisa lagta hai. Best salon in Karachi, hands down.',
-    link: 'https://www.facebook.com/tathirabid/posts/pfbid02J73qHitLiSYbpvJPJEYvNfBHyjSfKEhWL1hS6VbMupr15TzuPuGtXNTKBDMuvRyKl',
-  },
-  {
-    name: 'Jessica J.', initials: 'JJ', date: 'May 2024', service: 'Facial & Hair',
-    quote: 'Been coming here for years and the quality never drops. Rubina knows my skin better than I do — I leave glowing every single time.',
-    link: 'https://www.facebook.com/jessica.joseph.522/posts/pfbid02ZCUhHYUrNBsv9yEfCY5t5MiBPWzJEs6nMwtRSGYaNViyYEEUhKiUZYuSSL8yup9Ul',
-  },
-  {
-    name: 'Tashfeen G.', initials: 'TG', date: 'Mar 2024', service: 'Full package',
-    quote: 'The attention to detail is unmatched. From brow threading to bridal — everyone on the team treats you like family. Highly recommend to every girl in PECHS.',
-    link: 'https://www.facebook.com/tashfeen.ghulamali/posts/pfbid0LHJDHEFyLs7AefDCPGH6kPxL3z5Kov6sT1gdfXFvDXNZoAL1RXjpEBwzz81GMoPLl',
-  },
-  {
-    name: 'Sumaiya M.', initials: 'SM', date: 'Feb 2024', service: 'Bridal',
-    quote: 'I cannot thank Farwa Aapi enough for making me feel like a queen on my wedding day. Every step — from trials to the final look — was perfection. My family still talks about it.',
-    link: 'https://www.facebook.com/Sumaiya.Mohsi/posts/pfbid02Th9Xxwdqp5WK66n9MShW4orY8WxWvrSaAA3CoGwdpFJdK4J4zKJ6dbHWsvA86TpTl',
-  },
-  {
-    name: 'Sara K.', initials: 'SK', date: 'Jan 2024', service: 'Skincare',
-    quote: 'Honestly the most calm and professional salon experience in Karachi. No rush, no shortcuts — just clean, careful, beautiful work.',
-    link: 'https://www.facebook.com/cutesara.1995/posts/pfbid029WwdkbBNG5xsdX61yp4ixzDdZaFnFoxwKXPkvoECyQnfLFwbry4jUJz4y5VwqWB7l',
-  },
-  {
-    name: 'Nadia A.', initials: 'NA', date: 'Dec 2023', service: 'Threading & Facial',
-    quote: 'Always leave feeling fresh and confident. Rubina has been doing my brows for years — no one else gets the shape right the way she does.',
-    link: 'https://www.facebook.com/farwasalon/reviews',
-  },
-]
+/* The testimonials themselves now live in src/google-reviews-data.js, with an
+   absolute `postedAt` each, so the freshness tests can see them and so the
+   dates on the cards are computed rather than typed. */
+const FB_TESTIMONIALS_BY_RECENCY = sortByRecency(FACEBOOK_TESTIMONIALS)
 
-const FALLBACK_FEATURED_REVIEWS = [
-  {
-    name: 'Tathira B.',
-    quote: 'Farwa Aapi ne itni care aur detail se kaam kiya ke har visit pe ghar jaisa lagta hai. Best salon in Karachi, hands down.',
-    translation: '"Farwa Aapi works with such care and detail that every visit feels like home. Best salon in Karachi, hands down."',
-    link: 'https://www.facebook.com/tathirabid/posts/pfbid02J73qHitLiSYbpvJPJEYvNfBHyjSfKEhWL1hS6VbMupr15TzuPuGtXNTKBDMuvRyKl',
-  },
-  {
-    name: 'Jessica J.',
-    quote: 'Been coming here for years and the quality never drops. Rubina knows my skin better than I do — I leave glowing every single time.',
-    translation: null,
-    link: 'https://www.facebook.com/jessica.joseph.522/posts/pfbid02ZCUhHYUrNBsv9yEfCY5t5MiBPWzJEs6nMwtRSGYaNViyYEEUhKiUZYuSSL8yup9Ul',
-  },
-]
+/* Shown in the big pull-quote when the Google reviews are unavailable. */
+const FALLBACK_FEATURED_REVIEWS = FB_TESTIMONIALS_BY_RECENCY.slice(0, 2).map((p) => ({
+  name: p.name,
+  quote: p.quote,
+  translation: p.translation ? `"${p.translation}"` : null,
+  link: p.link,
+  postedAt: p.postedAt,
+}))
 
 function EditorialMedia({ item, className = '' }) {
   // Still via next/image only — raw <video poster> was pulling ~80KB JPEGs on first paint.
@@ -460,29 +433,54 @@ function reviewInitials(name) {
   return (parts[0]?.slice(0, 2) || '??').toUpperCase()
 }
 
-function toFbCard(post) {
+/**
+ * `now === null` means "render the wording that does not depend on the clock".
+ *
+ * This page is server-rendered and its HTML is cached. If the server baked a
+ * relative phrase into that HTML, the cached copy would repeat it for as long
+ * as it lived — which is the frozen-clock bug in a new costume. So the server
+ * pass emits the absolute date, and the client swaps in relative wording after
+ * mount, against a clock that is actually ticking. Today every testimonial is
+ * old enough that both passes produce the same string; the hook matters for
+ * the first genuinely recent review, not for these.
+ */
+function reviewCardDate(post, now) {
+  if (post.postedAt) {
+    if (now === null) return formatReviewDate(post.postedAt) ?? ''
+    return describeReviewAge(post.postedAt, now).label ?? ''
+  }
+  // Live Places API responses only. Google recomputes that string on every
+  // fetch, so it is as current as the fetch is — unlike one typed into a file.
+  return post.relativeTime || ''
+}
+
+function toReviewCard(post, now) {
   return {
     name: post.name,
     initials: post.initials || reviewInitials(post.name),
-    date: post.date || post.relativeTime || '',
+    date: reviewCardDate(post, now),
     service: post.service || (post.source === 'google' ? 'Google review' : 'Facebook'),
     quote: post.quote,
     link: post.link,
     source: post.source || 'facebook',
+    postedAt: post.postedAt ?? null,
   }
 }
 
-function toGoogleCards(reviews) {
-  return reviews.slice(0, 6).map((r) =>
-    toFbCard({
-      ...r,
-      service: r.relativeTime || 'Google review',
-      source: 'google',
-    }),
-  )
+function toGoogleCards(reviews, now) {
+  return sortByRecency(reviews)
+    .slice(0, 6)
+    .map((r) => toReviewCard({ ...r, service: 'Google review', source: 'google' }, now))
 }
 
-const FB_GRID_POSTS = FB_POSTS.map((post) => toFbCard(post))
+/** null on the server and the first client render, the real clock after mount. */
+function useClientNow() {
+  const [now, setNow] = useState(null)
+  useEffect(() => {
+    setNow(Date.now())
+  }, [])
+  return now
+}
 
 const manualPayload = getManualReviewsPayload()
 const gbpStats = getGbpStatsForDisplay()
@@ -491,11 +489,33 @@ const initialRatingLabel =
     ? `${gbpStats.rating}★ · ${gbpStats.reviewCount} Google reviews`
     : 'Reviews on Google'
 
-const initialGoogleGrid = manualPayload?.reviews?.length
-  ? toGoogleCards(manualPayload.reviews)
-  : []
+const initialGoogleReviews = manualPayload?.reviews?.length ? manualPayload.reviews : []
 
-function ReviewGridSection({ label, viewAllHref, posts, className = '', divided = true }) {
+/**
+ * The dating line under each block's heading.
+ *
+ * Deliberately says the same thing whatever the date is: it names the newest
+ * one on show and points at the live listing. Nothing here is conditional on
+ * how old the reviews happen to be, so there is no threshold at which the site
+ * quietly stops mentioning their age — which is the failure mode this whole
+ * change exists to prevent. It also costs nothing to render on the server,
+ * because it never reads the clock.
+ */
+function ReviewDatingNote({ posts, sourceName }) {
+  const newest = newestPostedAt(posts)
+  if (!newest) return null
+  const absolute = formatReviewDate(newest)
+  if (!absolute) return null
+
+  return (
+    <p className="text-stone/80 text-[10px] sm:text-[11px] font-['Inter'] font-light leading-relaxed mb-4 sm:mb-5 max-w-xl">
+      Newest here is from {absolute}. Each is shown with the month it was
+      posted, newest first — anything more recent is on {sourceName}.
+    </p>
+  )
+}
+
+function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = '', divided = true }) {
   if (!posts.length) return null
 
   const desktopCols = posts.length >= 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'
@@ -503,13 +523,15 @@ function ReviewGridSection({ label, viewAllHref, posts, className = '', divided 
 
   return (
     <div className={`reviews-block-divider ${divided ? '' : 'border-t-0 pt-0'} ${className}`}>
-      <div className="flex items-center justify-between gap-4 mb-4 sm:mb-5 md:mb-6">
+      <div className="flex items-center justify-between gap-4 mb-3 sm:mb-4">
         <p className="eyebrow mb-0">— {label}</p>
         <a href={viewAllHref} target="_blank" rel="noreferrer"
           className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1 shrink-0">
           View all <ArrowUpRight className="w-2.5 h-2.5" />
         </a>
       </div>
+
+      <ReviewDatingNote posts={posts} sourceName={sourceName} />
 
       <p className="md:hidden text-stone text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2.5">
         Swipe for more reviews →
@@ -540,7 +562,14 @@ function TestimonialsPreview() {
   const [featuredReviews, setFeaturedReviews] = useState(
     manualPayload?.reviews?.length ? manualPayload.reviews : FALLBACK_FEATURED_REVIEWS,
   )
-  const [googleGridPosts, setGoogleGridPosts] = useState(initialGoogleGrid)
+  const [googleReviews, setGoogleReviews] = useState(initialGoogleReviews)
+  const now = useClientNow()
+
+  const googleGridPosts = useMemo(() => toGoogleCards(googleReviews, now), [googleReviews, now])
+  const fbGridPosts = useMemo(
+    () => FB_TESTIMONIALS_BY_RECENCY.map((post) => toReviewCard(post, now)),
+    [now],
+  )
 
   useEffect(() => {
     let cancelled = false
@@ -557,7 +586,7 @@ function TestimonialsPreview() {
         if (!isGoogle) return
 
         setFeaturedReviews(data.reviews)
-        setGoogleGridPosts(toGoogleCards(data.reviews))
+        setGoogleReviews(data.reviews)
         if (data.rating != null && data.reviewCount != null) {
           setRatingLabel(`${data.rating}★ · ${data.reviewCount} Google reviews`)
         }
@@ -582,6 +611,10 @@ function TestimonialsPreview() {
 
   const featured = featuredReviews[reviewIdx]
   const featuredSourceLabel = featured.source === 'google' ? 'Google' : 'Facebook'
+  // The pull-quote is the loudest piece of social proof on the page and used
+  // to carry no date at all. An undated glowing quote reads as current; this
+  // one is not, and says so.
+  const featuredDate = reviewCardDate(featured, now)
 
   return (
     <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-mist border-t border-border-soft">
@@ -650,12 +683,14 @@ function TestimonialsPreview() {
           label="From Google"
           viewAllHref={GOOGLE_REVIEW_LINK}
           posts={googleGridPosts}
+          sourceName="Google"
           className={googleGridPosts.length ? 'mb-6 sm:mb-8 md:mb-10' : ''}
         />
         <ReviewGridSection
           label="From Facebook"
           viewAllHref="https://www.facebook.com/farwasalon/reviews"
-          posts={FB_GRID_POSTS}
+          posts={fbGridPosts}
+          sourceName="Facebook"
           className="mb-8 sm:mb-10 md:mb-12"
         />
 

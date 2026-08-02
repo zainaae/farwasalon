@@ -2,13 +2,15 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
+import Link from 'next/link'
 import { m, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown, CalendarCheck } from 'lucide-react'
 import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { toLocalDateString } from '../../lib/date-local.js'
 import { computeBookingDurationMinutes } from '../../lib/booking-duration.js'
 import { getAttribution, formatAttributionCell } from '../../lib/attribution.js'
+import { saveBookingRecord, listUpcomingBookings } from '../../lib/booking-storage.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
 
@@ -126,6 +128,64 @@ function FirstVisitHint() {
           </m.div>
         )}
       </AnimatePresence>
+    </div>
+  )
+}
+
+/**
+ * The retrieval half of a durable confirmation: a customer who closed the tab no
+ * longer has the confirmation URL, so /book is where she comes looking. Reads
+ * only what this device already stored — nothing is fetched, nothing leaves.
+ */
+function UpcomingBookings() {
+  const [bookings, setBookings] = useState([])
+
+  useEffect(() => {
+    /* Deferred to a microtask: the server cannot know what this device stored,
+       so reading during render would mismatch hydration. Matches the pattern the
+       confirmation and cancel pages use. */
+    queueMicrotask(() => setBookings(listUpcomingBookings()))
+  }, [])
+
+  if (bookings.length === 0) return null
+
+  return (
+    <div className="mb-8 panel-soft p-5 shadow-soft">
+      <p className="eyebrow mb-3">
+        — Your upcoming appointment{bookings.length > 1 ? 's' : ''}
+      </p>
+      <ul className="flex flex-col divide-y divide-border-soft">
+        {bookings.map((b) => (
+          <li
+            key={b.id}
+            className="flex flex-wrap items-center justify-between gap-3 py-3 first:pt-0 last:pb-0"
+          >
+            <div className="min-w-0">
+              <p className="font-['Syne'] font-bold text-[13px] text-ink uppercase truncate">
+                {b.service || 'Appointment'}
+              </p>
+              <p className="text-stone text-[11px] font-['Inter'] mt-0.5">
+                {formatDateNice(b.date)}
+                {b.time ? ` · ${formatTime12(b.time)}` : ''}
+              </p>
+            </div>
+            <Link
+              /* Only the id and the wall-clock details travel — the cancel token
+                 and her name stay in storage, out of anything analytics reads. */
+              href={`/book/confirmation?${new URLSearchParams({
+                id: b.id,
+                date: b.date,
+                time: b.time,
+                duration: String(b.duration),
+              }).toString()}`}
+              className="shrink-0 inline-flex items-center gap-1.5 text-ink text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] underline underline-offset-2 hover:text-accent-gold-deep transition-colors"
+            >
+              <CalendarCheck className="w-3.5 h-3.5" aria-hidden="true" />
+              View or cancel
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
@@ -319,29 +379,31 @@ export default function BookClient() {
       } catch {
         // ignore
       }
-      const confirmPayload = {
+      const bookedDuration = data.booking.duration || totalDurationMinutes
+      /* The whole record — including the cancel token — goes to durable storage,
+         not sessionStorage. This is the only copy the customer will ever hold:
+         nothing is texted, WhatsApped or emailed to her, so if it dies with the
+         tab she has no proof the appointment exists and no way to cancel it,
+         while the FAQ still penalises her for cancelling late. */
+      saveBookingRecord({
+        id: data.booking.id,
         service: data.booking.service,
         name: data.booking.clientName,
-        duration: data.booking.duration || totalDurationMinutes,
-      }
-      try {
-        sessionStorage.setItem(
-          `farwa-confirm-${data.booking.id}`,
-          JSON.stringify({ ...confirmPayload, cancelToken: data.booking.cancelToken || '' }),
-        )
-      } catch {
-        // ignore private mode
-      }
+        date: data.booking.date,
+        time: data.booking.time,
+        duration: bookedDuration,
+        cancelToken: data.booking.cancelToken || '',
+      })
       /* The cancel token stays out of the URL. Plausible and the Meta Pixel both
          transmit location.href, so a token in the query string is a bearer
          credential handed to third parties on every confirmation view — and the
          customer's name went with it. It is never emailed or written to the
-         sheet, so sessionStorage loses nothing. */
+         sheet, so local storage loses nothing. */
       const params = new URLSearchParams({
         id: data.booking.id,
         date: data.booking.date,
         time: data.booking.time,
-        duration: String(confirmPayload.duration),
+        duration: String(bookedDuration),
       })
 
       /* The conversion. BookingStarted was already tracked at step 1, so this
@@ -401,6 +463,8 @@ export default function BookClient() {
             Pick a service, choose a date and time, and confirm your appointment in under a minute.
           </m.p>
         </div>
+
+        {step === 0 && <UpcomingBookings />}
 
         {/* Step indicator */}
         <p className="sr-only" aria-live="polite">
