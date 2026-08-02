@@ -76,11 +76,19 @@ export async function GET(request) {
 
   let serviceDuration = 30
   let maxWorkers = MAX_WORKERS
-  const resolved = resolveBookingServices({
-    serviceId: serviceIdParam || undefined,
-    serviceIds: serviceIdsParam || undefined,
-  })
-  if (resolved.services?.length) {
+  /* serviceId / serviceIds are optional (legacy date-only polls use 30 min).
+     When the client does send them, reject unknown / oversized carts instead of
+     silently falling back to a 30-min grid — that lied about multi-service fit. */
+  const hasServiceId = Boolean(serviceIdParam)
+  const hasServiceIds = Boolean(serviceIdsParam)
+  if (hasServiceId || hasServiceIds) {
+    const resolved = resolveBookingServices({
+      serviceId: serviceIdParam || undefined,
+      serviceIds: serviceIdsParam || undefined,
+    })
+    if (resolved.error) {
+      return NextResponse.json({ error: resolved.error }, { status: resolved.status })
+    }
     const addonIds =
       resolved.services.length === 1 ? parseAddonIdsParam(addonIdsParam) : []
     serviceDuration = computeServicesDurationMinutes(resolved.services, addonIds)

@@ -520,7 +520,7 @@ export default function BookClient() {
 
         {/* Step indicator */}
         <p className="sr-only" aria-live="polite">
-          Step {step + 1} of 3: {['Choose a service', 'Pick date and time', 'Enter your details'][step]}
+          Step {step + 1} of 3: {['Choose services', 'Pick date and time', 'Enter your details'][step]}
         </p>
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2 sm:gap-4 mb-8 min-w-0" role="list" aria-label="Booking steps">
           {['Service', 'Date & Time', 'Details'].map((label, i) => (
