@@ -514,7 +514,7 @@ function ReviewDatingNote({ posts, sourceName }) {
   if (!absolute) return null
 
   return (
-    <p className="text-stone/80 text-[10px] sm:text-[11px] font-['Inter'] font-light leading-relaxed mb-4 sm:mb-5 max-w-xl">
+    <p className="text-stone text-[10px] sm:text-[11px] font-['Inter'] font-light leading-relaxed mb-4 sm:mb-5 max-w-xl">
       Newest here is from {absolute}. Each is shown with the month it was
       posted, newest first — anything more recent is on {sourceName}.
     </p>
