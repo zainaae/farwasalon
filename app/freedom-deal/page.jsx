@@ -43,19 +43,19 @@ export const revalidate = 86400
 const FAQS = [
   {
     q: 'What is the Freedom Deal at Farwa Beauty Salon?',
-    a: 'From 5 to 14 August 2026, any visit totalling Rs 1,400 or more gets 14% off at Farwa Beauty Salon in Block 3 PECHS, Karachi. You can reach the total with one service or several combined. The discount comes off our published prices, which have been printed on farwasalon.com all year.',
+    a: 'From 5 to 14 August 2026, any visit totalling Rs 1,400 or more gets 14% off at Farwa Beauty Salon in Block 3 PECHS, Karachi. Online booking takes one main service at a time — pick a service of Rs 1,400+ there, or WhatsApp us to combine several services into one visit. The discount comes off our published prices, which have been printed on farwasalon.com all year.',
   },
   {
     q: 'Which services are included in the 14 August offer?',
-    a: 'Everything on the menu counts toward the total — threading, waxing, facials, cleansing, hair, nails, massage, brows and bridal. Nothing is excluded from qualifying; you simply need the visit to add up to Rs 1,400 or more. Party makeup and keratin are quoted individually, so ask on WhatsApp how they apply.',
+    a: 'Everything on the menu counts toward the visit total — threading, waxing, facials, cleansing, hair, nails, massage, brows and bridal. Online you book one primary service (a few have small add-ons); for a multi-service basket, WhatsApp us. Party makeup and keratin are quoted individually.',
   },
   {
     q: 'How do I claim the Azaadi discount?',
-    a: 'Nothing to claim — book between 5 and 14 August and if your services total Rs 1,400 or more, the 14% comes off at the counter. Book online at farwasalon.com/book or WhatsApp +92 322 2782254.',
+    a: 'Book between 5 and 14 August. If your visit totals Rs 1,400 or more, the 14% comes off at the counter. Use farwasalon.com/book for a single qualifying service, or WhatsApp +92 322 2782254 to combine services.',
   },
   {
     q: 'Can I combine services to reach Rs 1,400?',
-    a: 'Yes — that is the point. Add the services you want to one booking; if the total reaches Rs 1,400 or more, the 14% applies to the visit. It does not matter whether that is one treatment or several small ones.',
+    a: 'Yes at the salon — that is how a multi-service visit works. The website books one main service per appointment, so message us on WhatsApp with the services you want and we will schedule them together and confirm the total.',
   },
   {
     q: 'Do I need to pay in advance?',
@@ -152,8 +152,8 @@ export default function AzadiSalePage() {
 
               <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 2 }}>
                 Once your visit reaches Rs 1,400, the whole bill is 14% less — 5 to 14
-                August. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
-                Book what you actually came in for.
+                August. Book one qualifying service online, or WhatsApp us to combine
+                several into one visit. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
               </p>
 
               <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-lg mb-8" style={{ '--i': 3 }}>
@@ -186,10 +186,10 @@ export default function AzadiSalePage() {
             How it works
           </h2>
           <p className="text-body text-sm md:text-[15px] mb-4 max-w-2xl leading-relaxed">
-            The Rs 1,400 is the total for your visit — not something one service has to cost on
-            its own. Come in for a cleansing and add a threading, or a manicure and a massage;
-            once the bill reaches Rs 1,400, the 14% applies to all of it. Nothing on the menu is
-            left out.
+            The Rs 1,400 is the total for your visit. Book one service of Rs 1,400+ online,
+            or WhatsApp us to combine treatments (for example a cleansing plus threading)
+            into one appointment — the website takes one main service per booking.
+            Once the bill reaches Rs 1,400, the 14% applies to all of it.
           </p>
           <p className="text-body text-sm md:text-[15px] mb-5 max-w-2xl leading-relaxed">
             Most salons run Azadi offers as a fixed package — one facial, one mani-pedi, one

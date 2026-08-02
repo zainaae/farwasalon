@@ -59,12 +59,13 @@ test('live: book via UI, verify confirmation, cancel via UI', async ({ page }) =
   })
   const url = new URL(page.url())
   const bookingId = url.searchParams.get('id')
-  const cancelToken = url.searchParams.get('token')
   expect(bookingId, 'confirmation must carry a booking id').toBeTruthy()
-  expect(cancelToken, 'confirmation must carry a cancel token').toBeTruthy()
+  // Cancel token must NEVER be in the URL (Plausible + Meta Pixel transmit href).
+  expect(url.searchParams.get('token')).toBeNull()
+  expect(page.url()).not.toMatch(/token=/)
   console.log(`LIVE BOOKING id=${bookingId} time=${slotLabel}`)
 
-  // Round-trip cleanup: cancel through the real UI + API
+  // Round-trip cleanup: cancel through the real UI + API (token from durable storage)
   await page.locator('a[href*="/book/cancel"]').first().click()
   await expect(page.getByRole('heading', { name: /cancel appointment/i })).toBeVisible({
     timeout: 15_000,

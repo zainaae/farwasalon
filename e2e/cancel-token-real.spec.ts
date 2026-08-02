@@ -8,12 +8,22 @@
 import { test, expect } from '@playwright/test'
 
 async function seedToken(page, id: string, cancelToken: string) {
+  const payload = JSON.stringify({
+    id,
+    cancelToken,
+    service: 'Threading',
+    name: 'Test',
+    date: '2099-01-05',
+    time: '13:00',
+    duration: 30,
+    savedAt: Date.now(),
+  })
   await page.addInitScript(
-    ([key, payload]) => sessionStorage.setItem(key as string, payload as string),
-    [
-      `farwa-confirm-${id}`,
-      JSON.stringify({ cancelToken, service: 'Threading', name: 'Test', date: '2099-01-05', time: '13:00' }),
-    ],
+    ([key, raw]) => {
+      try { localStorage.setItem(key as string, raw as string) } catch { /* ignore */ }
+      try { sessionStorage.setItem(key as string, raw as string) } catch { /* ignore */ }
+    },
+    [`farwa-confirm-${id}`, payload],
   )
 }
 

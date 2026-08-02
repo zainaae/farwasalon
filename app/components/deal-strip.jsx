@@ -46,7 +46,7 @@ export default function DealStrip() {
             </p>
             <p className="text-[color:var(--azadi-deep)]/70 text-[13px] md:text-sm font-['Inter'] font-light max-w-md">
               Independence Day offer — when your visit totals Rs 1,400 or more.
-              Combine any services to get there.
+            Book one qualifying service online, or WhatsApp to combine.
             </p>
           </div>
 

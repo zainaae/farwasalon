@@ -10,8 +10,8 @@ export const DEALS = [
     id: 'freedom-deal-2026',
     title: 'Freedom Deal — 14% off',
     description:
-      'For Pakistan’s Independence Day, take 14% off whenever your visit totals Rs 1,400 or more, from 5 to 14 August. Combine anything on the menu to get there — threading with a cleansing, a manicure with a massage. The discount comes off the printed rate, the same rate that has been on this page all year, not one raised for the occasion.',
-    priceNote: 'Any combination of services totalling Rs 1,400+. Party makeup and keratin stay individually quoted.',
+      'For Pakistan’s Independence Day, take 14% off when your visit totals Rs 1,400 or more, from 5 to 14 August. One service of Rs 1,400+ qualifies when you book online. To combine several services in one visit, WhatsApp us with your list — we book the basket at the counter; the online form takes one main service at a time. The discount comes off the printed rate, the same rate that has been on this page all year, not one raised for the occasion.',
+    priceNote: 'Rs 1,400+ per visit — book one qualifying service online, or WhatsApp to combine. Party makeup and keratin stay individually quoted.',
     category: 'Independence Day',
     href: '/prices',
     /* Filename carries the rate on purpose. The 20% version shipped first and
