@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, MessageCircle, ChevronDown, X } from 'lucide-react'
 import { IgIcon } from '../../src/shared.jsx'
 import { useNextSlot } from '../../src/use-next-slot.js'
-import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track } from '../../src/data.js'
+import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track, PREFERRED_TIME_OPTIONS } from '../../src/data.js'
 
 export default function ContactClient() {
   const [name,    setName]    = useState('')
@@ -45,7 +45,7 @@ export default function ContactClient() {
   }
 
   return (
-    <main id="main" className="page-content">
+    <main id="main" className="page-content pb-[calc(7.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">
 
       <section className="bg-white py-14 md:py-20 border-b border-border-soft">
         <div className="section-shell">
@@ -248,7 +248,7 @@ export default function ContactClient() {
                     <select id="booking-time" name="time" value={time} onChange={e => setTime(e.target.value)}
                       className="input-field appearance-none pr-10">
                       <option value="">Select a time</option>
-                      {['11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'].map(t => (
+                      {PREFERRED_TIME_OPTIONS.map(t => (
                         <option key={t} value={t}>{t}</option>
                       ))}
                     </select>

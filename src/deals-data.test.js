@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { DEALS, getActiveDeals, getUpcomingDeals, getHeadlineDeal, formatDealRange } from './deals-data.js'
+import { DEALS, getActiveDeals, getUpcomingDeals, getHeadlineDeal, getDealPhase, formatDealRange } from './deals-data.js'
 
 describe('deals data', () => {
   it('every deal has the required fields and valid dates', () => {
@@ -47,19 +47,24 @@ describe('Freedom Deal lifecycle', () => {
     expect(deal.image).toBe('/freedom-deal-2026-14pc.jpg')
   })
 
-  it('teases before it opens, runs during, and disappears after', () => {
-    // teaser window: announced, not claimable
+  it('teases on /deals before open, headlines only while live, gone after', () => {
+    // teaser window: announced on /deals, not claimable, not on home/banner
     expect(getUpcomingDeals(at('2026-07-30')).map((d) => d.id)).toContain('freedom-deal-2026')
     expect(getActiveDeals(at('2026-07-30')).map((d) => d.id)).not.toContain('freedom-deal-2026')
+    expect(getHeadlineDeal(at('2026-07-30'))).toBeNull()
+    expect(getDealPhase(deal, at('2026-07-30'))).toBe('upcoming')
 
-    // live on Independence Day itself
+    // live on Independence Day itself — home strip + /freedom-deal campaign
     expect(getActiveDeals(at('2026-08-14')).map((d) => d.id)).toContain('freedom-deal-2026')
     expect(getUpcomingDeals(at('2026-08-14')).map((d) => d.id)).not.toContain('freedom-deal-2026')
+    expect(getHeadlineDeal(at('2026-08-14'))?.id).toBe('freedom-deal-2026')
+    expect(getDealPhase(deal, at('2026-08-14'))).toBe('live')
 
-    // gone the day after it ends — no stale banner left up
+    // gone the day after it ends — no stale banner, soft-exit on landing page
     expect(getActiveDeals(at('2026-08-15')).map((d) => d.id)).not.toContain('freedom-deal-2026')
     expect(getUpcomingDeals(at('2026-08-15')).map((d) => d.id)).not.toContain('freedom-deal-2026')
     expect(getHeadlineDeal(at('2026-08-15'))).toBeNull()
+    expect(getDealPhase(deal, at('2026-08-15'))).toBe('ended')
   })
 
   it('formats the range for banner copy', () => {

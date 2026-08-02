@@ -6,6 +6,20 @@ export const SALON_LAT  = 24.8797532
 export const SALON_LNG  = 67.0584185
 export const IG_LINK    = 'https://www.instagram.com/farwasalon/'
 export const WA_DEFAULT = `https://wa.me/${WA_NUMBER}?text=Hi%21%20I%27d%20like%20to%20book%20an%20appointment%20at%20Farwa%20Beauty%20Salon.`
+
+/** Salon hours Mon–Sat 11:00–19:00. Preferred-time pickers use hourly starts;
+ *  last option is 6:00 PM so a visit can finish by close. */
+export const SALON_HOURS = { open: '11:00', close: '19:00', days: 'Mon–Sat' }
+export const PREFERRED_TIME_OPTIONS = [
+  '11:00 AM',
+  '12:00 PM',
+  '1:00 PM',
+  '2:00 PM',
+  '3:00 PM',
+  '4:00 PM',
+  '5:00 PM',
+  '6:00 PM',
+]
 export const waLink = (service = '') =>
   service
     ? `https://wa.me/${WA_NUMBER}?text=Hi%21%20I%27d%20like%20to%20book%20*${encodeURIComponent(service)}*%20at%20Farwa%20Beauty%20Salon.`

@@ -41,17 +41,22 @@ export const DEALS = [
   },
 ]
 
+/** Calendar day as YYYY-MM-DD in UTC — same convention as validFrom / validUntil. */
+export function dealDay(now = new Date()) {
+  return now.toISOString().slice(0, 10)
+}
+
 /** Deals still valid on the given date (defaults to today). */
 export function getActiveDeals(now = new Date()) {
-  const today = now.toISOString().slice(0, 10)
+  const today = dealDay(now)
   return DEALS.filter(
     (d) => (!d.validFrom || d.validFrom <= today) && (!d.validUntil || d.validUntil >= today),
   )
 }
 
-/** Deals announced but not yet open — shown as "starts <date>", never claimable. */
+/** Deals announced but not yet open — listed on /deals only, never on home/nav banners. */
 export function getUpcomingDeals(now = new Date()) {
-  const today = now.toISOString().slice(0, 10)
+  const today = dealDay(now)
   return DEALS.filter(
     (d) =>
       d.teaseFrom &&
@@ -61,9 +66,22 @@ export function getUpcomingDeals(now = new Date()) {
   )
 }
 
-/** The one deal worth announcing sitewide right now: live first, else upcoming. */
+/**
+ * Sitewide promo surfaces (home strip, prices banner) — LIVE accent deals only.
+ * Upcoming teasers stay off homepage / sticky / prominent CTAs so "Coming ·
+ * 5–14 August" cannot linger before open or after expiry.
+ */
 export function getHeadlineDeal(now = new Date()) {
-  return getActiveDeals(now).find((d) => d.accent) ?? getUpcomingDeals(now).find((d) => d.accent) ?? null
+  return getActiveDeals(now).find((d) => d.accent) ?? null
+}
+
+/** 'upcoming' | 'live' | 'ended' — for deal landing pages that must soft-exit. */
+export function getDealPhase(deal, now = new Date()) {
+  if (!deal) return 'ended'
+  const today = dealDay(now)
+  if (deal.validFrom && deal.validFrom > today) return 'upcoming'
+  if (deal.validUntil && deal.validUntil < today) return 'ended'
+  return 'live'
 }
 
 /** "5–19 August" / "14 August" — compact human range for banner copy. */

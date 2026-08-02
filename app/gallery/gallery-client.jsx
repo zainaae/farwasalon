@@ -2,8 +2,8 @@
 
 import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
-import { SmoothyGallery, IgIcon, useBooking } from '../../src/shared.jsx'
-import { IG_LINK, GALLERY_PHOTOS, GALLERY_SHOWCASE_ITEMS } from '../../src/data.js'
+import { SmoothyGallery, useBooking } from '../../src/shared.jsx'
+import { WA_DEFAULT, GALLERY_PHOTOS, GALLERY_SHOWCASE_ITEMS } from '../../src/data.js'
 import WorkShowcaseCard from './work-showcase-card.jsx'
 
 export default function GalleryClient() {
@@ -24,17 +24,18 @@ export default function GalleryClient() {
               </h1>
             </div>
             <p className="hero-fade-up text-body max-w-xl mt-5" style={{ animationDelay: '0.15s' }}>
-              Every service we offer, in one place. Finished looks on real clients go up on
-              our Instagram — we would rather show you those than restage them here.
+              A quiet look at the services we offer in our PECHS studio — bridal, hair,
+              skin, nails. Visit in person for the full portfolio, or book a slot below.
             </p>
           </div>
-          <a
-            href={IG_LINK} target="_blank" rel="noreferrer"
-            className="hero-fade-up link-underline !inline-flex items-center gap-2 shrink-0 text-ink text-xs tracking-wide font-['Inter']"
-            style={{ animationDelay: '0.2s' }}>
-            <IgIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
-            <span className="min-w-0">@farwasalon</span>
-          </a>
+          <button
+            type="button"
+            onClick={() => booking.open()}
+            className="hero-fade-up tap-safe btn-primary shrink-0 self-start"
+            style={{ animationDelay: '0.2s' }}
+          >
+            Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+          </button>
         </div>
       </div>
 
@@ -61,22 +62,22 @@ export default function GalleryClient() {
       <section className="bg-ink py-20 md:py-24">
         <div className="section-shell flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-            <p className="eyebrow mb-3">— Follow along</p>
+            <p className="eyebrow mb-3">— Ready when you are</p>
             <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-white leading-tight">
-              <span className="block">See daily updates</span> <span className="block">on Instagram</span>
+              <span className="block">Book a visit</span> <span className="block">at the PECHS studio</span>
             </h2>
           </m.div>
           <m.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.15 }}
             className="flex flex-col sm:flex-row items-start sm:items-center gap-4 shrink-0">
-            <a href={IG_LINK} target="_blank" rel="noreferrer"
+            <button type="button" onClick={() => booking.open()}
               className="inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-8 py-4 hover:bg-nude transition-colors duration-300">
-              <IgIcon className="w-4 h-4" /> @farwasalon
-            </a>
-            <button onClick={() => booking.open()}
-              className="tap-safe link-underline !inline-flex items-center gap-1.5 text-white/50 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors">
-              <span className="min-w-0">Book an Appointment</span>
-              <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
+              Book an Appointment
             </button>
+            <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
+              className="tap-safe link-underline !inline-flex items-center gap-1.5 text-white/50 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors">
+              <span className="min-w-0">WhatsApp us</span>
+              <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
+            </a>
           </m.div>
         </div>
       </section>

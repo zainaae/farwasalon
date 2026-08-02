@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
-import { DEALS } from '../../src/deals-data.js'
+import { DEALS, getDealPhase, formatDealRange } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import WaCta from '../components/wa-cta'
 import { SITE_ORIGIN, SALON_ID, buildFaqPageSchema } from '../../lib/business-schema.js'
 
 const DEAL = DEALS.find((d) => d.id === 'freedom-deal-2026')
+const RANGE = DEAL ? formatDealRange(DEAL) : '5–14 August'
 
 /* Pakistani users search this offer in several spellings — azadi, azaadi,
    jashn-e-azadi, "14 august sale", "independence day offer". They are the same
@@ -66,7 +67,47 @@ const FAQS = [
   },
 ]
 
+function SoftExit({ phase }) {
+  const ended = phase === 'ended'
+  return (
+    <main id="main" className="page-content">
+      <div className="section-shell section-pad min-h-0 max-w-2xl">
+        <p className="eyebrow mb-4">— Freedom Deal</p>
+        <h1 className="display-section text-ink mb-4">
+          {ended ? 'This offer has ended' : 'Opens soon'}
+        </h1>
+        <p className="text-body md:text-lg mb-3 leading-relaxed">
+          {ended
+            ? `The Freedom Deal (${RANGE} 2026) is over. Printed rates on the price list apply again — book online or WhatsApp when you are ready.`
+            : `The Freedom Deal runs ${RANGE} 2026 — 14% off when your visit totals Rs 1,400 or more. It is not open to claim yet.`}
+        </p>
+        <p className="text-stone text-sm font-['Inter'] font-light mb-8 leading-relaxed">
+          {ended
+            ? 'Browse current offers or book at the regular printed rate.'
+            : 'You can still book a slot for the offer window, or see the full price list anytime.'}
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <Link href="/book" className="tap-safe btn-primary">
+            Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+          </Link>
+          <Link href="/prices" className="tap-safe btn-secondary">
+            Price list
+          </Link>
+          <Link href="/deals" className="tap-safe link-underline text-ink text-sm font-medium">
+            Current deals
+          </Link>
+        </div>
+      </div>
+    </main>
+  )
+}
+
 export default function AzadiSalePage() {
+  const phase = getDealPhase(DEAL)
+
+  if (phase !== 'live') {
+    return <SoftExit phase={phase} />
+  }
 
   const offerSchema = DEAL && {
     '@context': 'https://schema.org',
@@ -86,13 +127,6 @@ export default function AzadiSalePage() {
       {offerSchema && <JsonLd data={offerSchema} />}
       <JsonLd data={buildFaqPageSchema(FAQS)} />
 
-      {/* Campaign hero — poster palette, poster artwork, and the discount itself
-          as the visual anchor. Deliberately off-brand for the ten days it runs:
-          the site is ink/nude/gold, this is the flag. */}
-      {/* Poster-led. The artwork is real, human-made and culturally specific —
-          it outranks anything generated, so it carries the fold and the words
-          annotate it. No eyebrow, no repeated date block: the dates are on the
-          poster and stated once in the copy. */}
       <section className="azadi-hero">
         <div className="section-shell py-10 md:py-16">
           <div className="grid gap-8 md:gap-14 md:grid-cols-[0.95fr_1.05fr] items-center">

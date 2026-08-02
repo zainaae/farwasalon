@@ -94,10 +94,15 @@ function StatsStrip() {
                 </div>
               ))}
             </div>
-            <Link href="/about" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-['Inter'] group w-fit">
-              <span className="link-underline">Read Our Story</span>
-              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-            </Link>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-['Inter'] group w-fit">
+                <span className="link-underline">Book a visit</span>
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+              </Link>
+              <Link href="/about" className="tap-safe text-stone hover:text-ink text-[11px] tracking-wide font-['Inter'] transition-colors">
+                Our story
+              </Link>
+            </div>
           </m.div>
         </div>
       </div>
@@ -477,7 +482,8 @@ function toGoogleCards(reviews, now) {
 function useClientNow() {
   const [now, setNow] = useState(null)
   useEffect(() => {
-    setNow(Date.now())
+    // Client clock only — relative review ages must not bake into SSR HTML.
+    setNow(Date.now()) // eslint-disable-line react-hooks/set-state-in-effect -- intentional: post-hydration clock
   }, [])
   return now
 }
@@ -611,10 +617,6 @@ function TestimonialsPreview() {
 
   const featured = featuredReviews[reviewIdx]
   const featuredSourceLabel = featured.source === 'google' ? 'Google' : 'Facebook'
-  // The pull-quote is the loudest piece of social proof on the page and used
-  // to carry no date at all. An undated glowing quote reads as current; this
-  // one is not, and says so.
-  const featuredDate = reviewCardDate(featured, now)
 
   return (
     <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-mist border-t border-border-soft">
