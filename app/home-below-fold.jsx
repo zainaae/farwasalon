@@ -13,7 +13,7 @@ import { formatPrice } from '../src/data.js'
 import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK } from '../src/data.js'
+import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK, MONTHLY_APPOINTMENTS } from '../src/data.js'
 import { EDITORIAL_PHOTOS } from '../src/salon-media.js'
 import { getGbpStatsForDisplay, getManualReviewsPayload } from '../lib/google-reviews.js'
 
@@ -108,8 +108,8 @@ function StatsStrip() {
               {[
                 { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
                 { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Specialities, one roof' },
-                { display: String(SERVICE_COUNT) + '+', final: SERVICE_COUNT, label: 'Services, every price printed' },
-                { display: `${GOOGLE_GBP_STATS.rating}★`, final: null, label: 'Rated by Karachi on Google' },
+                { display: String(SERVICE_COUNT), final: SERVICE_COUNT, label: 'Services, every price printed' },
+                { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-PK')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
               ].map(({ display, final, label }) => (
                 <div key={label} className="min-w-0">
                   <p className="font-['Unbounded'] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none">
@@ -175,8 +175,28 @@ function EditorialSlideshow() {
   )
 }
 
+/** The panel's video exists only to answer a hover. A touch device never
+ *  hovers, so on mobile it was 753 KB of metered data — more than three times
+ *  the page's entire gzipped JS — downloaded to sit still behind a text list.
+ *  `(hover: hover)` is the exact capability it depends on, so that is the gate.
+ *  Same reduced-motion and desktop checks as the hero video, for the same
+ *  reasons. */
+function useHoverVideoEnabled() {
+  const [enabled, setEnabled] = useState(false)
+  useEffect(() => {
+    queueMicrotask(() => {
+      const canHover = window.matchMedia('(hover: hover)').matches
+      const desktop = window.matchMedia('(min-width: 768px)').matches
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (canHover && desktop && !reduce) setEnabled(true)
+    })
+  }, [])
+  return enabled
+}
+
 function ServiceMediaPanel({ hovered }) {
   const activeVideo = hovered ? CAT_META[hovered]?.video : null
+  const videoEnabled = useHoverVideoEnabled()
 
   return (
     <div className="relative w-full h-full bg-[#0d0609]">
@@ -190,15 +210,17 @@ function ServiceMediaPanel({ hovered }) {
         style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
         aria-hidden
       />
-      <LazyVideo
-        src="/ct.mp4"
-        muted
-        loop
-        playsInline
-        aria-hidden
-        className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
-        style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
-      />
+      {videoEnabled && (
+        <LazyVideo
+          src="/ct.mp4"
+          muted
+          loop
+          playsInline
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
+          style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
+        />
+      )}
       {hovered && !CAT_META[hovered]?.video && (
         <Image
           key={hovered}
@@ -211,7 +233,7 @@ function ServiceMediaPanel({ hovered }) {
           aria-hidden="true"
         />
       )}
-      {activeVideo && (
+      {activeVideo && videoEnabled && (
         <video
           key={activeVideo}
           src={activeVideo}
@@ -221,10 +243,10 @@ function ServiceMediaPanel({ hovered }) {
         />
       )}
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 bg-gradient-to-t from-ink/80 to-transparent z-10">
-        <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-all duration-300">
+        <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-colors duration-300">
           {hovered ?? 'Farwa Beauty Salon'}
         </p>
-        <p className="text-white font-['Syne'] font-bold text-sm transition-all duration-300">
+        <p className="text-white font-['Syne'] font-bold text-sm transition-colors duration-300">
           {hovered ? `${SERVICES[hovered]?.length} services` : 'PECHS, Karachi'}
         </p>
       </div>
@@ -251,7 +273,7 @@ function FeaturedServices() {
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="shrink-0 self-start sm:self-auto">
             <Link href="/services"
-              className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-all duration-300">
+              className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-colors duration-300">
               View All <ArrowUpRight className="w-3 h-3" />
             </Link>
           </m.div>
@@ -321,7 +343,7 @@ function FeaturedServices() {
                             : `${SERVICES[cat].length} services`
                         })()}
                       </span>
-                      <ArrowUpRight className="w-3.5 h-3.5 text-stone/40 group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200" />
+                      <ArrowUpRight className="w-3.5 h-3.5 text-stone/40 group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-[transform,color] duration-200" />
                     </div>
                   </Link>
                 </m.div>
@@ -616,7 +638,7 @@ function TestimonialsPreview() {
                     aria-selected={reviewIdx === i}
                     aria-label={`Show review by ${r.name}`}
                     onClick={() => setReviewIdx(i)}
-                    className={`h-1.5 rounded-full transition-all ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30 hover:bg-stone/50'}`}
+                    className={`h-1.5 rounded-full transition-[width,background-color] ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30 hover:bg-stone/50'}`}
                   />
                 ))}
               </div>
@@ -688,7 +710,7 @@ function CtaBand() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
             <Link
               href="/book"
-              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-all duration-300 w-full sm:w-auto justify-center sm:justify-start"
+              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-[background-color,transform] duration-300 w-full sm:w-auto justify-center sm:justify-start"
             >
               Book an Appointment <ArrowUpRight className="w-4 h-4 shrink-0" />
             </Link>
@@ -744,6 +766,17 @@ function FounderNote() {
   )
 }
 
+/* Server-rendered. This used to load through a `dynamic(..., { ssr: false })`
+   wrapper behind a requestIdleCallback gate, which meant the site's most
+   important URL shipped 55 words of HTML and not a single <h2> — no services,
+   no reviews, no internal links — while every other page on the site rendered
+   its content server-side. The Performance export has / at 262 impressions and
+   3.4% CTR, the highest-impression page on the site.
+
+   It is still a client component (filter state, the review carousel), and
+   client components server-render unless you opt out. The opt-out was the
+   whole problem. The eight sections already carry `.cv-auto`
+   (content-visibility: auto), so offscreen ones cost nothing to render. */
 export default function HomeBelowFold() {
   return (
     <>

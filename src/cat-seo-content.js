@@ -1,10 +1,10 @@
 /* ─── Unique SERP title + meta description per service category ──── */
 export const CAT_SEO = {
   'Threading': {
-    title: 'Eyebrow Threading PECHS — From Rs 100',
+    title: 'Eyebrow Threading Karachi Rs 200 — Women-Only',
     h1: 'Eyebrow Threading in PECHS, Karachi',
     metaDesc:
-      'Eyebrow & face threading from Rs 100 at Farwa Beauty Salon, PECHS Karachi. Precise brows since 2008 — walk in or book online today.',
+      'Eyebrow threading Rs 200, upper lip Rs 150, full face Rs 1,200 at Farwa PECHS — a women-only studio since 2008. Walk in or book online.',
   },
   'Rica Hot Wax': {
     title: 'Rica Hot Wax PECHS — From Rs 150',
@@ -13,10 +13,10 @@ export const CAT_SEO = {
       'Gentle Rica hot wax from Rs 150 at Farwa Beauty Salon, PECHS Karachi. Italian stripless wax for face & sensitive skin. Book online.',
   },
   'Honey Wax': {
-    title: 'Honey Wax PECHS — From Rs 400',
-    h1: 'Honey Wax in PECHS, Karachi',
+    title: 'Full Body Wax Karachi Rs 2,800 — Honey Wax',
+    h1: 'Full Body & Honey Wax in PECHS, Karachi',
     metaDesc:
-      'Honey wax from Rs 400 · full body Rs 2,800 at Farwa PECHS. Compare with Rica body wax — printed PKR, women-only studio. Book online.',
+      'Full body honey wax Rs 2,800 (60 min) at Farwa PECHS — arms, legs, underarms, stomach, back, hips. Women-only studio, printed rates, book online.',
   },
   'Rica Wax': {
     title: 'Rica Wax PECHS Karachi — From Rs 600',
@@ -55,25 +55,39 @@ export const CAT_SEO = {
       '11 professional facials from Rs 1,400 at Farwa Beauty Salon, PECHS Karachi. Whitening, HD, organic & Janssen. Book your glow-up.',
   },
   'Nails': {
-    title: 'Manicure Pedicure Karachi — From Rs 300',
+    title: 'Mani & Pedi Karachi — 18 Options from Rs 300',
     h1: 'Manicure & Pedicure in PECHS, Karachi',
     metaDesc:
       'Manicure & pedicure price list Karachi — SPA Rs 1,400, French Rs 1,600 at Farwa PECHS. Commercial rates, book online today.',
   },
+  /* /bridal owns "bridal makeup Karachi" with its packages hero; this page is
+     the itemised menu, so the titles must not collide.
+     Retitled twice on 2026-07-31. The original led with PECHS, which none of
+     the feeding queries contain. The first replacement, "Bridal Services List
+     Karachi — From Rs 8,000", fixed that and introduced two worse problems:
+     "Services List" is warehouse vocabulary no bride types, and Rs 8,000 is the
+     TRIAL price — the full package is Rs 25,000, so the cheapest number on the
+     menu was being used as the headline on a page about packages. That is the
+     same bait the threading "from Rs 100" title was, and it was fixed the same
+     morning it was introduced.
+     Mehndi, Nikah and Barat are the words Karachi brides actually search, and
+     verified competitor research found almost no salon publishing rates against
+     them — Kashee's, Nabila and Nisha are all call-for-price. That gap is the
+     thing worth owning. */
   'Bridal': {
-    title: 'Bridal Makeup Karachi — From Rs 8,000',
+    title: 'Bridal Karachi — Mehndi, Nikah & Barat Rates',
     h1: 'Bridal Makeup in PECHS, Karachi',
     metaDesc:
-      'Bridal makeup Karachi from Rs 8,000 — trials, mehndi, engagement & full package Rs 25,000 at Farwa PECHS. Women-only studio.',
+      'Every bridal service priced individually at Farwa PECHS — mehndi, nikah, engagement looks and trials from Rs 8,000. Women-only studio in Block 3.',
   },
   'Hair': {
-    title: 'Haircut Colour Karachi — From Rs 1,500',
+    title: 'Haircut & Colour Karachi — Cuts from Rs 2,000',
     h1: 'Haircut, Colour & Blowdry in PECHS',
     metaDesc:
-      'Haircut & blowdry Rs 2,000 · colour/balayage from Rs 4,000 at Farwa PECHS. Women hair salon Karachi — book online today.',
+      'Haircut & blowdry from Rs 2,000 · colour from Rs 4,000 at Farwa PECHS. Hair rates start there — length and density decide the rest.',
   },
   'Eyebrow Tattoo': {
-    title: 'Microblading Karachi — From Rs 20,000',
+    title: 'Microblading Karachi — Rs 20,000, 12-18 Months',
     h1: 'Microblading in PECHS, Karachi',
     metaDesc:
       'Microblading & powder brows from Rs 20,000 at Farwa Beauty Salon, PECHS Karachi. Semi-permanent brows lasting 12–18 months. Book online.',
@@ -122,7 +136,7 @@ export const CAT_FAQS = {
     { q: 'Should I thread or wax my face before a wedding?', a: 'For brows and upper lip we recommend threading — cleaner shape, less redness for photos. Prefer wax on the face? Use Rica hot wax from Rs 150 a few days before the event. See our threading vs waxing guide, then book the look that fits your skin.' },
   ],
   'Nails': [
-    { q: 'How long does a manicure or pedicure take?', a: 'A standard manicure takes about 30 minutes, while a pedicure takes around 40 minutes. SPA Manicure and SPA Pedicure (Rs 1,400 each) take about 45 minutes.' },
+    { q: 'How long does a manicure or pedicure take?', a: 'A standard manicure takes about 30 minutes, while a pedicure takes around 35 minutes. SPA Manicure and SPA Pedicure (Rs 1,400 each) take about 45 minutes.' },
     { q: 'What is included in the SPA Pedicure?', a: 'Our SPA Pedicure (Rs 1,400) includes a foot soak, exfoliation scrub, cuticle care, callus removal, hydrating mask, massage, and polish application. It\'s a full pampering experience for tired feet.' },
     { q: 'What is included in the SPA Manicure?', a: 'SPA Manicure (Rs 1,400, ~45 min) covers soak, scrub, cuticle care, mask, hand massage, and polish — the upgrade from Normal Manicure (Rs 900).' },
     { q: 'Do you offer nail art and custom designs?', a: 'Yes — our nail artists create custom designs, French tips, ombre, marble effects, and seasonal styles. Bring reference photos or let our team design something unique for you.' },
@@ -133,7 +147,7 @@ export const CAT_FAQS = {
     { q: 'Do you do bridal hair styling?', a: 'Yes — bridal hair styling (Rs 8,000) includes a style consultation, blowout prep, full styling (updos, curls, braids, or sleek looks), and finishing spray. It\'s also part of our Full Bridal Package.' },
     { q: 'What hair colouring options do you offer?', a: 'We offer full-colour, highlights, balayage, and toning starting at Rs 4,000. Colour consultations are included to ensure the perfect shade for your skin tone and hair type.' },
     { q: 'How much is a blowdry only?', a: 'Blowdry & Styling is Rs 1,500 (~45 min). Haircut & Blowdry is Rs 2,000 when you want a cut in the same visit.' },
-    { q: 'Do you offer keratin treatments?', a: 'Keratin is not a listed SKU on our menu. We offer protein treatments, Wellaplex bond repair, and hair-fall protocols — see Hair Treatments and ask us what fits your hair without inventing services we do not run.' },
+    { q: 'Do you offer keratin treatments?', a: 'Yes — but it is quoted per head rather than printed, because the honest price depends on your hair length and density. WhatsApp us a photo for a binding quote. Fixed-price repair options are printed: protein treatment Rs 2,000, Wellaplex Rs 3,000, hair-fall protocols Rs 3,000.' },
   ],
   'Eyebrow Tattoo': [
     { q: 'How long does microblading last?', a: 'Microblading typically lasts 12–18 months depending on skin type, sun exposure, and aftercare. Oily skin types may need a touch-up sooner. We provide a complete aftercare kit with every session.' },
@@ -201,6 +215,11 @@ export const CAT_PAGE_BLOCKS = {
     { type: 'p', text: 'White Glow / Acne cleansing ~35 min (from Rs 1,200 / Rs 1,400). HD Cleansing ~40 min (Rs 1,700). Janssen Whitening Cleansing ~45 min (Rs 3,000). Congested skin: cleanse before a full facial.' },
   ],
   'Honey Wax': [
+    { type: 'h2', text: 'Full body wax: what it costs and what it covers' },
+    { type: 'p', text: 'Full Body Honey Wax is Rs 2,800 and takes about an hour. That covers arms, legs, underarms, stomach, back, hips and the back of the neck — the whole body in one appointment rather than area by area. Full Body Rica Wax is Rs 4,000 if you want the gentler stripless system.' },
+    { type: 'p', text: 'Worth knowing what the market charges: the at-home services advertising full body waxing in Karachi are around Rs 4,999 for honey and Rs 6,999 for Rica. We are a studio rather than a home visit, so you travel to us — but you pay Rs 2,800 and the price is printed rather than quoted on the phone.' },
+    { type: 'h2', text: 'Before you book' },
+    { type: 'p', text: 'Hair needs about 5mm, roughly two weeks of growth, or the wax cannot grip and the session feels patchy. That is the single most common reason a full body appointment disappoints, and it has nothing to do with which wax you chose. Book two to three days before an event rather than the morning of.' },
     { type: 'h2', text: 'Honey vs Rica — pick clearly' },
     { type: 'p', text: 'Honey wax is strip wax for body zones (full body Rs 2,800). Prefer less pull or sensitive skin? Book Rica body wax (full body Rs 4,000) or Rica hot wax for the face. See the Rica wax menu for the premium strip option.' },
   ],
@@ -218,7 +237,7 @@ export const CAT_PAGE_BLOCKS = {
   ],
   Hair: [
     { type: 'h2', text: 'Cut, colour & balayage' },
-    { type: 'p', text: 'Haircut & blowdry Rs 2,000. Blowdry only Rs 1,500. Colour / highlights / balayage from Rs 4,000. Bridal hair Rs 8,000. Keratin is not a listed SKU — ask about protein and Wellaplex instead.' },
+    { type: 'p', text: 'Haircut & blowdry from Rs 2,000. Blowdry only from Rs 1,500. Colour / highlights / balayage from Rs 4,000. Bridal hair from Rs 8,000. Hair rates start there and depend on length and density — we confirm before we start. Keratin is offered but quoted per head, not printed — send a photo on WhatsApp. Protein Rs 2,000 and Wellaplex Rs 3,000 are printed.' },
   ],
   'Eyebrow Tattoo': [
     { type: 'h2', text: 'What every session includes' },
@@ -231,7 +250,7 @@ export const CAT_PAGE_BLOCKS = {
     { type: 'p', text: 'Humid + congested: cleanse first. Event glow: HD Whitening Rs 3,000. Stubborn pigmentation: Janssen Whitening Rs 5,500. Sensitive: Herbal Organic Rs 1,600. Many clients add eyebrow threading in the same visit when timing allows — book both online.' },
   ],
   Threading: [
-    { type: 'h2', text: 'Hygiene block' },
+    { type: 'h2', text: 'Hygiene, and thread vs wax on the face' },
     { type: 'p', text: 'Fresh cotton thread for every client, sanitised scissors/tweezers, and a clean chair between guests. Threading vs face wax: choose thread for precision brows; Rica hot wax from Rs 150 if you prefer wax on the face.' },
   ],
 }

@@ -14,6 +14,26 @@
   --shadow-soft: 0 2px 12px rgba(13, 13, 13, 0.05);
   --shadow-card: 0 8px 32px rgba(13, 13, 13, 0.08);
 
+  /* Independence Day campaign — sampled from the Freedom Deal poster so the
+     page and the artwork share one palette. Used only by /freedom-deal and the
+     home strip, both of which stop rendering after 14 Aug. */
+  --azadi-paper: #f0ffd8;
+  --azadi-tint:  #d4ecba;
+  --azadi-green: #1c7d47;
+  --azadi-deep:  #102d1b;
+  --azadi-mid:   #174926;
+  --azadi-lift:  #f6ffe6;   /* gradient high stop */
+  --azadi-fall:  #e6f7c8;   /* gradient low stop */
+  --azadi-fall2: #e9f8ce;   /* strip low stop */
+
+  /* Motion language — exponential ease-out for entrances, three duration
+     buckets. Browser defaults (ease, ease-in-out) read as uncrafted. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.7, 0, 0.84, 0);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long:  420ms;
+
   /* shadcn tokens */
   --background: 30 20% 99%;
   --foreground: 0 0% 5%;
@@ -482,10 +502,17 @@
   .input-field::placeholder {
     color: rgba(107, 95, 87, 0.55);
   }
+  /* Pointer focus keeps the quiet ink ring. Keyboard focus must still get the
+     site-standard 2px gold outline — this rule outranks the global
+     input:focus-visible (0,2,0 vs 0,1,1), so it has to restore it itself. */
   .input-field:focus {
     outline: none;
     border-color: var(--ink);
     box-shadow: 0 0 0 1px var(--ink);
+  }
+  .input-field:focus-visible {
+    outline: 2px solid var(--accent-gold);
+    outline-offset: 3px;
   }
   .panel-muted {
     background: rgba(248, 245, 241, 0.85);
@@ -702,7 +729,10 @@
 }
 .skip-link:focus-visible {
   top: 12px;
-  outline: 2px solid #c9a98a;
+  /* --accent-gold-deep, 5.3:1 on white. #c9a98a measured 2.20:1, under the
+     3:1 WCAG 2.4.11 floor for focus indicators — and this is the ring on almost
+     every interactive element on the site. */
+  outline: 2px solid var(--accent-gold-deep);
   outline-offset: 2px;
 }
 
@@ -715,7 +745,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #c9a98a;
+  outline: 2px solid var(--accent-gold-deep);
   outline-offset: 3px;
   border-radius: 1px;
 }
@@ -815,4 +845,134 @@ button.tap-safe,
 [role="button"].tap-safe,
 [role="tab"].tap-safe {
   min-width: 44px;
+}
+
+/* ── Independence Day campaign (/freedom-deal + home strip) ──────────
+   Scoped, seasonal, and self-removing: the components that use these
+   classes stop rendering after 14 Aug, so the styles go unused rather
+   than needing a cleanup pass. */
+.azadi-hero {
+  position: relative;
+  isolation: isolate;
+  /* Two-stop field + a single soft bloom behind the figure. Deliberately not
+     an aurora mesh: one hue, low chroma, bloom confined to the upper right. */
+  background:
+    radial-gradient(70% 85% at 88% 8%, rgba(28, 125, 71, 0.20) 0%, rgba(28, 125, 71, 0) 62%),
+    radial-gradient(90% 70% at 4% 96%, rgba(23, 73, 38, 0.10) 0%, rgba(23, 73, 38, 0) 58%),
+    linear-gradient(158deg, var(--azadi-lift) 0%, var(--azadi-paper) 46%, var(--azadi-fall) 100%);
+  border-bottom: 1px solid var(--azadi-tint);
+}
+/* Grain — texture you can barely see, not decoration (0.055 opacity). */
+.azadi-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 170px;
+}
+
+/* ── Page-load orchestration — one sequence, staggered by DOM index,
+      capped under 500ms. transform + opacity only. ── */
+.azadi-in {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: azadiIn var(--dur-long) var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+@keyframes azadiIn {
+  to { opacity: 1; transform: none; }
+}
+.azadi-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--azadi-green);
+  display: inline-block;
+}
+.azadi-display {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.6rem, 8vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+  color: var(--azadi-deep);
+  overflow-wrap: anywhere;
+}
+.azadi-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 48px;
+  padding: 0.95rem 1.75rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--azadi-paper);
+  background: var(--azadi-deep);
+  border: 1px solid var(--azadi-deep);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.azadi-btn {
+  transition:
+    background-color var(--dur-short) var(--ease-out),
+    border-color var(--dur-short) var(--ease-out),
+    color var(--dur-short) var(--ease-out),
+    transform var(--dur-micro) var(--ease-out);
+}
+.azadi-btn:hover { background: var(--azadi-green); border-color: var(--azadi-green); transform: translateY(-1px); }
+.azadi-btn:active { transform: translateY(0); }
+.azadi-btn--ghost {
+  color: var(--azadi-deep);
+  background: transparent;
+}
+.azadi-btn--ghost:hover { background: var(--azadi-tint); border-color: var(--azadi-deep); color: var(--azadi-deep); }
+
+/* Home strip — same language, compressed to a band */
+.azadi-strip {
+  background:
+    radial-gradient(80% 150% at 88% 50%, rgba(28, 125, 71, 0.18) 0%, rgba(28, 125, 71, 0) 62%),
+    linear-gradient(100deg, var(--azadi-lift) 0%, var(--azadi-paper) 55%, var(--azadi-fall2) 100%);
+  border-top: 1px solid var(--azadi-tint);
+  border-bottom: 1px solid var(--azadi-tint);
+}
+.azadi-strip-figure {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2.75rem, 9vw, 4.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--azadi-green);
+}
+.azadi-strip-figure span { font-size: 0.4em; vertical-align: super; letter-spacing: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .azadi-in {
+    animation: azadiInReduced 150ms linear forwards;
+    animation-delay: 0s;
+    transform: none;
+  }
+  @keyframes azadiInReduced { to { opacity: 1; } }
+  .azadi-btn:hover, .azadi-btn:active { transform: none; }
+}
+
+/* Poster mat — the artwork is pale green on a pale green field, so it needs a
+   paper edge to read as a printed object rather than dissolving into the page. */
+.azadi-mat {
+  background: #fff;
+  padding: 0.55rem;
+  max-width: 460px;
+  box-shadow:
+    0 1px 2px rgba(16, 45, 27, 0.10),
+    0 12px 28px -8px rgba(16, 45, 27, 0.22);
+  border: 1px solid var(--azadi-tint);
+}
+@media (min-width: 768px) {
+  .azadi-mat { padding: 0.7rem; }
 }

@@ -35,6 +35,13 @@ export function waLinkBooking(names = [], extra = {}) {
 export const PHONE_RE = /^(\+?92|0)?3\d{2}[\s-]?\d{7}$/
 
 /* ─── Founding ─────────────────────────────────────────────────── */
+/** Monthly appointments, from the salon's own appointment book (owner-supplied,
+ *  July 2026). Stated as appointments rather than "happy customers" because the
+ *  book records appointments — satisfaction is not a number anyone can check,
+ *  and this site's whole position is that its numbers are checkable.
+ *  Update when the real figure moves. Do not round it upward. */
+export const MONTHLY_APPOINTMENTS = 1000
+
 export const FOUNDING_YEAR = 2008
 export const YEARS_ACTIVE  = new Date().getFullYear() - FOUNDING_YEAR
 
@@ -44,6 +51,16 @@ export const formatPrice = (pkr) => {
   if (pkr == null) return null
   return `Rs ${Number(pkr).toLocaleString('en-US')}`
 }
+/** Price for display, honouring `fromPrice`. Hair services depend on length and
+ *  density, so their printed rate is a floor. Everywhere a price is shown uses
+ *  this rather than formatPrice directly, so the qualifier cannot appear on the
+ *  menu but go missing in the booking flow. */
+export const formatServicePrice = (service) => {
+  if (!service || service.pricePkr == null) return null
+  const price = formatPrice(service.pricePkr)
+  return service.fromPrice ? `from ${price}` : price
+}
+
 export const formatDuration = (min) => {
   if (min == null) return null
   if (min < 60) return `${min} min`
@@ -53,8 +70,28 @@ export const formatDuration = (min) => {
 }
 
 /* ─── Analytics helper ────────────────────────────────────────── */
+/* Events that mean money. Mapped to Meta's standard event names so the pixel
+   can optimise delivery toward them; everything else stays Plausible-only. */
+const META_EVENTS = {
+  BookingCompleted: 'Schedule',
+  BookingStarted: 'InitiateCheckout',
+  WhatsAppIntent: 'Contact',
+  CallIntent: 'Contact',
+}
+
 export function track(event, props) {
   window.plausible?.(event, { props })
+
+  const metaEvent = META_EVENTS[event]
+  if (metaEvent && typeof window.fbq === 'function') {
+    /* Value + currency only where a real basket exists — Meta uses them to
+       optimise for higher-value bookings, and inventing them would poison it. */
+    const payload =
+      props?.value != null
+        ? { value: Number(props.value) || 0, currency: 'PKR', content_name: props.service }
+        : { content_name: props?.service || props?.from }
+    window.fbq('track', metaEvent, payload)
+  }
 }
 
 /* ─── Deep-link slugs ─────────────────────────────────────────── */

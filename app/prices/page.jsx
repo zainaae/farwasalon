@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { SERVICES, CAT_SLUGS, formatPrice, formatDuration, YEARS_ACTIVE } from '../../src/data.js'
+import { SERVICES, CAT_SLUGS, formatServicePrice, formatDuration, YEARS_ACTIVE } from '../../src/data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import {
@@ -8,6 +8,8 @@ import {
   getAggregateRating,
 } from '../../lib/business-schema.js'
 import { PRICES_PAGE_FAQS } from '../../src/faq-data.js'
+import QuoteBuilder from './quote-builder'
+import DealBanner from '../components/deal-banner'
 
 const title = 'Salon Price List Karachi 2026 — From Rs 100 | Farwa'
 const description =
@@ -57,6 +59,10 @@ export default function PricesPage() {
           </a>
         </div>
 
+        <div className="-mx-4 sm:-mx-5 md:-mx-10 mb-10">
+          <DealBanner />
+        </div>
+
         <nav aria-label="Price list categories" className="mb-12 max-w-4xl">
           <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2.5">Jump to category</p>
           <ul className="tab-scroller text-sm font-['Inter'] pb-1">
@@ -78,6 +84,8 @@ export default function PricesPage() {
             </Link>
           </p>
         </nav>
+
+        <QuoteBuilder />
 
         <section className="mb-12 panel-soft p-5 md:p-6 shadow-soft max-w-3xl" aria-labelledby="prices-bridal-strip">
           <h2 id="prices-bridal-strip" className="font-['Syne'] font-semibold text-ink text-lg mb-2">
@@ -121,11 +129,11 @@ export default function PricesPage() {
                   {SERVICES[cat].map((s) => (
                     <tr key={s.id} className="border-b border-border-soft">
                       <td className="py-2.5 pr-3 text-ink text-[14px] sm:text-[15px] font-['Inter'] font-light">{s.name}</td>
-                      <td className="py-2.5 pr-3 text-right text-stone/80 text-[12px] font-['Inter'] whitespace-nowrap hidden sm:table-cell">
+                      <td className="py-2.5 pr-3 text-right text-stone/80 text-[12px] font-['Inter'] whitespace-nowrap tabular-nums hidden sm:table-cell">
                         {s.durationMinutes ? formatDuration(s.durationMinutes) : ''}
                       </td>
-                      <td className="py-2.5 text-right font-['Unbounded'] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap">
-                        {formatPrice(s.pricePkr)}
+                      <td className="py-2.5 text-right font-['Unbounded'] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap tabular-nums">
+                        {formatServicePrice(s)}
                       </td>
                     </tr>
                   ))}
@@ -170,6 +178,12 @@ export default function PricesPage() {
         <p className="mt-10 text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone/80 max-w-2xl">
           All prices in Pakistani Rupees (Rs). Cash, JazzCash and EasyPaisa accepted at the salon.
           Listed rates are starting prices, not a tax invoice.
+        </p>
+        <p className="mt-4 text-[12px] text-stone font-['Inter'] font-light max-w-2xl">
+          The special works — <Link href="/blog/party-makeup-karachi-guide" className="link-underline text-ink font-medium">party makeup</Link>,
+          custom looks, event hairdos, and <Link href="/blog/keratin-treatment-price-karachi" className="link-underline text-ink font-medium">keratin</Link> —
+          are quoted per person because they genuinely vary.{' '}
+          <a href="#quote" className="link-underline text-ink font-medium">Construct your quote above</a> — it arrives in minutes and is binding once given.
         </p>
         <p className="mt-6 pt-6 border-t border-border-soft text-xs text-stone font-['Inter'] flex flex-wrap gap-x-3 gap-y-2">
           <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>

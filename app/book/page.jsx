@@ -38,7 +38,13 @@ export default function BookPage() {
       <main id="main" className="page-content overflow-x-clip">
         <div className="section-shell section-pad min-h-0 min-w-0 max-w-full overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
           <BookHeading />
-          <p className="text-body" aria-live="polite">Loading booking…</p>
+          {/* Reserve the height the real step-1 picker occupies (measured:
+              ~960px mobile / ~770px desktop). Without it the footer sat one
+              line below the heading and slammed down on hydration — CLS 0.54
+              on the conversion page. */}
+          <div className="min-h-[960px] md:min-h-[770px]">
+            <p className="text-body" aria-live="polite">Loading booking…</p>
+          </div>
         </div>
       </main>
     }>

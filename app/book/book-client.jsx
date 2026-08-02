@@ -4,10 +4,11 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown } from 'lucide-react'
-import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatDuration, PHONE_RE, getAddonsForService } from '../../src/data.js'
+import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { toLocalDateString } from '../../lib/date-local.js'
 import { computeBookingDurationMinutes } from '../../lib/booking-duration.js'
+import { getAttribution, formatAttributionCell } from '../../lib/attribution.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
 
@@ -202,6 +203,15 @@ export default function BookClient() {
   const totalDurationMinutes = selectedService
     ? computeBookingDurationMinutes(selectedService, addonIdsList)
     : 0
+  /* Basket value in PKR — used for the BookingCompleted conversion event, and
+     it is what decides whether the Freedom Deal's Rs 1,400 threshold is met. */
+  const totalPricePkr = selectedService
+    ? (selectedService.pricePkr || 0) +
+      addonIdsList.reduce(
+        (sum, id) => sum + (ALL_SERVICES.find((a) => a.id === id)?.pricePkr || 0),
+        0,
+      )
+    : 0
 
   useEffect(() => {
     if (step !== 1 || !selectedDate || !selectedService) return
@@ -286,6 +296,7 @@ export default function BookClient() {
           clientName: clientName.trim(),
           clientPhone: clientPhone.trim(),
           notes: combinedNotes,
+          source: formatAttributionCell(getAttribution()),
           website,
         }),
       })
@@ -316,18 +327,33 @@ export default function BookClient() {
       try {
         sessionStorage.setItem(
           `farwa-confirm-${data.booking.id}`,
-          JSON.stringify(confirmPayload),
+          JSON.stringify({ ...confirmPayload, cancelToken: data.booking.cancelToken || '' }),
         )
       } catch {
         // ignore private mode
       }
+      /* The cancel token stays out of the URL. Plausible and the Meta Pixel both
+         transmit location.href, so a token in the query string is a bearer
+         credential handed to third parties on every confirmation view — and the
+         customer's name went with it. It is never emailed or written to the
+         sheet, so sessionStorage loses nothing. */
       const params = new URLSearchParams({
         id: data.booking.id,
         date: data.booking.date,
         time: data.booking.time,
         duration: String(confirmPayload.duration),
       })
-      if (data.booking.cancelToken) params.set('token', data.booking.cancelToken)
+
+      /* The conversion. BookingStarted was already tracked at step 1, so this
+         is what makes booking completion rate measurable at all. Fired before
+         the redirect so it survives the navigation. */
+      track('BookingCompleted', {
+        service: data.booking.service,
+        category: selectedService?.category,
+        addons: selectedAddonIds.length,
+        value: totalPricePkr,
+      })
+
       router.push(`/book/confirmation?${params.toString()}`)
     } catch (err) {
       const aborted = err?.name === 'AbortError'
@@ -481,7 +507,7 @@ export default function BookClient() {
                                   </div>
                                   {s.pricePkr != null && (
                                     <span className="shrink-0 text-accent-gold-deep text-sm font-['Inter'] font-semibold">
-                                      {formatPrice(s.pricePkr)}
+                                      {formatServicePrice(s)}
                                     </span>
                                   )}
                                   <span
@@ -509,7 +535,7 @@ export default function BookClient() {
                     <div className="min-w-0">
                       <p className="font-['Syne'] font-bold text-sm text-ink uppercase truncate">{selectedService.name}</p>
                       <p className="text-stone text-[10px] font-['Inter']">
-                        {formatPrice(selectedService.pricePkr)} · {formatDuration(selectedService.durationMinutes)}
+                        {formatServicePrice(selectedService)} · {formatDuration(selectedService.durationMinutes)}
                       </p>
                     </div>
                     <button
@@ -606,7 +632,7 @@ export default function BookClient() {
                       disabled={blocked}
                       title={blockReason || undefined}
                       aria-label={blocked ? `${dayName} ${dateNum} ${monthName} — ${blockReason}` : `${dayName} ${dateNum} ${monthName}`}
-                      className={`tap-safe snap-center shrink-0 min-w-[4.25rem] w-[4.5rem] py-3 border text-center transition-all ${
+                      className={`tap-safe snap-center shrink-0 min-w-[4.25rem] w-[4.5rem] py-3 border text-center transition-colors ${
                         sel
                           ? 'bg-ink text-white border-ink'
                           : blocked
@@ -662,7 +688,7 @@ export default function BookClient() {
                             type="button"
                             onClick={() => available && setSelectedTime(time)}
                             disabled={!available}
-                            className={`tap-safe min-h-[44px] py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-all ${
+                            className={`tap-safe min-h-[44px] py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-colors ${
                               sel
                                 ? 'bg-ink text-white border-ink'
                                 : available
@@ -721,7 +747,7 @@ export default function BookClient() {
                 </p>
                 {selectedService?.pricePkr != null && (
                   <p className="text-accent-gold-deep text-xs font-['Inter'] font-medium mt-0.5">
-                    {formatPrice(selectedService.pricePkr)}
+                    {formatServicePrice(selectedService)}
                   </p>
                 )}
                 {selectedService &&

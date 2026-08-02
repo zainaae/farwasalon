@@ -12,6 +12,7 @@ import {
   getServiceIdByName,
 } from './data.js'
 import { BLOG_POSTS } from './blog-data.js'
+import { formatServicePrice } from './data.js'
 
 describe('CAT_META media files', () => {
   const publicDir = join(__dirname, '..', 'public')
@@ -155,6 +156,38 @@ describe('BLOG_POSTS', () => {
     const slugs = BLOG_POSTS.map(p => p.slug)
     expect(new Set(slugs).size).toBe(slugs.length)
   })
+
+  /* Nine posts once shipped at 108–236 words. Thin content is the leading cause
+     of "Crawled - currently not indexed", it drags quality signals across the
+     whole domain, and it is invisible in review because the page looks fine.
+     This is the floor that keeps stubs from shipping again. */
+  const wordsIn = (post) =>
+    post.content.reduce((n, b) => {
+      if (b.text) n += b.text.split(/\s+/).filter(Boolean).length
+      if (b.items) for (const i of b.items) n += String(i).split(/\s+/).filter(Boolean).length
+      return n
+    }, 0)
+
+  it('no post is thin enough to be a stub', () => {
+    for (const post of BLOG_POSTS) {
+      expect(wordsIn(post), `${post.slug} is only ${wordsIn(post)} words`).toBeGreaterThan(380)
+    }
+  })
+
+  it('readTime is consistent with the actual length', () => {
+    for (const post of BLOG_POSTS) {
+      const claimed = Number(String(post.readTime).match(/\d+/)?.[0])
+      const actual = Math.ceil(wordsIn(post) / 200)
+      expect(Math.abs(claimed - actual), `${post.slug} claims ${claimed} min, reads ~${actual}`).toBeLessThanOrEqual(2)
+    }
+  })
+
+  it('lastModified is never before the publish date', () => {
+    for (const post of BLOG_POSTS) {
+      if (!post.lastModified) continue
+      expect(post.lastModified >= post.date, `${post.slug}`).toBe(true)
+    }
+  })
 })
 
 describe('GALLERY_PHOTOS', () => {
@@ -214,5 +247,34 @@ describe('service id helpers', () => {
 
   it('getServiceIdByName returns null for unknown names', () => {
     expect(getServiceIdByName('Not A Real Service')).toBeNull()
+  })
+})
+
+/* Hair services depend on length and density, so their printed rate is a floor
+   rather than a quote. The qualifier has to be everywhere a price is shown — a
+   menu that says "from Rs 4,000" and a booking screen that says "Rs 4,000" is
+   the surprise-at-the-counter this site exists to avoid. */
+describe('hair prices are marked as starting prices', () => {
+  it('every Hair and Hair Treatments service carries fromPrice', () => {
+    for (const cat of ['Hair', 'Hair Treatments']) {
+      for (const svc of SERVICES[cat]) {
+        expect(svc.fromPrice, `${cat} / ${svc.name}`).toBe(true)
+      }
+    }
+  })
+
+  it('no fixed-price category is marked as variable', () => {
+    for (const cat of ['Threading', 'Nails', 'Massage', 'Facials', 'Cleansing']) {
+      for (const svc of SERVICES[cat]) {
+        expect(svc.fromPrice, `${cat} / ${svc.name} should be a fixed price`).toBeUndefined()
+      }
+    }
+  })
+
+  it('formatServicePrice prefixes only the variable ones', () => {
+    expect(formatServicePrice(SERVICES['Hair'].find((s) => s.name === 'Hair Colour'))).toBe('from Rs 4,000')
+    expect(formatServicePrice(SERVICES['Threading'][0])).toBe('Rs 200')
+    expect(formatServicePrice(null)).toBeNull()
+    expect(formatServicePrice({ pricePkr: null })).toBeNull()
   })
 })

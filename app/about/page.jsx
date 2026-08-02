@@ -1,6 +1,7 @@
 import AboutClient from './about-client'
 import JsonLd from '../json-ld'
 import { YEARS_ACTIVE } from '../../src/data.js'
+import { buildFounderSchema } from '../../lib/business-schema.js'
 
 export const metadata = {
   title: `About Us — ${YEARS_ACTIVE}+ Years of Beauty Expertise in PECHS Karachi`,
@@ -9,21 +10,10 @@ export const metadata = {
   openGraph: { type: 'website', images: [{ url: '/bridal.jpg', width: 1200, height: 630, alt: 'About Farwa Beauty Salon — trusted beauty home in PECHS Karachi since 2008' }] },
 }
 
-const founderSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Rubina',
-  jobTitle: 'Founder & Lead Beautician',
-  worksFor: {
-    '@type': 'BeautySalon',
-    name: 'Farwa Beauty Salon',
-  },
-}
-
 export default function AboutPage() {
   return (
     <>
-      <JsonLd data={founderSchema} />
+      <JsonLd data={buildFounderSchema()} />
       <AboutClient />
     </>
   )

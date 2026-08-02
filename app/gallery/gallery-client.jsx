@@ -15,27 +15,32 @@ export default function GalleryClient() {
       <div className="section-shell section-pad">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border-soft pb-10 md:pb-12">
           <div>
-            <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-              className="eyebrow mb-4">— Gallery</m.p>
+            {/* CSS entrances — framer initial{opacity:0} + overflow-hidden clipped
+                "DO" until hydrate; same LCP fix pattern as /services. */}
+            <p className="hero-fade-up eyebrow mb-4">— Gallery</p>
             <div className="overflow-hidden">
-              <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-                className="display-section text-ink">
-                <span className="block">THE WORK</span> <span className="block">SPEAKS</span>
-              </m.h1>
+              <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
+                <span className="block">WHAT WE</span> <span className="block">DO</span>
+              </h1>
             </div>
+            <p className="hero-fade-up text-body max-w-xl mt-5" style={{ animationDelay: '0.15s' }}>
+              Every service we offer, in one place. Finished looks on real clients go up on
+              our Instagram — we would rather show you those than restage them here.
+            </p>
           </div>
-          <m.a initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
+          <a
             href={IG_LINK} target="_blank" rel="noreferrer"
-            className="link-underline !inline-flex items-center gap-2 shrink-0 text-ink text-xs tracking-wide font-['Inter']">
+            className="hero-fade-up link-underline !inline-flex items-center gap-2 shrink-0 text-ink text-xs tracking-wide font-['Inter']"
+            style={{ animationDelay: '0.2s' }}>
             <IgIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
             <span className="min-w-0">@farwasalon</span>
-          </m.a>
+          </a>
         </div>
       </div>
 
       <section className="section-shell mb-12 md:mb-16" aria-labelledby="gallery-showcase-heading">
         <h2 id="gallery-showcase-heading" className="section-title text-xl md:text-2xl text-center mb-8">
-          Studio highlights
+          Services we offer
         </h2>
         <div className="grid md:grid-cols-3 gap-8 md:gap-6">
           {GALLERY_SHOWCASE_ITEMS.map((item, i) => (

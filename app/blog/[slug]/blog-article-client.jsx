@@ -69,11 +69,19 @@ export default function BlogArticleClient({ slug }) {
     )
   }
 
-  const formatted = new Date(post.date + 'T12:00:00').toLocaleDateString('en-PK', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+  const fmtDate = (d) =>
+    new Date(d + 'T12:00:00').toLocaleDateString('en-PK', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+
+  const formatted = fmtDate(post.date)
+  /* Only shown when the post has genuinely been revised. Stamping "updated
+     today" on every page is the freshness trick every thin affiliate site
+     uses, and readers can tell. */
+  const updated =
+    post.lastModified && post.lastModified !== post.date ? fmtDate(post.lastModified) : null
 
   return (
     <main id="main" className="page-content">
@@ -133,7 +141,18 @@ export default function BlogArticleClient({ slug }) {
               {post.title}
             </h1>
             <p className="text-stone text-sm font-light">
-              By {post.author || 'Rubina'}, Founder · Farwa Beauty Salon · {formatted}
+              By{' '}
+              <Link href="/about#rubina" className="link-underline text-ink font-medium">
+                {post.author || 'Rubina'}
+              </Link>
+              , Founder · Farwa Beauty Salon ·{' '}
+              <time dateTime={post.date}>{formatted}</time>
+              {updated && (
+                <>
+                  {' · Updated '}
+                  <time dateTime={post.lastModified}>{updated}</time>
+                </>
+              )}
             </p>
           </m.header>
 
@@ -212,7 +231,9 @@ export default function BlogArticleClient({ slug }) {
                 <span className="text-ink font-['Syne'] font-bold text-lg">R</span>
               </div>
               <div>
-                <p className="font-['Syne'] font-bold text-sm text-ink">{post.author || 'Rubina'}</p>
+                <p className="font-['Syne'] font-bold text-sm text-ink">
+                  <Link href="/about#rubina" className="link-underline">{post.author || 'Rubina'}</Link>
+                </p>
                 <p className="text-stone text-xs font-['Inter'] mt-0.5">Founder, Farwa Beauty Salon</p>
                 <p className="text-stone text-[13px] font-light font-['Inter'] mt-2 leading-relaxed">
                   {`Rubina founded Farwa Beauty Salon in 2008 and has spent ${YEARS_ACTIVE}+ years perfecting bridal artistry, skincare, and brow techniques in Karachi. She writes to help women make confident beauty decisions.`}

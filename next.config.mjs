@@ -4,8 +4,8 @@ import { getBestLocationRedirects } from './src/location-seo.js'
 const isDev = process.env.NODE_ENV === 'development'
 
 const scriptSrc = isDev
-  ? "'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io"
-  : "'self' 'unsafe-inline' https://plausible.io"
+  ? "'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io https://connect.facebook.net"
+  : "'self' 'unsafe-inline' https://plausible.io https://connect.facebook.net"
 
 // script-src keeps 'unsafe-inline': a nonce-based CSP would force every page to
 // render dynamically (middleware per request), losing static/CDN serving — a bad
@@ -18,7 +18,11 @@ const contentSecurityPolicy = [
   "font-src 'self'",
   "img-src 'self' data: https:",
   'frame-src https://www.google.com',
-  "connect-src 'self' https://plausible.io https://wa.me",
+  /* connect.facebook.net is listed even though the pixel is not enabled yet:
+     the moment NEXT_PUBLIC_META_PIXEL_ID is set in Vercel the pixel injects a
+     script from that host, and without these entries CSP blocks it silently —
+     no error, no events, and nothing obvious to debug. */
+  "connect-src 'self' https://plausible.io https://wa.me https://connect.facebook.net https://www.facebook.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
@@ -49,6 +53,32 @@ const nextConfig = {
   },
   trailingSlash: false,
   redirects: async () => [
+    /* /azadi-sale shipped first and was submitted to IndexNow; the campaign is
+       branded Freedom Deal to match the poster, so the old URL redirects
+       rather than 404s. Both spellings people might type land in the right
+       place. */
+    /* Campaign name aliases. All 301 to the single canonical page rather than
+       existing as separate pages: five near-identical pages competing for the
+       same query is keyword cannibalisation, and Google treats thin
+       location/name variants of one offer as doorway pages. Redirects capture
+       typed traffic, printed URLs and any inbound link with none of that risk. */
+    { source: '/azadi-sale', destination: '/freedom-deal', permanent: true },
+    { source: '/azadi-deal', destination: '/freedom-deal', permanent: true },
+    { source: '/azaadi-sale', destination: '/freedom-deal', permanent: true },
+    { source: '/azadi-offer', destination: '/freedom-deal', permanent: true },
+    { source: '/jashn-e-azadi', destination: '/freedom-deal', permanent: true },
+    { source: '/independence-day-offer', destination: '/freedom-deal', permanent: true },
+    { source: '/independence-sale', destination: '/freedom-deal', permanent: true },
+    { source: '/14-august-sale', destination: '/freedom-deal', permanent: true },
+    { source: '/14-august-offer', destination: '/freedom-deal', permanent: true },
+    {
+      /* Retired: a 151-word post competing with the substantial Rica-vs-honey
+         guide for the same query. Its full-body angle was absorbed there, so
+         this 301 consolidates the signal instead of splitting it. */
+      source: '/blog/full-body-wax-honey-vs-rica-karachi',
+      destination: '/blog/rica-wax-vs-honey-wax-karachi',
+      permanent: true,
+    },
     {
       source: '/team',
       destination: '/about',

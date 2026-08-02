@@ -26,6 +26,13 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
   }
 
+  /* `null` is valid JSON, so request.json() resolves and the catch above never
+     fires — then the first field read throws and the route 500s. `[]` and a
+     bare string reach here too. */
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return NextResponse.json({ error: 'Invalid request body' }, { status: 400 })
+  }
+
   // Honeypot — silent reject on filled fields
   if (body?.website?.trim?.() || body?._hp?.trim?.()) {
     return NextResponse.json({ error: 'Invalid submission' }, { status: 400 })

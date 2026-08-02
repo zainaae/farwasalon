@@ -55,7 +55,7 @@ export const NEIGHBORHOODS = [
     name: 'North Nazimabad',
     detail: 'Worth the trip — clients from North Nazimabad have been coming for years.',
     blurb:
-      'From North Nazimabad, PECHS is typically 25–40 minutes via Shahrah-e-Quaideen / University Road depending on traffic. Regulars still make the trip for bridal trials, eyebrow threading from Rs 200, and published facial rates — one calm women-only floor instead of guessing at a neighbourhood parlour.',
+      'From North Nazimabad, PECHS is typically 25–40 minutes via Shahrah-e-Quaideen / University Road depending on traffic. Regulars still make the trip for bridal trials, eyebrow threading at Rs 200, and published facial rates — one calm women-only floor instead of guessing at a neighbourhood parlour.',
   },
   {
     slug: 'saddar',
@@ -79,70 +79,43 @@ export const TOP_SERVICES = [
   { slug: 'facials', name: 'Facials', category: 'Facials', description: 'Organic, whitening, HD, and anti-ageing facials for every skin type.' },
   { slug: 'hair', name: 'Hair Services', category: 'Hair', description: 'Haircuts, colour, blowdry, styling, and treatments for all hair types.' },
   { slug: 'nails', name: 'Nail Services', category: 'Nails', description: 'Manicures, pedicures, nail art, French tips, and paraffin treatments.' },
-  { slug: 'waxing', name: 'Waxing', category: 'Rica Wax', description: 'Rica hot wax, honey wax, and body waxing for smooth, lasting results.' },
+  /* `categories` because this page promises "Rica hot wax, honey wax and body
+     waxing" and used to render only the Rica menu — so the ten waxing location
+     pages showed Rs 4,000 as the sole full-body price and hid the Rs 2,800
+     honey option, which is the cheapest full body in the Karachi SERP and the
+     reason to click. `category` stays as the primary for schema and slugs. */
+  { slug: 'waxing', name: 'Waxing', category: 'Rica Wax', categories: ['Rica Wax', 'Honey Wax', 'Rica Hot Wax'], description: 'Rica hot wax, honey wax and body waxing — full body from Rs 2,800.' },
 ]
 
 /**
- * Curated local landing pages (54 hubs). Sitemap + static generation use this
- * allowlist only — not the full service × neighborhood matrix.
- * Growth rule: add hubs only with unique neighborhood blurbs (no blank templates).
- */
-export const PRIORITY_LOCATION_SLUGS = [
-  'threading-in-pechs-karachi',
-  'bridal-makeup-in-pechs-karachi',
-  'facials-in-pechs-karachi',
-  'hair-in-pechs-karachi',
-  'nails-in-pechs-karachi',
-  'waxing-in-pechs-karachi',
-  'threading-in-gulshan',
-  'facials-in-gulshan',
-  'bridal-makeup-in-gulshan',
-  'hair-in-gulshan',
-  'nails-in-gulshan',
-  'waxing-in-gulshan',
-  'bridal-makeup-in-clifton-karachi',
-  'facials-in-clifton-karachi',
-  'hair-in-clifton-karachi',
-  'threading-in-clifton-karachi',
-  'nails-in-clifton-karachi',
-  'waxing-in-clifton-karachi',
-  'bridal-makeup-in-dha',
-  'threading-in-dha',
-  'hair-in-dha',
-  'facials-in-dha',
-  'nails-in-dha',
-  'waxing-in-dha',
-  'threading-in-bahadurabad',
-  'bridal-makeup-in-bahadurabad',
-  'facials-in-bahadurabad',
-  'hair-in-bahadurabad',
-  'nails-in-bahadurabad',
-  'waxing-in-bahadurabad',
-  'waxing-in-tariq-road',
-  'threading-in-tariq-road',
-  'facials-in-tariq-road',
-  'bridal-makeup-in-tariq-road',
-  'hair-in-tariq-road',
-  'nails-in-tariq-road',
-  'threading-in-shahrah-e-faisal',
-  'facials-in-shahrah-e-faisal',
-  'bridal-makeup-in-shahrah-e-faisal',
-  'hair-in-shahrah-e-faisal',
-  'bridal-makeup-in-north-nazimabad',
-  'threading-in-north-nazimabad',
-  'facials-in-north-nazimabad',
-  'hair-in-north-nazimabad',
-  'waxing-in-north-nazimabad',
-  'bridal-makeup-in-saddar',
-  'facials-in-saddar',
-  'threading-in-saddar',
-  'hair-in-saddar',
-  'nails-in-saddar',
-  'waxing-in-saddar',
-  'threading-in-korangi',
-  'facials-in-korangi',
-  'bridal-makeup-in-korangi',
-]
+ * Curated local landing pages (54 hubs).
+ *
+ * These were retired on 2026-07-30 on the theory that Google was folding them:
+ * pages sharing a service measured 84-91% identical, and Search Console's
+ * "Alternative page with proper canonical: 48" matched 54 minus the 6 kept
+ * exactly. That arithmetic was a coincidence and the conclusion was wrong.
+ *
+ * The Performance export for 2026-07-14..28 shows these pages earning 321
+ * impressions (13.5% of the site) and 12 clicks (19.7%) at an average position
+ * of 6.4, with 37 of 38 on page one. The six PECHS hubs kept in their place
+ * earned 36 impressions and zero clicks. Restored on 2026-07-31.
+ *
+ * The near-duplicate risk is real and unresolved — it is simply outweighed by
+ * measured page-one rankings. Differentiate them if you want to reduce it; do
+ * not delete them again without query data showing they have stopped earning.
+ *
+ * Derived from the full service x neighbourhood matrix rather than hand-listed.
+ * The hand-maintained list had drifted to 54 of the 60 combinations, and all six
+ * it omitted were live in Google's index and earning — nails-in-korangi at
+ * position 2.5, waxing-in-shahrah-e-faisal at 1.7 — so they were serving 404s
+ * to six clicks' worth of traffic. Every neighbourhood carries a unique blurb,
+ * so there is no combination that cannot be generated honestly.
+ *
+ * Growth rule: a new neighbourhood needs a unique blurb before it is added to
+ * NEIGHBORHOODS; the matrix does the rest.
+ */export const PRIORITY_LOCATION_SLUGS = TOP_SERVICES.flatMap((svc) =>
+  NEIGHBORHOODS.map((loc) => `${svc.slug}-in-${loc.slug}`),
+)
 
 export function parseLocationSlug(slug) {
   const inMatch = slug.match(/^(.+)-in-(.+)$/)
@@ -181,6 +154,7 @@ export function parseLocationSlug(slug) {
 export function getAllLocationServiceSlugs() {
   return [...PRIORITY_LOCATION_SLUGS]
 }
+
 
 /**
  * Permanent redirects for legacy `best-*` matrix URLs.

@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
-import { ServiceModal, formatPrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
+import { ServiceModal, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
 import { CAT_FAQS, CAT_SEO, CAT_RELATED, CAT_PAGE_BLOCKS } from '../../../src/cat-seo-content.js'
 import { getRelatedBlogPostsForCategory } from '../../../src/blog-data.js'
@@ -193,7 +193,7 @@ export default function CategoryDetailClient({ categorySlug }) {
                       </p>
                       {(s.pricePkr != null || s.durationMinutes != null) && (
                         <p className="text-accent-gold-deep text-[11px] font-['Inter'] mt-0.5">
-                          {s.pricePkr != null && formatPrice(s.pricePkr)}
+                          {s.pricePkr != null && formatServicePrice(s)}
                           {s.pricePkr != null && s.durationMinutes != null && ' · '}
                           {s.durationMinutes != null && formatDuration(s.durationMinutes)}
                         </p>
@@ -209,7 +209,7 @@ export default function CategoryDetailClient({ categorySlug }) {
                       </p>
                       {(s.pricePkr != null || s.durationMinutes != null) && (
                         <p className="text-accent-gold-deep text-[11px] font-['Inter'] mt-0.5">
-                          {s.pricePkr != null && formatPrice(s.pricePkr)}
+                          {s.pricePkr != null && formatServicePrice(s)}
                           {s.pricePkr != null && s.durationMinutes != null && ' · '}
                           {s.durationMinutes != null && formatDuration(s.durationMinutes)}
                         </p>

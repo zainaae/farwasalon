@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import { SERVICES, CAT_META, CAT_SLUGS, track, formatPrice } from '../../src/data.js'
 import { AREAS_HUB_HREF, getClientFacingAreaLinks } from '../../lib/location-links.js'
@@ -104,19 +103,19 @@ export default function ServicesClient() {
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
       <div className="section-shell section-pad min-h-0">
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
+          {/* CSS entrances — framer's initial{opacity:0} kept this header
+              invisible until hydration, making the intro paragraph a ~5.5s
+              LCP (same failure mode the homepage hero had). */}
           <div className="overflow-hidden">
-            <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-              className="display-section text-ink mb-4">
+            <h1 className="hero-rise display-section text-ink mb-4" style={{ animationDuration: '0.9s' }}>
               OUR<span className="text-border-soft mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>SERVICES
-            </m.h1>
+            </h1>
           </div>
-          <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.7 }}
-            className="text-body max-w-lg mb-6">
+          <p className="hero-fade-up text-body max-w-lg mb-6" style={{ animationDelay: '0.2s' }}>
             Thirteen specialities, 100+ services in PECHS, Karachi — every starting price printed from Rs 100.
             Book online in under a minute, or message us on WhatsApp.
-          </m.p>
-          <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.6 }}
-            className="flex flex-wrap items-center gap-3">
+          </p>
+          <div className="hero-fade-up flex flex-wrap items-center gap-3" style={{ animationDelay: '0.3s' }}>
             <Link href="/book" className="tap-safe btn-primary !py-2.5 !px-5">
               Book online <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
@@ -128,7 +127,7 @@ export default function ServicesClient() {
               className="tap-safe link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors flex items-center">
               Full price list
             </Link>
-          </m.div>
+          </div>
         </div>
 
         <LiveAvailability />

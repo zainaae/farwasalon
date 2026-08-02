@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
 import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Phone, MessageCircle } from 'lucide-react'
-import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatDuration, track, CAT_SLUGS } from './site-config.js'
+import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatServicePrice, formatDuration, track, CAT_SLUGS } from './site-config.js'
 import { useBooking } from './booking-context.jsx'
 import { useNextSlot } from './use-next-slot.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
@@ -223,7 +223,7 @@ export function SmoothyGallery({ photos }) {
             className="tap-safe min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
           >
             <span
-              className={`block h-[2px] transition-all duration-300 ${idx === i ? 'w-8 bg-ink' : 'w-3 bg-stone/30'}`}
+              className={`block h-[2px] transition-[width,background-color] duration-300 ${idx === i ? 'w-8 bg-ink' : 'w-3 bg-stone/30'}`}
             />
           </button>
         ))}
@@ -318,7 +318,7 @@ export function ServiceModal({ service, onClose }) {
             </h2>
             {(service.pricePkr != null || service.durationMinutes != null) && (
               <p className="text-[#c9a98a] text-sm font-['Inter'] font-medium mb-4 flex items-center gap-2">
-                {service.pricePkr != null && <span>{formatPrice(service.pricePkr)}</span>}
+                {service.pricePkr != null && <span>{formatServicePrice(service)}</span>}
                 {service.pricePkr != null && service.durationMinutes != null && <span className="text-stone/30">·</span>}
                 {service.durationMinutes != null && <span>{formatDuration(service.durationMinutes)}</span>}
               </p>
@@ -341,11 +341,11 @@ export function ServiceModal({ service, onClose }) {
             <div className="mt-auto flex flex-col gap-2">
               <button type="button"
                 onClick={() => { booking.addService(service, 'modal'); onClose() }}
-                className="inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone active:scale-[0.98] transition-all duration-300">
+                className="inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone active:scale-[0.98] transition-[background-color,transform] duration-300">
                 <Sparkles className="w-3.5 h-3.5" /> Add to Booking
               </button>
               <a href={waLink(service.name)} target="_blank" rel="noreferrer" onClick={onClose}
-                className="inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-all duration-300">
+                className="inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
                 Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -542,7 +542,7 @@ export function StickyMobileCTA({ hidden = false }) {
         style={{ bottom: 'max(0.6rem, env(safe-area-inset-bottom, 0px))' }}
         aria-label="Quick contact and booking"
       >
-        <div className="sticky-cta-enter pointer-events-auto mx-3.5 flex flex-col rounded-lg bg-ink/92 backdrop-blur-md shadow-lg shadow-ink/25 border border-white/[0.08] min-w-0 max-w-[calc(100vw-1.75rem)] overflow-hidden">
+        <div className="sticky-cta-enter pointer-events-auto mx-3.5 flex flex-col rounded-lg bg-ink/[0.92] backdrop-blur-md shadow-lg shadow-ink/25 border border-white/[0.08] min-w-0 max-w-[calc(100vw-1.75rem)] overflow-hidden">
           {showSlotHint && (
             <p className="px-3 pt-1.5 pb-0 text-center text-[8.5px] tracking-[0.14em] uppercase text-white/40 font-['Inter'] leading-none">
               <span
@@ -556,6 +556,7 @@ export function StickyMobileCTA({ hidden = false }) {
             <a
               href={`tel:+${WA_NUMBER}`}
               aria-label="Call the salon"
+              onClick={() => track('CallIntent', { from: 'sticky-bar' })}
               className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/80 hover:text-white active:scale-[0.98] text-[10px] tracking-[0.12em] uppercase font-medium font-['Inter'] py-2.5 transition-colors"
             >
               <Phone className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
@@ -596,7 +597,7 @@ export function StickyWA({ hidden = false }) {
         style={{ bottom: 'max(0.6rem, env(safe-area-inset-bottom, 0px))' }}>
         <div className="sticky-cta-enter">
           <Link href="/book"
-            className="tap-safe min-h-[44px] pointer-events-auto inline-flex items-center gap-2 bg-ink/92 backdrop-blur-md text-white text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-3 rounded-lg border border-white/[0.08] shadow-lg shadow-ink/25">
+            className="tap-safe min-h-[44px] pointer-events-auto inline-flex items-center gap-2 bg-ink/[0.92] backdrop-blur-md text-white text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-3 rounded-lg border border-white/[0.08] shadow-lg shadow-ink/25">
             Book Online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
         </div>
@@ -614,6 +615,13 @@ export function LazyVideo({ src, poster, className, autoPlay, ...props }) {
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    /* A looping autoplay video with no pause control is exactly what
+       prefers-reduced-motion exists to stop (WCAG 2.2.2). The hero video already
+       checks this; this component did not, so the same user got the animation
+       anyway — and paid for the download. Bailing here also means the source is
+       never attached, so nothing is fetched. */
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
+
     const io = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setVisible(true)
@@ -646,6 +654,6 @@ export function LazyVideo({ src, poster, className, autoPlay, ...props }) {
 }
 
 /* ─── Re-exports ───────────────────────────────────────────────── */
-export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatDuration, CAT_SLUGS }
+export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS }
 export { BookingProvider, useBooking } from './booking-context.jsx'
 export { useNextSlot } from './use-next-slot.js'

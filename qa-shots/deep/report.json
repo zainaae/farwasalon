@@ -1,0 +1,454 @@
+[
+  {
+    "vp": "m375",
+    "route": "/",
+    "file": "m375_home.png",
+    "title": "Beauty Salon PECHS Karachi — From Rs 100 | Farwa",
+    "path": "/",
+    "issues": [
+      "P1 tiny header/sticky taps: View Sukoon mustafa' 16x16; View Shehla Nadeem's 16x16; View Sumera Abbas's  16x16; View Tathira B.'s re 16x16"
+    ],
+    "notes": [
+      "hero-like nodes=6",
+      "videos=1",
+      "below-fold=false"
+    ],
+    "stickyBottom": 0,
+    "h1": "Beauty Salon in PECHSKarachi"
+  },
+  {
+    "vp": "m375",
+    "route": "/#menu",
+    "title": "Beauty Salon PECHS Karachi — From Rs 100 | Farwa",
+    "path": "/",
+    "issues": [
+      "P1 tiny header/sticky taps: View Sukoon mustafa' 16x16; View Shehla Nadeem's 16x16; View Sumera Abbas's  16x16; View Tathira B.'s re 16x16"
+    ],
+    "notes": [
+      "hero-like nodes=6",
+      "videos=1",
+      "below-fold=false"
+    ],
+    "stickyBottom": 0,
+    "h1": "Beauty Salon in PECHSKarachi"
+  },
+  {
+    "vp": "m375",
+    "route": "/book",
+    "file": "m375_book.png",
+    "title": "Book Online — Beauty Salon PECHS Karachi | Farwa",
+    "path": "/book",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "BOOK—ONLINE"
+  },
+  {
+    "vp": "m375",
+    "route": "/bridal",
+    "file": "m375_bridal.png",
+    "title": "Bridal Makeup Karachi — From Rs 8,000 | Farwa",
+    "path": "/bridal",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Bridal Makeup Karachi — Packages from Rs 8,000"
+  },
+  {
+    "vp": "m375",
+    "route": "/prices",
+    "file": "m375_prices.png",
+    "title": "Salon Price List Karachi 2026 — From Rs 100 | Farwa",
+    "path": "/prices",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Salon Price List Karachi 2026 — From Rs 100"
+  },
+  {
+    "vp": "m375",
+    "route": "/prices#scrolled",
+    "title": "Salon Price List Karachi 2026 — From Rs 100 | Farwa",
+    "path": "/prices",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Salon Price List Karachi 2026 — From Rs 100"
+  },
+  {
+    "vp": "m375",
+    "route": "/services",
+    "file": "m375_services.png",
+    "title": "Salon Services Karachi — 100+ From Rs 100 | Farwa",
+    "path": "/services",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "OUR—SERVICES"
+  },
+  {
+    "vp": "m375",
+    "route": "/services/facials",
+    "file": "m375_services_facials.png",
+    "title": "Facials PECHS Karachi — From Rs 1,400 | Farwa",
+    "path": "/services/facials",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Facials in PECHS, Karachi"
+  },
+  {
+    "vp": "m375",
+    "route": "/services/threading",
+    "file": "m375_services_threading.png",
+    "title": "Eyebrow Threading PECHS — From Rs 100 | Farwa",
+    "path": "/services/threading",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Eyebrow Threading in PECHS, Karachi"
+  },
+  {
+    "vp": "m375",
+    "route": "/services/bridal-makeup-in-pechs-karachi",
+    "file": "m375_services_bridal-makeup-in-pechs-karachi.png",
+    "title": "Bridal Makeup in PECHS — From Rs 8,000 | Farwa",
+    "path": "/services/bridal-makeup-in-pechs-karachi",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Bridal Makeup in PECHS, Karachi"
+  },
+  {
+    "vp": "m375",
+    "route": "/gallery",
+    "file": "m375_gallery.png",
+    "title": "Salon Work Gallery — Bridal, Hair & Facials in Karachi | Farwa Beauty Salon",
+    "path": "/gallery",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "THE WORK SPEAKS"
+  },
+  {
+    "vp": "m375",
+    "route": "/contact",
+    "file": "m375_contact.png",
+    "title": "Contact Beauty Salon PECHS — Directions | Farwa",
+    "path": "/contact",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "BOOK YOUR APPOINTMENT"
+  },
+  {
+    "vp": "m375",
+    "route": "/about",
+    "file": "m375_about.png",
+    "title": "About Us — 18+ Years of Beauty Expertise in PECHS Karachi | Farwa Beauty Salon",
+    "path": "/about",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "OUR STORY"
+  },
+  {
+    "vp": "m375",
+    "route": "/faq",
+    "file": "m375_faq.png",
+    "title": "Salon FAQ Karachi — Prices, Parking & Booking | Farwa",
+    "path": "/faq",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "FREQUENTLY ASKED"
+  },
+  {
+    "vp": "m375",
+    "route": "/blog",
+    "file": "m375_blog.png",
+    "title": "Beauty Tips Karachi — Bridal, Skin & Prices | Farwa",
+    "path": "/blog",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "BEAUTY TIPS—& GUIDES"
+  },
+  {
+    "vp": "m375",
+    "route": "/blog/salon-price-list-karachi-2026",
+    "file": "m375_blog_salon-price-list-karachi-2026.png",
+    "title": "Beauty Salon Price List Karachi 2026 — Real PKR | Farwa",
+    "path": "/blog/salon-price-list-karachi-2026",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Beauty Salon Price List Karachi 2026 — Real PKR"
+  },
+  {
+    "vp": "m375",
+    "route": "/beauty-salon-karachi",
+    "file": "m375_beauty-salon-karachi.png",
+    "title": "Beauty Salon Karachi — PECHS · From Rs 100 | Farwa",
+    "path": "/beauty-salon-karachi",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Beauty Salon in Karachi — PECHS"
+  },
+  {
+    "vp": "m375",
+    "route": "/privacy",
+    "file": "m375_privacy.png",
+    "title": "Privacy Policy | Farwa Beauty Salon",
+    "path": "/privacy",
+    "issues": [
+      "P1 tiny header/sticky taps:  32x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "PRIVACY POLICY"
+  },
+  {
+    "vp": "d1280",
+    "route": "/",
+    "file": "d1280_home.png",
+    "title": "Beauty Salon PECHS Karachi — From Rs 100 | Farwa",
+    "path": "/",
+    "issues": [
+      "P1 tiny header/sticky taps: FAQ 38x44; View Sukoon mustafa' 16x16; View Shehla Nadeem's 16x16; View Sumera Abbas's  16x16"
+    ],
+    "notes": [
+      "hero-like nodes=6",
+      "videos=2",
+      "below-fold=false"
+    ],
+    "stickyBottom": 1,
+    "h1": "Beauty Salon in PECHSKarachi"
+  },
+  {
+    "vp": "d1280",
+    "route": "/book",
+    "file": "d1280_book.png",
+    "title": "Book Online — Beauty Salon PECHS Karachi | Farwa",
+    "path": "/book",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "BOOK—ONLINE"
+  },
+  {
+    "vp": "d1280",
+    "route": "/bridal",
+    "file": "d1280_bridal.png",
+    "title": "Bridal Makeup Karachi — From Rs 8,000 | Farwa",
+    "path": "/bridal",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Bridal Makeup Karachi — Packages from Rs 8,000"
+  },
+  {
+    "vp": "d1280",
+    "route": "/prices",
+    "file": "d1280_prices.png",
+    "title": "Salon Price List Karachi 2026 — From Rs 100 | Farwa",
+    "path": "/prices",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Salon Price List Karachi 2026 — From Rs 100"
+  },
+  {
+    "vp": "d1280",
+    "route": "/services",
+    "file": "d1280_services.png",
+    "title": "Salon Services Karachi — 100+ From Rs 100 | Farwa",
+    "path": "/services",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "OUR—SERVICES"
+  },
+  {
+    "vp": "d1280",
+    "route": "/services/facials",
+    "file": "d1280_services_facials.png",
+    "title": "Facials PECHS Karachi — From Rs 1,400 | Farwa",
+    "path": "/services/facials",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Facials in PECHS, Karachi"
+  },
+  {
+    "vp": "d1280",
+    "route": "/services/threading",
+    "file": "d1280_services_threading.png",
+    "title": "Eyebrow Threading PECHS — From Rs 100 | Farwa",
+    "path": "/services/threading",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Eyebrow Threading in PECHS, Karachi"
+  },
+  {
+    "vp": "d1280",
+    "route": "/services/bridal-makeup-in-pechs-karachi",
+    "file": "d1280_services_bridal-makeup-in-pechs-karachi.png",
+    "title": "Bridal Makeup in PECHS — From Rs 8,000 | Farwa",
+    "path": "/services/bridal-makeup-in-pechs-karachi",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Bridal Makeup in PECHS, Karachi"
+  },
+  {
+    "vp": "d1280",
+    "route": "/gallery",
+    "file": "d1280_gallery.png",
+    "title": "Salon Work Gallery — Bridal, Hair & Facials in Karachi | Farwa Beauty Salon",
+    "path": "/gallery",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "THE WORK SPEAKS"
+  },
+  {
+    "vp": "d1280",
+    "route": "/contact",
+    "file": "d1280_contact.png",
+    "title": "Contact Beauty Salon PECHS — Directions | Farwa",
+    "path": "/contact",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "BOOK YOUR APPOINTMENT"
+  },
+  {
+    "vp": "d1280",
+    "route": "/about",
+    "file": "d1280_about.png",
+    "title": "About Us — 18+ Years of Beauty Expertise in PECHS Karachi | Farwa Beauty Salon",
+    "path": "/about",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "OUR STORY"
+  },
+  {
+    "vp": "d1280",
+    "route": "/faq",
+    "file": "d1280_faq.png",
+    "title": "Salon FAQ Karachi — Prices, Parking & Booking | Farwa",
+    "path": "/faq",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "FREQUENTLY ASKED"
+  },
+  {
+    "vp": "d1280",
+    "route": "/blog",
+    "file": "d1280_blog.png",
+    "title": "Beauty Tips Karachi — Bridal, Skin & Prices | Farwa",
+    "path": "/blog",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "BEAUTY TIPS—& GUIDES"
+  },
+  {
+    "vp": "d1280",
+    "route": "/blog/salon-price-list-karachi-2026",
+    "file": "d1280_blog_salon-price-list-karachi-2026.png",
+    "title": "Beauty Salon Price List Karachi 2026 — Real PKR | Farwa",
+    "path": "/blog/salon-price-list-karachi-2026",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Beauty Salon Price List Karachi 2026 — Real PKR"
+  },
+  {
+    "vp": "d1280",
+    "route": "/beauty-salon-karachi",
+    "file": "d1280_beauty-salon-karachi.png",
+    "title": "Beauty Salon Karachi — PECHS · From Rs 100 | Farwa",
+    "path": "/beauty-salon-karachi",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "Beauty Salon in Karachi — PECHS"
+  },
+  {
+    "vp": "d1280",
+    "route": "/privacy",
+    "file": "d1280_privacy.png",
+    "title": "Privacy Policy | Farwa Beauty Salon",
+    "path": "/privacy",
+    "issues": [
+      "P1 tiny header/sticky taps:  34x44; FAQ 38x44"
+    ],
+    "notes": [],
+    "stickyBottom": 0,
+    "h1": "PRIVACY POLICY"
+  }
+]

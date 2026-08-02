@@ -201,13 +201,16 @@ export default function BridalLandingPage() {
               One PECHS studio — brides visit from Tariq Road, Bahadurabad, Gulshan, DHA, Clifton,
               Saddar, North Nazimabad, and Shahrah-e-Faisal. We do not claim other branches.
             </p>
+            {/* The per-area bridal hubs were retired — they were one template with
+                the area name swapped, and Google folded them. These point at
+                pages that actually differ. */}
             <ul className="flex flex-wrap gap-x-4 gap-y-1">
               {[
                 ['Bridal in PECHS', '/services/bridal-makeup-in-pechs-karachi'],
-                ['Bridal near Tariq Road', '/services/bridal-makeup-in-tariq-road'],
-                ['Bridal from Gulshan', '/services/bridal-makeup-in-gulshan'],
-                ['Bridal from DHA', '/services/bridal-makeup-in-dha'],
-                ['Bridal from Clifton', '/services/bridal-makeup-in-clifton-karachi'],
+                ['Bridal packages & prices', '/services/bridal'],
+                ['Near Tariq Road', '/blog/salon-near-tariq-road-pechs'],
+                ['Bridal timeline', '/blog/bridal-beauty-timeline'],
+                ['Mehndi & engagement looks', '/blog/mehndi-engagement-makeup-karachi'],
               ].map(([label, href]) => (
                 <li key={href}>
                   <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink">

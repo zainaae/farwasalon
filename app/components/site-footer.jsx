@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { ArrowUpRight, MessageCircle, Star } from 'lucide-react'
 import { WA_DEFAULT, IG_LINK, MAPS_LINK, CAT_SLUGS } from '../../src/site-config.js'
 import { SALON_ADDRESS_LINES } from '../../lib/business-schema.js'
-import { AREAS_HUB_HREF, getClientFacingAreaLinks } from '../../lib/location-links.js'
+import { AREAS_HUB_HREF, getFooterAreaLinks } from '../../lib/location-links.js'
 import FooterNewsletter from './footer-newsletter.jsx'
 import {
   UrduSignature,
@@ -20,7 +20,7 @@ export default function SiteFooter() {
     label,
     slug,
   }))
-  const areaLinks = getClientFacingAreaLinks()
+  const areaLinks = getFooterAreaLinks()
   return (
     <footer className="bg-white">
       <div className="border-t border-border-soft px-5 md:px-10 py-8 md:py-10">
@@ -100,6 +100,7 @@ export default function SiteFooter() {
                   ['Home', '/'],
                   ['Services', '/services'],
                   ['Price List', '/prices'],
+                  ['Deals', '/deals'],
                   ['Book', '/book'],
                   ['Bridal', '/bridal'],
                   ['Gallery', '/gallery'],

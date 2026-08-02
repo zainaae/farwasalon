@@ -37,7 +37,17 @@ export async function generateMetadata({ params }) {
       ? `${service.slug}-in-${location.slug}`
       : categorySlug
     const locality = location.name.includes('Karachi') ? location.name : `${location.name}, Karachi`
-    const description = `${service.name} in ${locality} — ${service.description} At Farwa Beauty Salon, PECHS. From ${priceFloor}. ★ ${GOOGLE_GBP_STATS.rating} Google. Book online.`
+    /* Google truncates around 155-160 chars, so build the description from the
+       highest-CTR parts first (service + area + price + rating) and only spend
+       what is left on the service blurb — trimmed at a word boundary. */
+    const descTail = ` at Farwa Beauty Salon, PECHS. From ${priceFloor}. ★ ${GOOGLE_GBP_STATS.rating} Google. Book online.`
+    const descHead = `${service.name} in ${locality} — `
+    const blurbBudget = 155 - descHead.length - descTail.length
+    const blurb =
+      service.description.length <= blurbBudget
+        ? service.description
+        : `${service.description.slice(0, Math.max(0, blurbBudget - 1)).replace(/[\s,;—-]+\S*$/, '')}…`
+    const description = `${descHead}${blurb}${descTail}`
     return {
       title: { absolute: title },
       description,
@@ -64,7 +74,16 @@ export async function generateMetadata({ params }) {
   const title = seo?.title
     ? `${seo.title} | Farwa`
     : `${category} PECHS Karachi${priceHint} | Farwa`
-  const description = seo?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS, Karachi. Book online.`
+  /* Location pages have appended "★ 4.6 Google" to their description since
+     launch (see the descTail above); the plain category pages never did — so
+     the highest-impression service pages on the site shipped the weakest
+     snippets. /services/eyebrow-tattoo is 241 impressions at 1.7% CTR. Appended
+     only when it fits the ~155-char budget, so no hand-written description
+     gets truncated to make room for it. */
+  const baseDesc = seo?.metaDesc || `${category} services at Farwa Beauty Salon, PECHS, Karachi. Book online.`
+  const ratingSuffix = ` ★ ${GOOGLE_GBP_STATS.rating} on Google.`
+  const description =
+    baseDesc.length + ratingSuffix.length <= 158 ? `${baseDesc}${ratingSuffix}` : baseDesc
 
   return {
     title: { absolute: title },

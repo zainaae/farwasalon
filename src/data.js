@@ -11,7 +11,9 @@ export {
   PHONE_RE,
   FOUNDING_YEAR,
   YEARS_ACTIVE,
+  MONTHLY_APPOINTMENTS,
   formatPrice,
+  formatServicePrice,
   formatDuration,
   track,
   CAT_SLUGS,
@@ -20,7 +22,16 @@ export {
 
 /* ─── Services ────────────────────────────────────────────────── */
 let _id = 1
-const s = (name, category, pricePkr = null, durationMinutes = null) => ({ id: _id++, name, category, pricePkr, durationMinutes })
+/* `fromPrice` marks a service whose final cost genuinely depends on the head it
+   is done on — hair length and density change how much product and chair time a
+   colour or a treatment takes. Those prices are a floor, not a quote, and the
+   site says so everywhere a price is shown rather than surprising someone at the
+   counter. The blog already explained this ("Why Colour Says From Rs 4,000");
+   the menu now matches it. */
+const s = (name, category, pricePkr = null, durationMinutes = null, opts = {}) => ({
+  id: _id++, name, category, pricePkr, durationMinutes, ...opts,
+})
+const HAIR_DEPENDENT = { fromPrice: true }
 
 export const SERVICES = {
 
@@ -96,11 +107,11 @@ export const SERVICES = {
   ],
 
   'Hair Treatments': [
-    s('Normal Protein Treatment',        'Hair Treatments', 2000, 45),
-    s('Hair Fall Treatment with Ampule', 'Hair Treatments', 3000, 40),
-    s('Dandruff Treatment with Ampule',  'Hair Treatments', 3000, 40),
-    s('Olorchee Treatment',              'Hair Treatments', 2500, 45),
-    s('Wellaplex Stand-Alone Treatment', 'Hair Treatments', 3000, 60),
+    s('Normal Protein Treatment',        'Hair Treatments', 2000, 45, HAIR_DEPENDENT),
+    s('Hair Fall Treatment with Ampule', 'Hair Treatments', 3000, 40, HAIR_DEPENDENT),
+    s('Dandruff Treatment with Ampule',  'Hair Treatments', 3000, 40, HAIR_DEPENDENT),
+    s('Olorchee Treatment',              'Hair Treatments', 2500, 45, HAIR_DEPENDENT),
+    s('Wellaplex Stand-Alone Treatment', 'Hair Treatments', 3000, 60, HAIR_DEPENDENT),
   ],
 
   'Cleansing': [
@@ -111,17 +122,17 @@ export const SERVICES = {
   ],
 
   'Facials': [
-    s('Normal Facial',            'Facials', 1400, 45),
-    s('Herbal Organic Facial',    'Facials', 1600, 50),
-    s('Acne Facial',              'Facials', 1800, 50),
-    s('Whitening Facial',         'Facials', 1900, 55),
-    s('White Glow Facial',        'Facials', 2000, 55),
+    s('Normal Facial',            'Facials', 1400, 45, { desc: "The classic cleanse, exfoliate, massage and mask. Where to start if your skin is behaving and you want it looking rested rather than treated." }),
+    s('Herbal Organic Facial',    'Facials', 1600, 50, { desc: "The gentlest facial on the menu, and what we use on skin that reacts easily or has found other facials too brisk." }),
+    s('Acne Facial',              'Facials', 1800, 50, { desc: "Formulated for congested, breakout-prone skin, with anti-bacterial products. If blackheads are the main problem, a cleansing beforehand does more than moving up this list." }),
+    s('Whitening Facial',         'Facials', 1900, 55, { desc: "Entry-level brightening for dullness and mild unevenness. A noticeable lift without the cost of the cosmeceutical tiers." }),
+    s('White Glow Facial',        'Facials', 2000, 55, { desc: "Brightening with a richer finish than the standard Whitening — the one to pick when you want the glow to read in photographs." }),
     s("T.J's Facial",             'Facials', 2500, 60),
-    s('Whitening Fruit Facial',   'Facials', 2600, 60),
-    s('Oxy Glow Facial',          'Facials', 2800, 60),
-    s('HD Whitening Facial',      'Facials', 3000, 65),
-    s('Ultra Brightening Facial', 'Facials', 3500, 70),
-    s('Janssen Whitening Facial', 'Facials', 5500, 75),
+    s('Whitening Fruit Facial',   'Facials', 2600, 60, { desc: "Fruit-enzyme based brightening, lighter on the skin than the stronger actives further up the menu. Suits skin that wants radiance without intensity." }),
+    s('Oxy Glow Facial',          'Facials', 2800, 60, { desc: "An oxygenating facial for tired, city-dulled skin. The one most clients book when they cannot name what is wrong but the skin looks flat." }),
+    s('HD Whitening Facial',      'Facials', 3000, 65, { desc: "Our most-booked facial above Rs 2,000. High-definition brightening serums give a visible result in a single session that holds two to three weeks — the pre-event choice." }),
+    s('Ultra Brightening Facial', 'Facials', 3500, 70, { desc: "A step up from HD in strength and time, for uneven tone that has not shifted with the lighter tiers." }),
+    s('Janssen Whitening Facial', 'Facials', 5500, 75, { desc: "German cosmeceutical actives that work below the surface rather than on it. Built for long-standing pigmentation across a course of visits — most clients see the change around the third. Not the one to book for a single pre-wedding glow." }),
   ],
 
   'Nails': [
@@ -161,16 +172,16 @@ export const SERVICES = {
   ],
 
   'Hair': [
-    { id: _id++, name: 'Haircut & Blowdry', category: 'Hair', pricePkr: 2000, durationMinutes: 60,
+    { id: _id++, name: 'Haircut & Blowdry', category: 'Hair', pricePkr: 2000, durationMinutes: 60, fromPrice: true,
       desc: 'A precision cut and professional blowdry tailored to your face shape and hair texture.',
       includes: ['Consultation', 'Shampoo & condition', 'Cut & blowdry'] },
-    { id: _id++, name: 'Hair Colour', category: 'Hair', pricePkr: 4000, durationMinutes: 120,
+    { id: _id++, name: 'Hair Colour', category: 'Hair', pricePkr: 4000, durationMinutes: 120, fromPrice: true,
       desc: 'Full-colour, highlights, balayage, or toning — rich, lasting colour applied with care.',
       includes: ['Colour consultation', 'Application', 'Toning & blowdry'] },
-    { id: _id++, name: 'Blowdry & Styling', category: 'Hair', pricePkr: 1500, durationMinutes: 45,
+    { id: _id++, name: 'Blowdry & Styling', category: 'Hair', pricePkr: 1500, durationMinutes: 45, fromPrice: true,
       desc: 'A salon-quality blowdry and finish — smooth, voluminous, or styled exactly as you like.',
       includes: ['Shampoo', 'Blowdry', 'Style & finish'] },
-    { id: _id++, name: 'Bridal Hair Styling', category: 'Hair', pricePkr: 8000, durationMinutes: 120,
+    { id: _id++, name: 'Bridal Hair Styling', category: 'Hair', pricePkr: 8000, durationMinutes: 120, fromPrice: true,
       desc: 'Elegant updos, curls, braids or sleek styles — your perfect wedding hair, exactly as you envisioned.',
       includes: ['Style consultation', 'Blowout prep', 'Full styling', 'Finishing spray'] },
   ],

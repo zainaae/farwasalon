@@ -1,5 +1,10 @@
 import HomeHero from './home-hero'
-import HomeClient from './home-client'
+import DealStrip from './components/deal-strip'
+/* Imported directly rather than through next/dynamic. The chunk is only used
+   on this route, so splitting it measured byte-for-byte identical (787 KB of
+   scripts either way) — Next preloads it for hydration regardless. The
+   indirection bought nothing, so it is gone. */
+import HomeBelowFold from './home-below-fold'
 import JsonLd from './json-ld'
 import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
 import { pageSocialMeta } from '../lib/page-metadata.js'
@@ -26,7 +31,8 @@ export default function HomePage() {
       />
       <main id="main" className="overflow-x-clip max-w-full min-w-0">
         <HomeHero />
-        <HomeClient />
+        <DealStrip />
+        <HomeBelowFold />
       </main>
     </>
   )

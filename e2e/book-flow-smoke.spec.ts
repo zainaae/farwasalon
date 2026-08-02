@@ -17,14 +17,32 @@ test.describe('Book pages smoke', () => {
     await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
   })
 
-  test('/book/cancel returns 200 with valid query params', async ({ page }) => {
-    const res = await page.goto(
-      '/book/cancel?token=smoke&date=2026-06-15&time=14:00&id=FS-SMOKE&service=Threading&name=Test',
-    )
+  test('/book/cancel returns 200 for a booking held in session storage', async ({ page }) => {
+    await seedConfirmation(page, 'FS-SMOKE')
+    const res = await page.goto('/book/cancel?id=FS-SMOKE')
     expect(res?.status()).toBe(200)
     await expect(page.getByRole('heading', { name: /cancel appointment/i })).toBeVisible()
   })
 })
+
+
+/* The cancel page reads everything but the booking id from the payload the
+   confirmation page wrote. The token and the customer name used to ride in the
+   query string, where Plausible and the Meta Pixel both report location.href
+   verbatim. Seed storage the way a real booking would. */
+async function seedConfirmation(page, id: string, extra: Record<string, string> = {}) {
+  await page.addInitScript(
+    ([key, payload]) => sessionStorage.setItem(key as string, payload as string),
+    [`farwa-confirm-${id}`, JSON.stringify({
+      cancelToken: 'test-token',
+      service: 'Threading',
+      name: 'Test',
+      date: '2026-06-15',
+      time: '14:00',
+      ...extra,
+    })],
+  )
+}
 
 test.describe('Booking flow', () => {
   test.beforeEach(async ({ page }) => {
@@ -114,17 +132,16 @@ test.describe('Booking flow', () => {
 
   test('cancel booking with mocked API shows success', async ({ page }) => {
     await mockCancelApi(page)
-    await page.goto(
-      '/book/cancel?token=test&date=2026-06-15&time=14:00&id=FS-TEST&service=Threading&name=Test',
-    )
+    await seedConfirmation(page, 'FS-TEST')
+    await page.goto('/book/cancel?id=FS-TEST')
     await expect(page.getByRole('heading', { name: /cancel appointment/i })).toBeVisible()
     await page.getByRole('button', { name: /yes, cancel my appointment/i }).click()
     await expect(page.getByRole('heading', { name: /cancelled/i })).toBeVisible({ timeout: 15_000 })
     await expect(page.getByText(/appointment has been cancelled/i)).toBeVisible()
   })
 
-  test('cancel page without token or id shows invalid link UI', async ({ page }) => {
-    await page.goto('/book/cancel?date=2026-06-15&time=14:00&service=Threading&name=Test')
+  test('cancel page with no stored token shows invalid link UI', async ({ page }) => {
+    await page.goto('/book/cancel?id=FS-UNKNOWN')
     await expect(page.getByRole('heading', { name: /invalid cancellation link/i })).toBeVisible()
     await expect(page.getByRole('link', { name: /whatsapp the salon/i })).toHaveAttribute(
       'href',
