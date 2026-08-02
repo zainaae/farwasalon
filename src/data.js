@@ -18,6 +18,8 @@ export {
   track,
   CAT_SLUGS,
   slugToCategory,
+  PREFERRED_TIME_OPTIONS,
+  SALON_HOURS,
 } from './site-config.js'
 
 /* ─── Services ────────────────────────────────────────────────── */

@@ -17,7 +17,7 @@ test.describe('Book pages smoke', () => {
     await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
   })
 
-  test('/book/cancel returns 200 for a booking held in session storage', async ({ page }) => {
+  test('/book/cancel returns 200 for a booking held in durable storage', async ({ page }) => {
     await seedConfirmation(page, 'FS-SMOKE')
     const res = await page.goto('/book/cancel?id=FS-SMOKE')
     expect(res?.status()).toBe(200)
@@ -31,16 +31,23 @@ test.describe('Book pages smoke', () => {
    query string, where Plausible and the Meta Pixel both report location.href
    verbatim. Seed storage the way a real booking would. */
 async function seedConfirmation(page, id: string, extra: Record<string, string> = {}) {
+  const payload = JSON.stringify({
+    id,
+    cancelToken: 'test-token',
+    service: 'Threading',
+    name: 'Test',
+    date: '2026-06-15',
+    time: '14:00',
+    duration: 30,
+    savedAt: Date.now(),
+    ...extra,
+  })
   await page.addInitScript(
-    ([key, payload]) => sessionStorage.setItem(key as string, payload as string),
-    [`farwa-confirm-${id}`, JSON.stringify({
-      cancelToken: 'test-token',
-      service: 'Threading',
-      name: 'Test',
-      date: '2026-06-15',
-      time: '14:00',
-      ...extra,
-    })],
+    ([key, raw]) => {
+      try { localStorage.setItem(key as string, raw as string) } catch { /* ignore */ }
+      try { sessionStorage.setItem(key as string, raw as string) } catch { /* ignore */ }
+    },
+    [`farwa-confirm-${id}`, payload],
   )
 }
 
@@ -114,20 +121,27 @@ test.describe('Booking flow', () => {
     })
   })
 
-  test('confirmation page structure with sessionStorage key', async ({ page }) => {
-    await page.goto(
-      '/book/confirmation?id=e2e-001&date=2026-05-20&time=10:00&service=Eyebrow%20Threading&name=Tester&duration=10',
-    )
-    await page.evaluate(() => {
-      sessionStorage.setItem(
-        'farwa-confirm-e2e-001',
-        JSON.stringify({ service: 'Eyebrow Threading', name: 'Tester' }),
-      )
+  test('confirmation page structure with durable storage key', async ({ page }) => {
+    await page.addInitScript(() => {
+      const raw = JSON.stringify({
+        id: 'e2e-001',
+        service: 'Eyebrow Threading',
+        name: 'Tester',
+        date: '2026-05-20',
+        time: '10:00',
+        duration: 10,
+        cancelToken: 'e2e-token',
+        savedAt: Date.now(),
+      })
+      try { localStorage.setItem('farwa-confirm-e2e-001', raw) } catch { /* ignore */ }
+      try { sessionStorage.setItem('farwa-confirm-e2e-001', raw) } catch { /* ignore */ }
     })
-    await page.reload()
+    await page.goto('/book/confirmation?id=e2e-001&date=2026-05-20&time=10:00&duration=10')
     await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
     await expect(page.getByText(/Eyebrow Threading/i)).toBeVisible()
     await expect(page.getByText(/Tester/i)).toBeVisible()
+    expect(page.url()).not.toContain('token=')
+    expect(page.url()).not.toContain('e2e-token')
   })
 
   test('cancel booking with mocked API shows success', async ({ page }) => {

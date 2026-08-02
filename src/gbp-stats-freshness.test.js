@@ -16,7 +16,8 @@
  * silence it — check the numbers.
  */
 import { describe, it, expect } from 'vitest'
-import { GOOGLE_GBP_STATS, GOOGLE_REVIEWS } from './google-reviews-data.js'
+import { GOOGLE_GBP_STATS, GOOGLE_REVIEWS, FACEBOOK_TESTIMONIALS } from './google-reviews-data.js'
+import { describeReviewAge, formatReviewDate } from '../lib/google-reviews.js'
 
 const MAX_AGE_DAYS = 90
 const daysSince = (ymd) => Math.floor((Date.now() - Date.parse(`${ymd}T00:00:00Z`)) / 86_400_000)
@@ -64,6 +65,25 @@ describe('the figures themselves are plausible', () => {
       expect(r.rating, r.name).toBeGreaterThanOrEqual(4)
       expect(r.rating, r.name).toBeLessThanOrEqual(5)
       expect(r.text?.trim().length, `${r.name} has no review text`).toBeGreaterThan(0)
+    }
+  })
+})
+
+describe('review ages are absolute, not frozen relative phrases', () => {
+  it('every Google and Facebook testimonial has an absolute postedAt', () => {
+    for (const r of [...GOOGLE_REVIEWS, ...FACEBOOK_TESTIMONIALS]) {
+      expect(r.postedAt, r.name).toMatch(/^\d{4}-\d{2}(-\d{2})?$/)
+      expect(r).not.toHaveProperty('relativeTime')
+    }
+  })
+
+  it('old month-precision reviews render as archival dates, never “N weeks ago”', () => {
+    const now = Date.parse('2026-08-02T12:00:00Z')
+    for (const r of FACEBOOK_TESTIMONIALS) {
+      const { label, isRelative } = describeReviewAge(r.postedAt, now)
+      expect(isRelative, r.name).toBe(false)
+      expect(label, r.name).toBe(formatReviewDate(r.postedAt))
+      expect(label, r.name).not.toMatch(/weeks?\s+ago/i)
     }
   })
 })

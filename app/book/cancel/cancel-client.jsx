@@ -5,6 +5,10 @@ import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { m } from 'framer-motion'
 import { AlertTriangle, Check, X, ArrowUpRight } from 'lucide-react'
+import {
+  readBookingRecord,
+  markBookingCancelled,
+} from '../../../lib/booking-storage.js'
 
 const WA_NUMBER = '923222782254'
 
@@ -26,23 +30,19 @@ function CancelContent() {
   const params = useSearchParams()
   const id = params.get('id') || ''
 
-  /* Everything except the booking id now comes from the payload the confirmation
-     page wrote. Keeping the token and the customer's name out of the URL means
-     analytics and the pixel — both of which report location.href verbatim —
-     never see them. */
+  /* Everything except the booking id comes from durable storage (localStorage
+     first, then session, then memory). Token and customer name never ride in
+     the URL — Plausible and Meta Pixel report location.href verbatim. */
   const [details, setDetails] = useState(null)
   useEffect(() => {
     if (typeof window === 'undefined') return
-    // queueMicrotask, matching the confirmation page — a synchronous setState in
-    // an effect triggers the cascading-render lint rule.
     queueMicrotask(() => {
-      if (!id) return setDetails({})
-      try {
-        const raw = sessionStorage.getItem(`farwa-confirm-${id}`)
-        setDetails(raw ? JSON.parse(raw) : {})
-      } catch {
+      if (!id) {
         setDetails({})
+        return
       }
+      const record = readBookingRecord(id)
+      setDetails(record || {})
     })
   }, [id])
 
@@ -70,6 +70,7 @@ function CancelContent() {
         setState('error')
         return
       }
+      markBookingCancelled(id)
       setState('success')
     } catch {
       setError('Network error. Please check your connection or WhatsApp the salon.')
@@ -85,6 +86,25 @@ function CancelContent() {
     return <p className="text-body text-sm" aria-live="polite">Loading your booking…</p>
   }
 
+  if (details?.cancelledAt) {
+    return (
+      <div className="w-full max-w-lg text-center" role="status" aria-live="polite">
+        <div className="w-16 h-16 mx-auto mb-6 bg-[#e8f5e3] flex items-center justify-center rounded-full">
+          <Check className="w-8 h-8 text-[#4a9b3f]" strokeWidth={2.5} />
+        </div>
+        <h1 className="font-['Syne'] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+          Already cancelled
+        </h1>
+        <p className="text-stone text-sm font-['Inter'] font-light mb-8">
+          This appointment is no longer active.
+        </p>
+        <Link href="/book" className="btn-primary w-full">
+          Book another appointment <ArrowUpRight className="w-3.5 h-3.5" />
+        </Link>
+      </div>
+    )
+  }
+
   if (!token) {
     return (
       <div className="w-full max-w-lg text-center">
@@ -95,10 +115,11 @@ function CancelContent() {
           Invalid cancellation link
         </h1>
         <p className="text-stone text-sm font-['Inter'] font-light mb-8">
-          This cancellation link is missing required information. Please WhatsApp the salon directly.
+          We could not find a cancel code on this phone. WhatsApp the salon with your Booking ID
+          {id ? ` (${id})` : ''} — losing the confirmation page is not treated as a late cancellation.
         </p>
         <a
-          href={`https://wa.me/${WA_NUMBER}`}
+          href={id ? waUrl : `https://wa.me/${WA_NUMBER}`}
           target="_blank"
           rel="noreferrer"
           className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-[#25D366] text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-[#20bd5a] transition-colors"

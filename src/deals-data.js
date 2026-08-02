@@ -14,6 +14,8 @@ export const DEALS = [
     priceNote: 'Any combination of services totalling Rs 1,400+. Party makeup and keratin stay individually quoted.',
     category: 'Independence Day',
     href: '/prices',
+    /* Basket threshold for 14% — keep in sync with poster and book-page meter. */
+    thresholdPkr: 1400,
     /* Filename carries the rate on purpose. The 20% version shipped first and
        Next serves optimised images with max-age=2592000, so every browser that
        loaded the site that day held the wrong poster for thirty days — the URL
@@ -64,6 +66,13 @@ export function getUpcomingDeals(now = new Date()) {
 /** The one deal worth announcing sitewide right now: live first, else upcoming. */
 export function getHeadlineDeal(now = new Date()) {
   return getActiveDeals(now).find((d) => d.accent) ?? getUpcomingDeals(now).find((d) => d.accent) ?? null
+}
+
+/** True after validUntil (inclusive window ended). Upcoming deals are not ended. */
+export function isDealEnded(deal, now = new Date()) {
+  if (!deal?.validUntil) return false
+  const today = now.toISOString().slice(0, 10)
+  return deal.validUntil < today
 }
 
 /** "5–19 August" / "14 August" — compact human range for banner copy. */

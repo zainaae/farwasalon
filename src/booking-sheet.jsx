@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, Clock, Check, Sparkles } from 'lucide-react'
-import { SERVICES, formatServicePrice, formatDuration, track, waLinkBooking } from './data.js'
+import { SERVICES, formatServicePrice, formatDuration, track, waLinkBooking, PREFERRED_TIME_OPTIONS } from './data.js'
 import { toLocalDateString } from '../lib/date-local.js'
 
 /* ─── Visual month calendar (used inside BookingSheet) ─────────── */
@@ -234,7 +234,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
     onClose()
   }
 
-  const timeOptions = ['11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM', '7:00 PM']
+  const timeOptions = PREFERRED_TIME_OPTIONS
 
   return (
     <AnimatePresence>

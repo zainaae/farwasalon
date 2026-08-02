@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
-import { DEALS } from '../../src/deals-data.js'
+import { DEALS, isDealEnded, formatDealRange } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import WaCta from '../components/wa-cta'
@@ -54,7 +54,7 @@ const FAQS = [
   },
   {
     q: 'Can I combine services to reach Rs 1,400?',
-    a: 'Yes — that is the point. Add the services you want to one booking; if the total reaches Rs 1,400 or more, the 14% applies to the visit. It does not matter whether that is one treatment or several small ones.',
+    a: 'Yes — that is the point. Combine anything on the menu: threading with a cleansing, a manicure with a massage, whatever you want. On farwasalon.com/book, select multiple services in one booking and watch the running total toward Rs 1,400. WhatsApp +92 322 2782254 works too if you prefer.',
   },
   {
     q: 'Do I need to pay in advance?',
@@ -67,6 +67,30 @@ const FAQS = [
 ]
 
 export default function AzadiSalePage() {
+  const ended = isDealEnded(DEAL)
+  const range = DEAL ? formatDealRange(DEAL) : '5–14 August'
+
+  if (ended) {
+    return (
+      <main id="main" className="page-content">
+        <div className="section-shell section-pad min-h-0 max-w-2xl">
+          <p className="eyebrow mb-4">— Freedom Deal</p>
+          <h1 className="display-section text-ink mb-4">This offer has ended</h1>
+          <p className="text-body md:text-lg mb-3 leading-relaxed">
+            The Freedom Deal ({range} 2026) is over. Printed rates on the price list apply again —
+            book online or WhatsApp when you are ready.
+          </p>
+          <div className="flex flex-wrap items-center gap-3 mt-8">
+            <Link href="/book" className="tap-safe btn-primary">
+              Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+            <Link href="/prices" className="tap-safe btn-secondary">Price list</Link>
+            <Link href="/deals" className="tap-safe link-underline text-ink text-sm font-medium">Current deals</Link>
+          </div>
+        </div>
+      </main>
+    )
+  }
 
   const offerSchema = DEAL && {
     '@context': 'https://schema.org',
@@ -131,14 +155,14 @@ export default function AzadiSalePage() {
 
               <div className="azadi-in flex flex-wrap items-center gap-3" style={{ '--i': 4 }}>
                 <Link href="/book" className="tap-safe azadi-btn">
-                  Book your slot <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  Build your combo online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
                 <WaCta
-                  href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20I%20want%20to%20book"
+                  href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20help%20me%20build%20a%20Rs%201%2C400%20combo"
                   from="freedom-deal-hero"
                   className="tap-safe azadi-btn azadi-btn--ghost"
                 >
-                  Ask on WhatsApp
+                  Or WhatsApp us
                 </WaCta>
               </div>
             </div>
@@ -153,9 +177,9 @@ export default function AzadiSalePage() {
           </h2>
           <p className="text-body text-sm md:text-[15px] mb-4 max-w-2xl leading-relaxed">
             The Rs 1,400 is the total for your visit — not something one service has to cost on
-            its own. Come in for a cleansing and add a threading, or a manicure and a massage;
-            once the bill reaches Rs 1,400, the 14% applies to all of it. Nothing on the menu is
-            left out.
+            its own. On farwasalon.com/book, select several services and watch the running total.
+            Once the bill reaches Rs 1,400, the 14% applies to all of it at the counter. Nothing on
+            the menu is left out.
           </p>
           <p className="text-body text-sm md:text-[15px] mb-5 max-w-2xl leading-relaxed">
             Most salons run Azadi offers as a fixed package — one facial, one mani-pedi, one
@@ -164,15 +188,15 @@ export default function AzadiSalePage() {
             <Link href="/prices" className="link-underline text-ink font-medium">price list</Link>.
           </p>
           <p className="text-stone text-[13px] font-['Inter'] font-light max-w-2xl">
-            Not sure whether your booking gets there?{' '}
+            Want help building a Rs 1,400 combo?{' '}
             <WaCta
-              href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20does%20my%20booking%20qualify%3F"
+              href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20help%20me%20build%20a%20Rs%201%2C400%20combo"
               from="freedom-deal-qualify"
               className="link-underline text-ink font-medium"
             >
-              Message us
-            </WaCta>{' '}
-            and we will add it up for you before you come.
+              WhatsApp us your list
+            </WaCta>
+            {' '}— we will add it up and book the visit before you come.
           </p>
         </section>
 

@@ -316,7 +316,7 @@ export const BLOG_POSTS = [
       { type: 'h3', text: 'Q: Should I choose the cheapest salon near me?' },
       { type: 'p', text: 'A: Choose the most transparent one. Cheap with hidden costs ends up expensive; a salon that prints Rs 100 threading and Rs 1,400 facials and sticks to it will cost you less over a year than one with negotiable rates.' },
       { type: 'h3', text: 'Q: Can I book a salon appointment online in Karachi?' },
-      { type: 'p', text: 'A: At Farwa, yes — farwasalon.com/book shows live available slots and takes under a minute, with free cancellation up to two hours before. No calls, no back-and-forth.' },
+      { type: 'p', text: 'A: At Farwa, yes — farwasalon.com/book shows live available slots and takes under a minute. Cancel from your confirmation on the same phone, or WhatsApp us with your Booking ID — no calls required.' },
       { type: 'h3', text: 'Q: What is the address if I am searching beauty parlour near me near Tariq Road?' },
       { type: 'p', text: 'A: Farwa Beauty Salon, Plot 165/G-1, Saima Terrace, Block 3 PECHS, Karachi 75400 — a short hop from Tariq Road and Bahadurabad. See beauty salon Karachi for area links and directions on the contact page.' },
 
