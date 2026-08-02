@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { DEALS, getActiveDeals, getUpcomingDeals, getHeadlineDeal, getDealPhase, formatDealRange } from './deals-data.js'
+import { DEALS, getActiveDeals, getUpcomingDeals, getHeadlineDeal, formatDealRange, isDealEnded } from './deals-data.js'
 
 describe('deals data', () => {
   it('every deal has the required fields and valid dates', () => {
@@ -47,24 +47,24 @@ describe('Freedom Deal lifecycle', () => {
     expect(deal.image).toBe('/freedom-deal-2026-14pc.jpg')
   })
 
-  it('teases on /deals before open, headlines only while live, gone after', () => {
-    // teaser window: announced on /deals, not claimable, not on home/banner
+  it('teases before it opens, runs during, and disappears after', () => {
+    // teaser window: announced, not claimable — still the headline on home
     expect(getUpcomingDeals(at('2026-07-30')).map((d) => d.id)).toContain('freedom-deal-2026')
     expect(getActiveDeals(at('2026-07-30')).map((d) => d.id)).not.toContain('freedom-deal-2026')
-    expect(getHeadlineDeal(at('2026-07-30'))).toBeNull()
-    expect(getDealPhase(deal, at('2026-07-30'))).toBe('upcoming')
+    expect(getHeadlineDeal(at('2026-07-30'))?.id).toBe('freedom-deal-2026')
+    expect(isDealEnded(deal, at('2026-07-30'))).toBe(false)
 
-    // live on Independence Day itself — home strip + /freedom-deal campaign
+    // live on Independence Day itself
     expect(getActiveDeals(at('2026-08-14')).map((d) => d.id)).toContain('freedom-deal-2026')
     expect(getUpcomingDeals(at('2026-08-14')).map((d) => d.id)).not.toContain('freedom-deal-2026')
     expect(getHeadlineDeal(at('2026-08-14'))?.id).toBe('freedom-deal-2026')
-    expect(getDealPhase(deal, at('2026-08-14'))).toBe('live')
+    expect(isDealEnded(deal, at('2026-08-14'))).toBe(false)
 
-    // gone the day after it ends — no stale banner, soft-exit on landing page
+    // gone the day after it ends — no stale banner left up
     expect(getActiveDeals(at('2026-08-15')).map((d) => d.id)).not.toContain('freedom-deal-2026')
     expect(getUpcomingDeals(at('2026-08-15')).map((d) => d.id)).not.toContain('freedom-deal-2026')
     expect(getHeadlineDeal(at('2026-08-15'))).toBeNull()
-    expect(getDealPhase(deal, at('2026-08-15'))).toBe('ended')
+    expect(isDealEnded(deal, at('2026-08-15'))).toBe(true)
   })
 
   it('formats the range for banner copy', () => {

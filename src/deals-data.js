@@ -10,8 +10,8 @@ export const DEALS = [
     id: 'freedom-deal-2026',
     title: 'Freedom Deal — 14% off',
     description:
-      'For Pakistan’s Independence Day, take 14% off when your visit totals Rs 1,400 or more, from 5 to 14 August. One service of Rs 1,400+ qualifies when you book online. To combine several services in one visit, WhatsApp us with your list — we book the basket at the counter; the online form takes one main service at a time. The discount comes off the printed rate, the same rate that has been on this page all year, not one raised for the occasion.',
-    priceNote: 'Rs 1,400+ per visit — book one qualifying service online, or WhatsApp to combine. Party makeup and keratin stay individually quoted.',
+      'For Pakistan’s Independence Day, take 14% off whenever your visit totals Rs 1,400 or more, from 5 to 14 August. Combine anything on the menu to get there — threading with a cleansing, a manicure with a massage. The discount comes off the printed rate, the same rate that has been on this page all year, not one raised for the occasion.',
+    priceNote: 'Any combination of services totalling Rs 1,400+. Party makeup and keratin stay individually quoted.',
     category: 'Independence Day',
     href: '/prices',
     /* Filename carries the rate on purpose. The 20% version shipped first and
@@ -41,22 +41,17 @@ export const DEALS = [
   },
 ]
 
-/** Calendar day as YYYY-MM-DD in UTC — same convention as validFrom / validUntil. */
-export function dealDay(now = new Date()) {
-  return now.toISOString().slice(0, 10)
-}
-
 /** Deals still valid on the given date (defaults to today). */
 export function getActiveDeals(now = new Date()) {
-  const today = dealDay(now)
+  const today = now.toISOString().slice(0, 10)
   return DEALS.filter(
     (d) => (!d.validFrom || d.validFrom <= today) && (!d.validUntil || d.validUntil >= today),
   )
 }
 
-/** Deals announced but not yet open — listed on /deals only, never on home/nav banners. */
+/** Deals announced but not yet open — shown as "starts <date>", never claimable. */
 export function getUpcomingDeals(now = new Date()) {
-  const today = dealDay(now)
+  const today = now.toISOString().slice(0, 10)
   return DEALS.filter(
     (d) =>
       d.teaseFrom &&
@@ -66,22 +61,16 @@ export function getUpcomingDeals(now = new Date()) {
   )
 }
 
-/**
- * Sitewide promo surfaces (home strip, prices banner) — LIVE accent deals only.
- * Upcoming teasers stay off homepage / sticky / prominent CTAs so "Coming ·
- * 5–14 August" cannot linger before open or after expiry.
- */
+/** The one deal worth announcing sitewide right now: live first, else upcoming. */
 export function getHeadlineDeal(now = new Date()) {
-  return getActiveDeals(now).find((d) => d.accent) ?? null
+  return getActiveDeals(now).find((d) => d.accent) ?? getUpcomingDeals(now).find((d) => d.accent) ?? null
 }
 
-/** 'upcoming' | 'live' | 'ended' — for deal landing pages that must soft-exit. */
-export function getDealPhase(deal, now = new Date()) {
-  if (!deal) return 'ended'
-  const today = dealDay(now)
-  if (deal.validFrom && deal.validFrom > today) return 'upcoming'
-  if (deal.validUntil && deal.validUntil < today) return 'ended'
-  return 'live'
+/** True after validUntil (inclusive window ended). Upcoming deals are not ended. */
+export function isDealEnded(deal, now = new Date()) {
+  if (!deal?.validUntil) return false
+  const today = now.toISOString().slice(0, 10)
+  return deal.validUntil < today
 }
 
 /** "5–19 August" / "14 August" — compact human range for banner copy. */

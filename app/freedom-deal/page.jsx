@@ -1,14 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
-import { DEALS, getDealPhase, formatDealRange } from '../../src/deals-data.js'
+import { DEALS, isDealEnded, formatDealRange } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import WaCta from '../components/wa-cta'
 import { SITE_ORIGIN, SALON_ID, buildFaqPageSchema } from '../../lib/business-schema.js'
 
 const DEAL = DEALS.find((d) => d.id === 'freedom-deal-2026')
-const RANGE = DEAL ? formatDealRange(DEAL) : '5–14 August'
 
 /* Pakistani users search this offer in several spellings — azadi, azaadi,
    jashn-e-azadi, "14 august sale", "independence day offer". They are the same
@@ -43,19 +42,19 @@ export const revalidate = 86400
 const FAQS = [
   {
     q: 'What is the Freedom Deal at Farwa Beauty Salon?',
-    a: 'From 5 to 14 August 2026, any visit totalling Rs 1,400 or more gets 14% off at Farwa Beauty Salon in Block 3 PECHS, Karachi. Online booking takes one main service at a time — pick a service of Rs 1,400+ there, or WhatsApp us to combine several services into one visit. The discount comes off our published prices, which have been printed on farwasalon.com all year.',
+    a: 'From 5 to 14 August 2026, any visit totalling Rs 1,400 or more gets 14% off at Farwa Beauty Salon in Block 3 PECHS, Karachi. You can reach the total with one service or several combined. The discount comes off our published prices, which have been printed on farwasalon.com all year.',
   },
   {
     q: 'Which services are included in the 14 August offer?',
-    a: 'Everything on the menu counts toward the visit total — threading, waxing, facials, cleansing, hair, nails, massage, brows and bridal. Online you book one primary service (a few have small add-ons); for a multi-service basket, WhatsApp us. Party makeup and keratin are quoted individually.',
+    a: 'Everything on the menu counts toward the total — threading, waxing, facials, cleansing, hair, nails, massage, brows and bridal. Nothing is excluded from qualifying; you simply need the visit to add up to Rs 1,400 or more. Party makeup and keratin are quoted individually, so ask on WhatsApp how they apply.',
   },
   {
     q: 'How do I claim the Azaadi discount?',
-    a: 'Book between 5 and 14 August. If your visit totals Rs 1,400 or more, the 14% comes off at the counter. Use farwasalon.com/book for a single qualifying service, or WhatsApp +92 322 2782254 to combine services.',
+    a: 'Nothing to claim — book between 5 and 14 August and if your services total Rs 1,400 or more, the 14% comes off at the counter. Book online at farwasalon.com/book or WhatsApp +92 322 2782254.',
   },
   {
     q: 'Can I combine services to reach Rs 1,400?',
-    a: 'Yes at the salon — that is how a multi-service visit works. The website books one main service per appointment, so message us on WhatsApp with the services you want and we will schedule them together and confirm the total.',
+    a: 'Yes — that is the point. Combine anything on the menu: threading with a cleansing, a manicure with a massage, whatever you want. WhatsApp us your list and we will book the visit together so the total is clear before you come.',
   },
   {
     q: 'Do I need to pay in advance?',
@@ -67,46 +66,30 @@ const FAQS = [
   },
 ]
 
-function SoftExit({ phase }) {
-  const ended = phase === 'ended'
-  return (
-    <main id="main" className="page-content">
-      <div className="section-shell section-pad min-h-0 max-w-2xl">
-        <p className="eyebrow mb-4">— Freedom Deal</p>
-        <h1 className="display-section text-ink mb-4">
-          {ended ? 'This offer has ended' : 'Opens soon'}
-        </h1>
-        <p className="text-body md:text-lg mb-3 leading-relaxed">
-          {ended
-            ? `The Freedom Deal (${RANGE} 2026) is over. Printed rates on the price list apply again — book online or WhatsApp when you are ready.`
-            : `The Freedom Deal runs ${RANGE} 2026 — 14% off when your visit totals Rs 1,400 or more. It is not open to claim yet.`}
-        </p>
-        <p className="text-stone text-sm font-['Inter'] font-light mb-8 leading-relaxed">
-          {ended
-            ? 'Browse current offers or book at the regular printed rate.'
-            : 'You can still book a slot for the offer window, or see the full price list anytime.'}
-        </p>
-        <div className="flex flex-wrap items-center gap-3">
-          <Link href="/book" className="tap-safe btn-primary">
-            Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-          </Link>
-          <Link href="/prices" className="tap-safe btn-secondary">
-            Price list
-          </Link>
-          <Link href="/deals" className="tap-safe link-underline text-ink text-sm font-medium">
-            Current deals
-          </Link>
-        </div>
-      </div>
-    </main>
-  )
-}
-
 export default function AzadiSalePage() {
-  const phase = getDealPhase(DEAL)
+  const ended = isDealEnded(DEAL)
+  const range = DEAL ? formatDealRange(DEAL) : '5–14 August'
 
-  if (phase !== 'live') {
-    return <SoftExit phase={phase} />
+  if (ended) {
+    return (
+      <main id="main" className="page-content">
+        <div className="section-shell section-pad min-h-0 max-w-2xl">
+          <p className="eyebrow mb-4">— Freedom Deal</p>
+          <h1 className="display-section text-ink mb-4">This offer has ended</h1>
+          <p className="text-body md:text-lg mb-3 leading-relaxed">
+            The Freedom Deal ({range} 2026) is over. Printed rates on the price list apply again —
+            book online or WhatsApp when you are ready.
+          </p>
+          <div className="flex flex-wrap items-center gap-3 mt-8">
+            <Link href="/book" className="tap-safe btn-primary">
+              Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+            <Link href="/prices" className="tap-safe btn-secondary">Price list</Link>
+            <Link href="/deals" className="tap-safe link-underline text-ink text-sm font-medium">Current deals</Link>
+          </div>
+        </div>
+      </main>
+    )
   }
 
   const offerSchema = DEAL && {
@@ -127,6 +110,13 @@ export default function AzadiSalePage() {
       {offerSchema && <JsonLd data={offerSchema} />}
       <JsonLd data={buildFaqPageSchema(FAQS)} />
 
+      {/* Campaign hero — poster palette, poster artwork, and the discount itself
+          as the visual anchor. Deliberately off-brand for the ten days it runs:
+          the site is ink/nude/gold, this is the flag. */}
+      {/* Poster-led. The artwork is real, human-made and culturally specific —
+          it outranks anything generated, so it carries the fold and the words
+          annotate it. No eyebrow, no repeated date block: the dates are on the
+          poster and stated once in the copy. */}
       <section className="azadi-hero">
         <div className="section-shell py-10 md:py-16">
           <div className="grid gap-8 md:gap-14 md:grid-cols-[0.95fr_1.05fr] items-center">
@@ -152,8 +142,8 @@ export default function AzadiSalePage() {
 
               <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 2 }}>
                 Once your visit reaches Rs 1,400, the whole bill is 14% less — 5 to 14
-                August. Book one qualifying service online, or WhatsApp us to combine
-                several into one visit. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
+                August. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
+                Book what you actually came in for.
               </p>
 
               <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-lg mb-8" style={{ '--i': 3 }}>
@@ -168,11 +158,11 @@ export default function AzadiSalePage() {
                   Book your slot <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
                 <WaCta
-                  href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20I%20want%20to%20book"
+                  href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20help%20me%20build%20a%20Rs%201%2C400%20combo"
                   from="freedom-deal-hero"
                   className="tap-safe azadi-btn azadi-btn--ghost"
                 >
-                  Ask on WhatsApp
+                  WhatsApp us to build your combo
                 </WaCta>
               </div>
             </div>
@@ -186,10 +176,10 @@ export default function AzadiSalePage() {
             How it works
           </h2>
           <p className="text-body text-sm md:text-[15px] mb-4 max-w-2xl leading-relaxed">
-            The Rs 1,400 is the total for your visit. Book one service of Rs 1,400+ online,
-            or WhatsApp us to combine treatments (for example a cleansing plus threading)
-            into one appointment — the website takes one main service per booking.
-            Once the bill reaches Rs 1,400, the 14% applies to all of it.
+            The Rs 1,400 is the total for your visit — not something one service has to cost on
+            its own. Come in for a cleansing and add a threading, or a manicure and a massage;
+            once the bill reaches Rs 1,400, the 14% applies to all of it. Nothing on the menu is
+            left out.
           </p>
           <p className="text-body text-sm md:text-[15px] mb-5 max-w-2xl leading-relaxed">
             Most salons run Azadi offers as a fixed package — one facial, one mani-pedi, one
@@ -198,15 +188,15 @@ export default function AzadiSalePage() {
             <Link href="/prices" className="link-underline text-ink font-medium">price list</Link>.
           </p>
           <p className="text-stone text-[13px] font-['Inter'] font-light max-w-2xl">
-            Not sure whether your booking gets there?{' '}
+            Want help building a Rs 1,400 combo?{' '}
             <WaCta
-              href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20does%20my%20booking%20qualify%3F"
+              href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20help%20me%20build%20a%20Rs%201%2C400%20combo"
               from="freedom-deal-qualify"
               className="link-underline text-ink font-medium"
             >
-              Message us
-            </WaCta>{' '}
-            and we will add it up for you before you come.
+              WhatsApp us your list
+            </WaCta>
+            {' '}— we will add it up and book the visit before you come.
           </p>
         </section>
 

@@ -45,8 +45,8 @@ export const FAQ_GROUPS = [
         a: 'Please cancel or reschedule at least 2 hours before when you can. Use Cancel on your confirmation (saved on this phone under Book → Your upcoming appointment), or WhatsApp us with your Booking ID. We do not send SMS — if you lost the confirmation page, message us; that is not treated as a late cancellation.',
       },
       {
-        q: 'Can I book more than one service online?',
-        a: 'Online booking is one main service at a time (a few services also offer small add-ons on the date step). To combine several treatments in one visit — for example toward a deal total — WhatsApp us with the list and we will confirm time and price together.',
+        q: 'Can I add a quick service (like upper lip) when I book online?',
+        a: 'When you book certain services online, we suggest optional add-ons on the date/time step — for example, upper lip threading with eyebrow threading. For other combinations, note them in the booking notes or WhatsApp us and we will confirm the total time and price.',
       },
       {
         q: 'What payment methods do you accept?',
