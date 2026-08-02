@@ -15,26 +15,26 @@ export default function GalleryClient() {
       <div className="section-shell section-pad">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border-soft pb-10 md:pb-12">
           <div>
-            <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-              className="eyebrow mb-4">— Gallery</m.p>
+            {/* CSS entrances — framer initial{opacity:0} + overflow-hidden clipped
+                "DO" until hydrate; same LCP fix pattern as /services. */}
+            <p className="hero-fade-up eyebrow mb-4">— Gallery</p>
             <div className="overflow-hidden">
-              <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-                className="display-section text-ink">
+              <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
                 <span className="block">WHAT WE</span> <span className="block">DO</span>
-              </m.h1>
+              </h1>
             </div>
-            <m.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
-              className="text-body max-w-xl mt-5">
+            <p className="hero-fade-up text-body max-w-xl mt-5" style={{ animationDelay: '0.15s' }}>
               Every service we offer, in one place. Finished looks on real clients go up on
               our Instagram — we would rather show you those than restage them here.
-            </m.p>
+            </p>
           </div>
-          <m.a initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6, delay: 0.2 }}
+          <a
             href={IG_LINK} target="_blank" rel="noreferrer"
-            className="link-underline !inline-flex items-center gap-2 shrink-0 text-ink text-xs tracking-wide font-['Inter']">
+            className="hero-fade-up link-underline !inline-flex items-center gap-2 shrink-0 text-ink text-xs tracking-wide font-['Inter']"
+            style={{ animationDelay: '0.2s' }}>
             <IgIcon className="w-4 h-4 shrink-0" aria-hidden="true" />
             <span className="min-w-0">@farwasalon</span>
-          </m.a>
+          </a>
         </div>
       </div>
 

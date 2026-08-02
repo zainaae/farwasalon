@@ -16,32 +16,32 @@ export default function AboutClient() {
 
       <section className="bg-white py-16 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="eyebrow mb-3">— Est. 2008 · PECHS, Karachi</m.p>
+          {/* CSS entrances — framer initial{opacity:0} left this hero blank until
+              hydration (same LCP failure mode fixed on /services). */}
+          <p className="hero-fade-up eyebrow mb-3">— Est. 2008 · PECHS, Karachi</p>
           <div className="overflow-hidden">
-            <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-              className="display-section text-ink">
+            <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
               <span className="block">OUR</span> <span className="block">STORY</span>
-            </m.h1>
+            </h1>
           </div>
         </div>
       </section>
 
       <section className="bg-white py-12 md:py-16">
         <div className="section-shell">
-          <div className="grid grid-cols-3 gap-8 border-b border-border-soft pb-12">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 border-b border-border-soft pb-12">
             {[
               { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
               { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
               { display: String(SERVICE_COUNT), final: SERVICE_COUNT, label: 'Services on the menu' },
               { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-PK')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
             ].map(({ display, final, label }) => (
-              <m.div key={label} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+              <div key={label} className="min-w-0">
                 <p className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink mb-1">
                   <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
                 </p>
                 <p className="text-body text-[11px]">{label}</p>
-              </m.div>
+              </div>
             ))}
           </div>
         </div>
