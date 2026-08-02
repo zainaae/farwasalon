@@ -6,7 +6,9 @@ import JsonLd from '../json-ld'
 import {
   buildFaqPageSchema,
   getAggregateRating,
+  SERVICE_BOUNDARIES,
 } from '../../lib/business-schema.js'
+import { buildPriceListSchema, getMenuStats } from '../../lib/service-schema.js'
 import { PRICES_PAGE_FAQS } from '../../src/faq-data.js'
 import QuoteBuilder from './quote-builder'
 import DealBanner from '../components/deal-banner'
@@ -34,16 +36,33 @@ export default function PricesPage() {
   const categories = Object.keys(SERVICES)
   const faqSchema = buildFaqPageSchema(PRICES_PAGE_FAQS)
   const rating = getAggregateRating()
+  /* Counted from SERVICES at build time, never typed. The claim and the table
+     below it are the same list, so the claim cannot go stale while the list
+     grows — which is exactly how "102" got out of step once already. */
+  const menu = getMenuStats()
   return (
     <main id="main" className="page-content">
       {faqSchema && <JsonLd data={faqSchema} />}
+      <JsonLd data={buildPriceListSchema()} />
       <div className="section-shell section-pad min-h-0">
         <p className="eyebrow mb-4">— Price list · updated {UPDATED}</p>
         <h1 className="display-section text-ink mb-4 max-w-3xl">
           Salon Price List Karachi 2026 — From Rs 100
         </h1>
+        {/* The claim lives here, on the page that proves it. It used to live on
+            the homepage while this page said only "every priced service", so
+            nothing that read one read the other. */}
         <p className="text-body md:text-lg max-w-2xl mb-3 leading-relaxed">
-          Complete PECHS rate card — every service with a starting price in PKR. No hidden quotes.
+          This is the full published price list for Farwa Beauty Salon in Block 3 PECHS, Karachi:
+          all <strong className="font-medium text-ink">{menu.total} services</strong> across{' '}
+          {menu.categories} categories, and <strong className="font-medium text-ink">every one of
+          them carries a printed price</strong> in Pakistani Rupees. No hidden quotes.
+        </p>
+        <p className="text-body text-sm max-w-2xl mb-3 leading-relaxed">
+          {menu.fixed} of those are fixed rates — what the table says is what you pay. The
+          remaining {menu.startingFrom} are hair and hair-treatment services shown as
+          &ldquo;from&rdquo;, because length and density genuinely change the work; that figure is
+          a floor and it is confirmed with you before anything starts.
         </p>
         <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-6 leading-relaxed">
           {YEARS_ACTIVE}+ years · women-only studio · {rating.ratingValue}★ Google · cash, JazzCash, EasyPaisa · Mon–Sat 11–7
@@ -142,6 +161,27 @@ export default function PricesPage() {
             </section>
           ))}
         </div>
+
+        {/* The other half of a complete price list is what is not on it. Same
+            source as the `additionalProperty` boundaries in the salon JSON-LD,
+            so the visible text and the machine-readable claim cannot disagree. */}
+        <section className="mt-14 max-w-3xl" aria-labelledby="prices-not-offered">
+          <h2 id="prices-not-offered" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-3">
+            What is not on this list
+          </h2>
+          <p className="text-body text-sm mb-4">
+            A price list is only complete if it also says where it stops. These are the things
+            people ask for that we do not do, or do not print:
+          </p>
+          <dl className="space-y-3">
+            {SERVICE_BOUNDARIES.map((b) => (
+              <div key={b.name} className="text-sm">
+                <dt className="font-['Syne'] font-bold text-ink inline">{b.name}: </dt>
+                <dd className="text-body inline">{b.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
 
         <section className="mt-14 panel-soft p-6 md:p-8 shadow-soft max-w-3xl" aria-labelledby="prices-book-cta">
           <h2 id="prices-book-cta" className="font-['Syne'] font-semibold text-ink text-lg md:text-xl mb-2">
