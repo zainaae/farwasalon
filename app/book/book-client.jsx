@@ -452,6 +452,9 @@ export default function BookClient() {
         date: data.booking.date,
         time: data.booking.time,
         duration: String(bookedDuration),
+        /* Signals a fresh booking so confirmation can open WhatsApp once.
+           Safe in the URL — not a secret; stripped after the prompt runs. */
+        openWa: '1',
       })
 
       /* The conversion. BookingStarted was already tracked at step 1, so this
