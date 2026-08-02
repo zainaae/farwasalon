@@ -82,7 +82,7 @@ function StatsStrip() {
                 { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
                 { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Specialities, one roof' },
                 { display: String(SERVICE_COUNT), final: SERVICE_COUNT, label: 'Services, every price printed' },
-                { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-PK')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
+                { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-US')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
               ].map(({ display, final, label }) => (
                 <div key={label} className="min-w-0">
                   <p className="font-['Unbounded'] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none">
@@ -514,7 +514,7 @@ function ReviewDatingNote({ posts, sourceName }) {
   if (!absolute) return null
 
   return (
-    <p className="text-stone/80 text-[10px] sm:text-[11px] font-['Inter'] font-light leading-relaxed mb-4 sm:mb-5 max-w-xl">
+    <p className="text-stone text-[10px] sm:text-[11px] font-['Inter'] font-light leading-relaxed mb-4 sm:mb-5 max-w-xl">
       Newest here is from {absolute}. Each is shown with the month it was
       posted, newest first — anything more recent is on {sourceName}.
     </p>

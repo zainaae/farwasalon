@@ -11,7 +11,7 @@ import {
 } from '../../lib/business-schema.js'
 import { CAT_SLUGS, YEARS_ACTIVE, MAPS_LINK } from '../../src/data.js'
 
-const title = 'Beauty Salon Karachi — PECHS · From Rs 100 | Farwa'
+const title = 'Beauty Salon Karachi — PECHS \u00B7 From Rs 100 | Farwa'
 const description =
   'Looking for a beauty salon in Karachi? Farwa in PECHS — bridal, facials, threading & waxing from Rs 100. Transparent prices, online booking, since 2008.'
 

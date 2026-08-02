@@ -36,7 +36,7 @@ async function assertNoHorizontalOverflow(page: Page) {
 async function gotoAndSettle(page: Page, path: string) {
   await page.goto(path, { waitUntil: 'load' })
   if (path === '/book') {
-    await expect(page.getByText('— Choose a service')).toBeVisible({ timeout: 15_000 })
+    await expect(page.getByText('— Choose services')).toBeVisible({ timeout: 15_000 })
   } else {
     await expect(visibleMain(page)).toBeVisible()
   }
@@ -90,7 +90,7 @@ for (const viewport of PORTRAIT_MOBILE) {
       await gotoAndSettle(page, '/book')
       await assertNoHorizontalOverflow(page)
 
-      const step = page.getByText('— Choose a service')
+      const step = page.getByText('— Choose services')
       await expect(step).toBeVisible()
       const box = await step.boundingBox()
       expect(box).not.toBeNull()

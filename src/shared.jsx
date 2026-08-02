@@ -95,40 +95,15 @@ export function usePageMeta({ title, description, canonical, ogImage }) {
 
 /* ─── Instagram icon — see shared-chrome.jsx ─────────────────── */
 
-/* ─── Animated counter ─────────────────────────────────────────── */
-export function AnimatedNumber({ display, final, ariaLabel = display }) {
-  const ref   = useRef(null)
-  const [shown, setShown] = useState(display)
-  const fired = useRef(false)
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const isK    = display.includes('k')
-    const hasPlus = display.includes('+')
-    const io = new IntersectionObserver(entries => {
-      if (!entries[0].isIntersecting || fired.current) return
-      fired.current = true
-      io.disconnect()
-      const t0  = performance.now()
-      const dur = 1800
-      const tick = now => {
-        const p    = Math.min((now - t0) / dur, 1)
-        const ease = 1 - Math.pow(1 - p, 3)
-        const val  = Math.round(final * ease)
-        if (isK) setShown((val >= 1000 ? Math.floor(val / 1000) + 'k' : val) + (hasPlus ? '+' : ''))
-        else setShown(val + (hasPlus ? '+' : ''))
-        if (p < 1) requestAnimationFrame(tick)
-        else setShown(display)
-      }
-      requestAnimationFrame(tick)
-    }, { threshold: 0.4 })
-    io.observe(el)
-    return () => io.disconnect()
-  }, [display, final])
+/* ─── Stat number ────────────────────────────────────────────────
+ * Static truthful label only. A count-up used to jump to "0+" on the
+ * first rAF (and briefly looked like 0 / -1 on /about), which read as
+ * an unfinished page. Decorative tweening is not worth that. */
+export function AnimatedNumber({ display, final: _final, ariaLabel = display }) {
   return (
-    <span ref={ref}>
+    <span>
       <span className="sr-only">{ariaLabel}</span>
-      <span aria-hidden="true">{shown}</span>
+      <span aria-hidden="true">{display}</span>
     </span>
   )
 }

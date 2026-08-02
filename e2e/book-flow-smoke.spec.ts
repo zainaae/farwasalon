@@ -60,7 +60,7 @@ test.describe('Booking flow', () => {
   test('step 1–3 smoke with mocked APIs', async ({ page }) => {
     await page.goto('/book')
     await expect(page.getByRole('heading', { level: 1, name: /book|online/i })).toBeVisible()
-    await expect(page.getByText('— Choose a service')).toBeVisible()
+    await expect(page.getByText('— Choose services')).toBeVisible()
 
     await selectEyebrowThreading(page)
     await expect(page.getByText('— Pick a date')).toBeVisible()
@@ -167,7 +167,7 @@ test.describe('Booking flow', () => {
     await page.setViewportSize({ width: 390, height: 844 })
     await page.goto('/book?category=Threading')
     await expect(visibleMain(page)).toBeVisible()
-    await expect(page.getByText('— Choose a service')).toBeVisible()
+    await expect(page.getByText('— Choose services')).toBeVisible()
     await expect(page.getByRole('button', { name: /Eyebrow Threading/i })).toBeVisible()
   })
 })

@@ -19,11 +19,9 @@ export default function AboutClient() {
           {/* CSS entrances — framer initial{opacity:0} left this hero blank until
               hydration (same LCP failure mode fixed on /services). */}
           <p className="hero-fade-up eyebrow mb-3">— Est. 2008 · PECHS, Karachi</p>
-          <div className="overflow-hidden">
-            <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
-              <span className="block">OUR</span> <span className="block">STORY</span>
-            </h1>
-          </div>
+          <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
+            <span className="block">OUR</span> <span className="block">STORY</span>
+          </h1>
         </div>
       </section>
 
@@ -34,7 +32,7 @@ export default function AboutClient() {
               { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
               { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Service categories' },
               { display: String(SERVICE_COUNT), final: SERVICE_COUNT, label: 'Services on the menu' },
-              { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-PK')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
+              { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-US')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
             ].map(({ display, final, label }) => (
               <div key={label} className="min-w-0">
                 <p className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink mb-1">

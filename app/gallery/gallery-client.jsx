@@ -18,11 +18,10 @@ export default function GalleryClient() {
             {/* CSS entrances — framer initial{opacity:0} + overflow-hidden clipped
                 "DO" until hydrate; same LCP fix pattern as /services. */}
             <p className="hero-fade-up eyebrow mb-4">— Gallery</p>
-            <div className="overflow-hidden">
-              <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
-                <span className="block">WHAT WE</span> <span className="block">DO</span>
-              </h1>
-            </div>
+            {/* No overflow-hidden — it clipped Unbounded descenders on "DO". */}
+            <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
+              <span className="block">WHAT WE</span> <span className="block">DO</span>
+            </h1>
             <p className="hero-fade-up text-body max-w-xl mt-5" style={{ animationDelay: '0.15s' }}>
               A quiet look at the services we offer in our PECHS studio — bridal, hair,
               skin, nails. Visit in person for the full portfolio, or book a slot below.
