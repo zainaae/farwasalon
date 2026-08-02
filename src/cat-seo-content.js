@@ -253,4 +253,24 @@ export const CAT_PAGE_BLOCKS = {
     { type: 'h2', text: 'Hygiene, and thread vs wax on the face' },
     { type: 'p', text: 'Fresh cotton thread for every client, sanitised scissors/tweezers, and a clean chair between guests. Threading vs face wax: choose thread for precision brows; Rica hot wax from Rs 150 if you prefer wax on the face.' },
   ],
+  'Rica Hot Wax': [
+    { type: 'h2', text: 'Face zones and what they cost' },
+    { type: 'p', text: 'Lower lip from Rs 150 · upper lip Rs 200 · nose / forehead Rs 250 · brows / chin / face sides Rs 300 · back neck Rs 500. Full Face with Mask is Rs 1,200 (~30 min) when you want the whole face done in one sitting.' },
+    { type: 'h2', text: 'Hot wax vs threading on the face' },
+    { type: 'p', text: 'Rica hot wax is stripless Italian peel wax — it grips hair rather than skin, which is why many clients with sensitive faces prefer it. For brows where you want hair-by-hair shape control, threading still costs less (eyebrow Rs 200). Pick the method that matches the zone, not a blanket rule.' },
+    { type: 'h2', text: 'Before you book' },
+    { type: 'p', text: 'Hair needs about 5mm of growth or the wax cannot grip. Avoid hot showers, fragrance, and tight fabric on the area for 12–24 hours after. This menu is face and small zones only — arms, legs, and full body use the Rica strip-wax menu.' },
+  ],
+  'Hair Treatments': [
+    { type: 'h2', text: 'Printed treatment menu' },
+    { type: 'p', text: 'Normal Protein Treatment Rs 2,000 (~45 min). Olorchee Treatment Rs 2,500 (~45 min). Hair Fall or Dandruff Treatment with Ampule Rs 3,000 (~40 min). Wellaplex Stand-Alone Treatment Rs 3,000 (~60 min). Every rate above is on the price list — no surprise quote after you sit down.' },
+    { type: 'h2', text: 'Which treatment fits' },
+    { type: 'p', text: 'Shedding or thinning: Hair Fall with Ampule. Flakes and scalp itch: Dandruff with Ampule. Colour- or heat-damaged shafts: Wellaplex. Everyday strength and shine between colour visits: Protein. Keratin is offered but quoted per head from a photo on WhatsApp — length and density change the product load.' },
+  ],
+  Bridal: [
+    { type: 'h2', text: 'Published bridal rates' },
+    { type: 'p', text: 'Bridal Trial Rs 8,000 (~2 hrs). Mehndi / Dholki Look Rs 10,000 (~2 hrs). Engagement Look Rs 12,000 (~2.5 hrs). Full Bridal Package Rs 25,000 (~5 hrs) — makeup, hair, dupatta draping, touch-up kit, and event presence. Trial first if you want the look locked before the wedding day.' },
+    { type: 'h2', text: 'How to book without guessing' },
+    { type: 'p', text: 'Tell us which event (nikkah, mehndi, barat, walima, engagement) and bring reference photos to the trial. The /bridal page has package detail; this page is the itemised menu you can book against. October–March fills first — book 2–3 months ahead when you can.' },
+  ],
 }

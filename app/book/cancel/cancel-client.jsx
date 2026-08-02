@@ -83,7 +83,14 @@ function CancelContent() {
   )}`
 
   if (details === null) {
-    return <p className="text-body text-sm" aria-live="polite">Loading your booking…</p>
+    return (
+      <div className="w-full max-w-lg text-center" aria-live="polite">
+        <h1 className="font-['Syne'] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+          Cancel appointment
+        </h1>
+        <p className="text-body text-sm">Loading your booking…</p>
+      </div>
+    )
   }
 
   if (details?.cancelledAt) {
@@ -245,7 +252,16 @@ export default function CancelClient() {
   return (
     <main id="main" className="page-content">
       <div className="section-shell section-pad min-h-screen flex items-start justify-center">
-        <Suspense fallback={<p className="text-stone text-sm font-['Inter']">Loading…</p>}>
+        <Suspense
+          fallback={
+            <div className="w-full max-w-lg text-center">
+              <h1 className="font-['Syne'] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+                Cancel appointment
+              </h1>
+              <p className="text-stone text-sm font-['Inter']">Loading…</p>
+            </div>
+          }
+        >
           <CancelContent />
         </Suspense>
       </div>

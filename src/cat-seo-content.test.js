@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { CAT_SEO, CAT_FAQS, CAT_RELATED, CAT_PAGE_BLOCKS } from './cat-seo-content.js'
-import { SERVICES } from './data.js'
+import { SERVICES, CAT_SLUGS } from './data.js'
 
 describe('CAT_SEO', () => {
   it('covers every service category with unique title, h1, and metaDesc', () => {
@@ -69,6 +69,15 @@ describe('CAT_FAQS', () => {
    Headings are user-facing copy, so they have to read like it. */
 describe('CAT_PAGE_BLOCKS headings are copy, not editorial labels', () => {
   const LABEL_WORDS = /\b(block|section|placeholder|tbd|todo|draft|wip|lorem)\b/i
+
+  it('covers every service category', () => {
+    for (const category of Object.keys(CAT_SLUGS)) {
+      expect(
+        CAT_PAGE_BLOCKS[category]?.length,
+        `${category} is missing CAT_PAGE_BLOCKS`,
+      ).toBeGreaterThan(0)
+    }
+  })
 
   it('no heading contains an editorial label word', () => {
     for (const [category, blocks] of Object.entries(CAT_PAGE_BLOCKS)) {

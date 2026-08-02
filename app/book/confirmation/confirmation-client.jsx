@@ -83,7 +83,12 @@ function ConfirmationContent() {
     return (
       <main id="main" className="page-content">
         <div className="section-shell section-pad flex items-center justify-center min-h-screen">
-          <p className="text-body">Loading confirmation…</p>
+          <div className="max-w-md text-center" aria-live="polite">
+            <h1 className="font-['Syne'] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+              Booking confirmed
+            </h1>
+            <p className="text-body">Loading confirmation…</p>
+          </div>
         </div>
       </main>
     )
@@ -271,7 +276,12 @@ export default function ConfirmationClient() {
     <Suspense fallback={
       <main id="main" className="page-content">
         <div className="section-shell section-pad flex items-center justify-center min-h-screen">
-          <p className="text-body">Loading confirmation…</p>
+          <div className="max-w-md text-center">
+            <h1 className="font-['Syne'] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+              Booking confirmed
+            </h1>
+            <p className="text-body">Loading confirmation…</p>
+          </div>
         </div>
       </main>
     }>
