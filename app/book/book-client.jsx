@@ -5,17 +5,22 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown, CalendarCheck } from 'lucide-react'
-import { SERVICES, ALL_SERVICES, CAT_SLUGS, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track } from '../../src/data.js'
+import { SERVICES, ALL_SERVICES, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { toLocalDateString } from '../../lib/date-local.js'
-import { computeBookingDurationMinutes } from '../../lib/booking-duration.js'
+import {
+  computeServicesDurationMinutes,
+  computeServicesPricePkr,
+  MAX_BOOKING_SERVICES,
+} from '../../lib/booking-duration.js'
 import { getAttribution, formatAttributionCell } from '../../lib/attribution.js'
 import { saveBookingRecord, listUpcomingBookings } from '../../lib/booking-storage.js'
+import { getHeadlineDeal } from '../../src/deals-data.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
 
-function effectiveStep(step, selectedService, selectedDate, selectedTime) {
-  if (!selectedService) return 0
+function effectiveStep(step, selectedServices, selectedDate, selectedTime) {
+  if (!selectedServices?.length) return 0
   if (!selectedDate || !selectedTime) return Math.min(1, Math.max(0, step))
   return Math.min(2, Math.max(0, step))
 }
@@ -32,34 +37,50 @@ function loadBookDraft(searchParams) {
   }
 
   const serviceIdParam = searchParams.get('serviceId')
+  const serviceIdsParam = searchParams.get('serviceIds')
   const categoryParam = searchParams.get('category')
   const dateParam = searchParams.get('date')
   const timeParam = searchParams.get('time')
   const stepParam = searchParams.get('step')
 
-  const serviceId = serviceIdParam ?? (draft?.serviceId != null ? String(draft.serviceId) : null)
-  let selectedService = null
+  const idsFromParam = serviceIdsParam
+    ? serviceIdsParam.split(',').map((s) => parseInt(s.trim(), 10)).filter((n) => Number.isFinite(n) && n > 0)
+    : []
+  const legacyId = serviceIdParam != null ? parseInt(serviceIdParam, 10) : NaN
+  const draftIds = Array.isArray(draft?.serviceIds)
+    ? draft.serviceIds.map((id) => parseInt(String(id), 10)).filter((n) => Number.isFinite(n) && n > 0)
+    : draft?.serviceId != null
+      ? [parseInt(String(draft.serviceId), 10)].filter((n) => Number.isFinite(n) && n > 0)
+      : []
+
+  let idList = idsFromParam.length > 0
+    ? idsFromParam
+    : Number.isFinite(legacyId) && legacyId > 0
+      ? [legacyId]
+      : draftIds
+  idList = [...new Set(idList)]
+
+  const selectedServices = idList
+    .map((id) => ALL_SERVICES.find((s) => s.id === id))
+    .filter(Boolean)
+
   let expandedCat = categoryParam && CATEGORIES.includes(categoryParam) ? categoryParam : null
-  if (serviceId) {
-    const svc = ALL_SERVICES.find(s => s.id === parseInt(serviceId, 10))
-    if (svc) {
-      selectedService = svc
-      expandedCat = svc.category
-    }
+  if (selectedServices.length > 0) {
+    expandedCat = selectedServices[selectedServices.length - 1].category
   }
 
   const selectedDate = dateParam || draft?.date || ''
   const selectedTime = timeParam || draft?.time || ''
   let step = stepParam != null
     ? Math.min(2, Math.max(0, parseInt(stepParam, 10) || 0))
-    : (draft?.step ?? (serviceId && selectedDate && selectedTime ? 2 : serviceId && selectedDate ? 1 : 0))
-  step = effectiveStep(step, selectedService, selectedDate, selectedTime)
+    : (draft?.step ?? (selectedServices.length && selectedDate && selectedTime ? 2 : selectedServices.length && selectedDate ? 1 : 0))
+  step = effectiveStep(step, selectedServices, selectedDate, selectedTime)
 
   const addonIds = Array.isArray(draft?.addonIds) ? draft.addonIds : []
 
   return {
     step,
-    selectedService,
+    selectedServices,
     expandedCat,
     selectedDate,
     selectedTime,
@@ -113,7 +134,7 @@ function FirstVisitHint() {
           >
             <ul className="px-4 pb-4 flex flex-col gap-2.5">
               {[
-                'Choose any service — no account needed',
+                'Choose one or more services — no account needed',
                 'Pick a date and time that works for you',
                 'Confirm online — your slot is saved instantly',
                 'Optional: message us on WhatsApp for directions or questions',
@@ -203,7 +224,8 @@ export default function BookClient() {
   const [direction, setDirection] = useState(1)
 
   const [expandedCat, setExpandedCat] = useState(boot.expandedCat)
-  const [selectedService, setSelectedService] = useState(boot.selectedService)
+  const [selectedServices, setSelectedServices] = useState(boot.selectedServices)
+  const primaryService = selectedServices[0] || null
 
   const [selectedDate, setSelectedDate] = useState(boot.selectedDate)
   const [selectedTime, setSelectedTime] = useState(boot.selectedTime)
@@ -222,66 +244,90 @@ export default function BookClient() {
   const [error, setError] = useState('')
   const [phoneError, setPhoneError] = useState('')
 
+  const headlineDeal = getHeadlineDeal()
+  const dealThreshold = headlineDeal?.thresholdPkr || 0
+
+  const serviceIdsKey = selectedServices.map((s) => s.id).join(',')
+
   useEffect(() => {
     const params = new URLSearchParams()
-    if (selectedService) params.set('serviceId', String(selectedService.id))
+    if (selectedServices.length === 1) {
+      params.set('serviceId', String(selectedServices[0].id))
+    } else if (selectedServices.length > 1) {
+      params.set('serviceIds', selectedServices.map((s) => s.id).join(','))
+    }
     if (selectedDate) params.set('date', selectedDate)
     if (selectedTime) params.set('time', selectedTime)
     if (step > 0) params.set('step', String(step))
 
     const qs = params.toString()
     router.replace(qs ? `/book?${qs}` : '/book', { scroll: false })
-  }, [selectedService, selectedDate, selectedTime, step, router])
+  }, [selectedServices, selectedDate, selectedTime, step, router])
 
   useEffect(() => {
     try {
       localStorage.setItem(BOOK_DRAFT_KEY, JSON.stringify({
-        serviceId: selectedService?.id ?? null,
+        serviceIds: selectedServices.map((s) => s.id),
+        serviceId: primaryService?.id ?? null,
         date: selectedDate,
         time: selectedTime,
         step,
         clientName,
         clientPhone,
         notes,
-        addonIds: [...selectedAddonIds],
+        addonIds: selectedServices.length === 1 ? [...selectedAddonIds] : [],
       }))
     } catch {
       // ignore quota / private mode
     }
-  }, [selectedService, selectedDate, selectedTime, step, clientName, clientPhone, notes, selectedAddonIds])
+  }, [selectedServices, primaryService, selectedDate, selectedTime, step, clientName, clientPhone, notes, selectedAddonIds])
 
   const goTo = useCallback((target) => {
-    const next = effectiveStep(target, selectedService, selectedDate, selectedTime)
-    if (target === 1 && !selectedService) return
-    if (target === 2 && (!selectedService || !selectedDate || !selectedTime)) return
+    const next = effectiveStep(target, selectedServices, selectedDate, selectedTime)
+    if (target === 1 && selectedServices.length === 0) return
+    if (target === 2 && (selectedServices.length === 0 || !selectedDate || !selectedTime)) return
     setDirection(next > step ? 1 : -1)
     setStep(next)
-  }, [step, selectedService, selectedDate, selectedTime])
+  }, [step, selectedServices, selectedDate, selectedTime])
 
-  const addonIdsList = [...selectedAddonIds]
+  const toggleService = useCallback((s) => {
+    setSelectedServices((prev) => {
+      const exists = prev.some((p) => p.id === s.id)
+      if (exists) return prev.filter((p) => p.id !== s.id)
+      if (prev.length >= MAX_BOOKING_SERVICES) return prev
+      return [...prev, s]
+    })
+    setSelectedAddonIds(new Set())
+    setSelectedTime('')
+  }, [])
+
+  const removeService = useCallback((id) => {
+    setSelectedServices((prev) => prev.filter((p) => p.id !== id))
+    setSelectedAddonIds(new Set())
+    setSelectedTime('')
+  }, [])
+
+  const addonIdsList = selectedServices.length === 1 ? [...selectedAddonIds] : []
   const addonIdsKey = addonIdsList.sort((a, b) => a - b).join(',')
-  const totalDurationMinutes = selectedService
-    ? computeBookingDurationMinutes(selectedService, addonIdsList)
+  const totalDurationMinutes = selectedServices.length
+    ? computeServicesDurationMinutes(selectedServices, addonIdsList)
     : 0
-  /* Basket value in PKR — used for the BookingCompleted conversion event, and
-     it is what decides whether the Freedom Deal's Rs 1,400 threshold is met. */
-  const totalPricePkr = selectedService
-    ? (selectedService.pricePkr || 0) +
-      addonIdsList.reduce(
-        (sum, id) => sum + (ALL_SERVICES.find((a) => a.id === id)?.pricePkr || 0),
-        0,
-      )
-    : 0
+  /* Basket value in PKR — BookingCompleted conversion + Freedom Deal meter. */
+  const totalPricePkr = computeServicesPricePkr(selectedServices, addonIdsList)
 
   useEffect(() => {
-    if (step !== 1 || !selectedDate || !selectedService) return
+    if (step !== 1 || !selectedDate || selectedServices.length === 0) return
     setLoadingSlots(true) // eslint-disable-line react-hooks/set-state-in-effect -- set loading before async fetch
     setSlotsError('')
     setSelectedTime('')
     const addonQuery = addonIdsKey ? `&addonIds=${encodeURIComponent(addonIdsKey)}` : ''
+    const idsQuery =
+      selectedServices.length === 1
+        ? `serviceId=${selectedServices[0].id}`
+        : `serviceIds=${encodeURIComponent(serviceIdsKey)}`
     const controller = new AbortController()
     const timeoutId = setTimeout(() => controller.abort(), 25_000)
-    fetch(`/api/slots?date=${selectedDate}&serviceId=${selectedService.id}${addonQuery}`, {
+    fetch(`/api/slots?date=${selectedDate}&${idsQuery}${addonQuery}`, {
       signal: controller.signal,
     })
       .then(async (r) => {
@@ -309,7 +355,7 @@ export default function BookClient() {
         clearTimeout(timeoutId)
         setLoadingSlots(false)
       })
-  }, [step, selectedDate, selectedService, addonIdsKey])
+  }, [step, selectedDate, serviceIdsKey, selectedServices, addonIdsKey])
 
   const validatePhone = (value) => {
     if (value && !PHONE_RE.test(value.replace(/\s/g, ''))) {
@@ -321,7 +367,7 @@ export default function BookClient() {
   }
 
   const handleSubmit = async () => {
-    if (!selectedService || !selectedDate || !selectedTime) {
+    if (selectedServices.length === 0 || !selectedDate || !selectedTime) {
       setError('Please complete service, date, and time before confirming.')
       return
     }
@@ -332,9 +378,10 @@ export default function BookClient() {
     if (!validatePhone(clientPhone.trim())) return
     setError('')
     setSubmitting(true)
-    const addons = getAddonsForService(selectedService.id).filter((a) =>
-      selectedAddonIds.has(a.id),
-    )
+    const addons =
+      selectedServices.length === 1
+        ? getAddonsForService(primaryService.id).filter((a) => selectedAddonIds.has(a.id))
+        : []
     const addonNote =
       addons.length > 0
         ? `Add-ons: ${addons.map((a) => a.name).join(', ')}`
@@ -349,7 +396,8 @@ export default function BookClient() {
         headers: { 'Content-Type': 'application/json' },
         signal: bookController.signal,
         body: JSON.stringify({
-          serviceId: selectedService.id,
+          serviceId: primaryService.id,
+          serviceIds: selectedServices.map((s) => s.id),
           addonIds: addonIdsList,
           date: selectedDate,
           time: selectedTime,
@@ -411,8 +459,9 @@ export default function BookClient() {
          the redirect so it survives the navigation. */
       track('BookingCompleted', {
         service: data.booking.service,
-        category: selectedService?.category,
-        addons: selectedAddonIds.length,
+        category: primaryService?.category,
+        services: selectedServices.length,
+        addons: addonIdsList.length,
         value: totalPricePkr,
       })
 
@@ -460,7 +509,10 @@ export default function BookClient() {
             transition={{ delay: 0.2, duration: 0.7 }}
             className="text-body max-w-lg"
           >
-            Pick a service, choose a date and time, and confirm your appointment in under a minute.
+            Pick one or more services, choose a date and time, and confirm your appointment in under a minute.
+            {headlineDeal?.thresholdPkr ? (
+              <> Combine anything to reach {formatPrice(headlineDeal.thresholdPkr)} for the Freedom Deal.</>
+            ) : null}
           </m.p>
         </div>
 
@@ -511,7 +563,62 @@ export default function BookClient() {
               exit="exit"
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="eyebrow mb-6">— Choose a service</p>
+              <p className="eyebrow mb-2">— Choose services</p>
+              <p className="text-stone text-xs font-['Inter'] font-light mb-6 max-w-lg">
+                Tap to add or remove. You can mix categories in one visit
+                {headlineDeal?.thresholdPkr
+                  ? ` — build toward ${formatPrice(headlineDeal.thresholdPkr)} for 14% off`
+                  : ''}
+                .
+              </p>
+
+              {selectedServices.length > 0 && (
+                <div className="mb-5 flex flex-wrap gap-2">
+                  {selectedServices.map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => removeService(s.id)}
+                      className="tap-safe inline-flex items-center gap-1.5 border border-ink bg-mist px-2.5 py-1.5 text-[11px] font-['Inter'] text-ink"
+                      aria-label={`Remove ${s.name}`}
+                    >
+                      <span className="font-medium">{s.name}</span>
+                      {s.pricePkr != null && (
+                        <span className="text-stone">{formatPrice(s.pricePkr)}</span>
+                      )}
+                      <span className="text-stone" aria-hidden="true">×</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              {headlineDeal?.thresholdPkr && selectedServices.length > 0 && (
+                <div className="mb-6 max-w-md">
+                  <div className="flex items-baseline justify-between gap-3 mb-1.5">
+                    <p className="text-[10px] tracking-[0.18em] uppercase font-['Inter'] text-stone">
+                      Freedom Deal · {formatPrice(dealThreshold)}
+                    </p>
+                    <p className="text-xs font-['Inter'] text-ink font-medium">
+                      {totalPricePkr >= dealThreshold
+                        ? `Qualified · ${formatPrice(totalPricePkr)}`
+                        : `${formatPrice(totalPricePkr)} of ${formatPrice(dealThreshold)}`}
+                    </p>
+                  </div>
+                  <div className="h-1.5 bg-border-soft w-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-accent-gold to-[#8b6d59] transition-[width] duration-300"
+                      style={{
+                        width: `${Math.min(100, Math.round((totalPricePkr / dealThreshold) * 100))}%`,
+                      }}
+                    />
+                  </div>
+                  <p className="text-[11px] text-stone font-['Inter'] font-light mt-1.5">
+                    {totalPricePkr >= dealThreshold
+                      ? 'Your visit qualifies for 14% off at the counter.'
+                      : `Add ${formatPrice(dealThreshold - totalPricePkr)} more to unlock 14% off.`}
+                  </p>
+                </div>
+              )}
 
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
                 {CATEGORIES.map((cat) => {
@@ -552,15 +659,17 @@ export default function BookClient() {
                           </div>
                           <div className="flex flex-col divide-y divide-border-soft border-y border-border-soft">
                             {services.map((s) => {
-                              const sel = selectedService?.id === s.id
+                              const sel = selectedServices.some((p) => p.id === s.id)
+                              const atCap = !sel && selectedServices.length >= MAX_BOOKING_SERVICES
                               return (
                                 <button
                                   key={s.id}
                                   type="button"
-                                  onClick={() => setSelectedService(sel ? null : s)}
+                                  onClick={() => !atCap && toggleService(s)}
+                                  disabled={atCap}
                                   aria-pressed={sel}
                                   className={`tap-safe flex items-center justify-between gap-3 py-3.5 text-left transition-colors ${
-                                    sel ? 'bg-mist/80 pl-2' : 'hover:bg-mist hover:pl-2'
+                                    sel ? 'bg-mist/80 pl-2' : atCap ? 'opacity-40 cursor-not-allowed' : 'hover:bg-mist hover:pl-2'
                                   }`}
                                 >
                                   <div className="min-w-0 flex-1">
@@ -593,13 +702,17 @@ export default function BookClient() {
                 })}
               </div>
 
-              {selectedService && (
+              {selectedServices.length > 0 && (
                 <div className="sticky bottom-0 z-[1] pt-5 mt-6 border-t border-border-soft bg-white pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]">
                   <div className="flex items-center justify-between gap-4">
                     <div className="min-w-0">
-                      <p className="font-['Syne'] font-bold text-sm text-ink uppercase truncate">{selectedService.name}</p>
+                      <p className="font-['Syne'] font-bold text-sm text-ink uppercase truncate">
+                        {selectedServices.length === 1
+                          ? selectedServices[0].name
+                          : `${selectedServices.length} services`}
+                      </p>
                       <p className="text-stone text-[10px] font-['Inter']">
-                        {formatServicePrice(selectedService)} · {formatDuration(selectedService.durationMinutes)}
+                        {formatPrice(totalPricePkr)} · {formatDuration(totalDurationMinutes)}
                       </p>
                     </div>
                     <button
@@ -625,21 +738,36 @@ export default function BookClient() {
               exit="exit"
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="eyebrow mb-2">— Selected service</p>
-              <p className="font-['Syne'] font-bold text-sm text-ink uppercase mb-6">
-                {selectedService?.name}
-                <span className="text-stone font-normal text-[10px] font-['Inter'] ml-2">
+              <p className="eyebrow mb-2">— Selected services</p>
+              <div className="mb-6">
+                {selectedServices.map((s) => (
+                  <p key={s.id} className="font-['Syne'] font-bold text-sm text-ink uppercase">
+                    {s.name}
+                    {s.pricePkr != null && (
+                      <span className="text-stone font-normal text-[10px] font-['Inter'] ml-2">
+                        {formatPrice(s.pricePkr)}
+                      </span>
+                    )}
+                  </p>
+                ))}
+                <p className="text-stone text-[10px] font-['Inter'] mt-1">
                   {formatDuration(totalDurationMinutes)}
-                </span>
-              </p>
+                  {totalPricePkr > 0 ? ` · ${formatPrice(totalPricePkr)}` : ''}
+                  {headlineDeal?.thresholdPkr && totalPricePkr >= dealThreshold
+                    ? ' · Freedom Deal eligible'
+                    : ''}
+                </p>
+              </div>
 
-              {selectedService && getAddonsForService(selectedService.id).length > 0 && (
+              {primaryService &&
+                selectedServices.length === 1 &&
+                getAddonsForService(primaryService.id).length > 0 && (
                 <m.div className="mb-6 max-w-md">
                   <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-3">
                     Optional add-ons (affects time slots)
                   </p>
                   <div className="flex flex-col gap-2">
-                    {getAddonsForService(selectedService.id).map((addon) => {
+                    {getAddonsForService(primaryService.id).map((addon) => {
                       const checked = selectedAddonIds.has(addon.id)
                       return (
                         <label
@@ -805,17 +933,30 @@ export default function BookClient() {
 
               <div className="panel-muted p-4 mb-6 shadow-soft">
                 <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-2">Booking summary</p>
-                <p className="font-['Syne'] font-bold text-sm text-ink uppercase">{selectedService?.name}</p>
+                {selectedServices.map((s) => (
+                  <p key={s.id} className="font-['Syne'] font-bold text-sm text-ink uppercase">
+                    {s.name}
+                    {s.pricePkr != null && (
+                      <span className="text-accent-gold-deep font-['Inter'] font-medium text-xs ml-2 normal-case">
+                        {formatPrice(s.pricePkr)}
+                      </span>
+                    )}
+                  </p>
+                ))}
                 <p className="text-stone text-xs font-['Inter'] mt-1">
                   {formatDateNice(selectedDate)} · {formatTime12(selectedTime)} · {formatDuration(totalDurationMinutes)}
                 </p>
-                {selectedService?.pricePkr != null && (
+                {totalPricePkr > 0 && (
                   <p className="text-accent-gold-deep text-xs font-['Inter'] font-medium mt-0.5">
-                    {formatServicePrice(selectedService)}
+                    Total {formatPrice(totalPricePkr)}
+                    {headlineDeal?.thresholdPkr && totalPricePkr >= dealThreshold
+                      ? ' · Freedom Deal — 14% off at the counter'
+                      : ''}
                   </p>
                 )}
-                {selectedService &&
-                  getAddonsForService(selectedService.id)
+                {primaryService &&
+                  selectedServices.length === 1 &&
+                  getAddonsForService(primaryService.id)
                     .filter((a) => selectedAddonIds.has(a.id))
                     .map((a) => (
                       <p key={a.id} className="text-stone text-xs font-['Inter'] mt-1">

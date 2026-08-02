@@ -46,7 +46,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'Can I add a quick service (like upper lip) when I book online?',
-        a: 'When you book certain services online, we suggest optional add-ons on the date/time step — for example, upper lip threading with eyebrow threading. For other combinations, note them in the booking notes or WhatsApp us and we will confirm the total time and price.',
+        a: 'When you book certain services online, we suggest optional add-ons on the date/time step — for example, upper lip threading with eyebrow threading. You can also select any combination of menu services in one booking at farwasalon.com/book; the time slot expands to fit the visit.',
       },
       {
         q: 'What payment methods do you accept?',
@@ -100,7 +100,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'Do you offer full-body wax packages?',
-        a: 'Yes — Full Body Honey Wax is Rs 2,800 and Full Body Rica Wax is Rs 4,000. We also list individual areas (arms, legs, underarms, hips, stomach, back) with transparent PKR pricing on farwasalon.com/prices. For multiple areas in one visit, book the longest service first and note the rest in booking notes — we will confirm total time.',
+        a: 'Yes — Full Body Honey Wax is Rs 2,800 and Full Body Rica Wax is Rs 4,000. We also list individual areas (arms, legs, underarms, hips, stomach, back) with transparent PKR pricing on farwasalon.com/prices. For multiple areas in one visit, select each area on farwasalon.com/book — the combined duration is booked as one appointment.',
       },
     ],
   },
@@ -163,7 +163,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'Can I book multiple services in one visit?',
-        a: 'Yes — the online booking at farwasalon.com/book lets you add add-on services to your appointment, and the time slot adjusts automatically so nothing overlaps. Threading plus a facial, or waxing plus a manicure, are popular combinations.',
+        a: 'Yes — at farwasalon.com/book you can select several services in one booking. The combined duration sets your time slot automatically, and the salon sees every service on the appointment. Threading plus a facial, or waxing plus a manicure, are popular combinations.',
       },
       {
         q: 'Do you offer HydraFacial or keratin treatments?',

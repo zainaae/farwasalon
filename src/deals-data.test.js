@@ -44,6 +44,7 @@ describe('Freedom Deal lifecycle', () => {
     expect(deal.validUntil).toBe('2026-08-14')
     expect(deal.title).toMatch(/14%/)
     expect(deal.priceNote).toMatch(/1,400/)
+    expect(deal.thresholdPkr).toBe(1400)
     expect(deal.image).toBe('/freedom-deal-2026-14pc.jpg')
   })
 

@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server'
 import { getSheetRows, isConfigured } from '../../../lib/google-sheets.js'
-import { ALL_SERVICES, getServiceMaxWorkers } from '../../../src/data.js'
 import { checkRateLimit } from '../../../lib/rate-limit.js'
 import {
   FILTERED_SLOTS,
@@ -10,7 +9,12 @@ import {
   isSlotInPast,
 } from '../../../lib/booking-slots.js'
 import { validateBookingDate } from '../../../lib/booking-date-rules.js'
-import { computeBookingDurationMinutes, parseAddonIdsParam } from '../../../lib/booking-duration.js'
+import {
+  computeServicesDurationMinutes,
+  getBookingMaxWorkers,
+  parseAddonIdsParam,
+  resolveBookingServices,
+} from '../../../lib/booking-duration.js'
 import { logger, hashIp, errCtx } from '../../../lib/logger.js'
 
 export async function GET(request) {
@@ -26,6 +30,7 @@ export async function GET(request) {
   const { searchParams } = new URL(request.url)
   const date = searchParams.get('date')
   const serviceIdParam = searchParams.get('serviceId')
+  const serviceIdsParam = searchParams.get('serviceIds')
   const addonIdsParam = searchParams.get('addonIds')
 
   if (!date) {
@@ -71,13 +76,15 @@ export async function GET(request) {
 
   let serviceDuration = 30
   let maxWorkers = MAX_WORKERS
-  const addonIds = parseAddonIdsParam(addonIdsParam)
-  if (serviceIdParam) {
-    const svc = ALL_SERVICES.find(s => s.id === parseInt(serviceIdParam, 10))
-    if (svc) {
-      serviceDuration = computeBookingDurationMinutes(svc, addonIds)
-      maxWorkers = getServiceMaxWorkers(svc)
-    }
+  const resolved = resolveBookingServices({
+    serviceId: serviceIdParam || undefined,
+    serviceIds: serviceIdsParam || undefined,
+  })
+  if (resolved.services?.length) {
+    const addonIds =
+      resolved.services.length === 1 ? parseAddonIdsParam(addonIdsParam) : []
+    serviceDuration = computeServicesDurationMinutes(resolved.services, addonIds)
+    maxWorkers = getBookingMaxWorkers(resolved.services)
   }
 
   const slotsNeeded = slotsNeededForDuration(serviceDuration)

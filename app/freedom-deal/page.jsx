@@ -54,7 +54,7 @@ const FAQS = [
   },
   {
     q: 'Can I combine services to reach Rs 1,400?',
-    a: 'Yes — that is the point. Combine anything on the menu: threading with a cleansing, a manicure with a massage, whatever you want. WhatsApp us your list and we will book the visit together so the total is clear before you come.',
+    a: 'Yes — that is the point. Combine anything on the menu: threading with a cleansing, a manicure with a massage, whatever you want. On farwasalon.com/book, select multiple services in one booking and watch the running total toward Rs 1,400. WhatsApp +92 322 2782254 works too if you prefer.',
   },
   {
     q: 'Do I need to pay in advance?',
@@ -155,14 +155,14 @@ export default function AzadiSalePage() {
 
               <div className="azadi-in flex flex-wrap items-center gap-3" style={{ '--i': 4 }}>
                 <Link href="/book" className="tap-safe azadi-btn">
-                  Book your slot <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  Build your combo online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
                 <WaCta
                   href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20help%20me%20build%20a%20Rs%201%2C400%20combo"
                   from="freedom-deal-hero"
                   className="tap-safe azadi-btn azadi-btn--ghost"
                 >
-                  WhatsApp us to build your combo
+                  Or WhatsApp us
                 </WaCta>
               </div>
             </div>
@@ -177,9 +177,9 @@ export default function AzadiSalePage() {
           </h2>
           <p className="text-body text-sm md:text-[15px] mb-4 max-w-2xl leading-relaxed">
             The Rs 1,400 is the total for your visit — not something one service has to cost on
-            its own. Come in for a cleansing and add a threading, or a manicure and a massage;
-            once the bill reaches Rs 1,400, the 14% applies to all of it. Nothing on the menu is
-            left out.
+            its own. On farwasalon.com/book, select several services and watch the running total.
+            Once the bill reaches Rs 1,400, the 14% applies to all of it at the counter. Nothing on
+            the menu is left out.
           </p>
           <p className="text-body text-sm md:text-[15px] mb-5 max-w-2xl leading-relaxed">
             Most salons run Azadi offers as a fixed package — one facial, one mani-pedi, one

@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server'
 import { getSheetRows, appendBooking, generateBookingId, isConfigured, updateBookingStatus } from '../../../lib/google-sheets.js'
-import { ALL_SERVICES, PHONE_RE, getServiceMaxWorkers } from '../../../src/data.js'
+import { PHONE_RE } from '../../../src/data.js'
 import { checkRateLimit } from '../../../lib/rate-limit.js'
 import { requireStringField } from '../../../lib/sanitize.js'
 import { isAllowedOrigin } from '../../../lib/origin-check.js'
 import {
-  FILTERED_SLOTS,
   slotIndex,
   addMinutes,
   buildOccupiedCounts,
@@ -16,7 +15,14 @@ import {
 import { signCancelToken, phoneLast4 } from '../../../lib/booking-cancel-token.js'
 import { validateBookingDate, validateTimeInGrid } from '../../../lib/booking-date-rules.js'
 import { logger, hashIp, errCtx } from '../../../lib/logger.js'
-import { computeBookingDurationMinutes, parseAddonIdsParam } from '../../../lib/booking-duration.js'
+import {
+  computeServicesDurationMinutes,
+  formatCombinedCategory,
+  formatCombinedServiceName,
+  getBookingMaxWorkers,
+  parseAddonIdsParam,
+  resolveBookingServices,
+} from '../../../lib/booking-duration.js'
 
 export async function POST(request) {
   if (!isAllowedOrigin(request)) {
@@ -49,8 +55,22 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Invalid submission' }, { status: 400 })
   }
 
-  const serviceIdRaw = body.serviceId
-  if (typeof serviceIdRaw !== 'number' && typeof serviceIdRaw !== 'string') {
+  /* Legacy clients send serviceId; multi-select sends serviceIds (and may still
+     include serviceId as the first pick). Either path must resolve to catalog rows. */
+  const hasServiceId =
+    typeof body.serviceId === 'number' || typeof body.serviceId === 'string'
+  const hasServiceIds =
+    body.serviceIds != null &&
+    body.serviceIds !== '' &&
+    !(Array.isArray(body.serviceIds) && body.serviceIds.length === 0)
+  if (!hasServiceId && !hasServiceIds) {
+    return NextResponse.json({ error: 'Invalid serviceId' }, { status: 400 })
+  }
+  if (
+    hasServiceId &&
+    typeof body.serviceId !== 'number' &&
+    typeof body.serviceId !== 'string'
+  ) {
     return NextResponse.json({ error: 'Invalid serviceId' }, { status: 400 })
   }
 
@@ -103,13 +123,22 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Invalid phone number format' }, { status: 400 })
   }
 
-  const service = ALL_SERVICES.find(s => s.id === parseInt(String(serviceIdRaw), 10))
-  if (!service) {
-    return NextResponse.json({ error: 'Service not found' }, { status: 404 })
+  const resolved = resolveBookingServices({
+    serviceId: hasServiceId ? body.serviceId : undefined,
+    serviceIds: hasServiceIds ? body.serviceIds : undefined,
+  })
+  if (resolved.error) {
+    return NextResponse.json({ error: resolved.error }, { status: resolved.status })
   }
+  const services = resolved.services
+  const service = services[0]
 
-  const addonIds = parseAddonIdsParam(body.addonIds)
-  const duration = computeBookingDurationMinutes(service, addonIds)
+  /* Add-ons only apply to a single primary (whitelist). Multi-select already
+     carries every menu item as a full service — do not double-count. */
+  const addonIds = services.length === 1 ? parseAddonIdsParam(body.addonIds) : []
+  const duration = computeServicesDurationMinutes(services, addonIds)
+  const serviceLabel = formatCombinedServiceName(services)
+  const categoryLabel = formatCombinedCategory(services)
   const endTime = addMinutes(time, duration)
 
   if (!isConfigured()) {
@@ -131,7 +160,7 @@ export async function POST(request) {
     )
   }
 
-  const maxWorkers = getServiceMaxWorkers(service)
+  const maxWorkers = getBookingMaxWorkers(services)
   const occupied = buildOccupiedCounts(bookings)
   const startIdx = slotIndex(time)
   const needed = slotsNeededForDuration(duration)
@@ -150,8 +179,8 @@ export async function POST(request) {
       endTime,
       clientName,
       clientPhone,
-      service: service.name,
-      category: service.category,
+      service: serviceLabel,
+      category: categoryLabel,
       duration,
       status: 'Confirmed',
       bookedAt: new Date().toISOString(),
@@ -159,7 +188,13 @@ export async function POST(request) {
       source,
     })
   } catch (err) {
-    logger.error('/api/book', 'sheets-write-failed', { ip: hashIp(ip), date, serviceId: service.id, ...errCtx(err) })
+    logger.error('/api/book', 'sheets-write-failed', {
+      ip: hashIp(ip),
+      date,
+      serviceId: service.id,
+      serviceCount: services.length,
+      ...errCtx(err),
+    })
     return NextResponse.json(
       { error: 'Failed to save your booking. Please try again or contact the salon.' },
       { status: 502 }
@@ -200,7 +235,7 @@ export async function POST(request) {
       date,
       time,
       endTime,
-      service: service.name,
+      service: serviceLabel,
       duration,
       clientName,
       cancelToken,
