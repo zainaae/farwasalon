@@ -236,13 +236,22 @@ export default function SiteFooter() {
               <span className="text-[#e4ddd7] hidden sm:inline">·</span>
               <UrduSignature className="sm:hidden text-stone/70 text-[13px]" />
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 flex-wrap">
               <Link
                 href="/privacy"
                 className="text-stone text-[11px] font-['Inter'] hover:text-ink transition-colors"
               >
                 Privacy Policy
               </Link>
+              <span className="text-[#e4ddd7]">·</span>
+              <a
+                href="https://www.linkedin.com/in/zainaae/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-stone text-[11px] font-['Inter'] hover:text-ink transition-colors"
+              >
+                Site by Zain
+              </a>
               <span className="text-[#e4ddd7]">·</span>
               <p className="text-stone text-[11px] font-['Inter']">
                 {SALON_ADDRESS_LINES[0]} · Est. 2008
