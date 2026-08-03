@@ -12,6 +12,7 @@ import {
   canFitAtIndex,
   isSlotInPast,
   shouldCancelSelf,
+  MAX_WORKERS,
 } from '../../../lib/booking-slots.js'
 import { signCancelToken, phoneLast4 } from '../../../lib/booking-cancel-token.js'
 import { validateBookingDate, validateTimeInGrid } from '../../../lib/booking-date-rules.js'
@@ -218,13 +219,20 @@ export async function POST(request) {
         endTime: duplicate.endTime || addMinutes(time, dupDuration),
         service: duplicate.service || serviceLabel,
         duration: dupDuration,
-        clientName: duplicate.clientName || clientName,
+        /* Echo the name the client submitted — never the sheet's. The sheet
+           value is PII the retry already knows, and leaking it on an
+           unauthenticated phone+slot match is unnecessary. */
+        clientName,
         cancelToken: null,
       },
     })
   }
 
-  const maxWorkers = getBookingMaxWorkers(services)
+  /* Station capacity is always MAX_WORKERS for pre-check, slots, and the race
+     tiebreak. getBookingMaxWorkers may be ≤ that (exclusive services); never
+     above — otherwise bridal could pass pre-check at "3" then lose to
+     shouldCancelSelf (cap 2) after writing. */
+  const maxWorkers = Math.min(getBookingMaxWorkers(services), MAX_WORKERS)
   const occupied = buildOccupiedCounts(bookings)
   const startIdx = slotIndex(time)
   const needed = slotsNeededForDuration(duration)
@@ -277,7 +285,7 @@ export async function POST(request) {
     const freshOccupied = buildOccupiedCounts(freshBookings)
     const self = freshBookings.find((b) => b.bookingId === bookingId)
     if (
-      !canFitAtIndex(freshOccupied, startIdx, needed, maxWorkers) &&
+      !canFitAtIndex(freshOccupied, startIdx, needed, MAX_WORKERS) &&
       shouldCancelSelf(freshBookings, self)
     ) {
       try {

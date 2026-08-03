@@ -15,7 +15,7 @@ import {
   MAX_BOOKING_SERVICES,
 } from '../../lib/booking-duration.js'
 import { getAttribution, formatAttributionCell } from '../../lib/attribution.js'
-import { saveBookingRecord, listUpcomingBookings } from '../../lib/booking-storage.js'
+import { saveBookingRecord, readBookingRecord, listUpcomingBookings, resolveStoredCancelToken } from '../../lib/booking-storage.js'
 import { getHeadlineDeal, isDealActive, isDealUpcoming, formatDealRange } from '../../src/deals-data.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
@@ -438,7 +438,10 @@ export default function BookClient() {
          not sessionStorage. This is the only copy the customer will ever hold:
          nothing is texted, WhatsApped or emailed to her, so if it dies with the
          tab she has no proof the appointment exists and no way to cancel it,
-         while the FAQ still penalises her for cancelling late. */
+         while the FAQ still penalises her for cancelling late.
+         Idempotent retries return cancelToken: null — preserve any token we
+         already stored for this id instead of wiping it to ''. */
+      const existing = readBookingRecord(data.booking.id)
       saveBookingRecord({
         id: data.booking.id,
         service: data.booking.service,
@@ -446,7 +449,7 @@ export default function BookClient() {
         date: data.booking.date,
         time: data.booking.time,
         duration: bookedDuration,
-        cancelToken: data.booking.cancelToken || '',
+        cancelToken: resolveStoredCancelToken(data.booking.cancelToken, existing?.cancelToken),
       })
       /* The cancel token stays out of the URL. Plausible and the Meta Pixel both
          transmit location.href, so a token in the query string is a bearer

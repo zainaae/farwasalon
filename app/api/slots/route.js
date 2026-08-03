@@ -92,7 +92,9 @@ export async function GET(request) {
     const addonIds =
       resolved.services.length === 1 ? parseAddonIdsParam(addonIdsParam) : []
     serviceDuration = computeServicesDurationMinutes(resolved.services, addonIds)
-    maxWorkers = getBookingMaxWorkers(resolved.services)
+    /* Never advertise more stations than MAX_WORKERS — same cap as /api/book
+       and shouldCancelSelf, so the UI cannot offer a bridal "3rd" slot. */
+    maxWorkers = Math.min(getBookingMaxWorkers(resolved.services), MAX_WORKERS)
   }
 
   const slotsNeeded = slotsNeededForDuration(serviceDuration)

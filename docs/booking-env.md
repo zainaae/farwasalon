@@ -18,6 +18,20 @@ Set these in Vercel (or `.env.local` for local dev). Do not commit secrets.
 
 Cancel links look like: `/book/cancel?id=FBS-…` (the signed cancel token is stored on the device with the booking record; the API validates that token from the POST body, not the URL).
 
+## Booking Origin allowlist (CSRF)
+
+`POST /api/book`, `/api/book/cancel`, and other state-changing routes accept:
+
+- Production: `https://farwasalon.com`, `https://www.farwasalon.com`
+- Exact Vercel alias: `https://farwasalon.vercel.app`
+- The current deployment host from `VERCEL_URL` (set automatically on Vercel)
+- Localhost / loopback for development
+- Extra origins listed in `ALLOWED_BOOKING_ORIGINS`
+
+| Variable | Description |
+|----------|-------------|
+| `ALLOWED_BOOKING_ORIGINS` | Optional. Comma-separated full origins (e.g. `https://farwasalon-git-branch-team.vercel.app`) for preview deploys that are not the current `VERCEL_URL`. Without this, preview traffic should use `farwasalon.com` or the deployment's own URL. Attacker hosts like `farwasalon-evil.vercel.app` are **not** allowed by prefix. |
+
 ## Optional
 
 | Variable | Description |

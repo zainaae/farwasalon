@@ -159,16 +159,20 @@ export const SERVICES = {
   ],
 
   'Bridal': [
-    { id: _id++, name: 'Full Bridal Package', category: 'Bridal', pricePkr: 25000, durationMinutes: 300, maxWorkers: 3,
+    /* Station cap is the salon-wide MAX_WORKERS (2). Do not set maxWorkers > 2 —
+       slots, book pre-check, and race tiebreak all share that number. A higher
+       catalog value used to let a solo bridal book a "3rd" station that does
+       not exist, then get cancelled by shouldCancelSelf → write-then-409. */
+    { id: _id++, name: 'Full Bridal Package', category: 'Bridal', pricePkr: 25000, durationMinutes: 300,
       desc: 'Our signature all-day bridal experience — hair, makeup, draping, and touch-ups from preparation to reception.',
       includes: ['Bridal makeup', 'Hair styling', 'Dupatta draping', 'Touch-up kit', 'Event presence'] },
-    { id: _id++, name: 'Bridal Trial', category: 'Bridal', pricePkr: 8000, durationMinutes: 120, maxWorkers: 3,
+    { id: _id++, name: 'Bridal Trial', category: 'Bridal', pricePkr: 8000, durationMinutes: 120,
       desc: 'A full preview of your wedding look so you walk down the aisle knowing you look perfect.',
       includes: ['Look consultation', 'Full hair & makeup trial', 'Photos for reference'] },
-    { id: _id++, name: 'Engagement Look', category: 'Bridal', pricePkr: 12000, durationMinutes: 150, maxWorkers: 3,
+    { id: _id++, name: 'Engagement Look', category: 'Bridal', pricePkr: 12000, durationMinutes: 150,
       desc: 'Glam-ready styling for your engagement — romantic, radiant, and completely you.',
       includes: ['Makeup application', 'Hair set', 'Lash application'] },
-    { id: _id++, name: 'Mehndi / Dholki Look', category: 'Bridal', pricePkr: 10000, durationMinutes: 120, maxWorkers: 3,
+    { id: _id++, name: 'Mehndi / Dholki Look', category: 'Bridal', pricePkr: 10000, durationMinutes: 120,
       desc: 'Vibrant, colourful, and festive — a look that celebrates the joy of pre-wedding functions.',
       includes: ['Festive makeup', 'Flower or jewellery hair styling', 'Setting spray'] },
   ],
@@ -230,14 +234,18 @@ export function filterServiceCategories(categories, activeTab) {
   return categories.filter((c) => c === activeTab)
 }
 
-/** Default concurrent stations when a service has no maxWorkers */
+/** Default concurrent stations when a service has no maxWorkers.
+ *  The salon has 2 stations — never advertise more than this in slots/book. */
 export const DEFAULT_MAX_WORKERS = 2
 
-/** Per-service station cap for slot conflict checks (bridal uses more chairs) */
+/** Per-service station cap for slot conflict checks. Clamped to DEFAULT_MAX_WORKERS
+ *  so a catalog typo (e.g. bridal maxWorkers: 3) cannot overbook real stations. */
 export function getServiceMaxWorkers(service) {
-  if (service?.maxWorkers != null && service.maxWorkers > 0) return service.maxWorkers
-  if (service?.category === 'Bridal') return 3
-  return DEFAULT_MAX_WORKERS
+  let cap = DEFAULT_MAX_WORKERS
+  if (service?.maxWorkers != null && service.maxWorkers > 0) {
+    cap = service.maxWorkers
+  }
+  return Math.min(cap, DEFAULT_MAX_WORKERS)
 }
 
 /** First bookable service id in a category (for SEO landing CTAs) */
