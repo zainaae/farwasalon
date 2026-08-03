@@ -66,29 +66,29 @@ export default function HomeHero() {
         <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
           <p
             id="hero-lede"
-            className="hero-lcp text-white/65 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-['Inter'] mb-5 md:mb-7"
+            className="hero-lcp text-white/65 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-[family-name:var(--font-inter)] mb-5 md:mb-7"
           >
             Farwa Beauty Salon &middot; Est. 2008
           </p>
 
+          {/* H1 uses next/font CSS var + display:optional Unbounded so LCP is not
+              blocked on webfont swap. Poster remains priority/high fetchPriority. */}
           <h1
             id="hero-headline"
-            className="hero-lcp text-white leading-[0.96] mb-4 md:mb-5 break-words"
+            className="hero-lcp text-white leading-[0.96] mb-4 md:mb-5 break-words font-[family-name:var(--font-unbounded)]"
             style={{
-              fontFamily: 'var(--font-unbounded), Unbounded, sans-serif',
               fontSize: 'clamp(2.5rem, 8.8vw, 6.75rem)',
               letterSpacing: '-0.03em',
               maxWidth: '13ch',
             }}
           >
             <span className="block text-white font-bold">Beauty Salon in PECHS</span>
-            <span className="block text-white/80 font-light italic mt-1">Karachi</span>
+            <span className="block text-white/80 font-normal italic mt-1">Karachi</span>
           </h1>
 
           <p
-            className="text-white/90 leading-[1.15] mb-8 md:mb-9 break-words"
+            className="text-white/90 leading-[1.15] mb-8 md:mb-9 break-words font-[family-name:var(--font-unbounded)]"
             style={{
-              fontFamily: 'var(--font-unbounded), Unbounded, sans-serif',
               fontSize: 'clamp(1.05rem, 3.2vw, 1.75rem)',
               letterSpacing: '-0.01em',
               maxWidth: '22ch',
@@ -97,7 +97,7 @@ export default function HomeHero() {
             {thesis.map((line) => (
               <span
                 key={line.text}
-                className={`block ${line.em ? 'text-white/95 font-medium' : 'text-white/70 font-light italic'}`}
+                className={`block ${line.em ? 'text-white/95 font-bold' : 'text-white/70 font-normal italic'}`}
               >
                 {line.text}
               </span>
@@ -110,7 +110,7 @@ export default function HomeHero() {
           >
             <Link
               href="/book"
-              className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2.5 bg-white text-ink text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-8 md:px-10 py-[1.05rem] md:py-[1.2rem] hover:bg-nude active:scale-[0.98] transition-colors duration-300"
+              className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2.5 bg-white text-ink text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-8 md:px-10 py-[1.05rem] md:py-[1.2rem] hover:bg-nude active:scale-[0.98] transition-colors duration-300"
             >
               Book an Appointment
               <svg
@@ -131,7 +131,7 @@ export default function HomeHero() {
             </Link>
             <Link
               href="/services"
-              className="tap-safe link-underline self-center text-white/75 text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-['Inter'] hover:text-white transition-colors"
+              className="tap-safe link-underline self-center text-white/75 text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
             >
               Explore Services
             </Link>
@@ -139,7 +139,7 @@ export default function HomeHero() {
               href={`https://wa.me/${WA_NUMBER}`}
               target="_blank"
               rel="noreferrer"
-              className="tap-safe hidden sm:inline-flex text-white/50 text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white/80 transition-colors"
+              className="tap-safe hidden sm:inline-flex text-white/50 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white/80 transition-colors"
             >
               Or WhatsApp us
             </a>
@@ -155,7 +155,7 @@ export default function HomeHero() {
         <div className="w-px h-9 bg-white/20 relative overflow-hidden">
           <div className="hero-scroll-bar absolute top-0 left-0 w-full bg-white/80" style={{ height: '40%' }} />
         </div>
-        <span className="text-white/45 text-[9px] tracking-[0.22em] uppercase font-['Inter'] rotate-90 origin-center mt-2">
+        <span className="text-white/45 text-[9px] tracking-[0.22em] uppercase font-[family-name:var(--font-inter)] rotate-90 origin-center mt-2">
           scroll
         </span>
       </div>

@@ -26,7 +26,20 @@ const NewsletterModal = dynamic(() => import('./newsletter-modal'), {
 
 function ScrollProgress() {
   const barRef = useRef(null)
+  const [ready, setReady] = useState(false)
+
+  /* Mount after idle so first paint / LCP is not competing with scroll listeners. */
   useEffect(() => {
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(() => setReady(true), { timeout: 2000 })
+      return () => cancelIdleCallback(id)
+    }
+    const t = setTimeout(() => setReady(true), 800)
+    return () => clearTimeout(t)
+  }, [])
+
+  useEffect(() => {
+    if (!ready) return undefined
     let raf = 0
     const update = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight
@@ -43,7 +56,10 @@ function ScrollProgress() {
       window.removeEventListener('scroll', fn)
       cancelAnimationFrame(raf)
     }
-  }, [])
+  }, [ready])
+
+  if (!ready) return null
+
   return (
     <div
       aria-hidden="true"

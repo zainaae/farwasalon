@@ -6,20 +6,26 @@ import MetaPixel from './components/meta-pixel'
 import JsonLd from './json-ld'
 import { buildBeautySalonSchema, buildWebSiteSchema } from '../lib/business-schema.js'
 
+/* Inter is body copy — do not race the LCP image/font. Unbounded 700 is the
+   display face for the home H1; display:optional avoids holding LCP on a
+   late webfont swap (fallback stays if the face isn't ready in time). */
 const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   variable: '--font-inter',
   display: 'swap',
-  preload: true,
+  preload: false,
 })
 
 const unbounded = Unbounded({
   subsets: ['latin'],
+  /* 400 kept for italic/light brand lines (navbar, thesis); 700 is the H1 face.
+     display:optional so LCP is not held on webfont swap. */
   weight: ['400', '700'],
   variable: '--font-unbounded',
-  display: 'swap',
+  display: 'optional',
   preload: true,
+  adjustFontFallback: true,
 })
 
 const syne = Syne({
