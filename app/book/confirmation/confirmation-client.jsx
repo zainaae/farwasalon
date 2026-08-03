@@ -36,7 +36,8 @@ function ConfirmationContent() {
   const urlId = searchParams.get('id') || ''
   const urlDate = searchParams.get('date') || ''
   const urlTime = searchParams.get('time') || ''
-  const urlDuration = parseInt(searchParams.get('duration') || '60', 10) || 60
+  const urlDurationParam = searchParams.get('duration')
+  const urlDuration = parseInt(urlDurationParam || '60', 10) || 60
   const urlService = searchParams.get('service') || ''
   const urlName = searchParams.get('name') || ''
   const openWa = searchParams.get('openWa') === '1'
@@ -46,6 +47,16 @@ function ConfirmationContent() {
   const [durable, setDurable] = useState(true)
   const [waHint, setWaHint] = useState('')
   const [bookingId, setBookingId] = useState(urlId)
+  /* Snapshot wall-clock / display fields before URL scrub. replaceState clears
+     useSearchParams on the next render; without this, a confirmation that only
+     had query params (or lost storage) flips to "Invalid confirmation link". */
+  const [urlFallback, setUrlFallback] = useState({
+    date: urlDate,
+    time: urlTime,
+    duration: urlDuration,
+    service: urlService,
+    name: urlName,
+  })
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -65,6 +76,13 @@ function ConfirmationContent() {
     } catch {
       /* ignore */
     }
+    setUrlFallback((prev) => ({
+      date: urlDate || prev.date,
+      time: urlTime || prev.time,
+      duration: urlDurationParam != null && urlDurationParam !== '' ? urlDuration : prev.duration,
+      service: urlService || prev.service,
+      name: urlName || prev.name,
+    }))
     try {
       const next = new URL(window.location.href)
       for (const key of ['id', 'date', 'time', 'duration', 'service', 'name']) {
@@ -81,16 +99,19 @@ function ConfirmationContent() {
       setDurable(isBookingStorageDurable())
       setLoaded(true)
     })
+    // url* fields are read on the render that still has the query string;
+    // depending only on urlId avoids a second pass after scrub clears them.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional scrub snapshot
   }, [urlId])
 
   /* URL carries wall-clock ids only (analytics-safe). Service, name, and the
      cancel token live in durable storage — never in the query string. */
   const id = bookingId
-  const service = record?.service || urlService
-  const name = record?.name || urlName
-  const date = record?.date || urlDate
-  const time = record?.time || urlTime
-  const duration = record?.duration || urlDuration
+  const service = record?.service || urlFallback.service
+  const name = record?.name || urlFallback.name
+  const date = record?.date || urlFallback.date
+  const time = record?.time || urlFallback.time
+  const duration = record?.duration || urlFallback.duration
   const cancelToken = record?.cancelToken || ''
   const cancelled = Boolean(record?.cancelledAt)
 
