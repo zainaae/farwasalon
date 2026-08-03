@@ -27,4 +27,12 @@ describe('computeNextSlot', () => {
     expect(computeNextSlot(at('2026-07-18T19:30:00+05:00'))).toEqual({ label: 'Monday · 11:00am', open: false })
     expect(computeNextSlot(at('2026-07-19T14:00:00+05:00'))).toEqual({ label: 'Tomorrow · 11:00am', open: false })
   })
+
+  it('never advertises a slot the 30-min lead would reject (10:30-11:00 window)', () => {
+    // 10:45 + 30min lead = 11:15 → the API's first bookable slot is 11:30,
+    // but the old hardcoded branch advertised 11:00am. Regression pin.
+    expect(computeNextSlot(at('2026-07-15T10:45:00+05:00'))).toEqual({ label: 'Today · 11:30am', open: false })
+    // 10:29 + lead = 10:59 → 11:00 IS bookable
+    expect(computeNextSlot(at('2026-07-15T10:29:00+05:00'))).toEqual({ label: 'Today · 11:00am', open: false })
+  })
 })

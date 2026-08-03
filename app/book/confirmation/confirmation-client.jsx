@@ -29,7 +29,11 @@ function formatTime12(t) {
 
 function ConfirmationContent() {
   const searchParams = useSearchParams()
-  const id = searchParams.get('id') || ''
+  /* id can survive a refresh even after the URL is scrubbed: we cache it in
+     sessionStorage during the first render, so analytics never see the full
+     address with the booking reference more than once, yet a refresh still
+     restores the confirmation from storage. */
+  const urlId = searchParams.get('id') || ''
   const urlDate = searchParams.get('date') || ''
   const urlTime = searchParams.get('time') || ''
   const urlDuration = parseInt(searchParams.get('duration') || '60', 10) || 60
@@ -41,19 +45,47 @@ function ConfirmationContent() {
   const [loaded, setLoaded] = useState(false)
   const [durable, setDurable] = useState(true)
   const [waHint, setWaHint] = useState('')
+  const [bookingId, setBookingId] = useState(urlId)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
+    let resolved = urlId
+    if (!resolved) {
+      try {
+        resolved = sessionStorage.getItem('farwa-conf-id') || ''
+      } catch {
+        /* private mode */
+      }
+    }
+    /* Persist the id for refresh-restore, then scrub id/date/time/service/name
+       from the address so analytics see the confirmation path without the
+       booking reference (only the id is ever kept, never the cancel token). */
+    try {
+      sessionStorage.setItem('farwa-conf-id', resolved)
+    } catch {
+      /* ignore */
+    }
+    try {
+      const next = new URL(window.location.href)
+      for (const key of ['id', 'date', 'time', 'duration', 'service', 'name']) {
+        next.searchParams.delete(key)
+      }
+      window.history.replaceState({}, '', `${next.pathname}${next.search}`)
+    } catch {
+      /* ignore */
+    }
     queueMicrotask(() => {
-      const stored = id ? readBookingRecord(id) : null
+      setBookingId(resolved)
+      const stored = resolved ? readBookingRecord(resolved) : null
       setRecord(stored)
       setDurable(isBookingStorageDurable())
       setLoaded(true)
     })
-  }, [id])
+  }, [urlId])
 
   /* URL carries wall-clock ids only (analytics-safe). Service, name, and the
      cancel token live in durable storage — never in the query string. */
+  const id = bookingId
   const service = record?.service || urlService
   const name = record?.name || urlName
   const date = record?.date || urlDate

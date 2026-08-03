@@ -22,6 +22,9 @@ export async function POST(request) {
   } catch {
     return new NextResponse(null, { status: 400 })
   }
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+    return new NextResponse(null, { status: 400 })
+  }
 
   const clip = (v, n) => (typeof v === 'string' ? v.slice(0, n) : '')
   logger.error('/api/log-error', 'client-error-boundary', {

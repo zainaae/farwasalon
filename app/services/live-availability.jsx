@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { m } from 'framer-motion'
 import { Clock, ArrowUpRight } from 'lucide-react'
 import { CTA_PRIMARY_LABEL } from '../../src/shared.jsx'
-import { toLocalDateString } from '../../lib/date-local.js'
+import { salonTodayString } from '../../lib/date-local.js'
 
 const REFRESH_MS = 60_000
 
@@ -15,7 +15,10 @@ export default function LiveAvailability() {
   useEffect(() => {
     let active = true
     async function load() {
-      const today = toLocalDateString(new Date())
+      /* "Today" in salon time, matching how /api/slots judges past dates.
+         Using device-local today would fetch a date the server sees as past
+         for visitors west of Karachi, 400, and silently hide the widget. */
+      const today = salonTodayString()
       try {
         // Allow short CDN/browser cache (slots route sets s-maxage=15).
         const res = await fetch(`/api/slots?date=${today}`)

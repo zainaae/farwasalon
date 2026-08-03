@@ -126,9 +126,9 @@ export default function AboutClient() {
             ].map((p, i) => (
               <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
                 className="border-t border-white/10 pt-7">
-                <p className="font-['Unbounded'] text-[10px] text-stone mb-4">{p.num}</p>
+                <p className="font-['Unbounded'] text-[10px] text-mist/80 mb-4">{p.num}</p>
                 <h3 className="font-['Syne'] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
-                <p className="text-stone text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
+                <p className="text-mist/80 text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
               </m.div>
             ))}
           </div>

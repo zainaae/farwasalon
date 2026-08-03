@@ -28,23 +28,49 @@ function formatTime12(t) {
 
 function CancelContent() {
   const params = useSearchParams()
-  const id = params.get('id') || ''
+  const urlId = params.get('id') || ''
 
   /* Everything except the booking id comes from durable storage (localStorage
      first, then session, then memory). Token and customer name never ride in
-     the URL — Plausible and Meta Pixel report location.href verbatim. */
+     the URL — Plausible and Meta Pixel report location.href verbatim. The id
+     is cached in sessionStorage and scrubbed from the address after the first
+     render, so analytics only ever see the plain /book/cancel path. */
+  const [bookingId, setBookingId] = useState(urlId)
   const [details, setDetails] = useState(null)
   useEffect(() => {
     if (typeof window === 'undefined') return
-    queueMicrotask(() => {
-      if (!id) {
-        setDetails({})
-        return
+    let resolved = urlId
+    if (!resolved) {
+      try {
+        resolved = sessionStorage.getItem('farwa-conf-id') || ''
+      } catch {
+        /* private mode */
       }
-      const record = readBookingRecord(id)
+    }
+    if (!resolved) {
+      queueMicrotask(() => setDetails({}))
+      return
+    }
+    try {
+      sessionStorage.setItem('farwa-conf-id', resolved)
+    } catch {
+      /* ignore */
+    }
+    try {
+      const next = new URL(window.location.href)
+      next.searchParams.delete('id')
+      window.history.replaceState({}, '', `${next.pathname}${next.search}`)
+    } catch {
+      /* ignore */
+    }
+    queueMicrotask(() => {
+      setBookingId(resolved)
+      const record = readBookingRecord(resolved)
       setDetails(record || {})
     })
-  }, [id])
+  }, [urlId])
+
+  const id = bookingId
 
   const token = details?.cancelToken || ''
   const service = details?.service || ''

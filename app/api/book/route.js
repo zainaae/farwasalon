@@ -164,34 +164,62 @@ export async function POST(request) {
   /* Idempotency. The client times out at 25s; if the write succeeded but the
      response was lost, a retry would otherwise create a second Confirmed row.
      A matching recent booking for the same slot + phone + service is the same
-     visit — return it (with a fresh cancel token) instead of appending again. */
+     visit — return it instead of appending again.
+     Do NOT mint a fresh cancelToken here: Origin can be absent (curl), so
+     anyone who knows phone + slot + service could otherwise cancel the visit.
+     The original response (or durable storage) already holds the token.
+     Compare phone and service leniently so a retry with differently formatted
+     digits (+92… vs 03…) or reordered multi-service labels still dedupes. */
   const dupWindowMs = 15 * 60 * 1000
+  /* Canonical national number: strip formatting, drop leading 0, and fold the
+     +92 country code in — 03… and +92 3… are the same phone. */
+  const digits = (p) => {
+    let d = String(p || '').replace(/\D/g, '')
+    if (d.startsWith('92') && d.length === 12) d = d.slice(2)
+    if (d.startsWith('0')) d = d.slice(1)
+    return d
+  }
+  const stableLabel = (label) =>
+    String(label || '')
+      .split(/\s+\+\s+/)
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .sort()
+      .join(' + ')
+  const myPhone = digits(clientPhone)
+  const myLabel = stableLabel(serviceLabel)
   const duplicate = bookings.find(
     (b) =>
       b.status === 'Confirmed' &&
       b.timeSlot === time &&
-      b.clientPhone === clientPhone &&
-      b.service === serviceLabel &&
+      digits(b.clientPhone) === myPhone &&
+      stableLabel(b.service) === myLabel &&
       b.bookedAt &&
       Date.now() - Date.parse(b.bookedAt) < dupWindowMs,
   )
   if (duplicate) {
-    const cancelToken = signCancelToken({
-      bookingId: duplicate.bookingId,
-      date,
-      phoneLast4: phoneLast4(clientPhone),
-    })
+    /* Race loser whose cancel-write failed stays Confirmed over capacity.
+       A blind 200 here would promote that overbook; refuse instead. */
+    if (shouldCancelSelf(bookings, duplicate)) {
+      return NextResponse.json(
+        { error: 'This slot was just booked by someone else. Please choose a different time.' },
+        { status: 409 },
+      )
+    }
+    /* Report the duplicate's OWN duration/endTime/service, not the retry's —
+       a retry that truncated the basket would otherwise echo wrong numbers. */
+    const dupDuration = Number(duplicate.duration) || duration
     return NextResponse.json({
       success: true,
       booking: {
         id: duplicate.bookingId,
         date,
         time,
-        endTime: duplicate.endTime || addMinutes(time, duration),
-        service: serviceLabel,
-        duration,
-        clientName,
-        cancelToken,
+        endTime: duplicate.endTime || addMinutes(time, dupDuration),
+        service: duplicate.service || serviceLabel,
+        duration: dupDuration,
+        clientName: duplicate.clientName || clientName,
+        cancelToken: null,
       },
     })
   }
@@ -250,15 +278,15 @@ export async function POST(request) {
     const self = freshBookings.find((b) => b.bookingId === bookingId)
     if (
       !canFitAtIndex(freshOccupied, startIdx, needed, maxWorkers) &&
-      shouldCancelSelf(freshBookings, self, maxWorkers)
+      shouldCancelSelf(freshBookings, self)
     ) {
       try {
         await updateBookingStatus(bookingId, 'Cancelled')
       } catch (rollbackErr) {
         /* We have to cancel to keep capacity honest, and the cancel write
-           failed. Do NOT report success — the row would stay Confirmed and the
-           slot double-book. Surface a retryable error; the idempotency check
-           above recovers cleanly if the write actually persisted. */
+           failed. Do NOT report success — the row would stay Confirmed and
+           overbook. Surface a retryable error; a later idempotent retry that
+           still sees this over-capacity row will 409 via shouldCancelSelf. */
         logger.error('/api/book', 'race-rollback-failed', {
           ip: hashIp(ip),
           bookingId,

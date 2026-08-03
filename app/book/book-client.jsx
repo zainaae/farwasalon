@@ -8,7 +8,7 @@ import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown, Calendar
 import { SERVICES, ALL_SERVICES, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { BOOKING_WINDOW_DAYS } from '../../lib/booking-date-rules.js'
-import { toLocalDateString } from '../../lib/date-local.js'
+import { toLocalDateString, salonTodayString } from '../../lib/date-local.js'
 import {
   computeServicesDurationMinutes,
   computeServicesPricePkr,
@@ -488,8 +488,12 @@ export default function BookClient() {
     }
   }
 
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
+  /* The booking server validates dates in salon time (Asia/Karachi), so the
+     date strip must anchor on the SALON's today, not the visitor's device.
+     For a visitor west of Karachi, device-today can be the salon's yesterday
+     for ~10-14h a day — anchoring locally made the first chip a rejected past
+     date and same-day booking silently impossible. */
+  const today = new Date(`${salonTodayString()}T12:00:00`)
   const days = []
   for (let i = 0; i < BOOKING_WINDOW_DAYS; i++) {
     const d = new Date(today)

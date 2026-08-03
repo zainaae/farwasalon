@@ -4,7 +4,7 @@ export const BLOG_POSTS = [
   ...GROWTH_POSTS,
   {
     slug: 'party-makeup-karachi-guide',
-    title: 'Party Makeup in Karachi — What It Costs, What You Get, and How to Book',
+    title: 'Party Makeup in Karachi — Costs & What Is Included',
     description: 'Party makeup rates in Karachi explained: what published salon lists charge, what a look includes, and how Farwa in PECHS quotes yours over WhatsApp in minutes.',
     featuredImage: '/bridal.jpg',
     date: '2026-07-24',
@@ -45,7 +45,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'keratin-treatment-price-karachi',
-    title: 'Keratin Treatment in Karachi — Real Price Ranges, and What Actually Determines Yours',
+    title: 'Keratin Treatment Price in Karachi — Real Ranges',
     description: 'What keratin really costs in Karachi, why quotes vary by hair length, keratin vs protein vs Wellaplex — and how Farwa in PECHS quotes yours before you book.',
     featuredImage: '/hairtreatment.jpg',
     date: '2026-07-24',
@@ -326,7 +326,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'monsoon-hair-skin-care-karachi',
-    title: 'Monsoon Beauty Survival Guide for Karachi — Frizz, Sticky Skin, and What Actually Works',
+    title: 'Monsoon Hair & Skin Care in Karachi — What Works',
     description: 'How to handle Karachi monsoon humidity: taming hair frizz, keeping oily skin clear, and which salon treatments are worth booking in July and August.',
     featuredImage: '/hairtreatment.jpg',
     date: '2026-07-17',
