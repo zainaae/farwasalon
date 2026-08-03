@@ -86,7 +86,7 @@ export default function BeautySalonKarachiPage() {
               </li>
               <li>
                 <strong className="font-medium text-ink">{rating.ratingValue}★ Google rating</strong> (
-                {rating.reviewCount}+ reviews) — book online or WhatsApp.
+                {rating.reviewCount} reviews) — book online or WhatsApp.
               </li>
               <li>Mon–Sat 11–7; closed Sunday. Real-time slot availability when you book online.</li>
               <li>Women-only PECHS studio — we do not operate other branches or daily at-home parlour visits.</li>

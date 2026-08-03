@@ -230,7 +230,7 @@ export default function BridalLandingPage() {
                 <strong className="font-medium text-ink">{YEARS_ACTIVE}+ years</strong> of bridal work in PECHS — trials, touch-ups, and event-day calm.
               </li>
               <li>
-                <strong className="font-medium text-ink">{rating.ratingValue}★ on Google</strong> ({rating.reviewCount}+ reviews) — honest social proof, not inflated claims.
+                <strong className="font-medium text-ink">{rating.ratingValue}★ on Google</strong> ({rating.reviewCount} reviews) — honest social proof, not inflated claims.
               </li>
               <li>Book online with real-time slots, or WhatsApp for multi-event wedding plans.</li>
               <li>Skincare prep, threading, and facials under the same women-only roof before wedding week.</li>

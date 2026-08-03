@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { DEALS, getActiveDeals, getUpcomingDeals, getHeadlineDeal, formatDealRange, isDealEnded } from './deals-data.js'
+import { DEALS, getActiveDeals, getUpcomingDeals, getHeadlineDeal, formatDealRange, isDealEnded, isDealActive, isDealUpcoming } from './deals-data.js'
 
 describe('deals data', () => {
   it('every deal has the required fields and valid dates', () => {
@@ -52,18 +52,23 @@ describe('Freedom Deal lifecycle', () => {
     // teaser window: announced, not claimable — still the headline on home
     expect(getUpcomingDeals(at('2026-07-30')).map((d) => d.id)).toContain('freedom-deal-2026')
     expect(getActiveDeals(at('2026-07-30')).map((d) => d.id)).not.toContain('freedom-deal-2026')
+    expect(isDealUpcoming(deal, at('2026-07-30'))).toBe(true)
+    expect(isDealActive(deal, at('2026-07-30'))).toBe(false)
     expect(getHeadlineDeal(at('2026-07-30'))?.id).toBe('freedom-deal-2026')
     expect(isDealEnded(deal, at('2026-07-30'))).toBe(false)
 
     // live on Independence Day itself
     expect(getActiveDeals(at('2026-08-14')).map((d) => d.id)).toContain('freedom-deal-2026')
     expect(getUpcomingDeals(at('2026-08-14')).map((d) => d.id)).not.toContain('freedom-deal-2026')
+    expect(isDealUpcoming(deal, at('2026-08-14'))).toBe(false)
+    expect(isDealActive(deal, at('2026-08-14'))).toBe(true)
     expect(getHeadlineDeal(at('2026-08-14'))?.id).toBe('freedom-deal-2026')
     expect(isDealEnded(deal, at('2026-08-14'))).toBe(false)
 
     // gone the day after it ends — no stale banner left up
     expect(getActiveDeals(at('2026-08-15')).map((d) => d.id)).not.toContain('freedom-deal-2026')
     expect(getUpcomingDeals(at('2026-08-15')).map((d) => d.id)).not.toContain('freedom-deal-2026')
+    expect(isDealActive(deal, at('2026-08-15'))).toBe(false)
     expect(getHeadlineDeal(at('2026-08-15'))).toBeNull()
     expect(isDealEnded(deal, at('2026-08-15'))).toBe(true)
   })

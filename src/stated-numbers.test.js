@@ -13,6 +13,9 @@
  * These tests exist so the next one fails in CI instead of at the counter.
  */
 import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { join, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { SERVICES, YEARS_ACTIVE, FOUNDING_YEAR, MONTHLY_APPOINTMENTS } from './data.js'
 import { CAT_SEO } from './cat-seo-content.js'
 import { CAT_META_DESC } from './cat-meta-desc.js'
@@ -21,6 +24,8 @@ import { AREA_CONTENT } from './area-content.js'
 import { DEALS } from './deals-data.js'
 import { BLOG_POSTS } from './blog-data.js'
 import { GOOGLE_GBP_STATS } from './google-reviews-data.js'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 const ALL = Object.values(SERVICES).flat()
 const MENU_PRICES = new Set(ALL.map((s) => s.pricePkr).filter(Boolean))
@@ -112,14 +117,26 @@ describe('no exact count is inflated with a plus sign', () => {
      inside sentences promising honest figures. A "+" belongs on an estimate,
      never on a number the code counts. */
   it('copy does not add "+" to the service or review counts', () => {
+    const root = join(__dirname, '..')
+    const surfaceFiles = [
+      'app/components/salon-local-block.jsx',
+      'app/bridal/page.jsx',
+      'app/beauty-salon-karachi/page.jsx',
+    ].map((rel) => readFileSync(join(root, rel), 'utf8'))
+
     const copy = [
       Object.values(CAT_SEO).map((e) => `${e.title} ${e.metaDesc}`).join(' '),
       Object.values(CAT_META_DESC ?? {}).join(' '),
       JSON.stringify(FAQS),
+      ...surfaceFiles,
     ].join(' ')
     expect(copy, 'says "102+" for exactly 102 services').not.toMatch(/\b102\s*\+/)
     expect(copy, `says "${GOOGLE_GBP_STATS.reviewCount}+" for an exact review count`).not.toMatch(
       new RegExp(`\\b${GOOGLE_GBP_STATS.reviewCount}\\s*\\+\\s*(google\\s*)?review`, 'i'),
+    )
+    /* Template form that appends "+" after the live GBP count. */
+    expect(copy, 'appends "+" to rating.reviewCount').not.toMatch(
+      /reviewCount\}\s*\+\s*reviews/i,
     )
   })
 })

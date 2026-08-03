@@ -15,7 +15,7 @@ import {
 } from '../../lib/booking-duration.js'
 import { getAttribution, formatAttributionCell } from '../../lib/attribution.js'
 import { saveBookingRecord, listUpcomingBookings } from '../../lib/booking-storage.js'
-import { getHeadlineDeal } from '../../src/deals-data.js'
+import { getHeadlineDeal, isDealActive, isDealUpcoming, formatDealRange } from '../../src/deals-data.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
 
@@ -245,7 +245,12 @@ export default function BookClient() {
   const [phoneError, setPhoneError] = useState('')
 
   const headlineDeal = getHeadlineDeal()
-  const dealThreshold = headlineDeal?.thresholdPkr || 0
+  const dealLive = headlineDeal ? isDealActive(headlineDeal) : false
+  const dealUpcoming = headlineDeal ? isDealUpcoming(headlineDeal) : false
+  const dealThreshold = (dealLive || dealUpcoming) && headlineDeal?.thresholdPkr
+    ? headlineDeal.thresholdPkr
+    : 0
+  const dealRange = headlineDeal ? formatDealRange(headlineDeal) : ''
 
   const serviceIdsKey = selectedServices.map((s) => s.id).join(',')
 
@@ -513,8 +518,10 @@ export default function BookClient() {
             className="text-body max-w-lg"
           >
             Pick one or more services, choose a date and time, and confirm your appointment in under a minute.
-            {headlineDeal?.thresholdPkr ? (
-              <> Combine anything to reach {formatPrice(headlineDeal.thresholdPkr)} for the Freedom Deal.</>
+            {dealLive && dealThreshold ? (
+              <> Combine anything to reach {formatPrice(dealThreshold)} for the Freedom Deal.</>
+            ) : dealUpcoming && dealThreshold ? (
+              <> Freedom Deal starts {dealRange} — combine toward {formatPrice(dealThreshold)} when it opens.</>
             ) : null}
           </m.p>
         </div>
@@ -569,9 +576,11 @@ export default function BookClient() {
               <p className="eyebrow mb-2">— Choose services</p>
               <p className="text-stone text-xs font-['Inter'] font-light mb-6 max-w-lg">
                 Tap to add or remove. You can mix categories in one visit
-                {headlineDeal?.thresholdPkr
-                  ? ` — build toward ${formatPrice(headlineDeal.thresholdPkr)} for 14% off`
-                  : ''}
+                {dealLive && dealThreshold
+                  ? ` — build toward ${formatPrice(dealThreshold)} for 14% off`
+                  : dealUpcoming && dealThreshold
+                    ? ` — Freedom Deal opens ${dealRange}`
+                    : ''}
                 .
               </p>
 
@@ -595,15 +604,16 @@ export default function BookClient() {
                 </div>
               )}
 
-              {headlineDeal?.thresholdPkr && selectedServices.length > 0 && (
+              {dealThreshold > 0 && selectedServices.length > 0 && (
                 <div className="mb-6 max-w-md">
                   <div className="flex items-baseline justify-between gap-3 mb-1.5">
                     <p className="text-[10px] tracking-[0.18em] uppercase font-['Inter'] text-stone">
                       Freedom Deal · {formatPrice(dealThreshold)}
+                      {dealUpcoming ? ` · from ${dealRange}` : ''}
                     </p>
                     <p className="text-xs font-['Inter'] text-ink font-medium">
                       {totalPricePkr >= dealThreshold
-                        ? `Qualified · ${formatPrice(totalPricePkr)}`
+                        ? `${dealLive ? 'Qualified' : 'At threshold'} · ${formatPrice(totalPricePkr)}`
                         : `${formatPrice(totalPricePkr)} of ${formatPrice(dealThreshold)}`}
                     </p>
                   </div>
@@ -616,9 +626,13 @@ export default function BookClient() {
                     />
                   </div>
                   <p className="text-[11px] text-stone font-['Inter'] font-light mt-1.5">
-                    {totalPricePkr >= dealThreshold
-                      ? 'Your visit qualifies for 14% off at the counter.'
-                      : `Add ${formatPrice(dealThreshold - totalPricePkr)} more to unlock 14% off.`}
+                    {dealUpcoming
+                      ? totalPricePkr >= dealThreshold
+                        ? `Ready for when the deal opens (${dealRange}) — 14% is not claimable yet.`
+                        : `Practice basket toward ${formatPrice(dealThreshold)}. Deal opens ${dealRange}.`
+                      : totalPricePkr >= dealThreshold
+                        ? 'Your visit qualifies for 14% off at the counter.'
+                        : `Add ${formatPrice(dealThreshold - totalPricePkr)} more to unlock 14% off.`}
                   </p>
                 </div>
               )}
@@ -756,9 +770,11 @@ export default function BookClient() {
                 <p className="text-stone text-[10px] font-['Inter'] mt-1">
                   {formatDuration(totalDurationMinutes)}
                   {totalPricePkr > 0 ? ` · ${formatPrice(totalPricePkr)}` : ''}
-                  {headlineDeal?.thresholdPkr && totalPricePkr >= dealThreshold
+                  {dealLive && dealThreshold && totalPricePkr >= dealThreshold
                     ? ' · Freedom Deal eligible'
-                    : ''}
+                    : dealUpcoming && dealThreshold && totalPricePkr >= dealThreshold
+                      ? ` · Freedom Deal from ${dealRange}`
+                      : ''}
                 </p>
               </div>
 
@@ -952,9 +968,11 @@ export default function BookClient() {
                 {totalPricePkr > 0 && (
                   <p className="text-accent-gold-deep text-xs font-['Inter'] font-medium mt-0.5">
                     Total {formatPrice(totalPricePkr)}
-                    {headlineDeal?.thresholdPkr && totalPricePkr >= dealThreshold
+                    {dealLive && dealThreshold && totalPricePkr >= dealThreshold
                       ? ' · Freedom Deal — 14% off at the counter'
-                      : ''}
+                      : dealUpcoming && dealThreshold && totalPricePkr >= dealThreshold
+                        ? ` · Freedom Deal starts ${dealRange}`
+                        : ''}
                   </p>
                 )}
                 {primaryService &&

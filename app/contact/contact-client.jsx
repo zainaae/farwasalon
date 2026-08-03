@@ -50,11 +50,11 @@ export default function ContactClient() {
       <section className="bg-white py-14 md:py-20 border-b border-border-soft">
         <div className="section-shell">
           <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="eyebrow mb-3">— Ready?</m.p>
+            className="eyebrow mb-3">— Contact</m.p>
           <div className="overflow-hidden">
             <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
               className="display-section text-ink">
-              <span className="block">BOOK YOUR</span> <span className="block">APPOINTMENT</span>
+              <span className="block">FIND US</span> <span className="block">OR ASK US</span>
             </m.h1>
           </div>
           <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}

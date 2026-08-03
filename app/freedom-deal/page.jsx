@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
-import { DEALS, isDealEnded, formatDealRange } from '../../src/deals-data.js'
+import { DEALS, isDealActive, isDealUpcoming, isDealEnded, formatDealRange } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import WaCta from '../components/wa-cta'
@@ -68,6 +68,8 @@ const FAQS = [
 
 export default function AzadiSalePage() {
   const ended = isDealEnded(DEAL)
+  const upcoming = isDealUpcoming(DEAL)
+  const live = isDealActive(DEAL)
   const range = DEAL ? formatDealRange(DEAL) : '5–14 August'
 
   if (ended) {
@@ -92,7 +94,7 @@ export default function AzadiSalePage() {
     )
   }
 
-  const offerSchema = DEAL && {
+  const offerSchema = DEAL && live && {
     '@context': 'https://schema.org',
     '@type': 'Offer',
     name: 'Freedom Deal 2026 — Azadi offer, 14% off',
@@ -104,6 +106,30 @@ export default function AzadiSalePage() {
     validThrough: DEAL.validUntil,
     eligibleQuantity: { '@type': 'QuantitativeValue', minValue: 1400, unitText: 'PKR service value' },
   }
+
+  const heroTitle = upcoming ? (
+    <>
+      Coming 5 August.<br />14% off then.
+    </>
+  ) : (
+    <>
+      14% off.<br />No asterisk.
+    </>
+  )
+
+  const heroBody = upcoming ? (
+    <>
+      The Freedom Deal starts on 5 August 2026 — not today. From 5 to 14 August, once your visit
+      reaches Rs 1,400, the whole bill is 14% less. You can book a visit for those dates now; the
+      discount applies at the counter only during the window.
+    </>
+  ) : (
+    <>
+      Once your visit reaches Rs 1,400, the whole bill is 14% less — 5 to 14
+      August. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
+      Book what you actually came in for.
+    </>
+  )
 
   return (
     <main id="main" className="page-content">
@@ -136,26 +162,31 @@ export default function AzadiSalePage() {
             )}
 
             <div className="min-w-0">
-              <h1 className="azadi-display azadi-in mb-5" style={{ '--i': 1 }}>
-                14% off.<br />No asterisk.
+              <p
+                className="azadi-in text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-['Inter'] text-[color:var(--azadi-green)] mb-3"
+                style={{ '--i': 1 }}
+              >
+                {upcoming ? `Coming · ${range}` : `Now on · ${range}`}
+              </p>
+              <h1 className="azadi-display azadi-in mb-5" style={{ '--i': 2 }}>
+                {heroTitle}
               </h1>
 
-              <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 2 }}>
-                Once your visit reaches Rs 1,400, the whole bill is 14% less — 5 to 14
-                August. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
-                Book what you actually came in for.
+              <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 3 }}>
+                {heroBody}
               </p>
 
-              <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-lg mb-8" style={{ '--i': 3 }}>
+              <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-lg mb-8" style={{ '--i': 4 }}>
                 Our rates have been printed on this website since January. We didn&rsquo;t raise
                 them in July to discount them in August — scroll the{' '}
                 <Link href="/prices" className="underline underline-offset-2 hover:no-underline">price list</Link>{' '}
                 and check.
               </p>
 
-              <div className="azadi-in flex flex-wrap items-center gap-3" style={{ '--i': 4 }}>
+              <div className="azadi-in flex flex-wrap items-center gap-3" style={{ '--i': 5 }}>
                 <Link href="/book" className="tap-safe azadi-btn">
-                  Build your combo online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  {upcoming ? 'Book for August' : 'Build your combo online'}{' '}
+                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
                 <WaCta
                   href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20help%20me%20build%20a%20Rs%201%2C400%20combo"
