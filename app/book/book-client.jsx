@@ -518,10 +518,8 @@ export default function BookClient() {
             className="text-body max-w-lg"
           >
             Pick one or more services, choose a date and time, and confirm your appointment in under a minute.
-            {dealLive && dealThreshold ? (
-              <> Combine anything to reach {formatPrice(dealThreshold)} for the Freedom Deal.</>
-            ) : dealUpcoming && dealThreshold ? (
-              <> Freedom Deal starts {dealRange} — combine toward {formatPrice(dealThreshold)} when it opens.</>
+            {dealThreshold ? (
+              <> Combine anything toward {formatPrice(dealThreshold)} for the Freedom Deal ({dealRange}).</>
             ) : null}
           </m.p>
         </div>
@@ -576,11 +574,9 @@ export default function BookClient() {
               <p className="eyebrow mb-2">— Choose services</p>
               <p className="text-stone text-xs font-['Inter'] font-light mb-6 max-w-lg">
                 Tap to add or remove. You can mix categories in one visit
-                {dealLive && dealThreshold
-                  ? ` — build toward ${formatPrice(dealThreshold)} for 14% off`
-                  : dealUpcoming && dealThreshold
-                    ? ` — Freedom Deal opens ${dealRange}`
-                    : ''}
+                {dealThreshold
+                  ? ` — build toward ${formatPrice(dealThreshold)} for Freedom Deal`
+                  : ''}
                 .
               </p>
 
@@ -608,12 +604,12 @@ export default function BookClient() {
                 <div className="mb-6 max-w-md">
                   <div className="flex items-baseline justify-between gap-3 mb-1.5">
                     <p className="text-[10px] tracking-[0.18em] uppercase font-['Inter'] text-stone">
-                      Freedom Deal · {formatPrice(dealThreshold)}
-                      {dealUpcoming ? ` · from ${dealRange}` : ''}
+                      Toward Freedom Deal · {formatPrice(dealThreshold)}
+                      {dealUpcoming ? ` · ${dealRange}` : ''}
                     </p>
                     <p className="text-xs font-['Inter'] text-ink font-medium">
                       {totalPricePkr >= dealThreshold
-                        ? `${dealLive ? 'Qualified' : 'At threshold'} · ${formatPrice(totalPricePkr)}`
+                        ? `${dealLive ? 'Qualified' : 'Ready'} · ${formatPrice(totalPricePkr)}`
                         : `${formatPrice(totalPricePkr)} of ${formatPrice(dealThreshold)}`}
                     </p>
                   </div>
@@ -626,13 +622,13 @@ export default function BookClient() {
                     />
                   </div>
                   <p className="text-[11px] text-stone font-['Inter'] font-light mt-1.5">
-                    {dealUpcoming
-                      ? totalPricePkr >= dealThreshold
-                        ? `Ready for when the deal opens (${dealRange}) — 14% is not claimable yet.`
-                        : `Practice basket toward ${formatPrice(dealThreshold)}. Deal opens ${dealRange}.`
-                      : totalPricePkr >= dealThreshold
+                    {totalPricePkr >= dealThreshold
+                      ? dealLive
                         ? 'Your visit qualifies for 14% off at the counter.'
-                        : `Add ${formatPrice(dealThreshold - totalPricePkr)} more to unlock 14% off.`}
+                        : `Basket hits the Freedom Deal mark (${dealRange}).`
+                      : dealLive
+                        ? `Add ${formatPrice(dealThreshold - totalPricePkr)} more to unlock 14% off.`
+                        : `Add ${formatPrice(dealThreshold - totalPricePkr)} more toward Freedom Deal.`}
                   </p>
                 </div>
               )}
@@ -770,11 +766,11 @@ export default function BookClient() {
                 <p className="text-stone text-[10px] font-['Inter'] mt-1">
                   {formatDuration(totalDurationMinutes)}
                   {totalPricePkr > 0 ? ` · ${formatPrice(totalPricePkr)}` : ''}
-                  {dealLive && dealThreshold && totalPricePkr >= dealThreshold
-                    ? ' · Freedom Deal eligible'
-                    : dealUpcoming && dealThreshold && totalPricePkr >= dealThreshold
-                      ? ` · Freedom Deal from ${dealRange}`
-                      : ''}
+                  {dealThreshold && totalPricePkr >= dealThreshold
+                    ? dealLive
+                      ? ' · Freedom Deal eligible'
+                      : ` · Toward Freedom Deal (${dealRange})`
+                    : ''}
                 </p>
               </div>
 
@@ -968,11 +964,11 @@ export default function BookClient() {
                 {totalPricePkr > 0 && (
                   <p className="text-accent-gold-deep text-xs font-['Inter'] font-medium mt-0.5">
                     Total {formatPrice(totalPricePkr)}
-                    {dealLive && dealThreshold && totalPricePkr >= dealThreshold
-                      ? ' · Freedom Deal — 14% off at the counter'
-                      : dealUpcoming && dealThreshold && totalPricePkr >= dealThreshold
-                        ? ` · Freedom Deal starts ${dealRange}`
-                        : ''}
+                    {dealThreshold && totalPricePkr >= dealThreshold
+                      ? dealLive
+                        ? ' · Freedom Deal — 14% off at the counter'
+                        : ` · Toward Freedom Deal (${dealRange})`
+                      : ''}
                   </p>
                 )}
                 {primaryService &&
