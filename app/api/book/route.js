@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { getSheetRows, appendBooking, generateBookingId, isConfigured, updateBookingStatus } from '../../../lib/google-sheets.js'
 import { PHONE_RE } from '../../../src/data.js'
-import { checkRateLimit } from '../../../lib/rate-limit.js'
+import { checkRateLimit, getClientIp } from '../../../lib/rate-limit.js'
 import { requireStringField } from '../../../lib/sanitize.js'
 import { isAllowedOrigin } from '../../../lib/origin-check.js'
 import {
@@ -11,6 +11,7 @@ import {
   slotsNeededForDuration,
   canFitAtIndex,
   isSlotInPast,
+  shouldCancelSelf,
 } from '../../../lib/booking-slots.js'
 import { signCancelToken, phoneLast4 } from '../../../lib/booking-cancel-token.js'
 import { validateBookingDate, validateTimeInGrid } from '../../../lib/booking-date-rules.js'
@@ -28,8 +29,8 @@ export async function POST(request) {
   if (!isAllowedOrigin(request)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
-  const rl = checkRateLimit(ip, { window: 600, max: 5 })
+  const ip = getClientIp(request)
+  const rl = checkRateLimit(ip, { scope: 'book', window: 600, max: 5 })
   if (rl.limited) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again later.' },
@@ -160,6 +161,41 @@ export async function POST(request) {
     )
   }
 
+  /* Idempotency. The client times out at 25s; if the write succeeded but the
+     response was lost, a retry would otherwise create a second Confirmed row.
+     A matching recent booking for the same slot + phone + service is the same
+     visit — return it (with a fresh cancel token) instead of appending again. */
+  const dupWindowMs = 15 * 60 * 1000
+  const duplicate = bookings.find(
+    (b) =>
+      b.status === 'Confirmed' &&
+      b.timeSlot === time &&
+      b.clientPhone === clientPhone &&
+      b.service === serviceLabel &&
+      b.bookedAt &&
+      Date.now() - Date.parse(b.bookedAt) < dupWindowMs,
+  )
+  if (duplicate) {
+    const cancelToken = signCancelToken({
+      bookingId: duplicate.bookingId,
+      date,
+      phoneLast4: phoneLast4(clientPhone),
+    })
+    return NextResponse.json({
+      success: true,
+      booking: {
+        id: duplicate.bookingId,
+        date,
+        time,
+        endTime: duplicate.endTime || addMinutes(time, duration),
+        service: serviceLabel,
+        duration,
+        clientName,
+        cancelToken,
+      },
+    })
+  }
+
   const maxWorkers = getBookingMaxWorkers(services)
   const occupied = buildOccupiedCounts(bookings)
   const startIdx = slotIndex(time)
@@ -202,17 +238,38 @@ export async function POST(request) {
   }
 
   try {
-    /* Count everyone EXCEPT the row we just wrote. Including it made the check
-       compare occupied >= capacity against a total that already had us in it,
-       so the last free station at any slot always failed: pre-check saw 1 of 2,
-       the append made it 2 of 2, and the customer was told someone else had
-       taken a slot that was hers. Half of online capacity was unbookable, and
-       every attempt left a ghost Cancelled row. This now detects only a genuine
-       race — someone else booking between our pre-check and our write. */
-    const freshBookings = (await getSheetRows(date)).filter((b) => b.bookingId !== bookingId)
+    /* Re-read INCLUDING our own row, then resolve contention deterministically:
+       earliest row wins, later racers cancel themselves. The old
+       exclude-our-own check made two simultaneous bookings on the last free
+       station cancel EACH OTHER — the slot ended up empty and both got 409.
+       Earliest-wins guarantees exactly one survivor when capacity is genuinely
+       exhausted. A verify-read failure stays optimistic: the write already
+       landed, so the booking is treated as successful. */
+    const freshBookings = await getSheetRows(date)
     const freshOccupied = buildOccupiedCounts(freshBookings)
-    if (!canFitAtIndex(freshOccupied, startIdx, needed, maxWorkers)) {
-      await updateBookingStatus(bookingId, 'Cancelled')
+    const self = freshBookings.find((b) => b.bookingId === bookingId)
+    if (
+      !canFitAtIndex(freshOccupied, startIdx, needed, maxWorkers) &&
+      shouldCancelSelf(freshBookings, self, maxWorkers)
+    ) {
+      try {
+        await updateBookingStatus(bookingId, 'Cancelled')
+      } catch (rollbackErr) {
+        /* We have to cancel to keep capacity honest, and the cancel write
+           failed. Do NOT report success — the row would stay Confirmed and the
+           slot double-book. Surface a retryable error; the idempotency check
+           above recovers cleanly if the write actually persisted. */
+        logger.error('/api/book', 'race-rollback-failed', {
+          ip: hashIp(ip),
+          bookingId,
+          date,
+          ...errCtx(rollbackErr),
+        })
+        return NextResponse.json(
+          { error: 'Failed to save your booking. Please try again or contact the salon.' },
+          { status: 502 }
+        )
+      }
       return NextResponse.json(
         { error: 'This slot was just booked by someone else. Please choose a different time.' },
         { status: 409 }

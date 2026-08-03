@@ -9,8 +9,8 @@ import {
   readBookingRecord,
   markBookingCancelled,
 } from '../../../lib/booking-storage.js'
-
-const WA_NUMBER = '923222782254'
+import { CANCELLATION_MIN_HOURS } from '../../../lib/booking-duration.js'
+import { WA_NUMBER } from '../../../src/site-config.js'
 
 function formatDateNice(dateStr) {
   if (!dateStr) return ''
@@ -89,8 +89,8 @@ function CancelContent() {
       /* private mode — still try once this mount */
     }
 
-    setWaHint('Opening WhatsApp so the salon sees the cancel…')
     const timer = window.setTimeout(() => {
+      setWaHint('Opening WhatsApp so the salon sees the cancel…')
       const popup = window.open(cancelledWaUrl, '_blank', 'noopener,noreferrer')
       setWaHint(
         popup
@@ -233,7 +233,7 @@ function CancelContent() {
         Cancel appointment?
       </h1>
       <p className="text-stone text-sm font-['Inter'] font-light mb-8">
-        This will free your time slot for other guests. Online cancellation is available at least 2 hours before your appointment.
+        This will free your time slot for other guests. Online cancellation is available at least {CANCELLATION_MIN_HOURS} hours before your appointment.
       </p>
 
       <div className="panel-soft p-6 text-left mb-8 shadow-soft">

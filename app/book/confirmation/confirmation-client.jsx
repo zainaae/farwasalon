@@ -11,6 +11,7 @@ import {
   isBookingStorageDurable,
 } from '../../../lib/booking-storage.js'
 import { WA_NUMBER } from '../../../src/site-config.js'
+import { CANCELLATION_MIN_HOURS } from '../../../lib/booking-duration.js'
 
 function formatDateNice(dateStr) {
   if (!dateStr) return ''
@@ -95,8 +96,8 @@ function ConfirmationContent() {
       /* private mode — still try once this mount */
     }
 
-    setWaHint('Opening WhatsApp with your booking…')
     const timer = window.setTimeout(() => {
+      setWaHint('Opening WhatsApp with your booking…')
       const popup = window.open(waUrl, '_blank', 'noopener,noreferrer')
       setWaHint(
         popup
@@ -276,7 +277,7 @@ function ConfirmationContent() {
 
           {cancelToken && id && date && (
             <p className="mt-4 text-stone text-[10px] font-['Inter']">
-              Need to cancel? (at least 2 hours before your appointment){' '}
+              Need to cancel? (at least {CANCELLATION_MIN_HOURS} hours before your appointment){' '}
               <Link
                 /* Only the booking id travels. Token stays in storage — never
                    in a URL that Plausible / Meta Pixel report verbatim. */

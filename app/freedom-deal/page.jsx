@@ -6,6 +6,11 @@ import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import WaCta from '../components/wa-cta'
 import { SITE_ORIGIN, SALON_ID, buildFaqPageSchema } from '../../lib/business-schema.js'
+import { SITE_LAUNCH } from '../../lib/sitemap-data.js'
+
+const LAUNCH_MONTH = new Intl.DateTimeFormat('en-GB', { month: 'long' }).format(
+  new Date(`${SITE_LAUNCH}T00:00:00Z`),
+)
 
 const DEAL = DEALS.find((d) => d.id === 'freedom-deal-2026')
 
@@ -157,8 +162,8 @@ export default function AzadiSalePage() {
               </p>
 
               <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-lg mb-8" style={{ '--i': 4 }}>
-                Our rates have been printed on this website since January. We didn&rsquo;t raise
-                them in July to discount them in August — scroll the{' '}
+                Our rates have been printed on this website since {LAUNCH_MONTH} — the day we
+                launched. We didn&rsquo;t raise them in July to discount them in August — scroll the{' '}
                 <Link href="/prices" className="underline underline-offset-2 hover:no-underline">price list</Link>{' '}
                 and check.
               </p>

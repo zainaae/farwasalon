@@ -1,20 +1,27 @@
+import { salonNow, SAME_DAY_LEAD_MINUTES, SALON_TZ } from '../lib/booking-slots.js'
+
 /** Next bookable slot estimate for the hero hint.
  *  Mirrors the slots API rules: Mon–Sat 11:00–19:00, 30-min booking lead,
- *  slots on the half hour, 6:30pm is the last same-day slot. */
-export function computeNextSlot(now = new Date()) {
-  const day = now.getDay() // 0 Sun..6 Sat
-  if (day === 0) return { label: 'Tomorrow · 11:00am', open: false } // Sunday closed → Monday
+ *  slots on the half hour, 6:30pm is the last same-day slot. Computed in salon
+ *  time (Asia/Karachi) using the same primitives the slots API uses, so the
+ *  hint can never drift from what /api/slots will actually accept — the old
+ *  copy re-implemented the rules in device-local time and lied to visitors
+ *  outside Pakistan. */
+const LAST_SLOT_MIN = 18 * 60 + 30
 
-  const hr = now.getHours()
-  if (hr < 11) return { label: 'Today · 11:00am', open: false }
+export function computeNextSlot(now = new Date()) {
+  const { minutes } = salonNow(now)
+  const weekday = new Intl.DateTimeFormat('en-US', { timeZone: SALON_TZ, weekday: 'long' }).format(now)
+
+  if (weekday === 'Sunday') return { label: 'Tomorrow · 11:00am', open: false } // Sunday closed → Monday
+
+  if (minutes < 11 * 60) return { label: 'Today · 11:00am', open: false }
 
   // Same 30-min lead the slots API enforces, rounded up to the next :00/:30.
-  const LAST_SLOT = 18 * 60 + 30 // 6:30pm is the last bookable slot of the day
-  const slotMin = Math.ceil((hr * 60 + now.getMinutes() + 30) / 30) * 30
-  if (slotMin > LAST_SLOT) {
-    return day === 6
-      ? { label: 'Monday · 11:00am', open: false }
-      : { label: 'Tomorrow · 11:00am', open: false }
+  const slotMin = Math.ceil((minutes + SAME_DAY_LEAD_MINUTES) / 30) * 30
+  if (slotMin > LAST_SLOT_MIN) {
+    const next = weekday === 'Saturday' ? 'Monday' : 'Tomorrow'
+    return { label: `${next} · 11:00am`, open: false }
   }
 
   const h = Math.floor(slotMin / 60)

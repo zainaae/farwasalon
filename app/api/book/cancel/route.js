@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getSheetRows, updateBookingStatus, isConfigured } from '../../../../lib/google-sheets.js'
-import { checkRateLimit } from '../../../../lib/rate-limit.js'
+import { checkRateLimit, getClientIp } from '../../../../lib/rate-limit.js'
 import { isAllowedOrigin } from '../../../../lib/origin-check.js'
 import { verifyCancelToken, phoneLast4 } from '../../../../lib/booking-cancel-token.js'
 import { CANCELLATION_MIN_HOURS } from '../../../../lib/booking-duration.js'
@@ -11,8 +11,8 @@ export async function POST(request) {
   if (!isAllowedOrigin(request)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
-  const rl = checkRateLimit(ip, { window: 600, max: 10 })
+  const ip = getClientIp(request)
+  const rl = checkRateLimit(ip, { scope: 'book-cancel', window: 600, max: 10 })
   if (rl.limited) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again later.' },

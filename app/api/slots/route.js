@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getSheetRows, isConfigured } from '../../../lib/google-sheets.js'
-import { checkRateLimit } from '../../../lib/rate-limit.js'
+import { checkRateLimit, getClientIp } from '../../../lib/rate-limit.js'
 import {
   FILTERED_SLOTS,
   MAX_WORKERS,
@@ -18,8 +18,8 @@ import {
 import { logger, hashIp, errCtx } from '../../../lib/logger.js'
 
 export async function GET(request) {
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
-  const rl = checkRateLimit(ip, { window: 60, max: 30 })
+  const ip = getClientIp(request)
+  const rl = checkRateLimit(ip, { scope: 'slots', window: 60, max: 30 })
   if (rl.limited) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again later.' },
