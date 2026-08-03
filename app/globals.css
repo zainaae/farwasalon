@@ -511,7 +511,9 @@
     box-shadow: 0 0 0 1px var(--ink);
   }
   .input-field:focus-visible {
-    outline: 2px solid var(--accent-gold);
+    /* #c9a98a measured 2.20:1 — under the 3:1 WCAG 2.4.11 floor. The deep gold
+       matches the site-standard ring everywhere else. */
+    outline: 2px solid var(--accent-gold-deep);
     outline-offset: 3px;
   }
   .panel-muted {

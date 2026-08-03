@@ -75,7 +75,7 @@ export default function FaqClient() {
             <h2 className="font-['Unbounded'] font-bold text-xl md:text-2xl text-white mb-2">
               Still have questions?
             </h2>
-            <p className="text-stone text-sm font-['Inter'] font-light max-w-md">
+            <p className="text-mist/80 text-sm font-['Inter'] font-light max-w-md">
               WhatsApp us — we usually reply within a few hours during salon hours.
             </p>
           </m.div>

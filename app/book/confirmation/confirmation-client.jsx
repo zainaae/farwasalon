@@ -11,6 +11,7 @@ import {
   isBookingStorageDurable,
 } from '../../../lib/booking-storage.js'
 import { WA_NUMBER } from '../../../src/site-config.js'
+import { CANCELLATION_MIN_HOURS } from '../../../lib/booking-duration.js'
 
 function formatDateNice(dateStr) {
   if (!dateStr) return ''
@@ -28,10 +29,15 @@ function formatTime12(t) {
 
 function ConfirmationContent() {
   const searchParams = useSearchParams()
-  const id = searchParams.get('id') || ''
+  /* id can survive a refresh even after the URL is scrubbed: we cache it in
+     sessionStorage during the first render, so analytics never see the full
+     address with the booking reference more than once, yet a refresh still
+     restores the confirmation from storage. */
+  const urlId = searchParams.get('id') || ''
   const urlDate = searchParams.get('date') || ''
   const urlTime = searchParams.get('time') || ''
-  const urlDuration = parseInt(searchParams.get('duration') || '60', 10) || 60
+  const urlDurationParam = searchParams.get('duration')
+  const urlDuration = parseInt(urlDurationParam || '60', 10) || 60
   const urlService = searchParams.get('service') || ''
   const urlName = searchParams.get('name') || ''
   const openWa = searchParams.get('openWa') === '1'
@@ -40,24 +46,74 @@ function ConfirmationContent() {
   const [loaded, setLoaded] = useState(false)
   const [durable, setDurable] = useState(true)
   const [waHint, setWaHint] = useState('')
+  const [bookingId, setBookingId] = useState(urlId)
+  /* Snapshot wall-clock / display fields before URL scrub. replaceState clears
+     useSearchParams on the next render; without this, a confirmation that only
+     had query params (or lost storage) flips to "Invalid confirmation link". */
+  const [urlFallback, setUrlFallback] = useState({
+    date: urlDate,
+    time: urlTime,
+    duration: urlDuration,
+    service: urlService,
+    name: urlName,
+  })
 
   useEffect(() => {
     if (typeof window === 'undefined') return
+    let resolved = urlId
+    if (!resolved) {
+      try {
+        resolved = sessionStorage.getItem('farwa-conf-id') || ''
+      } catch {
+        /* private mode */
+      }
+    }
+    /* Persist the id for refresh-restore, then scrub id/date/time/service/name
+       from the address so analytics see the confirmation path without the
+       booking reference (only the id is ever kept, never the cancel token). */
+    try {
+      sessionStorage.setItem('farwa-conf-id', resolved)
+    } catch {
+      /* ignore */
+    }
+    try {
+      const next = new URL(window.location.href)
+      for (const key of ['id', 'date', 'time', 'duration', 'service', 'name']) {
+        next.searchParams.delete(key)
+      }
+      window.history.replaceState({}, '', `${next.pathname}${next.search}`)
+    } catch {
+      /* ignore */
+    }
+    /* Snapshot url* from this render's closure before scrub clears useSearchParams;
+       batch with other state so we avoid setState-in-effect. */
     queueMicrotask(() => {
-      const stored = id ? readBookingRecord(id) : null
+      setUrlFallback((prev) => ({
+        date: urlDate || prev.date,
+        time: urlTime || prev.time,
+        duration: urlDurationParam != null && urlDurationParam !== '' ? urlDuration : prev.duration,
+        service: urlService || prev.service,
+        name: urlName || prev.name,
+      }))
+      setBookingId(resolved)
+      const stored = resolved ? readBookingRecord(resolved) : null
       setRecord(stored)
       setDurable(isBookingStorageDurable())
       setLoaded(true)
     })
-  }, [id])
+    // url* fields are read on the render that still has the query string;
+    // depending only on urlId avoids a second pass after scrub clears them.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional scrub snapshot
+  }, [urlId])
 
   /* URL carries wall-clock ids only (analytics-safe). Service, name, and the
      cancel token live in durable storage — never in the query string. */
-  const service = record?.service || urlService
-  const name = record?.name || urlName
-  const date = record?.date || urlDate
-  const time = record?.time || urlTime
-  const duration = record?.duration || urlDuration
+  const id = bookingId
+  const service = record?.service || urlFallback.service
+  const name = record?.name || urlFallback.name
+  const date = record?.date || urlFallback.date
+  const time = record?.time || urlFallback.time
+  const duration = record?.duration || urlFallback.duration
   const cancelToken = record?.cancelToken || ''
   const cancelled = Boolean(record?.cancelledAt)
 
@@ -95,8 +151,8 @@ function ConfirmationContent() {
       /* private mode — still try once this mount */
     }
 
-    setWaHint('Opening WhatsApp with your booking…')
     const timer = window.setTimeout(() => {
+      setWaHint('Opening WhatsApp with your booking…')
       const popup = window.open(waUrl, '_blank', 'noopener,noreferrer')
       setWaHint(
         popup
@@ -276,7 +332,7 @@ function ConfirmationContent() {
 
           {cancelToken && id && date && (
             <p className="mt-4 text-stone text-[10px] font-['Inter']">
-              Need to cancel? (at least 2 hours before your appointment){' '}
+              Need to cancel? (at least {CANCELLATION_MIN_HOURS} hours before your appointment){' '}
               <Link
                 /* Only the booking id travels. Token stays in storage — never
                    in a URL that Plausible / Meta Pixel report verbatim. */

@@ -95,79 +95,88 @@ https://farwasalon.com
 Add each service with description and price range in the GBP Services section.
 
 ### Threading Services
-| Service | Price (PKR) |
-|---------|-------------|
-| Eyebrow Threading | 150 |
-| Upper Lip Threading | 100 |
-| Full Face Threading | 600 |
-| Chin Threading | 100 |
-| Forehead Threading | 100 |
+| Service | Price (PKR) | Duration |
+|---------|-------------|----------|
+| Eyebrow Threading | 200 | 10 min |
+| Upper Lip Threading | 150 | 5 min |
+| Full Face Threading | 1,200 | 25 min |
+| Chin Threading | 100 | 5 min |
+| Forehead Threading | 150 | 10 min |
 
 ### Waxing Services
-| Service | Price (PKR) |
-|---------|-------------|
-| Full Arms Wax | 500 |
-| Full Legs Wax | 700 |
-| Full Body Wax | 3,500 |
-| Underarms Wax | 250 |
-| Bikini Wax | 1,000 |
-| Back Wax | 600 |
-| Stomach Wax | 400 |
+| Service | Price (PKR) | Duration |
+|---------|-------------|----------|
+| Full Arms Honey Wax | 700 | 25 min |
+| Full Legs Honey Wax | 1,200 | 40 min |
+| Full Body Honey Wax | 2,800 | 60 min |
+| Underarms Honey Wax | 400 | 15 min |
+| Hips Honey Wax | 500 | 15 min |
+| Back Honey Wax | 600 | 20 min |
+| Stomach Honey Wax | 600 | 20 min |
 
 ### Facial Services
-| Service | Price (PKR) |
-|---------|-------------|
-| Whitening Facial | 1,500 |
-| Gold Facial | 2,500 |
-| Hydra Facial | 3,500 |
-| Anti-Aging Facial | 3,000 |
-| Acne Facial | 2,000 |
-| Fruit Facial | 1,200 |
-| Cleansing Facial | 1,000 |
+| Service | Price (PKR) | Duration |
+|---------|-------------|----------|
+| Normal Facial | 1,400 | 45 min |
+| Herbal Organic Facial | 1,600 | 50 min |
+| Acne Facial | 1,800 | 50 min |
+| Whitening Facial | 1,900 | 55 min |
+| White Glow Facial | 2,000 | 55 min |
+| T.J's Facial | 2,500 | 60 min |
+| Whitening Fruit Facial | 2,600 | 60 min |
+| Oxy Glow Facial | 2,800 | 60 min |
+| HD Whitening Facial | 3,000 | 65 min |
+| Ultra Brightening Facial | 3,500 | 70 min |
+| Janssen Whitening Facial | 5,500 | 75 min |
 
 ### Bridal Services
-| Service | Price (PKR) |
-|---------|-------------|
-| Bridal Makeup (Barat) | 15,000–30,000 |
-| Bridal Makeup (Walima) | 12,000–25,000 |
-| Mehndi Night Makeup | 8,000–15,000 |
-| Bridal Trial Session | 5,000 |
-| Full Bridal Package | 35,000–70,000 |
-| Engagement Makeup | 8,000–15,000 |
+| Service | Price (PKR) | Duration |
+|---------|-------------|----------|
+| Full Bridal Package | 25,000 | 300 min |
+| Bridal Trial | 8,000 | 120 min |
+| Engagement Look | 12,000 | 150 min |
+| Mehndi / Dholki Look | 10,000 | 120 min |
 
 ### Hair Services
-| Service | Price (PKR) |
-|---------|-------------|
-| Haircut & Styling | 800–1,500 |
-| Blow Dry | 600–1,000 |
-| Hair Protein Treatment | 3,000–8,000 |
-| Keratin Treatment | 5,000–15,000 |
-| Hair Color (Global) | 3,000–6,000 |
-| Highlights / Balayage | 4,000–10,000 |
-| Hair Spa | 1,500–3,000 |
-| Updo / Party Hairstyle | 2,000–5,000 |
+| Service | Price (PKR) | Duration |
+|---------|-------------|----------|
+| Haircut & Blowdry | From 2,000 | 60 min |
+| Hair Colour | From 4,000 | 120 min |
+| Blowdry & Styling | From 1,500 | 45 min |
+| Bridal Hair Styling | From 8,000 | 120 min |
+| Normal Protein Treatment | From 2,000 | 45 min |
+| Hair Fall Treatment with Ampule | From 3,000 | 40 min |
+| Dandruff Treatment with Ampule | From 3,000 | 40 min |
+| Olorchee Treatment | From 2,500 | 45 min |
+| Wellaplex Stand-Alone Treatment | From 3,000 | 60 min |
 
 ### Nail Services
-| Service | Price (PKR) |
-|---------|-------------|
-| Manicure (Basic) | 500 |
-| Manicure (Luxury) | 1,200 |
-| Pedicure (Basic) | 600 |
-| Pedicure (Luxury) | 1,500 |
-| Gel Nails | 2,000–3,500 |
-| Nail Art (per nail) | 100–300 |
-| Acrylic Nails | 3,000–5,000 |
-| Nail Extensions | 2,500–4,500 |
+| Service | Price (PKR) | Duration |
+|---------|-------------|----------|
+| Nail Paint | 300 | 15 min |
+| Nail Filing | 300 | 10 min |
+| Nail Filing & Shining | 600 | 20 min |
+| French Tips | 700 | 25 min |
+| Normal Manicure | 900 | 30 min |
+| Normal Pedicure | 1,000 | 35 min |
+| Whitening Manicure | 1,200 | 35 min |
+| Whitening Pedicure | 1,400 | 40 min |
+| Paraffin Manicure | 1,300 | 40 min |
+| SPA Manicure | 1,400 | 45 min |
+| SPA Pedicure | 1,400 | 45 min |
+| French Manicure | 1,600 | 45 min |
+| French Pedicure | 1,600 | 45 min |
 
 ### Massage Services
-| Service | Price (PKR) |
-|---------|-------------|
-| Full Body Massage (60 min) | 3,000 |
-| Back & Shoulder Massage | 1,500 |
-| Head Massage | 800 |
-| Foot Reflexology | 1,200 |
+| Service | Price (PKR) | Duration |
+|---------|-------------|----------|
+| Back Massage | 700 | 15 min |
+| Head Massage | 700 | 15 min |
+| Full Legs Massage | 1,400 | 30 min |
+| Head Massage & Wash | 1,500 | 30 min |
+| Full Body Massage | 2,500 | 40 min |
 
-> **Note:** Prices are approximate. Update with current pricing. Ranges are shown for services that vary by hair length, product tier, or complexity.
+> **Note:** Prices and durations match the live menu in `src/data.js`. Services marked "From" vary by hair length and density; all others are fixed prices.
 
 ---
 
@@ -304,7 +313,7 @@ Pre-fill the Q&A section with common questions. Log in with the business account
 **A:** Farwa Beauty Salon is open Monday to Saturday, 11 AM – 7 PM. We are closed on Sundays. We recommend booking appointments in advance, especially on weekends and during wedding season.
 
 ### Q2: Do you offer bridal makeup packages?
-**A:** Yes! We offer complete bridal packages including barat makeup, walima makeup, mehndi night, bridal trial session, and pre-bridal facials and skin prep. Our bridal packages start from PKR 35,000. Book your trial session by calling 0322-278-2254.
+**A:** Yes! We offer the Full Bridal Package (PKR 25,000), Bridal Trial (PKR 8,000), Engagement Look (PKR 12,000), and Mehndi / Dholki Look (PKR 10,000). Book your trial session by calling 0322-278-2254.
 
 ### Q3: Do I need an appointment or can I walk in?
 **A:** Both! Walk-ins are welcome for quick services like threading and waxing. For facials, bridal makeup, hair treatments, and weekend visits, we strongly recommend booking in advance via WhatsApp at 0322-278-2254.
@@ -316,13 +325,13 @@ Pre-fill the Q&A section with common questions. Log in with the business account
 **A:** We use a mix of premium international and trusted local brands for all our services. For facials and skin treatments, we use professional-grade products suited to each skin type. Feel free to ask about specific products during your visit.
 
 ### Q6: How much does a basic facial cost?
-**A:** Our facials range from PKR 1,000 for a cleansing facial to PKR 3,500 for a hydra facial. We also offer whitening facials (PKR 1,500), gold facials (PKR 2,500), and anti-aging facials (PKR 3,000). We can recommend the best option for your skin type.
+**A:** Our facials range from PKR 1,400 (Normal Facial) to PKR 5,500 (Janssen Whitening Facial). Popular picks include the Whitening Facial (PKR 1,900), White Glow Facial (PKR 2,000), and HD Whitening Facial (PKR 3,000). We can recommend the best option for your skin type.
 
 ### Q7: Do you offer services for men?
 **A:** Farwa Beauty Salon is a ladies-only salon. We specialize in women's beauty services including skincare, hair, bridal, nails, and waxing.
 
 ### Q8: Can I book a bridal trial before my wedding?
-**A:** Absolutely! We highly recommend a bridal trial session (PKR 5,000) so we can perfect your look before the big day. Book your trial at least 2–4 weeks before your wedding date by calling 0322-278-2254.
+**A:** Absolutely! We highly recommend a Bridal Trial session (PKR 8,000) so we can perfect your look before the big day. Book your trial at least 2–4 weeks before your wedding date by calling 0322-278-2254.
 
 ### Q9: Do you offer home service?
 **A:** Currently, we offer services at our salon in PECHS Block 3. For bridal services, home service may be available for an additional fee — please contact us at 0322-278-2254 to discuss your requirements.

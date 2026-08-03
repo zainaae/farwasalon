@@ -4,7 +4,7 @@ import {
   isGooglePlacesConfigured,
 } from '../../../lib/google-places.js'
 import { getManualReviewsPayload } from '../../../lib/google-reviews.js'
-import { checkRateLimit } from '../../../lib/rate-limit.js'
+import { checkRateLimit, getClientIp } from '../../../lib/rate-limit.js'
 import { logger, hashIp, errCtx } from '../../../lib/logger.js'
 
 export const revalidate = 86400
@@ -23,9 +23,8 @@ function manualOrFallbackResponse() {
 }
 
 export async function GET(request) {
-  const ip =
-    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
-  const rl = checkRateLimit(ip, { window: 60, max: 30 })
+  const ip = getClientIp(request)
+  const rl = checkRateLimit(ip, { scope: 'reviews', window: 60, max: 30 })
   if (rl.limited) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again later.' },

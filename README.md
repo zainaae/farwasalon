@@ -90,7 +90,7 @@ Copy [`.env.example`](.env.example) to `.env.local`. Everything is server-only �
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL` | Writing bookings to the Sheet | Yes, for booking |
 | `GOOGLE_PRIVATE_KEY` | ” | Yes, for booking |
 | `GOOGLE_SHEET_ID` | ” | Yes, for booking |
-| `BOOKING_CANCEL_SECRET` | Signing cancel links | Strongly recommended |
+| `BOOKING_CANCEL_SECRET` | Signing cancel links | **Required** for self-service cancel |
 | `GOOGLE_PLACES_API_KEY` | Live Google reviews on the homepage | Optional |
 | `GOOGLE_PLACE_ID` | ” | Optional |
 | `SALON_GBP_RATING` / `SALON_GBP_REVIEW_COUNT` | JSON-LD `aggregateRating` | Optional |

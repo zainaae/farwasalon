@@ -10,8 +10,17 @@ import {
 
 test.describe('Book pages smoke', () => {
   test('/book/confirmation returns 200 with valid query params', async ({ page }) => {
+    /* Real bookings write the record before redirect; URL only carries
+       wall-clock ids and is scrubbed client-side. Seed storage the same way. */
+    await seedConfirmation(page, 'smoke-001', {
+      service: 'Eyebrow Threading',
+      name: 'Tester',
+      date: '2026-05-20',
+      time: '10:00',
+      duration: 10,
+    })
     const res = await page.goto(
-      '/book/confirmation?id=smoke-001&date=2026-05-20&time=10:00&service=Eyebrow%20Threading&name=Tester&duration=10',
+      '/book/confirmation?id=smoke-001&date=2026-05-20&time=10:00&duration=10',
     )
     expect(res?.status()).toBe(200)
     await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()

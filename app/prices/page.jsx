@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { SERVICES, CAT_SLUGS, formatServicePrice, formatDuration, YEARS_ACTIVE } from '../../src/data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
+import { LAST_SERVICE_UPDATE } from '../../lib/sitemap-data.js'
 import JsonLd from '../json-ld'
 import {
   buildFaqPageSchema,
@@ -30,7 +31,16 @@ export const metadata = {
   }),
 }
 
-const UPDATED = '24 July 2026'
+const UPDATED = formatListDate(LAST_SERVICE_UPDATE)
+
+/* The "updated" eyebrow must agree with the sitemap <lastmod> for the menu.
+   Both read LAST_SERVICE_UPDATE, so a menu edit bumps one constant and both
+   surfaces follow — the page cannot claim a fresher date than the sitemap
+   does, or vice versa. */
+function formatListDate(ymd) {
+  const [y, m, d] = ymd.split('-').map(Number)
+  return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(y, m - 1, d))
+}
 
 export default function PricesPage() {
   const categories = Object.keys(SERVICES)

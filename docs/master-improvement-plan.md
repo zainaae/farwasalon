@@ -144,7 +144,7 @@ triggering* on the live Sheet cannot be checked from the repo.
 | `GOOGLE_SERVICE_ACCOUNT_EMAIL` | Yes |
 | `GOOGLE_PRIVATE_KEY` | Yes |
 | `GOOGLE_SHEET_ID` | Yes |
-| `BOOKING_CANCEL_SECRET` | Strongly recommended |
+| `BOOKING_CANCEL_SECRET` | **Required** for self-service cancel |
 
 **Security:** if any key was ever pasted into chat, a commit, or a screenshot, **rotate**
 the service-account key and the cancel secret.

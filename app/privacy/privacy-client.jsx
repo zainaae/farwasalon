@@ -50,6 +50,12 @@ export default function PrivacyClient() {
                   <strong className="font-medium text-ink">Plausible Analytics:</strong> We use Plausible for anonymous page views and referrers. It does not use cookies for tracking and does not build individual marketing profiles.
                 </li>
                 <li>
+                  <strong className="font-medium text-ink">Meta Pixel:</strong> If advertising is active, a Meta (Facebook) Pixel records anonymized page views and a "booking completed" event with the basket value and service chosen. The pixel is served by Meta and subject to their policies. We do not send your name or phone number to Meta.
+                </li>
+                <li>
+                  <strong className="font-medium text-ink">Booking references in page addresses:</strong> The confirmation page address includes a short booking reference and your appointment date/time so the page can reopen after a refresh. Analytics tools may therefore see that reference in the page address. It is not your name or phone number, and cancel access requires the code stored on this device, not the address alone.
+                </li>
+                <li>
                   <strong className="font-medium text-ink">Google Maps:</strong> Our contact page can load a Google Maps embed. Google may collect data under their own privacy policy when that embed loads.
                 </li>
                 <li>

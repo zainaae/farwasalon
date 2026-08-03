@@ -97,7 +97,7 @@ Lightweight pointers (not a full enterprise CMDB).
 
 | Capability | Status |
 |------------|--------|
-| **Analytics** | Plausible script + Vercel Analytics (`@vercel/analytics`), both wired in `app/layout.jsx`. |
+| **Analytics** | Plausible script wired in `app/layout.jsx` + Meta Pixel (`app/components/meta-pixel.jsx`). Vercel Analytics (`@vercel/analytics`) was removed as unused. |
 | **Errors** | `app/error.jsx` (route error boundary) and `app/not-found.jsx` — user-facing fallbacks; **optional:** Sentry (or similar) SDK + DSN via env — not mandated. |
 | **Logging** | Browser console in dev; production relies on user reports + analytics funnels until error monitoring is added. |
 

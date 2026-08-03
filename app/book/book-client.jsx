@@ -7,14 +7,15 @@ import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown, CalendarCheck } from 'lucide-react'
 import { SERVICES, ALL_SERVICES, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track } from '../../src/data.js'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
-import { toLocalDateString } from '../../lib/date-local.js'
+import { BOOKING_WINDOW_DAYS } from '../../lib/booking-date-rules.js'
+import { toLocalDateString, salonTodayString } from '../../lib/date-local.js'
 import {
   computeServicesDurationMinutes,
   computeServicesPricePkr,
   MAX_BOOKING_SERVICES,
 } from '../../lib/booking-duration.js'
 import { getAttribution, formatAttributionCell } from '../../lib/attribution.js'
-import { saveBookingRecord, listUpcomingBookings } from '../../lib/booking-storage.js'
+import { saveBookingRecord, readBookingRecord, listUpcomingBookings, resolveStoredCancelToken } from '../../lib/booking-storage.js'
 import { getHeadlineDeal, isDealActive, isDealUpcoming, formatDealRange } from '../../src/deals-data.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
@@ -437,7 +438,10 @@ export default function BookClient() {
          not sessionStorage. This is the only copy the customer will ever hold:
          nothing is texted, WhatsApped or emailed to her, so if it dies with the
          tab she has no proof the appointment exists and no way to cancel it,
-         while the FAQ still penalises her for cancelling late. */
+         while the FAQ still penalises her for cancelling late.
+         Idempotent retries return cancelToken: null — preserve any token we
+         already stored for this id instead of wiping it to ''. */
+      const existing = readBookingRecord(data.booking.id)
       saveBookingRecord({
         id: data.booking.id,
         service: data.booking.service,
@@ -445,7 +449,7 @@ export default function BookClient() {
         date: data.booking.date,
         time: data.booking.time,
         duration: bookedDuration,
-        cancelToken: data.booking.cancelToken || '',
+        cancelToken: resolveStoredCancelToken(data.booking.cancelToken, existing?.cancelToken),
       })
       /* The cancel token stays out of the URL. Plausible and the Meta Pixel both
          transmit location.href, so a token in the query string is a bearer
@@ -487,10 +491,14 @@ export default function BookClient() {
     }
   }
 
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
+  /* The booking server validates dates in salon time (Asia/Karachi), so the
+     date strip must anchor on the SALON's today, not the visitor's device.
+     For a visitor west of Karachi, device-today can be the salon's yesterday
+     for ~10-14h a day — anchoring locally made the first chip a rejected past
+     date and same-day booking silently impossible. */
+  const today = new Date(`${salonTodayString()}T12:00:00`)
   const days = []
-  for (let i = 0; i < 14; i++) {
+  for (let i = 0; i < BOOKING_WINDOW_DAYS; i++) {
     const d = new Date(today)
     d.setDate(d.getDate() + i)
     days.push(d)

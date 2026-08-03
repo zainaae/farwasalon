@@ -9,8 +9,8 @@ import {
   readBookingRecord,
   markBookingCancelled,
 } from '../../../lib/booking-storage.js'
-
-const WA_NUMBER = '923222782254'
+import { CANCELLATION_MIN_HOURS } from '../../../lib/booking-duration.js'
+import { WA_NUMBER } from '../../../src/site-config.js'
 
 function formatDateNice(dateStr) {
   if (!dateStr) return ''
@@ -28,23 +28,49 @@ function formatTime12(t) {
 
 function CancelContent() {
   const params = useSearchParams()
-  const id = params.get('id') || ''
+  const urlId = params.get('id') || ''
 
   /* Everything except the booking id comes from durable storage (localStorage
      first, then session, then memory). Token and customer name never ride in
-     the URL — Plausible and Meta Pixel report location.href verbatim. */
+     the URL — Plausible and Meta Pixel report location.href verbatim. The id
+     is cached in sessionStorage and scrubbed from the address after the first
+     render, so analytics only ever see the plain /book/cancel path. */
+  const [bookingId, setBookingId] = useState(urlId)
   const [details, setDetails] = useState(null)
   useEffect(() => {
     if (typeof window === 'undefined') return
-    queueMicrotask(() => {
-      if (!id) {
-        setDetails({})
-        return
+    let resolved = urlId
+    if (!resolved) {
+      try {
+        resolved = sessionStorage.getItem('farwa-conf-id') || ''
+      } catch {
+        /* private mode */
       }
-      const record = readBookingRecord(id)
+    }
+    if (!resolved) {
+      queueMicrotask(() => setDetails({}))
+      return
+    }
+    try {
+      sessionStorage.setItem('farwa-conf-id', resolved)
+    } catch {
+      /* ignore */
+    }
+    try {
+      const next = new URL(window.location.href)
+      next.searchParams.delete('id')
+      window.history.replaceState({}, '', `${next.pathname}${next.search}`)
+    } catch {
+      /* ignore */
+    }
+    queueMicrotask(() => {
+      setBookingId(resolved)
+      const record = readBookingRecord(resolved)
       setDetails(record || {})
     })
-  }, [id])
+  }, [urlId])
+
+  const id = bookingId
 
   const token = details?.cancelToken || ''
   const service = details?.service || ''
@@ -89,8 +115,8 @@ function CancelContent() {
       /* private mode — still try once this mount */
     }
 
-    setWaHint('Opening WhatsApp so the salon sees the cancel…')
     const timer = window.setTimeout(() => {
+      setWaHint('Opening WhatsApp so the salon sees the cancel…')
       const popup = window.open(cancelledWaUrl, '_blank', 'noopener,noreferrer')
       setWaHint(
         popup
@@ -233,7 +259,7 @@ function CancelContent() {
         Cancel appointment?
       </h1>
       <p className="text-stone text-sm font-['Inter'] font-light mb-8">
-        This will free your time slot for other guests. Online cancellation is available at least 2 hours before your appointment.
+        This will free your time slot for other guests. Online cancellation is available at least {CANCELLATION_MIN_HOURS} hours before your appointment.
       </p>
 
       <div className="panel-soft p-6 text-left mb-8 shadow-soft">
