@@ -69,7 +69,7 @@ function LazyMapsEmbed() {
 export default function SalonLocalBlock({ variant = 'light', className = '' }) {
   const dark = variant === 'dark'
   const rating = getAggregateRating()
-  const ratingLine = `${rating.ratingValue}★ · ${rating.reviewCount}+ reviews on Google`
+  const ratingLine = `${rating.ratingValue}★ · ${rating.reviewCount} reviews on Google`
 
   return (
     <section

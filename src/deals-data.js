@@ -68,6 +68,27 @@ export function getHeadlineDeal(now = new Date()) {
   return getActiveDeals(now).find((d) => d.accent) ?? getUpcomingDeals(now).find((d) => d.accent) ?? null
 }
 
+/** True while validFrom…validUntil (inclusive) covers today. */
+export function isDealActive(deal, now = new Date()) {
+  if (!deal) return false
+  const today = now.toISOString().slice(0, 10)
+  return (
+    (!deal.validFrom || deal.validFrom <= today) &&
+    (!deal.validUntil || deal.validUntil >= today)
+  )
+}
+
+/** True in the tease window: announced, not yet claimable. */
+export function isDealUpcoming(deal, now = new Date()) {
+  if (!deal?.teaseFrom || !deal?.validFrom) return false
+  const today = now.toISOString().slice(0, 10)
+  return (
+    deal.teaseFrom <= today &&
+    deal.validFrom > today &&
+    (!deal.validUntil || deal.validUntil >= today)
+  )
+}
+
 /** True after validUntil (inclusive window ended). Upcoming deals are not ended. */
 export function isDealEnded(deal, now = new Date()) {
   if (!deal?.validUntil) return false

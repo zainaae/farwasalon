@@ -54,6 +54,53 @@ function CancelContent() {
 
   const [state, setState] = useState('idle')
   const [error, setError] = useState('')
+  const [waHint, setWaHint] = useState('')
+
+  const cancelWaText = [
+    `Hi! I've cancelled my booking.`,
+    `Booking ID: ${id}`,
+    date ? `Date: ${formatDateNice(date)}` : null,
+    time ? `Time: ${formatTime12(time)}` : null,
+    service ? `Service: ${service}` : null,
+    name ? `Name: ${name}` : null,
+  ].filter((line) => line !== null).join('\n')
+
+  const cancelledWaUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
+    id
+      ? cancelWaText
+      : 'Hi! I cancelled a booking and wanted to let you know.',
+  )}`
+
+  const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
+    `Hi! I'd like to cancel my booking.\nBooking ID: ${id}\nService: ${service}\nDate: ${formatDateNice(date)}\nTime: ${formatTime12(time)}\nName: ${name}`,
+  )}`
+
+  /* After a successful cancel, offer WhatsApp once with a prefilled ping —
+     same safety pattern as confirmation (skip webdriver / one-shot key). */
+  useEffect(() => {
+    if (state !== 'success' || !id || !cancelledWaUrl) return
+    if (typeof navigator !== 'undefined' && navigator.webdriver) return
+
+    const storageKey = `farwa-wa-cancel-opened:${id}`
+    try {
+      if (sessionStorage.getItem(storageKey)) return
+      sessionStorage.setItem(storageKey, '1')
+    } catch {
+      /* private mode — still try once this mount */
+    }
+
+    setWaHint('Opening WhatsApp so the salon sees the cancel…')
+    const timer = window.setTimeout(() => {
+      const popup = window.open(cancelledWaUrl, '_blank', 'noopener,noreferrer')
+      setWaHint(
+        popup
+          ? 'WhatsApp opened — tap Send so the desk has a copy.'
+          : 'Tap the green button below to open WhatsApp, then tap Send.',
+      )
+    }, 700)
+
+    return () => window.clearTimeout(timer)
+  }, [state, id, cancelledWaUrl])
 
   const handleCancel = async () => {
     setState('submitting')
@@ -77,10 +124,6 @@ function CancelContent() {
       setState('error')
     }
   }
-
-  const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(
-    `Hi! I'd like to cancel my booking.\nBooking ID: ${id}\nService: ${service}\nDate: ${formatDateNice(date)}\nTime: ${formatTime12(time)}\nName: ${name}`,
-  )}`
 
   if (details === null) {
     return (
@@ -146,15 +189,31 @@ function CancelContent() {
         <h1 className="font-['Syne'] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
           Cancelled
         </h1>
-        <p className="text-stone text-sm font-['Inter'] font-light mb-8">
+        <p className="text-stone text-sm font-['Inter'] font-light mb-4">
           Your appointment has been cancelled. We&apos;re sorry to miss you — hope to see you soon.
         </p>
-        <Link
-          href="/book"
-          className="btn-primary w-full"
-        >
-          Book another appointment <ArrowUpRight className="w-3.5 h-3.5" />
-        </Link>
+        {waHint ? (
+          <p className="text-stone text-xs font-['Inter'] font-light mb-6" aria-live="polite">
+            {waHint}
+          </p>
+        ) : (
+          <p className="text-stone text-xs font-['Inter'] font-light mb-6">
+            Optional: message the salon so the desk sees the cancel on WhatsApp too.
+          </p>
+        )}
+        <div className="flex flex-col gap-3">
+          <a
+            href={cancelledWaUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-[#25D366] text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-[#20bd5a] transition-colors"
+          >
+            WhatsApp cancel note <ArrowUpRight className="w-3.5 h-3.5" />
+          </a>
+          <Link href="/book" className="btn-primary w-full">
+            Book another appointment <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
       </div>
     )
   }

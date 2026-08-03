@@ -21,51 +21,71 @@ export default function PrivacyClient() {
 
       <section className="py-14 md:py-20">
         <div className="max-w-screen-md mx-auto prose-sm">
-          <p className="text-stone text-xs font-['Inter'] mb-8">Last updated: May 2026</p>
+          <p className="text-stone text-xs font-['Inter'] mb-8">Last updated: August 2026</p>
 
           <div className="flex flex-col gap-8">
             <div>
               <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Who we are</h2>
               <p className="text-body text-sm">
-                Farwa Beauty Salon is a beauty studio located in PECHS, Karachi, Pakistan. This policy explains how we handle data collected through this website.
+                Farwa Beauty Salon is a beauty studio in PECHS, Karachi, Pakistan. This page explains what happens when you use farwasalon.com — online booking, the newsletter, and a few third-party tools.
               </p>
             </div>
 
             <div>
               <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Data we collect</h2>
               <ul className="text-body text-sm list-disc pl-5 space-y-1.5">
-                <li><strong className="font-medium text-ink">WhatsApp booking forms:</strong> Your name, preferred services, date, and time are assembled into a pre-filled WhatsApp message. We do not store this data on our servers — it is sent directly to WhatsApp.</li>
-                <li><strong className="font-medium text-ink">Plausible Analytics:</strong> We use Plausible, a privacy-friendly analytics tool that does not use cookies, does not collect personal data, and is fully compliant with GDPR, CCPA, and PECR. Plausible collects anonymous page views and referrer information only.</li>
-                <li><strong className="font-medium text-ink">Google Maps embed:</strong> Our contact page embeds a Google Maps iframe. Google may collect data as described in their privacy policy when this embed loads.</li>
-                <li><strong className="font-medium text-ink">Instagram links:</strong> We link to our Instagram profile. Instagram/Meta collects data when you visit their platform.</li>
+                <li>
+                  <strong className="font-medium text-ink">Online booking:</strong> When you book at /book, we store your name, phone number, chosen service(s), date, and time in our Google Sheet so we can run the appointment diary. A cancel code for that booking is also saved on this device (see below).
+                </li>
+                <li>
+                  <strong className="font-medium text-ink">Newsletter:</strong> If you subscribe, your email (and first name if you give one) is stored in our Google Sheet&apos;s Subscribers tab so we can send updates and welcome offers.
+                </li>
+                <li>
+                  <strong className="font-medium text-ink">On this device:</strong> Confirmation and cancellation details for a booking you made here are kept in this browser&apos;s local storage (and sometimes session storage) so you can reopen the confirmation or cancel link on the same phone without putting your name or phone in the URL.
+                </li>
+                <li>
+                  <strong className="font-medium text-ink">Salon email notify:</strong> After a new online booking, our Google Apps Script may email the salon so the desk sees the appointment. That email uses the booking details already in the sheet.
+                </li>
+                <li>
+                  <strong className="font-medium text-ink">Plausible Analytics:</strong> We use Plausible for anonymous page views and referrers. It does not use cookies for tracking and does not build individual marketing profiles.
+                </li>
+                <li>
+                  <strong className="font-medium text-ink">Google Maps:</strong> Our contact page can load a Google Maps embed. Google may collect data under their own privacy policy when that embed loads.
+                </li>
+                <li>
+                  <strong className="font-medium text-ink">WhatsApp:</strong> Links that open WhatsApp take you off this site. Messages and any data you send there are handled by WhatsApp / Meta under their policies — we do not host that chat on our servers.
+                </li>
+                <li>
+                  <strong className="font-medium text-ink">Instagram:</strong> Links to our Instagram profile are off-site; Meta collects data when you visit their platform.
+                </li>
               </ul>
             </div>
 
             <div>
               <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Cookies</h2>
               <p className="text-body text-sm">
-                This website does not set any first-party cookies. Third-party embeds (Google Maps) may set their own cookies as governed by their respective privacy policies.
+                This website does not set first-party tracking cookies. Booking drafts and confirmation details use browser storage on your device, not cookies. Third-party embeds (such as Google Maps) may set their own cookies under their policies.
               </p>
             </div>
 
             <div>
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Data retention</h2>
+              <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">How long we keep it</h2>
               <p className="text-body text-sm">
-                We do not store any personal data on this website. WhatsApp conversations are retained per WhatsApp&apos;s own policies. Plausible analytics data is aggregated and anonymised — no individual user data is stored.
+                Booking rows stay in our Google Sheet while we need them for the diary and follow-up. Newsletter emails stay until you ask to be removed. Data on your device stays until you clear site data or cancel/remove that booking record. WhatsApp and Google retain their own copies under their policies.
               </p>
             </div>
 
             <div>
               <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Your rights</h2>
               <p className="text-body text-sm">
-                Since we do not collect or store personal data, there is no personal data to access, correct, or delete. If you have questions about your data in WhatsApp conversations, please contact us directly.
+                You can ask us to correct or delete booking or newsletter details we hold. Message the salon on WhatsApp at +92 322 2782254 with your name, phone or email, and (if relevant) Booking ID — we will handle the request from the sheet. Clearing this site&apos;s data in your browser removes the local confirmation/cancel copy on that device only.
               </p>
             </div>
 
             <div>
               <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Contact</h2>
               <p className="text-body text-sm">
-                For any privacy-related questions, reach us on WhatsApp at +92 322 2782254 or visit us in PECHS, Karachi.
+                For privacy questions, WhatsApp +92 322 2782254 or visit us in PECHS, Karachi.
               </p>
             </div>
           </div>

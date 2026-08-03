@@ -70,8 +70,9 @@ FAQ in [`src/faq-data.js`](src/faq-data.js).
 4. `/book/confirmation` — shows the booking and an Add-to-Calendar link. Display
    fields come from `sessionStorage` (keyed by booking id), so names and phone
    numbers are **not** put in the URL.
-5. `/book/cancel?token=…` — guests may cancel up to `CANCELLATION_MIN_HOURS`
-   (**2 hours**) before the appointment. That constant lives in
+5. `/book/cancel?id=…` — guests may cancel up to `CANCELLATION_MIN_HOURS`
+   (**2 hours**) before the appointment. The cancel token is read from this
+   device’s booking storage (not the URL). That constant lives in
    [`lib/booking-duration.js`](lib/booking-duration.js) and is the single source
    of truth — the FAQ copy must match it.
 6. The Apps Script bot polls the sheet and emails the salon (see

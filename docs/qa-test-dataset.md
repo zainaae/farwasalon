@@ -213,7 +213,7 @@ Also: `/blog/rss.xml`
 |------|----------|
 | `POST /api/book/cancel` `{ token: "invalid.token" }` | 400 |
 | `{ bookingId: "BAD-ID", date: "YYYY-MM-DD" }` | 400 |
-| UI smoke | `/book/cancel?token=smoke&…` (mocked in e2e) |
+| UI smoke | `/book/cancel?id=smoke` (mocked in e2e) |
 
 ---
 

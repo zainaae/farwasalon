@@ -18,7 +18,7 @@ Set these in Vercel (or `.env.local` for local dev). Do not commit secrets.
 
 If `BOOKING_CANCEL_SECRET` is not set, tokens are derived from `GOOGLE_SHEET_ID` + `GOOGLE_SERVICE_ACCOUNT_EMAIL` (works once Sheets is configured, but a dedicated secret is safer for production).
 
-Cancel links look like: `/book/cancel?token=…&id=FBS-…&date=…` (display fields are optional; the API validates the signed `token`).
+Cancel links look like: `/book/cancel?id=FBS-…` (the signed cancel token is stored on the device with the booking record; the API validates that token from the POST body, not the URL).
 
 ## Optional
 
