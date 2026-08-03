@@ -94,7 +94,9 @@ export default function AzadiSalePage() {
     )
   }
 
-  const offerSchema = DEAL && live && {
+  /* validFrom / validThrough keep the window honest for search; we still show
+     the campaign page before the 5th with one calm timing line, not a soft-launch lecture. */
+  const offerSchema = DEAL && {
     '@context': 'https://schema.org',
     '@type': 'Offer',
     name: 'Freedom Deal 2026 — Azadi offer, 14% off',
@@ -107,30 +109,6 @@ export default function AzadiSalePage() {
     eligibleQuantity: { '@type': 'QuantitativeValue', minValue: 1400, unitText: 'PKR service value' },
   }
 
-  const heroTitle = upcoming ? (
-    <>
-      Coming 5 August.<br />14% off then.
-    </>
-  ) : (
-    <>
-      14% off.<br />No asterisk.
-    </>
-  )
-
-  const heroBody = upcoming ? (
-    <>
-      The Freedom Deal starts on 5 August 2026 — not today. From 5 to 14 August, once your visit
-      reaches Rs 1,400, the whole bill is 14% less. You can book a visit for those dates now; the
-      discount applies at the counter only during the window.
-    </>
-  ) : (
-    <>
-      Once your visit reaches Rs 1,400, the whole bill is 14% less — 5 to 14
-      August. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
-      Book what you actually came in for.
-    </>
-  )
-
   return (
     <main id="main" className="page-content">
       {offerSchema && <JsonLd data={offerSchema} />}
@@ -141,8 +119,8 @@ export default function AzadiSalePage() {
           the site is ink/nude/gold, this is the flag. */}
       {/* Poster-led. The artwork is real, human-made and culturally specific —
           it outranks anything generated, so it carries the fold and the words
-          annotate it. No eyebrow, no repeated date block: the dates are on the
-          poster and stated once in the copy. */}
+          annotate it. Timing lives in one calm eyebrow when upcoming; the H1
+          stays the campaign line. */}
       <section className="azadi-hero">
         <div className="section-shell py-10 md:py-16">
           <div className="grid gap-8 md:gap-14 md:grid-cols-[0.95fr_1.05fr] items-center">
@@ -166,14 +144,16 @@ export default function AzadiSalePage() {
                 className="azadi-in text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-['Inter'] text-[color:var(--azadi-green)] mb-3"
                 style={{ '--i': 1 }}
               >
-                {upcoming ? `Coming · ${range}` : `Now on · ${range}`}
+                {live ? `Now on · ${range}` : upcoming ? `Starts 5 August · ${range}` : range}
               </p>
               <h1 className="azadi-display azadi-in mb-5" style={{ '--i': 2 }}>
-                {heroTitle}
+                14% off.<br />No asterisk.
               </h1>
 
               <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 3 }}>
-                {heroBody}
+                Once your visit reaches Rs 1,400, the whole bill is 14% less — 5 to 14
+                August. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
+                Book what you actually came in for.
               </p>
 
               <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-lg mb-8" style={{ '--i': 4 }}>
@@ -185,8 +165,7 @@ export default function AzadiSalePage() {
 
               <div className="azadi-in flex flex-wrap items-center gap-3" style={{ '--i': 5 }}>
                 <Link href="/book" className="tap-safe azadi-btn">
-                  {upcoming ? 'Book for August' : 'Build your combo online'}{' '}
-                  <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+                  Build your combo online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
                 <WaCta
                   href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20help%20me%20build%20a%20Rs%201%2C400%20combo"
