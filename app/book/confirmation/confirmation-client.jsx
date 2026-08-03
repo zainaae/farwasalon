@@ -76,13 +76,6 @@ function ConfirmationContent() {
     } catch {
       /* ignore */
     }
-    setUrlFallback((prev) => ({
-      date: urlDate || prev.date,
-      time: urlTime || prev.time,
-      duration: urlDurationParam != null && urlDurationParam !== '' ? urlDuration : prev.duration,
-      service: urlService || prev.service,
-      name: urlName || prev.name,
-    }))
     try {
       const next = new URL(window.location.href)
       for (const key of ['id', 'date', 'time', 'duration', 'service', 'name']) {
@@ -92,7 +85,16 @@ function ConfirmationContent() {
     } catch {
       /* ignore */
     }
+    /* Snapshot url* from this render's closure before scrub clears useSearchParams;
+       batch with other state so we avoid setState-in-effect. */
     queueMicrotask(() => {
+      setUrlFallback((prev) => ({
+        date: urlDate || prev.date,
+        time: urlTime || prev.time,
+        duration: urlDurationParam != null && urlDurationParam !== '' ? urlDuration : prev.duration,
+        service: urlService || prev.service,
+        name: urlName || prev.name,
+      }))
       setBookingId(resolved)
       const stored = resolved ? readBookingRecord(resolved) : null
       setRecord(stored)
