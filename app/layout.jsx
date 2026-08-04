@@ -3,6 +3,7 @@ import Script from 'next/script'
 import './globals.css'
 import ClientShell from './client-shell'
 import MetaPixel from './components/meta-pixel'
+import { StarSymbolDefs } from './components/star-rating.jsx'
 import JsonLd from './json-ld'
 import { buildBeautySalonSchema, buildWebSiteSchema } from '../lib/business-schema.js'
 
@@ -20,11 +21,20 @@ const inter = Inter({
 const unbounded = Unbounded({
   subsets: ['latin'],
   /* 400 kept for italic/light brand lines (navbar, thesis); 700 is the H1 face.
-     display:optional so LCP is not held on webfont swap. */
+     display:optional so LCP is not held on webfont swap.
+
+     preload deliberately OFF. It was on, and combined with display:optional it
+     was the worst of both: 50 KB fetched on the critical path — 4.4x the size
+     of the LCP image, competing with it for bandwidth — and then, if the ~100ms
+     block period lapses, `optional` means the browser never applies the face
+     for that page load at all. On a mid-range Android over Pakistani mobile
+     data, that is 50 KB downloaded and visually discarded. Without preload the
+     font still arrives and still applies on the visits where it is quick
+     enough; it just stops racing the image that decides LCP. */
   weight: ['400', '700'],
   variable: '--font-unbounded',
   display: 'optional',
-  preload: true,
+  preload: false,
   adjustFontFallback: true,
 })
 
@@ -122,6 +132,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body className="overflow-x-clip">
+        <StarSymbolDefs />
         <MetaPixel />
         <ClientShell>{children}</ClientShell>
         <JsonLd data={buildBeautySalonSchema()} />

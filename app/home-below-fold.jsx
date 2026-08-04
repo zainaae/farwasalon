@@ -4,7 +4,8 @@ import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { m } from 'framer-motion'
-import { ArrowUpRight, ChevronRight, Star, Quote } from 'lucide-react'
+import { ArrowUpRight, ChevronRight, Quote } from 'lucide-react'
+import StarRating from './components/star-rating.jsx'
 import {
   AnimatedNumber, LazyVideo, CAT_SLUGS,
   WordmarkDivider,
@@ -385,9 +386,7 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
           <div className="min-w-0">
             <p className="font-['Syne'] font-semibold text-[13px] text-ink truncate leading-tight">{post.name}</p>
             <div className="flex items-center gap-1.5 mt-0.5">
-              <div className="flex gap-0.5 text-stone/70" aria-hidden="true">
-                {[...Array(5)].map((_, s) => <Star key={s} className="w-2 h-2 fill-current" />)}
-              </div>
+              <StarRating size={8} className="text-stone/70" />
               <span className="text-stone text-[9px] font-['Inter']">· {post.date}</span>
             </div>
           </div>
@@ -562,7 +561,7 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
   )
 }
 
-function TestimonialsPreview() {
+function TestimonialsPreview({ placesEnabled }) {
   const [reviewIdx, setReviewIdx] = useState(0)
   const [ratingLabel, setRatingLabel] = useState(initialRatingLabel)
   const [featuredReviews, setFeaturedReviews] = useState(
@@ -579,6 +578,15 @@ function TestimonialsPreview() {
 
   useEffect(() => {
     let cancelled = false
+
+    /* Skip the round trip entirely when the Places API is not wired. Production
+       returns {"source":"google-manual","configured":false} with review data
+       byte-identical to what was already server-rendered from
+       src/google-reviews-data.js — so this was a fetch, a JSON parse and a full
+       re-render of the reviews subtree that could not change a pixel, fired on
+       every visit to the page whose LCP we care about most. It starts doing
+       real work the moment GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID are set. */
+    if (!placesEnabled) return undefined
 
     async function loadReviews() {
       try {
@@ -605,7 +613,7 @@ function TestimonialsPreview() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [placesEnabled])
 
   useEffect(() => {
     if (featuredReviews.length <= 1) return undefined
@@ -629,9 +637,7 @@ function TestimonialsPreview() {
             <h2 className="display-section">What clients say</h2>
           </div>
           <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
-            <div className="flex gap-0.5 text-stone/80" role="img" aria-label={`${GOOGLE_GBP_STATS.rating} out of 5 stars`}>
-              {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />)}
-            </div>
+            <StarRating size={11} className="text-stone/80" label={`${GOOGLE_GBP_STATS.rating} out of 5 stars`} />
             <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug whitespace-nowrap">
               {ratingLabel}
             </span>
@@ -814,7 +820,7 @@ function FounderNote() {
    client components server-render unless you opt out. The opt-out was the
    whole problem. The eight sections already carry `.cv-auto`
    (content-visibility: auto), so offscreen ones cost nothing to render. */
-export default function HomeBelowFold() {
+export default function HomeBelowFold({ placesEnabled = false }) {
   return (
     <>
       <QuickPickRow />
@@ -825,7 +831,7 @@ export default function HomeBelowFold() {
       <TrustPillars />
       <SalonLocalBlock />
       <FounderNote />
-      <TestimonialsPreview />
+      <TestimonialsPreview placesEnabled={placesEnabled} />
       <CtaBand />
     </>
   )
