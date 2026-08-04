@@ -44,3 +44,6 @@ public/*.orig.mp4
 public/*.orig.webm
 coverage/
 .lighthouseci/
+
+# Scratch output from audit runs and agents — never committed.
+tmp-*
