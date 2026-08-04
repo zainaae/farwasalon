@@ -75,7 +75,7 @@ function StatsStrip() {
             viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.15 }}
             className="flex flex-col gap-6 sm:gap-7">
             <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
-              For over {YEARS_ACTIVE} years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
+              For over {YEARS_ACTIVE}{' '}years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-4 border-t border-border-soft pt-6 sm:pt-7">
               {[

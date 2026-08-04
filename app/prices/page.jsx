@@ -70,7 +70,7 @@ export default function PricesPage() {
         </p>
         <p className="text-body text-sm max-w-2xl mb-3 leading-relaxed">
           {menu.fixed} of those are fixed rates — what the table says is what you pay. The
-          remaining {menu.startingFrom} are hair and hair-treatment services shown as
+          remaining {menu.startingFrom}{' '}are hair and hair-treatment services shown as
           &ldquo;from&rdquo;, because length and density genuinely change the work; that figure is
           a floor and it is confirmed with you before anything starts.
         </p>
