@@ -187,14 +187,25 @@ export async function POST(request) {
       .filter(Boolean)
       .sort()
       .join(' + ')
+  /* The name is part of the key. Without it, a mother booking threading at
+     15:00 and then booking the same slot for her daughter on the same phone
+     looked like a retry: the second request returned the mother's bookingId,
+     never wrote a row, and the daughter was turned away at the door — while
+     MAX_WORKERS is 2 and the slot genuinely had room. A retry repeats the same
+     name; a second guest does not. Normalised for case and spacing so
+     "ayesha  khan" and "Ayesha Khan" still dedupe as one person. */
+  const stableName = (n) => String(n || '').trim().replace(/\s+/g, ' ').toLowerCase()
+
   const myPhone = digits(clientPhone)
   const myLabel = stableLabel(serviceLabel)
+  const myName = stableName(clientName)
   const duplicate = bookings.find(
     (b) =>
       b.status === 'Confirmed' &&
       b.timeSlot === time &&
       digits(b.clientPhone) === myPhone &&
       stableLabel(b.service) === myLabel &&
+      stableName(b.clientName) === myName &&
       b.bookedAt &&
       Date.now() - Date.parse(b.bookedAt) < dupWindowMs,
   )

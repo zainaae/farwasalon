@@ -12,6 +12,7 @@ import { toLocalDateString, salonTodayString } from '../../lib/date-local.js'
 import {
   computeServicesDurationMinutes,
   computeServicesPricePkr,
+  servicesHaveVariablePrice,
   MAX_BOOKING_SERVICES,
 } from '../../lib/booking-duration.js'
 import { getAttribution, formatAttributionCell } from '../../lib/attribution.js'
@@ -320,6 +321,11 @@ export default function BookClient() {
     : 0
   /* Basket value in PKR — BookingCompleted conversion + Freedom Deal meter. */
   const totalPricePkr = computeServicesPricePkr(selectedServices, addonIdsList)
+  /* site-config.js documents the contract: the "from" qualifier must survive
+     everywhere a price is shown, not just on the menu. The picker honoured it
+     and every total below dropped it. */
+  const priceIsFrom = servicesHaveVariablePrice(selectedServices)
+  const totalLabel = priceIsFrom ? `from ${formatPrice(totalPricePkr)}` : formatPrice(totalPricePkr)
 
   useEffect(() => {
     if (step !== 1 || !selectedDate || selectedServices.length === 0) return
@@ -600,7 +606,7 @@ export default function BookClient() {
                     >
                       <span className="font-medium">{s.name}</span>
                       {s.pricePkr != null && (
-                        <span className="text-stone">{formatPrice(s.pricePkr)}</span>
+                        <span className="text-stone">{formatServicePrice(s)}</span>
                       )}
                       <span className="text-stone" aria-hidden="true">×</span>
                     </button>
@@ -617,8 +623,8 @@ export default function BookClient() {
                     </p>
                     <p className="text-xs font-['Inter'] text-ink font-medium">
                       {totalPricePkr >= dealThreshold
-                        ? `${dealLive ? 'Qualified' : 'Ready'} · ${formatPrice(totalPricePkr)}`
-                        : `${formatPrice(totalPricePkr)} of ${formatPrice(dealThreshold)}`}
+                        ? `${dealLive ? 'Qualified' : 'Ready'} · ${totalLabel}`
+                        : `${totalLabel} of ${formatPrice(dealThreshold)}`}
                     </p>
                   </div>
                   <div className="h-1.5 bg-border-soft w-full overflow-hidden">
@@ -733,7 +739,7 @@ export default function BookClient() {
                           : `${selectedServices.length} services`}
                       </p>
                       <p className="text-stone text-[10px] font-['Inter']">
-                        {formatPrice(totalPricePkr)} · {formatDuration(totalDurationMinutes)}
+                        {totalLabel} · {formatDuration(totalDurationMinutes)}
                       </p>
                     </div>
                     <button
