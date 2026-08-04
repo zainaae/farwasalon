@@ -293,14 +293,28 @@ export async function POST(request) {
        exhausted. A verify-read failure stays optimistic: the write already
        landed, so the booking is treated as successful. */
     const freshBookings = await getSheetRows(date)
-    const freshOccupied = buildOccupiedCounts(freshBookings)
     const self = freshBookings.find((b) => b.bookingId === bookingId)
-    if (
-      !canFitAtIndex(freshOccupied, startIdx, needed, MAX_WORKERS) &&
-      shouldCancelSelf(freshBookings, self)
-    ) {
+    /* shouldCancelSelf decides alone. It was gated behind !canFitAtIndex, and
+       the two disagree about footprint: buildOccupiedCounts and
+       shouldCancelSelf both apply a +/- BUFFER_MIN envelope, canFitAtIndex does
+       not. So for any overbook landing on a buffer slot, canFitAtIndex still
+       reported "fits", the && short-circuited, and shouldCancelSelf — which
+       correctly returned true — was never asked. The guard added to catch races
+       could not fire for that whole class. shouldCancelSelf already walks every
+       slot self occupies against the shared cap, so it is the complete check;
+       the precondition only ever subtracted from it. */
+    if (shouldCancelSelf(freshBookings, self)) {
       try {
-        await updateBookingStatus(bookingId, 'Cancelled')
+        const rolledBack = await updateBookingStatus(bookingId, 'Cancelled')
+        if (!rolledBack) {
+          /* Silent no-op: no row was written, so the overbook is still
+             Confirmed. Same consequence as a throw — never report success. */
+          logger.error('/api/book', 'race-rollback-noop', { ip: hashIp(ip), bookingId, date })
+          return NextResponse.json(
+            { error: 'Failed to save your booking. Please try again or contact the salon.' },
+            { status: 502 },
+          )
+        }
       } catch (rollbackErr) {
         /* We have to cancel to keep capacity honest, and the cancel write
            failed. Do NOT report success — the row would stay Confirmed and

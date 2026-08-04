@@ -106,7 +106,17 @@ export async function POST(request) {
   }
 
   try {
-    await updateBookingStatus(bookingId, 'Cancelled')
+    /* A no-op is not a success. updateBookingStatus returns false when auth is
+       missing or the row cannot be found; treating that as cancelled told the
+       customer she was free while the salon still held her station. */
+    const written = await updateBookingStatus(bookingId, 'Cancelled')
+    if (!written) {
+      logger.error('/api/book/cancel', 'status-update-noop', { ip: hashIp(ip), bookingId })
+      return NextResponse.json(
+        { error: 'We could not cancel that booking. Please WhatsApp the salon so we can free the slot.' },
+        { status: 502 },
+      )
+    }
   } catch (err) {
     logger.error('/api/book/cancel', 'status-update-failed', { ip: hashIp(ip), bookingId, ...errCtx(err) })
     return NextResponse.json(
