@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import WaCta from '../../components/wa-cta.jsx'
 import { useRouter } from 'next/navigation'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft } from 'lucide-react'
@@ -130,9 +131,9 @@ export default function CategoryDetailClient({ categorySlug }) {
               <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">
                 Book online <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe btn-secondary">
+              <WaCta href={WA_DEFAULT} from="service-category" className="tap-safe btn-secondary">
                 WhatsApp
-              </a>
+              </WaCta>
             </div>
             <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter']">
               <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">

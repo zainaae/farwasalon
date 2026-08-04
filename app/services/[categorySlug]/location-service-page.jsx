@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import WaCta from '../../components/wa-cta.jsx'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, MapPin, Clock, Phone } from 'lucide-react'
 import {
@@ -80,9 +81,9 @@ export default function LocationServicePage({ data, slug }) {
             <Link href={bookHref} className="btn-primary">
               Book online <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <a href={waLink(service.name)} target="_blank" rel="noreferrer" className="btn-secondary">
+            <WaCta href={waLink(service.name)} from="location-hub" className="btn-secondary">
               WhatsApp
-            </a>
+            </WaCta>
           </div>
           <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter'] text-stone mb-10">
             <span className="inline-flex items-center gap-1.5 min-h-[44px]">

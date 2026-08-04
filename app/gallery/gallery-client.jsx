@@ -1,6 +1,7 @@
 'use client'
 
 import { m } from 'framer-motion'
+import WaCta from '../components/wa-cta.jsx'
 import { ArrowUpRight } from 'lucide-react'
 import { SmoothyGallery, useBooking } from '../../src/shared.jsx'
 import { WA_DEFAULT, GALLERY_PHOTOS, GALLERY_SHOWCASE_ITEMS } from '../../src/data.js'
@@ -72,11 +73,11 @@ export default function GalleryClient() {
               className="inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-8 py-4 hover:bg-nude transition-colors duration-300">
               Book an Appointment
             </button>
-            <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
+            <WaCta href={WA_DEFAULT} from="gallery"
               className="tap-safe link-underline !inline-flex items-center gap-1.5 text-white/50 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors">
               <span className="min-w-0">WhatsApp us</span>
               <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
-            </a>
+            </WaCta>
           </m.div>
         </div>
       </section>

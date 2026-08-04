@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import WaCta from '../components/wa-cta.jsx'
 import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react'
 import JsonLd from '../json-ld'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
@@ -90,9 +91,9 @@ export default function BridalLandingPage() {
             </Link>
           </div>
           <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-['Inter'] mb-14">
-            <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
+            <WaCta href={WA_DEFAULT} from="bridal-inline" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
               WhatsApp wedding plan
-            </a>
+            </WaCta>
             <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
               Directions
             </a>
@@ -297,9 +298,9 @@ export default function BridalLandingPage() {
               >
                 Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe btn-secondary">
+              <WaCta href={WA_DEFAULT} from="bridal-cta" className="tap-safe btn-secondary">
                 WhatsApp wedding plan
-              </a>
+              </WaCta>
             </div>
           </section>
 

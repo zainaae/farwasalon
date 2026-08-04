@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import WaCta from '../../components/wa-cta.jsx'
 import Image from 'next/image'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
@@ -268,14 +269,13 @@ export default function BlogArticleClient({ slug }) {
             <Link href="/book" className="tap-safe btn-primary">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <a
+            <WaCta
               href={WA_DEFAULT}
-              target="_blank"
-              rel="noreferrer"
+              from="blog-article"
               className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
             >
               Or WhatsApp us
-            </a>
+            </WaCta>
             <Link
               href="/blog"
               className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"

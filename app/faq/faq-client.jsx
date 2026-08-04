@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import WaCta from '../components/wa-cta.jsx'
 import Link from 'next/link'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronDown, MessageCircle } from 'lucide-react'
@@ -81,10 +82,10 @@ export default function FaqClient() {
           </m.div>
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
             className="flex flex-wrap items-center gap-4">
-            <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
+            <WaCta href={WA_DEFAULT} from="faq"
               className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3.5 hover:bg-nude transition-colors duration-300">
               <MessageCircle className="w-3.5 h-3.5" /> Message on WhatsApp
-            </a>
+            </WaCta>
             <Link href="/book"
               className="link-underline !inline-flex items-center gap-1.5 text-white/60 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors">
               <span className="min-w-0">{CTA_PRIMARY_LABEL}</span>

@@ -280,7 +280,8 @@ export function ServiceModal({ service, onClose }) {
                 className="inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone active:scale-[0.98] transition-[background-color,transform] duration-300">
                 <Sparkles className="w-3.5 h-3.5" /> Add to Booking
               </button>
-              <a href={waLink(service.name)} target="_blank" rel="noreferrer" onClick={onClose}
+              <a href={waLink(service.name)} target="_blank" rel="noreferrer"
+                onClick={() => { track('WhatsAppIntent', { from: 'service-modal', service: service.name }); onClose() }}
                 className="inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
                 Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
@@ -504,6 +505,7 @@ export function StickyMobileCTA({ hidden = false }) {
               href={WA_DEFAULT}
               target="_blank"
               rel="noreferrer"
+              onClick={() => track('WhatsAppIntent', { from: 'sticky-bar' })}
               aria-label="Message the salon on WhatsApp"
               className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/80 hover:text-white active:scale-[0.98] text-[10px] tracking-[0.12em] uppercase font-medium font-['Inter'] py-2.5 transition-colors"
             >

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import WaCta from './components/wa-cta.jsx'
 import Link from 'next/link'
 import { WA_NUMBER } from '../src/site-config.js'
 import HomeHeroVideo from './home-hero-video'
@@ -135,14 +136,13 @@ export default function HomeHero() {
             >
               Explore Services
             </Link>
-            <a
+            <WaCta
               href={`https://wa.me/${WA_NUMBER}`}
-              target="_blank"
-              rel="noreferrer"
+              from="hero"
               className="tap-safe hidden sm:inline-flex text-white/50 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white/80 transition-colors"
             >
               Or WhatsApp us
-            </a>
+            </WaCta>
           </div>
         </div>
       </div>

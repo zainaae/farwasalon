@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import WaCta from '../components/wa-cta.jsx'
 import Image from 'next/image'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import { SERVICES, CAT_META, CAT_SLUGS, track, formatPrice } from '../../src/data.js'
@@ -119,10 +120,10 @@ export default function ServicesClient() {
             <Link href="/book" className="tap-safe btn-primary !py-2.5 !px-5">
               Book online <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
-            <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer"
+            <WaCta href="https://wa.me/923222782254" from="services-index"
               className="tap-safe btn-secondary !py-2.5 !px-5">
               WhatsApp
-            </a>
+            </WaCta>
             <Link href="/prices"
               className="tap-safe link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors flex items-center">
               Full price list

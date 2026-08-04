@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import WaCta from './wa-cta.jsx'
 import Link from 'next/link'
 import { MapPin, Clock, Phone, Star, ArrowUpRight } from 'lucide-react'
 import { MAPS_LINK, WA_NUMBER } from '../../src/data.js'
@@ -124,14 +125,13 @@ export default function SalonLocalBlock({ variant = 'light', className = '' }) {
               >
                 Book online <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
-              <a
+              <WaCta
                 href={`https://wa.me/${WA_NUMBER}`}
-                target="_blank"
-                rel="noreferrer"
+                from="local-block"
                 className={`btn-secondary ${dark ? '!border-white/30 !text-white hover:!border-white hover:!bg-white/10' : ''}`}
               >
                 WhatsApp
-              </a>
+              </WaCta>
             </div>
           </div>
           <div>

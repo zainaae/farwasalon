@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import WaCta from './components/wa-cta.jsx'
 import Link from 'next/link'
 import Image from 'next/image'
 import { m } from 'framer-motion'
@@ -332,7 +333,7 @@ function FeaturedServices() {
             <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
               className="mt-8 pt-6 border-t border-[#e4ddd7]">
               <p className="text-stone text-xs font-['Inter'] font-light">
-                Book any service online — or <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noreferrer" className="underline hover:text-ink transition-colors">reach us on WhatsApp</a>.
+                Book any service online — or <WaCta href={`https://wa.me/${WA_NUMBER}`} from="services-blurb" className="underline hover:text-ink transition-colors">reach us on WhatsApp</WaCta>.
               </p>
             </m.div>
           </div>
@@ -776,14 +777,13 @@ function CtaBand() {
               Beauty salon Karachi
             </Link>
           </div>
-          <a
+          <WaCta
             href={`https://wa.me/${WA_NUMBER}`}
-            target="_blank"
-            rel="noreferrer"
+            from="cta-band"
             className="tap-safe text-white/60 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start lg:justify-end min-w-0"
           >
             Or reach us on WhatsApp
-          </a>
+          </WaCta>
         </m.div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import WaCta from '../components/wa-cta.jsx'
 import { NEIGHBORHOODS } from '../../src/location-seo.js'
 import { AREA_CONTENT } from '../../src/area-content.js'
 import { ArrowUpRight, MapPin, Clock, Phone } from 'lucide-react'
@@ -55,9 +56,9 @@ export default function BeautySalonKarachiPage() {
             <Link href="/book" className="btn-primary">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer" className="btn-secondary">
+            <WaCta href="https://wa.me/923222782254" from="karachi-hub" className="btn-secondary">
               WhatsApp
-            </a>
+            </WaCta>
           </div>
           <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter'] mb-12">
             <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">

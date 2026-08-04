@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import WaCta from './wa-cta.jsx'
 import Image from 'next/image'
 import { ArrowUpRight, MessageCircle, Star } from 'lucide-react'
 import { WA_DEFAULT, IG_LINK, MAPS_LINK, CAT_SLUGS } from '../../src/site-config.js'
@@ -54,12 +55,13 @@ export default function SiteFooter() {
             >
               {CTA_PRIMARY_LABEL} <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
-            <a
+            <WaCta
               href={WA_DEFAULT}
+              from="footer-hint"
               className="text-stone text-[10px] font-['Inter'] tracking-wide hover:text-ink transition-colors"
             >
               {CTA_WHATSAPP_HINT}
-            </a>
+            </WaCta>
           </div>
         </div>
       </div>
@@ -138,15 +140,14 @@ export default function SiteFooter() {
               </p>
               <ul className="flex flex-col gap-3">
                 <li>
-                  <a
+                  <WaCta
                     href={WA_DEFAULT}
-                    target="_blank"
-                    rel="noreferrer"
+                    from="footer-contact"
                     className="link-underline tap-safe !inline-flex items-center gap-2 min-h-[44px] text-stone text-xs leading-snug font-['Inter'] hover:text-ink"
                   >
                     <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
                     <span className="min-w-0">WhatsApp</span>
-                  </a>
+                  </WaCta>
                 </li>
                 <li>
                   <a

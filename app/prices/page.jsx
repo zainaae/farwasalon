@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import WaCta from '../components/wa-cta.jsx'
 import { ArrowUpRight } from 'lucide-react'
 import { SERVICES, CAT_SLUGS, formatServicePrice, formatDuration, YEARS_ACTIVE } from '../../src/data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
@@ -82,10 +83,10 @@ export default function PricesPage() {
           <Link href="/book" className="tap-safe btn-primary w-full sm:w-auto justify-center">
             Book online <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
-          <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer"
+          <WaCta href="https://wa.me/923222782254" from="prices-quote"
             className="tap-safe btn-secondary w-full sm:w-auto justify-center">
             Ask on WhatsApp
-          </a>
+          </WaCta>
         </div>
 
         <div className="-mx-4 sm:-mx-5 md:-mx-10 mb-10">
@@ -204,10 +205,10 @@ export default function PricesPage() {
             <Link href="/book" className="tap-safe btn-primary">
               Book online <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
-            <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer"
+            <WaCta href="https://wa.me/923222782254" from="prices-footer"
               className="tap-safe btn-secondary">
               Ask on WhatsApp
-            </a>
+            </WaCta>
           </div>
         </section>
 
