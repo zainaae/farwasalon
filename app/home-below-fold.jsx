@@ -376,7 +376,10 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
   return (
     <article
       className={`group panel-soft shadow-soft flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-card ${
-        compact ? 'shrink-0 snap-start w-[85vw] max-w-[320px]' : 'h-full min-h-[260px] sm:min-h-[272px]'
+        compact
+          ? 'shrink-0 snap-start w-[85vw] max-w-[320px]'
+          : /* swipe card on mobile, equal-height grid cell from md up */
+            'shrink-0 snap-start w-[85vw] max-w-[320px] md:shrink md:w-auto md:max-w-none md:h-full md:min-h-[260px] lg:md:min-h-[272px]'
       }`}
     >
       <header className="flex items-center justify-between px-5 py-3.5 sm:py-4 border-b border-border-soft">
@@ -525,7 +528,6 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
   if (!posts.length) return null
 
   const desktopCols = posts.length >= 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'
-  const desktopLimit = posts.length >= 3 ? posts.length : 2
 
   return (
     <div className={`reviews-block-divider ${divided ? '' : 'border-t-0 pt-0'} ${className}`}>
@@ -542,20 +544,21 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
       <p className="md:hidden text-stone text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2.5">
         Swipe for more reviews →
       </p>
-      <div className="md:hidden flex gap-3.5 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
-        {posts.map((post) => (
-          <ReviewCard key={`${label}-${post.name}-${post.quote.slice(0, 24)}`} post={post} compact excerpt />
-        ))}
-      </div>
+      {/* One render, restyled per breakpoint. This used to be two blocks — a
+          md:hidden scroller and a hidden md:grid — so every review shipped
+          twice and half the DOM was display:none on any given device. On the
+          homepage that was 20 <blockquote> for 10 reviews. The two differed
+          only in layout: `compact` swapped the card's width classes, and
+          desktopLimit resolved to posts.length for any list of 3 or more, so
+          neither showed different content. Responsive classes express the same
+          thing once.
 
-      <div className={`hidden md:grid ${desktopCols} gap-4 sm:gap-5 max-w-5xl items-stretch`}>
-        {posts.slice(0, desktopLimit).map((post, i) => (
-          <m.div key={`${label}-${post.name}`} className="h-full"
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}>
-            <ReviewCard post={post} excerpt />
-          </m.div>
+          The per-card stagger went with it. In a horizontal scroller
+          whileInView leaves off-screen cards at opacity 0 until they are
+          scrolled to, which is the wrong behaviour for a swipe row. */}
+      <div className={`flex gap-3.5 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none md:mx-0 md:px-0 md:pb-0 md:overflow-visible md:grid ${desktopCols} md:gap-4 lg:md:gap-5 md:max-w-5xl md:items-stretch`}>
+        {posts.map((post) => (
+          <ReviewCard key={`${label}-${post.name}-${post.quote.slice(0, 24)}`} post={post} excerpt />
         ))}
       </div>
     </div>
