@@ -145,6 +145,27 @@
   @media (min-width: 768px) {
     .section-shell { padding-left: 2.5rem; padding-right: 2.5rem; }
   }
+  /* A flow scale for interior pages.
+     Measured, /prices and /bridal ran 25 consecutive section boundaries every
+     one of which fell between 47 and 56px — CV under 5%. A sub-note, a sibling
+     topic and a total change of subject all got the same gap, so the page had
+     no way to say "new subject".
+
+     This is a margin scale, not a padding one, and deliberately so:
+     .section-pad appears exactly once per page, on the outer shell wrapper.
+     Every interior <section> computes padding: 0 and all real spacing comes
+     from mb-* utilities, so retuning .section-pad would only move each page's
+     top and bottom frame.
+
+     28 : 48 : 96 -> ratios of 1.7x and 2x. Both clear the 1.5x a spacing step
+     needs to read as a level change. 48px is today's value, unchanged, so
+     anything left alone keeps its current rhythm. */
+  .flow-tight { margin-bottom: 1.75rem; }
+  .flow       { margin-bottom: 3rem; }
+  .flow-loose { margin-bottom: 6rem; }
+  @media (min-width: 768px) {
+    .flow-loose { margin-bottom: 7.5rem; }
+  }
   .section-pad {
     padding-top: 3.5rem;
     padding-bottom: 3.5rem;

@@ -57,7 +57,7 @@ export default function PricesPage() {
       <JsonLd data={buildPriceListSchema()} />
       <div className="section-shell section-pad min-h-0">
         <p className="eyebrow mb-4">— Price list · updated {UPDATED}</p>
-        <h1 className="display-section text-ink mb-4 max-w-3xl">
+        <h1 className="display-section text-ink mb-4 max-w-2xl">
           Salon Price List Karachi 2026 — From Rs 100
         </h1>
         {/* The claim lives here, on the page that proves it. It used to live on
@@ -127,7 +127,7 @@ export default function PricesPage() {
 
         <QuoteBuilder />
 
-        <section className="mb-12 panel-soft p-5 md:p-6 shadow-soft max-w-3xl" aria-labelledby="prices-bridal-strip">
+        <section className="flow panel-soft p-5 md:p-6 shadow-soft" aria-labelledby="prices-bridal-strip">
           <h2 id="prices-bridal-strip" className="font-['Syne'] font-semibold text-ink text-lg mb-2">
             Bridal packages
           </h2>
@@ -186,7 +186,7 @@ export default function PricesPage() {
         {/* The other half of a complete price list is what is not on it. Same
             source as the `additionalProperty` boundaries in the salon JSON-LD,
             so the visible text and the machine-readable claim cannot disagree. */}
-        <section className="mt-14 max-w-3xl" aria-labelledby="prices-not-offered">
+        <section className="mt-24 md:mt-30 max-w-2xl" aria-labelledby="prices-not-offered">
           <h2 id="prices-not-offered" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-3">
             What is not on this list
           </h2>
@@ -204,7 +204,7 @@ export default function PricesPage() {
           </dl>
         </section>
 
-        <section className="mt-14 panel-soft p-6 md:p-8 shadow-soft max-w-3xl" aria-labelledby="prices-book-cta">
+        <section className="mt-14 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="prices-book-cta">
           <h2 id="prices-book-cta" className="font-['Syne'] font-semibold text-ink text-lg md:text-xl mb-2">
             Ready to book?
           </h2>
@@ -222,7 +222,7 @@ export default function PricesPage() {
           </div>
         </section>
 
-        <section className="mt-14 pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
+        <section className="mt-24 md:mt-30 pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
           <h2 id="prices-faq-heading" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-6">
             Price questions
           </h2>

@@ -100,7 +100,7 @@ export default function BridalLandingPage() {
             </a>
           </p>
 
-          <figure className="mb-14 max-w-3xl">
+          <figure className="flow-loose">
             <div className="relative aspect-[16/10] md:aspect-[2/1] overflow-hidden bg-mist border border-border-soft">
               <Image
                 src="/bridal.jpg"
@@ -154,7 +154,7 @@ export default function BridalLandingPage() {
             </div>
           </section>
 
-          <section className="mb-12" aria-labelledby="packages-heading">
+          <section className="flow-loose" aria-labelledby="packages-heading">
             <h2 id="packages-heading" className="section-title mb-4">
               Bridal packages (PKR) — what&apos;s included
             </h2>
@@ -194,7 +194,7 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <section className="mb-12" aria-labelledby="timeline-heading">
+          <section className="flow-loose" aria-labelledby="timeline-heading">
             <h2 id="timeline-heading" className="section-title mb-4">
               Pre-bridal timeline
             </h2>
@@ -216,7 +216,7 @@ export default function BridalLandingPage() {
             </p>
           </section>
 
-          <section className="mb-12" aria-labelledby="catchment-heading">
+          <section className="flow-tight" aria-labelledby="catchment-heading">
             <h2 id="catchment-heading" className="section-title mb-4">
               Brides from across Karachi
             </h2>
@@ -244,7 +244,7 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <section className="mb-12" aria-labelledby="why-bridal-heading">
+          <section className="flow-loose" aria-labelledby="why-bridal-heading">
             <h2 id="why-bridal-heading" className="section-title mb-4">
               Why brides choose Farwa
             </h2>
@@ -260,7 +260,7 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-bridal-heading">
+          <section className="flow-loose panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-bridal-heading">
             <h2 id="visit-bridal-heading" className="section-title mb-4">
               Studio &amp; consultation
             </h2>
@@ -291,7 +291,7 @@ export default function BridalLandingPage() {
           </section>
 
           {BRIDAL_FAQS.length > 0 && (
-            <section className="mb-12" aria-labelledby="bridal-faq-heading">
+            <section className="flow" aria-labelledby="bridal-faq-heading">
               <h2 id="bridal-faq-heading" className="section-title mb-4">
                 Bridal FAQ
               </h2>
@@ -306,7 +306,7 @@ export default function BridalLandingPage() {
             </section>
           )}
 
-          <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft max-w-3xl" aria-labelledby="bridal-book-cta">
+          <section className="flow panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="bridal-book-cta">
             <h2 id="bridal-book-cta" className="section-title mb-2">
               Lock your bridal date
             </h2>
