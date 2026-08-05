@@ -123,7 +123,7 @@ function EditorialSlideshow() {
 
   return (
     <section
-      className="cv-auto editorial-marquee bg-white border-y border-[#e4ddd7] overflow-x-clip max-w-full"
+      className="cv-auto editorial-marquee bg-mist border-y border-[#e4ddd7] overflow-x-clip max-w-full"
       aria-label="Editorial photo showcase"
     >
       <div className="section-shell flex items-end justify-between gap-4 pt-5 pb-2 px-4 sm:px-5 md:px-10">
@@ -854,7 +854,7 @@ function CtaBand() {
 
 function FounderNote() {
   return (
-    <section className="cv-auto bg-mist border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
+    <section className="cv-auto bg-white border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
       <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
