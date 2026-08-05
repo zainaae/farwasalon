@@ -13,20 +13,21 @@ export const SALON_OWNED = {
 
 /**
  * Homepage editorial marquee — prefer owned assets where available.
- * @type {SalonMediaItem[]}
+ * `href` is a stay-path (gallery or money page); default /gallery.
+ * @type {(SalonMediaItem & { href?: string })[]}
  */
 export const EDITORIAL_PHOTOS = [
-  { src: '/bridal.jpg', label: 'Bridal' },
-  { src: '/eyebrowtattoo.jpg', label: 'Eyebrow Tattoo' },
-  { src: SALON_OWNED.nailsPoster, label: 'Nail craft', video: SALON_OWNED.nailsVideo },
-  { src: '/glow3.jpg', label: 'Facials' },
-  { src: '/threading.jpg', label: 'Threading' },
-  { src: '/hairdo.jpg', label: 'Hair' },
-  { src: '/oilwax.jpg', label: 'Rica Wax' },
-  { src: '/facialcleansing.jpg', label: 'Cleansing' },
-  { src: '/massage.jpg', label: 'Massage' },
-  { src: '/pedicure.jpg', label: 'Nail finish' },
-  { src: '/wax2.jpg', label: 'Honey Wax' },
-  { src: '/hairtreatment.jpg', label: 'Hair treatments' },
-  { src: '/bleachpolish.jpg', label: 'Bleach & polish' },
+  { src: '/bridal.jpg', label: 'Bridal', href: '/bridal' },
+  { src: '/eyebrowtattoo.jpg', label: 'Eyebrow Tattoo', href: '/services/eyebrow-tattoo' },
+  { src: SALON_OWNED.nailsPoster, label: 'Nail craft', video: SALON_OWNED.nailsVideo, href: '/services/nails' },
+  { src: '/glow3.jpg', label: 'Facials', href: '/services/facials' },
+  { src: '/threading.jpg', label: 'Threading', href: '/services/threading' },
+  { src: '/hairdo.jpg', label: 'Hair', href: '/services/hair' },
+  { src: '/oilwax.jpg', label: 'Rica Wax', href: '/services/rica-hot-wax' },
+  { src: '/facialcleansing.jpg', label: 'Cleansing', href: '/services/facials' },
+  { src: '/massage.jpg', label: 'Massage', href: '/services/massage' },
+  { src: '/pedicure.jpg', label: 'Nail finish', href: '/services/nails' },
+  { src: '/wax2.jpg', label: 'Honey Wax', href: '/services/honey-wax' },
+  { src: '/hairtreatment.jpg', label: 'Hair treatments', href: '/services/hair' },
+  { src: '/bleachpolish.jpg', label: 'Bleach & polish', href: '/gallery' },
 ]

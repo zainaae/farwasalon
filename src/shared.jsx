@@ -452,7 +452,10 @@ export function shouldShowMobileCtaBar(pathname) {
     pathname === '/prices' ||
     pathname === '/gallery' ||
     pathname === '/beauty-salon-karachi' ||
-    pathname === '/contact'
+    pathname === '/contact' ||
+    pathname === '/freedom-deal' ||
+    pathname === '/deals' ||
+    pathname === '/about'
   ) {
     return true
   }

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { AnimatedNumber } from '../../src/shared.jsx'
@@ -84,6 +85,16 @@ export default function AboutClient() {
                 every article byline — the anchor is load-bearing, not decorative. */}
             <m.div id="rubina" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
               className="flex flex-col gap-6 pt-2 md:pt-10 scroll-mt-28">
+              <div className="relative w-full max-w-md aspect-[4/5] overflow-hidden border border-border-soft bg-mist">
+                <Image
+                  src="/bridal2.jpg"
+                  alt="Bridal work at Farwa Beauty Salon, PECHS Karachi — Rubina’s studio"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 420px"
+                  className="object-cover"
+                  loading="lazy"
+                />
+              </div>
               <p className="text-ink text-lg md:text-xl font-light leading-relaxed">
                 &ldquo;It started in 2008 — a single chair, a steady hand, and a belief that beauty was worth doing well.&rdquo;
               </p>
@@ -108,6 +119,9 @@ export default function AboutClient() {
                   </div>
                 ))}
               </div>
+              <Link href="/book" className="tap-safe btn-primary self-start mt-2">
+                Book with us <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
             </m.div>
           </div>
         </m.div>

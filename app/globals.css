@@ -451,21 +451,30 @@
   @media (min-width: 768px) {
     .page-content { padding-top: calc(3.5rem + env(safe-area-inset-top, 0px)); }
   }
-  /* Mobile Call/WA/Book bar: keep /prices jump chips + anchors clear of the fixed CTA */
+  /* Mobile Call/WA/Book bar: keep /prices jump chips + anchors clear of the fixed CTA.
+     Sticky category skim also helps on desktop — same jump nav, header-aware top. */
+  .page-content nav[aria-label="Price list categories"] {
+    position: sticky;
+    top: calc(3.5rem + env(safe-area-inset-top, 0px));
+    z-index: 40;
+    background: #fff;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .page-content [id^="prices-"],
+  .page-content #quote {
+    scroll-margin-top: calc(3.5rem + env(safe-area-inset-top, 0px) + 4.5rem);
+  }
   @media (max-width: 767px) {
     html {
       scroll-padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
     }
     .page-content nav[aria-label="Price list categories"] {
-      position: sticky;
       top: calc(3.375rem + env(safe-area-inset-top, 0px));
-      z-index: 40;
-      background: #fff;
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
       scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
     }
-    .page-content [id^="prices-"] {
+    .page-content [id^="prices-"],
+    .page-content #quote {
       scroll-margin-top: calc(3.375rem + env(safe-area-inset-top, 0px) + 5.75rem);
       scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
     }
@@ -659,6 +668,22 @@
   to   { transform: translateX(-50%); }
 }
 .marquee-track { animation: marquee 22s linear infinite; }
+.editorial-marquee-track {
+  animation: marquee 65s linear infinite;
+}
+.editorial-marquee-track--mobile {
+  animation: marquee 45s linear infinite;
+}
+.editorial-marquee:hover .editorial-marquee-track,
+.editorial-marquee:focus-within .editorial-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .editorial-marquee-track,
+  .editorial-marquee-track--mobile {
+    animation: none !important;
+  }
+}
 
 /* â”€â”€ Loader â”€â”€ */
 .loader {

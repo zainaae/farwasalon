@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
+import { track } from '../../src/site-config.js'
 import { getHeadlineDeal, getActiveDeals, formatDealRange } from '../../src/deals-data.js'
 
 /* Home-page campaign band. Renders only while the headline offer is announced
@@ -16,13 +17,14 @@ export default function DealStrip() {
   const live = getActiveDeals().some((d) => d.id === deal.id)
   const range = formatDealRange(deal)
   const href = deal.id === 'freedom-deal-2026' ? '/freedom-deal' : '/deals'
+  const onDealClick = () => track('DealStripClick', { from: 'home', deal: deal.id, live })
 
   return (
     <aside className="azadi-strip" aria-label={live ? 'Current offer' : 'Upcoming offer'}>
       <div className="section-shell py-8 md:py-10">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 md:gap-10">
           {deal.image && (
-            <Link href={href} className="shrink-0 self-center sm:self-auto" tabIndex={-1} aria-hidden="true">
+            <Link href={href} onClick={onDealClick} className="shrink-0 self-center sm:self-auto" tabIndex={-1} aria-hidden="true">
               <Image
                 src={deal.image}
                 alt=""
@@ -53,7 +55,7 @@ export default function DealStrip() {
             </p>
           </div>
 
-          <Link href={href} className="tap-safe azadi-btn shrink-0 self-stretch sm:self-auto justify-center">
+          <Link href={href} onClick={onDealClick} className="tap-safe azadi-btn shrink-0 self-stretch sm:self-auto justify-center">
             {live ? 'See the offer' : 'Details'}
             <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>

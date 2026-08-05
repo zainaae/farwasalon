@@ -8,14 +8,10 @@ export default function PrivacyClient() {
 
       <section className="bg-white py-16 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="eyebrow mb-3">— Legal</m.p>
-          <div className="overflow-hidden">
-            <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-              className="display-section text-ink">
-              <span className="block">PRIVACY</span> <span className="block">POLICY</span>
-            </m.h1>
-          </div>
+          <p className="hero-fade-up eyebrow mb-3">— Legal</p>
+          <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
+            <span className="block">PRIVACY</span> <span className="block">POLICY</span>
+          </h1>
         </div>
       </section>
 

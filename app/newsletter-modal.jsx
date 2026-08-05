@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
 import { X, Check, ArrowUpRight } from 'lucide-react'
+import { track } from '../src/site-config.js'
 
 const STORAGE_KEY = 'farwa-newsletter-seen'
 const SCROLL_DEPTH = 0.6
@@ -49,6 +50,7 @@ export default function NewsletterModal() {
       if (fired) return
       fired = true
       setOpen(true)
+      track('NewsletterOpen')
     }
 
     // Engagement-gated only: never ambush a visitor who just arrived.

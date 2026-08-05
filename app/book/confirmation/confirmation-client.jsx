@@ -235,19 +235,21 @@ function ConfirmationContent() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="w-full max-w-lg text-center"
         >
-          <div className="w-16 h-16 mx-auto mb-6 bg-[#e8f5e3] flex items-center justify-center rounded-full">
-            <Check className="w-8 h-8 text-[#4a9b3f]" strokeWidth={2.5} />
+          <div className="w-16 h-16 mx-auto mb-6 bg-mist border border-border-soft flex items-center justify-center rounded-full">
+            <Check className="w-8 h-8 text-ink" strokeWidth={2.5} />
           </div>
 
           <div role="status" aria-live="polite">
             <h1 className="font-['Syne'] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
-              You&apos;re booked!
+              You&apos;re set
             </h1>
             <p className={`text-stone text-sm font-['Inter'] font-light ${waHint ? 'mb-2' : 'mb-6'}`}>
-              Your slot is reserved on our list. One more step — send the WhatsApp message so we both keep a copy in chat. We do not send SMS.
+              Your slot is held on our list
+              {id ? <> — Booking ID <span className="font-mono text-ink">{id}</span></> : null}.
+              Send the WhatsApp message so we both keep a copy in chat. We do not send SMS.
             </p>
             {waHint ? (
-              <p className="text-[#128C7E] text-xs font-['Inter'] font-medium mb-6" aria-live="polite">
+              <p className="text-ink text-xs font-['Inter'] font-medium mb-6" aria-live="polite">
                 {waHint}
               </p>
             ) : null}
@@ -351,7 +353,7 @@ function ConfirmationContent() {
           )}
 
           <div className="flex flex-wrap justify-center gap-x-5 gap-y-2 mt-6">
-            {['Slot reserved online', 'No SMS — keep WhatsApp or calendar'].map(t => (
+            {['Slot held online', 'Keep WhatsApp or calendar', id ? `ID ${id}` : 'No SMS'].filter(Boolean).map(t => (
               <span key={t} className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">
                 <Check className="w-3 h-3 text-ink/40 shrink-0" /> {t}
               </span>

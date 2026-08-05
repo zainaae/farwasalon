@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import WaCta from '../components/wa-cta.jsx'
 import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react'
 import JsonLd from '../json-ld'
@@ -98,6 +99,27 @@ export default function BridalLandingPage() {
               Directions
             </a>
           </p>
+
+          <figure className="mb-14 max-w-3xl">
+            <div className="relative aspect-[16/10] md:aspect-[2/1] overflow-hidden bg-mist border border-border-soft">
+              <Image
+                src="/bridal.jpg"
+                alt="Bridal makeup at Farwa Beauty Salon, PECHS Karachi"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </div>
+            <figcaption className="mt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+              <p className="font-['Unbounded'] font-bold text-ink text-2xl sm:text-3xl md:text-4xl leading-[1.05] tracking-tight">
+                From the chair
+              </p>
+              <p className="text-stone text-xs font-['Inter'] font-light max-w-xs sm:text-right">
+                Owned studio still — bridal work in PECHS, not a stock look.
+              </p>
+            </figcaption>
+          </figure>
 
           <section className="mb-14" aria-labelledby="event-taxonomy-heading">
             <h2 id="event-taxonomy-heading" className="section-title mb-3">

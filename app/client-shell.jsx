@@ -12,6 +12,7 @@ import {
   shouldShowMobileCtaBar,
 } from '../src/shared'
 import { BookingProvider } from '../src/booking-context.jsx'
+import { track } from '../src/site-config.js'
 import { captureAttribution } from '../lib/attribution.js'
 
 const loadDomAnimation = () => import('framer-motion').then((mod) => mod.domAnimation)
@@ -82,6 +83,42 @@ function ScrollToTop() {
   return null
 }
 
+const SCROLL_DEPTH_THRESHOLDS = [25, 50, 75, 100]
+
+/* Idle-mounted like ScrollProgress — no scroll listener until after first paint. */
+function ScrollDepthTracker() {
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(() => setReady(true), { timeout: 2000 })
+      return () => cancelIdleCallback(id)
+    }
+    const t = setTimeout(() => setReady(true), 800)
+    return () => clearTimeout(t)
+  }, [])
+
+  useEffect(() => {
+    if (!ready) return undefined
+    const fired = new Set()
+    const check = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      const pct = max > 0 ? (window.scrollY / max) * 100 : 0
+      for (const threshold of SCROLL_DEPTH_THRESHOLDS) {
+        if (pct >= threshold && !fired.has(threshold)) {
+          fired.add(threshold)
+          track('ScrollDepth', { depth: String(threshold) })
+        }
+      }
+    }
+    check()
+    window.addEventListener('scroll', check, { passive: true })
+    return () => window.removeEventListener('scroll', check)
+  }, [ready])
+
+  return null
+}
+
 export default function ClientShell({ children }) {
   /* First-touch attribution: record the campaign that earned this session on
      whichever page the visitor lands on, before any internal navigation can
@@ -114,6 +151,7 @@ export default function ClientShell({ children }) {
       <MotionConfig reducedMotion="user">
         <BookingProvider>
           <ScrollProgress />
+          <ScrollDepthTracker />
           <ScrollToTop />
           <SkipLink />
           <Navbar transparent={isHome} onMobileOpenChange={setMobileNavOpen} />

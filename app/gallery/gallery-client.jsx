@@ -24,8 +24,9 @@ export default function GalleryClient() {
               <span className="block">WHAT WE</span> <span className="block">DO</span>
             </h1>
             <p className="hero-fade-up text-body max-w-xl mt-5" style={{ animationDelay: '0.15s' }}>
-              A quiet look at the services we offer in our PECHS studio — bridal, hair,
-              skin, nails. Visit in person for the full portfolio, or book a slot below.
+              Real work from our PECHS studio — bridal, hair, skin, nails. These are
+              service stills and clips from the chair, not stock before-and-afters.
+              Visit in person for the full portfolio, or book a slot below.
             </p>
           </div>
           <button

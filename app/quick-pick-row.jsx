@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { SERVICES, formatPrice, track } from '../src/data.js'
 
@@ -24,12 +23,6 @@ function minPriceFor(category) {
   if (!Array.isArray(list)) return null
   const prices = list.map((s) => s.pricePkr).filter((p) => typeof p === 'number')
   return prices.length ? Math.min(...prices) : null
-}
-
-const cardMotion = {
-  initial: { opacity: 0, y: 8 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
 }
 
 export default function QuickPickRow() {
@@ -64,13 +57,8 @@ export default function QuickPickRow() {
         </div>
 
         <div className="quick-pick-grid">
-          {items.map(({ category, minPrice }, i) => (
-            <m.div
-              key={category}
-              className="min-w-0 h-full"
-              {...cardMotion}
-              transition={{ duration: 0.4, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-            >
+          {items.map(({ category, minPrice }) => (
+            <div key={category} className="min-w-0 h-full">
               <Link
                 href={`/book?category=${encodeURIComponent(category)}`}
                 onClick={() => track('QuickPick', { category })}
@@ -88,13 +76,9 @@ export default function QuickPickRow() {
                   <span className="text-stone text-[10px] font-['Inter']">View options</span>
                 )}
               </Link>
-            </m.div>
+            </div>
           ))}
-          <m.div
-            className="min-w-0 h-full"
-            {...cardMotion}
-            transition={{ duration: 0.4, delay: items.length * 0.04, ease: [0.16, 1, 0.3, 1] }}
-          >
+          <div className="min-w-0 h-full">
             <Link
               href="/services"
               onClick={() => track('QuickPick', { category: 'all' })}
@@ -106,8 +90,14 @@ export default function QuickPickRow() {
               </span>
               <span className="text-stone text-[10px] font-['Inter']">Categories</span>
             </Link>
-          </m.div>
+          </div>
         </div>
+
+        <p className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] tracking-[0.12em] uppercase font-['Inter'] text-stone">
+          <Link href="/bridal" className="tap-safe hover:text-ink transition-colors">Bridal</Link>
+          <Link href="/prices" className="tap-safe hover:text-ink transition-colors">Prices</Link>
+          <Link href="/blog/bridal-beauty-timeline" className="tap-safe hover:text-ink transition-colors">Bridal timeline</Link>
+        </p>
       </div>
     </section>
   )
