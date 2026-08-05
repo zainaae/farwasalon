@@ -48,7 +48,7 @@ export default function DealStrip() {
             <p className="text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-['Inter'] text-[color:var(--azadi-green)] mb-1.5">
               {live ? `Now on · ${range}` : `Starts 5 August · ${range}`}
             </p>
-            <p className="font-['Unbounded'] font-bold text-[color:var(--azadi-deep)] text-lg md:text-2xl leading-tight mb-1.5">
+            <p className="font-[family-name:var(--font-unbounded)] font-bold text-[color:var(--azadi-deep)] text-lg md:text-2xl leading-tight mb-1.5">
               Freedom Deal — 14% off
             </p>
             <p className="text-[color:var(--azadi-deep)]/70 text-[13px] md:text-sm font-['Inter'] font-light max-w-md">

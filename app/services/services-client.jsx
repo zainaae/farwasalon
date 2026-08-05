@@ -86,7 +86,7 @@ function MenuRow({ cat }) {
         {minPrice && (
           <>
             <span className="block text-[10px] tracking-[0.18em] uppercase font-['Inter'] text-stone">from</span>
-            <span className="block font-['Unbounded'] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight">{formatPrice(minPrice)}</span>
+            <span className="block font-[family-name:var(--font-unbounded)] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight">{formatPrice(minPrice)}</span>
           </>
         )}
         <span className="mt-1.5 inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -137,7 +137,7 @@ export default function ServicesClient() {
               { n: '03', title: 'Done', line: 'Printed PKR, no surprise add-ons — leave when you feel ready.' },
             ].map((step) => (
               <li key={step.n} className="flex gap-3 min-w-0 sm:max-w-[14rem]">
-                <span className="font-['Unbounded'] text-[10px] text-accent-gold-deep shrink-0 pt-0.5" aria-hidden="true">{step.n}</span>
+                <span className="font-[family-name:var(--font-unbounded)] text-[10px] text-accent-gold-deep shrink-0 pt-0.5" aria-hidden="true">{step.n}</span>
                 <span>
                   <span className="block font-['Syne'] font-semibold text-ink text-sm mb-0.5">{step.title}</span>
                   <span className="block text-body text-xs leading-relaxed">{step.line}</span>

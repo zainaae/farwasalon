@@ -230,7 +230,7 @@ export default function CategoryDetailClient({ categorySlug }) {
 
           {faqs.length > 0 && (
             <section className="mt-12 pt-10 border-t border-border-soft">
-              <h2 className="font-['Unbounded'] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
+              <h2 className="font-[family-name:var(--font-unbounded)] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
                 Frequently Asked Questions
               </h2>
               <dl className="divide-y divide-border-soft">

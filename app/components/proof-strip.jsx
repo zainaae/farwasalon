@@ -51,7 +51,7 @@ export default function ProofStrip() {
           {items.map(({ key, lead, label, href }, i) => {
             const body = (
               <>
-                <span className="font-['Unbounded'] font-bold text-white text-[15px] md:text-base leading-none tabular-nums">
+                <span className="font-[family-name:var(--font-unbounded)] font-bold text-white text-[15px] md:text-base leading-none tabular-nums">
                   {lead}
                 </span>
                 <span className="text-white/70 text-[11px] md:text-xs font-['Inter'] leading-none">

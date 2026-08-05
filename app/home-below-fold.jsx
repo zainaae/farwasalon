@@ -87,7 +87,7 @@ function StatsStrip() {
                 { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-US')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
               ].map(({ display, final, label }) => (
                 <div key={label} className="min-w-0">
-                  <p className="font-['Unbounded'] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none">
+                  <p className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none">
                     {final !== null
                       ? <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
                       : display}
@@ -334,7 +334,7 @@ function FeaturedServices() {
                     onMouseLeave={() => setHovered(null)}
                     className="group flex items-center justify-between py-4 md:py-5 gap-4">
                     <div className="flex items-center gap-4 min-w-0">
-                      <span className="font-['Unbounded'] text-[10px] text-stone shrink-0 w-5 tabular-nums">
+                      <span className="font-[family-name:var(--font-unbounded)] text-[10px] text-stone shrink-0 w-5 tabular-nums">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="min-w-0">
@@ -396,7 +396,7 @@ function TrustPillars() {
             <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
               className="border-t border-white/10 pt-7">
-              <p className="font-['Unbounded'] text-[10px] text-accent-gold mb-4">{p.num}</p>
+              <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-accent-gold mb-4">{p.num}</p>
               <h3 className="font-['Syne'] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
               <p className="text-nude/90 text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
             </m.div>
@@ -787,7 +787,6 @@ function TestimonialsPreview({ placesEnabled }) {
   )
 }
 
-
 function CtaBand() {
   return (
     <section className="cv-auto bg-ink py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10">
@@ -801,7 +800,7 @@ function CtaBand() {
         >
           <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
           <h2
-            className="font-['Unbounded'] font-bold text-white leading-[1.05] text-balance max-w-2xl lg:max-w-none"
+            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.05] text-balance max-w-2xl lg:max-w-none"
             style={{ fontSize: 'clamp(1.9rem, 5.5vw + 0.5rem, 4rem)' }}
           >
             Ready for your glow? We&apos;re ready for you.

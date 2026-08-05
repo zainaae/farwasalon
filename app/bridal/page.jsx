@@ -72,7 +72,7 @@ export default function BridalLandingPage() {
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
           <p className="eyebrow mb-4">— Bridal · from Rs 8,000</p>
-          <h1 id="bridal-headline" className="font-['Unbounded'] font-bold text-[1.85rem] sm:text-3xl md:text-[2.6rem] text-ink mb-5 max-w-2xl leading-[1.12] tracking-tight">
+          <h1 id="bridal-headline" className="font-[family-name:var(--font-unbounded)] font-bold text-[1.85rem] sm:text-3xl md:text-[2.6rem] text-ink mb-5 max-w-2xl leading-[1.12] tracking-tight">
             Bridal Makeup Karachi — Packages from Rs 8,000
           </h1>
           <p id="bridal-lede" className="text-body md:text-lg max-w-2xl mb-8 leading-relaxed">
@@ -112,7 +112,7 @@ export default function BridalLandingPage() {
               />
             </div>
             <figcaption className="mt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-              <p className="font-['Unbounded'] font-bold text-ink text-2xl sm:text-3xl md:text-4xl leading-[1.05] tracking-tight">
+              <p className="font-[family-name:var(--font-unbounded)] font-bold text-ink text-2xl sm:text-3xl md:text-4xl leading-[1.05] tracking-tight">
                 From the chair
               </p>
               <p className="text-stone text-xs font-['Inter'] font-light max-w-xs sm:text-right">
@@ -144,7 +144,7 @@ export default function BridalLandingPage() {
                       <td className="py-2.5 pr-3 text-ink font-medium">{row.event}</td>
                       <td className="py-2.5 pr-3 text-stone">{row.look}</td>
                       <td className="py-2.5 pr-3 text-stone">{row.mapsTo}</td>
-                      <td className="py-2.5 text-right text-ink font-['Unbounded'] font-bold text-xs">
+                      <td className="py-2.5 text-right text-ink font-[family-name:var(--font-unbounded)] font-bold text-xs">
                         {formatPrice(row.price)}
                       </td>
                     </tr>

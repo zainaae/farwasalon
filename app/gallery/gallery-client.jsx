@@ -64,7 +64,7 @@ export default function GalleryClient() {
         <div className="section-shell flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
             <p className="eyebrow mb-3">— Ready when you are</p>
-            <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-white leading-tight">
+            <h2 className="font-[family-name:var(--font-unbounded)] font-bold text-2xl md:text-3xl text-white leading-tight">
               <span className="block">Book a visit</span> <span className="block">at the PECHS studio</span>
             </h2>
           </m.div>

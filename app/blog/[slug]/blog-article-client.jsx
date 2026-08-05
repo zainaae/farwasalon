@@ -138,7 +138,7 @@ export default function BlogArticleClient({ slug }) {
               </span>
               <span className="text-stone text-[10px] font-['Inter']">{post.readTime}</span>
             </div>
-            <h1 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight mb-3">
+            <h1 className="font-[family-name:var(--font-unbounded)] font-bold text-2xl md:text-3xl text-ink leading-tight mb-3">
               {post.title}
             </h1>
             <p className="text-stone text-sm font-light">

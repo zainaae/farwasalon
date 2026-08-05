@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -10,7 +10,7 @@
   --stone:  #6b5f57;
   --border-soft: #e4ddd7;
   --accent-gold: #c9a98a;
-  --accent-gold-deep: #82664a; /* gold for text on light bg â€” 5.3:1 on white, 4.9:1 on mist */
+  --accent-gold-deep: #82664a; /* gold for text on light bg — 5.3:1 on white, 4.9:1 on mist */
   --shadow-soft: 0 2px 12px rgba(13, 13, 13, 0.05);
   --shadow-card: 0 8px 32px rgba(13, 13, 13, 0.08);
 
@@ -91,14 +91,14 @@
   }
 }
 
-/* â”€â”€ Urdu Nastaliq â”€â”€ */
+/* ── Urdu Nastaliq ── */
 .font-nastaliq {
   font-family: 'Noto Nastaliq Urdu', serif;
   font-weight: 400;
   line-height: 1.8;
 }
 
-/* â”€â”€ Horizontal scroll-snap â”€â”€ */
+/* ── Horizontal scroll-snap ── */
 .snap-x-row {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -107,7 +107,7 @@
 .snap-x-row::-webkit-scrollbar { display: none; }
 .snap-center-child > * { scroll-snap-align: center; scroll-snap-stop: always; }
 
-/* â”€â”€ Colour utilities â”€â”€ */
+/* ── Colour utilities ── */
 @layer utilities {
   .bg-ink    { background-color: #0d0d0d !important; }
   .bg-white  { background-color: #ffffff !important; }
@@ -129,7 +129,7 @@
   .shadow-card { box-shadow: var(--shadow-card); }
 }
 
-/* â”€â”€ Layout & typography components â”€â”€ */
+/* ── Layout & typography components ── */
 @layer components {
   .section-shell {
     width: 100%;
@@ -161,7 +161,13 @@
     line-height: 1.4;
   }
   .section-title {
-    font-family: 'Unbounded', sans-serif;
+    /* var(--font-unbounded) first, like .display-section. Unbounded loads with
+       display:optional, so when it is not ready inside the ~100ms block period
+       the browser discards it for that page load — and a bare `Unbounded` with
+       nothing after it lands on the default serif. The next/font variable
+       carries the metric-matched fallback, so the page degrades to something
+       that looks like the design instead of to Times. */
+    font-family: var(--font-unbounded), 'Unbounded', sans-serif;
     font-weight: 700;
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
     line-height: 1.15;
@@ -304,7 +310,7 @@
     flex-wrap: nowrap;
     overflow-x: auto;
   }
-  /* Featured Services category filters â€” equal-width grid (sidebar column narrows at md) */
+  /* Featured Services category filters — equal-width grid (sidebar column narrows at md) */
   .service-filter-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -587,7 +593,7 @@
   }
 }
 
-/* â”€â”€ Display fonts â”€â”€ */
+/* ── Display fonts ── */
 .display-hero {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
@@ -634,7 +640,7 @@
   }
 }
 
-/* â”€â”€ Underline reveal â”€â”€ */
+/* ── Underline reveal ── */
 .link-underline {
   position: relative;
 }
@@ -689,12 +695,11 @@
   opacity: 1;
 }
 
-/* â”€â”€ Marquee â”€â”€ */
+/* ── Marquee ── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-.marquee-track { animation: marquee 22s linear infinite; }
 /* One track element now serves both breakpoints (see EditorialSlideshow).
    The speeds still differ — a phone shows fewer cards, so the same duration
    would feel slower — so the duration is the only thing that varies. */
@@ -712,7 +717,7 @@
   .editorial-marquee-track { animation: none !important; }
 }
 
-/* â”€â”€ Loader â”€â”€ */
+/* ── Loader ── */
 .loader {
   width: 32px; height: 32px;
   border: 1.5px solid #e4ddd7;
@@ -730,20 +735,20 @@
   animation: fadeIn 0.5s ease forwards;
 }
 
-/* â”€â”€ Spotlight â”€â”€ */
+/* ── Spotlight ── */
 @keyframes spotlight {
   0%   { opacity: 0; transform: translate(-72%,-62%) scale(0.5); }
   100% { opacity: 1; transform: translate(-50%,-40%) scale(1); }
 }
 .animate-spotlight { animation: spotlight 2s ease .75s 1 forwards; }
 
-/* â”€â”€ String wave (Stringtune fallback) â”€â”€ */
+/* ── String wave (Stringtune fallback) ── */
 @keyframes stringWave {
   from { transform: scaleY(1) translateY(0px); }
   to   { transform: scaleY(-1) translateY(-4px); }
 }
 
-/* â”€â”€ Modal backdrop â”€â”€ */
+/* ── Modal backdrop ── */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: 200;
   background: rgba(13,13,13,0.6);
@@ -765,7 +770,7 @@
   display: none;
 }
 
-/* â”€â”€ Skip-to-content link (a11y) â”€â”€ */
+/* ── Skip-to-content link (a11y) ── */
 .skip-link {
   position: absolute;
   top: -60px;
@@ -790,7 +795,7 @@
   outline-offset: 2px;
 }
 
-/* â”€â”€ Global focus-visible ring â”€â”€ */
+/* ── Global focus-visible ring ── */
 *:focus { outline: none; }
 a:focus-visible,
 button:focus-visible,
@@ -804,7 +809,7 @@ textarea:focus-visible,
   border-radius: 1px;
 }
 
-/* â”€â”€ Responsive FB iframe card â”€â”€ */
+/* ── Responsive FB iframe card ── */
 .fb-embed-frame {
   position: relative;
   width: 100%;
@@ -817,7 +822,7 @@ textarea:focus-visible,
   border: 0;
 }
 
-/* â”€â”€ Image quality â”€â”€ */
+/* ── Image quality ── */
 img {
   image-rendering: auto;
   -ms-interpolation-mode: bicubic;
@@ -826,10 +831,10 @@ img[data-max-native] {
   image-rendering: high-quality;
 }
 
-/* â”€â”€ Prevent video controls interception â”€â”€ */
+/* ── Prevent video controls interception ── */
 video[aria-hidden="true"] { pointer-events: none; }
 
-/* â”€â”€ Reduced motion â”€â”€ */
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -837,18 +842,15 @@ video[aria-hidden="true"] { pointer-events: none; }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .marquee-track,
-  [style*="animation: marquee"] { animation: none !important; }
-  video { playback-rate: 1 !important; }
 }
 
-/* â”€â”€ Ken Burns hero animation (mobile) â”€â”€ */
+/* ── Ken Burns hero animation (mobile) ── */
 @keyframes kenburns {
   0%   { transform: scale(1)    translate(0, 0); }
   100% { transform: scale(1.12) translate(-1.5%, -1%); }
 }
 
-/* â”€â”€ Navbar slide-in (replaces framer-motion for perf) â”€â”€ */
+/* ── Navbar slide-in (replaces framer-motion for perf) ── */
 @keyframes navSlideIn {
   from { transform: translateY(-32px); opacity: 0; }
   to   { transform: translateY(0);     opacity: 1; }
@@ -885,13 +887,13 @@ video[aria-hidden="true"] { pointer-events: none; }
   animation: heroFade 0.55s ease both;
 }
 
-/* â”€â”€ content-visibility for below-fold sections (paint-holding) â”€â”€ */
+/* ── content-visibility for below-fold sections (paint-holding) ── */
 .cv-auto {
   content-visibility: auto;
   contain-intrinsic-size: auto 600px;
 }
 
-/* â”€â”€ Touch target floor (WCAG 2.5.5; holds at browser zoom-out) â”€â”€ */
+/* ── Touch target floor (WCAG 2.5.5; holds at browser zoom-out) ── */
 .tap-safe {
   min-height: 44px;
 }
@@ -948,7 +950,7 @@ button.tap-safe,
   display: inline-block;
 }
 .azadi-display {
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   font-size: clamp(2.6rem, 8vw, 5rem);
   line-height: 0.92;
@@ -997,7 +999,7 @@ button.tap-safe,
   border-bottom: 1px solid var(--azadi-tint);
 }
 .azadi-strip-figure {
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   font-size: clamp(2.75rem, 9vw, 4.5rem);
   line-height: 0.85;

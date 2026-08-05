@@ -155,7 +155,6 @@ export function getAllLocationServiceSlugs() {
   return [...PRIORITY_LOCATION_SLUGS]
 }
 
-
 /**
  * Permanent redirects for legacy `best-*` matrix URLs.
  * Priority hubs → matching `-in-*`; everything else → the service category page

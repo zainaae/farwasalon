@@ -192,7 +192,7 @@ export default function NewsletterModal() {
                   <p className="text-accent-gold-deep text-[10px] tracking-[0.32em] uppercase font-['Inter'] font-medium mb-3">
                     — A welcome gift
                   </p>
-                  <h2 id="newsletter-heading" className="font-['Unbounded'] font-bold text-2xl sm:text-[1.65rem] text-ink leading-tight mb-3">
+                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-[1.65rem] text-ink leading-tight mb-3">
                     Get <span className="text-accent-gold-deep">10% off</span> your first facial
                   </h2>
                   <p className="text-stone text-[13px] font-['Inter'] font-light leading-relaxed mb-6">

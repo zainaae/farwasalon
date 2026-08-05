@@ -69,7 +69,7 @@ export default function FaqClient() {
       <section className="bg-ink py-16 md:py-20">
         <div className="section-shell flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <m.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <h2 className="font-['Unbounded'] font-bold text-xl md:text-2xl text-white mb-2">
+            <h2 className="font-[family-name:var(--font-unbounded)] font-bold text-xl md:text-2xl text-white mb-2">
               Still have questions?
             </h2>
             <p className="text-mist/80 text-sm font-['Inter'] font-light max-w-md">
