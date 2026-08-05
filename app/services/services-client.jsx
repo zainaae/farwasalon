@@ -129,6 +129,22 @@ export default function ServicesClient() {
               Full price list
             </Link>
           </div>
+
+          <ol className="hero-fade-up mt-8 pt-6 border-t border-border-soft flex flex-col sm:flex-row sm:flex-wrap gap-4 sm:gap-8" style={{ animationDelay: '0.35s' }} aria-label="How a visit works">
+            {[
+              { n: '01', title: 'Book', line: 'Pick a service and a live slot online — or WhatsApp if you prefer.' },
+              { n: '02', title: 'Visit', line: 'Come to the PECHS studio. We confirm the work before we start.' },
+              { n: '03', title: 'Done', line: 'Printed PKR, no surprise add-ons — leave when you feel ready.' },
+            ].map((step) => (
+              <li key={step.n} className="flex gap-3 min-w-0 sm:max-w-[14rem]">
+                <span className="font-['Unbounded'] text-[10px] text-accent-gold-deep shrink-0 pt-0.5" aria-hidden="true">{step.n}</span>
+                <span>
+                  <span className="block font-['Syne'] font-semibold text-ink text-sm mb-0.5">{step.title}</span>
+                  <span className="block text-body text-xs leading-relaxed">{step.line}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
         </div>
 
         <LiveAvailability />

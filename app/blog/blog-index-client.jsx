@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
@@ -20,22 +20,13 @@ export default function BlogIndexClient() {
   const booking = useBooking()
   const [activeCategory, setActiveCategory] = useState('All')
 
-  const categories = useMemo(() => {
-    const set = new Set(BLOG_POSTS.map((p) => p.category).filter(Boolean))
-    return ['All', ...Array.from(set).sort()]
-  }, [])
-
-  const sorted = useMemo(
-    () => [...BLOG_POSTS].sort((a, b) => String(b.date).localeCompare(String(a.date))),
-    [],
-  )
+  const categories = ['All', ...Array.from(new Set(BLOG_POSTS.map((p) => p.category).filter(Boolean))).sort()]
+  const sorted = [...BLOG_POSTS].sort((a, b) => String(b.date).localeCompare(String(a.date)))
   const featured = sorted[0]
-  const rest = sorted.slice(1).filter(
-    (p) => activeCategory === 'All' || p.category === activeCategory,
-  )
-  /* When filtering away from All, featured may leave the quiet list —
-     if the chip matches featured's category, keep it out of the list still. */
-  const list = rest.filter((p) => p.slug !== featured?.slug)
+  const list = sorted
+    .slice(1)
+    .filter((p) => p.slug !== featured?.slug)
+    .filter((p) => activeCategory === 'All' || p.category === activeCategory)
 
   return (
     <main id="main" className="page-content">

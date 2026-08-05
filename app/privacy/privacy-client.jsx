@@ -1,7 +1,5 @@
 'use client'
 
-import { m } from 'framer-motion'
-
 export default function PrivacyClient() {
   return (
     <main id="main" className="page-content">

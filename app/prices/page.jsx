@@ -96,6 +96,11 @@ export default function PricesPage() {
         <nav aria-label="Price list categories" className="mb-12 max-w-4xl">
           <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2.5">Jump to category</p>
           <ul className="tab-scroller text-sm font-['Inter'] pb-1">
+            <li>
+              <a href="#quote" className="tap-safe tab-pill inline-flex items-center">
+                Quote builder
+              </a>
+            </li>
             {categories.map((cat) => (
               <li key={cat}>
                 <a
