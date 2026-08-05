@@ -465,26 +465,29 @@
   @media (min-width: 768px) {
     .page-content { padding-top: calc(3.5rem + env(safe-area-inset-top, 0px)); }
   }
-  /* Mobile Call/WA/Book bar: keep /prices jump chips + anchors clear of the fixed CTA.
-     Sticky category skim also helps on desktop — same jump nav, header-aware top. */
-  .page-content nav[aria-label="Price list categories"] {
-    position: sticky;
-    top: calc(3.5rem + env(safe-area-inset-top, 0px));
-    z-index: 40;
-    background: #fff;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    /* It reads as a bar, not a hole punched in the page. */
-    border-bottom: 1px solid var(--border-soft);
-  }
-  /* Stay one scrollable row at every width. The shared .tab-scroller switches
-     to flex-wrap at md, which turned this nav into a 174px-tall opaque white
-     block — and because it is sticky, it then rode down over the price table
-     it indexes, hiding the service names while their prices stayed visible on
-     the right. Rows read as bare numbers. One row is ~44px and covers nothing. */
-  .page-content nav[aria-label="Price list categories"] .tab-scroller {
-    flex-wrap: nowrap;
-    overflow-x: auto;
+  /* The /prices jump nav is sticky on MOBILE ONLY, which is where a 9,000px
+     price list actually needs a skim rail and where .tab-scroller is already
+     a one-row horizontal scroller.
+
+     It was briefly sticky at every width. Above md the shared .tab-scroller
+     switches to flex-wrap, so it became a 174px opaque white block that rode
+     down over the table it indexes — service names hidden, their prices still
+     visible past its right edge, rows reading as bare numbers. Forcing one
+     scrollable row instead fixed the covering but pushed the last categories
+     off the right edge, and nobody horizontal-scrolls on a desktop.
+
+     On desktop it simply wraps and scrolls away: all 14 categories visible,
+     nothing covered. Sticky earns its cost on a phone, not on a 1200px page. */
+  @media (max-width: 767px) {
+    .page-content nav[aria-label="Price list categories"] {
+      position: sticky;
+      top: calc(3.375rem + env(safe-area-inset-top, 0px));
+      z-index: 40;
+      background: #fff;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
   }
   .page-content [id^="prices-"],
   .page-content #quote {
@@ -495,7 +498,6 @@
       scroll-padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
     }
     .page-content nav[aria-label="Price list categories"] {
-      top: calc(3.375rem + env(safe-area-inset-top, 0px));
       scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
     }
     .page-content [id^="prices-"],
