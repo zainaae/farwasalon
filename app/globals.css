@@ -295,6 +295,15 @@
       padding-right: 0;
     }
   }
+  /* Category filters on /blog: 15 chips wrap to a second row above md and
+     orphan the last three onto a line of their own. Keep the mobile one-row
+     behaviour at every width. Must come after the .tab-scroller md override —
+     same specificity, so source order decides. */
+  .blog-filter-row,
+  .blog-filter-row:is(.tab-scroller) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
   /* Featured Services category filters â€” equal-width grid (sidebar column narrows at md) */
   .service-filter-grid {
     display: grid;

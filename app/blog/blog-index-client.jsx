@@ -52,9 +52,13 @@ export default function BlogIndexClient() {
         {featured && (
           <article className="mb-12 md:mb-16 border-b border-border-soft pb-12">
             <Link href={`/blog/${featured.slug}`} className="group block">
-              <div className="grid md:grid-cols-[1.15fr_1fr] gap-6 md:gap-10 items-start">
+              {/* items-center, not items-start. The image column runs ~620px
+                  and the title/dek/meta stack ends around 240px, so top-aligning
+                  them left roughly 200px of dead white beside the tallest block
+                  on the page. */}
+              <div className="grid md:grid-cols-[1.15fr_1fr] gap-6 md:gap-10 items-center">
                 {featured.featuredImage && (
-                  <div className="relative aspect-[16/10] md:aspect-[4/3] overflow-hidden bg-mist border border-border-soft">
+                  <div className="relative aspect-[16/10] md:aspect-[16/11] overflow-hidden bg-mist border border-border-soft">
                     <Image
                       src={featured.featuredImage}
                       alt={featured.title}
@@ -94,7 +98,9 @@ export default function BlogIndexClient() {
             here; the ul/li between tablist and tab broke the required ownership
             on top of that. aria-pressed describes what these actually are. */}
         <div className="mb-8">
-          <ul className="tab-scroller text-sm font-['Inter'] pb-1" aria-label="Filter articles by category">
+          {/* One scrollable row. At 15 categories the shared .tab-scroller wraps
+              above md and leaves a second line holding three lonely chips. */}
+          <ul className="tab-scroller blog-filter-row text-sm font-['Inter'] pb-1" aria-label="Filter articles by category">
             {categories.map((cat) => (
               <li key={cat}>
                 <button
@@ -136,7 +142,7 @@ export default function BlogIndexClient() {
                       <span className="text-border-soft mx-2" aria-hidden="true">·</span>
                       {post.readTime}
                     </p>
-                    <h2 className="font-['Syne'] font-semibold text-base md:text-lg text-ink leading-snug group-hover:text-stone transition-colors">
+                    <h2 className="font-['Syne'] font-semibold text-lg md:text-xl text-ink leading-snug group-hover:text-stone transition-colors">
                       {post.title}
                     </h2>
                     <p className="text-body text-sm mt-1 line-clamp-2 max-w-2xl">

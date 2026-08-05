@@ -246,8 +246,11 @@ export function ServiceModal({ service, onClose }) {
           <div className="p-6 md:p-8 flex flex-col max-h-[min(85dvh,calc(100dvh-2rem))] overflow-y-auto overscroll-contain">
             <div className="flex justify-between items-start mb-5">
               <span className="text-[10px] tracking-[0.2em] uppercase text-stone font-['Inter']">{service.category}</span>
+              {/* -m-2 keeps the icon where it was while the hit box grows to
+                  44px; without it this was exactly the 20x20 icon. The booking
+                  sheet's close button already does this. */}
               <button onClick={onClose} aria-label="Close dialog"
-                className="text-stone hover:text-ink transition-colors"><X className="w-5 h-5" /></button>
+                className="tap-safe -m-2 p-2 inline-flex items-center justify-center text-stone hover:text-ink transition-colors"><X className="w-5 h-5" /></button>
             </div>
             <h2 id={titleId} className="font-['Unbounded'] font-bold text-lg md:text-xl text-ink mb-2 leading-tight uppercase">
               {service.name}

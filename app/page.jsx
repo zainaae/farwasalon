@@ -1,5 +1,6 @@
 import HomeHero from './home-hero'
 import DealStrip from './components/deal-strip'
+import ProofStrip from './components/proof-strip'
 /* Static import — not next/dynamic with a loading fallback. That pattern
    streams the placeholder into the initial HTML and only fills below-fold
    after the client chunk; with JS off (crawlers / our SEO e2e) <main> shrunk
@@ -33,6 +34,7 @@ export default function HomePage() {
       />
       <main id="main" className="overflow-x-clip max-w-full min-w-0">
         <HomeHero />
+        <ProofStrip />
         <DealStrip />
         <HomeBelowFold placesEnabled={isGooglePlacesConfigured()} />
       </main>

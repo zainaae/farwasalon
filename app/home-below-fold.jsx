@@ -304,15 +304,18 @@ function FeaturedServices() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="service-filter-grid mb-6"
-              role="tablist"
+              role="group"
               aria-label="Filter service categories"
             >
+              {/* aria-pressed, not role=tab. The tab pattern commits to
+                  arrow-key roving focus and an owned tabpanel; there is no
+                  keydown handler in this file and no role=tabpanel anywhere in
+                  it. The blog index already made this call. */}
               {HOME_SERVICE_TABS.map((tab) => (
                 <button
                   key={tab}
                   type="button"
-                  role="tab"
-                  aria-selected={activeTab === tab}
+                  aria-pressed={activeTab === tab}
                   onClick={() => {
                     setActiveTab(tab)
                     setHovered(null)
@@ -719,18 +722,29 @@ function TestimonialsPreview({ placesEnabled }) {
                 <ArrowUpRight className="w-2.5 h-2.5" />
               </a>
             </div>
+              {/* Was role=tablist/role=tab with aria-selected, and the dot itself
+                  was the hit box: 6x6 px, a quarter of the WCAG 2.5.8 floor.
+                  role=tab also promises arrow-key roving focus and an owned
+                  tabpanel, neither of which exists here.
+
+                  Both are solved the way the photo dots in shared.jsx already
+                  solve them — a 44px padded button wrapping a small visual bar,
+                  in a labelled group with aria-current. */}
             {featuredReviews.length > 1 && (
-              <div className="flex items-center gap-1.5" role="tablist" aria-label="Featured reviews">
+              <div className="flex items-center" role="group" aria-label="Featured reviews">
                 {featuredReviews.map((r, i) => (
                   <button
                     key={r.name}
                     type="button"
-                    role="tab"
-                    aria-selected={reviewIdx === i}
+                    aria-current={reviewIdx === i ? 'true' : undefined}
                     aria-label={`Show review by ${r.name}`}
                     onClick={() => setReviewIdx(i)}
-                    className={`h-1.5 rounded-full transition-[width,background-color] ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30 hover:bg-stone/50'}`}
-                  />
+                    className="tap-safe min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+                  >
+                    <span
+                      className={`block h-1.5 rounded-full transition-[width,background-color] ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30'}`}
+                    />
+                  </button>
                 ))}
               </div>
             )}
