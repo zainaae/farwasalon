@@ -70,7 +70,7 @@ function MenuRow({ cat }) {
       </span>
       <span className="min-w-0">
         <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h2 className="font-['Syne'] font-semibold text-ink text-lg sm:text-xl md:text-2xl leading-tight">{cat}</h2>
+          <h3 className="font-[family-name:var(--font-syne)] font-semibold text-ink text-base sm:text-lg md:text-xl leading-tight">{cat}</h3>
           {POPULAR_CATS.has(cat) && (
             <span className="text-[9px] tracking-[0.18em] uppercase font-semibold font-['Inter'] text-accent-gold-deep">Most booked</span>
           )}
@@ -86,7 +86,7 @@ function MenuRow({ cat }) {
         {minPrice && (
           <>
             <span className="block text-[10px] tracking-[0.18em] uppercase font-['Inter'] text-stone">from</span>
-            <span className="block font-[family-name:var(--font-unbounded)] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight">{formatPrice(minPrice)}</span>
+            <span className="block font-[family-name:var(--font-unbounded)] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight tabular-nums">{formatPrice(minPrice)}</span>
           </>
         )}
         <span className="mt-1.5 inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -149,13 +149,14 @@ export default function ServicesClient() {
 
         <LiveAvailability />
 
-        <h2 className="sr-only">Browse all service categories</h2>
+        {/* The chapters below are real h2s now, so this stand-in is gone —
+            it existed only because the visible chapter labels were spans. */}
         <div>
           {MENU_CHAPTERS.map(({ name, caption, cats }) => (
             <section key={name} aria-label={name}>
               <div className="flex items-baseline gap-4 pt-10 pb-3 border-b border-ink/30 first:pt-2">
-                <span className="font-['Syne'] italic font-semibold text-accent-gold-deep text-base sm:text-lg">{name}</span>
-                <span className="eyebrow !text-[9px]">{caption}</span>
+                <h2 className="section-title text-accent-gold-deep">{name}</h2>
+                <span className="eyebrow">{caption}</span>
               </div>
               {cats.map((cat) => <MenuRow key={cat} cat={cat} />)}
             </section>

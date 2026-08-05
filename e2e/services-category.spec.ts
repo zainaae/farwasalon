@@ -52,7 +52,11 @@ test.describe('Services pages', () => {
     for (const chapter of ['The Face', 'The Brow & The Silk', 'The Hair', 'The Hands & The Calm', 'The Bride']) {
       await expect(page.locator(`section[aria-label="${chapter}"]`)).toHaveCount(1)
     }
-    const rows = page.locator('a[href^="/services/"]', { has: page.locator('h2') })
+    /* h3, not h2. The chapter labels ("The Face", "The Bride") were spans set
+       smaller than the categories they grouped — the parent read as a caption.
+       They are h2 now and the categories stepped down to h3, so the outline
+       nests instead of listing 13 sibling h2s under an sr-only stand-in. */
+    const rows = page.locator('a[href^="/services/"]', { has: page.locator('h3') })
     await expect(rows).toHaveCount(13)
     await expect(page.getByText(/^from$/i)).toHaveCount(13)
   })

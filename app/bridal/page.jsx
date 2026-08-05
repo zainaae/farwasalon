@@ -112,7 +112,7 @@ export default function BridalLandingPage() {
               />
             </div>
             <figcaption className="mt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
-              <p className="font-[family-name:var(--font-unbounded)] font-bold text-ink text-2xl sm:text-3xl md:text-4xl leading-[1.05] tracking-tight">
+              <p className="font-[family-name:var(--font-unbounded)] font-bold text-ink text-lg sm:text-xl leading-[1.05] tracking-tight">
                 From the chair
               </p>
               <p className="text-stone text-xs font-['Inter'] font-light max-w-xs sm:text-right">
@@ -144,7 +144,7 @@ export default function BridalLandingPage() {
                       <td className="py-2.5 pr-3 text-ink font-medium">{row.event}</td>
                       <td className="py-2.5 pr-3 text-stone">{row.look}</td>
                       <td className="py-2.5 pr-3 text-stone">{row.mapsTo}</td>
-                      <td className="py-2.5 text-right text-ink font-[family-name:var(--font-unbounded)] font-bold text-xs">
+                      <td className="py-2.5 text-right text-ink font-[family-name:var(--font-unbounded)] font-bold text-xs tabular-nums">
                         {formatPrice(row.price)}
                       </td>
                     </tr>
@@ -261,7 +261,7 @@ export default function BridalLandingPage() {
           </section>
 
           <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-bridal-heading">
-            <h2 id="visit-bridal-heading" className="section-title text-lg mb-4">
+            <h2 id="visit-bridal-heading" className="section-title mb-4">
               Studio &amp; consultation
             </h2>
             <ul className="space-y-3 text-sm font-['Inter'] text-stone font-light">
@@ -295,11 +295,11 @@ export default function BridalLandingPage() {
               <h2 id="bridal-faq-heading" className="section-title mb-4">
                 Bridal FAQ
               </h2>
-              <dl className="max-w-3xl space-y-6">
+              <dl className="max-w-lg space-y-6">
                 {BRIDAL_FAQS.map((f) => (
                   <div key={f.q}>
                     <dt className="font-['Syne'] font-bold text-sm text-ink mb-1">{f.q}</dt>
-                    <dd className="text-body text-sm">{f.a}</dd>
+                    <dd className="text-body">{f.a}</dd>
                   </div>
                 ))}
               </dl>
@@ -307,7 +307,7 @@ export default function BridalLandingPage() {
           )}
 
           <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft max-w-3xl" aria-labelledby="bridal-book-cta">
-            <h2 id="bridal-book-cta" className="section-title text-lg mb-2">
+            <h2 id="bridal-book-cta" className="section-title mb-2">
               Lock your bridal date
             </h2>
             <p className="text-body text-sm mb-5">

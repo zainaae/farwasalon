@@ -347,13 +347,15 @@
     white-space: normal;
     line-height: 1.25;
     padding: 0.5rem 0.375rem;
-    font-size: 9px;
+    /* No font-size here. This grid was re-shrinking .tab-pill to 9px — the
+       smallest interactive text on the site, and a silent revert of the 11px/500
+       legibility fix. The padding and tracking below are what actually solve
+       the three-column fit. */
     letter-spacing: 0.1em;
     scroll-snap-align: unset;
   }
   @media (min-width: 640px) {
     .service-filter-grid .tab-pill {
-      font-size: 10px;
       letter-spacing: 0.12em;
       padding: 0.5rem 0.5rem;
     }

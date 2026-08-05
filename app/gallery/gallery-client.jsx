@@ -41,7 +41,7 @@ export default function GalleryClient() {
       </div>
 
       <section className="section-shell mb-12 md:mb-16" aria-labelledby="gallery-showcase-heading">
-        <h2 id="gallery-showcase-heading" className="section-title text-xl md:text-2xl text-center mb-8">
+        <h2 id="gallery-showcase-heading" className="section-title text-center mb-8">
           Services we offer
         </h2>
         <div className="grid md:grid-cols-3 gap-8 md:gap-6">

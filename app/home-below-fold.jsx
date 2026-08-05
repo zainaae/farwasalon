@@ -87,7 +87,7 @@ function StatsStrip() {
                 { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-US')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
               ].map(({ display, final, label }) => (
                 <div key={label} className="min-w-0">
-                  <p className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none">
+                  <p className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none tabular-nums">
                     {final !== null
                       ? <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
                       : display}

@@ -224,11 +224,11 @@ export default function PricesPage() {
           <h2 id="prices-faq-heading" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-6">
             Price questions
           </h2>
-          <dl className="space-y-5 max-w-3xl">
+          <dl className="space-y-5 max-w-lg">
             {PRICES_PAGE_FAQS.map((f) => (
               <div key={f.q}>
                 <dt className="font-['Syne'] font-bold text-sm text-ink">{f.q}</dt>
-                <dd className="mt-1.5 text-body text-sm">{f.a}</dd>
+                <dd className="mt-1.5 text-body">{f.a}</dd>
               </div>
             ))}
           </dl>

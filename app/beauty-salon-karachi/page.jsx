@@ -95,7 +95,7 @@ export default function BeautySalonKarachiPage() {
           </section>
 
           <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-heading">
-            <h2 id="visit-heading" className="section-title text-lg mb-4">
+            <h2 id="visit-heading" className="section-title mb-4">
               Visit the salon
             </h2>
             <ul className="space-y-3 text-sm font-['Inter'] text-stone font-light">

@@ -125,7 +125,7 @@ export default function CategoryDetailClient({ categorySlug }) {
             <p className="eyebrow mb-2">
               — {services.length} services{minPrice != null ? ` · from ${formatPrice(minPrice)}` : ''}
             </p>
-            <h1 id="service-category-title" className="section-title text-2xl md:text-3xl mb-3">{pageH1}</h1>
+            <h1 id="service-category-title" className="section-title mb-3">{pageH1}</h1>
             <p id="service-category-desc" className="text-body max-w-prose leading-[1.7]">{meta.desc}</p>
             <div className="cta-cluster mt-5">
               <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">
