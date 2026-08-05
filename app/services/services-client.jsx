@@ -54,8 +54,17 @@ function MenuRow({ cat }) {
     <Link
       href={href}
       onClick={() => track('ServiceCategoryView', { category: cat })}
-      className="group grid grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] items-center gap-4 sm:gap-6 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
-      <span className="relative block w-14 h-[4.2rem] sm:w-[4.5rem] sm:h-[5.4rem] shrink-0 border border-border-soft p-[3px] bg-white">
+      /* Four columns from md, not three. The middle column was a single 983px
+         `1fr` with a tagline capped at max-w-xl, and the longest tagline in the
+         menu only runs ~330px — so every row carried ~650px of dead white and
+         the menu region, 1,901px tall, was about 1.2M px2 of it. The count and
+         availability move into their own right-aligned column, which turns two
+         edges and a gap into three columns of information.
+
+         Explicitly placed rather than rendered twice: on small screens it sits
+         under the tagline in column 2, at md it moves to column 3. */
+      className="group grid grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] md:grid-cols-[4.5rem_minmax(0,28rem)_minmax(0,1fr)_auto] items-center gap-x-4 sm:gap-x-6 gap-y-1.5 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
+      <span className="row-span-2 md:row-span-1 relative block w-14 h-[4.2rem] sm:w-[4.5rem] sm:h-[5.4rem] shrink-0 border border-border-soft p-[3px] bg-white">
         <span className="relative block w-full h-full overflow-hidden">
           <Image
             src={meta.img}
@@ -76,13 +85,13 @@ function MenuRow({ cat }) {
           )}
         </span>
         {meta.tagline && (
-          <p className="text-stone text-[13px] sm:text-sm font-light font-['Inter'] leading-snug mt-0.5 max-w-xl">{meta.tagline}</p>
+          <p className="text-stone text-[13px] sm:text-sm font-light font-['Inter'] leading-snug mt-0.5">{meta.tagline}</p>
         )}
-        <p className="text-stone/70 text-[11px] font-['Inter'] mt-1">
-          {count} services{availability ? ` · ${availability.toLowerCase()}` : ''}
-        </p>
       </span>
-      <span className="text-right shrink-0">
+      <p className="col-start-2 row-start-2 md:col-start-3 md:row-start-1 md:text-right text-stone text-[11px] font-['Inter'] min-w-0">
+        {count} services{availability ? ` · ${availability.toLowerCase()}` : ''}
+      </p>
+      <span className="col-start-3 row-start-1 row-span-2 md:col-start-4 md:row-start-1 md:row-span-1 text-right shrink-0">
         {minPrice && (
           <>
             <span className="block text-[10px] tracking-[0.18em] uppercase font-['Inter'] text-stone">from</span>
