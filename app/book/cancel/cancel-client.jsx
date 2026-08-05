@@ -199,7 +199,7 @@ function CancelContent() {
           you downloaded, or on this phone under Book → Your upcoming appointment.
         </p>
         <a
-          href={id ? waUrl : `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(id ? `Hi Farwa — please cancel booking ${id}.` : 'Hi Farwa — I need help cancelling a booking.')}`}
+          href={id ? waUrl : `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hi Farwa — I need help cancelling a booking.')}`}
           target="_blank"
           rel="noreferrer"
           className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-[#25D366] text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-[#20bd5a] transition-colors"

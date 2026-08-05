@@ -22,11 +22,14 @@ export default function BlogIndexClient() {
 
   const categories = ['All', ...Array.from(new Set(BLOG_POSTS.map((p) => p.category).filter(Boolean))).sort()]
   const sorted = [...BLOG_POSTS].sort((a, b) => String(b.date).localeCompare(String(a.date)))
-  const featured = sorted[0]
-  const list = sorted
-    .slice(1)
-    .filter((p) => p.slug !== featured?.slug)
-    .filter((p) => activeCategory === 'All' || p.category === activeCategory)
+
+  /* Filter first, then feature. Featuring sorted[0] before filtering pinned
+     the newest post of ALL categories above the chips, so choosing Hair still
+     led with a Seasonal article labelled "Featured · Seasonal". The feature
+     slot is the newest post of whatever is being shown. */
+  const inCategory = sorted.filter((p) => activeCategory === 'All' || p.category === activeCategory)
+  const featured = inCategory[0]
+  const list = inCategory.slice(1)
 
   return (
     <main id="main" className="page-content">
@@ -86,14 +89,17 @@ export default function BlogIndexClient() {
           </article>
         )}
 
-        <div className="mb-8" role="tablist" aria-label="Filter by category">
-          <ul className="tab-scroller text-sm font-['Inter'] pb-1">
+        {/* Toggle buttons, not tabs. role="tab" commits to the ARIA tab pattern —
+            arrow-key roving focus and an owned tabpanel — and neither exists
+            here; the ul/li between tablist and tab broke the required ownership
+            on top of that. aria-pressed describes what these actually are. */}
+        <div className="mb-8">
+          <ul className="tab-scroller text-sm font-['Inter'] pb-1" aria-label="Filter articles by category">
             {categories.map((cat) => (
               <li key={cat}>
                 <button
                   type="button"
-                  role="tab"
-                  aria-selected={activeCategory === cat}
+                  aria-pressed={activeCategory === cat}
                   onClick={() => setActiveCategory(cat)}
                   className={`tap-safe tab-pill inline-flex items-center ${activeCategory === cat ? 'tab-pill-active' : ''}`}
                 >
@@ -104,39 +110,47 @@ export default function BlogIndexClient() {
           </ul>
         </div>
 
-        <ul className="flex flex-col divide-y divide-border-soft border-t border-border-soft">
-          {list.map((post) => (
-            <li key={post.slug}>
-              <Link
-                href={`/blog/${post.slug}`}
-                className="group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-5 md:py-6"
-              >
-                <time
-                  dateTime={post.date}
-                  className="shrink-0 text-stone text-[11px] font-['Inter'] tabular-nums sm:w-28"
+        <p className="sr-only" aria-live="polite">
+          {activeCategory === 'All'
+            ? `Showing all ${sorted.length} articles`
+            : `Showing ${inCategory.length} ${activeCategory} article${inCategory.length === 1 ? '' : 's'}`}
+        </p>
+
+        {list.length > 0 && (
+          <ul className="flex flex-col divide-y divide-border-soft border-t border-border-soft">
+            {list.map((post) => (
+              <li key={post.slug}>
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-5 md:py-6"
                 >
-                  {formatBlogDate(post.date)}
-                </time>
-                <div className="min-w-0 flex-1">
-                  <p className="text-[10px] tracking-[0.16em] uppercase font-['Inter'] text-stone mb-1">
-                    {post.category}
-                    <span className="text-border-soft mx-2" aria-hidden="true">·</span>
-                    {post.readTime}
-                  </p>
-                  <h2 className="font-['Syne'] font-semibold text-base md:text-lg text-ink leading-snug group-hover:text-stone transition-colors">
-                    {post.title}
-                  </h2>
-                  <p className="text-body text-sm mt-1 line-clamp-2 max-w-2xl">
-                    {post.description}
-                  </p>
-                </div>
-                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-                  Read <ChevronRight className="w-3 h-3" />
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+                  <time
+                    dateTime={post.date}
+                    className="shrink-0 text-stone text-[11px] font-['Inter'] tabular-nums sm:w-28"
+                  >
+                    {formatBlogDate(post.date)}
+                  </time>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[10px] tracking-[0.16em] uppercase font-['Inter'] text-stone mb-1">
+                      {post.category}
+                      <span className="text-border-soft mx-2" aria-hidden="true">·</span>
+                      {post.readTime}
+                    </p>
+                    <h2 className="font-['Syne'] font-semibold text-base md:text-lg text-ink leading-snug group-hover:text-stone transition-colors">
+                      {post.title}
+                    </h2>
+                    <p className="text-body text-sm mt-1 line-clamp-2 max-w-2xl">
+                      {post.description}
+                    </p>
+                  </div>
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                    Read <ChevronRight className="w-3 h-3" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {list.length === 0 && (
           <p className="text-body text-sm py-8">No guides in this category yet.</p>

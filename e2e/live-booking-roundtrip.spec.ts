@@ -54,7 +54,7 @@ test('live: book via UI, verify confirmation, cancel via UI', async ({ page }) =
   await page.getByRole('button', { name: 'Confirm Booking' }).click()
 
   // Confirmation = the real sheet row exists (route verifies before responding)
-  await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible({
+  await expect(page.getByRole('heading', { name: /you're set/i })).toBeVisible({
     timeout: 30_000,
   })
   // Analytics scrub removes `id` from the address after first paint; read the

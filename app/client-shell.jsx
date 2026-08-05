@@ -88,6 +88,7 @@ const SCROLL_DEPTH_THRESHOLDS = [25, 50, 75, 100]
 /* Idle-mounted like ScrollProgress — no scroll listener until after first paint. */
 function ScrollDepthTracker() {
   const [ready, setReady] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     if ('requestIdleCallback' in window) {
@@ -98,23 +99,42 @@ function ScrollDepthTracker() {
     return () => clearTimeout(t)
   }, [])
 
+  /* Keyed on pathname so `fired` resets per page. ClientShell never remounts
+     across a client-side navigation, so a Set created once would have let the
+     first page consume every threshold and reported nothing for the rest of
+     the visit — and the event carries `page` for the same reason: a depth with
+     no page attached cannot be attributed to anything. */
   useEffect(() => {
     if (!ready) return undefined
     const fired = new Set()
-    const check = () => {
+    let frame = 0
+
+    const measure = () => {
+      frame = 0
       const max = document.documentElement.scrollHeight - window.innerHeight
       const pct = max > 0 ? (window.scrollY / max) * 100 : 0
       for (const threshold of SCROLL_DEPTH_THRESHOLDS) {
         if (pct >= threshold && !fired.has(threshold)) {
           fired.add(threshold)
-          track('ScrollDepth', { depth: String(threshold) })
+          track('ScrollDepth', { depth: String(threshold), page: pathname })
         }
       }
     }
-    check()
-    window.addEventListener('scroll', check, { passive: true })
-    return () => window.removeEventListener('scroll', check)
-  }, [ready])
+
+    /* scrollHeight forces layout, so reading it on every scroll event is a
+       synchronous reflow per frame. One rAF-coalesced read instead. */
+    const onScroll = () => {
+      if (frame) return
+      frame = requestAnimationFrame(measure)
+    }
+
+    measure()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [ready, pathname])
 
   return null
 }

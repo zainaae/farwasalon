@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown, CalendarCheck } from 'lucide-react'
 import { SERVICES, ALL_SERVICES, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track, WA_NUMBER } from '../../src/data.js'
+import WaCta from '../components/wa-cta.jsx'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { BOOKING_WINDOW_DAYS } from '../../lib/booking-date-rules.js'
 import { toLocalDateString, salonTodayString } from '../../lib/date-local.js'
@@ -578,14 +579,13 @@ export default function BookClient() {
                 <span className="text-stone"> · {formatDateNice(selectedDate)} · {formatTime12(selectedTime)}</span>
               ) : null}
             </p>
-            <a
+            <WaCta
               href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hi Farwa — I need help with an online booking.')}`}
-              target="_blank"
-              rel="noreferrer"
+              from="book-help"
               className="tap-safe shrink-0 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone hover:text-ink transition-colors"
             >
               Need help? WhatsApp
-            </a>
+            </WaCta>
           </div>
         )}
 

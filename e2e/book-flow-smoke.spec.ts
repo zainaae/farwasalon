@@ -23,7 +23,7 @@ test.describe('Book pages smoke', () => {
       '/book/confirmation?id=smoke-001&date=2026-05-20&time=10:00&duration=10',
     )
     expect(res?.status()).toBe(200)
-    await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /you're set/i })).toBeVisible()
   })
 
   test('/book/cancel returns 200 for a booking held in durable storage', async ({ page }) => {
@@ -108,7 +108,7 @@ test.describe('Booking flow', () => {
     await page.locator('#bk-phone').fill('03001234567')
     await page.getByRole('button', { name: 'Confirm Booking' }).click()
     await expect(page).toHaveURL(/\/book\/confirmation/, { timeout: 15_000 })
-    await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /you're set/i })).toBeVisible()
   })
 
   test('slots error path when API returns empty', async ({ page }) => {
@@ -146,7 +146,7 @@ test.describe('Booking flow', () => {
       try { sessionStorage.setItem('farwa-confirm-e2e-001', raw) } catch { /* ignore */ }
     })
     await page.goto('/book/confirmation?id=e2e-001&date=2026-05-20&time=10:00&duration=10')
-    await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /you're set/i })).toBeVisible()
     await expect(page.getByText(/Eyebrow Threading/i)).toBeVisible()
     await expect(page.getByText(/Tester/i)).toBeVisible()
     expect(page.url()).not.toContain('token=')

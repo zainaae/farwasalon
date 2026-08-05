@@ -113,7 +113,13 @@ function StatsStrip() {
 }
 
 function EditorialSlideshow() {
+  /* The list is doubled so the strip can loop seamlessly. The second copy is
+     the same 13 photos, so it is presentational: without aria-hidden a screen
+     reader reads the gallery twice, and without tabIndex -1 a keyboard user
+     tabs 26 stops through 13 destinations — inside a strip that is still
+     moving. Only the first copy is reachable. */
   const doubled = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
+  const isClone = (i) => i >= EDITORIAL_PHOTOS.length
 
   return (
     <section
@@ -141,6 +147,8 @@ function EditorialSlideshow() {
                 className="relative shrink-0 overflow-hidden mx-[5px] group"
                 style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)' }}
                 aria-label={`${p.label} — see gallery`}
+                aria-hidden={isClone(i) || undefined}
+                tabIndex={isClone(i) ? -1 : undefined}
               >
                 <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
@@ -168,6 +176,8 @@ function EditorialSlideshow() {
                 href={href}
                 className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group"
                 aria-label={`${p.label} — see more`}
+                aria-hidden={isClone(i) || undefined}
+                tabIndex={isClone(i) ? -1 : undefined}
               >
                 <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
