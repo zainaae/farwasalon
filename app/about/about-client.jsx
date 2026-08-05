@@ -129,7 +129,7 @@ export default function AboutClient() {
 
       <section className="bg-ink py-16 md:py-20">
         <m.div className="section-shell">
-          <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="eyebrow mb-10">
+          <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="eyebrow eyebrow--on-dark mb-10">
             — Why choose Farwa
           </m.p>
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">

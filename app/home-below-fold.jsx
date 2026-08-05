@@ -161,7 +161,7 @@ function EditorialSlideshow() {
                 tabIndex={isClone(i) ? -1 : undefined}
               >
                 <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent md:from-ink/60 md:via-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
                 <span className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
                   <span className="text-white text-[10px] tracking-[0.2em] md:tracking-[0.18em] uppercase font-['Inter'] font-medium leading-none">
                     {p.label}

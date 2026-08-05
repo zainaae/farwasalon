@@ -152,6 +152,12 @@
   @media (min-width: 768px) {
     .section-pad { padding-top: 4.5rem; padding-bottom: 4.5rem; }
   }
+  /* .eyebrow hardcodes --stone, which is 6.18:1 on white but only 3.15:1 on
+     --ink. Two sections used it on a dark ground and failed AA there; two
+     others already worked around it, each a different way. --accent-gold is
+     8.82:1 on ink — its best number anywhere — so the dark variant is both
+     the fix and the cheapest way to put the accent on more pages. */
+  .eyebrow--on-dark { color: var(--accent-gold); }
   .eyebrow {
     font-family: 'Inter', system-ui, sans-serif;
     font-size: 10px;
