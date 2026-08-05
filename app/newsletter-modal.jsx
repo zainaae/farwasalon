@@ -39,7 +39,14 @@ export default function NewsletterModal() {
   const firstInputRef = useRef(null)
 
   // Decide whether this route should ever surface the modal.
-  const eligible = !pathname?.startsWith('/book') && !pathname?.startsWith('/cancel')
+  /* Allowlist, not denylist. This previously ran anywhere except /book and
+     /cancel, so at 60% scroll depth it locked the body and covered whatever
+     the visitor had scrolled to: the reviews block on the homepage, the middle
+     of the hair table on /prices, the FAQ on /bridal. The most engaged visitor
+     on the site got interrupted on a decision page and asked for an email —
+     a channel this salon does not run on — with no way to book inside the
+     dialog. It belongs where someone is reading, not deciding. */
+  const eligible = pathname === '/' || pathname?.startsWith('/blog')
 
   useEffect(() => {
     if (!eligible || alreadySeen()) return

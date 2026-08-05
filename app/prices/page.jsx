@@ -93,7 +93,10 @@ export default function PricesPage() {
           <DealBanner />
         </div>
 
-        <nav aria-label="Price list categories" className="mb-12 max-w-4xl">
+        {/* Full width, not max-w-4xl: this is sticky, so a 896px bar over a
+            1200px table covered the service names while their prices stayed
+            visible to the right of it — rows read as bare numbers. */}
+        <nav aria-label="Price list categories" className="mb-12 w-full">
           <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2.5">Jump to category</p>
           <ul className="tab-scroller text-sm font-['Inter'] pb-1">
             <li>

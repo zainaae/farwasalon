@@ -465,6 +465,17 @@
     background: #fff;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    /* It reads as a bar, not a hole punched in the page. */
+    border-bottom: 1px solid var(--border-soft);
+  }
+  /* Stay one scrollable row at every width. The shared .tab-scroller switches
+     to flex-wrap at md, which turned this nav into a 174px-tall opaque white
+     block — and because it is sticky, it then rode down over the price table
+     it indexes, hiding the service names while their prices stayed visible on
+     the right. Rows read as bare numbers. One row is ~44px and covers nothing. */
+  .page-content nav[aria-label="Price list categories"] .tab-scroller {
+    flex-wrap: nowrap;
+    overflow-x: auto;
   }
   .page-content [id^="prices-"],
   .page-content #quote {
@@ -673,21 +684,21 @@
   to   { transform: translateX(-50%); }
 }
 .marquee-track { animation: marquee 22s linear infinite; }
+/* One track element now serves both breakpoints (see EditorialSlideshow).
+   The speeds still differ — a phone shows fewer cards, so the same duration
+   would feel slower — so the duration is the only thing that varies. */
 .editorial-marquee-track {
-  animation: marquee 65s linear infinite;
-}
-.editorial-marquee-track--mobile {
   animation: marquee 45s linear infinite;
+}
+@media (min-width: 768px) {
+  .editorial-marquee-track { animation-duration: 65s; }
 }
 .editorial-marquee:hover .editorial-marquee-track,
 .editorial-marquee:focus-within .editorial-marquee-track {
   animation-play-state: paused;
 }
 @media (prefers-reduced-motion: reduce) {
-  .editorial-marquee-track,
-  .editorial-marquee-track--mobile {
-    animation: none !important;
-  }
+  .editorial-marquee-track { animation: none !important; }
 }
 
 /* â”€â”€ Loader â”€â”€ */

@@ -136,37 +136,18 @@ function EditorialSlideshow() {
         </Link>
       </div>
 
-      <div className="md:hidden py-3 w-full max-w-full overflow-x-clip">
-        <div className="editorial-marquee-track editorial-marquee-track--mobile flex w-max max-w-none">
-          {doubled.map((p, i) => {
-            const href = p.href || '/gallery'
-            return (
-              <Link
-                key={i}
-                href={href}
-                className="relative shrink-0 overflow-hidden mx-[5px] group"
-                style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)' }}
-                aria-label={`${p.label} — see gallery`}
-                aria-hidden={isClone(i) || undefined}
-                tabIndex={isClone(i) ? -1 : undefined}
-              >
-                <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-                <span className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-                  <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
-                    {p.label}
-                  </span>
-                  <span className="text-white/60 text-[9px] font-['Inter'] tabular-nums">
-                    {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
-                  </span>
-                </span>
-              </Link>
-            )
-          })}
-        </div>
-      </div>
+      {/* One track, restyled per breakpoint. This was two — a md:hidden
+          scroller and a hidden md:block one — over the same doubled list, so
+          all 13 photos shipped four times (2 breakpoints x the loop clone) as
+          52 cards, and ~30 KB of the document was display:none on any given
+          device. That is the same bug the reviews grid below already had; the
+          comment there explains it at length.
 
-      <div className="hidden md:block py-2 w-full max-w-full overflow-x-clip isolate">
+          The two differed in ways that are all expressible responsively: card
+          size, margin, gradient depth, and a mobile-only index numeral. The
+          track speed differed too (45s vs 65s) — that now lives in one class
+          with a media query, in globals.css. */}
+      <div className="py-3 md:py-2 w-full max-w-full overflow-x-clip md:isolate">
         <div className="editorial-marquee-track flex w-max max-w-none will-change-transform">
           {doubled.map((p, i) => {
             const href = p.href || '/gallery'
@@ -174,15 +155,20 @@ function EditorialSlideshow() {
               <Link
                 key={i}
                 href={href}
-                className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group"
-                aria-label={`${p.label} — see more`}
+                className="relative shrink-0 overflow-hidden group mx-[5px] md:mx-1.5 w-[min(62vw,230px)] h-[min(82vw,306px)] md:w-[260px] md:h-auto md:aspect-[3/4] lg:w-[300px] xl:w-[330px]"
+                aria-label={`${p.label} — see gallery`}
                 aria-hidden={isClone(i) || undefined}
                 tabIndex={isClone(i) ? -1 : undefined}
               >
                 <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
-                <span className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
-                  {p.label}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent md:from-ink/60 md:via-transparent" />
+                <span className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+                  <span className="text-white text-[10px] tracking-[0.2em] md:tracking-[0.18em] uppercase font-['Inter'] font-medium leading-none">
+                    {p.label}
+                  </span>
+                  <span className="md:hidden text-white/60 text-[9px] font-['Inter'] tabular-nums">
+                    {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
+                  </span>
                 </span>
               </Link>
             )
@@ -228,7 +214,7 @@ function ServiceMediaPanel({ hovered }) {
   return (
     <div className="relative w-full h-full bg-[#0d0609]">
       <Image
-        src="/bridal2.jpg"
+        src="/threading.jpg"
         alt=""
         fill
         quality={50}
@@ -713,7 +699,7 @@ function TestimonialsPreview({ placesEnabled }) {
           }}
         >
           <Quote className="reviews-featured-mark absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 sm:w-10 sm:h-10 rotate-180 pointer-events-none" aria-hidden="true" />
-          <blockquote className={`relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6 sm:line-clamp-none' : ''}`}>
+          <blockquote className={`relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6' : ''}`}>
             {featured.quote}
           </blockquote>
           {featured.translation && (
