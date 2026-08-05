@@ -503,9 +503,13 @@
       border-bottom: 1px solid var(--border-soft);
     }
   }
+  /* Anchor offset must match the real chrome, or every jump-nav click parks
+     its target underneath the nav that sent you there. It was 4.5rem of nav
+     allowance against a nav that measured 144px on a phone — targets landed
+     ~70px under it. The sticky element is one ~60px row now. */
   .page-content [id^="prices-"],
   .page-content #quote {
-    scroll-margin-top: calc(3.5rem + env(safe-area-inset-top, 0px) + 4.5rem);
+    scroll-margin-top: calc(3.5rem + env(safe-area-inset-top, 0px) + 3.75rem);
   }
   @media (max-width: 767px) {
     html {
@@ -516,7 +520,8 @@
     }
     .page-content [id^="prices-"],
     .page-content #quote {
-      scroll-margin-top: calc(3.375rem + env(safe-area-inset-top, 0px) + 5.75rem);
+      /* 4.25rem, not 5.75rem: the sticky element is a single ~65px pill row now. */
+      scroll-margin-top: calc(3.375rem + env(safe-area-inset-top, 0px) + 4.25rem);
       scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
     }
   }

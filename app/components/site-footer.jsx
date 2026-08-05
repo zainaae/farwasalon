@@ -67,12 +67,12 @@ export default function SiteFooter() {
       </div>
       <div className="border-t border-border-soft px-5 md:px-10 py-10 md:py-12">
         <div className="max-w-screen-xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-10 mb-10">
+          <div className="grid grid-cols-2 md:grid-cols-[1.7fr_1.1fr_1.2fr_1fr] gap-8 md:gap-10 mb-10">
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">
                 Services
               </p>
-              <ul className="flex flex-col gap-2 sm:gap-2.5">
+              <ul className="flex flex-col sm:block sm:columns-2 sm:gap-x-6 gap-2 sm:gap-2.5 [&>li]:mb-2.5">
                 {serviceLinks.map((sl) => (
                   <li key={sl.label}>
                     <Link
@@ -97,7 +97,7 @@ export default function SiteFooter() {
               <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-4">
                 Navigate
               </p>
-              <ul className="flex flex-col gap-2.5">
+              <ul className="flex flex-col sm:block sm:columns-2 sm:gap-x-6 gap-2.5 [&>li]:mb-2.5">
                 {[
                   ['Home', '/'],
                   ['Services', '/services'],

@@ -292,7 +292,7 @@ function FeaturedServices() {
           </m.div>
         </div>
 
-        <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-start">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24">
             <ServiceMediaPanel hovered={hovered} />

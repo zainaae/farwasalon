@@ -44,7 +44,7 @@ export default function GalleryClient() {
         <h2 id="gallery-showcase-heading" className="section-title text-center mb-8">
           Services we offer
         </h2>
-        <div className="grid md:grid-cols-3 gap-8 md:gap-6">
+        <div className="grid md:grid-cols-3 gap-8 md:gap-8">
           {GALLERY_SHOWCASE_ITEMS.map((item, i) => (
             <WorkShowcaseCard key={item.label} src={item.src} label={item.label} alt={item.alt} video={item.video} index={i} />
           ))}

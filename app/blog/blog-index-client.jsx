@@ -56,7 +56,7 @@ export default function BlogIndexClient() {
                   and the title/dek/meta stack ends around 240px, so top-aligning
                   them left roughly 200px of dead white beside the tallest block
                   on the page. */}
-              <div className="grid md:grid-cols-[1.15fr_1fr] gap-6 md:gap-10 items-center">
+              <div className="grid md:grid-cols-[1.6fr_1fr] gap-6 md:gap-10 items-center">
                 {featured.featuredImage && (
                   <div className="relative aspect-[16/10] md:aspect-[16/11] overflow-hidden bg-mist border border-border-soft">
                     <Image
@@ -145,7 +145,7 @@ export default function BlogIndexClient() {
                     <h2 className="font-['Syne'] font-semibold text-lg md:text-xl text-ink leading-snug group-hover:text-stone transition-colors">
                       {post.title}
                     </h2>
-                    <p className="text-body text-sm mt-1 line-clamp-2 max-w-2xl">
+                    <p className="text-body text-sm mt-2 line-clamp-2 max-w-2xl">
                       {post.description}
                     </p>
                   </div>

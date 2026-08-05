@@ -93,11 +93,13 @@ export default function PricesPage() {
           <DealBanner />
         </div>
 
-        {/* Full width, not max-w-4xl: this is sticky, so a 896px bar over a
-            1200px table covered the service names while their prices stayed
-            visible to the right of it — rows read as bare numbers. */}
-        <nav aria-label="Price list categories" className="mb-12 w-full">
-          <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2.5">Jump to category</p>
+        {/* Only the pill row sticks. The label and the guide link used to sit
+            inside the sticky box too, which made it 144px tall on a phone —
+            with the 57px header that is 198px of permanent chrome, 24% of a
+            390x844 viewport, on the longest page of the site. They are
+            ordinary flow content now and the sticky element is one row. */}
+        <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2.5">Jump to category</p>
+        <nav aria-label="Price list categories" className="w-full">
           <ul className="tab-scroller text-sm font-['Inter'] pb-1">
             <li>
               <a href="#quote" className="tap-safe tab-pill inline-flex items-center">
@@ -115,13 +117,13 @@ export default function PricesPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-stone text-sm font-light">
-            How to read a rate list:{' '}
-            <Link href="/blog/salon-price-list-karachi-2026" className="link-underline hover:text-ink text-ink font-medium">
-              Salon Price List Karachi 2026 guide
-            </Link>
-          </p>
         </nav>
+        <p className="mt-3 mb-12 text-stone text-sm font-light">
+          How to read a rate list:{' '}
+          <Link href="/blog/salon-price-list-karachi-2026" className="link-underline hover:text-ink text-ink font-medium">
+            Salon Price List Karachi 2026 guide
+          </Link>
+        </p>
 
         <QuoteBuilder />
 
