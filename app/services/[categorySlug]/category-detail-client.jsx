@@ -9,7 +9,6 @@ import Link from 'next/link'
 import { ServiceModal, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
 import { CAT_FAQS, CAT_SEO, CAT_RELATED, CAT_PAGE_BLOCKS } from '../../../src/cat-seo-content.js'
-import { getRelatedBlogPostsForCategory } from '../../../src/blog-data.js'
 import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
@@ -45,7 +44,7 @@ function ServiceJsonLd({ category, services }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
-export default function CategoryDetailClient({ categorySlug }) {
+export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }) {
   const category = slugToCategory(categorySlug)
   const [modal, setModal] = useState(null)
   const router   = useRouter()
@@ -64,7 +63,6 @@ export default function CategoryDetailClient({ categorySlug }) {
   const relatedCats = (CAT_RELATED[category] || [])
     .filter((cat) => CAT_SLUGS[cat])
     .slice(0, 4)
-  const relatedBlogs = category ? getRelatedBlogPostsForCategory(category, 3) : []
   const pageBlocks = CAT_PAGE_BLOCKS[category] || []
 
   if (!category) {

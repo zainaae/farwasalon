@@ -5,7 +5,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight, ChevronRight } from 'lucide-react'
 import { useBooking } from '../../src/shared.jsx'
-import { BLOG_POSTS } from '../../src/blog-data.js'
 import { BreadcrumbJsonLd } from '../json-ld.jsx'
 
 function formatBlogDate(dateStr) {
@@ -16,12 +15,12 @@ function formatBlogDate(dateStr) {
   })
 }
 
-export default function BlogIndexClient() {
+export default function BlogIndexClient({ posts }) {
   const booking = useBooking()
   const [activeCategory, setActiveCategory] = useState('All')
 
-  const categories = ['All', ...Array.from(new Set(BLOG_POSTS.map((p) => p.category).filter(Boolean))).sort()]
-  const sorted = [...BLOG_POSTS].sort((a, b) => String(b.date).localeCompare(String(a.date)))
+  const categories = ['All', ...Array.from(new Set(posts.map((p) => p.category).filter(Boolean))).sort()]
+  const sorted = [...posts].sort((a, b) => String(b.date).localeCompare(String(a.date)))
 
   /* Filter first, then feature. Featuring sorted[0] before filtering pinned
      the newest post of ALL categories above the chips, so choosing Hair still

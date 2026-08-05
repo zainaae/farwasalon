@@ -893,6 +893,14 @@ video[aria-hidden="true"] { pointer-events: none; }
   transform: none !important;
   opacity: 1 !important;
 }
+/* The blog article's back-link keeps its entrance as CSS. It is decorative and
+   sits above nothing that matters, unlike the header and body below it. */
+@keyframes articleSlideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.article-slide-in { animation: articleSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
 .hero-fade-up {
   animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
