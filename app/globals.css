@@ -239,8 +239,13 @@
     min-height: 44px;
     padding: 0.5rem 0.75rem;
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.14em;
+    /* Was 10px at the inherited weight 300. That measures 6.18:1 on white —
+       it passes AA on paper and still read as barely-there, because the cause
+       was never colour: it was hairline weight at 10px with wide tracking.
+       Size and weight fix the legibility without touching the palette. */
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--stone);
     border: 1px solid var(--border-soft);
