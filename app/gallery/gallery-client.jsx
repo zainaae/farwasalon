@@ -24,8 +24,9 @@ export default function GalleryClient() {
               <span className="block">WHAT WE</span> <span className="block">DO</span>
             </h1>
             <p className="hero-fade-up text-body max-w-xl mt-5" style={{ animationDelay: '0.15s' }}>
-              A quiet look at the services we offer in our PECHS studio — bridal, hair,
-              skin, nails. Visit in person for the full portfolio, or book a slot below.
+              Real work from our PECHS studio — bridal, hair, skin, nails. These are
+              service stills and clips from the chair, not stock before-and-afters.
+              Visit in person for the full portfolio, or book a slot below.
             </p>
           </div>
           <button
@@ -40,10 +41,10 @@ export default function GalleryClient() {
       </div>
 
       <section className="section-shell mb-12 md:mb-16" aria-labelledby="gallery-showcase-heading">
-        <h2 id="gallery-showcase-heading" className="section-title text-xl md:text-2xl text-center mb-8">
+        <h2 id="gallery-showcase-heading" className="section-title text-center mb-8">
           Services we offer
         </h2>
-        <div className="grid md:grid-cols-3 gap-8 md:gap-6">
+        <div className="grid md:grid-cols-3 gap-8 md:gap-8">
           {GALLERY_SHOWCASE_ITEMS.map((item, i) => (
             <WorkShowcaseCard key={item.label} src={item.src} label={item.label} alt={item.alt} video={item.video} index={i} />
           ))}
@@ -62,8 +63,8 @@ export default function GalleryClient() {
       <section className="bg-ink py-20 md:py-24">
         <div className="section-shell flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}>
-            <p className="eyebrow mb-3">— Ready when you are</p>
-            <h2 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-white leading-tight">
+            <p className="eyebrow eyebrow--on-dark mb-3">— Ready when you are</p>
+            <h2 className="font-[family-name:var(--font-unbounded)] font-bold text-2xl md:text-3xl text-white leading-tight">
               <span className="block">Book a visit</span> <span className="block">at the PECHS studio</span>
             </h2>
           </m.div>

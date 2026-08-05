@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import WaCta from '../components/wa-cta.jsx'
 import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react'
 import JsonLd from '../json-ld'
@@ -71,7 +72,7 @@ export default function BridalLandingPage() {
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
           <p className="eyebrow mb-4">— Bridal · from Rs 8,000</p>
-          <h1 id="bridal-headline" className="font-['Unbounded'] font-bold text-[1.85rem] sm:text-3xl md:text-[2.6rem] text-ink mb-5 max-w-2xl leading-[1.12] tracking-tight">
+          <h1 id="bridal-headline" className="font-[family-name:var(--font-unbounded)] font-bold text-[1.85rem] sm:text-3xl md:text-[2.6rem] text-ink mb-5 max-w-2xl leading-[1.12] tracking-tight">
             Bridal Makeup Karachi — Packages from Rs 8,000
           </h1>
           <p id="bridal-lede" className="text-body md:text-lg max-w-2xl mb-8 leading-relaxed">
@@ -99,6 +100,27 @@ export default function BridalLandingPage() {
             </a>
           </p>
 
+          <figure className="flow-loose">
+            <div className="relative aspect-[16/10] md:aspect-[2/1] overflow-hidden bg-mist border border-border-soft">
+              <Image
+                src="/bridal.jpg"
+                alt="Bridal makeup at Farwa Beauty Salon, PECHS Karachi"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </div>
+            <figcaption className="mt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+              <p className="font-[family-name:var(--font-unbounded)] font-bold text-ink text-lg sm:text-xl leading-[1.05] tracking-tight">
+                From the chair
+              </p>
+              <p className="text-stone text-xs font-['Inter'] font-light max-w-xs sm:text-right">
+                Owned studio still — bridal work in PECHS, not a stock look.
+              </p>
+            </figcaption>
+          </figure>
+
           <section className="mb-14" aria-labelledby="event-taxonomy-heading">
             <h2 id="event-taxonomy-heading" className="section-title mb-3">
               Event looks → Farwa packages
@@ -122,7 +144,7 @@ export default function BridalLandingPage() {
                       <td className="py-2.5 pr-3 text-ink font-medium">{row.event}</td>
                       <td className="py-2.5 pr-3 text-stone">{row.look}</td>
                       <td className="py-2.5 pr-3 text-stone">{row.mapsTo}</td>
-                      <td className="py-2.5 text-right text-ink font-['Unbounded'] font-bold text-xs">
+                      <td className="py-2.5 text-right text-ink font-[family-name:var(--font-unbounded)] font-bold text-xs tabular-nums">
                         {formatPrice(row.price)}
                       </td>
                     </tr>
@@ -132,7 +154,7 @@ export default function BridalLandingPage() {
             </div>
           </section>
 
-          <section className="mb-12" aria-labelledby="packages-heading">
+          <section className="flow-loose" aria-labelledby="packages-heading">
             <h2 id="packages-heading" className="section-title mb-4">
               Bridal packages (PKR) — what&apos;s included
             </h2>
@@ -172,7 +194,7 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <section className="mb-12" aria-labelledby="timeline-heading">
+          <section className="flow-loose" aria-labelledby="timeline-heading">
             <h2 id="timeline-heading" className="section-title mb-4">
               Pre-bridal timeline
             </h2>
@@ -194,7 +216,7 @@ export default function BridalLandingPage() {
             </p>
           </section>
 
-          <section className="mb-12" aria-labelledby="catchment-heading">
+          <section className="flow-tight" aria-labelledby="catchment-heading">
             <h2 id="catchment-heading" className="section-title mb-4">
               Brides from across Karachi
             </h2>
@@ -222,7 +244,7 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <section className="mb-12" aria-labelledby="why-bridal-heading">
+          <section className="flow-loose" aria-labelledby="why-bridal-heading">
             <h2 id="why-bridal-heading" className="section-title mb-4">
               Why brides choose Farwa
             </h2>
@@ -238,8 +260,8 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-bridal-heading">
-            <h2 id="visit-bridal-heading" className="section-title text-lg mb-4">
+          <section className="flow-loose panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-bridal-heading">
+            <h2 id="visit-bridal-heading" className="section-title mb-4">
               Studio &amp; consultation
             </h2>
             <ul className="space-y-3 text-sm font-['Inter'] text-stone font-light">
@@ -269,23 +291,23 @@ export default function BridalLandingPage() {
           </section>
 
           {BRIDAL_FAQS.length > 0 && (
-            <section className="mb-12" aria-labelledby="bridal-faq-heading">
+            <section className="flow" aria-labelledby="bridal-faq-heading">
               <h2 id="bridal-faq-heading" className="section-title mb-4">
                 Bridal FAQ
               </h2>
-              <dl className="max-w-3xl space-y-6">
+              <dl className="max-w-lg space-y-6">
                 {BRIDAL_FAQS.map((f) => (
                   <div key={f.q}>
                     <dt className="font-['Syne'] font-bold text-sm text-ink mb-1">{f.q}</dt>
-                    <dd className="text-body text-sm">{f.a}</dd>
+                    <dd className="text-body">{f.a}</dd>
                   </div>
                 ))}
               </dl>
             </section>
           )}
 
-          <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft max-w-3xl" aria-labelledby="bridal-book-cta">
-            <h2 id="bridal-book-cta" className="section-title text-lg mb-2">
+          <section className="flow panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="bridal-book-cta">
+            <h2 id="bridal-book-cta" className="section-title mb-2">
               Lock your bridal date
             </h2>
             <p className="text-body text-sm mb-5">

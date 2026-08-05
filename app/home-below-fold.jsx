@@ -87,7 +87,7 @@ function StatsStrip() {
                 { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-US')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
               ].map(({ display, final, label }) => (
                 <div key={label} className="min-w-0">
-                  <p className="font-['Unbounded'] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none">
+                  <p className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none tabular-nums">
                     {final !== null
                       ? <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
                       : display}
@@ -113,43 +113,76 @@ function StatsStrip() {
 }
 
 function EditorialSlideshow() {
+  /* The list is doubled so the strip can loop seamlessly. The second copy is
+     the same 13 photos, so it is presentational: without aria-hidden a screen
+     reader reads the gallery twice, and without tabIndex -1 a keyboard user
+     tabs 26 stops through 13 destinations — inside a strip that is still
+     moving. Only the first copy is reachable. */
   const doubled = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
+  const isClone = (i) => i >= EDITORIAL_PHOTOS.length
 
   return (
-    <section className="cv-auto bg-white border-y border-[#e4ddd7] overflow-x-clip max-w-full" aria-label="Editorial photo showcase">
-      <div className="md:hidden py-3 w-full max-w-full overflow-x-clip">
-        <div className="flex w-max max-w-none" style={{ animation: 'marquee 45s linear infinite' }}>
-          {doubled.map((p, i) => (
-            <figure key={i}
-              className="relative shrink-0 overflow-hidden mx-[5px]"
-              style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)' }}>
-              <EditorialMedia item={p} />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-              <figcaption className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-                <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
-                  {p.label}
+    <section
+      className="cv-auto editorial-marquee bg-mist border-y border-[#e4ddd7] overflow-x-clip max-w-full"
+      aria-label="Editorial photo showcase"
+    >
+      <div className="section-shell flex items-end justify-between gap-4 pt-5 pb-2 px-4 sm:px-5 md:px-10">
+        <p className="eyebrow mb-0">— The work</p>
+        <Link
+          href="/gallery"
+          className="tap-safe inline-flex items-center gap-1.5 text-[10px] tracking-[0.16em] uppercase font-['Inter'] text-ink hover:text-stone transition-colors"
+        >
+          See the work <ArrowUpRight className="w-3 h-3" />
+        </Link>
+      </div>
+
+      {/* One track, restyled per breakpoint. This was two — a md:hidden
+          scroller and a hidden md:block one — over the same doubled list, so
+          all 13 photos shipped four times (2 breakpoints x the loop clone) as
+          52 cards, and ~30 KB of the document was display:none on any given
+          device. That is the same bug the reviews grid below already had; the
+          comment there explains it at length.
+
+          The two differed in ways that are all expressible responsively: card
+          size, margin, gradient depth, and a mobile-only index numeral. The
+          track speed differed too (45s vs 65s) — that now lives in one class
+          with a media query, in globals.css. */}
+      <div className="py-3 md:py-2 w-full max-w-full overflow-x-clip md:isolate">
+        <div className="editorial-marquee-track flex w-max max-w-none will-change-transform">
+          {doubled.map((p, i) => {
+            const href = p.href || '/gallery'
+            return (
+              <Link
+                key={i}
+                href={href}
+                className="relative shrink-0 overflow-hidden group mx-[5px] md:mx-1.5 w-[min(62vw,230px)] h-[min(82vw,306px)] md:w-[260px] md:h-auto md:aspect-[3/4] lg:w-[300px] xl:w-[330px]"
+                aria-label={`${p.label} — see gallery`}
+                aria-hidden={isClone(i) || undefined}
+                tabIndex={isClone(i) ? -1 : undefined}
+              >
+                <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+                <span className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+                  <span className="text-white text-[10px] tracking-[0.2em] md:tracking-[0.18em] uppercase font-['Inter'] font-medium leading-none">
+                    {p.label}
+                  </span>
+                  <span className="md:hidden text-white/60 text-[9px] font-['Inter'] tabular-nums">
+                    {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
+                  </span>
                 </span>
-                <span className="text-white/60 text-[9px] font-['Inter'] tabular-nums">
-                  {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
-                </span>
-              </figcaption>
-            </figure>
-          ))}
+              </Link>
+            )
+          })}
         </div>
       </div>
 
-      <div className="hidden md:block py-2 w-full max-w-full overflow-x-clip isolate">
-        <div className="flex w-max max-w-none will-change-transform" style={{ animation: 'marquee 65s linear infinite' }}>
-          {doubled.map((p, i) => (
-            <div key={i} className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group cursor-default">
-              <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
-              <span className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
-                {p.label}
-              </span>
-            </div>
-          ))}
-        </div>
+      <div className="section-shell px-4 sm:px-5 md:px-10 pb-5 pt-1">
+        <Link
+          href="/gallery"
+          className="tap-safe link-underline text-stone hover:text-ink text-[11px] font-['Inter'] transition-colors"
+        >
+          Browse the full gallery
+        </Link>
       </div>
     </section>
   )
@@ -181,7 +214,7 @@ function ServiceMediaPanel({ hovered }) {
   return (
     <div className="relative w-full h-full bg-[#0d0609]">
       <Image
-        src="/bridal2.jpg"
+        src="/threading.jpg"
         alt=""
         fill
         quality={50}
@@ -259,7 +292,7 @@ function FeaturedServices() {
           </m.div>
         </div>
 
-        <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-start">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
             className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24">
             <ServiceMediaPanel hovered={hovered} />
@@ -271,15 +304,18 @@ function FeaturedServices() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="service-filter-grid mb-6"
-              role="tablist"
+              role="group"
               aria-label="Filter service categories"
             >
+              {/* aria-pressed, not role=tab. The tab pattern commits to
+                  arrow-key roving focus and an owned tabpanel; there is no
+                  keydown handler in this file and no role=tabpanel anywhere in
+                  it. The blog index already made this call. */}
               {HOME_SERVICE_TABS.map((tab) => (
                 <button
                   key={tab}
                   type="button"
-                  role="tab"
-                  aria-selected={activeTab === tab}
+                  aria-pressed={activeTab === tab}
                   onClick={() => {
                     setActiveTab(tab)
                     setHovered(null)
@@ -292,15 +328,13 @@ function FeaturedServices() {
             </m.div>
             <div className="divide-y divide-border-soft border-t border-border-soft">
               {visibleCategories.map((cat, i) => (
-                <m.div key={cat}
-                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}>
+                <div key={cat}>
                   <Link href={`/services/${CAT_SLUGS[cat]}`}
                     onMouseEnter={() => setHovered(cat)}
                     onMouseLeave={() => setHovered(null)}
                     className="group flex items-center justify-between py-4 md:py-5 gap-4">
                     <div className="flex items-center gap-4 min-w-0">
-                      <span className="font-['Unbounded'] text-[10px] text-stone shrink-0 w-5 tabular-nums">
+                      <span className="font-[family-name:var(--font-unbounded)] text-[10px] text-stone shrink-0 w-5 tabular-nums">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="min-w-0">
@@ -326,16 +360,20 @@ function FeaturedServices() {
                       <ArrowUpRight className="w-3.5 h-3.5 text-stone/40 group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-[transform,color] duration-200" />
                     </div>
                   </Link>
-                </m.div>
+                </div>
               ))}
             </div>
 
-            <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
-              className="mt-8 pt-6 border-t border-[#e4ddd7]">
+            <div className="mt-8 pt-6 border-t border-[#e4ddd7] space-y-3">
               <p className="text-stone text-xs font-['Inter'] font-light">
                 Book any service online — or <WaCta href={`https://wa.me/${WA_NUMBER}`} from="services-blurb" className="underline hover:text-ink transition-colors">reach us on WhatsApp</WaCta>.
               </p>
-            </m.div>
+              <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] tracking-[0.12em] uppercase font-['Inter'] text-stone">
+                <Link href="/bridal" className="tap-safe hover:text-ink transition-colors">Bridal</Link>
+                <Link href="/prices" className="tap-safe hover:text-ink transition-colors">Prices</Link>
+                <Link href="/blog/bridal-beauty-timeline" className="tap-safe hover:text-ink transition-colors">Bridal timeline</Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -358,7 +396,7 @@ function TrustPillars() {
             <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
               className="border-t border-white/10 pt-7">
-              <p className="font-['Unbounded'] text-[10px] text-accent-gold mb-4">{p.num}</p>
+              <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-accent-gold mb-4">{p.num}</p>
               <h3 className="font-['Syne'] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
               <p className="text-nude/90 text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
             </m.div>
@@ -379,7 +417,7 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
         compact
           ? 'shrink-0 snap-start w-[85vw] max-w-[320px]'
           : /* swipe card on mobile, equal-height grid cell from md up */
-            'shrink-0 snap-start w-[85vw] max-w-[320px] md:shrink md:w-auto md:max-w-none md:h-full md:min-h-[260px] lg:md:min-h-[272px]'
+            'shrink-0 snap-start w-[85vw] max-w-[320px] md:shrink md:w-auto md:max-w-none md:h-full md:min-h-[272px]'
       }`}
     >
       <header className="flex items-center justify-between px-5 py-3.5 sm:py-4 border-b border-border-soft">
@@ -556,7 +594,7 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
           The per-card stagger went with it. In a horizontal scroller
           whileInView leaves off-screen cards at opacity 0 until they are
           scrolled to, which is the wrong behaviour for a swipe row. */}
-      <div className={`flex gap-3.5 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none md:mx-0 md:px-0 md:pb-0 md:overflow-visible md:grid ${desktopCols} md:gap-4 lg:md:gap-5 md:max-w-5xl md:items-stretch`}>
+      <div className={`flex gap-3.5 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none md:mx-0 md:px-0 md:pb-0 md:overflow-visible md:grid ${desktopCols} md:gap-5 md:max-w-5xl md:items-stretch`}>
         {posts.map((post) => (
           <ReviewCard key={`${label}-${post.name}-${post.quote.slice(0, 24)}`} post={post} excerpt />
         ))}
@@ -567,6 +605,7 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
 
 function TestimonialsPreview({ placesEnabled }) {
   const [reviewIdx, setReviewIdx] = useState(0)
+  const [paused, setPaused] = useState(false)
   const [ratingLabel, setRatingLabel] = useState(initialRatingLabel)
   const [featuredReviews, setFeaturedReviews] = useState(
     manualPayload?.reviews?.length ? manualPayload.reviews : FALLBACK_FEATURED_REVIEWS,
@@ -620,12 +659,12 @@ function TestimonialsPreview({ placesEnabled }) {
   }, [placesEnabled])
 
   useEffect(() => {
-    if (featuredReviews.length <= 1) return undefined
+    if (featuredReviews.length <= 1 || paused) return undefined
     const id = setInterval(() => {
       setReviewIdx((i) => (i + 1) % featuredReviews.length)
     }, 8000)
     return () => clearInterval(id)
-  }, [featuredReviews.length])
+  }, [featuredReviews.length, paused])
 
   const featured = featuredReviews[reviewIdx]
   const featuredSourceLabel = featured.source === 'google' ? 'Google' : 'Facebook'
@@ -648,12 +687,22 @@ function TestimonialsPreview({ placesEnabled }) {
           </div>
         </m.div>
 
-        <m.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+        <m.figure
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
           className="reviews-featured relative px-6 py-9 sm:px-9 sm:py-10 md:px-12 md:py-11 mb-8 sm:mb-10 md:mb-12"
-          aria-live="polite">
+          aria-live="polite"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false)
+          }}
+        >
           <Quote className="reviews-featured-mark absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 sm:w-10 sm:h-10 rotate-180 pointer-events-none" aria-hidden="true" />
-          <blockquote className={`relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6 sm:line-clamp-none' : ''}`}>
+          <blockquote className={`relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6' : ''}`}>
             {featured.quote}
           </blockquote>
           {featured.translation && (
@@ -673,18 +722,29 @@ function TestimonialsPreview({ placesEnabled }) {
                 <ArrowUpRight className="w-2.5 h-2.5" />
               </a>
             </div>
+              {/* Was role=tablist/role=tab with aria-selected, and the dot itself
+                  was the hit box: 6x6 px, a quarter of the WCAG 2.5.8 floor.
+                  role=tab also promises arrow-key roving focus and an owned
+                  tabpanel, neither of which exists here.
+
+                  Both are solved the way the photo dots in shared.jsx already
+                  solve them — a 44px padded button wrapping a small visual bar,
+                  in a labelled group with aria-current. */}
             {featuredReviews.length > 1 && (
-              <div className="flex items-center gap-1.5" role="tablist" aria-label="Featured reviews">
+              <div className="flex items-center" role="group" aria-label="Featured reviews">
                 {featuredReviews.map((r, i) => (
                   <button
                     key={r.name}
                     type="button"
-                    role="tab"
-                    aria-selected={reviewIdx === i}
+                    aria-current={reviewIdx === i ? 'true' : undefined}
                     aria-label={`Show review by ${r.name}`}
                     onClick={() => setReviewIdx(i)}
-                    className={`h-1.5 rounded-full transition-[width,background-color] ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30 hover:bg-stone/50'}`}
-                  />
+                    className="tap-safe min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+                  >
+                    <span
+                      className={`block h-1.5 rounded-full transition-[width,background-color] ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30'}`}
+                    />
+                  </button>
                 ))}
               </div>
             )}
@@ -727,7 +787,6 @@ function TestimonialsPreview({ placesEnabled }) {
   )
 }
 
-
 function CtaBand() {
   return (
     <section className="cv-auto bg-ink py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10">
@@ -741,7 +800,7 @@ function CtaBand() {
         >
           <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
           <h2
-            className="font-['Unbounded'] font-bold text-white leading-[1.05] text-balance max-w-2xl lg:max-w-none"
+            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.05] text-balance max-w-2xl lg:max-w-none"
             style={{ fontSize: 'clamp(1.9rem, 5.5vw + 0.5rem, 4rem)' }}
           >
             Ready for your glow? We&apos;re ready for you.
@@ -795,8 +854,14 @@ function CtaBand() {
 
 function FounderNote() {
   return (
-    <section className="cv-auto bg-mist border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
-      <div className="max-w-3xl mx-auto text-center">
+    <section className="cv-auto bg-white border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
+      <m.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-3xl mx-auto text-center"
+      >
         <p className="eyebrow mb-6">— The House</p>
         <blockquote
           className="font-['Syne'] italic text-ink text-balance leading-[1.3]"
@@ -807,7 +872,13 @@ function FounderNote() {
         <p className="mt-6 text-[11px] tracking-[0.28em] uppercase font-['Inter'] text-stone">
           Rubina · Founder, Farwa Beauty Salon
         </p>
-      </div>
+        <Link
+          href="/about"
+          className="tap-safe mt-8 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-['Inter'] text-ink hover:text-stone transition-colors"
+        >
+          Meet Rubina <ChevronRight className="w-3.5 h-3.5" />
+        </Link>
+      </m.div>
     </section>
   )
 }

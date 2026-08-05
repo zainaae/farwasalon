@@ -49,16 +49,11 @@ export default function ContactClient() {
 
       <section className="bg-white py-14 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="eyebrow mb-3">— Contact</m.p>
-          <div className="overflow-hidden">
-            <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-              className="display-section text-ink">
-              <span className="block">FIND US</span> <span className="block">OR ASK US</span>
-            </m.h1>
-          </div>
-          <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}
-            className="mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
+          <p className="hero-fade-up eyebrow mb-3">— Contact</p>
+          <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
+            <span className="block">FIND US</span> <span className="block">OR ASK US</span>
+          </h1>
+          <div className="hero-fade-up mt-6 flex flex-wrap items-center gap-3 sm:gap-4" style={{ animationDelay: '0.2s' }}>
             <span className="inline-flex items-center gap-2 border border-border-soft px-3 py-2 text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone">
               <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#6b9b5f]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
               Next slot <span className="text-ink font-medium ml-1">{slot.label}</span>
@@ -66,7 +61,7 @@ export default function ContactClient() {
             <Link href="/book" className="tap-safe btn-primary text-[10px] sm:text-[11px] !py-2.5 !px-5">
               <Sparkles className="w-3 h-3" /> Book online
             </Link>
-          </m.div>
+          </div>
         </div>
       </section>
 

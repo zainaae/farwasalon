@@ -40,7 +40,7 @@ export default function BeautySalonKarachiPage() {
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
           <p className="eyebrow mb-4">— Karachi beauty salon</p>
-          <h1 className="font-['Unbounded'] font-bold text-3xl md:text-[2.5rem] text-ink mb-6 max-w-3xl leading-tight tracking-tight">
+          <h1 className="font-[family-name:var(--font-unbounded)] font-bold text-3xl md:text-[2.5rem] text-ink mb-6 max-w-3xl leading-tight tracking-tight">
             Beauty Salon in Karachi — PECHS
           </h1>
           <p className="text-body md:text-lg max-w-3xl mb-4">
@@ -95,7 +95,7 @@ export default function BeautySalonKarachiPage() {
           </section>
 
           <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-heading">
-            <h2 id="visit-heading" className="section-title text-lg mb-4">
+            <h2 id="visit-heading" className="section-title mb-4">
               Visit the salon
             </h2>
             <ul className="space-y-3 text-sm font-['Inter'] text-stone font-light">

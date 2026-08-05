@@ -176,11 +176,11 @@ export function WordmarkDivider() {
     <div aria-hidden="true" className="bg-white border-y border-border-soft overflow-hidden">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-5 sm:py-6 md:py-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 md:gap-8 text-center sm:text-left">
         <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a98a]/50 to-[#c9a98a]" />
-        <span className="font-['Unbounded'] font-bold text-ink tracking-[0.3em] text-[11px] md:text-[13px] shrink-0">
+        <span className="font-[family-name:var(--font-unbounded)] font-bold text-ink tracking-[0.3em] text-[11px] md:text-[13px] shrink-0">
           F · B · S
         </span>
         <span className="hidden sm:inline text-[#c9a98a] text-xs" aria-hidden="true">✦</span>
-        <span className="font-['Unbounded'] italic font-light text-stone text-[11px] md:text-[13px] shrink-0 tracking-wide">
+        <span className="font-[family-name:var(--font-unbounded)] italic font-light text-stone text-[11px] md:text-[13px] shrink-0 tracking-wide">
           Since 2008
         </span>
         <span className="flex-1 h-px bg-gradient-to-l from-transparent via-[#c9a98a]/50 to-[#c9a98a]" />
@@ -246,10 +246,13 @@ export function ServiceModal({ service, onClose }) {
           <div className="p-6 md:p-8 flex flex-col max-h-[min(85dvh,calc(100dvh-2rem))] overflow-y-auto overscroll-contain">
             <div className="flex justify-between items-start mb-5">
               <span className="text-[10px] tracking-[0.2em] uppercase text-stone font-['Inter']">{service.category}</span>
+              {/* -m-2 keeps the icon where it was while the hit box grows to
+                  44px; without it this was exactly the 20x20 icon. The booking
+                  sheet's close button already does this. */}
               <button onClick={onClose} aria-label="Close dialog"
-                className="text-stone hover:text-ink transition-colors"><X className="w-5 h-5" /></button>
+                className="tap-safe -m-2 p-2 inline-flex items-center justify-center text-stone hover:text-ink transition-colors"><X className="w-5 h-5" /></button>
             </div>
-            <h2 id={titleId} className="font-['Unbounded'] font-bold text-lg md:text-xl text-ink mb-2 leading-tight uppercase">
+            <h2 id={titleId} className="font-[family-name:var(--font-unbounded)] font-bold text-lg md:text-xl text-ink mb-2 leading-tight uppercase">
               {service.name}
             </h2>
             {(service.pricePkr != null || service.durationMinutes != null) && (
@@ -299,7 +302,7 @@ function Logo({ light }) {
   /* Fixed-height shell so wordmark ↔ image swap never shifts the header row. */
   const shell = 'inline-flex items-center justify-center h-8 w-auto max-w-[10rem]'
   const wordmark =
-    "font-['Unbounded'] font-bold text-[12px] md:text-[13px] lg:text-[14px] tracking-[0.14em] md:tracking-[0.16em] leading-none"
+    "font-[family-name:var(--font-unbounded)] font-bold text-[12px] md:text-[13px] lg:text-[14px] tracking-[0.14em] md:tracking-[0.16em] leading-none"
 
   /* On dark transparent hero: white text looks cleaner than inverting the JPG
      (JPG has white background so brightness-0+invert turns it into a flat white blob) */
@@ -452,7 +455,10 @@ export function shouldShowMobileCtaBar(pathname) {
     pathname === '/prices' ||
     pathname === '/gallery' ||
     pathname === '/beauty-salon-karachi' ||
-    pathname === '/contact'
+    pathname === '/contact' ||
+    pathname === '/freedom-deal' ||
+    pathname === '/deals' ||
+    pathname === '/about'
   ) {
     return true
   }

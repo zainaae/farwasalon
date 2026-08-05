@@ -727,7 +727,7 @@ export const BLOG_POSTS = [
     lastModified: '2026-04-28',
     readTime: '6 min read',
     author: 'Rubina',
-    category: 'Guide',
+    category: 'Guides',
     relatedCategories: ['Threading', 'Rica Hot Wax', 'Honey Wax'],
     content: [
       { type: 'p', text: 'It\'s one of the most common questions we get at Farwa Beauty Salon: "Should I thread or wax?" The answer depends on the area being treated, your skin sensitivity, and what results you\'re after. Here\'s an honest breakdown from our team.' },
@@ -1046,7 +1046,7 @@ export const BLOG_POSTS = [
     lastModified: '2026-04-25',
     readTime: '7 min read',
     author: 'Rubina',
-    category: 'Guide',
+    category: 'Guides',
     relatedCategories: ['Threading', 'Facials', 'Nails'],
     content: [
       { type: 'p', text: 'Walking into a beauty salon for the first time can feel intimidating — especially if you are not sure what to expect, what to ask for, or how things work. Whether you are a college student booking your first facial, a bride-to-be exploring options, or someone who has simply never had the occasion, this guide will help you feel confident and prepared. At Farwa Beauty Salon in PECHS, Karachi, we welcome first-time visitors every week — here is what we wish everyone knew before their first appointment.' },

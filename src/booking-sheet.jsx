@@ -4,6 +4,7 @@ import { m, AnimatePresence } from 'framer-motion'
 import { X, ChevronLeft, ChevronRight, Clock, Check, Sparkles } from 'lucide-react'
 import { SERVICES, formatServicePrice, formatDuration, track, waLinkBooking, PREFERRED_TIME_OPTIONS } from './data.js'
 import { toLocalDateString } from '../lib/date-local.js'
+import Link from 'next/link'
 
 /* ─── Visual month calendar (used inside BookingSheet) ─────────── */
 function MonthCalendar({ value, onChange }) {
@@ -252,12 +253,18 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
           >
             <div className="flex items-center justify-between px-5 md:px-7 py-3.5 md:py-4 border-b border-border-soft">
               <div>
-                <p className="text-stone text-[10px] tracking-[0.24em] uppercase font-['Inter']">Step {step + 1} of 3</p>
-                <h2 id="booking-title" className="font-['Unbounded'] font-bold text-ink text-base md:text-lg mt-0.5">
+                <p className="text-stone text-[10px] tracking-[0.24em] uppercase font-['Inter']">Step {step + 1} of 3 · WhatsApp request</p>
+                <h2 id="booking-title" className="font-[family-name:var(--font-unbounded)] font-bold text-ink text-base md:text-lg mt-0.5">
                   {step === 0 && 'Choose services'}
                   {step === 1 && 'Pick a date'}
                   {step === 2 && 'Pick a time'}
                 </h2>
+                <p className="mt-1 text-[10px] font-['Inter'] text-stone">
+                  Prefer a live slot?{' '}
+                  <Link href="/book" onClick={onClose} className="underline underline-offset-2 hover:text-ink transition-colors">
+                    Book online
+                  </Link>
+                </p>
               </div>
               <button type="button" onClick={onClose} aria-label="Close booking"
                 className="tap-safe text-stone hover:text-ink transition-colors">
@@ -458,4 +465,3 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
     </AnimatePresence>
   )
 }
-

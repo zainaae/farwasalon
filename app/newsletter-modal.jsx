@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
 import { X, Check, ArrowUpRight } from 'lucide-react'
+import { track } from '../src/site-config.js'
 
 const STORAGE_KEY = 'farwa-newsletter-seen'
 const SCROLL_DEPTH = 0.6
@@ -38,7 +39,14 @@ export default function NewsletterModal() {
   const firstInputRef = useRef(null)
 
   // Decide whether this route should ever surface the modal.
-  const eligible = !pathname?.startsWith('/book') && !pathname?.startsWith('/cancel')
+  /* Allowlist, not denylist. This previously ran anywhere except /book and
+     /cancel, so at 60% scroll depth it locked the body and covered whatever
+     the visitor had scrolled to: the reviews block on the homepage, the middle
+     of the hair table on /prices, the FAQ on /bridal. The most engaged visitor
+     on the site got interrupted on a decision page and asked for an email —
+     a channel this salon does not run on — with no way to book inside the
+     dialog. It belongs where someone is reading, not deciding. */
+  const eligible = pathname === '/' || pathname?.startsWith('/blog')
 
   useEffect(() => {
     if (!eligible || alreadySeen()) return
@@ -49,6 +57,7 @@ export default function NewsletterModal() {
       if (fired) return
       fired = true
       setOpen(true)
+      track('NewsletterOpen')
     }
 
     // Engagement-gated only: never ambush a visitor who just arrived.
@@ -183,7 +192,7 @@ export default function NewsletterModal() {
                   <p className="text-accent-gold-deep text-[10px] tracking-[0.32em] uppercase font-['Inter'] font-medium mb-3">
                     — A welcome gift
                   </p>
-                  <h2 id="newsletter-heading" className="font-['Unbounded'] font-bold text-2xl sm:text-[1.65rem] text-ink leading-tight mb-3">
+                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-[1.65rem] text-ink leading-tight mb-3">
                     Get <span className="text-accent-gold-deep">10% off</span> your first facial
                   </h2>
                   <p className="text-stone text-[13px] font-['Inter'] font-light leading-relaxed mb-6">

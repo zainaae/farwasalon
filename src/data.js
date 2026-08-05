@@ -314,7 +314,6 @@ export const CAT_META = {
     tagline: 'Microblading & powder brows from Rs 20,000' },
 }
 
-
 export const GALLERY_PHOTOS = [
   { src: '/threading.jpg',  label: 'Threading' },
   { src: '/bridal.jpg',     label: 'Bridal' },
@@ -327,4 +326,3 @@ export const GALLERY_PHOTOS = [
   { src: '/oilwax.jpg',     label: 'Beauty' },
   { src: '/waxing.jpg',     label: 'Waxing' },
 ]
-

@@ -57,7 +57,7 @@ export default function PricesPage() {
       <JsonLd data={buildPriceListSchema()} />
       <div className="section-shell section-pad min-h-0">
         <p className="eyebrow mb-4">— Price list · updated {UPDATED}</p>
-        <h1 className="display-section text-ink mb-4 max-w-3xl">
+        <h1 className="display-section text-ink mb-4 max-w-2xl">
           Salon Price List Karachi 2026 — From Rs 100
         </h1>
         {/* The claim lives here, on the page that proves it. It used to live on
@@ -93,9 +93,19 @@ export default function PricesPage() {
           <DealBanner />
         </div>
 
-        <nav aria-label="Price list categories" className="mb-12 max-w-4xl">
-          <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2.5">Jump to category</p>
+        {/* Only the pill row sticks. The label and the guide link used to sit
+            inside the sticky box too, which made it 144px tall on a phone —
+            with the 57px header that is 198px of permanent chrome, 24% of a
+            390x844 viewport, on the longest page of the site. They are
+            ordinary flow content now and the sticky element is one row. */}
+        <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2.5">Jump to category</p>
+        <nav aria-label="Price list categories" className="w-full">
           <ul className="tab-scroller text-sm font-['Inter'] pb-1">
+            <li>
+              <a href="#quote" className="tap-safe tab-pill inline-flex items-center">
+                Quote builder
+              </a>
+            </li>
             {categories.map((cat) => (
               <li key={cat}>
                 <a
@@ -107,17 +117,17 @@ export default function PricesPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-stone text-sm font-light">
-            How to read a rate list:{' '}
-            <Link href="/blog/salon-price-list-karachi-2026" className="link-underline hover:text-ink text-ink font-medium">
-              Salon Price List Karachi 2026 guide
-            </Link>
-          </p>
         </nav>
+        <p className="mt-3 mb-12 text-stone text-sm font-light">
+          How to read a rate list:{' '}
+          <Link href="/blog/salon-price-list-karachi-2026" className="link-underline hover:text-ink text-ink font-medium">
+            Salon Price List Karachi 2026 guide
+          </Link>
+        </p>
 
         <QuoteBuilder />
 
-        <section className="mb-12 panel-soft p-5 md:p-6 shadow-soft max-w-3xl" aria-labelledby="prices-bridal-strip">
+        <section className="flow panel-soft p-5 md:p-6 shadow-soft" aria-labelledby="prices-bridal-strip">
           <h2 id="prices-bridal-strip" className="font-['Syne'] font-semibold text-ink text-lg mb-2">
             Bridal packages
           </h2>
@@ -162,7 +172,7 @@ export default function PricesPage() {
                       <td className="py-2.5 pr-3 text-right text-stone/80 text-[12px] font-['Inter'] whitespace-nowrap tabular-nums hidden sm:table-cell">
                         {s.durationMinutes ? formatDuration(s.durationMinutes) : ''}
                       </td>
-                      <td className="py-2.5 text-right font-['Unbounded'] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap tabular-nums">
+                      <td className="py-2.5 text-right font-[family-name:var(--font-unbounded)] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap tabular-nums">
                         {formatServicePrice(s)}
                       </td>
                     </tr>
@@ -176,7 +186,7 @@ export default function PricesPage() {
         {/* The other half of a complete price list is what is not on it. Same
             source as the `additionalProperty` boundaries in the salon JSON-LD,
             so the visible text and the machine-readable claim cannot disagree. */}
-        <section className="mt-14 max-w-3xl" aria-labelledby="prices-not-offered">
+        <section className="mt-24 md:mt-30 max-w-2xl" aria-labelledby="prices-not-offered">
           <h2 id="prices-not-offered" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-3">
             What is not on this list
           </h2>
@@ -194,7 +204,7 @@ export default function PricesPage() {
           </dl>
         </section>
 
-        <section className="mt-14 panel-soft p-6 md:p-8 shadow-soft max-w-3xl" aria-labelledby="prices-book-cta">
+        <section className="mt-14 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="prices-book-cta">
           <h2 id="prices-book-cta" className="font-['Syne'] font-semibold text-ink text-lg md:text-xl mb-2">
             Ready to book?
           </h2>
@@ -212,15 +222,15 @@ export default function PricesPage() {
           </div>
         </section>
 
-        <section className="mt-14 pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
+        <section className="mt-24 md:mt-30 pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
           <h2 id="prices-faq-heading" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-6">
             Price questions
           </h2>
-          <dl className="space-y-5 max-w-3xl">
+          <dl className="space-y-5 max-w-lg">
             {PRICES_PAGE_FAQS.map((f) => (
               <div key={f.q}>
                 <dt className="font-['Syne'] font-bold text-sm text-ink">{f.q}</dt>
-                <dd className="mt-1.5 text-body text-sm">{f.a}</dd>
+                <dd className="mt-1.5 text-body">{f.a}</dd>
               </div>
             ))}
           </dl>

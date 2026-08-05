@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { m } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { AnimatedNumber } from '../../src/shared.jsx'
@@ -35,7 +36,7 @@ export default function AboutClient() {
               { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-US')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
             ].map(({ display, final, label }) => (
               <div key={label} className="min-w-0">
-                <p className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink mb-1">
+                <p className="font-[family-name:var(--font-unbounded)] font-bold text-2xl md:text-3xl text-ink mb-1">
                   <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
                 </p>
                 <p className="text-body text-[11px]">{label}</p>
@@ -51,7 +52,7 @@ export default function AboutClient() {
             <div>
               <div className="overflow-hidden mb-10">
                 <m.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-                  className="font-['Unbounded'] font-bold text-3xl md:text-4xl text-ink leading-tight">
+                  className="font-[family-name:var(--font-unbounded)] font-bold text-3xl md:text-4xl text-ink leading-tight">
                   A dream, a single chair, and {YEARS_ACTIVE} years of beauty.
                 </m.h2>
               </div>
@@ -73,7 +74,7 @@ export default function AboutClient() {
                       {i < 7 && <div className="w-px h-10 bg-border-soft mt-1" />}
                     </div>
                     <div className="pb-2">
-                      <p className="font-['Unbounded'] font-bold text-xs text-ink mb-0.5">{milestone.year}</p>
+                      <p className="font-[family-name:var(--font-unbounded)] font-bold text-xs text-ink mb-0.5">{milestone.year}</p>
                       <p className="text-body text-sm">{milestone.text}</p>
                     </div>
                   </m.div>
@@ -84,6 +85,16 @@ export default function AboutClient() {
                 every article byline — the anchor is load-bearing, not decorative. */}
             <m.div id="rubina" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
               className="flex flex-col gap-6 pt-2 md:pt-10 scroll-mt-28">
+              <div className="relative w-full max-w-md aspect-[4/5] overflow-hidden border border-border-soft bg-mist">
+                <Image
+                  src="/bridal2.jpg"
+                  alt="Bridal work at Farwa Beauty Salon, PECHS Karachi — Rubina’s studio"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 420px"
+                  className="object-cover"
+                  loading="lazy"
+                />
+              </div>
               <p className="text-ink text-lg md:text-xl font-light leading-relaxed">
                 &ldquo;It started in 2008 — a single chair, a steady hand, and a belief that beauty was worth doing well.&rdquo;
               </p>
@@ -108,6 +119,9 @@ export default function AboutClient() {
                   </div>
                 ))}
               </div>
+              <Link href="/book" className="tap-safe btn-primary self-start mt-2">
+                Book with us <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
             </m.div>
           </div>
         </m.div>
@@ -115,7 +129,7 @@ export default function AboutClient() {
 
       <section className="bg-ink py-16 md:py-20">
         <m.div className="section-shell">
-          <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="eyebrow mb-10">
+          <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="eyebrow eyebrow--on-dark mb-10">
             — Why choose Farwa
           </m.p>
           <div className="grid md:grid-cols-3 gap-8 md:gap-12">
@@ -126,7 +140,7 @@ export default function AboutClient() {
             ].map((p, i) => (
               <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
                 className="border-t border-white/10 pt-7">
-                <p className="font-['Unbounded'] text-[10px] text-mist/80 mb-4">{p.num}</p>
+                <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-mist/80 mb-4">{p.num}</p>
                 <h3 className="font-['Syne'] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
                 <p className="text-mist/80 text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
               </m.div>

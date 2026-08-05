@@ -1,7 +1,7 @@
 import { BLOG_POSTS } from '../../../src/blog-data.js'
 import { buildBlogFaqSchema } from '../../../lib/blog-faq.js'
 import { pageSocialMeta } from '../../../lib/page-metadata.js'
-import BlogArticleClient from './blog-article-client'
+import BlogArticle from './blog-article'
 
 export const dynamicParams = false
 
@@ -40,7 +40,7 @@ export default async function BlogArticlePage({ params }) {
       {faqSchema && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       )}
-      <BlogArticleClient slug={slug} />
+      <BlogArticle slug={slug} />
     </>
   )
 }

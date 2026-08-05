@@ -5,7 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown, CalendarCheck } from 'lucide-react'
-import { SERVICES, ALL_SERVICES, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track } from '../../src/data.js'
+import { SERVICES, ALL_SERVICES, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track, WA_NUMBER } from '../../src/data.js'
+import WaCta from '../components/wa-cta.jsx'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { BOOKING_WINDOW_DAYS } from '../../lib/booking-date-rules.js'
 import { toLocalDateString, salonTodayString } from '../../lib/date-local.js'
@@ -108,9 +109,9 @@ function formatDateNice(dateStr) {
 }
 
 const stepVariants = {
-  enter:  () => ({ opacity: 0, y: 12 }),
+  enter:  () => ({ opacity: 0.92, y: 8 }),
   center: { opacity: 1, y: 0 },
-  exit:   () => ({ opacity: 0, y: -12 }),
+  exit:   () => ({ opacity: 0.92, y: -6 }),
 }
 
 function FirstVisitHint() {
@@ -517,18 +518,18 @@ export default function BookClient() {
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
           <m.div className="overflow-hidden">
             <m.h1
-              initial={{ y: '60%', opacity: 0 }}
+              initial={{ y: '40%', opacity: 0.85 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="display-section text-ink mb-4 break-words"
             >
               BOOK<span className="text-border-soft mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>ONLINE
             </m.h1>
           </m.div>
           <m.p
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0.85, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.7 }}
+            transition={{ delay: 0.15, duration: 0.55 }}
             className="text-body max-w-lg"
           >
             Pick one or more services, choose a date and time, and confirm your appointment in under a minute.
@@ -536,6 +537,9 @@ export default function BookClient() {
               <> Combine anything toward {formatPrice(dealThreshold)} for the Freedom Deal ({dealRange}).</>
             ) : null}
           </m.p>
+          <p className="mt-3 text-[10px] tracking-[0.12em] uppercase font-['Inter'] text-stone">
+            1. Service → 2. Date &amp; time → 3. Your details
+          </p>
         </div>
 
         {step === 0 && <UpcomingBookings />}
@@ -544,7 +548,7 @@ export default function BookClient() {
         <p className="sr-only" aria-live="polite">
           Step {step + 1} of 3: {['Choose services', 'Pick date and time', 'Enter your details'][step]}
         </p>
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-2 sm:gap-4 mb-8 min-w-0" role="list" aria-label="Booking steps">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-2 sm:gap-4 mb-4 min-w-0" role="list" aria-label="Booking steps">
           {['Service', 'Date & Time', 'Details'].map((label, i) => (
             <div key={label} className="flex items-center gap-1.5 sm:gap-2 shrink-0" role="listitem">
               <span className={`w-7 h-7 flex items-center justify-center text-[11px] font-['Inter'] font-bold transition-colors ${
@@ -563,6 +567,27 @@ export default function BookClient() {
             </div>
           ))}
         </div>
+
+        {selectedServices.length > 0 && (
+          <div className="mb-6 panel-muted px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+            <p className="text-ink text-xs font-['Inter'] min-w-0">
+              <span className="font-medium">
+                {selectedServices.length} service{selectedServices.length === 1 ? '' : 's'}
+              </span>
+              <span className="text-stone"> · {formatDuration(totalDurationMinutes)} · {totalLabel}</span>
+              {selectedDate && selectedTime ? (
+                <span className="text-stone"> · {formatDateNice(selectedDate)} · {formatTime12(selectedTime)}</span>
+              ) : null}
+            </p>
+            <WaCta
+              href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hi Farwa — I need help with an online booking.')}`}
+              from="book-help"
+              className="tap-safe shrink-0 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone hover:text-ink transition-colors"
+            >
+              Need help? WhatsApp
+            </WaCta>
+          </div>
+        )}
 
         <div className="h-[2px] bg-border-soft w-full mb-8">
           <m.div

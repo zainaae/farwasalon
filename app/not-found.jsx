@@ -11,7 +11,7 @@ export default function NotFound() {
       <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">
         — 404
       </p>
-      <h1 className="font-['Unbounded'] font-bold text-4xl md:text-6xl text-ink mb-4 uppercase">
+      <h1 className="font-[family-name:var(--font-unbounded)] font-bold text-4xl md:text-6xl text-ink mb-4 uppercase">
         Page Not Found
       </h1>
       <p className="text-stone max-w-md mb-8 font-light font-['Inter'] text-sm leading-relaxed">

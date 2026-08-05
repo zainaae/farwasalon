@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
-import { getActiveDeals, getUpcomingDeals, formatDealRange } from '../../src/deals-data.js'
+import { getActiveDeals, getUpcomingDeals, getHeadlineDeal, isDealActive, formatDealRange } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import { SITE_ORIGIN, SALON_ID } from '../../lib/business-schema.js'
@@ -49,6 +49,8 @@ export default function DealsPage() {
   const upcoming = getUpcomingDeals()
   // Announced-but-not-open offers appear too, clearly labelled — never claimable early.
   const deals = [...upcoming, ...live]
+  const headline = getHeadlineDeal()
+  const freedomLive = headline?.id === 'freedom-deal-2026' && isDealActive(headline)
   return (
     <main id="main" className="page-content">
       <JsonLd data={buildDealsSchema(deals)} />
@@ -67,7 +69,10 @@ export default function DealsPage() {
         </p>
 
         <div className="grid gap-6 max-w-3xl">
-          {deals.map((d) => (
+          {deals.map((d) => {
+            const primaryHref = freedomLive && d.id === 'freedom-deal-2026' ? '/freedom-deal' : '/book'
+            const primaryLabel = freedomLive && d.id === 'freedom-deal-2026' ? 'See Freedom Deal' : 'Book online'
+            return (
             <section key={d.id} className="panel-soft p-6 md:p-7 shadow-soft" aria-labelledby={`deal-${d.id}`}>
               <p className="text-[10px] tracking-[0.24em] uppercase font-['Inter'] text-accent-gold-deep mb-2">
                 {upcoming.some((u) => u.id === d.id) ? `Starts ${formatDealRange(d)}` : d.category}
@@ -89,15 +94,16 @@ export default function DealsPage() {
               <p className="text-body text-sm mb-2 max-w-xl">{d.description}</p>
               <p className="text-stone text-[12px] font-['Inter'] mb-5">{d.priceNote}</p>
               <div className="flex flex-wrap items-center gap-3">
-                <Link href="/book" className="tap-safe btn-primary !py-2.5 !px-5">
-                  Book online <ArrowUpRight className="w-3.5 h-3.5" />
+                <Link href={primaryHref} className="tap-safe btn-primary !py-2.5 !px-5">
+                  {primaryLabel} <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
                 <Link href={d.href} className="tap-safe btn-secondary !py-2.5 !px-5">
                   See services
                 </Link>
               </div>
             </section>
-          ))}
+            )
+          })}
         </div>
 
         <section className="mt-14 pt-10 border-t border-border-soft max-w-3xl">

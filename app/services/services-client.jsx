@@ -54,8 +54,17 @@ function MenuRow({ cat }) {
     <Link
       href={href}
       onClick={() => track('ServiceCategoryView', { category: cat })}
-      className="group grid grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] items-center gap-4 sm:gap-6 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
-      <span className="relative block w-14 h-[4.2rem] sm:w-[4.5rem] sm:h-[5.4rem] shrink-0 border border-border-soft p-[3px] bg-white">
+      /* Four columns from md, not three. The middle column was a single 983px
+         `1fr` with a tagline capped at max-w-xl, and the longest tagline in the
+         menu only runs ~330px — so every row carried ~650px of dead white and
+         the menu region, 1,901px tall, was about 1.2M px2 of it. The count and
+         availability move into their own right-aligned column, which turns two
+         edges and a gap into three columns of information.
+
+         Explicitly placed rather than rendered twice: on small screens it sits
+         under the tagline in column 2, at md it moves to column 3. */
+      className="group grid grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] md:grid-cols-[4.5rem_minmax(0,28rem)_minmax(0,1fr)_auto] items-center gap-x-4 sm:gap-x-6 gap-y-1.5 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
+      <span className="row-span-2 md:row-span-1 relative block w-14 h-[4.2rem] sm:w-[4.5rem] sm:h-[5.4rem] shrink-0 border border-border-soft p-[3px] bg-white">
         <span className="relative block w-full h-full overflow-hidden">
           <Image
             src={meta.img}
@@ -70,23 +79,23 @@ function MenuRow({ cat }) {
       </span>
       <span className="min-w-0">
         <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h2 className="font-['Syne'] font-semibold text-ink text-lg sm:text-xl md:text-2xl leading-tight">{cat}</h2>
+          <h3 className="font-[family-name:var(--font-syne)] font-semibold text-ink text-base sm:text-lg md:text-xl leading-tight">{cat}</h3>
           {POPULAR_CATS.has(cat) && (
             <span className="text-[9px] tracking-[0.18em] uppercase font-semibold font-['Inter'] text-accent-gold-deep">Most booked</span>
           )}
         </span>
         {meta.tagline && (
-          <p className="text-stone text-[13px] sm:text-sm font-light font-['Inter'] leading-snug mt-0.5 max-w-xl">{meta.tagline}</p>
+          <p className="text-stone text-[13px] sm:text-sm font-light font-['Inter'] leading-snug mt-0.5">{meta.tagline}</p>
         )}
-        <p className="text-stone/70 text-[11px] font-['Inter'] mt-1">
-          {count} services{availability ? ` · ${availability.toLowerCase()}` : ''}
-        </p>
       </span>
-      <span className="text-right shrink-0">
+      <p className="col-start-2 row-start-2 md:col-start-3 md:row-start-1 md:text-right text-stone text-[11px] font-['Inter'] min-w-0">
+        {count} services{availability ? ` · ${availability.toLowerCase()}` : ''}
+      </p>
+      <span className="col-start-3 row-start-1 row-span-2 md:col-start-4 md:row-start-1 md:row-span-1 text-right shrink-0">
         {minPrice && (
           <>
             <span className="block text-[10px] tracking-[0.18em] uppercase font-['Inter'] text-stone">from</span>
-            <span className="block font-['Unbounded'] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight">{formatPrice(minPrice)}</span>
+            <span className="block font-[family-name:var(--font-unbounded)] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight tabular-nums">{formatPrice(minPrice)}</span>
           </>
         )}
         <span className="mt-1.5 inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -129,17 +138,34 @@ export default function ServicesClient() {
               Full price list
             </Link>
           </div>
+
+          <ol className="hero-fade-up mt-8 pt-6 border-t border-border-soft flex flex-col sm:flex-row sm:flex-wrap gap-4 sm:gap-8" style={{ animationDelay: '0.35s' }} aria-label="How a visit works">
+            {[
+              { n: '01', title: 'Book', line: 'Pick a service and a live slot online — or WhatsApp if you prefer.' },
+              { n: '02', title: 'Visit', line: 'Come to the PECHS studio. We confirm the work before we start.' },
+              { n: '03', title: 'Done', line: 'Printed PKR, no surprise add-ons — leave when you feel ready.' },
+            ].map((step) => (
+              <li key={step.n} className="flex gap-3 min-w-0 sm:max-w-[14rem]">
+                <span className="font-[family-name:var(--font-unbounded)] text-[10px] text-accent-gold-deep shrink-0 pt-0.5" aria-hidden="true">{step.n}</span>
+                <span>
+                  <span className="block font-['Syne'] font-semibold text-ink text-sm mb-0.5">{step.title}</span>
+                  <span className="block text-body text-xs leading-relaxed">{step.line}</span>
+                </span>
+              </li>
+            ))}
+          </ol>
         </div>
 
         <LiveAvailability />
 
-        <h2 className="sr-only">Browse all service categories</h2>
+        {/* The chapters below are real h2s now, so this stand-in is gone —
+            it existed only because the visible chapter labels were spans. */}
         <div>
           {MENU_CHAPTERS.map(({ name, caption, cats }) => (
             <section key={name} aria-label={name}>
               <div className="flex items-baseline gap-4 pt-10 pb-3 border-b border-ink/30 first:pt-2">
-                <span className="font-['Syne'] italic font-semibold text-accent-gold-deep text-base sm:text-lg">{name}</span>
-                <span className="eyebrow !text-[9px]">{caption}</span>
+                <h2 className="section-title text-accent-gold-deep">{name}</h2>
+                <span className="eyebrow">{caption}</span>
               </div>
               {cats.map((cat) => <MenuRow key={cat} cat={cat} />)}
             </section>

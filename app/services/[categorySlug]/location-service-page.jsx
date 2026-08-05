@@ -65,7 +65,7 @@ export default function LocationServicePage({ data, slug }) {
             </ol>
           </nav>
 
-          <h1 className="font-['Unbounded'] font-bold text-2xl md:text-4xl text-ink leading-tight mb-4">{heading}</h1>
+          <h1 className="font-[family-name:var(--font-unbounded)] font-bold text-2xl md:text-4xl text-ink leading-tight mb-4">{heading}</h1>
           <p className="text-body md:text-base max-w-2xl mb-4">
             {service.description} {location.detail}
             {priceFloor ? ` Published prices from ${priceFloor}.` : ''}

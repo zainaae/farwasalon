@@ -190,18 +190,25 @@ function CancelContent() {
         <h1 className="font-['Syne'] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
           Invalid cancellation link
         </h1>
-        <p className="text-stone text-sm font-['Inter'] font-light mb-8">
+        <p className="text-stone text-sm font-['Inter'] font-light mb-4">
           We could not find a cancel code on this phone. WhatsApp the salon with your Booking ID
           {id ? ` (${id})` : ''} — losing the confirmation page is not treated as a late cancellation.
         </p>
+        <p className="text-stone text-[11px] font-['Inter'] font-light mb-8 text-left panel-muted px-4 py-3">
+          Find your Booking ID in: the confirmation page, your WhatsApp message to us, the calendar file
+          you downloaded, or on this phone under Book → Your upcoming appointment.
+        </p>
         <a
-          href={id ? waUrl : `https://wa.me/${WA_NUMBER}`}
+          href={id ? waUrl : `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hi Farwa — I need help cancelling a booking.')}`}
           target="_blank"
           rel="noreferrer"
           className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-[#25D366] text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-[#20bd5a] transition-colors"
         >
           WhatsApp the salon <ArrowUpRight className="w-3.5 h-3.5" />
         </a>
+        <Link href="/book" className="tap-safe mt-3 inline-flex text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone hover:text-ink transition-colors">
+          Back to Book
+        </Link>
       </div>
     )
   }

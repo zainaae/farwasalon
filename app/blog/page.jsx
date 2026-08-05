@@ -1,4 +1,5 @@
 import BlogIndexClient from './blog-index-client'
+import { BLOG_POSTS } from '../../src/blog-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 
 const title = 'Beauty Tips Karachi — Bridal, Skin & Prices | Farwa'
@@ -21,6 +22,13 @@ export const metadata = {
   }),
 }
 
+/* The index needs seven fields per post to draw a card. Importing BLOG_POSTS
+   into the client component shipped all 29 article bodies to the browser to
+   render a list of titles. Read here, handed over as props; the component stays
+   a client component because it filters and opens the booking modal. */
+const CARD_FIELDS = ['slug', 'title', 'description', 'featuredImage', 'date', 'readTime', 'category']
+
 export default function BlogPage() {
-  return <BlogIndexClient />
+  const cards = BLOG_POSTS.map((post) => Object.fromEntries(CARD_FIELDS.map((f) => [f, post[f]])))
+  return <BlogIndexClient posts={cards} />
 }

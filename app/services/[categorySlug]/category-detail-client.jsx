@@ -9,7 +9,6 @@ import Link from 'next/link'
 import { ServiceModal, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
 import { CAT_FAQS, CAT_SEO, CAT_RELATED, CAT_PAGE_BLOCKS } from '../../../src/cat-seo-content.js'
-import { getRelatedBlogPostsForCategory } from '../../../src/blog-data.js'
 import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
@@ -45,7 +44,7 @@ function ServiceJsonLd({ category, services }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
-export default function CategoryDetailClient({ categorySlug }) {
+export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }) {
   const category = slugToCategory(categorySlug)
   const [modal, setModal] = useState(null)
   const router   = useRouter()
@@ -64,7 +63,6 @@ export default function CategoryDetailClient({ categorySlug }) {
   const relatedCats = (CAT_RELATED[category] || [])
     .filter((cat) => CAT_SLUGS[cat])
     .slice(0, 4)
-  const relatedBlogs = category ? getRelatedBlogPostsForCategory(category, 3) : []
   const pageBlocks = CAT_PAGE_BLOCKS[category] || []
 
   if (!category) {
@@ -125,7 +123,7 @@ export default function CategoryDetailClient({ categorySlug }) {
             <p className="eyebrow mb-2">
               — {services.length} services{minPrice != null ? ` · from ${formatPrice(minPrice)}` : ''}
             </p>
-            <h1 id="service-category-title" className="section-title text-2xl md:text-3xl mb-3">{pageH1}</h1>
+            <h1 id="service-category-title" className="section-title mb-3">{pageH1}</h1>
             <p id="service-category-desc" className="text-body max-w-prose leading-[1.7]">{meta.desc}</p>
             <div className="cta-cluster mt-5">
               <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">
@@ -230,7 +228,7 @@ export default function CategoryDetailClient({ categorySlug }) {
 
           {faqs.length > 0 && (
             <section className="mt-12 pt-10 border-t border-border-soft">
-              <h2 className="font-['Unbounded'] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
+              <h2 className="font-[family-name:var(--font-unbounded)] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
                 Frequently Asked Questions
               </h2>
               <dl className="divide-y divide-border-soft">

@@ -1,9 +1,6 @@
-'use client'
-
 import Link from 'next/link'
 import WaCta from '../../components/wa-cta.jsx'
 import Image from 'next/image'
-import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { WA_DEFAULT, YEARS_ACTIVE, CAT_SLUGS, CAT_META } from '../../../src/data.js'
 import { BLOG_POSTS } from '../../../src/blog-data.js'
@@ -57,7 +54,14 @@ function ArticleJsonLd({ post }) {
   )
 }
 
-export default function BlogArticleClient({ slug }) {
+/**
+ * A server component. It was a client one, so the whole of BLOG_POSTS — 29
+ * articles, 178 KB, 91% of it prose — was bundled into a chunk referenced by
+ * 103 prerendered documents, to render one article. Nothing here was ever
+ * interactive: the only client API in 307 lines was four framer-motion
+ * entrance tweens.
+ */
+export default function BlogArticle({ slug }) {
   const post = BLOG_POSTS.find((p) => p.slug === slug)
 
   if (!post) {
@@ -113,32 +117,28 @@ export default function BlogArticleClient({ slug }) {
             </ol>
           </nav>
 
-          <m.div
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="article-slide-in">
             <Link
               href="/blog"
               className="tap-safe inline-flex items-center gap-2 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors mb-7"
             >
               <ChevronLeft className="w-3.5 h-3.5" /> All Articles
             </Link>
-          </m.div>
+          </div>
 
-          <m.header
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-10 pb-8 border-b border-border-soft"
-          >
+          {/* No entrance animation below this line. The header holds the h1 and
+              the block further down holds the article body — both LCP
+              candidates — and the featured image is preloaded to be one. They
+              were fading in from opacity 0, which is precisely the delay the
+              hero already had to fix (see .hero-lcp in globals.css). */}
+          <header className="mb-10 pb-8 border-b border-border-soft">
             <div className="flex items-center gap-3 mb-4">
               <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
                 {post.category}
               </span>
               <span className="text-stone text-[10px] font-['Inter']">{post.readTime}</span>
             </div>
-            <h1 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight mb-3">
+            <h1 className="font-[family-name:var(--font-unbounded)] font-bold text-2xl md:text-3xl text-ink leading-tight mb-3">
               {post.title}
             </h1>
             <p className="text-stone text-sm font-light">
@@ -155,21 +155,15 @@ export default function BlogArticleClient({ slug }) {
                 </>
               )}
             </p>
-          </m.header>
+          </header>
 
           {post.featuredImage && (
-            <m.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}
-              className="relative overflow-hidden mb-10 aspect-[16/9]">
+            <div className="relative overflow-hidden mb-10 aspect-[16/9]">
               <Image src={post.featuredImage} alt={post.title} fill className="object-cover" priority />
-            </m.div>
+            </div>
           )}
 
-          <m.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="prose-farwa"
-          >
+          <div className="prose-farwa">
             {post.content.map((block, i) => {
               if (block.type === 'h2') {
                 return (
@@ -224,7 +218,7 @@ export default function BlogArticleClient({ slug }) {
                 </p>
               )
             })}
-          </m.div>
+          </div>
 
           <div className="mt-10 pt-8 border-t border-border-soft">
             <div className="flex items-start gap-4 mb-8">

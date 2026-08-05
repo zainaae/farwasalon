@@ -39,7 +39,7 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     await expect(visibleMain(page)).toBeVisible()
     await expect(page.getByRole('heading', { name: /Services we offer/i })).toBeVisible()
     // Quiet studio framing — no Instagram-as-main-proof trust blocker.
-    await expect(page.getByText(/quiet look at the services/i)).toBeVisible()
+    await expect(page.getByText(/not stock before-and-afters/i)).toBeVisible()
     await expect(page.getByText(/real clients go up on\s+our Instagram/i)).toHaveCount(0)
     await expect(page.getByRole('button', { name: /Book an Appointment/i }).first()).toBeVisible()
     await expect(page.getByText('Threading & glow facial')).toBeVisible()

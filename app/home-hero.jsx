@@ -2,7 +2,6 @@ import Image from 'next/image'
 import WaCta from './components/wa-cta.jsx'
 import Link from 'next/link'
 import { WA_NUMBER } from '../src/site-config.js'
-import HomeHeroVideo from './home-hero-video'
 
 const HERO_POSTER = '/bridal2.jpg'
 
@@ -23,19 +22,33 @@ export default function HomeHero() {
         fetchPriority="high"
         quality={60}
         sizes="(max-width: 768px) 100vw, 100vw"
-        className="hero-lcp object-cover scale-[1.01] pointer-events-none"
-        style={{ objectPosition: '50% 35%' }}
+        /* Focal point moves right as the viewport widens. The copy occupies the
+           left of the frame, and at desktop widths a centred crop put the
+           headline straight across the bride's face. Portrait keeps her
+           centred; from md up she sits in the right third with the type on
+           clear ground. */
+        className="hero-lcp object-cover scale-[1.01] pointer-events-none object-[50%_35%] md:object-[68%_28%]"
       />
 
-      <HomeHeroVideo />
+      {/* No desktop video. /hero-mp4.mp4 is stock b-roll — a blow-dry on a
+          client who looks nothing like the ones who walk into Block 3 — and it
+          sat on top of this bridal still, so desktop got the generic first
+          impression and only mobile saw the real one. The still is the
+          stronger asset on every screen. Restore HomeHeroVideo when there is
+          owned PECHS footage to put here (docs/salon-photography-guide.md). */}
 
       <div
         id="hero-overlay"
         className="absolute inset-0 z-[1]"
         style={{
-          opacity: 0.48,
+          /* One even wash over the whole frame is what made this read flat:
+             every part of the image sat at the same tone, so nothing receded
+             and nothing came forward. Weighted to the bottom-left instead,
+             where the copy sits — that buys contrast for the type and leaves
+             the top-right of the photograph bright. */
           background:
-            'linear-gradient(to top, rgba(13,6,9,0.88) 0%, rgba(13,6,9,0.55) 38%, rgba(13,6,9,0.22) 68%, rgba(13,6,9,0.35) 100%)',
+            'linear-gradient(to top, rgba(13,6,9,0.88) 0%, rgba(13,6,9,0.44) 24%, rgba(13,6,9,0.10) 56%, rgba(13,6,9,0.24) 100%), ' +
+            'linear-gradient(to right, rgba(13,6,9,0.60) 0%, rgba(13,6,9,0.34) 28%, rgba(13,6,9,0.06) 58%, rgba(13,6,9,0) 78%)',
         }}
       />
 
@@ -67,7 +80,7 @@ export default function HomeHero() {
         <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
           <p
             id="hero-lede"
-            className="hero-lcp text-white/65 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-[family-name:var(--font-inter)] mb-5 md:mb-7"
+            className="hero-lcp text-white/80 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-[family-name:var(--font-inter)] mb-5 md:mb-7"
           >
             Farwa Beauty Salon &middot; Est. 2008
           </p>
@@ -84,7 +97,7 @@ export default function HomeHero() {
             }}
           >
             <span className="block text-white font-bold">Beauty Salon in PECHS</span>
-            <span className="block text-white/80 font-normal italic mt-1">Karachi</span>
+            <span className="block text-white font-normal mt-1">Karachi</span>
           </h1>
 
           <p
@@ -98,7 +111,7 @@ export default function HomeHero() {
             {thesis.map((line) => (
               <span
                 key={line.text}
-                className={`block ${line.em ? 'text-white/95 font-bold' : 'text-white/70 font-normal italic'}`}
+                className={`block ${line.em ? 'text-white/95 font-bold' : 'text-white/85 font-normal'}`}
               >
                 {line.text}
               </span>
@@ -139,7 +152,7 @@ export default function HomeHero() {
             <WaCta
               href={`https://wa.me/${WA_NUMBER}`}
               from="hero"
-              className="tap-safe hidden sm:inline-flex text-white/50 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white/80 transition-colors"
+              className="tap-safe link-underline self-center hidden sm:inline-flex text-white/75 text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
             >
               Or WhatsApp us
             </WaCta>
