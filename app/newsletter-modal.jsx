@@ -1,9 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import ArrowUpRight from './components/icon-sprite.jsx'
 import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
-import { X, Check, ArrowUpRight } from 'lucide-react'
+import { X, Check } from 'lucide-react'
 import { track } from '../src/site-config.js'
 
 const STORAGE_KEY = 'farwa-newsletter-seen'

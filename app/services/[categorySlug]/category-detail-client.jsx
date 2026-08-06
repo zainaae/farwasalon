@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import ArrowUpRight from '../../components/icon-sprite.jsx'
 import WaCta from '../../components/wa-cta.jsx'
 import { useRouter } from 'next/navigation'
 import { m } from 'framer-motion'
-import { ArrowUpRight, ChevronLeft } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ServiceModal, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'

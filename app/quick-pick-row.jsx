@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import ArrowUpRight from './components/icon-sprite.jsx'
 import { SERVICES, formatPrice, track } from '../src/data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length

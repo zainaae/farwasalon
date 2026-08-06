@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowUpRight, ChevronRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { useBooking } from '../../src/shared.jsx'
 import { BreadcrumbJsonLd } from '../json-ld.jsx'
 

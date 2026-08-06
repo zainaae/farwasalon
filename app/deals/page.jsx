@@ -1,6 +1,6 @@
 import Link from 'next/link'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import Image from 'next/image'
-import { ArrowUpRight } from 'lucide-react'
 import { getActiveDeals, getUpcomingDeals, getHeadlineDeal, isDealActive, formatDealRange } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'

@@ -1,10 +1,11 @@
 'use client'
 
 import { Suspense, useState, useEffect } from 'react'
+import ArrowUpRight from '../../components/icon-sprite.jsx'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { m } from 'framer-motion'
-import { AlertTriangle, Check, X, ArrowUpRight } from 'lucide-react'
+import { AlertTriangle, Check, X } from 'lucide-react'
 import {
   readBookingRecord,
   markBookingCancelled,

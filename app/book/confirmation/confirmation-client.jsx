@@ -1,10 +1,11 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
+import ArrowUpRight from '../../components/icon-sprite.jsx'
 import { Suspense, useMemo, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { m } from 'framer-motion'
-import { Check, ArrowUpRight, CalendarPlus } from 'lucide-react'
+import { Check, CalendarPlus } from 'lucide-react'
 import { buildBookingIcs } from '../../../lib/calendar-ics.js'
 import {
   readBookingRecord,

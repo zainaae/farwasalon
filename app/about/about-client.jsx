@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import Image from 'next/image'
 import { m } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
 import { AnimatedNumber } from '../../src/shared.jsx'
 import SalonLocalBlock from '../components/salon-local-block.jsx'
 import { SERVICES, YEARS_ACTIVE, MONTHLY_APPOINTMENTS } from '../../src/data.js'

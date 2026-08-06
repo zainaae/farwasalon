@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import { m } from 'framer-motion'
 import Link from 'next/link'
-import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, MessageCircle, ChevronDown, X } from 'lucide-react'
+import { Check, MapPin, Phone, Clock, Sparkles, MessageCircle, ChevronDown, X } from 'lucide-react'
 import { IgIcon } from '../../src/shared.jsx'
 import { useNextSlot } from '../../src/use-next-slot.js'
 import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track, PREFERRED_TIME_OPTIONS } from '../../src/data.js'

@@ -1,9 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import ArrowUpRight from './icon-sprite.jsx'
 import WaCta from './wa-cta.jsx'
 import Link from 'next/link'
-import { MapPin, Clock, Phone, Star, ArrowUpRight } from 'lucide-react'
+import { MapPin, Clock, Phone, Star } from 'lucide-react'
 import { MAPS_LINK, WA_NUMBER } from '../../src/data.js'
 import {
   SALON_ADDRESS_LINES,

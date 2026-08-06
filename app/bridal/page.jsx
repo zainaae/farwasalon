@@ -1,7 +1,8 @@
 import Link from 'next/link'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import Image from 'next/image'
 import WaCta from '../components/wa-cta.jsx'
-import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react'
+import { Clock, MapPin, Phone } from 'lucide-react'
 import JsonLd from '../json-ld'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import {

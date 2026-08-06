@@ -1,9 +1,10 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import Link from 'next/link'
 import { m } from 'framer-motion'
-import { Clock, ArrowUpRight } from 'lucide-react'
+import { Clock } from 'lucide-react'
 import { CTA_PRIMARY_LABEL } from '../../src/shared.jsx'
 import { salonTodayString } from '../../lib/date-local.js'
 

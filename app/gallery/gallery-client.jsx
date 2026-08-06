@@ -1,8 +1,8 @@
 'use client'
 
 import { m } from 'framer-motion'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import WaCta from '../components/wa-cta.jsx'
-import { ArrowUpRight } from 'lucide-react'
 import { SmoothyGallery, useBooking } from '../../src/shared.jsx'
 import { WA_DEFAULT, GALLERY_PHOTOS, GALLERY_SHOWCASE_ITEMS } from '../../src/data.js'
 import WorkShowcaseCard from './work-showcase-card.jsx'

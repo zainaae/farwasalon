@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import ArrowUpRight from './icon-sprite.jsx'
 import Image from 'next/image'
-import { ArrowUpRight } from 'lucide-react'
 import { track } from '../../src/site-config.js'
 import { getHeadlineDeal, getActiveDeals, formatDealRange } from '../../src/deals-data.js'
 

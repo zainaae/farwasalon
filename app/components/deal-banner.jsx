@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import ArrowUpRight from './icon-sprite.jsx'
 import { getHeadlineDeal, getActiveDeals, formatDealRange } from '../../src/deals-data.js'
 
 /* Seasonal announcement strip. Renders nothing when no headline deal is

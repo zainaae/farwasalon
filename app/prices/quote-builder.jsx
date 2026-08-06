@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { ArrowUpRight } from 'lucide-react'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 
 /* The two-tier pricing model: every fixed service is printed on this page;
    the "special works" (custom makeup looks, event hairdos, keratin) genuinely

@@ -1,6 +1,7 @@
 import Link from 'next/link'
+import ArrowUpRight from '../../components/icon-sprite.jsx'
 import { notFound } from 'next/navigation'
-import { ArrowUpRight, MapPin, Clock, Car } from 'lucide-react'
+import { MapPin, Clock, Car } from 'lucide-react'
 import { NEIGHBORHOODS, TOP_SERVICES } from '../../../src/location-seo.js'
 import { AREA_CONTENT } from '../../../src/area-content.js'
 import { CAT_SLUGS, SERVICES, formatPrice, YEARS_ACTIVE, MAPS_LINK } from '../../../src/data.js'

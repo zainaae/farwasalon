@@ -1,9 +1,10 @@
 'use client'
 
 import Link from 'next/link'
+import ArrowUpRight from './icon-sprite.jsx'
 import WaCta from './wa-cta.jsx'
 import Image from 'next/image'
-import { ArrowUpRight, MessageCircle, Star } from 'lucide-react'
+import { MessageCircle, Star } from 'lucide-react'
 import { WA_DEFAULT, IG_LINK, MAPS_LINK, CAT_SLUGS } from '../../src/site-config.js'
 import { SALON_ADDRESS_LINES } from '../../lib/business-schema.js'
 import { AREAS_HUB_HREF, getFooterAreaLinks } from '../../lib/location-links.js'

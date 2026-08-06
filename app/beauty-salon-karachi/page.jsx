@@ -1,8 +1,9 @@
 import Link from 'next/link'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import WaCta from '../components/wa-cta.jsx'
 import { NEIGHBORHOODS } from '../../src/location-seo.js'
 import { AREA_CONTENT } from '../../src/area-content.js'
-import { ArrowUpRight, MapPin, Clock, Phone } from 'lucide-react'
+import { MapPin, Clock, Phone } from 'lucide-react'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import {
   SALON_ADDRESS_LINES,

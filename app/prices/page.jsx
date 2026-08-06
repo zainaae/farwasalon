@@ -1,6 +1,6 @@
 import Link from 'next/link'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import WaCta from '../components/wa-cta.jsx'
-import { ArrowUpRight } from 'lucide-react'
 import { SERVICES, CAT_SLUGS, formatServicePrice, formatDuration, YEARS_ACTIVE } from '../../src/data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import { LAST_SERVICE_UPDATE } from '../../lib/sitemap-data.js'

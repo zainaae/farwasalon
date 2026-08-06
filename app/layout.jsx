@@ -4,6 +4,7 @@ import './globals.css'
 import ClientShell from './client-shell'
 import MetaPixel from './components/meta-pixel'
 import { StarSymbolDefs } from './components/star-rating.jsx'
+import { IconSymbolDefs } from './components/icon-sprite.jsx'
 import JsonLd from './json-ld'
 import { buildBeautySalonSchema, buildWebSiteSchema } from '../lib/business-schema.js'
 
@@ -133,6 +134,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="overflow-x-clip">
         <StarSymbolDefs />
+        <IconSymbolDefs />
         <MetaPixel />
         <ClientShell>{children}</ClientShell>
         <JsonLd data={buildBeautySalonSchema()} />

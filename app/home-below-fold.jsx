@@ -1,11 +1,12 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import ArrowUpRight from './components/icon-sprite.jsx'
 import WaCta from './components/wa-cta.jsx'
 import Link from 'next/link'
 import Image from 'next/image'
 import { m } from 'framer-motion'
-import { ArrowUpRight, ChevronRight, Quote } from 'lucide-react'
+import { ChevronRight, Quote } from 'lucide-react'
 import StarRating from './components/star-rating.jsx'
 import {
   LazyVideo, CAT_SLUGS,

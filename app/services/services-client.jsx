@@ -1,9 +1,10 @@
 'use client'
 
 import Link from 'next/link'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import WaCta from '../components/wa-cta.jsx'
 import Image from 'next/image'
-import { ArrowUpRight, ChevronRight } from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 import { SERVICES, CAT_META, CAT_SLUGS, track, formatPrice } from '../../src/data.js'
 import { AREAS_HUB_HREF, getClientFacingAreaLinks } from '../../lib/location-links.js'
 import LiveAvailability from './live-availability'

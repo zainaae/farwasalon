@@ -1,10 +1,11 @@
 'use client'
 
 import { useState } from 'react'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import WaCta from '../components/wa-cta.jsx'
 import Link from 'next/link'
 import { m } from 'framer-motion'
-import { ArrowUpRight, ChevronDown, MessageCircle } from 'lucide-react'
+import { ChevronDown, MessageCircle } from 'lucide-react'
 import { CTA_PRIMARY_LABEL } from '../../src/shared.jsx'
 import { FAQ_GROUPS } from '../../src/faq-data.js'
 import { WA_DEFAULT } from '../../src/data.js'

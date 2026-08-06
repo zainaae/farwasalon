@@ -1,8 +1,9 @@
 'use client'
 import Link from 'next/link'
+import ArrowUpRight from '../../components/icon-sprite.jsx'
 import WaCta from '../../components/wa-cta.jsx'
 import { m } from 'framer-motion'
-import { ArrowUpRight, ChevronRight, MapPin, Clock, Phone } from 'lucide-react'
+import { ChevronRight, MapPin, Clock, Phone } from 'lucide-react'
 import { AREA_CONTENT } from '../../../src/area-content.js'
 import {
   waLink,
