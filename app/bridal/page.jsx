@@ -111,11 +111,11 @@ export default function BridalLandingPage() {
                 sizes="(max-width: 768px) 100vw, 768px"
               />
             </div>
-            <figcaption className="mt-4 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2">
+            <figcaption className="mt-4 max-w-xl">
               <p className="font-[family-name:var(--font-unbounded)] font-bold text-ink text-lg sm:text-xl leading-[1.05] tracking-tight">
                 From the chair
               </p>
-              <p className="text-stone text-xs font-['Inter'] font-light max-w-xs sm:text-right">
+              <p className="mt-1.5 text-stone text-xs font-['Inter'] font-light">
                 Owned studio still — bridal work in PECHS, not a stock look.
               </p>
             </figcaption>

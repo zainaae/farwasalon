@@ -63,7 +63,7 @@ function MenuRow({ cat }) {
 
          Explicitly placed rather than rendered twice: on small screens it sits
          under the tagline in column 2, at md it moves to column 3. */
-      className="group grid grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] md:grid-cols-[4.5rem_minmax(0,28rem)_minmax(0,1fr)_auto] items-center gap-x-4 sm:gap-x-6 gap-y-1.5 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
+      className="group grid grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] md:grid-cols-[4.5rem_minmax(0,1fr)_auto_auto] items-center gap-x-4 sm:gap-x-6 gap-y-1.5 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
       <span className="row-span-2 md:row-span-1 relative block w-14 h-[4.2rem] sm:w-[4.5rem] sm:h-[5.4rem] shrink-0 border border-border-soft p-[3px] bg-white">
         <span className="relative block w-full h-full overflow-hidden">
           <Image
@@ -88,7 +88,7 @@ function MenuRow({ cat }) {
           <p className="text-stone text-[13px] sm:text-sm font-light font-['Inter'] leading-snug mt-0.5">{meta.tagline}</p>
         )}
       </span>
-      <p className="col-start-2 row-start-2 md:col-start-3 md:row-start-1 md:text-right text-stone text-[11px] font-['Inter'] min-w-0">
+      <p className="col-start-2 row-start-2 md:col-start-3 md:row-start-1 md:text-right md:self-center text-stone text-[11px] font-['Inter'] whitespace-nowrap">
         {count} services{availability ? ` · ${availability.toLowerCase()}` : ''}
       </p>
       <span className="col-start-3 row-start-1 row-span-2 md:col-start-4 md:row-start-1 md:row-span-1 text-right shrink-0">
@@ -159,8 +159,14 @@ export default function ServicesClient() {
         <LiveAvailability />
 
         {/* The chapters below are real h2s now, so this stand-in is gone —
-            it existed only because the visible chapter labels were spans. */}
-        <div>
+            it existed only because the visible chapter labels were spans.
+
+            Constrained to max-w-4xl. At the full 1200px shell width a menu row
+            carried its name and tagline at the far left and its count and price
+            at the far right, ~470px apart, so the row read as scattered pieces
+            rather than one line you scan. Narrowing the canvas is what fixes
+            that — not moving the pieces around inside it. */}
+        <div className="max-w-4xl">
           {MENU_CHAPTERS.map(({ name, caption, cats }) => (
             <section key={name} aria-label={name}>
               <div className="flex items-baseline gap-4 pt-10 pb-3 border-b border-ink/30 first:pt-2">
