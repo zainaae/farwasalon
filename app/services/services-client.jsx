@@ -115,12 +115,11 @@ export default function ServicesClient() {
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
           {/* CSS entrances — framer's initial{opacity:0} kept this header
               invisible until hydration, making the intro paragraph a ~5.5s
-              LCP (same failure mode the homepage hero had). */}
-          <div className="overflow-hidden">
-            <h1 className="hero-rise display-section text-ink mb-4" style={{ animationDuration: '0.9s' }}>
-              OUR<span className="text-border-soft mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>SERVICES
-            </h1>
-          </div>
+              LCP (same failure mode the homepage hero had).
+              No overflow-hidden: it clipped Unbounded on the title. */}
+          <h1 className="hero-rise display-page text-ink mb-4" style={{ animationDuration: '0.9s' }}>
+            Our services
+          </h1>
           <p className="hero-fade-up text-body max-w-lg mb-6" style={{ animationDelay: '0.2s' }}>
             Thirteen specialities, 100+ services in PECHS, Karachi — every starting price printed from Rs 100.
             Book online in under a minute, or message us on WhatsApp.

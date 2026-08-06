@@ -56,8 +56,8 @@ export default function DealsPage() {
       <JsonLd data={buildDealsSchema(deals)} />
       <div className="section-shell section-pad min-h-0">
         <p className="eyebrow mb-4">— Current offers</p>
-        <h1 className="display-section text-ink mb-4 max-w-3xl">
-          Salon Deals in Karachi
+        <h1 className="display-page text-ink mb-4 max-w-3xl">
+          Salon deals in Karachi
         </h1>
         <p className="text-body md:text-lg max-w-2xl mb-3 leading-relaxed">
           We do deals differently: few, real, and printed — with the same transparent

@@ -22,8 +22,8 @@ export const metadata = {
 function BookHeading() {
   return (
     <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
-      <h1 className="display-section text-ink mb-4 break-words">
-        BOOK<span className="text-border-soft mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>ONLINE
+      <h1 className="display-page text-ink mb-4 break-words">
+        Book online
       </h1>
       <p className="text-body max-w-lg">
         Pick a service, choose a date and time, and confirm your appointment in under a minute.

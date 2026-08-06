@@ -7,8 +7,8 @@ export default function PrivacyClient() {
       <section className="bg-white py-16 md:py-20 border-b border-border-soft">
         <div className="section-shell">
           <p className="hero-fade-up eyebrow mb-3">— Legal</p>
-          <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
-            <span className="block">PRIVACY</span> <span className="block">POLICY</span>
+          <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
+            Privacy policy
           </h1>
         </div>
       </section>

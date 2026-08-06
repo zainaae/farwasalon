@@ -44,8 +44,8 @@ export default function FaqClient() {
       <section className="bg-white py-16 md:py-20 border-b border-border-soft">
         <div className="section-shell">
           <p className="hero-fade-up eyebrow mb-3">— Common questions</p>
-          <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
-            <span className="block">FREQUENTLY</span> <span className="block">ASKED</span>
+          <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
+            Frequently asked questions
           </h1>
         </div>
       </section>

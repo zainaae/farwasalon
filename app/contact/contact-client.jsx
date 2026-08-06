@@ -50,8 +50,8 @@ export default function ContactClient() {
       <section className="bg-white py-14 md:py-20 border-b border-border-soft">
         <div className="section-shell">
           <p className="hero-fade-up eyebrow mb-3">— Contact</p>
-          <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
-            <span className="block">FIND US</span> <span className="block">OR ASK US</span>
+          <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
+            Find us or ask us
           </h1>
           <div className="hero-fade-up mt-6 flex flex-wrap items-center gap-3 sm:gap-4" style={{ animationDelay: '0.2s' }}>
             <span className="inline-flex items-center gap-2 border border-border-soft px-3 py-2 text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone">

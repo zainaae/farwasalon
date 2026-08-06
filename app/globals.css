@@ -197,9 +197,10 @@
     font-family: var(--font-unbounded), 'Unbounded', sans-serif;
     font-weight: 700;
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    line-height: 1.15;
+    line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--ink);
+    text-wrap: balance;
   }
   .text-body {
     font-family: 'Inter', system-ui, sans-serif;
@@ -638,29 +639,52 @@
 .display-section {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
-  font-size: clamp(1.75rem, 4.5vw, 5.5rem);
-  line-height: 0.95;
+  /* Cap at ~4.25rem — 5.5rem made two-word banners (Our Services) dominate
+     the viewport and fight the body. Short all-caps banners still read large. */
+  font-size: clamp(1.75rem, 4.2vw, 4.25rem);
+  /* 0.95 clipped Unbounded ascenders/descenders inside overflow-hidden parents
+     and stacked lines ("WHAT WE" / "DO") looked glued. */
+  line-height: 1.08;
   letter-spacing: -0.02em;
   overflow-wrap: anywhere;
+  padding-block: 0.06em;
+  text-wrap: balance;
 }
 /* The inner-page h1 rung.
    Measured across the site there were SEVEN distinct h1 sizes — 108, 80, 65,
-   42, 40, 34, 30, 28 — so "page title" meant nothing consistent. The 65px
-   .display-section suits a one-word banner (OUR STORY, WHAT WE DO); it is far
+   42, 40, 34, 30, 28 — so "page title" meant nothing consistent. The
+   .display-section suits a short banner (OUR STORY, WHAT WE DO); it is far
    too large for "Facials in PECHS, Karachi". Inner pages need their own rung,
    and there wasn't one.
 
    .display-card used to sit here at clamp(1.2rem, 2.5vw, 2rem) in Syne. That
    measured SMALLER than .section-title on mobile (19.2 vs 20px) and identical
    to it at 1024 — a fourth name for a rung that already existed. This is the
-   geometric mean between .display-section (65px) and .section-title (28px),
+   geometric mean between .display-section and .section-title (28px),
    in Unbounded to match the display face its neighbours use. */
 .display-page {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   font-size: clamp(1.5rem, 3vw, 2.7rem);
-  line-height: 1.05;
+  line-height: 1.12;
   letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+  padding-block: 0.04em;
+  text-wrap: balance;
+}
+/* Em-dash ornaments inside display titles used font-light italic Unbounded —
+   a weight/style the face barely supports, so the dash floated as a mistyped
+   glyph. Keep the dash roman, slightly quieter, optically centered. */
+.display-dash {
+  display: inline-block;
+  margin-inline: 0.28em;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.55em;
+  line-height: 1;
+  color: var(--border-soft);
+  vertical-align: 0.12em;
+  letter-spacing: 0;
 }
 @keyframes heroScrollBar {
   from { transform: translateY(-100%); }

@@ -40,8 +40,8 @@ export default function BlogIndexClient({ posts }) {
 
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
           <p className="hero-fade-up eyebrow mb-4">— Guides from the chair</p>
-          <h1 className="hero-rise display-section text-ink mb-4" style={{ animationDuration: '0.9s' }}>
-            BEAUTY TIPS<span className="text-border-soft mx-3 font-light italic text-[0.6em]">—</span>GUIDES
+          <h1 className="hero-rise display-page text-ink mb-4" style={{ animationDuration: '0.9s' }}>
+            Beauty tips &amp; guides
           </h1>
           <p className="hero-fade-up text-body max-w-lg" style={{ animationDelay: '0.15s' }}>
             Expert advice from our team — bridal prep timelines, skincare for Karachi weather, and professional tips you can use at home.

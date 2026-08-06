@@ -82,7 +82,7 @@ export default function AzadiSalePage() {
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0 max-w-2xl">
           <p className="eyebrow mb-4">— Freedom Deal</p>
-          <h1 className="display-section text-ink mb-4">This offer has ended</h1>
+          <h1 className="display-page text-ink mb-4">This offer has ended</h1>
           <p className="text-body md:text-lg mb-3 leading-relaxed">
             The Freedom Deal ({range} 2026) is over. Printed rates on the price list apply again —
             book online or WhatsApp when you are ready.
