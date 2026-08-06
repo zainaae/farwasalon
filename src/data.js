@@ -167,7 +167,7 @@ export const SERVICES = {
       desc: 'Our signature all-day bridal experience — hair, makeup, draping, and touch-ups from preparation to reception.',
       includes: ['Bridal makeup', 'Hair styling', 'Dupatta draping', 'Touch-up kit', 'Event presence'] },
     { id: _id++, name: 'Bridal Trial', category: 'Bridal', pricePkr: 8000, durationMinutes: 120,
-      desc: 'A full preview of your wedding look so you walk down the aisle knowing you look perfect.',
+      desc: 'Two hours, four to six weeks out. You see the whole look — makeup, hair, draping — and leave with reference photos, so nothing is decided for the first time on the day.',
       includes: ['Look consultation', 'Full hair & makeup trial', 'Photos for reference'] },
     { id: _id++, name: 'Engagement Look', category: 'Bridal', pricePkr: 12000, durationMinutes: 150,
       desc: 'Glam-ready styling for your engagement — romantic, radiant, and completely you.',

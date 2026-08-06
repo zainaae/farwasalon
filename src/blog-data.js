@@ -669,7 +669,7 @@ export const BLOG_POSTS = [
     category: 'Skincare',
     relatedCategories: ['Facials', 'Cleansing', 'Bleach & Polish'],
     content: [
-      { type: 'p', text: 'Karachi\'s summer is relentless — the humidity, the heat, the dust. Your skincare routine needs to adapt, but many women make the same mistakes year after year. After 17+ years of treating Karachi skin, here\'s what we see most often at Farwa Beauty Salon.' },
+      { type: 'p', text: 'Karachi\'s summer is relentless — the humidity, the heat, the dust. Your skincare routine needs to adapt, but many women make the same mistakes year after year. After 18 years of treating Karachi skin, here\'s what we see most often at Farwa Beauty Salon.' },
       { type: 'p', text: 'The good news is that most summer skin problems are completely preventable. Small adjustments to your routine can make the difference between dull, breakout-prone skin and a clear, healthy complexion that thrives even in 40-degree heat. Let us walk you through the five most common mistakes — and exactly how to fix them.' },
 
       { type: 'h2', text: '1. Skipping Moisturiser Because "It\'s Too Hot"' },
