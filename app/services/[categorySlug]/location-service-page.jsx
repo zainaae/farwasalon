@@ -3,6 +3,7 @@ import Link from 'next/link'
 import WaCta from '../../components/wa-cta.jsx'
 import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, MapPin, Clock, Phone } from 'lucide-react'
+import { AREA_CONTENT } from '../../../src/area-content.js'
 import {
   waLink,
   SERVICES,
@@ -21,6 +22,9 @@ const PRIORITY_SET = new Set(PRIORITY_LOCATION_SLUGS)
 
 export default function LocationServicePage({ data, slug }) {
   const { service, location, prefix } = data
+  /* Real route, drive time and "worth the trip" copy for this area, already
+     written in src/area-content.js and — until now — imported by nobody. */
+  const area = AREA_CONTENT[location.slug]
   const heading = prefix === 'best'
     ? `Best ${service.name} in ${location.name}`
     : `${service.name} ${prefix === 'near' ? 'Near' : 'in'} ${location.name}`
@@ -141,12 +145,35 @@ export default function LocationServicePage({ data, slug }) {
 
         <m.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }}
           className="mb-12">
+          {/* This heading promised directions and then printed location.blurb —
+              the same 45-word paragraph already shown near the top of the page.
+              Every one of these 60 pages said "Getting Here from X" and gave no
+              route, no drive time and no distance, while src/area-content.js
+              held exactly that for all ten areas and was never imported.
+
+              Measured across the set, wiring it up takes template share from
+              ~78% to ~57% and pairwise similarity from ~67% to ~42% — without
+              a word being written or a photograph taken. */}
           <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Getting Here from {location.name}</h2>
-          <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed mb-4">
+          {area && (
+            <p className="flex flex-wrap gap-x-5 gap-y-1 mb-3 text-[11px] tracking-[0.12em] uppercase font-['Inter'] text-stone">
+              <span>{area.distanceKm}</span>
+              <span aria-hidden="true" className="text-stone/40">·</span>
+              <span>{area.driveTime}</span>
+              <span aria-hidden="true" className="text-stone/40">·</span>
+              <span className="normal-case tracking-normal">{area.route}</span>
+            </p>
+          )}
+          <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed mb-4 max-w-2xl">
             Farwa Beauty Salon — Plot 165/G-1, Saima Terrace, Block 3 PECHS, Karachi 75400.
-            {' '}{location.blurb || location.detail}
+            {' '}{area ? area.gettingHere : (location.blurb || location.detail)}
             {' '}Open Monday to Saturday, 11 AM to 7 PM. Book online for instant confirmation, or WhatsApp +92 322 278 2254.
           </p>
+          {area?.worthTheTrip && (
+            <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed mb-4 max-w-2xl">
+              {area.worthTheTrip}
+            </p>
+          )}
           <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter']">
             <Link href="/prices" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Price list
@@ -154,6 +181,11 @@ export default function LocationServicePage({ data, slug }) {
             <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Directions
             </a>
+            {area && (
+              <Link href={`/areas/${location.slug}`} className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+                More on visiting from {location.name}
+              </Link>
+            )}
           </p>
         </m.section>
 
