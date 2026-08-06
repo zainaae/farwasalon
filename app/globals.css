@@ -1032,10 +1032,12 @@ button.tap-safe,
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   font-size: clamp(2.6rem, 8vw, 5rem);
-  line-height: 0.92;
+  /* 0.92 glued stacked lines and clipped Unbounded caps ("14%", "Off"). */
+  line-height: 1.12;
   letter-spacing: -0.035em;
   color: var(--azadi-deep);
   overflow-wrap: anywhere;
+  padding-block: 0.12em;
 }
 .azadi-btn {
   display: inline-flex;

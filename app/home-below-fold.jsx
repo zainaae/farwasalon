@@ -776,7 +776,7 @@ function CtaBand() {
         >
           <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
           <h2
-            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.05] text-balance max-w-2xl lg:max-w-none"
+            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.08] text-balance max-w-2xl lg:max-w-none ps-[0.35em] pe-[0.04em] pb-[0.04em]"
             style={{ fontSize: 'clamp(1.9rem, 5.5vw + 0.5rem, 4rem)' }}
           >
             Ready for your glow? We&apos;re ready for you.
