@@ -116,7 +116,7 @@ export default function BridalLandingPage() {
                 From the chair
               </p>
               <p className="mt-1.5 text-stone text-xs font-['Inter'] font-light">
-                Owned studio still — bridal work in PECHS, not a stock look.
+                Bridal work at the PECHS studio.
               </p>
             </figcaption>
           </figure>
