@@ -108,7 +108,7 @@ export default async function AreaPage({ params }) {
         </nav>
 
         <p className="eyebrow mb-4">— Coming from {area.name}</p>
-        <h1 className="font-[family-name:var(--font-unbounded)] font-bold text-2xl md:text-[2.1rem] text-ink mb-5 max-w-3xl leading-tight tracking-tight">
+        <h1 className="display-page text-ink mb-5 max-w-2xl">
           Beauty Salon for {area.name}
           <span className="block text-stone text-base md:text-lg font-['Inter'] font-light mt-2">
             One studio in Block 3, PECHS — {content.driveTime} away

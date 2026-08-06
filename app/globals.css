@@ -643,11 +643,24 @@
   letter-spacing: -0.02em;
   overflow-wrap: anywhere;
 }
-.display-card {
-  font-family: var(--font-syne), 'Syne', sans-serif;
+/* The inner-page h1 rung.
+   Measured across the site there were SEVEN distinct h1 sizes — 108, 80, 65,
+   42, 40, 34, 30, 28 — so "page title" meant nothing consistent. The 65px
+   .display-section suits a one-word banner (OUR STORY, WHAT WE DO); it is far
+   too large for "Facials in PECHS, Karachi". Inner pages need their own rung,
+   and there wasn't one.
+
+   .display-card used to sit here at clamp(1.2rem, 2.5vw, 2rem) in Syne. That
+   measured SMALLER than .section-title on mobile (19.2 vs 20px) and identical
+   to it at 1024 — a fourth name for a rung that already existed. This is the
+   geometric mean between .display-section (65px) and .section-title (28px),
+   in Unbounded to match the display face its neighbours use. */
+.display-page {
+  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(1.5rem, 3vw, 2.7rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
 }
 @keyframes heroScrollBar {
   from { transform: translateY(-100%); }
