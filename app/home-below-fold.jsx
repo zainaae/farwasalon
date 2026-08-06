@@ -359,15 +359,24 @@ function FeaturedServices() {
 }
 
 function TrustPillars() {
+  /* Flat #0d0d0d with three short paragraphs across the left two-thirds was
+      329x1440px of the least interesting surface on the site — the band read
+      as a gap between sections rather than as a chapter. The hero already
+      earns its dark field with a weighted gradient; this is the same idea in
+      one declaration, no JS, and the gold is the accent's best number
+      anywhere (8.82:1 on ink). */
   return (
-    <section className="cv-auto bg-ink py-14 md:py-16 px-4 sm:px-5 md:px-10">
+    <section
+      className="cv-auto bg-ink py-14 md:py-16 px-4 sm:px-5 md:px-10"
+      style={{ backgroundImage: 'radial-gradient(75% 120% at 16% 0%, rgba(201,169,138,0.10), transparent 60%)' }}
+    >
       <div className="max-w-screen-xl mx-auto">
         <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="text-accent-gold text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-10">— Why choose Farwa</m.p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-10">
           {[
             { num: '01', title: `${YEARS_ACTIVE} Years in PECHS`, desc: 'Since 2008 — the same chair-side standard whether you are in for ten minutes or a full bridal day.' },
-            { num: '02', title: 'Book Online, Walk In Welcome', desc: 'Real-time slots on farwasalon.com/book, WhatsApp for questions, and walk-ins when we have room.' },
+            { num: '02', title: 'Book Online, Walk In Welcome', desc: 'Real-time slots online, WhatsApp for questions, and walk-ins when we have room.' },
             { num: '03', title: 'Transparent PKR Pricing', desc: 'Every service listed with PKR on the site — no surprise quotes at the counter.' },
           ].map((p, i) => (
             <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
