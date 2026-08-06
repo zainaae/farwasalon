@@ -21,7 +21,7 @@ export default function GalleryClient() {
             <p className="hero-fade-up eyebrow mb-4">— Gallery</p>
             {/* No overflow-hidden — it clipped Unbounded descenders on "DO". */}
             <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
-              <span className="block">WHAT WE</span> <span className="block">DO</span>
+              What we do
             </h1>
             <p className="hero-fade-up text-body max-w-xl mt-5" style={{ animationDelay: '0.15s' }}>
               A look at the services we offer in our PECHS studio — bridal, hair,

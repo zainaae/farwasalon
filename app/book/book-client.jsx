@@ -516,16 +516,14 @@ export default function BookClient() {
       <div className="section-shell section-pad min-h-0 min-w-0 max-w-full overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
 
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
-          <m.div className="overflow-hidden">
-            <m.h1
-              initial={{ y: '40%', opacity: 0.85 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="display-section text-ink mb-4 break-words"
-            >
-              BOOK<span className="text-border-soft mx-1.5 sm:mx-3 font-light italic text-[0.6em]">—</span>ONLINE
-            </m.h1>
-          </m.div>
+          <m.h1
+            initial={{ y: 16, opacity: 0.85 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="display-page text-ink mb-4 break-words"
+          >
+            Book online
+          </m.h1>
           <m.p
             initial={{ opacity: 0.85, y: 10 }}
             animate={{ opacity: 1, y: 0 }}

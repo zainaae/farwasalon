@@ -57,8 +57,8 @@ export default function PricesPage() {
       <JsonLd data={buildPriceListSchema()} />
       <div className="section-shell section-pad min-h-0">
         <p className="eyebrow mb-4">— Price list · updated {UPDATED}</p>
-        <h1 className="display-section text-ink mb-4 max-w-2xl">
-          Salon Price List Karachi 2026 — From Rs 100
+        <h1 className="display-page text-ink mb-4 max-w-2xl">
+          Salon price list — from Rs 100
         </h1>
         {/* The claim lives here, on the page that proves it. It used to live on
             the homepage while this page said only "every priced service", so

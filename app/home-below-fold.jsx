@@ -8,14 +8,14 @@ import { m } from 'framer-motion'
 import { ArrowUpRight, ChevronRight, Quote } from 'lucide-react'
 import StarRating from './components/star-rating.jsx'
 import {
-  AnimatedNumber, LazyVideo, CAT_SLUGS,
+  LazyVideo, CAT_SLUGS,
   WordmarkDivider,
 } from '../src/shared.jsx'
 import { formatPrice } from '../src/data.js'
 import { GOOGLE_GBP_STATS, FACEBOOK_TESTIMONIALS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK, MONTHLY_APPOINTMENTS } from '../src/data.js'
+import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK } from '../src/data.js'
 import { EDITORIAL_PHOTOS } from '../src/salon-media.js'
 import {
   getGbpStatsForDisplay,
@@ -25,9 +25,6 @@ import {
   sortByRecency,
   newestPostedAt,
 } from '../lib/google-reviews.js'
-
-const CATEGORY_COUNT = Object.keys(SERVICES).length
-const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 
 /* The testimonials themselves now live in src/google-reviews-data.js, with an
    absolute `postedAt` each, so the freshness tests can see them and so the
@@ -60,48 +57,32 @@ function EditorialMedia({ item, className = '' }) {
 }
 
 function StatsStrip() {
+  /* Story band only. The four trust figures live in ProofStrip under the hero —
+     repeating years / appointments / service count here made the page feel like
+     it was restating itself, and overflow-hidden on the title clipped Unbounded. */
   return (
-    <section className="cv-auto bg-white py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10">
+    <section className="cv-auto bg-white py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10 border-b border-border-soft">
       <div className="max-w-screen-xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-          <div className="overflow-hidden">
-            <m.div initial={{ y: '40%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}>
-              <p className="eyebrow mb-3">— Est. 2008 · PECHS</p>
-              <h2 className="display-section max-w-2xl">
-                A beauty studio with {YEARS_ACTIVE} years of care
-              </h2>
-            </m.div>
-          </div>
+        <div className="grid md:grid-cols-2 gap-8 md:gap-14 items-end">
+          <m.div initial={{ y: 28, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}>
+            <p className="eyebrow mb-3">— Est. 2008 · PECHS</p>
+            <h2 className="display-page max-w-xl text-ink">
+              A beauty studio with {YEARS_ACTIVE} years of care
+            </h2>
+          </m.div>
           <m.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.15 }}
-            className="flex flex-col gap-6 sm:gap-7">
-            <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
+            viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.12 }}
+            className="flex flex-col gap-5 sm:gap-6 md:pb-1">
+            <p className="text-body max-w-xl">
               For over {YEARS_ACTIVE}{' '}years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-4 border-t border-border-soft pt-6 sm:pt-7">
-              {[
-                { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
-                { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Specialities, one roof' },
-                { display: String(SERVICE_COUNT), final: SERVICE_COUNT, label: 'Services, every price printed' },
-                { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-US')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
-              ].map(({ display, final, label }) => (
-                <div key={label} className="min-w-0">
-                  <p className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none tabular-nums">
-                    {final !== null
-                      ? <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
-                      : display}
-                  </p>
-                  <p className="text-stone text-[11px] tracking-wide font-[family-name:var(--font-inter)] leading-tight">{label}</p>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-              <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-[family-name:var(--font-inter)] group w-fit">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1 border-t border-border-soft">
+              <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-[family-name:var(--font-inter)] group w-fit pt-4">
                 <span className="link-underline">Book a visit</span>
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
-              <Link href="/about" className="tap-safe text-stone hover:text-ink text-[11px] tracking-wide font-[family-name:var(--font-inter)] transition-colors">
+              <Link href="/about" className="tap-safe text-stone hover:text-ink text-[11px] tracking-wide font-[family-name:var(--font-inter)] transition-colors pt-4">
                 Our story
               </Link>
             </div>
@@ -276,25 +257,25 @@ function FeaturedServices() {
   const visibleCategories = filterServiceCategories(categories, activeTab)
 
   return (
-    <section className="cv-auto bg-white section-pad border-t border-border-soft">
+    <section className="cv-auto bg-mist section-pad border-t border-border-soft">
       <div className="section-shell">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-10 md:mb-12">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between mb-8 md:mb-10">
           <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
             <p className="eyebrow mb-2">— What we do</p>
-            <h2 className="display-section">Our Services</h2>
+            <h2 className="display-page text-ink">Our services</h2>
           </m.div>
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="shrink-0 self-start sm:self-auto">
             <Link href="/services"
               className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-colors duration-300">
-              View All <ArrowUpRight className="w-3 h-3" />
+              Full menu <ArrowUpRight className="w-3 h-3" />
             </Link>
           </m.div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-start">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-            className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24">
+            className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24 shadow-soft">
             <ServiceMediaPanel hovered={hovered} />
           </m.div>
 
@@ -326,7 +307,7 @@ function FeaturedServices() {
                 </button>
               ))}
             </m.div>
-            <div className="divide-y divide-border-soft border-t border-border-soft">
+            <div className="divide-y divide-border-soft border-t border-border-soft bg-white/70 px-3 sm:px-4 -mx-3 sm:-mx-4">
               {visibleCategories.map((cat, i) => (
                 <div key={cat}>
                   <Link href={`/services/${CAT_SLUGS[cat]}`}
@@ -364,14 +345,9 @@ function FeaturedServices() {
               ))}
             </div>
 
-            <div className="mt-8 pt-6 border-t border-[#e4ddd7] space-y-3">
-              <p className="text-stone text-xs font-[family-name:var(--font-inter)] font-light">
+            <div className="mt-8 pt-6 border-t border-[#e4ddd7]">
+              <p className="text-body text-xs">
                 Book any service online — or <WaCta href={`https://wa.me/${WA_NUMBER}`} from="services-blurb" className="underline hover:text-ink transition-colors">reach us on WhatsApp</WaCta>.
-              </p>
-              <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] tracking-[0.12em] uppercase font-[family-name:var(--font-inter)] text-stone">
-                <Link href="/bridal" className="tap-safe hover:text-ink transition-colors">Bridal</Link>
-                <Link href="/prices" className="tap-safe hover:text-ink transition-colors">Prices</Link>
-                <Link href="/blog/bridal-beauty-timeline" className="tap-safe hover:text-ink transition-colors">Bridal timeline</Link>
               </p>
             </div>
           </div>
@@ -677,7 +653,7 @@ function TestimonialsPreview({ placesEnabled }) {
           className="flex flex-col gap-4 sm:gap-5 sm:flex-row sm:items-end sm:justify-between mb-8 sm:mb-10 md:mb-12">
           <div className="min-w-0">
             <p className="eyebrow mb-2">— Client reviews</p>
-            <h2 className="display-section">What clients say</h2>
+            <h2 className="display-page text-ink">What clients say</h2>
           </div>
           <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
             <StarRating size={11} className="text-stone/80" label={`${GOOGLE_GBP_STATS.rating} out of 5 stars`} />
@@ -800,7 +776,7 @@ function CtaBand() {
         >
           <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-3">&mdash; Visit us in PECHS</p>
           <h2
-            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.05] text-balance max-w-2xl lg:max-w-none"
+            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.08] text-balance max-w-2xl lg:max-w-none ps-[0.35em] pe-[0.04em] pb-[0.04em]"
             style={{ fontSize: 'clamp(1.9rem, 5.5vw + 0.5rem, 4rem)' }}
           >
             Ready for your glow? We&apos;re ready for you.

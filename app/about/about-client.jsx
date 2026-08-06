@@ -21,7 +21,7 @@ export default function AboutClient() {
               hydration (same LCP failure mode fixed on /services). */}
           <p className="hero-fade-up eyebrow mb-3">— Est. 2008 · PECHS, Karachi</p>
           <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
-            <span className="block">OUR</span> <span className="block">STORY</span>
+            Our story
           </h1>
         </div>
       </section>
@@ -50,9 +50,9 @@ export default function AboutClient() {
         <m.div className="section-shell">
           <div className="grid md:grid-cols-[1fr_1.4fr] gap-12 md:gap-20 items-start">
             <div>
-              <div className="overflow-hidden mb-10">
-                <m.h2 initial={{ y: '60%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-                  className="font-[family-name:var(--font-unbounded)] font-bold text-3xl md:text-4xl text-ink leading-tight">
+              <div className="mb-10">
+                <m.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+                  className="display-page text-ink">
                   A dream, a single chair, and {YEARS_ACTIVE} years of beauty.
                 </m.h2>
               </div>

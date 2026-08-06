@@ -73,7 +73,7 @@ export default function BridalLandingPage() {
         <div className="section-shell section-pad min-h-0">
           <p className="eyebrow mb-4">— Bridal · from Rs 8,000</p>
           <h1 id="bridal-headline" className="display-page text-ink mb-5 max-w-2xl">
-            Bridal Makeup Karachi — Packages from Rs 8,000
+            Bridal makeup in PECHS, Karachi
           </h1>
           <p id="bridal-lede" className="text-body md:text-lg max-w-2xl mb-8 leading-relaxed">
             Farwa in PECHS has styled weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000,
