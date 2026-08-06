@@ -69,21 +69,21 @@ export default function BlogIndexClient({ posts }) {
                   </div>
                 )}
                 <div className="min-w-0 pt-1">
-                  <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-accent-gold-deep mb-3">
+                  <p className="text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)] text-accent-gold-deep mb-3">
                     Featured · {featured.category}
                   </p>
-                  <h2 className="font-['Syne'] font-bold text-xl md:text-2xl lg:text-3xl text-ink leading-snug mb-3 group-hover:text-stone transition-colors">
+                  <h2 className="font-[family-name:var(--font-syne)] font-bold text-xl md:text-2xl lg:text-3xl text-ink leading-snug mb-3 group-hover:text-stone transition-colors">
                     {featured.title}
                   </h2>
                   <p className="text-body mb-4 max-w-md line-clamp-3">
                     {featured.description}
                   </p>
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-5 text-stone text-[10px] font-['Inter']">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-5 text-stone text-[10px] font-[family-name:var(--font-inter)]">
                     <time dateTime={featured.date}>{formatBlogDate(featured.date)}</time>
                     <span aria-hidden="true" className="text-border-soft">·</span>
                     <span>{featured.readTime}</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 text-[10px] tracking-[0.16em] uppercase font-medium font-['Inter'] text-ink group-hover:gap-2 transition-[gap]">
+                  <span className="inline-flex items-center gap-1 text-[10px] tracking-[0.16em] uppercase font-medium font-[family-name:var(--font-inter)] text-ink group-hover:gap-2 transition-[gap]">
                     Read article <ChevronRight className="w-3 h-3" />
                   </span>
                 </div>
@@ -99,7 +99,7 @@ export default function BlogIndexClient({ posts }) {
         <div className="mb-8">
           {/* One scrollable row. At 15 categories the shared .tab-scroller wraps
               above md and leaves a second line holding three lonely chips. */}
-          <ul className="tab-scroller blog-filter-row text-sm font-['Inter'] pb-1" aria-label="Filter articles by category">
+          <ul className="tab-scroller blog-filter-row text-sm font-[family-name:var(--font-inter)] pb-1" aria-label="Filter articles by category">
             {categories.map((cat) => (
               <li key={cat}>
                 <button
@@ -131,24 +131,24 @@ export default function BlogIndexClient({ posts }) {
                 >
                   <time
                     dateTime={post.date}
-                    className="shrink-0 text-stone text-[11px] font-['Inter'] tabular-nums sm:w-28"
+                    className="shrink-0 text-stone text-[11px] font-[family-name:var(--font-inter)] tabular-nums sm:w-28"
                   >
                     {formatBlogDate(post.date)}
                   </time>
                   <div className="min-w-0 flex-1">
-                    <p className="text-[10px] tracking-[0.16em] uppercase font-['Inter'] text-stone mb-1">
+                    <p className="text-[10px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1">
                       {post.category}
                       <span className="text-border-soft mx-2" aria-hidden="true">·</span>
                       {post.readTime}
                     </p>
-                    <h2 className="font-['Syne'] font-semibold text-lg md:text-xl text-ink leading-snug group-hover:text-stone transition-colors">
+                    <h2 className="font-[family-name:var(--font-syne)] font-semibold text-lg md:text-xl text-ink leading-snug group-hover:text-stone transition-colors">
                       {post.title}
                     </h2>
                     <p className="text-body text-sm mt-2 line-clamp-2 max-w-2xl">
                       {post.description}
                     </p>
                   </div>
-                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
                     Read <ChevronRight className="w-3 h-3" />
                   </span>
                 </Link>

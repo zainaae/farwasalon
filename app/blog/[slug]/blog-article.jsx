@@ -100,7 +100,7 @@ export default function BlogArticle({ slug }) {
 
         <div className="max-w-2xl">
           <nav aria-label="Breadcrumb" className="mb-5">
-            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-['Inter']">
+            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-[family-name:var(--font-inter)]">
               <li>
                 <Link href="/" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
                   Home
@@ -120,7 +120,7 @@ export default function BlogArticle({ slug }) {
           <div className="article-slide-in">
             <Link
               href="/blog"
-              className="tap-safe inline-flex items-center gap-2 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors mb-7"
+              className="tap-safe inline-flex items-center gap-2 text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors mb-7"
             >
               <ChevronLeft className="w-3.5 h-3.5" /> All Articles
             </Link>
@@ -133,10 +133,10 @@ export default function BlogArticle({ slug }) {
               hero already had to fix (see .hero-lcp in globals.css). */}
           <header className="mb-10 pb-8 border-b border-border-soft">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
+              <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-[family-name:var(--font-inter)] bg-mist px-2 py-1">
                 {post.category}
               </span>
-              <span className="text-stone text-[10px] font-['Inter']">{post.readTime}</span>
+              <span className="text-stone text-[10px] font-[family-name:var(--font-inter)]">{post.readTime}</span>
             </div>
             <h1 className="display-page text-ink mb-3">
               {post.title}
@@ -169,7 +169,7 @@ export default function BlogArticle({ slug }) {
                 return (
                   <h2
                     key={i}
-                    className="font-['Syne'] font-bold text-lg text-ink mt-8 mb-3"
+                    className="font-[family-name:var(--font-syne)] font-bold text-lg text-ink mt-8 mb-3"
                   >
                     {block.text}
                   </h2>
@@ -179,7 +179,7 @@ export default function BlogArticle({ slug }) {
                 return (
                   <h3
                     key={i}
-                    className="font-['Syne'] font-bold text-sm text-ink mt-5 mb-2"
+                    className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mt-5 mb-2"
                   >
                     {block.text}
                   </h3>
@@ -189,7 +189,7 @@ export default function BlogArticle({ slug }) {
                 return (
                   <ul
                     key={i}
-                    className="list-disc pl-5 mb-4 space-y-1.5 text-stone text-[15px] font-light leading-relaxed font-['Inter'] marker:text-[#c9a98a]"
+                    className="list-disc pl-5 mb-4 space-y-1.5 text-stone text-[15px] font-light leading-relaxed font-[family-name:var(--font-inter)] marker:text-[#c9a98a]"
                   >
                     {block.items?.map((item, j) => (
                       <li key={j}>{renderText(item)}</li>
@@ -201,7 +201,7 @@ export default function BlogArticle({ slug }) {
                 return (
                   <ol
                     key={i}
-                    className="list-decimal pl-5 mb-4 space-y-1.5 text-stone text-[15px] font-light leading-relaxed font-['Inter'] marker:text-[#c9a98a]"
+                    className="list-decimal pl-5 mb-4 space-y-1.5 text-stone text-[15px] font-light leading-relaxed font-[family-name:var(--font-inter)] marker:text-[#c9a98a]"
                   >
                     {block.items?.map((item, j) => (
                       <li key={j}>{renderText(item)}</li>
@@ -212,7 +212,7 @@ export default function BlogArticle({ slug }) {
               return (
                 <p
                   key={i}
-                  className="text-stone text-[15px] font-light leading-relaxed mb-4 font-['Inter']"
+                  className="text-stone text-[15px] font-light leading-relaxed mb-4 font-[family-name:var(--font-inter)]"
                 >
                   {renderText(block.text)}
                 </p>
@@ -223,14 +223,14 @@ export default function BlogArticle({ slug }) {
           <div className="mt-10 pt-8 border-t border-border-soft">
             <div className="flex items-start gap-4 mb-8">
               <div className="w-12 h-12 rounded-full bg-mist flex items-center justify-center flex-shrink-0">
-                <span className="text-ink font-['Syne'] font-bold text-lg">R</span>
+                <span className="text-ink font-[family-name:var(--font-syne)] font-bold text-lg">R</span>
               </div>
               <div>
-                <p className="font-['Syne'] font-bold text-sm text-ink">
+                <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink">
                   <Link href="/about#rubina" className="link-underline">{post.author || 'Rubina'}</Link>
                 </p>
-                <p className="text-stone text-xs font-['Inter'] mt-0.5">Founder, Farwa Beauty Salon</p>
-                <p className="text-stone text-[13px] font-light font-['Inter'] mt-2 leading-relaxed">
+                <p className="text-stone text-xs font-[family-name:var(--font-inter)] mt-0.5">Founder, Farwa Beauty Salon</p>
+                <p className="text-stone text-[13px] font-light font-[family-name:var(--font-inter)] mt-2 leading-relaxed">
                   {`Rubina founded Farwa Beauty Salon in 2008 and has spent ${YEARS_ACTIVE}+ years perfecting bridal artistry, skincare, and brow techniques in Karachi. She writes to help women make confident beauty decisions.`}
                 </p>
               </div>
@@ -239,7 +239,7 @@ export default function BlogArticle({ slug }) {
 
           {post.relatedCategories?.length > 0 && (
             <section className="pt-8 border-t border-border-soft">
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-4">Related Services</h2>
+              <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-4">Related Services</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {post.relatedCategories.map((cat) => {
                   const meta = CAT_META[cat]
@@ -250,7 +250,7 @@ export default function BlogArticle({ slug }) {
                       <Image src={meta.img} alt="" fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 50vw, 33vw" />
                       <div className="absolute inset-0 bg-ink/50 group-hover:bg-ink/60 transition-colors" />
                       <div className="absolute inset-0 flex items-end p-3">
-                        <span className="text-white font-['Syne'] font-bold text-xs uppercase">{cat}</span>
+                        <span className="text-white font-[family-name:var(--font-syne)] font-bold text-xs uppercase">{cat}</span>
                       </div>
                     </Link>
                   )
@@ -266,13 +266,13 @@ export default function BlogArticle({ slug }) {
             <WaCta
               href={WA_DEFAULT}
               from="blog-article"
-              className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
+              className="text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
             >
               Or WhatsApp us
             </WaCta>
             <Link
               href="/blog"
-              className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
+              className="text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
             >
               ← More articles
             </Link>
@@ -282,12 +282,12 @@ export default function BlogArticle({ slug }) {
             const related = getRelatedPosts(post, slug, 3)
             return related.length > 0 && (
               <section className="mt-10 pt-8 border-t border-border-soft">
-                <h2 className="font-['Syne'] font-bold text-base text-ink mb-4">Related Articles</h2>
+                <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-4">Related Articles</h2>
                 <div className="space-y-4">
                   {related.map((p) => (
                     <Link key={p.slug} href={`/blog/${p.slug}`} className="block group">
-                      <p className="font-['Syne'] font-bold text-sm text-ink group-hover:text-stone transition-colors leading-snug">{p.title}</p>
-                      <p className="text-stone text-xs font-['Inter'] mt-1 line-clamp-1">{p.description}</p>
+                      <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink group-hover:text-stone transition-colors leading-snug">{p.title}</p>
+                      <p className="text-stone text-xs font-[family-name:var(--font-inter)] mt-1 line-clamp-1">{p.description}</p>
                     </Link>
                   ))}
                 </div>

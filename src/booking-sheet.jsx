@@ -44,7 +44,7 @@ function MonthCalendar({ value, onChange }) {
           aria-label="Previous month">
           <ChevronLeft className="w-4 h-4" />
         </button>
-        <span className="font-['Syne'] font-bold text-sm text-ink">{monthLabel}</span>
+        <span className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink">{monthLabel}</span>
         <button type="button" onClick={next}
           className="w-9 h-9 flex items-center justify-center text-stone hover:text-ink transition-colors"
           aria-label="Next month">
@@ -56,7 +56,7 @@ function MonthCalendar({ value, onChange }) {
       <div className="grid grid-cols-7 mb-1">
         {['Su','Mo','Tu','We','Th','Fr','Sa'].map((d, i) => (
           <div key={d}
-            className={`text-center text-[9px] tracking-wide uppercase font-['Inter'] py-1.5 text-stone ${i === 0 ? 'line-through' : ''}`}>
+            className={`text-center text-[9px] tracking-wide uppercase font-[family-name:var(--font-inter)] py-1.5 text-stone ${i === 0 ? 'line-through' : ''}`}>
             {d}
           </div>
         ))}
@@ -94,7 +94,7 @@ function MonthCalendar({ value, onChange }) {
         })}
       </div>
 
-      <p className="text-[9px] text-stone font-['Inter'] mt-3 flex items-center gap-3">
+      <p className="text-[9px] text-stone font-[family-name:var(--font-inter)] mt-3 flex items-center gap-3">
         <span className="inline-flex items-center gap-1">
           <span className="inline-block w-3 h-3 border border-[#c9a98a]" aria-hidden="true" /> Today
         </span>
@@ -108,12 +108,12 @@ function BookingSheetSelectedChips({ picked, onRemove }) {
   if (picked.length === 0) return null
   return (
     <div>
-      <p className="text-stone text-[10px] tracking-[0.22em] uppercase font-['Inter'] mb-2">Selected ({picked.length})</p>
+      <p className="text-stone text-[10px] tracking-[0.22em] uppercase font-[family-name:var(--font-inter)] mb-2">Selected ({picked.length})</p>
       <ul className="flex flex-wrap gap-2 mb-4" aria-label="Selected services">
         {picked.map((p) => (
           <li key={p.id}>
-            <span className="inline-flex items-center gap-1.5 max-w-full pl-3 pr-1 py-1.5 bg-mist border border-border-soft text-[11px] font-['Inter'] text-ink">
-              <span className="truncate font-['Syne'] font-semibold uppercase tracking-tight">{p.name}</span>
+            <span className="inline-flex items-center gap-1.5 max-w-full pl-3 pr-1 py-1.5 bg-mist border border-border-soft text-[11px] font-[family-name:var(--font-inter)] text-ink">
+              <span className="truncate font-[family-name:var(--font-syne)] font-semibold uppercase tracking-tight">{p.name}</span>
               <button
                 type="button"
                 onClick={() => onRemove(p.id)}
@@ -253,13 +253,13 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
           >
             <div className="flex items-center justify-between px-5 md:px-7 py-3.5 md:py-4 border-b border-border-soft">
               <div>
-                <p className="text-stone text-[10px] tracking-[0.24em] uppercase font-['Inter']">Step {step + 1} of 3 · WhatsApp request</p>
+                <p className="text-stone text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)]">Step {step + 1} of 3 · WhatsApp request</p>
                 <h2 id="booking-title" className="font-[family-name:var(--font-unbounded)] font-bold text-ink text-base md:text-lg mt-0.5">
                   {step === 0 && 'Choose services'}
                   {step === 1 && 'Pick a date'}
                   {step === 2 && 'Pick a time'}
                 </h2>
-                <p className="mt-1 text-[10px] font-['Inter'] text-stone">
+                <p className="mt-1 text-[10px] font-[family-name:var(--font-inter)] text-stone">
                   Prefer a live slot?{' '}
                   <Link href="/book" onClick={onClose} className="underline underline-offset-2 hover:text-ink transition-colors">
                     Book online
@@ -282,9 +282,9 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
             <div ref={sheetRef} className="flex-1 overflow-y-auto px-5 md:px-7 py-5 md:py-6 pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] md:pb-6 overscroll-contain flex flex-col min-h-0">
               {fallbackUrl && (
                 <div className="mb-4 p-3 border border-[#c9a98a] bg-[#faf7f5]">
-                  <p className="text-ink text-xs font-['Inter'] mb-2">Popup was blocked. Open WhatsApp manually:</p>
+                  <p className="text-ink text-xs font-[family-name:var(--font-inter)] mb-2">Popup was blocked. Open WhatsApp manually:</p>
                   <a href={fallbackUrl} target="_blank" rel="noreferrer"
-                    className="text-[#8b6d59] underline text-xs font-['Inter'] font-medium break-all">
+                    className="text-[#8b6d59] underline text-xs font-[family-name:var(--font-inter)] font-medium break-all">
                     Open WhatsApp manually →
                   </a>
                 </div>
@@ -295,7 +295,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                     <label htmlFor="bk-name" className="sr-only">Your name</label>
                     <input id="bk-name" type="text" placeholder="Your name" autoComplete="name"
                       value={bkName} onChange={e => setBkName(e.target.value)}
-                      className="border border-border-soft text-ink placeholder-stone text-sm font-['Inter'] px-4 py-2.5 w-full focus:outline-none focus:border-ink transition-colors bg-white" />
+                      className="border border-border-soft text-ink placeholder-stone text-sm font-[family-name:var(--font-inter)] px-4 py-2.5 w-full focus:outline-none focus:border-ink transition-colors bg-white" />
                   </div>
                   <BookingSheetSelectedChips picked={picked} onRemove={removePick} />
                   {!cat ? (
@@ -308,8 +308,8 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                             onClick={() => setCat(c)}
                             className="tap-safe p-3 border border-border-soft hover:border-ink hover:bg-mist transition-colors text-left"
                           >
-                            <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight">{c}</p>
-                            <p className="text-stone text-[10px] font-['Inter'] mt-1">{SERVICES[c].length} services</p>
+                            <p className="font-[family-name:var(--font-syne)] font-bold text-xs text-ink uppercase leading-tight">{c}</p>
+                            <p className="text-stone text-[10px] font-[family-name:var(--font-inter)] mt-1">{SERVICES[c].length} services</p>
                           </button>
                         ))}
                       </div>
@@ -319,12 +319,12 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                       <button
                         type="button"
                         onClick={() => setCat(null)}
-                        className="mb-3 shrink-0 inline-flex items-center gap-1.5 text-stone text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
+                        className="mb-3 shrink-0 inline-flex items-center gap-1.5 text-stone text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
                       >
                         <ChevronLeft className="w-3 h-3" /> Add from another category
                       </button>
-                      <p className="text-stone text-[10px] tracking-[0.22em] uppercase font-['Inter'] mb-2">{cat}</p>
-                      <p className="text-[11px] text-stone/80 font-['Inter'] font-light mb-3">
+                      <p className="text-stone text-[10px] tracking-[0.22em] uppercase font-[family-name:var(--font-inter)] mb-2">{cat}</p>
+                      <p className="text-[11px] text-stone/80 font-[family-name:var(--font-inter)] font-light mb-3">
                         Tap to select one or more. Then continue when you&apos;re ready.
                       </p>
                       <div className="flex flex-col divide-y divide-[#e4ddd7] border-y border-border-soft flex-1 min-h-0 overflow-y-auto overscroll-contain">
@@ -341,9 +341,9 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                               }`}
                             >
                               <div className="min-w-0">
-                                <span className="font-['Syne'] font-bold text-[13px] text-ink uppercase block">{s.name}</span>
+                                <span className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink uppercase block">{s.name}</span>
                                 {(s.pricePkr != null || s.durationMinutes != null) && (
-                                  <span className="text-stone text-[10px] font-['Inter'] mt-0.5 block">
+                                  <span className="text-stone text-[10px] font-[family-name:var(--font-inter)] mt-0.5 block">
                                     {s.pricePkr != null && formatServicePrice(s)}
                                     {s.pricePkr != null && s.durationMinutes != null && ' · '}
                                     {s.durationMinutes != null && formatDuration(s.durationMinutes)}
@@ -365,7 +365,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                       <button
                         type="button"
                         onClick={toggleCategoryHint}
-                        className="mt-4 text-left text-stone text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
+                        className="mt-4 text-left text-stone text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
                       >
                         {cat && picked.some((p) => p.id === `__cat__:${cat}`)
                           ? `Remove "${cat}" general booking`
@@ -379,7 +379,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                       <button
                         type="button"
                         onClick={() => setStep(1)}
-                        className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone transition-colors"
+                        className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-stone transition-colors"
                       >
                         Continue · {picked.length} service{picked.length === 1 ? '' : 's'}
                       </button>
@@ -390,14 +390,14 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
 
               {step === 1 && (
                 <div>
-                  <p className="text-stone text-sm font-['Inter'] font-light mb-2">
+                  <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-2">
                     <span className="text-ink font-medium">{picked.length}</span>{' '}
                     service{picked.length === 1 ? '' : 's'} selected
                   </p>
                   {picked.length <= 3 ? (
-                    <p className="text-ink text-xs font-['Inter'] mb-5 leading-relaxed">{serviceNamesSummary}</p>
+                    <p className="text-ink text-xs font-[family-name:var(--font-inter)] mb-5 leading-relaxed">{serviceNamesSummary}</p>
                   ) : (
-                    <ul className="text-ink text-xs font-['Inter'] mb-5 list-disc pl-5 space-y-1 max-h-[5.5rem] overflow-y-auto">
+                    <ul className="text-ink text-xs font-[family-name:var(--font-inter)] mb-5 list-disc pl-5 space-y-1 max-h-[5.5rem] overflow-y-auto">
                       {picked.map((p) => (
                         <li key={p.id}>{p.name}</li>
                       ))}
@@ -408,7 +408,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                     <button
                       type="button"
                       onClick={() => setStep(0)}
-                      className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink transition-colors"
+                      className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] px-4 py-3 hover:text-ink transition-colors"
                     >
                       ← Back
                     </button>
@@ -418,7 +418,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
 
               {step === 2 && (
                 <div>
-                  <p className="text-stone text-sm font-['Inter'] font-light mb-2">
+                  <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-2">
                     {picked.length} service{picked.length === 1 ? '' : 's'} ·{' '}
                     <span className="text-ink font-medium">{date ? new Date(`${date}T12:00:00`).toDateString() : ''}</span>
                   </p>
@@ -428,7 +428,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                         key={t}
                         type="button"
                         onClick={() => setTime(t)}
-                        className={`tap-safe py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-colors ${
+                        className={`tap-safe py-3 border text-[11px] tracking-wide font-[family-name:var(--font-syne)] font-bold transition-colors ${
                           time === t
                             ? 'bg-ink text-white border-ink'
                             : 'border-border-soft text-ink hover:border-ink hover:bg-mist'
@@ -443,7 +443,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                     <button
                       type="button"
                       onClick={() => setStep(1)}
-                      className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink"
+                      className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] px-4 py-3 hover:text-ink"
                     >
                       Back
                     </button>
@@ -451,7 +451,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
                       type="button"
                       onClick={handleBook}
                       disabled={!time}
-                      className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                      className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-stone disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
                     >
                       <Sparkles className="w-3.5 h-3.5" /> Send on WhatsApp
                     </button>

@@ -71,11 +71,11 @@ export default function GalleryClient() {
           <m.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, delay: 0.15 }}
             className="flex flex-col sm:flex-row items-start sm:items-center gap-4 shrink-0">
             <button type="button" onClick={() => booking.open()}
-              className="inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-8 py-4 hover:bg-nude transition-colors duration-300">
+              className="inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-8 py-4 hover:bg-nude transition-colors duration-300">
               Book an Appointment
             </button>
             <WaCta href={WA_DEFAULT} from="gallery"
-              className="tap-safe link-underline !inline-flex items-center gap-1.5 text-white/50 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors">
+              className="tap-safe link-underline !inline-flex items-center gap-1.5 text-white/50 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors">
               <span className="min-w-0">WhatsApp us</span>
               <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
             </WaCta>

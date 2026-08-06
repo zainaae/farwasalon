@@ -64,7 +64,7 @@ export default function DealsPage() {
           PKR pricing as our <Link href="/prices" className="link-underline text-ink font-medium">full price list</Link>.
           If a deal is listed here, it is honoured at the counter, no conditions invented on arrival.
         </p>
-        <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-10 leading-relaxed">
+        <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-2xl mb-10 leading-relaxed">
           No fake countdowns. When a deal has an end date, it is printed on the deal — and it really ends.
         </p>
 
@@ -74,11 +74,11 @@ export default function DealsPage() {
             const primaryLabel = freedomLive && d.id === 'freedom-deal-2026' ? 'See Freedom Deal' : 'Book online'
             return (
             <section key={d.id} className="panel-soft p-6 md:p-7 shadow-soft" aria-labelledby={`deal-${d.id}`}>
-              <p className="text-[10px] tracking-[0.24em] uppercase font-['Inter'] text-accent-gold-deep mb-2">
+              <p className="text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)] text-accent-gold-deep mb-2">
                 {upcoming.some((u) => u.id === d.id) ? `Starts ${formatDealRange(d)}` : d.category}
                 {d.validUntil ? ` · ${formatDealRange(d)}` : ' · ongoing welcome offer'}
               </p>
-              <h2 id={`deal-${d.id}`} className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-2">
+              <h2 id={`deal-${d.id}`} className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-2">
                 {d.title}
               </h2>
               {d.image && (
@@ -92,7 +92,7 @@ export default function DealsPage() {
                 />
               )}
               <p className="text-body text-sm mb-2 max-w-xl">{d.description}</p>
-              <p className="text-stone text-[12px] font-['Inter'] mb-5">{d.priceNote}</p>
+              <p className="text-stone text-[12px] font-[family-name:var(--font-inter)] mb-5">{d.priceNote}</p>
               <div className="flex flex-wrap items-center gap-3">
                 <Link href={primaryHref} className="tap-safe btn-primary !py-2.5 !px-5">
                   {primaryLabel} <ArrowUpRight className="w-3.5 h-3.5" />
@@ -107,7 +107,7 @@ export default function DealsPage() {
         </div>
 
         <section className="mt-14 pt-10 border-t border-border-soft max-w-3xl">
-          <h2 className="font-['Syne'] font-semibold text-ink text-lg md:text-xl mb-3">
+          <h2 className="font-[family-name:var(--font-syne)] font-semibold text-ink text-lg md:text-xl mb-3">
             Why so few deals?
           </h2>
           <p className="text-body text-sm max-w-2xl mb-3">

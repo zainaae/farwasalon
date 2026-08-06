@@ -54,7 +54,7 @@ export default function ProofStrip() {
                 <span className="font-[family-name:var(--font-unbounded)] font-bold text-white text-[15px] md:text-base leading-none tabular-nums">
                   {lead}
                 </span>
-                <span className="text-white/70 text-[11px] md:text-xs font-['Inter'] leading-none">
+                <span className="text-white/70 text-[11px] md:text-xs font-[family-name:var(--font-inter)] leading-none">
                   {label}
                 </span>
               </>

@@ -92,16 +92,16 @@ function StatsStrip() {
                       ? <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
                       : display}
                   </p>
-                  <p className="text-stone text-[11px] tracking-wide font-['Inter'] leading-tight">{label}</p>
+                  <p className="text-stone text-[11px] tracking-wide font-[family-name:var(--font-inter)] leading-tight">{label}</p>
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-              <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-['Inter'] group w-fit">
+              <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-[family-name:var(--font-inter)] group w-fit">
                 <span className="link-underline">Book a visit</span>
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
-              <Link href="/about" className="tap-safe text-stone hover:text-ink text-[11px] tracking-wide font-['Inter'] transition-colors">
+              <Link href="/about" className="tap-safe text-stone hover:text-ink text-[11px] tracking-wide font-[family-name:var(--font-inter)] transition-colors">
                 Our story
               </Link>
             </div>
@@ -130,7 +130,7 @@ function EditorialSlideshow() {
         <p className="eyebrow mb-0">— The work</p>
         <Link
           href="/gallery"
-          className="tap-safe inline-flex items-center gap-1.5 text-[10px] tracking-[0.16em] uppercase font-['Inter'] text-ink hover:text-stone transition-colors"
+          className="tap-safe inline-flex items-center gap-1.5 text-[10px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-ink hover:text-stone transition-colors"
         >
           See the work <ArrowUpRight className="w-3 h-3" />
         </Link>
@@ -163,10 +163,10 @@ function EditorialSlideshow() {
                 <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
                 <span className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-                  <span className="text-white text-[10px] tracking-[0.2em] md:tracking-[0.18em] uppercase font-['Inter'] font-medium leading-none">
+                  <span className="text-white text-[10px] tracking-[0.2em] md:tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] font-medium leading-none">
                     {p.label}
                   </span>
-                  <span className="md:hidden text-white/60 text-[9px] font-['Inter'] tabular-nums">
+                  <span className="md:hidden text-white/60 text-[9px] font-[family-name:var(--font-inter)] tabular-nums">
                     {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
                   </span>
                 </span>
@@ -179,7 +179,7 @@ function EditorialSlideshow() {
       <div className="section-shell px-4 sm:px-5 md:px-10 pb-5 pt-1">
         <Link
           href="/gallery"
-          className="tap-safe link-underline text-stone hover:text-ink text-[11px] font-['Inter'] transition-colors"
+          className="tap-safe link-underline text-stone hover:text-ink text-[11px] font-[family-name:var(--font-inter)] transition-colors"
         >
           Browse the full gallery
         </Link>
@@ -256,10 +256,10 @@ function ServiceMediaPanel({ hovered }) {
         />
       )}
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 bg-gradient-to-t from-ink/80 to-transparent z-10">
-        <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-colors duration-300">
+        <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)] transition-colors duration-300">
           {hovered ?? 'Farwa Beauty Salon'}
         </p>
-        <p className="text-white font-['Syne'] font-bold text-sm transition-colors duration-300">
+        <p className="text-white font-[family-name:var(--font-syne)] font-bold text-sm transition-colors duration-300">
           {hovered ? `${SERVICES[hovered]?.length} services` : 'PECHS, Karachi'}
         </p>
       </div>
@@ -286,7 +286,7 @@ function FeaturedServices() {
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="shrink-0 self-start sm:self-auto">
             <Link href="/services"
-              className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-colors duration-300">
+              className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-colors duration-300">
               View All <ArrowUpRight className="w-3 h-3" />
             </Link>
           </m.div>
@@ -338,18 +338,18 @@ function FeaturedServices() {
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="min-w-0">
-                        <span className="block font-['Syne'] font-bold text-sm md:text-base uppercase text-ink group-hover:text-stone transition-colors duration-200 truncate">
+                        <span className="block font-[family-name:var(--font-syne)] font-bold text-sm md:text-base uppercase text-ink group-hover:text-stone transition-colors duration-200 truncate">
                           {cat}
                         </span>
                         {CAT_META[cat]?.tagline && (
-                          <span className="block text-stone text-[11px] font-['Inter'] mt-0.5 truncate">
+                          <span className="block text-stone text-[11px] font-[family-name:var(--font-inter)] mt-0.5 truncate">
                             {CAT_META[cat].tagline}
                           </span>
                         )}
                       </span>
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
-                      <span className="text-stone text-[11px] font-['Inter'] hidden sm:block">
+                      <span className="text-stone text-[11px] font-[family-name:var(--font-inter)] hidden sm:block">
                         {(() => {
                           const prices = SERVICES[cat].map((s) => s.pricePkr).filter(Boolean)
                           return prices.length
@@ -365,10 +365,10 @@ function FeaturedServices() {
             </div>
 
             <div className="mt-8 pt-6 border-t border-[#e4ddd7] space-y-3">
-              <p className="text-stone text-xs font-['Inter'] font-light">
+              <p className="text-stone text-xs font-[family-name:var(--font-inter)] font-light">
                 Book any service online — or <WaCta href={`https://wa.me/${WA_NUMBER}`} from="services-blurb" className="underline hover:text-ink transition-colors">reach us on WhatsApp</WaCta>.
               </p>
-              <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] tracking-[0.12em] uppercase font-['Inter'] text-stone">
+              <p className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] tracking-[0.12em] uppercase font-[family-name:var(--font-inter)] text-stone">
                 <Link href="/bridal" className="tap-safe hover:text-ink transition-colors">Bridal</Link>
                 <Link href="/prices" className="tap-safe hover:text-ink transition-colors">Prices</Link>
                 <Link href="/blog/bridal-beauty-timeline" className="tap-safe hover:text-ink transition-colors">Bridal timeline</Link>
@@ -386,7 +386,7 @@ function TrustPillars() {
     <section className="cv-auto bg-ink py-14 md:py-16 px-4 sm:px-5 md:px-10">
       <div className="max-w-screen-xl mx-auto">
         <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="text-accent-gold text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</m.p>
+          className="text-accent-gold text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-10">— Why choose Farwa</m.p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-10">
           {[
             { num: '01', title: `${YEARS_ACTIVE} Years in PECHS`, desc: 'Since 2008 — the same chair-side standard whether you are in for ten minutes or a full bridal day.' },
@@ -397,8 +397,8 @@ function TrustPillars() {
               viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
               className="border-t border-white/10 pt-7">
               <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-accent-gold mb-4">{p.num}</p>
-              <h3 className="font-['Syne'] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
-              <p className="text-nude/90 text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
+              <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
+              <p className="text-nude/90 text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">{p.desc}</p>
             </m.div>
           ))}
         </div>
@@ -423,13 +423,13 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
       <header className="flex items-center justify-between px-5 py-3.5 sm:py-4 border-b border-border-soft">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-9 h-9 bg-mist border border-border-soft flex items-center justify-center shrink-0">
-            <span className="text-ink font-['Syne'] font-semibold text-[11px]">{post.initials}</span>
+            <span className="text-ink font-[family-name:var(--font-syne)] font-semibold text-[11px]">{post.initials}</span>
           </div>
           <div className="min-w-0">
-            <p className="font-['Syne'] font-semibold text-[13px] text-ink truncate leading-tight">{post.name}</p>
+            <p className="font-[family-name:var(--font-syne)] font-semibold text-[13px] text-ink truncate leading-tight">{post.name}</p>
             <div className="flex items-center gap-1.5 mt-0.5">
               <StarRating size={8} className="text-stone/70" />
-              <span className="text-stone text-[9px] font-['Inter']">· {post.date}</span>
+              <span className="text-stone text-[9px] font-[family-name:var(--font-inter)]">· {post.date}</span>
             </div>
           </div>
         </div>
@@ -443,7 +443,7 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
       <div className="flex-1 px-5 py-4 sm:py-5 flex flex-col bg-white min-h-0">
         <Quote className="w-3.5 h-3.5 text-accent-gold/35 mb-2.5 rotate-180 shrink-0" aria-hidden="true" />
         <blockquote
-          className={`text-stone text-[13px] md:text-sm font-light leading-relaxed font-['Inter'] flex-1 ${
+          className={`text-stone text-[13px] md:text-sm font-light leading-relaxed font-[family-name:var(--font-inter)] flex-1 ${
             clampQuote ? 'line-clamp-4 sm:line-clamp-5' : ''
           }`}
         >
@@ -461,10 +461,10 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
           </a>
         )}
         <div className="flex items-center justify-between gap-3 mt-auto pt-4 border-t border-border-soft">
-          <span className="text-stone text-[9px] tracking-[0.18em] uppercase font-['Inter'] truncate">
+          <span className="text-stone text-[9px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] truncate">
             {post.service}
           </span>
-          <span className="inline-flex items-center gap-1 text-stone text-[9px] tracking-[0.16em] uppercase font-['Inter'] shrink-0">
+          <span className="inline-flex items-center gap-1 text-stone text-[9px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] shrink-0">
             {sourceLabel}
           </span>
         </div>
@@ -555,7 +555,7 @@ function ReviewDatingNote({ posts, sourceName }) {
   if (!absolute) return null
 
   return (
-    <p className="text-stone text-[10px] sm:text-[11px] font-['Inter'] font-light leading-relaxed mb-4 sm:mb-5 max-w-xl">
+    <p className="text-stone text-[10px] sm:text-[11px] font-[family-name:var(--font-inter)] font-light leading-relaxed mb-4 sm:mb-5 max-w-xl">
       Newest here is from {absolute}. Each is shown with the month it was
       posted, newest first — anything more recent is on {sourceName}.
     </p>
@@ -572,14 +572,14 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
       <div className="flex items-center justify-between gap-4 mb-3 sm:mb-4">
         <p className="eyebrow mb-0">— {label}</p>
         <a href={viewAllHref} target="_blank" rel="noreferrer"
-          className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1 shrink-0">
+          className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] transition-colors inline-flex items-center gap-1 shrink-0">
           View all <ArrowUpRight className="w-2.5 h-2.5" />
         </a>
       </div>
 
       <ReviewDatingNote posts={posts} sourceName={sourceName} />
 
-      <p className="md:hidden text-stone text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2.5">
+      <p className="md:hidden text-stone text-[9px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] mb-2.5">
         Swipe for more reviews →
       </p>
       {/* One render, restyled per breakpoint. This used to be two blocks — a
@@ -681,7 +681,7 @@ function TestimonialsPreview({ placesEnabled }) {
           </div>
           <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
             <StarRating size={11} className="text-stone/80" label={`${GOOGLE_GBP_STATS.rating} out of 5 stars`} />
-            <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug whitespace-nowrap">
+            <span className="text-stone text-[10px] sm:text-[11px] font-[family-name:var(--font-inter)] leading-snug whitespace-nowrap">
               {ratingLabel}
             </span>
           </div>
@@ -702,22 +702,22 @@ function TestimonialsPreview({ placesEnabled }) {
           }}
         >
           <Quote className="reviews-featured-mark absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 sm:w-10 sm:h-10 rotate-180 pointer-events-none" aria-hidden="true" />
-          <blockquote className={`relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6' : ''}`}>
+          <blockquote className={`relative z-[1] font-[family-name:var(--font-syne)] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6' : ''}`}>
             {featured.quote}
           </blockquote>
           {featured.translation && (
-            <p className="relative z-[1] text-stone text-center text-sm font-light mt-4 sm:mt-5 font-['Inter'] max-w-xl mx-auto leading-relaxed">
+            <p className="relative z-[1] text-stone text-center text-sm font-light mt-4 sm:mt-5 font-[family-name:var(--font-inter)] max-w-xl mx-auto leading-relaxed">
               {featured.translation}
             </p>
           )}
           <figcaption className="relative z-[1] flex flex-col items-center gap-3.5 mt-7 sm:mt-8">
             <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-              <span className="text-stone text-[10px] tracking-[0.2em] uppercase font-['Inter']">
+              <span className="text-stone text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)]">
                 {featured.name}
               </span>
               <span className="text-stone/40 hidden sm:inline" aria-hidden="true">·</span>
               <a href={featured.link} target="_blank" rel="noreferrer"
-                className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
+                className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] inline-flex items-center gap-1 transition-colors">
                 {featuredSourceLabel}{' '}
                 <ArrowUpRight className="w-2.5 h-2.5" />
               </a>
@@ -768,16 +768,16 @@ function TestimonialsPreview({ placesEnabled }) {
 
         <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="reviews-cta-row pt-8 sm:pt-10 border-t border-border-soft flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 sm:gap-6">
-          <p className="text-stone text-[11px] sm:text-xs font-light font-['Inter'] tracking-wide max-w-sm">
+          <p className="text-stone text-[11px] sm:text-xs font-light font-[family-name:var(--font-inter)] tracking-wide max-w-sm">
             Loved your visit? Help us spread the word.
           </p>
           <div className="reviews-cta-actions flex flex-col min-[480px]:flex-row sm:flex-row items-stretch gap-3 w-full lg:w-auto lg:max-w-xl">
             <a href={GOOGLE_REVIEW_LINK} target="_blank" rel="noreferrer"
-              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-5 sm:px-6 py-3 hover:bg-stone transition-colors duration-300">
+              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-5 sm:px-6 py-3 hover:bg-stone transition-colors duration-300">
               Write a Google review <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
             </a>
             <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
-              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-5 sm:px-6 py-3 bg-white">
+              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-5 sm:px-6 py-3 bg-white">
               Follow on Facebook <ArrowUpRight className="w-3 h-3 shrink-0" />
             </a>
           </div>
@@ -798,7 +798,7 @@ function CtaBand() {
           transition={{ duration: 0.8 }}
           className="w-full lg:flex-1 lg:min-w-0"
         >
-          <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
+          <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-3">&mdash; Visit us in PECHS</p>
           <h2
             className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.05] text-balance max-w-2xl lg:max-w-none"
             style={{ fontSize: 'clamp(1.9rem, 5.5vw + 0.5rem, 4rem)' }}
@@ -816,25 +816,25 @@ function CtaBand() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
             <Link
               href="/book"
-              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-[background-color,transform] duration-300 w-full sm:w-auto justify-center sm:justify-start"
+              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-[background-color,transform] duration-300 w-full sm:w-auto justify-center sm:justify-start"
             >
               Book an Appointment <ArrowUpRight className="w-4 h-4 shrink-0" />
             </Link>
             <Link
               href="/prices"
-              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
+              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
             >
               Price list
             </Link>
             <Link
               href="/bridal"
-              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
+              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
             >
               Bridal
             </Link>
             <Link
               href="/beauty-salon-karachi"
-              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
+              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
             >
               Beauty salon Karachi
             </Link>
@@ -842,7 +842,7 @@ function CtaBand() {
           <WaCta
             href={`https://wa.me/${WA_NUMBER}`}
             from="cta-band"
-            className="tap-safe text-white/60 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start lg:justify-end min-w-0"
+            className="tap-safe text-white/60 text-[10px] tracking-[0.12em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors flex items-center justify-center sm:justify-start lg:justify-end min-w-0"
           >
             Or reach us on WhatsApp
           </WaCta>
@@ -864,17 +864,17 @@ function FounderNote() {
       >
         <p className="eyebrow mb-6">— The House</p>
         <blockquote
-          className="font-['Syne'] italic text-ink text-balance leading-[1.3]"
+          className="font-[family-name:var(--font-syne)] italic text-ink text-balance leading-[1.3]"
           style={{ fontSize: 'clamp(1.35rem, 3.6vw, 2.25rem)' }}>
           &ldquo;Trends visit Karachi every season. Grace stays. I opened this
           salon in 2008 to give every woman on this street both.&rdquo;
         </blockquote>
-        <p className="mt-6 text-[11px] tracking-[0.28em] uppercase font-['Inter'] text-stone">
+        <p className="mt-6 text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] text-stone">
           Rubina · Founder, Farwa Beauty Salon
         </p>
         <Link
           href="/about"
-          className="tap-safe mt-8 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-['Inter'] text-ink hover:text-stone transition-colors"
+          className="tap-safe mt-8 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-ink hover:text-stone transition-colors"
         >
           Meet Rubina <ChevronRight className="w-3.5 h-3.5" />
         </Link>

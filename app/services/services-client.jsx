@@ -81,24 +81,24 @@ function MenuRow({ cat }) {
         <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h3 className="font-[family-name:var(--font-syne)] font-semibold text-ink text-base sm:text-lg md:text-xl leading-tight">{cat}</h3>
           {POPULAR_CATS.has(cat) && (
-            <span className="text-[9px] tracking-[0.18em] uppercase font-semibold font-['Inter'] text-accent-gold-deep">Most booked</span>
+            <span className="text-[9px] tracking-[0.18em] uppercase font-semibold font-[family-name:var(--font-inter)] text-accent-gold-deep">Most booked</span>
           )}
         </span>
         {meta.tagline && (
-          <p className="text-stone text-[13px] sm:text-sm font-light font-['Inter'] leading-snug mt-0.5">{meta.tagline}</p>
+          <p className="text-stone text-[13px] sm:text-sm font-light font-[family-name:var(--font-inter)] leading-snug mt-0.5">{meta.tagline}</p>
         )}
       </span>
-      <p className="col-start-2 row-start-2 md:col-start-3 md:row-start-1 md:text-right md:self-center text-stone text-[11px] font-['Inter'] whitespace-nowrap">
+      <p className="col-start-2 row-start-2 md:col-start-3 md:row-start-1 md:text-right md:self-center text-stone text-[11px] font-[family-name:var(--font-inter)] whitespace-nowrap">
         {count} services{availability ? ` · ${availability.toLowerCase()}` : ''}
       </p>
       <span className="col-start-3 row-start-1 row-span-2 md:col-start-4 md:row-start-1 md:row-span-1 text-right shrink-0">
         {minPrice && (
           <>
-            <span className="block text-[10px] tracking-[0.18em] uppercase font-['Inter'] text-stone">from</span>
+            <span className="block text-[10px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] text-stone">from</span>
             <span className="block font-[family-name:var(--font-unbounded)] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight tabular-nums">{formatPrice(minPrice)}</span>
           </>
         )}
-        <span className="mt-1.5 inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+        <span className="mt-1.5 inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200">
           View <ChevronRight className="w-3 h-3" />
         </span>
       </span>
@@ -134,7 +134,7 @@ export default function ServicesClient() {
               WhatsApp
             </WaCta>
             <Link href="/prices"
-              className="tap-safe link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors flex items-center">
+              className="tap-safe link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors flex items-center">
               Full price list
             </Link>
           </div>
@@ -148,7 +148,7 @@ export default function ServicesClient() {
               <li key={step.n} className="flex gap-3 min-w-0 sm:max-w-[14rem]">
                 <span className="font-[family-name:var(--font-unbounded)] text-[10px] text-accent-gold-deep shrink-0 pt-0.5" aria-hidden="true">{step.n}</span>
                 <span>
-                  <span className="block font-['Syne'] font-semibold text-ink text-sm mb-0.5">{step.title}</span>
+                  <span className="block font-[family-name:var(--font-syne)] font-semibold text-ink text-sm mb-0.5">{step.title}</span>
                   <span className="block text-body text-xs leading-relaxed">{step.line}</span>
                 </span>
               </li>
@@ -177,27 +177,27 @@ export default function ServicesClient() {
             </section>
           ))}
         </div>
-        <p className="mt-8 text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone/80">
+        <p className="mt-8 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone/80">
           Every price is a printed starting figure — final quotes confirmed before your appointment, never after.
         </p>
 
         <section className="mt-12 pt-10 border-t border-border-soft" aria-labelledby="areas-heading">
-          <h2 id="areas-heading" className="font-['Syne'] font-bold text-lg text-ink mb-3">
+          <h2 id="areas-heading" className="font-[family-name:var(--font-syne)] font-bold text-lg text-ink mb-3">
             Areas we serve
           </h2>
-          <p className="text-stone text-sm font-light font-['Inter'] mb-4 max-w-xl">
+          <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)] mb-4 max-w-xl">
             One PECHS studio — clients visit from across Karachi.
           </p>
           <ul className="flex flex-wrap gap-x-4 gap-y-1">
             {areaLinks.map(({ slug, href, label }) => (
               <li key={slug}>
-                <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink">
+                <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-[family-name:var(--font-inter)] hover:text-ink">
                   {label}
                 </Link>
               </li>
             ))}
             <li>
-              <Link href={AREAS_HUB_HREF} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-['Inter'] font-medium hover:text-stone">
+              <Link href={AREAS_HUB_HREF} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-[family-name:var(--font-inter)] font-medium hover:text-stone">
                 See all areas →
               </Link>
             </li>

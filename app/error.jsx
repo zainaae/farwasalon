@@ -25,7 +25,7 @@ export default function Error({ error, reset }) {
 
   return (
     <main id="main" className="min-h-screen bg-white flex flex-col items-center justify-center px-6 text-center pt-[calc(3.375rem+env(safe-area-inset-top,0px))]">
-      <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-3">
+      <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-3">
         — Something went wrong
       </p>
       <h1 className="font-[family-name:var(--font-unbounded)] font-bold text-3xl text-ink mb-4">
@@ -36,7 +36,7 @@ export default function Error({ error, reset }) {
       </p>
       <button
         onClick={() => reset()}
-        className="bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-7 py-4 hover:bg-stone transition-colors"
+        className="bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-7 py-4 hover:bg-stone transition-colors"
       >
         Try again
       </button>

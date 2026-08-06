@@ -123,7 +123,7 @@ function FirstVisitHint() {
         onClick={() => setOpen(o => !o)}
         className="tap-safe w-full flex items-center justify-between px-4 py-3 text-left"
       >
-        <span className="text-ink text-xs font-['Inter'] font-medium">First visit? Here&apos;s what to expect</span>
+        <span className="text-ink text-xs font-[family-name:var(--font-inter)] font-medium">First visit? Here&apos;s what to expect</span>
         <ChevronDown className={`w-4 h-4 text-stone transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
       <AnimatePresence>
@@ -143,7 +143,7 @@ function FirstVisitHint() {
                 'Optional: message us on WhatsApp for directions or questions',
                 'Walk-ins welcome — book online to skip the wait',
               ].map(tip => (
-                <li key={tip} className="flex items-start gap-2 text-stone text-xs font-['Inter'] font-light">
+                <li key={tip} className="flex items-start gap-2 text-stone text-xs font-[family-name:var(--font-inter)] font-light">
                   <Check className="w-3.5 h-3.5 text-accent-gold-deep shrink-0 mt-0.5" />
                   {tip}
                 </li>
@@ -185,10 +185,10 @@ function UpcomingBookings() {
             className="flex flex-wrap items-center justify-between gap-3 py-3 first:pt-0 last:pb-0"
           >
             <div className="min-w-0">
-              <p className="font-['Syne'] font-bold text-[13px] text-ink uppercase truncate">
+              <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink uppercase truncate">
                 {b.service || 'Appointment'}
               </p>
-              <p className="text-stone text-[11px] font-['Inter'] mt-0.5">
+              <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] mt-0.5">
                 {formatDateNice(b.date)}
                 {b.time ? ` · ${formatTime12(b.time)}` : ''}
               </p>
@@ -202,7 +202,7 @@ function UpcomingBookings() {
                 time: b.time,
                 duration: String(b.duration),
               }).toString()}`}
-              className="shrink-0 inline-flex items-center gap-1.5 text-ink text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] underline underline-offset-2 hover:text-accent-gold-deep transition-colors"
+              className="shrink-0 inline-flex items-center gap-1.5 text-ink text-[10px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] underline underline-offset-2 hover:text-accent-gold-deep transition-colors"
             >
               <CalendarCheck className="w-3.5 h-3.5" aria-hidden="true" />
               View or cancel
@@ -537,7 +537,7 @@ export default function BookClient() {
               <> Combine anything toward {formatPrice(dealThreshold)} for the Freedom Deal ({dealRange}).</>
             ) : null}
           </m.p>
-          <p className="mt-3 text-[10px] tracking-[0.12em] uppercase font-['Inter'] text-stone">
+          <p className="mt-3 text-[10px] tracking-[0.12em] uppercase font-[family-name:var(--font-inter)] text-stone">
             1. Service → 2. Date &amp; time → 3. Your details
           </p>
         </div>
@@ -551,14 +551,14 @@ export default function BookClient() {
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2 sm:gap-4 mb-4 min-w-0" role="list" aria-label="Booking steps">
           {['Service', 'Date & Time', 'Details'].map((label, i) => (
             <div key={label} className="flex items-center gap-1.5 sm:gap-2 shrink-0" role="listitem">
-              <span className={`w-7 h-7 flex items-center justify-center text-[11px] font-['Inter'] font-bold transition-colors ${
+              <span className={`w-7 h-7 flex items-center justify-center text-[11px] font-[family-name:var(--font-inter)] font-bold transition-colors ${
                 i < step ? 'bg-ink text-white' :
                 i === step ? 'bg-ink text-white' :
                 'border border-border-soft text-stone'
               }`}>
                 {i < step ? <Check className="w-3.5 h-3.5" /> : i + 1}
               </span>
-              <span className={`text-[10px] sm:text-[11px] tracking-[0.1em] sm:tracking-[0.12em] uppercase font-['Inter'] ${
+              <span className={`text-[10px] sm:text-[11px] tracking-[0.1em] sm:tracking-[0.12em] uppercase font-[family-name:var(--font-inter)] ${
                 i === step ? 'text-ink font-medium' : 'text-stone'
               }`}>
                 {label}
@@ -570,7 +570,7 @@ export default function BookClient() {
 
         {selectedServices.length > 0 && (
           <div className="mb-6 panel-muted px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-            <p className="text-ink text-xs font-['Inter'] min-w-0">
+            <p className="text-ink text-xs font-[family-name:var(--font-inter)] min-w-0">
               <span className="font-medium">
                 {selectedServices.length} service{selectedServices.length === 1 ? '' : 's'}
               </span>
@@ -582,7 +582,7 @@ export default function BookClient() {
             <WaCta
               href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hi Farwa — I need help with an online booking.')}`}
               from="book-help"
-              className="tap-safe shrink-0 text-[10px] tracking-[0.14em] uppercase font-['Inter'] text-stone hover:text-ink transition-colors"
+              className="tap-safe shrink-0 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone hover:text-ink transition-colors"
             >
               Need help? WhatsApp
             </WaCta>
@@ -611,7 +611,7 @@ export default function BookClient() {
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
               <p className="eyebrow mb-2">— Choose services</p>
-              <p className="text-stone text-xs font-['Inter'] font-light mb-6 max-w-lg">
+              <p className="text-stone text-xs font-[family-name:var(--font-inter)] font-light mb-6 max-w-lg">
                 Tap to add or remove. You can mix categories in one visit
                 {dealThreshold
                   ? ` — build toward ${formatPrice(dealThreshold)} for Freedom Deal`
@@ -626,7 +626,7 @@ export default function BookClient() {
                       key={s.id}
                       type="button"
                       onClick={() => removeService(s.id)}
-                      className="tap-safe inline-flex items-center gap-1.5 border border-ink bg-mist px-2.5 py-1.5 text-[11px] font-['Inter'] text-ink"
+                      className="tap-safe inline-flex items-center gap-1.5 border border-ink bg-mist px-2.5 py-1.5 text-[11px] font-[family-name:var(--font-inter)] text-ink"
                       aria-label={`Remove ${s.name}`}
                     >
                       <span className="font-medium">{s.name}</span>
@@ -642,11 +642,11 @@ export default function BookClient() {
               {dealThreshold > 0 && selectedServices.length > 0 && (
                 <div className="mb-6 max-w-md">
                   <div className="flex items-baseline justify-between gap-3 mb-1.5">
-                    <p className="text-[10px] tracking-[0.18em] uppercase font-['Inter'] text-stone">
+                    <p className="text-[10px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] text-stone">
                       Toward Freedom Deal · {formatPrice(dealThreshold)}
                       {dealUpcoming ? ` · ${dealRange}` : ''}
                     </p>
-                    <p className="text-xs font-['Inter'] text-ink font-medium">
+                    <p className="text-xs font-[family-name:var(--font-inter)] text-ink font-medium">
                       {totalPricePkr >= dealThreshold
                         ? `${dealLive ? 'Qualified' : 'Ready'} · ${totalLabel}`
                         : `${totalLabel} of ${formatPrice(dealThreshold)}`}
@@ -660,7 +660,7 @@ export default function BookClient() {
                       }}
                     />
                   </div>
-                  <p className="text-[11px] text-stone font-['Inter'] font-light mt-1.5">
+                  <p className="text-[11px] text-stone font-[family-name:var(--font-inter)] font-light mt-1.5">
                     {totalPricePkr >= dealThreshold
                       ? dealLive
                         ? 'Your visit qualifies for 14% off at the counter.'
@@ -685,8 +685,8 @@ export default function BookClient() {
                           onClick={() => setExpandedCat(cat)}
                           className="tap-safe book-category-btn group"
                         >
-                          <p className="font-['Syne'] font-bold text-xs text-ink uppercase leading-tight break-words">{cat}</p>
-                          <p className="text-stone text-[10px] font-['Inter'] mt-1">
+                          <p className="font-[family-name:var(--font-syne)] font-bold text-xs text-ink uppercase leading-tight break-words">{cat}</p>
+                          <p className="text-stone text-[10px] font-[family-name:var(--font-inter)] mt-1">
                             {services.length} services
                             {(() => {
                               const prices = services.map((s) => s.pricePkr).filter(Boolean)
@@ -698,13 +698,13 @@ export default function BookClient() {
                         <div className="panel-soft p-5 md:p-6 shadow-soft">
                           <div className="flex items-center justify-between mb-4">
                             <div>
-                              <p className="font-['Syne'] font-bold text-sm text-ink uppercase">{cat}</p>
-                              <p className="text-stone text-[10px] font-['Inter'] mt-0.5">{services.length} services</p>
+                              <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink uppercase">{cat}</p>
+                              <p className="text-stone text-[10px] font-[family-name:var(--font-inter)] mt-0.5">{services.length} services</p>
                             </div>
                             <button
                               type="button"
                               onClick={() => setExpandedCat(null)}
-                              className="text-stone text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors flex items-center gap-1"
+                              className="text-stone text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors flex items-center gap-1"
                             >
                               <ChevronLeft className="w-3 h-3" /> All categories
                             </button>
@@ -725,13 +725,13 @@ export default function BookClient() {
                                   }`}
                                 >
                                   <div className="min-w-0 flex-1">
-                                    <span className="font-['Syne'] font-bold text-[13px] text-ink uppercase block">{s.name}</span>
-                                    <span className="text-stone text-[10px] font-['Inter'] mt-0.5 block">
+                                    <span className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink uppercase block">{s.name}</span>
+                                    <span className="text-stone text-[10px] font-[family-name:var(--font-inter)] mt-0.5 block">
                                       {s.durationMinutes != null && formatDuration(s.durationMinutes)}
                                     </span>
                                   </div>
                                   {s.pricePkr != null && (
-                                    <span className="shrink-0 text-accent-gold-deep text-sm font-['Inter'] font-semibold">
+                                    <span className="shrink-0 text-accent-gold-deep text-sm font-[family-name:var(--font-inter)] font-semibold">
                                       {formatServicePrice(s)}
                                     </span>
                                   )}
@@ -758,12 +758,12 @@ export default function BookClient() {
                 <div className="sticky bottom-0 z-[1] pt-5 mt-6 border-t border-border-soft bg-white pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]">
                   <div className="flex items-center justify-between gap-4">
                     <div className="min-w-0">
-                      <p className="font-['Syne'] font-bold text-sm text-ink uppercase truncate">
+                      <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink uppercase truncate">
                         {selectedServices.length === 1
                           ? selectedServices[0].name
                           : `${selectedServices.length} services`}
                       </p>
-                      <p className="text-stone text-[10px] font-['Inter']">
+                      <p className="text-stone text-[10px] font-[family-name:var(--font-inter)]">
                         {totalLabel} · {formatDuration(totalDurationMinutes)}
                       </p>
                     </div>
@@ -793,16 +793,16 @@ export default function BookClient() {
               <p className="eyebrow mb-2">— Selected services</p>
               <div className="mb-6">
                 {selectedServices.map((s) => (
-                  <p key={s.id} className="font-['Syne'] font-bold text-sm text-ink uppercase">
+                  <p key={s.id} className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink uppercase">
                     {s.name}
                     {s.pricePkr != null && (
-                      <span className="text-stone font-normal text-[10px] font-['Inter'] ml-2">
+                      <span className="text-stone font-normal text-[10px] font-[family-name:var(--font-inter)] ml-2">
                         {formatPrice(s.pricePkr)}
                       </span>
                     )}
                   </p>
                 ))}
-                <p className="text-stone text-[10px] font-['Inter'] mt-1">
+                <p className="text-stone text-[10px] font-[family-name:var(--font-inter)] mt-1">
                   {formatDuration(totalDurationMinutes)}
                   {totalPricePkr > 0 ? ` · ${formatPrice(totalPricePkr)}` : ''}
                   {dealThreshold && totalPricePkr >= dealThreshold
@@ -817,7 +817,7 @@ export default function BookClient() {
                 selectedServices.length === 1 &&
                 getAddonsForService(primaryService.id).length > 0 && (
                 <m.div className="mb-6 max-w-md">
-                  <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-3">
+                  <p className="text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)] text-stone mb-3">
                     Optional add-ons (affects time slots)
                   </p>
                   <div className="flex flex-col gap-2">
@@ -844,7 +844,7 @@ export default function BookClient() {
                             }}
                             className="w-4 h-4 accent-ink"
                           />
-                          <span className="flex-1 text-sm font-['Inter'] text-ink">{addon.name}</span>
+                          <span className="flex-1 text-sm font-[family-name:var(--font-inter)] text-ink">{addon.name}</span>
                           {addon.durationMinutes != null && (
                             <span className="text-xs text-stone">+{formatDuration(addon.durationMinutes)}</span>
                           )}
@@ -886,11 +886,11 @@ export default function BookClient() {
                             : 'border-border-soft text-ink hover:border-ink hover:bg-mist cursor-pointer'
                       }`}
                     >
-                      <span className={`block text-[9px] tracking-wider uppercase font-['Inter'] ${sel ? 'text-white/70' : 'text-stone'}`}>
+                      <span className={`block text-[9px] tracking-wider uppercase font-[family-name:var(--font-inter)] ${sel ? 'text-white/70' : 'text-stone'}`}>
                         {dayName}
                       </span>
-                      <span className="block font-['Syne'] font-bold text-lg leading-tight mt-0.5">{dateNum}</span>
-                      <span className={`block text-[9px] font-['Inter'] ${sel ? 'text-white/70' : 'text-stone'}`}>
+                      <span className="block font-[family-name:var(--font-syne)] font-bold text-lg leading-tight mt-0.5">{dateNum}</span>
+                      <span className={`block text-[9px] font-[family-name:var(--font-inter)] ${sel ? 'text-white/70' : 'text-stone'}`}>
                         {blocked ? 'Call' : monthName}
                       </span>
                     </button>
@@ -901,25 +901,25 @@ export default function BookClient() {
 
               {selectedDate && (
                 <div className="mt-6">
-                  <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-4">
+                  <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-4">
                     — Available times · {formatDateNice(selectedDate)}
                   </p>
                   {loadingSlots ? (
                     <div role="status" aria-live="polite" className="flex items-center justify-center py-10">
                       <Loader2 className="w-5 h-5 text-stone animate-spin" aria-hidden="true" />
-                      <span className="text-stone text-sm font-['Inter'] ml-2">Checking availability…</span>
+                      <span className="text-stone text-sm font-[family-name:var(--font-inter)] ml-2">Checking availability…</span>
                     </div>
                   ) : slotsError || slots.length === 0 ? (
                     <m.div
                       role="status"
                       className="panel-muted px-4 py-8 text-center shadow-soft"
                     >
-                      <p className="text-stone text-sm font-['Inter'] font-light mb-4">
+                      <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-4">
                         {slotsError || 'No open slots for this date. Try another day or message us on WhatsApp.'}
                       </p>
                       <a
                         href="https://wa.me/923222782254"
-                        className="text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] underline underline-offset-2"
+                        className="text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] underline underline-offset-2"
                       >
                         WhatsApp the salon
                       </a>
@@ -934,7 +934,7 @@ export default function BookClient() {
                             type="button"
                             onClick={() => available && setSelectedTime(time)}
                             disabled={!available}
-                            className={`tap-safe min-h-[44px] py-3 border text-[11px] tracking-wide font-['Syne'] font-bold transition-colors ${
+                            className={`tap-safe min-h-[44px] py-3 border text-[11px] tracking-wide font-[family-name:var(--font-syne)] font-bold transition-colors ${
                               sel
                                 ? 'bg-ink text-white border-ink'
                                 : available
@@ -956,7 +956,7 @@ export default function BookClient() {
                 <button
                   type="button"
                   onClick={() => goTo(0)}
-                  className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink transition-colors"
+                  className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] px-4 py-3 hover:text-ink transition-colors"
                 >
                   ← Back
                 </button>
@@ -986,22 +986,22 @@ export default function BookClient() {
               <p className="eyebrow mb-6">— Your details</p>
 
               <div className="panel-muted p-4 mb-6 shadow-soft">
-                <p className="text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone mb-2">Booking summary</p>
+                <p className="text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">Booking summary</p>
                 {selectedServices.map((s) => (
-                  <p key={s.id} className="font-['Syne'] font-bold text-sm text-ink uppercase">
+                  <p key={s.id} className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink uppercase">
                     {s.name}
                     {s.pricePkr != null && (
-                      <span className="text-accent-gold-deep font-['Inter'] font-medium text-xs ml-2 normal-case">
+                      <span className="text-accent-gold-deep font-[family-name:var(--font-inter)] font-medium text-xs ml-2 normal-case">
                         {formatPrice(s.pricePkr)}
                       </span>
                     )}
                   </p>
                 ))}
-                <p className="text-stone text-xs font-['Inter'] mt-1">
+                <p className="text-stone text-xs font-[family-name:var(--font-inter)] mt-1">
                   {formatDateNice(selectedDate)} · {formatTime12(selectedTime)} · {formatDuration(totalDurationMinutes)}
                 </p>
                 {totalPricePkr > 0 && (
-                  <p className="text-accent-gold-deep text-xs font-['Inter'] font-medium mt-0.5">
+                  <p className="text-accent-gold-deep text-xs font-[family-name:var(--font-inter)] font-medium mt-0.5">
                     Total {formatPrice(totalPricePkr)}
                     {dealThreshold && totalPricePkr >= dealThreshold
                       ? dealLive
@@ -1015,7 +1015,7 @@ export default function BookClient() {
                   getAddonsForService(primaryService.id)
                     .filter((a) => selectedAddonIds.has(a.id))
                     .map((a) => (
-                      <p key={a.id} className="text-stone text-xs font-['Inter'] mt-1">
+                      <p key={a.id} className="text-stone text-xs font-[family-name:var(--font-inter)] mt-1">
                         + {a.name}
                         {a.pricePkr != null ? ` · ${formatPrice(a.pricePkr)}` : ''}
                       </p>
@@ -1034,7 +1034,7 @@ export default function BookClient() {
                   className="absolute opacity-0 pointer-events-none h-0 w-0 overflow-hidden"
                 />
                 <div>
-                  <label htmlFor="bk-name" className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5 block">
+                  <label htmlFor="bk-name" className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1.5 block">
                     Name <span className="text-accent-gold-deep">*</span>
                   </label>
                   <input
@@ -1049,7 +1049,7 @@ export default function BookClient() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="bk-phone" className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5 block">
+                  <label htmlFor="bk-phone" className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1.5 block">
                     Phone <span className="text-accent-gold-deep">*</span>
                   </label>
                   <input
@@ -1066,10 +1066,10 @@ export default function BookClient() {
                     aria-describedby={phoneError ? 'bk-phone-error' : undefined}
                     className="input-field"
                   />
-                  {phoneError && <p id="bk-phone-error" role="alert" className="text-red-600 text-xs font-['Inter'] mt-1">{phoneError}</p>}
+                  {phoneError && <p id="bk-phone-error" role="alert" className="text-red-600 text-xs font-[family-name:var(--font-inter)] mt-1">{phoneError}</p>}
                 </div>
                 <div>
-                  <label htmlFor="bk-notes" className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5 block">
+                  <label htmlFor="bk-notes" className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1.5 block">
                     Notes <span className="text-stone">(optional)</span>
                   </label>
                   <textarea
@@ -1086,7 +1086,7 @@ export default function BookClient() {
               <div role="alert" aria-live="assertive">
                 {error && (
                   <div className="mt-4 p-3 border border-red-200 bg-red-50 max-w-md">
-                    <p className="text-red-700 text-xs font-['Inter']">{error}</p>
+                    <p className="text-red-700 text-xs font-[family-name:var(--font-inter)]">{error}</p>
                   </div>
                 )}
               </div>
@@ -1095,7 +1095,7 @@ export default function BookClient() {
                 <button
                   type="button"
                   onClick={() => goTo(1)}
-                  className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] px-4 py-3 hover:text-ink transition-colors"
+                  className="tap-safe text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] px-4 py-3 hover:text-ink transition-colors"
                 >
                   ← Back
                 </button>

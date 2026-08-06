@@ -113,7 +113,7 @@ export default function AboutClient() {
                   <div key={v.title} className="flex gap-4">
                     <span className="w-1 h-1 rounded-full bg-ink shrink-0 mt-2" />
                     <div>
-                      <p className="font-['Syne'] font-bold text-sm text-ink mb-1">{v.title}</p>
+                      <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-1">{v.title}</p>
                       <p className="text-body text-xs">{v.desc}</p>
                     </div>
                   </div>
@@ -141,8 +141,8 @@ export default function AboutClient() {
               <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
                 className="border-t border-white/10 pt-7">
                 <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-mist/80 mb-4">{p.num}</p>
-                <h3 className="font-['Syne'] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
-                <p className="text-mist/80 text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
+                <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
+                <p className="text-mist/80 text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">{p.desc}</p>
               </m.div>
             ))}
           </div>
@@ -160,7 +160,7 @@ export default function AboutClient() {
             <Link href="/book" className="tap-safe btn-primary">
               Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
-            <Link href="/services" className="link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors">
+            <Link href="/services" className="link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors">
               Our Services
             </Link>
           </m.div>

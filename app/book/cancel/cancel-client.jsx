@@ -154,7 +154,7 @@ function CancelContent() {
   if (details === null) {
     return (
       <div className="w-full max-w-lg text-center" aria-live="polite">
-        <h1 className="font-['Syne'] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+        <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
           Cancel appointment
         </h1>
         <p className="text-body text-sm">Loading your booking…</p>
@@ -168,10 +168,10 @@ function CancelContent() {
         <div className="w-16 h-16 mx-auto mb-6 bg-[#e8f5e3] flex items-center justify-center rounded-full">
           <Check className="w-8 h-8 text-[#4a9b3f]" strokeWidth={2.5} />
         </div>
-        <h1 className="font-['Syne'] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+        <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
           Already cancelled
         </h1>
-        <p className="text-stone text-sm font-['Inter'] font-light mb-8">
+        <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-8">
           This appointment is no longer active.
         </p>
         <Link href="/book" className="btn-primary w-full">
@@ -187,14 +187,14 @@ function CancelContent() {
         <div className="w-16 h-16 mx-auto mb-6 bg-mist flex items-center justify-center rounded-full">
           <AlertTriangle className="w-7 h-7 text-stone" strokeWidth={2} />
         </div>
-        <h1 className="font-['Syne'] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+        <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
           Invalid cancellation link
         </h1>
-        <p className="text-stone text-sm font-['Inter'] font-light mb-4">
+        <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-4">
           We could not find a cancel code on this phone. WhatsApp the salon with your Booking ID
           {id ? ` (${id})` : ''} — losing the confirmation page is not treated as a late cancellation.
         </p>
-        <p className="text-stone text-[11px] font-['Inter'] font-light mb-8 text-left panel-muted px-4 py-3">
+        <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] font-light mb-8 text-left panel-muted px-4 py-3">
           Find your Booking ID in: the confirmation page, your WhatsApp message to us, the calendar file
           you downloaded, or on this phone under Book → Your upcoming appointment.
         </p>
@@ -202,11 +202,11 @@ function CancelContent() {
           href={id ? waUrl : `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hi Farwa — I need help cancelling a booking.')}`}
           target="_blank"
           rel="noreferrer"
-          className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-[#25D366] text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-[#20bd5a] transition-colors"
+          className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-[#25D366] text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-4 hover:bg-[#20bd5a] transition-colors"
         >
           WhatsApp the salon <ArrowUpRight className="w-3.5 h-3.5" />
         </a>
-        <Link href="/book" className="tap-safe mt-3 inline-flex text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone hover:text-ink transition-colors">
+        <Link href="/book" className="tap-safe mt-3 inline-flex text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone hover:text-ink transition-colors">
           Back to Book
         </Link>
       </div>
@@ -219,18 +219,18 @@ function CancelContent() {
         <div className="w-16 h-16 mx-auto mb-6 bg-[#e8f5e3] flex items-center justify-center rounded-full">
           <Check className="w-8 h-8 text-[#4a9b3f]" strokeWidth={2.5} />
         </div>
-        <h1 className="font-['Syne'] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
+        <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
           Cancelled
         </h1>
-        <p className="text-stone text-sm font-['Inter'] font-light mb-4">
+        <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-4">
           Your appointment has been cancelled. We&apos;re sorry to miss you — hope to see you soon.
         </p>
         {waHint ? (
-          <p className="text-stone text-xs font-['Inter'] font-light mb-6" aria-live="polite">
+          <p className="text-stone text-xs font-[family-name:var(--font-inter)] font-light mb-6" aria-live="polite">
             {waHint}
           </p>
         ) : (
-          <p className="text-stone text-xs font-['Inter'] font-light mb-6">
+          <p className="text-stone text-xs font-[family-name:var(--font-inter)] font-light mb-6">
             Optional: message the salon so the desk sees the cancel on WhatsApp too.
           </p>
         )}
@@ -239,7 +239,7 @@ function CancelContent() {
             href={cancelledWaUrl}
             target="_blank"
             rel="noreferrer"
-            className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-[#25D366] text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-[#20bd5a] transition-colors"
+            className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-[#25D366] text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-4 hover:bg-[#20bd5a] transition-colors"
           >
             WhatsApp cancel note <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
@@ -262,10 +262,10 @@ function CancelContent() {
         <AlertTriangle className="w-7 h-7 text-[#c44a4a]" strokeWidth={2} />
       </div>
 
-      <h1 className="font-['Syne'] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
+      <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
         Cancel appointment?
       </h1>
-      <p className="text-stone text-sm font-['Inter'] font-light mb-8">
+      <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-8">
         This will free your time slot for other guests. Online cancellation is available at least {CANCELLATION_MIN_HOURS} hours before your appointment.
       </p>
 
@@ -275,36 +275,36 @@ function CancelContent() {
           {service && (
             <>
               <div className="flex justify-between items-start">
-                <span className="text-stone text-xs font-['Inter']">Service</span>
-                <span className="font-['Syne'] font-bold text-sm text-ink uppercase text-right max-w-[60%]">{service}</span>
+                <span className="text-stone text-xs font-[family-name:var(--font-inter)]">Service</span>
+                <span className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink uppercase text-right max-w-[60%]">{service}</span>
               </div>
               <div className="h-px bg-border-soft" />
             </>
           )}
           <div className="flex justify-between items-start">
-            <span className="text-stone text-xs font-['Inter']">Date</span>
-            <span className="text-ink text-sm font-['Inter'] font-medium">{formatDateNice(date)}</span>
+            <span className="text-stone text-xs font-[family-name:var(--font-inter)]">Date</span>
+            <span className="text-ink text-sm font-[family-name:var(--font-inter)] font-medium">{formatDateNice(date)}</span>
           </div>
           {time && (
             <>
               <div className="h-px bg-border-soft" />
               <div className="flex justify-between items-start">
-                <span className="text-stone text-xs font-['Inter']">Time</span>
-                <span className="text-ink text-sm font-['Inter'] font-medium">{formatTime12(time)}</span>
+                <span className="text-stone text-xs font-[family-name:var(--font-inter)]">Time</span>
+                <span className="text-ink text-sm font-[family-name:var(--font-inter)] font-medium">{formatTime12(time)}</span>
               </div>
             </>
           )}
           <div className="h-px bg-border-soft" />
           <div className="flex justify-between items-start">
-            <span className="text-stone text-xs font-['Inter']">Booking ID</span>
-            <span className="text-stone text-xs font-['Inter'] font-mono">{id}</span>
+            <span className="text-stone text-xs font-[family-name:var(--font-inter)]">Booking ID</span>
+            <span className="text-stone text-xs font-[family-name:var(--font-inter)] font-mono">{id}</span>
           </div>
         </div>
       </div>
 
       {error && (
         <div role="alert" aria-live="assertive" className="mb-6 border border-[#c44a4a]/30 bg-[#fbeaea]/40 px-4 py-3 text-left">
-          <p className="text-[#c44a4a] text-xs font-['Inter'] flex items-start gap-2">
+          <p className="text-[#c44a4a] text-xs font-[family-name:var(--font-inter)] flex items-start gap-2">
             <X className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />
             <span>{error}</span>
           </p>
@@ -317,7 +317,7 @@ function CancelContent() {
           onClick={handleCancel}
           disabled={state === 'submitting'}
           aria-busy={state === 'submitting'}
-          className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-[#c44a4a] text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-[#a83a3a] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+          className="tap-safe w-full inline-flex items-center justify-center gap-2 bg-[#c44a4a] text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-4 hover:bg-[#a83a3a] disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
         >
           {state === 'submitting' ? 'Cancelling…' : 'Yes, cancel my appointment'}
         </button>
@@ -325,7 +325,7 @@ function CancelContent() {
           href={waUrl}
           target="_blank"
           rel="noreferrer"
-          className="tap-safe w-full inline-flex items-center justify-center gap-2 text-stone text-[11px] tracking-[0.16em] uppercase font-['Inter'] hover:text-ink transition-colors"
+          className="tap-safe w-full inline-flex items-center justify-center gap-2 text-stone text-[11px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
         >
           Or message the salon on WhatsApp
         </a>
@@ -347,10 +347,10 @@ export default function CancelClient() {
         <Suspense
           fallback={
             <div className="w-full max-w-lg text-center">
-              <h1 className="font-['Syne'] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+              <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
                 Cancel appointment
               </h1>
-              <p className="text-stone text-sm font-['Inter']">Loading…</p>
+              <p className="text-stone text-sm font-[family-name:var(--font-inter)]">Loading…</p>
             </div>
           }
         >

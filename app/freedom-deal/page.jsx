@@ -146,7 +146,7 @@ export default function AzadiSalePage() {
 
             <div className="min-w-0">
               <p
-                className="azadi-in text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-['Inter'] text-[color:var(--azadi-green)] mb-3"
+                className="azadi-in text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-[family-name:var(--font-inter)] text-[color:var(--azadi-green)] mb-3"
                 style={{ '--i': 1 }}
               >
                 {live ? `Now on · ${range}` : upcoming ? `Starts 5 August · ${range}` : range}
@@ -155,13 +155,13 @@ export default function AzadiSalePage() {
                 14% off.<br />No asterisk.
               </h1>
 
-              <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-['Inter'] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 3 }}>
+              <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-[family-name:var(--font-inter)] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 3 }}>
                 Once your visit reaches Rs 1,400, the whole bill is 14% less — 5 to 14
                 August. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
                 Book what you actually came in for.
               </p>
 
-              <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-['Inter'] font-light max-w-lg mb-8" style={{ '--i': 4 }}>
+              <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-[family-name:var(--font-inter)] font-light max-w-lg mb-8" style={{ '--i': 4 }}>
                 Our rates have been printed on this website since {LAUNCH_MONTH} — the day we
                 launched. We didn&rsquo;t raise them in July to discount them in August — scroll the{' '}
                 <Link href="/prices" className="underline underline-offset-2 hover:no-underline">price list</Link>{' '}
@@ -187,7 +187,7 @@ export default function AzadiSalePage() {
 
       <div className="section-shell section-pad min-h-0">
         <section aria-labelledby="azadi-qualifying" className="mb-14">
-          <h2 id="azadi-qualifying" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-4">
+          <h2 id="azadi-qualifying" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-4">
             How it works
           </h2>
           <p className="text-body text-sm md:text-[15px] mb-4 max-w-2xl leading-relaxed">
@@ -202,7 +202,7 @@ export default function AzadiSalePage() {
             Everything, with its price, is on the{' '}
             <Link href="/prices" className="link-underline text-ink font-medium">price list</Link>.
           </p>
-          <p className="text-stone text-[13px] font-['Inter'] font-light max-w-2xl">
+          <p className="text-stone text-[13px] font-[family-name:var(--font-inter)] font-light max-w-2xl">
             Want help building a Rs 1,400 combo?{' '}
             <WaCta
               href="https://wa.me/923222782254?text=Freedom%20Deal%20—%20help%20me%20build%20a%20Rs%201%2C400%20combo"
@@ -216,20 +216,20 @@ export default function AzadiSalePage() {
         </section>
 
         <section aria-labelledby="azadi-faq" className="mb-12">
-          <h2 id="azadi-faq" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-6">
+          <h2 id="azadi-faq" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-6">
             Azadi offer — questions
           </h2>
           <dl className="space-y-5 max-w-3xl">
             {FAQS.map((f) => (
               <div key={f.q}>
-                <dt className="font-['Syne'] font-bold text-sm text-ink">{f.q}</dt>
+                <dt className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink">{f.q}</dt>
                 <dd className="mt-1.5 text-body text-sm">{f.a}</dd>
               </div>
             ))}
           </dl>
         </section>
 
-        <p className="text-xs text-stone font-['Inter'] flex flex-wrap gap-x-3 gap-y-2">
+        <p className="text-xs text-stone font-[family-name:var(--font-inter)] flex flex-wrap gap-x-3 gap-y-2">
           <Link href="/deals" className="link-underline hover:text-ink font-medium">All current deals</Link>
           <Link href="/prices" className="link-underline hover:text-ink font-medium">Full price list</Link>
           <Link href="/services/facials" className="link-underline hover:text-ink font-medium">Facials</Link>

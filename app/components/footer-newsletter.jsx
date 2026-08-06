@@ -36,7 +36,7 @@ export default function FooterNewsletter() {
   if (state === 'success') {
     return (
       <div className="mb-10 pb-8 border-b border-border-soft">
-        <p className="flex items-center gap-2 text-sm font-['Inter'] text-ink">
+        <p className="flex items-center gap-2 text-sm font-[family-name:var(--font-inter)] text-ink">
           <Check className="w-4 h-4 text-accent-gold shrink-0" />
           Thanks — beauty tips and offers will land in your inbox.
         </p>
@@ -46,10 +46,10 @@ export default function FooterNewsletter() {
 
   return (
     <div className="mb-10 pb-8 border-b border-border-soft">
-      <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-['Inter'] text-ink mb-2">
+      <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-[family-name:var(--font-inter)] text-ink mb-2">
         Salon updates
       </p>
-      <p className="text-stone text-xs font-['Inter'] mb-3 max-w-md">
+      <p className="text-stone text-xs font-[family-name:var(--font-inter)] mb-3 max-w-md">
         Occasional PECHS beauty tips and offers — no spam.
       </p>
       <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md min-w-0 w-full">
@@ -64,17 +64,17 @@ export default function FooterNewsletter() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@example.com"
-          className="flex-1 min-w-0 border border-border-soft px-3 py-2.5 text-sm font-['Inter'] text-ink bg-white focus:outline-none focus:ring-1 focus:ring-ink/20"
+          className="flex-1 min-w-0 border border-border-soft px-3 py-2.5 text-sm font-[family-name:var(--font-inter)] text-ink bg-white focus:outline-none focus:ring-1 focus:ring-ink/20"
         />
         <button
           type="submit"
           disabled={state === 'submitting'}
-          className="tap-safe shrink-0 bg-ink text-white text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-5 py-2.5 hover:bg-stone transition-colors disabled:opacity-60"
+          className="tap-safe shrink-0 bg-ink text-white text-[10px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] px-5 py-2.5 hover:bg-stone transition-colors disabled:opacity-60"
         >
           {state === 'submitting' ? 'Sending…' : 'Subscribe'}
         </button>
       </form>
-      {error && <p className="mt-2 text-xs text-red-700 font-['Inter']">{error}</p>}
+      {error && <p className="mt-2 text-xs text-red-700 font-[family-name:var(--font-inter)]">{error}</p>}
     </div>
   )
 }

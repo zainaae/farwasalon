@@ -15,18 +15,18 @@ export default function PrivacyClient() {
 
       <section className="py-14 md:py-20">
         <div className="max-w-screen-md mx-auto prose-sm">
-          <p className="text-stone text-xs font-['Inter'] mb-8">Last updated: August 2026</p>
+          <p className="text-stone text-xs font-[family-name:var(--font-inter)] mb-8">Last updated: August 2026</p>
 
           <div className="flex flex-col gap-8">
             <div>
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Who we are</h2>
+              <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">Who we are</h2>
               <p className="text-body text-sm">
                 Farwa Beauty Salon is a beauty studio in PECHS, Karachi, Pakistan. This page explains what happens when you use farwasalon.com — online booking, the newsletter, and a few third-party tools.
               </p>
             </div>
 
             <div>
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Data we collect</h2>
+              <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">Data we collect</h2>
               <ul className="text-body text-sm list-disc pl-5 space-y-1.5">
                 <li>
                   <strong className="font-medium text-ink">Online booking:</strong> When you book at /book, we store your name, phone number, chosen service(s), date, and time in our Google Sheet so we can run the appointment diary. A cancel code for that booking is also saved on this device (see below).
@@ -62,28 +62,28 @@ export default function PrivacyClient() {
             </div>
 
             <div>
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Cookies</h2>
+              <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">Cookies</h2>
               <p className="text-body text-sm">
                 This website does not set first-party tracking cookies. Booking drafts and confirmation details use browser storage on your device, not cookies. Third-party embeds (such as Google Maps) may set their own cookies under their policies.
               </p>
             </div>
 
             <div>
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">How long we keep it</h2>
+              <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">How long we keep it</h2>
               <p className="text-body text-sm">
                 Booking rows stay in our Google Sheet while we need them for the diary and follow-up. Newsletter emails stay until you ask to be removed. Data on your device stays until you clear site data or cancel/remove that booking record. WhatsApp and Google retain their own copies under their policies.
               </p>
             </div>
 
             <div>
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Your rights</h2>
+              <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">Your rights</h2>
               <p className="text-body text-sm">
                 You can ask us to correct or delete booking or newsletter details we hold. Message the salon on WhatsApp at +92 322 2782254 with your name, phone or email, and (if relevant) Booking ID — we will handle the request from the sheet. Clearing this site&apos;s data in your browser removes the local confirmation/cancel copy on that device only.
               </p>
             </div>
 
             <div>
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-2">Contact</h2>
+              <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">Contact</h2>
               <p className="text-body text-sm">
                 For privacy questions, WhatsApp +92 322 2782254 or visit us in PECHS, Karachi.
               </p>

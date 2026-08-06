@@ -49,16 +49,16 @@ export default function QuickPickRow() {
         <div className="bg-white shadow-card border border-border-soft px-4 sm:px-6 md:px-7 py-5 md:py-6">
           <div className="flex items-baseline justify-between gap-4 mb-3.5 md:mb-4">
             <div className="flex items-baseline gap-3 min-w-0">
-              <h2 id="quickpick-heading" className="font-['Syne'] font-semibold text-ink text-base sm:text-lg leading-none">
+              <h2 id="quickpick-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-base sm:text-lg leading-none">
                 Quick pick
               </h2>
-              <p className="text-stone text-[10px] sm:text-[11px] font-['Inter'] hidden sm:block">
+              <p className="text-stone text-[10px] sm:text-[11px] font-[family-name:var(--font-inter)] hidden sm:block">
                 Tap a service to start booking in one step
               </p>
             </div>
             <Link
               href="/services"
-              className="tap-safe shrink-0 inline-flex items-center gap-1 text-stone hover:text-ink text-[10px] tracking-[0.16em] uppercase font-['Inter'] transition-colors"
+              className="tap-safe shrink-0 inline-flex items-center gap-1 text-stone hover:text-ink text-[10px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] transition-colors"
             >
               All <ArrowUpRight className="w-3 h-3" />
             </Link>
@@ -73,15 +73,15 @@ export default function QuickPickRow() {
                   aria-label={`Book ${category}${minPrice ? ` — from ${formatPrice(minPrice)}` : ''}`}
                   className="tap-safe quick-pick-card"
                 >
-                  <span className="font-['Syne'] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full">
+                  <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full">
                     {category}
                   </span>
                   {minPrice != null ? (
-                    <span className="text-accent-gold-deep text-[10px] font-['Inter'] font-medium truncate w-full">
+                    <span className="text-accent-gold-deep text-[10px] font-[family-name:var(--font-inter)] font-medium truncate w-full">
                       From {formatPrice(minPrice)}
                     </span>
                   ) : (
-                    <span className="text-stone text-[10px] font-['Inter']">View options</span>
+                    <span className="text-stone text-[10px] font-[family-name:var(--font-inter)]">View options</span>
                   )}
                 </Link>
               </div>
@@ -93,15 +93,15 @@ export default function QuickPickRow() {
                 aria-label={`View all ${CATEGORY_COUNT} service categories`}
                 className="tap-safe quick-pick-card quick-pick-card--all"
               >
-                <span className="font-['Syne'] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full">
+                <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full">
                   View all {CATEGORY_COUNT}
                 </span>
-                <span className="text-stone text-[10px] font-['Inter']">Categories</span>
+                <span className="text-stone text-[10px] font-[family-name:var(--font-inter)]">Categories</span>
               </Link>
             </div>
           </div>
 
-          <p className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] tracking-[0.12em] uppercase font-['Inter'] text-stone">
+          <p className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] tracking-[0.12em] uppercase font-[family-name:var(--font-inter)] text-stone">
             <Link href="/bridal" className="tap-safe hover:text-ink transition-colors">Bridal</Link>
             <Link href="/prices" className="tap-safe hover:text-ink transition-colors">Prices</Link>
             <Link href="/blog/bridal-beauty-timeline" className="tap-safe hover:text-ink transition-colors">Bridal timeline</Link>

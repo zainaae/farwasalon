@@ -180,7 +180,7 @@
      the fix and the cheapest way to put the accent on more pages. */
   .eyebrow--on-dark { color: var(--accent-gold); }
   .eyebrow {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 10px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
@@ -202,7 +202,7 @@
     color: var(--ink);
   }
   .text-body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-weight: 300;
     font-size: 0.9375rem;
     line-height: 1.65;
@@ -218,7 +218,7 @@
     gap: 0.5rem;
     min-height: 44px;
     padding: 0.75rem 1rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 0.75rem;
     color: var(--ink);
     background: rgba(248, 245, 241, 0.55);
@@ -237,7 +237,7 @@
     gap: 0.5rem;
     min-height: 44px;
     padding: 0.875rem 1.5rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 12.5px;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -256,7 +256,7 @@
     gap: 0.5rem;
     min-height: 44px;
     padding: 0.875rem 1.5rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 12.5px;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -271,7 +271,7 @@
     flex-shrink: 0;
     min-height: 44px;
     padding: 0.5rem 0.75rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     /* Was 10px at the inherited weight 300. That measures 6.18:1 on white —
        it passes AA on paper and still read as barely-there, because the cause
        was never colour: it was hairline weight at 10px with wide tracking.
@@ -464,7 +464,7 @@
     }
   }
   .review-excerpt-link {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.12em;
@@ -550,7 +550,7 @@
     width: 100%;
     min-height: 44px;
     padding: 0.75rem 1rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 1rem;
     font-weight: 300;
     color: var(--ink);
@@ -611,7 +611,7 @@
   .book-slot {
     min-height: 44px;
     padding: 0.625rem 0.75rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 0.75rem;
     border: 1px solid var(--border-soft);
     transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
@@ -826,7 +826,7 @@
   background: #0d0d0d;
   color: #fff;
   padding: 10px 18px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1020,7 +1020,7 @@ button.tap-safe,
   gap: 0.5rem;
   min-height: 48px;
   padding: 0.95rem 1.75rem;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
   font-size: 12.5px;
   font-weight: 600;
   letter-spacing: 0.14em;

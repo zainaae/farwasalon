@@ -52,7 +52,7 @@ export default function LocationServicePage({ data, slug }) {
       <div className="section-shell section-pad min-h-0">
         <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
           <nav aria-label="Breadcrumb" className="mb-5">
-            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-['Inter']">
+            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-[family-name:var(--font-inter)]">
               <li>
                 <Link href="/" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
                   Home
@@ -77,7 +77,7 @@ export default function LocationServicePage({ data, slug }) {
           {location.blurb ? (
             <p className="text-body text-sm max-w-2xl mb-4">{location.blurb}</p>
           ) : null}
-          <p className="text-xs text-stone font-['Inter'] font-light max-w-2xl mb-5 border-l-2 border-accent-gold/40 pl-3">
+          <p className="text-xs text-stone font-[family-name:var(--font-inter)] font-light max-w-2xl mb-5 border-l-2 border-accent-gold/40 pl-3">
             One studio in PECHS — we welcome clients from {location.name} and nearby areas. All appointments are at our PECHS address below.
           </p>
 
@@ -89,7 +89,7 @@ export default function LocationServicePage({ data, slug }) {
               WhatsApp
             </WaCta>
           </div>
-          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter'] text-stone mb-10">
+          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)] text-stone mb-10">
             <span className="inline-flex items-center gap-1.5 min-h-[44px]">
               <MapPin className="w-3.5 h-3.5 shrink-0" aria-hidden /> {SALON_ADDRESS_LINES[0]}
             </span>
@@ -113,18 +113,18 @@ export default function LocationServicePage({ data, slug }) {
         {displayServices.length > 0 && (
           <m.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-12">
-            <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Our {service.name} Services</h2>
+            <h2 className="font-[family-name:var(--font-syne)] font-bold text-lg text-ink mb-4">Our {service.name} Services</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {displayServices.map((svc, i) => (
                 <m.div key={i} className="card-link !justify-start !flex-col !items-start hover:shadow-soft">
-                  <p className="font-['Syne'] font-semibold text-sm text-ink mb-1">{svc.name}</p>
-                  {svc.pricePkr != null && <p className="text-stone text-xs font-['Inter']">{formatServicePrice(svc)}</p>}
+                  <p className="font-[family-name:var(--font-syne)] font-semibold text-sm text-ink mb-1">{svc.name}</p>
+                  {svc.pricePkr != null && <p className="text-stone text-xs font-[family-name:var(--font-inter)]">{formatServicePrice(svc)}</p>}
                 </m.div>
               ))}
             </div>
             {categoryKey && (
               <Link href={`/services/${CAT_SLUGS[categoryKey]}`}
-                className="inline-flex items-center gap-2 mt-4 text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] text-ink hover:text-stone transition-colors">
+                className="inline-flex items-center gap-2 mt-4 text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] text-ink hover:text-stone transition-colors">
                 View all {service.name} services <ChevronRight className="w-3 h-3" />
               </Link>
             )}
@@ -133,8 +133,8 @@ export default function LocationServicePage({ data, slug }) {
 
         <m.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-12 panel-soft p-6 md:p-8 shadow-soft">
-          <h2 className="font-['Syne'] font-bold text-lg text-ink mb-3">Why Choose Farwa Beauty Salon?</h2>
-          <ul className="space-y-2 text-stone text-sm font-light font-['Inter']">
+          <h2 className="font-[family-name:var(--font-syne)] font-bold text-lg text-ink mb-3">Why Choose Farwa Beauty Salon?</h2>
+          <ul className="space-y-2 text-stone text-sm font-light font-[family-name:var(--font-inter)]">
             <li>✓ Serving PECHS since 2008 — {YEARS_ACTIVE}+ years of experience</li>
             <li>✓ Expert {service.name.toLowerCase()} professionals</li>
             <li>✓ Hygienic, comfortable environment in PECHS</li>
@@ -154,9 +154,9 @@ export default function LocationServicePage({ data, slug }) {
               Measured across the set, wiring it up takes template share from
               ~78% to ~57% and pairwise similarity from ~67% to ~42% — without
               a word being written or a photograph taken. */}
-          <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Getting Here from {location.name}</h2>
+          <h2 className="font-[family-name:var(--font-syne)] font-bold text-lg text-ink mb-4">Getting Here from {location.name}</h2>
           {area && (
-            <p className="flex flex-wrap gap-x-5 gap-y-1 mb-3 text-[11px] tracking-[0.12em] uppercase font-['Inter'] text-stone">
+            <p className="flex flex-wrap gap-x-5 gap-y-1 mb-3 text-[11px] tracking-[0.12em] uppercase font-[family-name:var(--font-inter)] text-stone">
               <span>{area.distanceKm}</span>
               <span aria-hidden="true" className="text-stone/40">·</span>
               <span>{area.driveTime}</span>
@@ -164,17 +164,17 @@ export default function LocationServicePage({ data, slug }) {
               <span className="normal-case tracking-normal">{area.route}</span>
             </p>
           )}
-          <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed mb-4 max-w-2xl">
+          <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)] leading-relaxed mb-4 max-w-2xl">
             Farwa Beauty Salon — Plot 165/G-1, Saima Terrace, Block 3 PECHS, Karachi 75400.
             {' '}{area ? area.gettingHere : (location.blurb || location.detail)}
             {' '}Open Monday to Saturday, 11 AM to 7 PM. Book online for instant confirmation, or WhatsApp +92 322 278 2254.
           </p>
           {area?.worthTheTrip && (
-            <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed mb-4 max-w-2xl">
+            <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)] leading-relaxed mb-4 max-w-2xl">
               {area.worthTheTrip}
             </p>
           )}
-          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter']">
+          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)]">
             <Link href="/prices" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Price list
             </Link>
@@ -192,12 +192,12 @@ export default function LocationServicePage({ data, slug }) {
         {faqs.length > 0 && (
           <m.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.25 }}
             className="mb-12">
-            <h2 className="font-['Syne'] font-bold text-lg text-ink mb-4">Common questions</h2>
+            <h2 className="font-[family-name:var(--font-syne)] font-bold text-lg text-ink mb-4">Common questions</h2>
             <div className="space-y-4">
               {faqs.map((item) => (
                 <div key={item.q} className="panel-soft p-4 shadow-soft">
-                  <h3 className="font-['Syne'] font-semibold text-sm text-ink mb-2">{item.q}</h3>
-                  <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed">{item.a}</p>
+                  <h3 className="font-[family-name:var(--font-syne)] font-semibold text-sm text-ink mb-2">{item.q}</h3>
+                  <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)] leading-relaxed">{item.a}</p>
                 </div>
               ))}
             </div>
@@ -206,13 +206,13 @@ export default function LocationServicePage({ data, slug }) {
 
         {nearbyAreas.length > 0 && (
           <section className="mb-12 pt-8 border-t border-border-soft">
-            <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Nearby areas</h2>
+            <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-3">Nearby areas</h2>
             <ul className="flex flex-wrap gap-x-4 gap-y-1">
               {nearbyAreas.slice(0, 5).map((area) => (
                 <li key={area.slug}>
                   <Link
                     href={area.href}
-                    className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink"
+                    className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-[family-name:var(--font-inter)] hover:text-ink"
                   >
                     {area.label}
                   </Link>
@@ -221,7 +221,7 @@ export default function LocationServicePage({ data, slug }) {
               <li>
                 <Link
                   href={AREAS_HUB_HREF}
-                  className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-['Inter'] font-medium hover:text-stone"
+                  className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-[family-name:var(--font-inter)] font-medium hover:text-stone"
                 >
                   See all areas →
                 </Link>
@@ -231,7 +231,7 @@ export default function LocationServicePage({ data, slug }) {
         )}
 
         <section className="pt-8 border-t border-border-soft">
-          <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Also Available</h2>
+          <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-3">Also Available</h2>
           <ul className="flex flex-wrap gap-x-4 gap-y-1 mb-6">
             {relatedServices.map((rs) => {
               const locSlug = `${rs.slug}-in-${location.slug}`
@@ -240,14 +240,14 @@ export default function LocationServicePage({ data, slug }) {
                 : `/services/${CAT_SLUGS[rs.category]}`
               return (
                 <li key={rs.slug}>
-                  <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink">
+                  <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-[family-name:var(--font-inter)] hover:text-ink">
                     {rs.name}
                   </Link>
                 </li>
               )
             })}
           </ul>
-          <p className="text-stone text-sm font-light font-['Inter'] leading-relaxed max-w-2xl">
+          <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)] leading-relaxed max-w-2xl">
             We welcome clients from across Karachi at our PECHS studio — one address, one team.{' '}
             {PRIORITY_SET.has(pechsSlug) ? (
               <Link href={`/services/${pechsSlug}`} className="link-underline hover:text-ink text-ink">

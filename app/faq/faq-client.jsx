@@ -25,7 +25,7 @@ function FaqItem({ faq, index }) {
         aria-controls={`faq-panel-${index}`}
         aria-label={faq.q}
       >
-        <span className="font-['Syne'] font-bold text-sm text-ink leading-snug">{faq.q}</span>
+        <span className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink leading-snug">{faq.q}</span>
         <ChevronDown className={`w-4 h-4 text-stone shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
       <div id={`faq-panel-${index}`} role="region" className={`overflow-hidden transition-[max-height,padding,margin] duration-200 ${open ? 'max-h-[28rem] pb-5 -mt-1' : 'max-h-0'}`}>
@@ -72,18 +72,18 @@ export default function FaqClient() {
             <h2 className="font-[family-name:var(--font-unbounded)] font-bold text-xl md:text-2xl text-white mb-2">
               Still have questions?
             </h2>
-            <p className="text-mist/80 text-sm font-['Inter'] font-light max-w-md">
+            <p className="text-mist/80 text-sm font-[family-name:var(--font-inter)] font-light max-w-md">
               WhatsApp us — we usually reply within a few hours during salon hours.
             </p>
           </m.div>
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
             className="flex flex-wrap items-center gap-4">
             <WaCta href={WA_DEFAULT} from="faq"
-              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-6 py-3.5 hover:bg-nude transition-colors duration-300">
+              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-nude transition-colors duration-300">
               <MessageCircle className="w-3.5 h-3.5" /> Message on WhatsApp
             </WaCta>
             <Link href="/book"
-              className="link-underline !inline-flex items-center gap-1.5 text-white/60 text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors">
+              className="link-underline !inline-flex items-center gap-1.5 text-white/60 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors">
               <span className="min-w-0">{CTA_PRIMARY_LABEL}</span>
               <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
             </Link>

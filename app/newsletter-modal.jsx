@@ -173,29 +173,29 @@ export default function NewsletterModal() {
                   <div className="w-14 h-14 mx-auto mb-5 bg-[#e8f5e3] flex items-center justify-center rounded-full">
                     <Check className="w-7 h-7 text-[#4a9b3f]" strokeWidth={2.5} />
                   </div>
-                  <h2 id="newsletter-heading" className="font-['Syne'] font-bold text-xl text-ink uppercase tracking-tight mb-2">
+                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-syne)] font-bold text-xl text-ink uppercase tracking-tight mb-2">
                     Welcome!
                   </h2>
-                  <p className="text-stone text-sm font-['Inter'] font-light mb-6">
+                  <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-6">
                     Your 10% off code will arrive in your inbox shortly. We&apos;ll only send you the good stuff.
                   </p>
                   <button
                     type="button"
                     onClick={dismiss}
-                    className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3"
+                    className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3"
                   >
                     Continue browsing
                   </button>
                 </div>
               ) : (
                 <>
-                  <p className="text-accent-gold-deep text-[10px] tracking-[0.32em] uppercase font-['Inter'] font-medium mb-3">
+                  <p className="text-accent-gold-deep text-[10px] tracking-[0.32em] uppercase font-[family-name:var(--font-inter)] font-medium mb-3">
                     — A welcome gift
                   </p>
                   <h2 id="newsletter-heading" className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-[1.65rem] text-ink leading-tight mb-3">
                     Get <span className="text-accent-gold-deep">10% off</span> your first facial
                   </h2>
-                  <p className="text-stone text-[13px] font-['Inter'] font-light leading-relaxed mb-6">
+                  <p className="text-stone text-[13px] font-[family-name:var(--font-inter)] font-light leading-relaxed mb-6">
                     Plus monthly seasonal tips, bridal timelines, and early access to slots in peak season. No spam — promise.
                   </p>
 
@@ -224,7 +224,7 @@ export default function NewsletterModal() {
                         placeholder="your@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-['Inter'] placeholder:text-stone/50 focus:outline-none focus:border-ink"
+                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:outline-none focus:border-ink"
                       />
                     </div>
                     <div>
@@ -237,12 +237,12 @@ export default function NewsletterModal() {
                         maxLength={60}
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-['Inter'] placeholder:text-stone/50 focus:outline-none focus:border-ink"
+                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:outline-none focus:border-ink"
                       />
                     </div>
 
                     {error && (
-                      <p role="alert" aria-live="assertive" className="text-[#c44a4a] text-xs font-['Inter']">
+                      <p role="alert" aria-live="assertive" className="text-[#c44a4a] text-xs font-[family-name:var(--font-inter)]">
                         {error}
                       </p>
                     )}
@@ -251,13 +251,13 @@ export default function NewsletterModal() {
                       type="submit"
                       disabled={state === 'submitting'}
                       aria-busy={state === 'submitting'}
-                      className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                      className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-stone disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                     >
                       {state === 'submitting' ? 'Saving…' : <>Get my 10% off <ArrowUpRight className="w-3.5 h-3.5" /></>}
                     </button>
                   </form>
 
-                  <p className="mt-4 text-stone text-[10px] font-['Inter']">
+                  <p className="mt-4 text-stone text-[10px] font-[family-name:var(--font-inter)]">
                     We never share your email. Unsubscribe any time.{' '}
                     <button
                       type="button"

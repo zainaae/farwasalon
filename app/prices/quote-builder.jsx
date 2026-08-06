@@ -38,10 +38,10 @@ export default function QuoteBuilder() {
 
   return (
     <section id="quote" className="mb-12 panel-soft p-5 md:p-7 shadow-soft max-w-3xl" aria-labelledby="quote-heading">
-      <p className="text-[10px] tracking-[0.24em] uppercase font-['Inter'] text-accent-gold-deep mb-2">
+      <p className="text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)] text-accent-gold-deep mb-2">
         The special works · quoted per person
       </p>
-      <h2 id="quote-heading" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-2">
+      <h2 id="quote-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-2">
         Construct your quote
       </h2>
       <p className="text-body text-sm mb-5 max-w-xl">
@@ -52,7 +52,7 @@ export default function QuoteBuilder() {
 
       <div className="flex flex-col gap-4">
         <div>
-          <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2">The work</p>
+          <p className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">The work</p>
           <div className="flex flex-wrap gap-2">
             {WORKS.map((w) => (
               <button key={w.id} type="button" onClick={() => setWork(w)}
@@ -65,7 +65,7 @@ export default function QuoteBuilder() {
 
         {work.asks.includes('look') && (
           <div>
-            <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2">The look</p>
+            <p className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">The look</p>
             <div className="flex flex-wrap gap-2">
               {LOOKS.map((l) => (
                 <button key={l} type="button" onClick={() => setLook(look === l ? '' : l)}
@@ -79,7 +79,7 @@ export default function QuoteBuilder() {
 
         {work.asks.includes('length') && (
           <div>
-            <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2">Hair length</p>
+            <p className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">Hair length</p>
             <div className="flex flex-wrap gap-2">
               {LENGTHS.map((l) => (
                 <button key={l} type="button" onClick={() => setLength(length === l ? '' : l)}
@@ -92,7 +92,7 @@ export default function QuoteBuilder() {
         )}
 
         <div>
-          <label htmlFor="quote-date" className="block text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2">
+          <label htmlFor="quote-date" className="block text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">
             Event date <span className="normal-case tracking-normal">(optional)</span>
           </label>
           <input
@@ -100,7 +100,7 @@ export default function QuoteBuilder() {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="border border-border-soft bg-white px-3.5 py-2.5 text-ink text-sm font-['Inter'] focus:outline-none focus:border-ink"
+            className="border border-border-soft bg-white px-3.5 py-2.5 text-ink text-sm font-[family-name:var(--font-inter)] focus:outline-none focus:border-ink"
           />
         </div>
 
@@ -108,7 +108,7 @@ export default function QuoteBuilder() {
           <a href={waHref} target="_blank" rel="noreferrer" className="tap-safe btn-primary">
             Send for a quote <ArrowUpRight className="w-3.5 h-3.5" />
           </a>
-          <p className="text-stone text-[12px] font-['Inter'] font-light">
+          <p className="text-stone text-[12px] font-[family-name:var(--font-inter)] font-light">
             Opens WhatsApp with your request pre-written — add a reference photo there.
           </p>
         </div>

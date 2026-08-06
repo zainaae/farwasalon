@@ -48,7 +48,7 @@ export default function BeautySalonKarachiPage() {
             services in PECHS Block 3 since 2008. Transparent pricing from Rs 100, a calm women-only studio,
             and online booking — one PECHS address (not an at-home parlour), one team you can trust.
           </p>
-          <p className="text-stone text-sm font-['Inter'] font-light max-w-3xl mb-8">
+          <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-3xl mb-8">
             {SALON_ADDRESS_LINES[0]} · {SALON_ADDRESS_LINES[1]} · {SALON_PHONE_DISPLAY}
           </p>
 
@@ -60,7 +60,7 @@ export default function BeautySalonKarachiPage() {
               WhatsApp
             </WaCta>
           </div>
-          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter'] mb-12">
+          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)] mb-12">
             <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Directions
             </a>
@@ -98,7 +98,7 @@ export default function BeautySalonKarachiPage() {
             <h2 id="visit-heading" className="section-title mb-4">
               Visit the salon
             </h2>
-            <ul className="space-y-3 text-sm font-['Inter'] text-stone font-light">
+            <ul className="space-y-3 text-sm font-[family-name:var(--font-inter)] text-stone font-light">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-ink" />
                 {SALON_ADDRESS_LINES[0]}
@@ -114,7 +114,7 @@ export default function BeautySalonKarachiPage() {
                 </a>
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-4 text-xs font-['Inter']">
+            <div className="mt-4 flex flex-wrap gap-4 text-xs font-[family-name:var(--font-inter)]">
               <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="link-underline hover:text-ink">
                 Directions on Google Maps
               </a>
@@ -171,7 +171,7 @@ export default function BeautySalonKarachiPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-8 pt-6 border-t border-border-soft text-xs text-stone font-['Inter']">
+            <p className="mt-8 pt-6 border-t border-border-soft text-xs text-stone font-[family-name:var(--font-inter)]">
               <Link href="/" className="link-underline hover:text-ink font-medium">
                 Back to home
               </Link>

@@ -101,7 +101,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
           })()}
 
           <nav aria-label="Breadcrumb" className="mb-5">
-            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-['Inter']">
+            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-[family-name:var(--font-inter)]">
               <li>
                 <Link href="/" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
                   Home
@@ -133,7 +133,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                 WhatsApp
               </WaCta>
             </div>
-            <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter']">
+            <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)]">
               <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
                 Directions
               </a>
@@ -153,14 +153,14 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
               {pageBlocks.map((block, i) => {
                 if (block.type === 'h2') {
                   return (
-                    <h2 key={i} className="font-['Syne'] font-bold text-lg text-ink pt-2">
+                    <h2 key={i} className="font-[family-name:var(--font-syne)] font-bold text-lg text-ink pt-2">
                       {block.text}
                     </h2>
                   )
                 }
                 if (block.type === 'ul' && Array.isArray(block.items)) {
                   return (
-                    <ul key={i} className="list-disc pl-5 space-y-1 text-stone text-sm font-['Inter'] font-light">
+                    <ul key={i} className="list-disc pl-5 space-y-1 text-stone text-sm font-[family-name:var(--font-inter)] font-light">
                       {block.items.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
@@ -187,11 +187,11 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                   {opens ? (
                     <button type="button" onClick={() => openFor(s)}
                       className="min-w-0 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2">
-                      <p className="font-['Syne'] font-bold text-[13px] text-ink uppercase leading-tight group-hover:text-stone transition-colors">
+                      <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink uppercase leading-tight group-hover:text-stone transition-colors">
                         {s.name}
                       </p>
                       {(s.pricePkr != null || s.durationMinutes != null) && (
-                        <p className="text-accent-gold-deep text-[11px] font-['Inter'] mt-0.5">
+                        <p className="text-accent-gold-deep text-[11px] font-[family-name:var(--font-inter)] mt-0.5">
                           {s.pricePkr != null && formatServicePrice(s)}
                           {s.pricePkr != null && s.durationMinutes != null && ' · '}
                           {s.durationMinutes != null && formatDuration(s.durationMinutes)}
@@ -203,11 +203,11 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                     </button>
                   ) : (
                     <div className="min-w-0">
-                      <p className="font-['Syne'] font-bold text-[13px] text-ink uppercase leading-tight">
+                      <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink uppercase leading-tight">
                         {s.name}
                       </p>
                       {(s.pricePkr != null || s.durationMinutes != null) && (
-                        <p className="text-accent-gold-deep text-[11px] font-['Inter'] mt-0.5">
+                        <p className="text-accent-gold-deep text-[11px] font-[family-name:var(--font-inter)] mt-0.5">
                           {s.pricePkr != null && formatServicePrice(s)}
                           {s.pricePkr != null && s.durationMinutes != null && ' · '}
                           {s.durationMinutes != null && formatDuration(s.durationMinutes)}
@@ -234,8 +234,8 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
               <dl className="divide-y divide-border-soft">
                 {faqs.map((faq, i) => (
                   <div key={i} className="py-5">
-                    <dt className="font-['Syne'] font-bold text-sm text-ink mb-2">{faq.q}</dt>
-                    <dd className="text-stone text-sm font-light leading-relaxed font-['Inter']">{faq.a}</dd>
+                    <dt className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-2">{faq.q}</dt>
+                    <dd className="text-stone text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">{faq.a}</dd>
                   </div>
                 ))}
               </dl>
@@ -250,7 +250,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
             <button
               type="button"
               onClick={onBack}
-              className="tap-safe inline-flex items-center text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
+              className="tap-safe inline-flex items-center text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
             >
               ← Back to all categories
             </button>
@@ -258,7 +258,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
 
           {relatedCats.length > 0 && (
               <section className="mt-10 pt-8 border-t border-border-soft">
-                <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Related Services</h2>
+                <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-3">Related Services</h2>
                 <div className="flex flex-wrap gap-2">
                   {relatedCats.map((cat) => (
                     <Link key={cat} href={`/services/${CAT_SLUGS[cat]}`}
@@ -280,22 +280,22 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
 
           {relatedBlogs.length > 0 && (
             <section className="mt-10 pt-8 border-t border-border-soft">
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-3">Related Guides</h2>
+              <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-3">Related Guides</h2>
               <ul className="space-y-3">
                 {relatedBlogs.map((post) => (
                   <li key={post.slug}>
                     <Link href={`/blog/${post.slug}`} className="group block">
-                      <span className="font-['Syne'] font-bold text-sm text-ink group-hover:text-stone transition-colors leading-snug">
+                      <span className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink group-hover:text-stone transition-colors leading-snug">
                         {post.title}
                       </span>
-                      <span className="block text-stone text-xs font-['Inter'] mt-0.5 line-clamp-1">
+                      <span className="block text-stone text-xs font-[family-name:var(--font-inter)] mt-0.5 line-clamp-1">
                         {post.description}
                       </span>
                     </Link>
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] tracking-[0.12em] uppercase font-['Inter']">
+              <p className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[11px] tracking-[0.12em] uppercase font-[family-name:var(--font-inter)]">
                 <Link href="/prices" className="link-underline hover:text-ink text-stone">Price list</Link>
                 <Link href="/book" className="link-underline hover:text-ink text-stone">Book online</Link>
                 <Link href="/beauty-salon-karachi" className="link-underline hover:text-ink text-stone">Beauty salon Karachi</Link>
@@ -305,19 +305,19 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
 
           {areaLinks.length > 0 && (
             <section className="mt-10 pt-8 border-t border-border-soft" aria-labelledby="cat-areas-heading">
-              <h2 id="cat-areas-heading" className="font-['Syne'] font-bold text-base text-ink mb-3">
+              <h2 id="cat-areas-heading" className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-3">
                 Areas we serve
               </h2>
               <ul className="flex flex-wrap gap-x-4 gap-y-1">
                 {areaLinks.map(({ slug: areaSlug, href, label }) => (
                   <li key={areaSlug}>
-                    <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink">
+                    <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-[family-name:var(--font-inter)] hover:text-ink">
                       {label}
                     </Link>
                   </li>
                 ))}
                 <li>
-                  <Link href={AREAS_HUB_HREF} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-['Inter'] font-medium hover:text-stone">
+                  <Link href={AREAS_HUB_HREF} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-[family-name:var(--font-inter)] font-medium hover:text-stone">
                     See all areas →
                   </Link>
                 </li>

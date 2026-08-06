@@ -27,11 +27,11 @@ export default function WorkShowcaseCard({ src, label, alt, video, index }) {
           )}
         </div>
         <figcaption className="flex items-baseline justify-between gap-3 pt-2.5 pb-0.5 px-0.5">
-          <span className="text-ink text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium">
+          <span className="text-ink text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)] font-medium">
             {label}
           </span>
           {numeral && (
-            <span className="text-stone/70 text-[10px] tracking-[0.2em] font-['Inter']">{numeral}</span>
+            <span className="text-stone/70 text-[10px] tracking-[0.2em] font-[family-name:var(--font-inter)]">{numeral}</span>
           )}
         </figcaption>
       </div>
