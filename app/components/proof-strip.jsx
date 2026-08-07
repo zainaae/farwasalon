@@ -36,8 +36,11 @@ export default function ProofStrip() {
     {
       key: 'rating',
       lead: `${GOOGLE_GBP_STATS.rating}★`,
-      label: `${GOOGLE_GBP_STATS.reviewCount} Google reviews`,
+      /* Count lives in the reviews section — here the glyph is enough and
+         avoids restating "19 Google reviews" under the hero. */
+      label: null,
       href: GOOGLE_REVIEW_LINK,
+      ariaLabel: `${GOOGLE_GBP_STATS.rating} stars from ${GOOGLE_GBP_STATS.reviewCount} Google reviews`,
     },
     { key: 'years', lead: `${YEARS_ACTIVE}+`, label: 'Years in PECHS' },
     { key: 'volume', lead: `${MONTHLY_APPOINTMENTS.toLocaleString('en-US')}+`, label: 'Appointments a month' },
@@ -48,15 +51,17 @@ export default function ProofStrip() {
     <aside className="bg-ink border-t border-white/10" aria-label="Why clients choose Farwa">
       <div className="section-shell py-4 md:py-5">
         <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-10">
-          {items.map(({ key, lead, label, href }, i) => {
+          {items.map(({ key, lead, label, href, ariaLabel }, i) => {
             const body = (
               <>
                 <span className="font-[family-name:var(--font-unbounded)] font-bold text-white text-[15px] md:text-base leading-none tabular-nums">
                   {lead}
                 </span>
-                <span className="text-white/70 text-[11px] md:text-xs font-[family-name:var(--font-inter)] leading-none">
-                  {label}
-                </span>
+                {label ? (
+                  <span className="text-white/70 text-[11px] md:text-xs font-[family-name:var(--font-inter)] leading-none">
+                    {label}
+                  </span>
+                ) : null}
               </>
             )
 
@@ -71,6 +76,7 @@ export default function ProofStrip() {
                   <Link
                     href={href}
                     {...(href.startsWith('http') ? { target: '_blank', rel: 'noreferrer' } : {})}
+                    {...(ariaLabel ? { 'aria-label': ariaLabel } : {})}
                     className="tap-safe inline-flex items-center gap-2 hover:opacity-80 transition-opacity"
                   >
                     {body}
