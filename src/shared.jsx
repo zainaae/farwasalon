@@ -279,6 +279,7 @@ export function ServiceModal({ service, onClose }) {
             <div className="mt-auto flex flex-col gap-2">
               <Link
                 href={`/book?serviceId=${service.id}`}
+                aria-label={`Continue to book ${service.name}`}
                 onClick={() => {
                   track('BookingStarted', { source: 'service-modal', category: service.category || 'none' })
                   onClose()

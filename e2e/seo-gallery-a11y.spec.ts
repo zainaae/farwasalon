@@ -46,7 +46,10 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     await expect(page.getByText(/services we offer in our PECHS studio/i)).toBeVisible()
     await expect(page.getByText(/not stock before-and-afters/i)).toHaveCount(0)
     await expect(page.getByText(/real clients go up on\s+our Instagram/i)).toHaveCount(0)
-    await expect(page.getByRole('button', { name: /Book an Appointment/i }).first()).toBeVisible()
+    // Quieter luxury routes Book to /book (Link), not the WhatsApp sheet button.
+    const bookCta = page.getByRole('link', { name: /Book an Appointment/i }).first()
+    await expect(bookCta).toBeVisible()
+    await expect(bookCta).toHaveAttribute('href', '/book')
     await expect(page.getByText('Threading & glow facial')).toBeVisible()
     await expect(page.getByText('Bridal styling')).toBeVisible()
     await expect(page.getByText('Manicure & pedicure')).toBeVisible()
