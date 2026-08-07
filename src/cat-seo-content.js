@@ -115,10 +115,10 @@ export const CAT_RELATED = {
 export const CAT_FAQS = {
   'Bridal': [
     { q: 'How far in advance should I book my bridal package?', a: 'We recommend booking at least 2–3 months ahead, especially during wedding season (October–March). This gives time for a trial, skincare prep, and any adjustments to your look.' },
-    { q: 'Do you offer a bridal trial before the wedding day?', a: 'Yes — book a Bridal Trial (Rs 8,000) about 2–4 weeks before the wedding. It includes a full hair and makeup preview with reference photos so both you and our team are aligned for the big day.' },
-    { q: 'What is the difference between Nikkah, Barat, and Walima makeup?', a: 'Nikkah looks are usually softer and more elegant. Barat (baraat) looks are fuller glam for stage and photos. Walima looks are polished and radiant for the celebration that follows. Our published menu lists Engagement Look (Rs 12,000), Mehndi/Dholki Look (Rs 10,000), Bridal Trial (Rs 8,000), and Full Bridal Package (Rs 25,000) — tell us which event you need and we style to that mood and outfit.' },
+    { q: 'Do you offer a bridal trial before the wedding day?', a: 'Yes — book a Bridal Trial (from Rs 8,000) about 2–4 weeks before the wedding. It includes a full hair and makeup preview with reference photos so both you and our team are aligned for the big day. Final quote depends on hair and is confirmed before the appointment.' },
+    { q: 'What is the difference between Nikkah, Barat, and Walima makeup?', a: 'Nikkah looks are usually softer and more elegant. Barat (baraat) looks are fuller glam for stage and photos. Walima looks are polished and radiant for the celebration that follows. Our published menu lists Engagement Look (from Rs 12,000), Mehndi/Dholki Look (from Rs 10,000), Bridal Trial (from Rs 8,000), and Full Bridal Package (from Rs 25,000) — tell us which event you need and we style to that mood and outfit.' },
     { q: 'Can you do makeup for engagement and mehndi events too?', a: 'Absolutely. We offer dedicated Engagement and Mehndi/Dholki looks on the menu, and we style nikkah, barat, and walima moods within the Full Bridal Package or by event when you WhatsApp us your schedule.' },
-    { q: 'What is included in the Full Bridal Package?', a: 'Our signature package (Rs 25,000) includes bridal makeup, hair styling, dupatta draping, a touch-up kit, and event presence so we\'re there for any adjustments throughout the day.' },
+    { q: 'What is included in the Full Bridal Package?', a: 'Our signature package (from Rs 25,000) includes bridal makeup, hair styling, dupatta draping, a touch-up kit, and event presence so we\'re there for any adjustments throughout the day. The printed figure is a floor — final quote for your hair is confirmed before the day.' },
   ],
   'Facials': [
     { q: 'How often should I get a facial?', a: 'For best results, we recommend a professional facial every 4–6 weeks. This aligns with your skin\'s natural renewal cycle and helps maintain clear, glowing skin between visits.' },
@@ -143,10 +143,10 @@ export const CAT_FAQS = {
     { q: 'How much is a manicure and pedicure in Karachi?', a: 'At Farwa, Normal Manicure is Rs 900 and Normal Pedicure Rs 1,000. SPA and French options run Rs 1,400–1,600. Nail paint alone is Rs 300. Full list: farwasalon.com/prices.' },
   ],
   'Hair': [
-    { q: 'How much does a haircut cost at Farwa?', a: 'A haircut with professional blowdry starts at Rs 2,000. This includes a consultation, shampoo, conditioning, precision cut, and styled blowdry.' },
-    { q: 'Do you do bridal hair styling?', a: 'Yes — bridal hair styling (Rs 8,000) includes a style consultation, blowout prep, full styling (updos, curls, braids, or sleek looks), and finishing spray. It\'s also part of our Full Bridal Package.' },
-    { q: 'What hair colouring options do you offer?', a: 'We offer full-colour, highlights, balayage, and toning starting at Rs 4,000. Colour consultations are included to ensure the perfect shade for your skin tone and hair type.' },
-    { q: 'How much is a blowdry only?', a: 'Blowdry & Styling is Rs 1,500 (~45 min). Haircut & Blowdry is Rs 2,000 when you want a cut in the same visit.' },
+    { q: 'How much does a haircut cost at Farwa?', a: 'A haircut with professional blowdry starts at Rs 2,000. This includes a consultation, shampoo, conditioning, precision cut, and styled blowdry. Length and density can adjust the final quote — we confirm before we start.' },
+    { q: 'Do you do bridal hair styling?', a: 'Yes — bridal hair styling (from Rs 8,000) includes a style consultation, blowout prep, full styling (updos, curls, braids, or sleek looks), and finishing spray. It\'s also part of our Full Bridal Package.' },
+    { q: 'What hair colouring options do you offer?', a: 'We offer full-colour, highlights, balayage, and toning starting at Rs 4,000. Colour consultations are included to ensure the perfect shade for your skin tone and hair type. Final quote depends on length and density.' },
+    { q: 'How much is a blowdry only?', a: 'Blowdry & Styling starts at Rs 1,500 (~45 min). Haircut & Blowdry starts at Rs 2,000 when you want a cut in the same visit.' },
     { q: 'Do you offer keratin treatments?', a: 'Yes — but it is quoted per head rather than printed, because the honest price depends on your hair length and density. WhatsApp us a photo for a binding quote. Fixed-price repair options are printed: protein treatment Rs 2,000, Wellaplex Rs 3,000, hair-fall protocols Rs 3,000.' },
   ],
   'Eyebrow Tattoo': [
