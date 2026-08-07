@@ -45,7 +45,7 @@ export default function GalleryClient() {
         </h2>
         {/* Asymmetric photo board — featured left, stacked pair right. Breaks equal 3-up cardboard. */}
         <div className="grid lg:grid-cols-12 gap-5 md:gap-6 lg:gap-7 items-stretch">
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 min-h-0">
             <WorkShowcaseCard
               src={GALLERY_SHOWCASE_ITEMS[0].src}
               label={GALLERY_SHOWCASE_ITEMS[0].label}
@@ -55,7 +55,7 @@ export default function GalleryClient() {
               featured
             />
           </div>
-          <div className="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-1 gap-5 md:gap-6">
+          <div className="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-1 gap-5 md:gap-6 lg:content-stretch">
             {GALLERY_SHOWCASE_ITEMS.slice(1).map((item, i) => (
               <WorkShowcaseCard
                 key={item.label}

@@ -123,11 +123,11 @@ function EditorialSlideshow() {
       className="cv-auto editorial-marquee bg-mist border-y border-[#e4ddd7] overflow-x-clip max-w-full"
       aria-label="Editorial photo showcase"
     >
-      <div className="section-shell flex items-end justify-between gap-4 pt-7 pb-3 px-4 sm:px-5 md:px-10 md:pt-8">
-        <p className="eyebrow mb-0">— The work</p>
+      <div className="section-shell flex items-end justify-between gap-4 pt-7 pb-4 px-4 sm:px-5 md:px-10 md:pt-8 md:pb-5">
+        <p className="eyebrow mb-0 text-plum">— The work</p>
         <Link
           href="/gallery"
-          className="tap-safe inline-flex items-center gap-1.5 text-[10px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-ink hover:text-stone transition-colors"
+          className="tap-safe inline-flex items-center gap-1.5 text-[10px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-plum-deep hover:text-ink transition-colors"
         >
           See the work <ArrowUpRight className="w-3 h-3" />
         </Link>
@@ -158,12 +158,12 @@ function EditorialSlideshow() {
                 tabIndex={isClone(i) ? -1 : undefined}
               >
                 <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/88 via-ink/35 to-transparent" />
                 <span className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-                  <span className="text-white text-[10px] tracking-[0.2em] md:tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] font-medium leading-none">
+                  <span className="text-white text-[10px] tracking-[0.2em] md:tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] font-medium leading-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.65)]">
                     {p.label}
                   </span>
-                  <span className="md:hidden text-white/60 text-[9px] font-[family-name:var(--font-inter)] tabular-nums">
+                  <span className="md:hidden text-white/70 text-[9px] font-[family-name:var(--font-inter)] tabular-nums drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
                     {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
                   </span>
                 </span>

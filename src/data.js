@@ -273,10 +273,11 @@ export function getAddonsForService(serviceId) {
     .filter(Boolean)
 }
 
-/** Featured service samples for gallery showcase (single image per service — not before/after pairs) */
+/** Featured service samples for gallery showcase (single image per service — not before/after pairs).
+ *  Bridal leads — strongest photo dominance; glow + nails stack beside. */
 export const GALLERY_SHOWCASE_ITEMS = [
-  { src: '/glow3.jpg', label: 'Threading & glow facial', alt: 'Facial glow treatment at Farwa Beauty Salon' },
   { src: '/bridal.jpg', label: 'Bridal styling', alt: 'Bridal makeup and styling at Farwa Beauty Salon' },
+  { src: '/glow3.jpg', label: 'Threading & glow facial', alt: 'Facial glow treatment at Farwa Beauty Salon' },
   { src: '/pedicure.jpg', label: 'Manicure & pedicure', alt: 'Nail services at Farwa Beauty Salon', video: '/manicurephotography.mp4' },
 ]
 

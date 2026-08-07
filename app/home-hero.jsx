@@ -77,7 +77,7 @@ export default function HomeHero() {
               so e2e + crawlers still see Beauty Salon / PECHS / Karachi. */}
           <h1
             id="hero-headline"
-            className="hero-lcp text-white leading-[0.9] mb-4 md:mb-5 font-[family-name:var(--font-unbounded)]"
+            className="hero-lcp text-white leading-[0.96] mb-4 md:mb-5 font-[family-name:var(--font-unbounded)]"
             style={{ letterSpacing: '-0.035em' }}
           >
             {/* nowrap + fluid size capped to viewport so the brand never orphans
@@ -89,11 +89,11 @@ export default function HomeHero() {
               Farwa
             </span>
             <span
-              className="block text-white/90 font-normal mt-2 md:mt-3 max-w-[16ch] sm:max-w-[18ch]"
+              className="block text-white/90 font-normal mt-3.5 md:mt-4 max-w-[16ch] sm:max-w-[18ch]"
               style={{
                 fontSize: 'clamp(1.1rem, 3vw, 2rem)',
                 letterSpacing: '-0.02em',
-                lineHeight: 1.15,
+                lineHeight: 1.22,
                 overflowWrap: 'anywhere',
               }}
             >

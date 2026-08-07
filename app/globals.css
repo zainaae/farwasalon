@@ -1242,9 +1242,18 @@ button.tap-safe,
   border-top: 1px solid var(--azadi-tint);
   border-bottom: 1px solid var(--azadi-tint);
 }
-/* Slim home variant — no poster / giant % competing with proof + quick-pick */
+/* Slim home variant — seasonal green kept, paper warmed toward Farwa mist
+   so ink → deal → white doesn't read as a foreign mint slab. Plum hairline
+   bridges brand spine without a Quoti purple wash. */
 .azadi-strip--slim {
-  background: linear-gradient(100deg, var(--azadi-lift) 0%, var(--azadi-paper) 70%, var(--azadi-fall2) 100%);
+  background: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--azadi-lift) 78%, var(--mist)) 0%,
+    color-mix(in srgb, var(--azadi-paper) 72%, var(--mist)) 68%,
+    color-mix(in srgb, var(--azadi-fall2) 70%, var(--nude)) 100%
+  );
+  border-top: 1px solid color-mix(in srgb, var(--plum) 18%, var(--azadi-tint));
+  border-bottom: 1px solid color-mix(in srgb, var(--border-soft) 55%, var(--azadi-tint));
 }
 .azadi-strip-figure {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
