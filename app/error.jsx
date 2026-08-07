@@ -28,7 +28,7 @@ export default function Error({ error, reset }) {
       <p className="text-stone text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-3">
         — Something went wrong
       </p>
-      <h1 className="font-[family-name:var(--font-unbounded)] font-bold text-3xl text-ink mb-4">
+      <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-3xl text-ink mb-4">
         Unexpected Error
       </h1>
       <p className="text-stone max-w-sm mb-8 font-light text-sm">

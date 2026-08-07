@@ -267,7 +267,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
               featured card uses; no hover lift, since nothing here is clickable. */}
           {faqs.length > 0 && (
             <section className="mt-12 panel-soft shadow-soft p-6 sm:p-8 md:p-10">
-              <h2 className="font-[family-name:var(--font-unbounded)] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
+              <h2 className="font-[family-name:var(--font-fraunces)] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
                 Frequently Asked Questions
               </h2>
               <dl className="divide-y divide-border-soft">

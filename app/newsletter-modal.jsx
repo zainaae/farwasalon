@@ -201,7 +201,7 @@ export default function NewsletterModal() {
                   <div className="w-11 h-11 mb-4 bg-plum/10 flex items-center justify-center border border-plum/25">
                     <Check className="w-5 h-5 text-plum" strokeWidth={2.5} />
                   </div>
-                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-unbounded)] font-bold text-xl text-ink tracking-tight mb-2">
+                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-fraunces)] font-bold text-xl text-ink tracking-tight mb-2">
                     Welcome!
                   </h2>
                   <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-6 leading-relaxed">
@@ -220,7 +220,7 @@ export default function NewsletterModal() {
                   <p className="text-plum text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] font-medium mb-2.5">
                     — Salon updates
                   </p>
-                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-unbounded)] font-bold text-[1.45rem] sm:text-[1.65rem] text-ink leading-tight mb-2.5">
+                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-fraunces)] font-bold text-[1.45rem] sm:text-[1.65rem] text-ink leading-tight mb-2.5">
                     Tips from the chair at Farwa
                   </h2>
                   <p className="text-stone text-[13px] font-[family-name:var(--font-inter)] font-light leading-relaxed mb-6 max-w-sm">

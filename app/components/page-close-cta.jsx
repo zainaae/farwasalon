@@ -38,7 +38,7 @@ export default function PageCloseCta({
             {eyebrow}
           </p>
           <h2
-            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.12] text-balance"
+            className="font-[family-name:var(--font-fraunces)] font-bold text-white leading-[1.12] text-balance"
             style={{ fontSize: 'clamp(1.75rem, 4.5vw + 0.4rem, 3rem)', letterSpacing: '-0.02em', maxWidth: '14ch' }}
           >
             {title}

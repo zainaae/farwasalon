@@ -1,4 +1,4 @@
-import { Inter, Unbounded, Syne } from 'next/font/google'
+import { Inter, Fraunces, Syne } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import ClientShell from './client-shell'
@@ -8,7 +8,7 @@ import { IconSymbolDefs } from './components/icon-sprite.jsx'
 import JsonLd from './json-ld'
 import { buildBeautySalonSchema, buildWebSiteSchema } from '../lib/business-schema.js'
 
-/* Inter is body copy — do not race the LCP image/font. Unbounded 700 is the
+/* Inter is body copy — do not race the LCP image/font. Fraunces 700 is the
    display face for the home H1; display:optional avoids holding LCP on a
    late webfont swap (fallback stays if the face isn't ready in time). */
 const inter = Inter({
@@ -21,21 +21,17 @@ const inter = Inter({
   preload: false,
 })
 
-const unbounded = Unbounded({
+const fraunces = Fraunces({
   subsets: ['latin'],
-  /* 400 kept for italic/light brand lines (navbar, thesis); 700 is the H1 face.
+  /* Soft optical serif for brand display — bridal warmth without Unbounded's
+     industrial block. 400 covers italic/light brand lines; 700 is the H1 hit.
      display:optional so LCP is not held on webfont swap.
 
-     preload deliberately OFF. It was on, and combined with display:optional it
-     was the worst of both: 50 KB fetched on the critical path — 4.4x the size
-     of the LCP image, competing with it for bandwidth — and then, if the ~100ms
-     block period lapses, `optional` means the browser never applies the face
-     for that page load at all. On a mid-range Android over Pakistani mobile
-     data, that is 50 KB downloaded and visually discarded. Without preload the
-     font still arrives and still applies on the visits where it is quick
-     enough; it just stops racing the image that decides LCP. */
-  weight: ['400', '700'],
-  variable: '--font-unbounded',
+     preload deliberately OFF (same rationale as the old Unbounded setup):
+     avoid racing the LCP bridal still on mid-range Pakistani mobile data. */
+  weight: ['400', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-fraunces',
   display: 'optional',
   preload: false,
   adjustFontFallback: true,
@@ -119,7 +115,7 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${unbounded.variable} ${syne.variable}`}
+      className={`${inter.variable} ${fraunces.variable} ${syne.variable}`}
     >
       <head>
         {/* Fonts are self-hosted via next/font — no runtime Google Fonts connection. */}

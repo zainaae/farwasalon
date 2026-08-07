@@ -77,27 +77,31 @@ export default function HomeHero() {
             Farwa Beauty Salon &middot; PECHS
           </p>
 
-          {/* Brand name is the display hit. Local SEO stays inside the same H1
-              so e2e + crawlers still see Beauty Salon / PECHS / Karachi. */}
+          {/* Brand name is the display hit (Fraunces). Location line stays Inter
+              so desktop reads as soft display + clean sans, not one blocky stack.
+              Local SEO stays inside the same H1 for e2e + crawlers. */}
           <h1
             id="hero-headline"
-            className="hero-lcp text-white leading-[0.96] mb-3 md:mb-5 font-[family-name:var(--font-unbounded)]"
-            style={{ letterSpacing: '-0.035em' }}
+            className="hero-lcp text-white mb-3 md:mb-5"
           >
             {/* nowrap + fluid size capped to viewport so the brand never orphans
                 as "Farw / a" on 390px. Subtitle keeps overflow-wrap. */}
             <span
-              className="block text-white font-bold whitespace-nowrap"
-              style={{ fontSize: 'clamp(2.5rem, 10vw, 8.5rem)' }}
+              className="block text-white font-bold whitespace-nowrap font-[family-name:var(--font-fraunces)]"
+              style={{
+                fontSize: 'clamp(2.65rem, 11vw, 7.75rem)',
+                letterSpacing: '-0.02em',
+                lineHeight: 0.98,
+              }}
             >
               Farwa
             </span>
             <span
-              className="block text-white/90 font-normal mt-2.5 md:mt-4 max-w-[16ch] sm:max-w-[18ch]"
+              className="block text-white/90 font-medium mt-2.5 md:mt-4 max-w-[18ch] sm:max-w-[22ch] font-[family-name:var(--font-inter)]"
               style={{
-                fontSize: 'clamp(1.05rem, 2.8vw, 2rem)',
-                letterSpacing: '-0.02em',
-                lineHeight: 1.22,
+                fontSize: 'clamp(1.05rem, 2.4vw, 1.65rem)',
+                letterSpacing: '-0.015em',
+                lineHeight: 1.28,
                 overflowWrap: 'anywhere',
               }}
             >

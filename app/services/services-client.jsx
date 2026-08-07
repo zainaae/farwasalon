@@ -83,7 +83,7 @@ function MenuRow({ cat }) {
         {minPrice && (
           <>
             <span className="block text-[10px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] text-stone">from</span>
-            <span className="block font-[family-name:var(--font-unbounded)] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight tabular-nums">{formatPrice(minPrice)}</span>
+            <span className="block font-[family-name:var(--font-fraunces)] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight tabular-nums">{formatPrice(minPrice)}</span>
           </>
         )}
         <span className="mt-1.5 inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -113,7 +113,7 @@ export default function ServicesClient() {
           {/* CSS entrances — framer's initial{opacity:0} kept this header
               invisible until hydration, making the intro paragraph a ~5.5s
               LCP (same failure mode the homepage hero had).
-              No overflow-hidden: it clipped Unbounded on the title. */}
+              No overflow-hidden: it clipped display glyphs on the title. */}
           <div className="title-stack max-w-2xl lg:max-w-[28rem] border-l-2 border-plum pl-5 lg:pl-6">
           <p className="hero-fade-up eyebrow text-plum">— Services · PECHS</p>
           <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
@@ -145,7 +145,7 @@ export default function ServicesClient() {
               { n: '03', title: 'Done', line: 'Printed PKR, no surprise add-ons — leave when you feel ready.' },
             ].map((step) => (
               <li key={step.n} className="flex gap-3 min-w-0 sm:max-w-[14rem]">
-                <span className="font-[family-name:var(--font-unbounded)] text-[10px] text-accent-gold-deep shrink-0 pt-0.5" aria-hidden="true">{step.n}</span>
+                <span className="font-[family-name:var(--font-fraunces)] text-[10px] text-accent-gold-deep shrink-0 pt-0.5" aria-hidden="true">{step.n}</span>
                 <span>
                   <span className="block font-[family-name:var(--font-syne)] font-semibold text-ink text-sm mb-0.5">{step.title}</span>
                   <span className="block text-body text-xs leading-relaxed">{step.line}</span>

@@ -178,7 +178,7 @@ export default function PricesPage() {
                       <td className="py-2.5 pr-3 text-right text-stone/80 text-[12px] font-[family-name:var(--font-inter)] whitespace-nowrap tabular-nums hidden sm:table-cell">
                         {s.durationMinutes ? formatDuration(s.durationMinutes) : ''}
                       </td>
-                      <td className="py-2.5 text-right font-[family-name:var(--font-unbounded)] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap tabular-nums">
+                      <td className="py-2.5 text-right font-[family-name:var(--font-fraunces)] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap tabular-nums">
                         {formatServicePrice(s)}
                       </td>
                     </tr>

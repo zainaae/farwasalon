@@ -162,7 +162,7 @@ export default function BridalLandingPage() {
                       <td className="py-2.5 pr-3 text-ink font-medium">{row.event}</td>
                       <td className="py-2.5 pr-3 text-stone">{row.look}</td>
                       <td className="py-2.5 pr-3 text-stone">{row.mapsTo}</td>
-                      <td className="py-2.5 text-right text-ink font-[family-name:var(--font-unbounded)] font-bold text-xs tabular-nums">
+                      <td className="py-2.5 text-right text-ink font-[family-name:var(--font-fraunces)] font-bold text-xs tabular-nums">
                         {formatPrice(row.price)}
                       </td>
                     </tr>

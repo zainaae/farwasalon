@@ -254,7 +254,7 @@ export function BookingSheet({ open, onClose, initialCategory = null, initialPic
             <div className="flex items-center justify-between px-5 md:px-7 py-3.5 md:py-4 border-b border-border-soft">
               <div>
                 <p className="text-stone text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)]">Step {step + 1} of 3 · WhatsApp request</p>
-                <h2 id="booking-title" className="font-[family-name:var(--font-unbounded)] font-bold text-ink text-base md:text-lg mt-0.5">
+                <h2 id="booking-title" className="font-[family-name:var(--font-fraunces)] font-bold text-ink text-base md:text-lg mt-0.5">
                   {step === 0 && 'Choose services'}
                   {step === 1 && 'Pick a date'}
                   {step === 2 && 'Pick a time'}

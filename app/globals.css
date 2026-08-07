@@ -52,13 +52,13 @@
   --dur-long:  420ms;
 
   /* Type lookmax — optical hierarchy, not seven random H1 sizes.
-     Display = Unbounded 700 (tight track). UI labels = Inter 500–600.
+     Display = Fraunces 700 (soft optical serif). UI labels = Inter 500–600.
      Body = Inter 400 (300 reads anemic on mist). Pull quotes = Syne. */
-  --track-display: -0.035em;
-  --track-display-tight: -0.045em;
+  --track-display: -0.02em;
+  --track-display-tight: -0.025em;
   --track-eyebrow: 0.22em;
-  --leading-display: 1.05;
-  --leading-page: 1.12;
+  --leading-display: 1.08;
+  --leading-page: 1.14;
   --leading-body: 1.65;
 
   /* shadcn tokens */
@@ -230,13 +230,13 @@
     line-height: 1.45;
   }
   .section-title {
-    /* var(--font-unbounded) first, like .display-section. Unbounded loads with
+    /* var(--font-fraunces) first, like .display-section. Fraunces loads with
        display:optional, so when it is not ready inside the ~100ms block period
-       the browser discards it for that page load — and a bare `Unbounded` with
-       nothing after it lands on the default serif. The next/font variable
+       the browser discards it for that page load — and a bare family name with
+       nothing after it can land on the wrong face. The next/font variable
        carries the metric-matched fallback, so the page degrades to something
        that looks like the design instead of to Times. */
-    font-family: var(--font-unbounded), 'Unbounded', sans-serif;
+    font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
     font-weight: 700;
     font-size: clamp(1.35rem, 2.6vw, 1.85rem);
     line-height: var(--leading-page);
@@ -266,7 +266,7 @@
     color: var(--stone);
     max-width: 36em;
   }
-  /* Title stack rhythm: eyebrow → display → body. Unbounded and Inter sit
+  /* Title stack rhythm: eyebrow → display → body. Fraunces and Inter sit
      glued when margins match the optical size of the glyphs; these defaults
      open the gap without a redesign. Tailwind mb-* on children still wins. */
   .title-stack > .eyebrow {
@@ -826,21 +826,21 @@
 
 /* ── Display fonts ── */
 .display-hero {
-  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
+  font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
   font-weight: 700;
-  font-size: clamp(3.5rem, 12vw, 12rem);
-  line-height: 0.88;
+  font-size: clamp(3.25rem, 11vw, 10.5rem);
+  line-height: 0.96;
   letter-spacing: var(--track-display-tight);
   font-feature-settings: 'kern' 1, 'liga' 1;
 }
 .display-section {
-  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
+  font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
   font-weight: 700;
   /* Cap at ~4.25rem — 5.5rem made two-word banners (Our Services) dominate
-     the viewport and fight the body. Short all-caps banners still read large. */
+     the viewport and fight the body. Short banners still read large. */
   font-size: clamp(1.85rem, 4.4vw, 4.25rem);
-  /* 0.95 clipped Unbounded ascenders/descenders inside overflow-hidden parents
-     and stacked lines ("WHAT WE" / "DO") looked glued. */
+  /* Open leading a touch vs the old Unbounded stack — Fraunces has softer
+     vertical metrics and needs room inside overflow-hidden parents. */
   line-height: var(--leading-display);
   letter-spacing: var(--track-display);
   overflow-wrap: anywhere;
@@ -859,9 +859,9 @@
    measured SMALLER than .section-title on mobile (19.2 vs 20px) and identical
    to it at 1024 — a fourth name for a rung that already existed. This is the
    geometric mean between .display-section and .section-title (28px),
-   in Unbounded to match the display face its neighbours use. */
+   in Fraunces to match the display face its neighbours use. */
 .display-page {
-  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
+  font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
   font-weight: 700;
   font-size: clamp(1.65rem, 3.4vw, 2.85rem);
   line-height: var(--leading-page);
@@ -881,8 +881,8 @@
   font-feature-settings: 'kern' 1, 'liga' 1;
 }
 /* Em-dash ornaments inside display titles used font-light italic Unbounded —
-   a weight/style the face barely supports, so the dash floated as a mistyped
-   glyph. Keep the dash roman, slightly quieter, optically centered. */
+   a weight/style that face barely supported. Keep the dash roman, slightly
+   quieter, optically centered in the current display face. */
 .display-dash {
   display: inline-block;
   margin-inline: 0.28em;
@@ -1237,12 +1237,12 @@ button.tap-safe,
   display: inline-block;
 }
 .azadi-display {
-  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
+  font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
   font-weight: 700;
   font-size: clamp(2.6rem, 8vw, 5rem);
-  /* 0.92 glued stacked lines and clipped Unbounded caps ("14%", "Off"). */
-  line-height: 1.12;
-  letter-spacing: -0.035em;
+  /* Open leading so stacked deal lines ("14%", "Off") don't glue. */
+  line-height: 1.14;
+  letter-spacing: -0.02em;
   color: var(--azadi-deep);
   overflow-wrap: anywhere;
   padding-block: 0.12em;
@@ -1301,11 +1301,11 @@ button.tap-safe,
   border-bottom: 1px solid color-mix(in srgb, var(--border-soft) 55%, var(--azadi-tint));
 }
 .azadi-strip-figure {
-  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
+  font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
   font-weight: 700;
   font-size: clamp(2.75rem, 9vw, 4.5rem);
-  line-height: 0.85;
-  letter-spacing: -0.04em;
+  line-height: 0.92;
+  letter-spacing: -0.025em;
   color: var(--azadi-green);
 }
 .azadi-strip-figure span { font-size: 0.4em; vertical-align: super; letter-spacing: 0; }
