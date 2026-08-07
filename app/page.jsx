@@ -35,7 +35,10 @@ export default function HomePage() {
       <main id="main" className="overflow-x-clip max-w-full min-w-0">
         <HomeHero />
         <ProofStrip />
+        {/* White pause — proof + deal + quick-pick were reading as one jungled stack. */}
+        <div className="h-3 sm:h-4 bg-white" aria-hidden="true" />
         <DealStrip />
+        <div className="h-3 sm:h-4 bg-white" aria-hidden="true" />
         <HomeBelowFold placesEnabled={isGooglePlacesConfigured()} />
       </main>
     </>

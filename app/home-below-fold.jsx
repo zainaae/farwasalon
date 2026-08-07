@@ -67,7 +67,7 @@ function StatsStrip() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="md:col-span-7 flex flex-col justify-center px-4 sm:px-5 md:px-10 py-14 sm:py-16 md:py-[4.5rem]"
+          className="md:col-span-7 flex flex-col justify-center px-4 sm:px-5 md:px-10 py-16 sm:py-[4.75rem] md:py-[5.5rem]"
         >
           <div className="title-stack max-w-xl">
             <p className="eyebrow">— Est. 2008 · PECHS</p>
@@ -123,7 +123,7 @@ function EditorialSlideshow() {
       className="cv-auto editorial-marquee bg-mist border-y border-[#e4ddd7] overflow-x-clip max-w-full"
       aria-label="Editorial photo showcase"
     >
-      <div className="section-shell flex items-end justify-between gap-4 pt-5 pb-2 px-4 sm:px-5 md:px-10">
+      <div className="section-shell flex items-end justify-between gap-4 pt-7 pb-3 px-4 sm:px-5 md:px-10 md:pt-8">
         <p className="eyebrow mb-0">— The work</p>
         <Link
           href="/gallery"
@@ -173,7 +173,7 @@ function EditorialSlideshow() {
         </div>
       </div>
 
-      <div className="section-shell px-4 sm:px-5 md:px-10 pb-5 pt-1">
+      <div className="section-shell px-4 sm:px-5 md:px-10 pb-7 pt-2 md:pb-8">
         <Link
           href="/gallery"
           className="tap-safe link-underline text-stone hover:text-ink text-[11px] font-[family-name:var(--font-inter)] transition-colors"
@@ -275,7 +275,7 @@ function FeaturedServices() {
   return (
     <section className="cv-auto bg-white section-pad border-t border-border-soft">
       <div className="section-shell">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between mb-8 md:mb-10">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline sm:justify-between mb-10 md:mb-12 lg:mb-14">
           <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
             className="title-stack">
             <p className="eyebrow">— What we do</p>
@@ -290,9 +290,9 @@ function FeaturedServices() {
           </m.div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-            className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24 shadow-soft">
+            className="relative overflow-hidden aspect-[4/3] lg:aspect-[3/4] lg:sticky lg:top-24 shadow-soft">
             <ServiceMediaPanel hovered={hovered} />
           </m.div>
 
@@ -439,13 +439,13 @@ function ProblemBand() {
             </div>
           </m.div>
 
-          <div className="lg:col-span-7 px-4 sm:px-5 md:px-0 py-12 sm:py-14 lg:py-2 flex flex-col justify-center">
+          <div className="lg:col-span-7 px-4 sm:px-5 md:px-0 py-14 sm:py-16 lg:py-4 flex flex-col justify-center">
             <m.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-8 md:mb-10"
+              className="mb-10 md:mb-12"
             >
               <p className="eyebrow eyebrow--on-dark mb-4">— The salon problem</p>
               <h2
@@ -571,7 +571,7 @@ function BookingStory() {
       aria-labelledby="booking-story-heading"
     >
       <div className="section-shell">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-14">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 md:mb-14 lg:mb-16">
           <div className="title-stack">
             <p className="eyebrow">— How booking works</p>
             <h2 id="booking-story-heading" className="display-page text-ink max-w-[16ch]">
@@ -580,7 +580,7 @@ function BookingStory() {
           </div>
           {/* Progress rail — shows which beat is live */}
           <ol
-            className="flex items-center gap-2 self-start md:self-end"
+            className="flex items-center gap-2 self-start lg:self-end"
             aria-label={`Step ${active + 1} of ${BOOKING_STEPS.length}`}
           >
             {BOOKING_STEPS.map((s, i) => (
@@ -605,13 +605,13 @@ function BookingStory() {
           </ol>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10 md:gap-14 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <div ref={listRef}>
             {BOOKING_STEPS.map((s, i) => (
               <div
                 key={s.n}
                 data-booking-step={i}
-                className={`booking-story-step flex flex-col justify-center py-10 md:py-0 md:min-h-[58vh] ${
+                className={`booking-story-step flex flex-col justify-center py-12 md:py-14 lg:py-0 lg:min-h-[58vh] ${
                   active === i ? 'booking-story-step--active' : 'booking-story-step--inactive'
                 }`}
               >
@@ -636,14 +636,14 @@ function BookingStory() {
                 {active === i && (
                   <Link
                     href="/book"
-                    className="btn-loud tap-safe self-start !min-h-12 !px-6 !py-3 !text-[12px]"
+                    className="btn-loud tap-safe self-start !min-h-12 !px-6 !py-3 !text-[12px] sticky-midband-cta"
                   >
                     Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                   </Link>
                 )}
-                {/* Mobile: image rides with the step — no second sticky fight. */}
+                {/* Mobile + tablet: image rides with the step — sticky photo only from lg. */}
                 <div
-                  className={`md:hidden mt-7 booking-story-frame media-zoom border border-border-soft bg-white p-1 ${
+                  className={`lg:hidden mt-8 booking-story-frame media-zoom border border-border-soft bg-white p-1 ${
                     active === i ? 'booking-story-frame--live shadow-card' : 'shadow-soft opacity-55'
                   }`}
                 >
@@ -654,7 +654,7 @@ function BookingStory() {
                     height={800}
                     loading="lazy"
                     quality={55}
-                    sizes="90vw"
+                    sizes="(max-width: 1023px) 90vw, 40vw"
                     className={`w-full aspect-[4/5] object-cover transition-transform duration-700 ${
                       active === i ? 'scale-100' : 'scale-[1.02]'
                     }`}
@@ -664,7 +664,7 @@ function BookingStory() {
             ))}
           </div>
 
-          <div className="hidden md:block sticky top-[calc(50vh-280px)] h-[560px]">
+          <div className="hidden lg:block sticky top-[calc(50vh-280px)] h-[560px]">
             <div
               className={`booking-story-frame relative h-full border border-border-soft bg-white p-1.5 overflow-hidden ${
                 active >= 0 ? 'booking-story-frame--live shadow-card' : 'shadow-card'
@@ -678,7 +678,7 @@ function BookingStory() {
                   fill
                   loading="lazy"
                   quality={55}
-                  sizes="(min-width: 768px) 40vw, 0px"
+                  sizes="(min-width: 1024px) 40vw, 0px"
                   className={`object-cover transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     active === i
                       ? 'opacity-100 scale-100 booking-story-img--live'

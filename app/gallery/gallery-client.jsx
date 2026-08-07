@@ -39,14 +39,34 @@ export default function GalleryClient() {
         </div>
       </div>
 
-      <section className="section-shell mb-12 md:mb-16" aria-labelledby="gallery-showcase-heading">
-        <h2 id="gallery-showcase-heading" className="section-title text-center mb-8">
+      <section className="section-shell mb-16 md:mb-20 lg:mb-24" aria-labelledby="gallery-showcase-heading">
+        <h2 id="gallery-showcase-heading" className="section-title mb-8 md:mb-10 max-w-xl">
           Services we offer
         </h2>
-        <div className="grid md:grid-cols-3 gap-8 md:gap-8">
-          {GALLERY_SHOWCASE_ITEMS.map((item, i) => (
-            <WorkShowcaseCard key={item.label} src={item.src} label={item.label} alt={item.alt} video={item.video} index={i} />
-          ))}
+        {/* Asymmetric photo board — featured left, stacked pair right. Breaks equal 3-up cardboard. */}
+        <div className="grid lg:grid-cols-12 gap-5 md:gap-6 lg:gap-7 items-stretch">
+          <div className="lg:col-span-7">
+            <WorkShowcaseCard
+              src={GALLERY_SHOWCASE_ITEMS[0].src}
+              label={GALLERY_SHOWCASE_ITEMS[0].label}
+              alt={GALLERY_SHOWCASE_ITEMS[0].alt}
+              video={GALLERY_SHOWCASE_ITEMS[0].video}
+              index={0}
+              featured
+            />
+          </div>
+          <div className="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-1 gap-5 md:gap-6">
+            {GALLERY_SHOWCASE_ITEMS.slice(1).map((item, i) => (
+              <WorkShowcaseCard
+                key={item.label}
+                src={item.src}
+                label={item.label}
+                alt={item.alt}
+                video={item.video}
+                index={i + 1}
+              />
+            ))}
+          </div>
         </div>
       </section>
 

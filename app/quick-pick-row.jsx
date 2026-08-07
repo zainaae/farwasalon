@@ -6,7 +6,7 @@ import { SERVICES, formatPrice, track } from '../src/data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
 
-/** Popular shortcuts + high-value categories missing from the original six. */
+/* Six shortcuts — eight made fold 2 a spreadsheet. Full menu stays one tap away. */
 const QUICK_PICK_CATEGORIES = [
   'Threading',
   'Bridal',
@@ -14,8 +14,6 @@ const QUICK_PICK_CATEGORIES = [
   'Nails',
   'Hair',
   'Massage',
-  'Eyebrow Tattoo',
-  'Rica Hot Wax',
 ]
 
 function minPriceFor(category) {
@@ -33,16 +31,15 @@ export default function QuickPickRow() {
 
   if (items.length === 0) return null
 
-  /* Flat strip under the deal band — not a raised card dashboard. Quoti
-     structure (one-tap booking shortcuts) stays; Farwa skin drops the
-     nested white card + mini-tile grid that made fold 2 feel like a promo panel. */
+  /* Flat strip under the deal band. Extra mobile bottom pad so the sticky
+     Call/WA/Book bar does not eat the last price row when fold 2 is on screen. */
   return (
     <section
       aria-labelledby="quickpick-heading"
-      className="cv-auto bg-white border-b border-border-soft py-5 md:py-6"
+      className="cv-auto bg-white border-b border-border-soft pt-8 md:pt-10 pb-[calc(6.75rem+env(safe-area-inset-bottom,0px))] md:pb-10"
     >
       <div className="section-shell">
-        <div className="flex items-baseline justify-between gap-4 mb-3">
+        <div className="flex items-baseline justify-between gap-4 mb-5 md:mb-6">
           <div className="flex items-baseline gap-3 min-w-0">
             <h2 id="quickpick-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-sm sm:text-base leading-none">
               Quick pick
@@ -68,13 +65,7 @@ export default function QuickPickRow() {
                 aria-label={`Book ${category}${minPrice ? ` — from ${formatPrice(minPrice)}` : ''}`}
                 className="tap-safe quick-pick-card"
               >
-                {/* min-h reserves both lines on every card. The card centres its
-                  content, so "Eyebrow Tattoo" — the one name that wraps —
-                  grew taller than its neighbours and pushed its price a line
-                  below theirs, breaking the only horizontal edge this strip
-                  has. 2.5em is two lines at leading-tight, and it is in em so
-                  it tracks the 11px/12px breakpoint change. */}
-              <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full min-h-[2.5em]">
+                <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full min-h-[2.5em]">
                   {category}
                 </span>
                 {minPrice != null ? (
@@ -94,7 +85,6 @@ export default function QuickPickRow() {
               aria-label={`View all ${CATEGORY_COUNT} service categories`}
               className="tap-safe quick-pick-card quick-pick-card--all"
             >
-              {/* Same reserved two lines as the service cards above. */}
               <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full min-h-[2.5em]">
                 View all {CATEGORY_COUNT}
               </span>
