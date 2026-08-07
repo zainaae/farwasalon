@@ -114,6 +114,15 @@ export default function ServicesClient() {
   return (
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
       <div className="section-shell section-pad min-h-0">
+        {/* One column for the whole page, centred. The menu was already
+            constrained to max-w-4xl for a good reason (see below) but the
+            header, the printed-price note and the areas block all ran the
+            full shell — so three different widths stacked, the header's rule
+            ended at x=1320 while the chapter rules ended at x=1020, and the
+            leftover ~300px sat asymmetrically down one side. Same column for
+            everything means one left edge, one rule length, and margins that
+            read as margins. */}
+        <div className="max-w-4xl mx-auto">
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8 title-stack">
           {/* CSS entrances — framer's initial{opacity:0} kept this header
               invisible until hydration, making the intro paragraph a ~5.5s
@@ -168,7 +177,7 @@ export default function ServicesClient() {
             at the far right, ~470px apart, so the row read as scattered pieces
             rather than one line you scan. Narrowing the canvas is what fixes
             that — not moving the pieces around inside it. */}
-        <div className="max-w-4xl">
+        <div>
           {MENU_CHAPTERS.map(({ name, caption, cats }) => (
             <section key={name} aria-label={name}>
               <div className="flex items-baseline gap-4 pt-10 pb-3 border-b border-ink/30 first:pt-2">
@@ -183,7 +192,12 @@ export default function ServicesClient() {
           Every price is a printed starting figure — final quotes confirmed before your appointment, never after.
         </p>
 
-        <section className="mt-12 pt-10 border-t border-border-soft" aria-labelledby="areas-heading">
+        {/* This page measured 1 shadowed element out of 281 and a single flat
+            ground end to end. "Areas we serve" is its FAQ equivalent — a block
+            of a different kind at the bottom of the menu — so it takes the same
+            panel-soft + shadow-soft the category pages and the blog featured
+            card now use, and gives the page its one tonal step. */}
+        <section className="mt-12 panel-soft shadow-soft p-6 sm:p-8 md:p-10" aria-labelledby="areas-heading">
           <h2 id="areas-heading" className="font-[family-name:var(--font-syne)] font-bold text-lg text-ink mb-3">
             Areas we serve
           </h2>
@@ -205,6 +219,7 @@ export default function ServicesClient() {
             </li>
           </ul>
         </section>
+        </div>
       </div>
       <PageCloseCta waFrom="services-index" />
     </main>
