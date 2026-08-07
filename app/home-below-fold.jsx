@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useMemo, useRef } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import ArrowUpRight from './components/icon-sprite.jsx'
 import WaCta from './components/wa-cta.jsx'
 import Link from 'next/link'
@@ -12,7 +12,6 @@ import {
   LazyVideo, CAT_SLUGS,
   WordmarkDivider,
 } from '../src/shared.jsx'
-import { formatPrice } from '../src/data.js'
 import { GOOGLE_GBP_STATS, FACEBOOK_TESTIMONIALS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
@@ -76,7 +75,7 @@ function StatsStrip() {
             </h2>
           </div>
           <p className="text-body max-w-xl mt-5">
-            For over {YEARS_ACTIVE}{' '}years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
+            For over {YEARS_ACTIVE}{' '}years in PECHS Block 3 — Rubina&apos;s chair, printed PKR on every service, and the same standard whether you book ten minutes or a bridal day.
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-5 mt-2 border-t border-border-soft">
             <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-[family-name:var(--font-inter)] group w-fit pt-4">
@@ -171,15 +170,6 @@ function EditorialSlideshow() {
             )
           })}
         </div>
-      </div>
-
-      <div className="section-shell px-4 sm:px-5 md:px-10 pb-7 pt-2 md:pb-8">
-        <Link
-          href="/gallery"
-          className="tap-safe link-underline text-stone hover:text-ink text-[11px] font-[family-name:var(--font-inter)] transition-colors"
-        >
-          Browse the full gallery
-        </Link>
       </div>
     </section>
   )
@@ -347,13 +337,8 @@ function FeaturedServices() {
                       </span>
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
-                      <span className="text-stone text-[11px] font-[family-name:var(--font-inter)] hidden sm:block">
-                        {(() => {
-                          const prices = SERVICES[cat].map((s) => s.pricePkr).filter(Boolean)
-                          return prices.length
-                            ? `${SERVICES[cat].length} · from ${formatPrice(Math.min(...prices))}`
-                            : `${SERVICES[cat].length} services`
-                        })()}
+                      <span className="text-stone text-[11px] font-[family-name:var(--font-inter)] hidden sm:block tabular-nums">
+                        {SERVICES[cat].length}
                       </span>
                       <ArrowUpRight className="w-3.5 h-3.5 text-stone/40 group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-[transform,color] duration-200" />
                     </div>
@@ -374,55 +359,42 @@ function FeaturedServices() {
   )
 }
 
-function ProblemBand() {
-  /* Friction chapter — Quoti rhythm without SaaS card theatre.
-     Photo anchors the band; friction reads as a numbered list, not three
-     equal cardboard tiles on a flat plum slab. */
-  const problems = [
+function TrustPillars() {
+  /* #42 calm trust chapter — three honest claims, no CTA pile-up.
+     Photo anchor kept from the later problem band so this is not a mist slab. */
+  const pillars = [
     {
       num: '01',
-      title: 'Prices you only learn at the counter',
-      fix: 'Every starting price printed — from Rs 100 — before you book.',
-      href: '/prices',
-      cta: 'See prices',
+      title: `${YEARS_ACTIVE} Years in PECHS`,
+      desc: 'Since 2008 — the same chair-side standard whether you are in for ten minutes or a full bridal day.',
     },
     {
       num: '02',
-      title: 'Back-and-forth to get a slot',
-      fix: 'Pick a live slot online in under a minute. No WhatsApp ping-pong.',
-      href: '/book',
-      cta: 'Book a slot',
+      title: 'Book Online, Walk In Welcome',
+      desc: 'Real-time slots online, WhatsApp for questions, and walk-ins when we have room.',
     },
     {
       num: '03',
-      title: 'Walk-ins mean waiting',
-      fix: 'A booked slot is yours. Cancel free up to 2 hours before.',
-      href: '/book',
-      cta: 'Reserve yours',
+      title: 'Transparent PKR Pricing',
+      desc: 'Every service listed with PKR on the site — no surprise quotes at the counter.',
     },
   ]
 
   return (
     <section
-      className="problem-band grain-on-dark border-t border-white/10"
-      aria-labelledby="problem-band-heading"
+      className="cv-auto bg-ink border-t border-white/10"
+      aria-labelledby="trust-pillars-heading"
+      style={{ backgroundImage: 'radial-gradient(75% 120% at 16% 0%, rgba(201,169,138,0.10), transparent 60%)' }}
     >
-      <div className="max-w-screen-xl mx-auto px-0 md:px-10 md:py-16 lg:py-20">
-        <div className="grid lg:grid-cols-12 lg:gap-x-10 xl:gap-x-14 lg:items-stretch">
-          {/* Media column — real work, not another mist panel */}
-          <m.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative lg:col-span-5 min-h-[42vw] sm:min-h-[320px] lg:min-h-0 overflow-hidden"
-          >
-            <div className="relative h-full min-h-[280px] lg:min-h-full aspect-[4/5] lg:aspect-auto lg:absolute lg:inset-0">
+      <div className="max-w-screen-xl mx-auto">
+        <div className="grid lg:grid-cols-12 lg:items-stretch">
+          <div className="relative lg:col-span-5 min-h-[240px] sm:min-h-[300px] lg:min-h-0 overflow-hidden">
+            <div className="relative h-full min-h-[240px] lg:min-h-full aspect-[5/4] lg:aspect-auto lg:absolute lg:inset-0">
               <Image
                 src="/glow3.jpg"
                 alt="Facial glow treatment at Farwa Beauty Salon, PECHS"
                 fill
-                quality={60}
+                quality={55}
                 sizes="(max-width: 1023px) 100vw, 42vw"
                 className="object-cover object-[50%_30%]"
               />
@@ -430,267 +402,41 @@ function ProblemBand() {
                 className="absolute inset-0"
                 style={{
                   background:
-                    'linear-gradient(to top, rgba(63,22,49,0.72) 0%, rgba(63,22,49,0.15) 45%, rgba(63,22,49,0.35) 100%)',
+                    'linear-gradient(to top, rgba(13,13,13,0.55) 0%, rgba(13,13,13,0.08) 50%, rgba(13,13,13,0.28) 100%)',
                 }}
               />
-              <p className="absolute bottom-5 left-5 right-5 text-white/85 text-[10px] tracking-[0.22em] uppercase font-[family-name:var(--font-inter)]">
-                Farwa · PECHS Block 3
-              </p>
             </div>
-          </m.div>
+          </div>
 
-          <div className="lg:col-span-7 px-4 sm:px-5 md:px-0 py-14 sm:py-16 lg:py-4 flex flex-col justify-center">
-            <m.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-60px' }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="mb-10 md:mb-12"
-            >
-              <p className="eyebrow eyebrow--on-dark mb-4">— The salon problem</p>
-              <h2
-                id="problem-band-heading"
-                className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.08] text-balance max-w-[14ch]"
-                style={{ fontSize: 'clamp(1.85rem, 4.4vw, 3.35rem)', letterSpacing: '-0.03em' }}
-              >
-                The hard part isn&apos;t the service.
-              </h2>
-              <p className="mt-4 text-white/70 text-[15px] md:text-base font-light leading-relaxed font-[family-name:var(--font-inter)] max-w-md">
-                It&apos;s the guessing, the waiting, the back-and-forth. We took those out.
-              </p>
-            </m.div>
-
-            <ol className="problem-list divide-y divide-white/[0.12] border-y border-white/[0.12]" role="list">
-              {problems.map((p, i) => (
-                <m.li
-                  key={p.num}
-                  role="listitem"
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{ delay: i * 0.08, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                  className="problem-list-row group grid grid-cols-[auto_1fr] gap-x-4 sm:gap-x-5 py-5 sm:py-6"
-                >
-                  <span
-                    className="font-[family-name:var(--font-unbounded)] font-bold text-berry/70 text-lg sm:text-xl tabular-nums leading-none pt-0.5"
-                    aria-hidden="true"
-                  >
-                    {p.num}
-                  </span>
-                  <div className="min-w-0">
-                    <h3 className="font-[family-name:var(--font-syne)] font-semibold text-[16px] sm:text-[17px] md:text-lg text-white leading-snug">
-                      {p.title}
-                    </h3>
-                    <p className="mt-1.5 text-white/65 text-[13.5px] font-light leading-relaxed font-[family-name:var(--font-inter)] max-w-md">
-                      {p.fix}
-                    </p>
-                    <Link
-                      href={p.href}
-                      className="tap-safe mt-3 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] text-accent-gold hover:text-white transition-colors"
-                    >
-                      {p.cta} <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
-                    </Link>
-                  </div>
-                </m.li>
-              ))}
-            </ol>
-
-            <m.div
+          <div className="lg:col-span-7 px-4 sm:px-5 md:px-10 py-14 md:py-16 lg:py-[4.5rem]">
+            <m.p
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="cta-cluster mt-8 md:mt-10"
+              id="trust-pillars-heading"
+              className="text-accent-gold text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-8 md:mb-10"
             >
-              <Link href="/book" className="btn-loud btn-loud--light tap-safe">
-                Book a slot <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
-              </Link>
-              <Link href="/prices" className="btn-ghost-on-dark tap-safe">
-                See all prices
-              </Link>
-            </m.div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-const BOOKING_STEPS = [
-  {
-    n: '01',
-    t: 'Pick your service',
-    l: 'Thirteen specialities, every starting price printed. No calling to ask what a facial costs.',
-    img: '/glow3.jpg',
-    alt: 'Facial glow treatment at Farwa Beauty Salon',
-  },
-  {
-    n: '02',
-    t: 'Pick a live slot',
-    l: 'Real availability, Mon–Sat 11:00–19:00. Book in under a minute; cancel free up to 2 hours before.',
-    img: '/pedicure.jpg',
-    alt: 'Nail finish at Farwa Beauty Salon',
-  },
-  {
-    n: '03',
-    t: 'Walk in, sit down',
-    l: 'We confirm the work before we start. Printed PKR, no surprise add-ons.',
-    img: '/threading.jpg',
-    alt: 'Threading at Farwa Beauty Salon',
-  },
-]
-
-function BookingStory() {
-  /* Sticky how-booking-works — Quoti energy, Farwa plum accents + loud CTAs. */
-  const [active, setActive] = useState(0)
-  const listRef = useRef(null)
-
-  useEffect(() => {
-    const root = listRef.current
-    if (!root) return undefined
-    const nodes = [...root.querySelectorAll('[data-booking-step]')]
-    if (!nodes.length) return undefined
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            const i = Number(e.target.getAttribute('data-booking-step'))
-            if (!Number.isNaN(i)) setActive(i)
-          }
-        })
-      },
-      { rootMargin: '-40% 0px -40% 0px' },
-    )
-    nodes.forEach((el) => io.observe(el))
-    return () => io.disconnect()
-  }, [])
-
-  return (
-    <section
-      className="booking-story bg-mist border-t border-border-soft section-pad"
-      aria-labelledby="booking-story-heading"
-    >
-      <div className="section-shell">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 md:mb-14 lg:mb-16">
-          <div className="title-stack">
-            <p className="eyebrow">— How booking works</p>
-            <h2 id="booking-story-heading" className="display-page text-ink max-w-[16ch]">
-              Booked while you get on with your day
-            </h2>
-          </div>
-          {/* Progress rail — shows which beat is live */}
-          <ol
-            className="flex items-center gap-2 self-start lg:self-end"
-            aria-label={`Step ${active + 1} of ${BOOKING_STEPS.length}`}
-          >
-            {BOOKING_STEPS.map((s, i) => (
-              <li key={s.n} className="flex items-center gap-2">
-                <span
-                  className={`booking-progress-dot font-[family-name:var(--font-unbounded)] text-[11px] font-bold tabular-nums transition-colors duration-500 ${
-                    i === active ? 'text-plum' : i < active ? 'text-ink' : 'text-stone'
-                  }`}
+              — Why choose Farwa
+            </m.p>
+            <div className="grid sm:grid-cols-3 gap-8 md:gap-9">
+              {pillars.map((p, i) => (
+                <m.div
+                  key={p.num}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1, duration: 0.65 }}
+                  className="border-t border-white/10 pt-6 md:pt-7"
                 >
-                  {s.n}
-                </span>
-                {i < BOOKING_STEPS.length - 1 && (
-                  <span
-                    aria-hidden="true"
-                    className={`block w-8 h-px transition-colors duration-500 ${
-                      i < active ? 'bg-plum' : 'bg-border-soft'
-                    }`}
-                  />
-                )}
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          <div ref={listRef}>
-            {BOOKING_STEPS.map((s, i) => (
-              <div
-                key={s.n}
-                data-booking-step={i}
-                className={`booking-story-step flex flex-col justify-center py-12 md:py-14 lg:py-0 lg:min-h-[58vh] ${
-                  active === i ? 'booking-story-step--active' : 'booking-story-step--inactive'
-                }`}
-              >
-                <span
-                  className={`booking-story-num font-[family-name:var(--font-unbounded)] font-bold leading-none transition-colors duration-500 ${
-                    active === i ? 'text-plum' : 'text-stone'
-                  }`}
-                  style={{ fontSize: 'clamp(2.75rem, 6vw, 4.5rem)' }}
-                  aria-hidden="true"
-                >
-                  {s.n}
-                </span>
-                <h3
-                  className={`font-[family-name:var(--font-unbounded)] font-bold mt-4 mb-3.5 leading-[1.15] transition-colors duration-500 ${
-                    active === i ? 'text-ink' : 'text-stone'
-                  }`}
-                  style={{ fontSize: 'clamp(1.35rem, 2.4vw, 2rem)', letterSpacing: '-0.02em' }}
-                >
-                  {s.t}
-                </h3>
-                <p className="text-body max-w-md mb-6">{s.l}</p>
-                {active === i && (
-                  <Link
-                    href="/book"
-                    className="btn-loud tap-safe self-start !min-h-12 !px-6 !py-3 !text-[12px] sticky-midband-cta"
-                  >
-                    Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-                  </Link>
-                )}
-                {/* Mobile + tablet: image rides with the step — sticky photo only from lg. */}
-                <div
-                  className={`lg:hidden mt-8 booking-story-frame media-zoom border border-border-soft bg-white p-1 ${
-                    active === i ? 'booking-story-frame--live shadow-card' : 'shadow-soft opacity-55'
-                  }`}
-                >
-                  <Image
-                    src={s.img}
-                    alt={s.alt}
-                    width={640}
-                    height={800}
-                    loading="lazy"
-                    quality={55}
-                    sizes="(max-width: 1023px) 90vw, 40vw"
-                    className={`w-full aspect-[4/5] object-cover transition-transform duration-700 ${
-                      active === i ? 'scale-100' : 'scale-[1.02]'
-                    }`}
-                  />
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="hidden lg:block sticky top-[calc(50vh-280px)] h-[560px]">
-            <div
-              className={`booking-story-frame relative h-full border border-border-soft bg-white p-1.5 overflow-hidden ${
-                active >= 0 ? 'booking-story-frame--live shadow-card' : 'shadow-card'
-              }`}
-            >
-              {BOOKING_STEPS.map((s, i) => (
-                <Image
-                  key={s.n}
-                  src={s.img}
-                  alt={s.alt}
-                  fill
-                  loading="lazy"
-                  quality={55}
-                  sizes="(min-width: 1024px) 40vw, 0px"
-                  className={`object-cover transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    active === i
-                      ? 'opacity-100 scale-100 booking-story-img--live'
-                      : 'opacity-0 scale-[1.06]'
-                  }`}
-                />
+                  <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-accent-gold mb-3.5">{p.num}</p>
+                  <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-[17px] text-white mb-2.5 leading-snug">
+                    {p.title}
+                  </h3>
+                  <p className="text-nude/90 text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">
+                    {p.desc}
+                  </p>
+                </m.div>
               ))}
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between pointer-events-none">
-                <span className="bg-plum-deep/90 text-white text-[10px] tracking-[0.18em] uppercase font-semibold font-[family-name:var(--font-inter)] px-3 py-2">
-                  Step {BOOKING_STEPS[active]?.n} · {BOOKING_STEPS[active]?.t}
-                </span>
-              </div>
             </div>
           </div>
         </div>
@@ -931,9 +677,6 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
 
       <ReviewDatingNote posts={posts} sourceName={sourceName} />
 
-      <p className="md:hidden text-plum text-[9px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] mb-3">
-        Swipe for more →
-      </p>
       <div
         className={`reviews-strip-rail flex gap-4 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none md:mx-0 md:px-0 md:pb-0 md:overflow-visible md:grid ${desktopCols} md:gap-5 md:max-w-5xl md:items-stretch`}
       >
@@ -1105,20 +848,15 @@ function TestimonialsPreview({ placesEnabled }) {
         />
 
         <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="reviews-cta-row pt-8 sm:pt-10 border-t border-border-soft flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 sm:gap-6">
-          <p className="text-stone text-[11px] sm:text-xs font-light font-[family-name:var(--font-inter)] tracking-wide max-w-sm">
-            Loved your visit? Help us spread the word.
-          </p>
-          <div className="reviews-cta-actions flex flex-col min-[480px]:flex-row sm:flex-row items-stretch gap-3 w-full lg:w-auto lg:max-w-xl">
-            <a href={GOOGLE_REVIEW_LINK} target="_blank" rel="noreferrer"
-              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-5 sm:px-6 py-3 hover:bg-plum transition-colors duration-300">
-              Write a Google review <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
-            </a>
-            <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
-              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-5 sm:px-6 py-3 bg-white">
-              Follow on Facebook <ArrowUpRight className="w-3 h-3 shrink-0" />
-            </a>
-          </div>
+          className="reviews-cta-row pt-8 sm:pt-10 border-t border-border-soft flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3">
+          <a href={GOOGLE_REVIEW_LINK} target="_blank" rel="noreferrer"
+            className="tap-safe reviews-cta-btn inline-flex items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-5 sm:px-6 py-3 hover:bg-plum transition-colors duration-300">
+            Write a Google review <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+          </a>
+          <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
+            className="tap-safe reviews-cta-btn inline-flex items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-5 sm:px-6 py-3 bg-white">
+            Follow on Facebook <ArrowUpRight className="w-3 h-3 shrink-0" />
+          </a>
         </m.div>
       </div>
     </section>
@@ -1277,8 +1015,7 @@ export default function HomeBelowFold({ placesEnabled = false }) {
       <EditorialSlideshow />
       <WordmarkDivider />
       <FeaturedServices />
-      <ProblemBand />
-      <BookingStory />
+      <TrustPillars />
       <SalonLocalBlock />
       <FounderNote />
       <TestimonialsPreview placesEnabled={placesEnabled} />
