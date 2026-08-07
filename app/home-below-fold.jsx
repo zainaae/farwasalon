@@ -15,7 +15,17 @@ import {
 import { GOOGLE_GBP_STATS, FACEBOOK_TESTIMONIALS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, GOOGLE_REVIEW_LINK } from '../src/data.js'
+import {
+  SERVICES,
+  ALL_SERVICES,
+  CAT_META,
+  YEARS_ACTIVE,
+  FOUNDING_YEAR,
+  MONTHLY_APPOINTMENTS,
+  SALON_HOURS,
+  WA_NUMBER,
+  GOOGLE_REVIEW_LINK,
+} from '../src/data.js'
 import { EDITORIAL_PHOTOS } from '../src/salon-media.js'
 import {
   getGbpStatsForDisplay,
@@ -327,7 +337,7 @@ function TrustPillars() {
     {
       num: '01',
       title: `${YEARS_ACTIVE} Years in PECHS`,
-      desc: 'Since 2008 — the same chair-side standard whether you are in for ten minutes or a full bridal day.',
+      desc: `Since ${FOUNDING_YEAR} — the same chair-side standard whether you are in for ten minutes or a full bridal day.`,
     },
     {
       num: '02',
@@ -371,6 +381,80 @@ function TrustPillars() {
                 {p.title}
               </h3>
               <p className="text-stone text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">
+                {p.desc}
+              </p>
+            </m.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* Quoti structure (named pains + hard figures) — Farwa skin/truth only.
+   Figures must stay enforceable via src/stated-numbers.test.js. No invented %. */
+function HardNumbersBand() {
+  const serviceCount = ALL_SERVICES.length
+  const rating = GOOGLE_GBP_STATS.rating
+  const reviewCount = GOOGLE_GBP_STATS.reviewCount
+  const monthly = MONTHLY_APPOINTMENTS.toLocaleString('en-PK')
+  const pains = [
+    {
+      num: '01',
+      title: 'Prices you only learn at the counter',
+      lead: `${serviceCount} services`,
+      desc: 'Every starting price printed on the site — from threading to bridal — before you book.',
+    },
+    {
+      num: '02',
+      title: 'Back-and-forth just to get a slot',
+      lead: `${SALON_HOURS.days} ${SALON_HOURS.open}–${SALON_HOURS.close}`,
+      desc: 'Pick a live slot online in under a minute. Cancel free up to 2 hours before. No prepayment.',
+    },
+    {
+      num: '03',
+      title: 'Guessing who to trust',
+      lead: `${rating}★ · ${reviewCount} Google`,
+      desc: `${YEARS_ACTIVE} years in PECHS · ${monthly}+ appointments a month — same street, same standard.`,
+    },
+  ]
+
+  return (
+    <section
+      className="hard-numbers-band cv-auto living-band--soft living-band border-t border-border-soft"
+      aria-labelledby="hard-numbers-heading"
+    >
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-16 lg:py-[4.5rem]">
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="title-stack max-w-xl mb-10 md:mb-12"
+        >
+          <p className="eyebrow text-plum">— Around the service</p>
+          <h2 id="hard-numbers-heading" className="display-section text-ink">
+            The hardest part isn&rsquo;t the service
+          </h2>
+          <p className="text-body">It&rsquo;s everything around it. Here&rsquo;s what we publish so you don&rsquo;t have to ask.</p>
+        </m.div>
+        <div className="grid sm:grid-cols-3 gap-8 md:gap-10">
+          {pains.map((p, i) => (
+            <m.div
+              key={p.num}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08, duration: 0.6 }}
+              className="border-t border-border-soft pt-6"
+            >
+              <p className="font-[family-name:var(--font-fraunces)] text-[10px] text-plum mb-3">{p.num}</p>
+              <h3 className="font-[family-name:var(--font-syne)] font-semibold text-[15px] md:text-base text-ink mb-3 leading-snug">
+                {p.title}
+              </h3>
+              <p className="font-[family-name:var(--font-fraunces)] font-bold text-ink text-lg md:text-xl tracking-[-0.02em] mb-2">
+                {p.lead}
+              </p>
+              <p className="text-stone text-sm font-normal leading-relaxed font-[family-name:var(--font-inter)]">
                 {p.desc}
               </p>
             </m.div>
@@ -871,8 +955,8 @@ function CtaBand() {
 }
 
 function FounderNote() {
-  /* Quote only — we do not have a cleared founder portrait. A client hair
-     shot labeled as Rubina was wrong context. */
+  /* House voice — line is salon copy, not a sourced personal quote. No founder
+     portrait; do not attribute first-person lines to Rubina by name. */
   return (
     <section className="cv-auto living-band--soft living-band border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
       <m.div
@@ -887,11 +971,11 @@ function FounderNote() {
           className="display-quote text-ink mx-auto"
           style={{ maxWidth: '24ch' }}
         >
-          &ldquo;Trends visit Karachi every season. Grace stays. I opened this
-          salon in 2008 to give every woman on this street both.&rdquo;
+          &ldquo;Trends visit Karachi every season. Grace stays. This salon
+          opened in {FOUNDING_YEAR}{' '}to give every woman on this street both.&rdquo;
         </blockquote>
         <p className="mt-7 text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] text-stone">
-          Rubina · Founder, Farwa Beauty Salon
+          Farwa Beauty Salon · PECHS
         </p>
         <Link
           href="/about"
@@ -923,6 +1007,7 @@ export default function HomeBelowFold({ placesEnabled = false }) {
       <EditorialSlideshow />
       <WordmarkDivider />
       <FeaturedServices />
+      <HardNumbersBand />
       <TrustPillars />
       <SalonLocalBlock />
       <FounderNote />

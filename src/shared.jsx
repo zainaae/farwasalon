@@ -605,5 +605,4 @@ export function LazyVideo({ src, poster, className, autoPlay, ...props }) {
 
 /* ─── Re-exports ───────────────────────────────────────────────── */
 export { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS }
-export { BookingProvider, useBooking } from './booking-context.jsx'
 export { useNextSlot } from './use-next-slot.js'

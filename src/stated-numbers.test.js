@@ -141,6 +141,19 @@ describe('no exact count is inflated with a plus sign', () => {
   })
 })
 
+describe('hard-numbers band uses live stated figures', () => {
+  it('home HardNumbersBand references enforceable sources, not invented percents', () => {
+    const home = readFileSync(join(__dirname, '..', 'app', 'home-below-fold.jsx'), 'utf8')
+    expect(home).toMatch(/hard-numbers-band|HardNumbersBand/)
+    expect(home).toMatch(/ALL_SERVICES\.length/)
+    expect(home).toMatch(/GOOGLE_GBP_STATS/)
+    expect(home).toMatch(/YEARS_ACTIVE/)
+    expect(home).toMatch(/MONTHLY_APPOINTMENTS/)
+    expect(home).toMatch(/SALON_HOURS/)
+    expect(home, 'must not invent Quoti-style outside-hours %').not.toMatch(/40\s*%/)
+  })
+})
+
 describe('category price floors quoted in copy are honest', () => {
   /* A floor may legitimately describe one named service ("polish from Rs 900")
      rather than the whole category. What it may never do is claim a floor lower

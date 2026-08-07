@@ -656,7 +656,7 @@ export default function BookClient() {
                     </p>
                     <p className="text-xs font-[family-name:var(--font-inter)] text-ink font-medium">
                       {totalPricePkr >= dealThreshold
-                        ? `${dealLive ? 'Qualified' : 'Ready'} · ${totalLabel}`
+                        ? `${dealLive ? (priceIsFrom ? 'Floor ready' : 'Qualified') : 'Ready'} · ${totalLabel}`
                         : `${totalLabel} of ${formatPrice(dealThreshold)}`}
                     </p>
                   </div>
@@ -669,13 +669,19 @@ export default function BookClient() {
                     />
                   </div>
                   <p className="text-[11px] text-stone font-[family-name:var(--font-inter)] font-light mt-1.5">
-                    {totalPricePkr >= dealThreshold
-                      ? dealLive
-                        ? 'Your visit qualifies for 14% off at the counter.'
-                        : `Basket hits the Freedom Deal mark (${dealRange}).`
-                      : dealLive
-                        ? `Add ${formatPrice(dealThreshold - totalPricePkr)} more to unlock 14% off.`
-                        : `Add ${formatPrice(dealThreshold - totalPricePkr)} more toward Freedom Deal.`}
+                    {priceIsFrom
+                      ? totalPricePkr >= dealThreshold
+                        ? dealLive
+                          ? 'Starting total reaches the Freedom Deal mark — final quote (by hair) confirms 14% at the counter.'
+                          : `Starting total hits the Freedom Deal mark (${dealRange}); final quote still depends on hair.`
+                        : `Starting from ${totalLabel} — hair/bridal finals are quoted before your visit. Add about ${formatPrice(dealThreshold - totalPricePkr)} more toward Freedom Deal.`
+                      : totalPricePkr >= dealThreshold
+                        ? dealLive
+                          ? 'Your visit qualifies for 14% off at the counter.'
+                          : `Basket hits the Freedom Deal mark (${dealRange}).`
+                        : dealLive
+                          ? `Add ${formatPrice(dealThreshold - totalPricePkr)} more to unlock 14% off.`
+                          : `Add ${formatPrice(dealThreshold - totalPricePkr)} more toward Freedom Deal.`}
                   </p>
                 </div>
               )}
@@ -805,20 +811,27 @@ export default function BookClient() {
                     {s.name}
                     {s.pricePkr != null && (
                       <span className="text-stone font-normal text-[10px] font-[family-name:var(--font-inter)] ml-2">
-                        {formatPrice(s.pricePkr)}
+                        {formatServicePrice(s)}
                       </span>
                     )}
                   </p>
                 ))}
                 <p className="text-stone text-[10px] font-[family-name:var(--font-inter)] mt-1">
                   {formatDuration(totalDurationMinutes)}
-                  {totalPricePkr > 0 ? ` · ${formatPrice(totalPricePkr)}` : ''}
+                  {totalPricePkr > 0 ? ` · ${totalLabel}` : ''}
                   {dealThreshold && totalPricePkr >= dealThreshold
                     ? dealLive
-                      ? ' · Freedom Deal eligible'
+                      ? priceIsFrom
+                        ? ' · Freedom Deal on confirmed quote'
+                        : ' · Freedom Deal eligible'
                       : ` · Toward Freedom Deal (${dealRange})`
                     : ''}
                 </p>
+                {priceIsFrom && (
+                  <p className="text-stone text-[10px] font-[family-name:var(--font-inter)] font-light mt-1.5 max-w-md">
+                    Hair and bridal prices start from the printed floor — final quote depends on your hair, confirmed before the appointment.
+                  </p>
+                )}
               </div>
 
               {primaryService &&
@@ -1001,7 +1014,7 @@ export default function BookClient() {
                     {s.name}
                     {s.pricePkr != null && (
                       <span className="text-accent-gold-deep font-[family-name:var(--font-inter)] font-medium text-xs ml-2 normal-case">
-                        {formatPrice(s.pricePkr)}
+                        {formatServicePrice(s)}
                       </span>
                     )}
                   </p>
@@ -1011,12 +1024,19 @@ export default function BookClient() {
                 </p>
                 {totalPricePkr > 0 && (
                   <p className="text-accent-gold-deep text-xs font-[family-name:var(--font-inter)] font-medium mt-0.5">
-                    Total {formatPrice(totalPricePkr)}
+                    {priceIsFrom ? `Starting from ${formatPrice(totalPricePkr)}` : `Total ${formatPrice(totalPricePkr)}`}
                     {dealThreshold && totalPricePkr >= dealThreshold
                       ? dealLive
-                        ? ' · Freedom Deal — 14% off at the counter'
+                        ? priceIsFrom
+                          ? ' · Freedom Deal on confirmed quote'
+                          : ' · Freedom Deal — 14% off at the counter'
                         : ` · Toward Freedom Deal (${dealRange})`
                       : ''}
+                  </p>
+                )}
+                {priceIsFrom && (
+                  <p className="text-stone text-[10px] font-[family-name:var(--font-inter)] font-light mt-1.5">
+                    Final PKR confirmed for your hair before the visit — not a fixed online total.
                   </p>
                 )}
                 {primaryService &&

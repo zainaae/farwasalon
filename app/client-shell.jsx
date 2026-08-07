@@ -11,7 +11,6 @@ import {
   StickyMobileCTA,
   shouldShowMobileCtaBar,
 } from '../src/shared'
-import { BookingProvider } from '../src/booking-context.jsx'
 import { track } from '../src/site-config.js'
 import { captureAttribution } from '../lib/attribution.js'
 
@@ -169,7 +168,6 @@ export default function ClientShell({ children }) {
   return (
     <LazyMotion features={loadDomAnimation} strict>
       <MotionConfig reducedMotion="user">
-        <BookingProvider>
           <ScrollProgress />
           <ScrollDepthTracker />
           <ScrollToTop />
@@ -185,7 +183,6 @@ export default function ClientShell({ children }) {
             <StickyWA hidden={stickyHidden} />
           )}
           {showNewsletter ? <NewsletterModal /> : null}
-        </BookingProvider>
       </MotionConfig>
     </LazyMotion>
   )
