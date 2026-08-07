@@ -44,17 +44,8 @@ export const DEALS = [
     teaseFrom: '2026-07-29',
     accent: true,
   },
-  {
-    id: 'first-facial-10',
-    title: '10% off your first facial',
-    description:
-      'New to Farwa? Join the newsletter (form in the footer of any page) and your 10% code for any first facial — from a Normal Facial to Janssen Whitening — arrives by email.',
-    priceNote: 'Facials from Rs 1,400 — code applies to your first one',
-    category: 'Facials',
-    href: '/services/facials',
-    validFrom: '2026-05-14',
-    validUntil: null, // evergreen welcome offer
-  },
+  /* first-facial-10 retired: it promised 10% with no staff/code/ESP backup.
+     Do not re-add a public % offer until the salon can honour it at the counter. */
 ]
 
 /** Deals still valid on the given date (defaults to today). */

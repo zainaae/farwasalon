@@ -56,19 +56,21 @@ export default function PricesPage() {
       {faqSchema && <JsonLd data={faqSchema} />}
       <JsonLd data={buildPriceListSchema()} />
       <div className="section-shell section-pad min-h-0">
-        <p className="eyebrow mb-4">— Price list · updated {UPDATED}</p>
-        <h1 className="display-page text-ink mb-4 max-w-2xl">
-          Salon price list — from Rs 100
-        </h1>
-        {/* The claim lives here, on the page that proves it. It used to live on
-            the homepage while this page said only "every priced service", so
-            nothing that read one read the other. */}
-        <p className="text-body md:text-lg max-w-2xl mb-3 leading-relaxed">
-          This is the full published price list for Farwa Beauty Salon in Block 3 PECHS, Karachi:
-          all <strong className="font-medium text-ink">{menu.total} services</strong> across{' '}
-          {menu.categories} categories, and <strong className="font-medium text-ink">every one of
-          them carries a printed price</strong> in Pakistani Rupees. No hidden quotes.
-        </p>
+        <div className="title-stack mb-3 max-w-2xl">
+          <p className="eyebrow">— Price list · updated {UPDATED}</p>
+          <h1 className="display-page text-ink">
+            Salon price list — from Rs 100
+          </h1>
+          {/* The claim lives here, on the page that proves it. It used to live on
+              the homepage while this page said only "every priced service", so
+              nothing that read one read the other. */}
+          <p className="text-body md:text-lg leading-relaxed">
+            This is the full published price list for Farwa Beauty Salon in Block 3 PECHS, Karachi:
+            all <strong className="font-medium text-ink">{menu.total} services</strong> across{' '}
+            {menu.categories} categories, and <strong className="font-medium text-ink">every one of
+            them carries a printed price</strong> in Pakistani Rupees. No hidden quotes.
+          </p>
+        </div>
         <p className="text-body text-sm max-w-2xl mb-3 leading-relaxed">
           {menu.fixed} of those are fixed rates — what the table says is what you pay. The
           remaining {menu.startingFrom}{' '}are hair and hair-treatment services shown as

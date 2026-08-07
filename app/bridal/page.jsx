@@ -72,14 +72,16 @@ export default function BridalLandingPage() {
       {faqSchema && <JsonLd data={faqSchema} />}
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
-          <p className="eyebrow mb-4">— Bridal · from Rs 8,000</p>
-          <h1 id="bridal-headline" className="display-page text-ink mb-5 max-w-2xl">
-            Bridal makeup in PECHS, Karachi
-          </h1>
-          <p id="bridal-lede" className="text-body md:text-lg max-w-2xl mb-8 leading-relaxed">
-            Farwa in PECHS has styled weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000,
-            Engagement Rs 12,000, Full Bridal Package Rs 25,000.
-          </p>
+          <div className="title-stack mb-10 max-w-2xl">
+            <p className="eyebrow">— Bridal · from Rs 8,000</p>
+            <h1 id="bridal-headline" className="display-page text-ink">
+              Bridal makeup in PECHS, Karachi
+            </h1>
+            <p id="bridal-lede" className="text-body md:text-lg leading-relaxed">
+              Farwa in PECHS has styled weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000,
+              Engagement Rs 12,000, Full Bridal Package Rs 25,000.
+            </p>
+          </div>
 
           <div className="cta-cluster mb-4">
             <Link

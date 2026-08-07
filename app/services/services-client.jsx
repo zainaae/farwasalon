@@ -113,12 +113,12 @@ export default function ServicesClient() {
   return (
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
       <div className="section-shell section-pad min-h-0">
-        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
+        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8 title-stack">
           {/* CSS entrances — framer's initial{opacity:0} kept this header
               invisible until hydration, making the intro paragraph a ~5.5s
               LCP (same failure mode the homepage hero had).
               No overflow-hidden: it clipped Unbounded on the title. */}
-          <h1 className="hero-rise display-page text-ink mb-4" style={{ animationDuration: '0.9s' }}>
+          <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
             Our services
           </h1>
           <p className="hero-fade-up text-body max-w-lg mb-6" style={{ animationDelay: '0.2s' }}>
