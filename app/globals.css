@@ -511,6 +511,79 @@
   @media (min-width: 768px) {
     .reviews-block-divider { padding-top: 2.5rem; }
   }
+  /* Quote-forward strip under the featured pull-quote */
+  .review-strip-card {
+    background: #fff;
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--plum);
+    box-shadow: var(--shadow-soft);
+    transition:
+      transform var(--dur-med) var(--ease-out),
+      box-shadow var(--dur-med) var(--ease-out),
+      border-color var(--dur-med) var(--ease-out);
+  }
+  .review-strip-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-plum, var(--shadow-card));
+    border-color: color-mix(in srgb, var(--plum) 35%, var(--border-soft));
+    border-left-color: var(--berry);
+  }
+  .review-strip-card__link {
+    padding: 1.25rem 1.25rem 1.15rem;
+    color: inherit;
+    text-decoration: none;
+    min-height: 100%;
+  }
+  @media (min-width: 640px) {
+    .review-strip-card__link {
+      padding: 1.4rem 1.35rem 1.25rem;
+    }
+  }
+  .review-strip-card__mark {
+    color: color-mix(in srgb, var(--berry) 45%, transparent);
+    margin-bottom: 0.75rem;
+    transition: color var(--dur-med) var(--ease-out);
+  }
+  .review-strip-card:hover .review-strip-card__mark {
+    color: var(--berry);
+  }
+  .review-strip-card__quote {
+    margin: 0;
+  }
+  .review-strip-card__avatar {
+    background: color-mix(in srgb, var(--plum-deep) 8%, #fff);
+    border: 1px solid color-mix(in srgb, var(--plum) 28%, var(--border-soft));
+    color: var(--plum-deep);
+  }
+  .review-strip-card__arrow {
+    color: var(--stone);
+    opacity: 0.45;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      opacity var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .review-strip-card:hover .review-strip-card__arrow {
+    color: var(--plum);
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+  .review-strip-viewall {
+    color: var(--plum);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .review-strip-viewall:hover {
+    color: var(--plum-deep);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .review-strip-card,
+    .review-strip-card:hover {
+      transform: none;
+    }
+    .review-strip-card:hover .review-strip-card__arrow {
+      transform: none;
+    }
+  }
   .reviews-rating-row {
     display: inline-flex;
     flex-wrap: wrap;
@@ -1395,6 +1468,56 @@ button.tap-safe,
 .problem-band {
   background-color: var(--plum-deep);
   background-image: radial-gradient(75% 120% at 16% 0%, rgba(158, 42, 82, 0.22), transparent 58%);
+}
+
+.problem-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 17rem;
+  padding: 1.5rem 1.35rem 1.5rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 3px solid var(--berry);
+  background: rgba(255, 255, 255, 0.04);
+  transition:
+    transform var(--dur-med) var(--ease-out),
+    border-color var(--dur-med) var(--ease-out),
+    background-color var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
+}
+.problem-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.22);
+  border-left-color: var(--accent-gold);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: var(--shadow-plum);
+}
+.problem-card-index {
+  display: block;
+  font-size: clamp(3.25rem, 8vw, 4.75rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+}
+.problem-band-rail {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.problem-band-rail::-webkit-scrollbar { display: none; }
+
+@keyframes bookingKenBurns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+.booking-story-img--live {
+  animation: bookingKenBurns 8s var(--ease-out) forwards;
+}
+.booking-story-num {
+  letter-spacing: -0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .problem-card:hover { transform: none; box-shadow: none; }
+  .booking-story-img--live { animation: none; }
 }
 
 /* Quoti-style sticky rail — fills the dead right/left column with a job,
