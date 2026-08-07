@@ -115,13 +115,13 @@ export default function BridalLandingPage() {
               <div className="cta-cluster mb-4">
                 <Link
                   href={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
-                  className="tap-safe inline-flex items-center justify-center gap-2 bg-white text-ink text-[12px] md:text-[13px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-7 md:px-8 py-3.5 hover:bg-nude active:scale-[0.98] transition-colors w-full sm:w-auto"
+                  className="btn-loud btn-loud--light tap-safe w-full sm:w-auto"
                 >
                   Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/prices"
-                  className="tap-safe inline-flex items-center justify-center gap-2 border border-white/70 text-white text-[12px] md:text-[13px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-7 md:px-8 py-3.5 hover:bg-white/10 transition-colors w-full sm:w-auto"
+                  className="btn-ghost-on-dark tap-safe w-full sm:w-auto"
                 >
                   Full price list
                 </Link>

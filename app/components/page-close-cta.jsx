@@ -4,7 +4,7 @@ import WaCta from './wa-cta.jsx'
 import { WA_NUMBER } from '../../src/data.js'
 
 /**
- * Shared close for interior money/info pages — Quoti × Farwa north star:
+ * Shared close for interior money/info pages — Farwa theme master:
  * decisive Book + WhatsApp pair on logo plum-deep (not a purple wash).
  */
 export default function PageCloseCta({
@@ -17,6 +17,7 @@ export default function PageCloseCta({
   waFrom = 'page-close',
   waLabel = 'WhatsApp us',
   onBookClick,
+  children,
 }) {
   const wa = waHref || `https://wa.me/${WA_NUMBER}`
   const bookClass =
@@ -39,7 +40,7 @@ export default function PageCloseCta({
             <p className="text-body mt-4 mx-auto max-w-md text-white/70">{body}</p>
           ) : null}
         </div>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-xl">
+        <div className="cta-cluster justify-center w-full max-w-xl">
           {onBookClick ? (
             <button type="button" onClick={onBookClick} className={bookClass}>
               {bookLabel} <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
@@ -52,11 +53,12 @@ export default function PageCloseCta({
           <WaCta
             href={wa}
             from={waFrom}
-            className="tap-safe inline-flex items-center justify-center gap-2 min-h-14 px-8 py-3.5 text-[13px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] text-white border border-white/70 hover:bg-white/10 transition-colors w-full sm:w-auto"
+            className="btn-ghost-on-dark tap-safe w-full sm:w-auto"
           >
             {waLabel}
           </WaCta>
         </div>
+        {children}
       </div>
     </section>
   )

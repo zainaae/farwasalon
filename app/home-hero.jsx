@@ -1,19 +1,19 @@
 import Image from 'next/image'
 import WaCta from './components/wa-cta.jsx'
 import Link from 'next/link'
+import ArrowUpRight from './components/icon-sprite.jsx'
 import { WA_NUMBER } from '../src/site-config.js'
 
 const HERO_POSTER = '/bridal2.jpg'
 
-const thesis = [
-  { text: 'Bridal. Hair. Skin. ', em: true },
-  { text: 'Rubina\u2019s studio ', em: false },
-  { text: 'since 2008.', em: true },
-]
-
+/**
+ * Brand-first first viewport (Farwa theme master):
+ * logo/name + PECHS · one H1 · one supporting line · one CTA group · one dominant image.
+ * Quoti rhythm lives below the fold — not as slogan H1, avatars, or purple wash.
+ */
 export default function HomeHero() {
   return (
-    <section className="relative w-full h-[100svh] min-h-[520px] max-h-[1100px] overflow-hidden bg-[#0d0609]">
+    <section className="relative w-full h-[100svh] min-h-[520px] max-h-[1100px] overflow-hidden bg-[var(--hero-ground)]">
       <Image
         src={HERO_POSTER}
         alt="Bridal makeup and beauty styling at Farwa Beauty Salon in PECHS Karachi"
@@ -80,9 +80,9 @@ export default function HomeHero() {
         <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
           <p
             id="hero-lede"
-            className="hero-lcp text-white/80 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-[family-name:var(--font-inter)] mb-5 md:mb-7"
+            className="hero-lcp text-white/85 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-[family-name:var(--font-inter)] mb-5 md:mb-7"
           >
-            Farwa Beauty Salon &middot; Est. 2008
+            Farwa Beauty Salon &middot; PECHS
           </p>
 
           {/* H1 uses next/font CSS var + display:optional Unbounded so LCP is not
@@ -101,60 +101,28 @@ export default function HomeHero() {
           </h1>
 
           <p
-            className="text-white/90 leading-[1.15] mb-8 md:mb-9 break-words font-[family-name:var(--font-unbounded)]"
-            style={{
-              fontSize: 'clamp(1.05rem, 3.2vw, 1.75rem)',
-              letterSpacing: '-0.01em',
-              maxWidth: '22ch',
-            }}
+            className="hero-lcp text-white/85 text-[15px] sm:text-base md:text-lg font-light leading-snug mb-8 md:mb-9 max-w-md font-[family-name:var(--font-inter)]"
           >
-            {thesis.map((line) => (
-              <span
-                key={line.text}
-                className={`block ${line.em ? 'text-white/95 font-bold' : 'text-white/85 font-normal'}`}
-              >
-                {line.text}
-              </span>
-            ))}
+            Bridal, hair &amp; skin with Rubina since 2008.
           </p>
 
           <div
-            className="hero-fade-up flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-7"
+            className="hero-fade-up cta-cluster items-stretch sm:items-center"
             style={{ animationDelay: '0.32s' }}
           >
             <Link
               href="/book"
-              className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2.5 bg-white text-ink text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-8 md:px-10 py-[1.05rem] md:py-[1.2rem] hover:bg-nude active:scale-[0.98] transition-colors duration-300"
+              className="btn-loud btn-loud--light tap-safe"
             >
               Book an Appointment
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M7 7h10v10" />
-                <path d="M7 17 17 7" />
-              </svg>
-            </Link>
-            <Link
-              href="/services"
-              className="tap-safe link-underline self-center text-white/75 text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
-            >
-              Explore Services
+              <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
             </Link>
             <WaCta
               href={`https://wa.me/${WA_NUMBER}`}
               from="hero"
-              className="tap-safe link-underline self-center hidden sm:inline-flex text-white/75 text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
+              className="btn-ghost-on-dark tap-safe"
             >
-              Or WhatsApp us
+              WhatsApp us
             </WaCta>
           </div>
         </div>

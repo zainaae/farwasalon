@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Farwa theme master — Quoti structure, Farwa skin.
+   Spine: --plum-deep / --plum / --berry (logo). Surfaces: mist / stone / ink.
+   Gold is ambient only. No second competing palette, no purple-on-white wash. */
 :root {
   --white:  #ffffff;
   --ink:    #0d0d0d;
@@ -18,6 +21,8 @@
   --plum-deep: #3f1631;
   --plum: #6e2044;
   --berry: #9e2a52; /* ≈7:1 on white — safe for small text */
+  /* Hero bridal ground — near-black with plum undertone (matches poster). */
+  --hero-ground: #0d0609;
   --shadow-soft: 0 2px 12px rgba(13, 13, 13, 0.05);
   --shadow-card: 0 8px 32px rgba(13, 13, 13, 0.08);
   --shadow-plum: 0 8px 28px rgba(63, 22, 49, 0.14);
@@ -34,12 +39,16 @@
   --azadi-fall:  #e6f7c8;   /* gradient low stop */
   --azadi-fall2: #e9f8ce;   /* strip low stop */
 
-  /* Motion language — exponential ease-out for entrances, three duration
-     buckets. Browser defaults (ease, ease-in-out) read as uncrafted. */
+  /* Motion language — exponential ease-out for entrances, duration buckets.
+     Browser defaults (ease, ease-in-out) read as uncrafted.
+     Aliases (--ease-out-expo, --dur-fast/--dur-med) match the theme remake kit. */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo: var(--ease-out);
   --ease-in:  cubic-bezier(0.7, 0, 0.84, 0);
   --dur-micro: 120ms;
+  --dur-fast:  var(--dur-micro);
   --dur-short: 220ms;
+  --dur-med:   var(--dur-short);
   --dur-long:  420ms;
 
   /* shadcn tokens */
@@ -276,10 +285,20 @@
     color: #fff;
     background: var(--ink);
     border: 1px solid var(--ink);
-    transition: background-color 0.2s ease, transform 0.15s ease;
+    transition:
+      background-color var(--dur-med) var(--ease-out),
+      border-color var(--dur-med) var(--ease-out),
+      color var(--dur-med) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out),
+      box-shadow var(--dur-med) var(--ease-out);
   }
-  .btn-primary:hover { background: var(--plum); border-color: var(--plum); }
-  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:hover {
+    background: var(--plum);
+    border-color: var(--plum);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-plum);
+  }
+  .btn-primary:active { transform: translateY(0) scale(0.98); box-shadow: none; }
   .btn-secondary {
     display: inline-flex;
     align-items: center;
@@ -295,9 +314,18 @@
     color: var(--ink);
     background: transparent;
     border: 1px solid var(--ink);
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color var(--dur-med) var(--ease-out),
+      border-color var(--dur-med) var(--ease-out),
+      color var(--dur-med) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
   }
-  .btn-secondary:hover { background: var(--mist); }
+  .btn-secondary:hover {
+    background: var(--mist);
+    border-color: var(--plum);
+    color: var(--plum-deep);
+  }
+  .btn-secondary:active { transform: scale(0.98); }
   .tab-pill {
     flex-shrink: 0;
     min-height: 44px;
@@ -483,6 +511,79 @@
   @media (min-width: 768px) {
     .reviews-block-divider { padding-top: 2.5rem; }
   }
+  /* Quote-forward strip under the featured pull-quote */
+  .review-strip-card {
+    background: #fff;
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--plum);
+    box-shadow: var(--shadow-soft);
+    transition:
+      transform var(--dur-med) var(--ease-out),
+      box-shadow var(--dur-med) var(--ease-out),
+      border-color var(--dur-med) var(--ease-out);
+  }
+  .review-strip-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-plum, var(--shadow-card));
+    border-color: color-mix(in srgb, var(--plum) 35%, var(--border-soft));
+    border-left-color: var(--berry);
+  }
+  .review-strip-card__link {
+    padding: 1.25rem 1.25rem 1.15rem;
+    color: inherit;
+    text-decoration: none;
+    min-height: 100%;
+  }
+  @media (min-width: 640px) {
+    .review-strip-card__link {
+      padding: 1.4rem 1.35rem 1.25rem;
+    }
+  }
+  .review-strip-card__mark {
+    color: color-mix(in srgb, var(--berry) 45%, transparent);
+    margin-bottom: 0.75rem;
+    transition: color var(--dur-med) var(--ease-out);
+  }
+  .review-strip-card:hover .review-strip-card__mark {
+    color: var(--berry);
+  }
+  .review-strip-card__quote {
+    margin: 0;
+  }
+  .review-strip-card__avatar {
+    background: color-mix(in srgb, var(--plum-deep) 8%, #fff);
+    border: 1px solid color-mix(in srgb, var(--plum) 28%, var(--border-soft));
+    color: var(--plum-deep);
+  }
+  .review-strip-card__arrow {
+    color: var(--stone);
+    opacity: 0.45;
+    transition:
+      color var(--dur-fast) var(--ease-out),
+      opacity var(--dur-fast) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+  .review-strip-card:hover .review-strip-card__arrow {
+    color: var(--plum);
+    opacity: 1;
+    transform: translate(2px, -2px);
+  }
+  .review-strip-viewall {
+    color: var(--plum);
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .review-strip-viewall:hover {
+    color: var(--plum-deep);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .review-strip-card,
+    .review-strip-card:hover {
+      transform: none;
+    }
+    .review-strip-card:hover .review-strip-card__arrow {
+      transform: none;
+    }
+  }
   .reviews-rating-row {
     display: inline-flex;
     flex-wrap: wrap;
@@ -603,11 +704,33 @@
   @media (max-width: 639px) {
     .cta-cluster > .btn-primary,
     .cta-cluster > .btn-secondary,
+    .cta-cluster > .btn-loud,
+    .cta-cluster > .btn-ghost-on-dark,
     .cta-cluster > a.btn-primary,
-    .cta-cluster > a.btn-secondary {
+    .cta-cluster > a.btn-secondary,
+    .cta-cluster > a.btn-loud,
+    .cta-cluster > a.btn-ghost-on-dark {
       width: 100%;
       justify-content: center;
     }
+  }
+  /* Chapter rail — menu / list section heads with a plum brand edge. */
+  .chapter-rail {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 1rem;
+    padding-top: 2.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--plum);
+  }
+  .chapter-rail:first-child,
+  section:first-child > .chapter-rail {
+    padding-top: 0.5rem;
+  }
+  .chapter-rail .section-title {
+    color: var(--plum);
+    margin: 0;
   }
   .footer-areas summary::-webkit-details-marker { display: none; }
   .footer-areas summary::marker { content: ''; }
@@ -1154,7 +1277,10 @@ button.tap-safe,
   .azadi-mat { padding: 0.7rem; }
 }
 
-/* ── Quoti-structure home (below fold) — Farwa skin ── */
+/* ── Quoti-structure home (below fold) — Farwa skin ──
+   Control kit: primary = .btn-loud (Book), secondary = .btn-ghost-on-dark /
+   .btn-secondary (WhatsApp/outline), tertiary = .link-underline.
+   Motion kit: --ease-out-expo + --dur-fast/--dur-med; 2–3 intentional moves. */
 .btn-loud {
   display: inline-flex;
   align-items: center;
@@ -1171,21 +1297,153 @@ button.tap-safe,
   background: var(--ink);
   border: 1px solid var(--ink);
   text-decoration: none;
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition:
+    background-color var(--dur-med) var(--ease-out),
+    border-color var(--dur-med) var(--ease-out),
+    color var(--dur-med) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
 }
-.btn-loud:hover { background: var(--plum); color: #fff; border-color: var(--plum); }
-.btn-loud:active { transform: scale(0.98); }
+.btn-loud:hover {
+  background: var(--plum);
+  color: #fff;
+  border-color: var(--plum);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-plum);
+}
+.btn-loud:active { transform: translateY(0) scale(0.98); box-shadow: none; }
+.btn-loud:focus-visible {
+  outline: 2px solid var(--berry);
+  outline-offset: 3px;
+}
 .btn-loud--light {
   color: var(--ink);
   background: #fff;
   border-color: #fff;
 }
-.btn-loud--light:hover { background: var(--nude); color: var(--plum-deep); }
+.btn-loud--light:hover {
+  background: var(--nude);
+  color: var(--plum-deep);
+  border-color: var(--nude);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-plum);
+}
 .btn-loud--plum {
   background: var(--plum-deep);
   border-color: var(--plum-deep);
 }
-.btn-loud--plum:hover { background: var(--plum); border-color: var(--plum); color: #fff; }
+.btn-loud--plum:hover {
+  background: var(--plum);
+  border-color: var(--plum);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-plum);
+}
+
+/* Secondary close on plum/ink finales — same language as PageCloseCta WhatsApp. */
+.btn-ghost-on-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 56px;
+  padding: 0.875rem 2rem;
+  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition:
+    background-color var(--dur-med) var(--ease-out),
+    border-color var(--dur-med) var(--ease-out),
+    color var(--dur-med) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.btn-ghost-on-dark:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.btn-ghost-on-dark:active { transform: translateY(0) scale(0.98); }
+.btn-ghost-on-dark:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 3px;
+}
+
+/* Slow scale on owned photography tiles — gallery / work strip / sticky frames. */
+.media-zoom {
+  overflow: hidden;
+}
+.media-zoom > img,
+.media-zoom img {
+  transform: scale(1);
+  transition: transform var(--dur-long) var(--ease-out);
+}
+.media-zoom:hover > img,
+.media-zoom:hover img,
+.group:hover .media-zoom > img,
+.group:hover .media-zoom img {
+  transform: scale(1.04);
+}
+
+/* Sticky booking-story — plum edge glow on the active step. */
+.booking-story-step {
+  border-left: 2px solid transparent;
+  padding-left: 1rem;
+  margin-left: -1rem;
+  transition:
+    border-color var(--dur-med) var(--ease-out),
+    opacity var(--dur-med) var(--ease-out);
+}
+.booking-story-step--active {
+  border-left-color: var(--plum);
+}
+/* Inactive hierarchy stays via heading text-stone in JSX — never container opacity. */
+.booking-story-frame {
+  transition: box-shadow var(--dur-long) var(--ease-out);
+}
+.booking-story-frame--live {
+  box-shadow: var(--shadow-plum);
+}
+
+/* CSS section enter for pages without framer on a given block. */
+@keyframes themeRise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.theme-rise {
+  animation: themeRise var(--dur-long) var(--ease-out-expo) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-loud:hover,
+  .btn-loud--light:hover,
+  .btn-loud--plum:hover,
+  .btn-ghost-on-dark:hover,
+  .btn-primary:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  .media-zoom > img,
+  .media-zoom img,
+  .media-zoom:hover > img,
+  .media-zoom:hover img,
+  .group:hover .media-zoom > img,
+  .group:hover .media-zoom img {
+    transform: none;
+    transition: none;
+  }
+  .theme-rise {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
 
 .grain-on-dark {
   position: relative;
@@ -1212,6 +1470,56 @@ button.tap-safe,
   background-image: radial-gradient(75% 120% at 16% 0%, rgba(158, 42, 82, 0.22), transparent 58%);
 }
 
+.problem-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 17rem;
+  padding: 1.5rem 1.35rem 1.5rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-left: 3px solid var(--berry);
+  background: rgba(255, 255, 255, 0.04);
+  transition:
+    transform var(--dur-med) var(--ease-out),
+    border-color var(--dur-med) var(--ease-out),
+    background-color var(--dur-med) var(--ease-out),
+    box-shadow var(--dur-med) var(--ease-out);
+}
+.problem-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.22);
+  border-left-color: var(--accent-gold);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: var(--shadow-plum);
+}
+.problem-card-index {
+  display: block;
+  font-size: clamp(3.25rem, 8vw, 4.75rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+}
+.problem-band-rail {
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.problem-band-rail::-webkit-scrollbar { display: none; }
+
+@keyframes bookingKenBurns {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+.booking-story-img--live {
+  animation: bookingKenBurns 8s var(--ease-out) forwards;
+}
+.booking-story-num {
+  letter-spacing: -0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .problem-card:hover { transform: none; box-shadow: none; }
+  .booking-story-img--live { animation: none; }
+}
+
 /* Quoti-style sticky rail — fills the dead right/left column with a job,
    not with empty canvas. Plum hairline marks the brand edge. */
 .editorial-sticky-rail {
@@ -1232,7 +1540,7 @@ button.tap-safe,
   box-shadow: var(--shadow-plum);
 }
 
-/* Booking-story inactive steps must not use container opacity on .bg-mist —
-   that blended text to ~1.6–2.3:1 (axe color-contrast). Hierarchy is via
-   heading text-stone + sticky/mobile media opacity instead. */
+/* Booking-story inactive steps must not use container opacity or text-stone/NN
+   on .bg-mist — those blend to ~1.6–1.8:1 (axe color-contrast). Hierarchy is
+   via full text-stone on headings/nums/progress + sticky/mobile media opacity. */
 
