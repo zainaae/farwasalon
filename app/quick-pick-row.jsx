@@ -36,10 +36,10 @@ export default function QuickPickRow() {
   return (
     <section
       aria-labelledby="quickpick-heading"
-      className="cv-auto bg-white border-b border-border-soft pt-8 md:pt-10 pb-8 md:pb-10"
+      className="cv-auto bg-white border-b border-border-soft pt-6 md:pt-8 pb-6 md:pb-8"
     >
       <div className="section-shell">
-        <div className="flex items-baseline justify-between gap-4 mb-5 md:mb-6">
+        <div className="flex items-baseline justify-between gap-4 mb-3.5 md:mb-4">
           <div className="flex items-baseline gap-3 min-w-0">
             <h2 id="quickpick-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-sm sm:text-base leading-none">
               Quick pick
