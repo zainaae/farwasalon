@@ -100,7 +100,7 @@ export default function QuoteBuilder() {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="border border-border-soft bg-white px-3.5 py-2.5 text-ink text-sm font-[family-name:var(--font-inter)] focus:outline-none focus:border-ink"
+            className="border border-border-soft bg-white px-3.5 py-2.5 text-ink text-sm font-[family-name:var(--font-inter)] focus:border-ink"
           />
         </div>
 
