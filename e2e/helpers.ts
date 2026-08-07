@@ -155,7 +155,8 @@ export async function openNewsletterModal(page: Page) {
   await page.goto('/')
   // The modal is engagement-gated: it opens at 60% scroll depth. The scroll
   // listener attaches after hydration, so keep nudging until it reacts.
-  const dialog = page.getByRole('dialog', { name: /seasonal tips|salon updates/i })
+  // Accessible name comes from aria-labelledby → #newsletter-heading (h2).
+  const dialog = page.getByRole('dialog', { name: /tips from the chair|salon updates|seasonal tips/i })
   for (let i = 0; i < 30; i++) {
     if (await dialog.isVisible().catch(() => false)) break
     await page.evaluate(() => {

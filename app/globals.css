@@ -193,11 +193,14 @@
     .flow-loose { margin-bottom: 7.5rem; }
   }
   .section-pad {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
   @media (min-width: 768px) {
-    .section-pad { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+    .section-pad { padding-top: 5.25rem; padding-bottom: 5.25rem; }
+  }
+  @media (min-width: 1024px) {
+    .section-pad { padding-top: 5.75rem; padding-bottom: 5.75rem; }
   }
   /* .eyebrow hardcodes --stone, which is 6.18:1 on white but only 3.15:1 on
      --ink. Two sections used it on a dark ground and failed AA there; two
@@ -440,35 +443,30 @@
       padding: 0.5rem 0.5rem;
     }
   }
+  /* Cap at 3–4 columns — 5/9-up at tablet/desktop read as a price spreadsheet. */
   .quick-pick-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5rem;
+    gap: 0.75rem 1.25rem;
     width: 100%;
     min-width: 0;
   }
-  @media (min-width: 480px) {
-    .quick-pick-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  }
   @media (min-width: 640px) {
-    .quick-pick-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .quick-pick-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem 1.75rem; }
   }
-  @media (min-width: 900px) {
-    .quick-pick-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  }
-  @media (min-width: 1280px) {
-    .quick-pick-grid { grid-template-columns: repeat(9, minmax(0, 1fr)); }
+  @media (min-width: 1024px) {
+    .quick-pick-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.15rem 2rem; }
   }
   .quick-pick-card {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
-    gap: 0.125rem;
+    justify-content: flex-start;
+    gap: 0.35rem;
     width: 100%;
-    min-height: 3.25rem;
+    min-height: 3.75rem;
     height: 100%;
-    padding: 0.55rem 0.15rem 0.65rem;
+    padding: 0.85rem 0.2rem 1rem;
     border: none;
     border-bottom: 1px solid var(--border-soft);
     border-radius: 0;
@@ -674,7 +672,11 @@
   }
   @media (max-width: 767px) {
     html {
-      scroll-padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+      scroll-padding-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+    }
+    /* Mid-page loud CTAs need clearance above the fixed Call/WA/Book bar */
+    .sticky-midband-cta {
+      margin-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
     }
     .page-content nav[aria-label="Price list categories"] {
       scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
@@ -1235,10 +1237,14 @@ button.tap-safe,
 /* Home strip — same language, compressed to a band */
 .azadi-strip {
   background:
-    radial-gradient(80% 150% at 88% 50%, rgba(28, 125, 71, 0.18) 0%, rgba(28, 125, 71, 0) 62%),
+    radial-gradient(80% 150% at 88% 50%, rgba(28, 125, 71, 0.14) 0%, rgba(28, 125, 71, 0) 62%),
     linear-gradient(100deg, var(--azadi-lift) 0%, var(--azadi-paper) 55%, var(--azadi-fall2) 100%);
   border-top: 1px solid var(--azadi-tint);
   border-bottom: 1px solid var(--azadi-tint);
+}
+/* Slim home variant — no poster / giant % competing with proof + quick-pick */
+.azadi-strip--slim {
+  background: linear-gradient(100deg, var(--azadi-lift) 0%, var(--azadi-paper) 70%, var(--azadi-fall2) 100%);
 }
 .azadi-strip-figure {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;

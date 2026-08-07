@@ -49,8 +49,8 @@ export default function ProofStrip() {
 
   return (
     <aside className="bg-ink border-t border-white/10" aria-label="Why clients choose Farwa">
-      <div className="section-shell py-4 md:py-5">
-        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:gap-x-10">
+      <div className="section-shell py-5 md:py-6">
+        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3.5 md:gap-x-10 md:gap-y-3">
           {items.map(({ key, lead, label, href, ariaLabel }, i) => {
             const body = (
               <>

@@ -14,6 +14,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import ArrowUpRight from './components/icon-sprite.jsx'
 import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
@@ -52,14 +53,7 @@ export default function NewsletterModal() {
   const previouslyFocused = useRef(null)
   const firstInputRef = useRef(null)
 
-  // Decide whether this route should ever surface the modal.
-  /* Allowlist, not denylist. This previously ran anywhere except /book and
-     /cancel, so at 60% scroll depth it locked the body and covered whatever
-     the visitor had scrolled to: the reviews block on the homepage, the middle
-     of the hair table on /prices, the FAQ on /bridal. The most engaged visitor
-     on the site got interrupted on a decision page and asked for an email —
-     a channel this salon does not run on — with no way to book inside the
-     dialog. It belongs where someone is reading, not deciding. */
+  /* Allowlist, not denylist — reading pages only. */
   const eligible = pathname === '/' || pathname?.startsWith('/blog')
 
   useEffect(() => {
@@ -74,7 +68,6 @@ export default function NewsletterModal() {
       track('NewsletterOpen')
     }
 
-    // Engagement-gated only: never ambush a visitor who just arrived.
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight
       if (max > 0 && window.scrollY / max >= SCROLL_DEPTH) triggerOnce()
@@ -82,7 +75,6 @@ export default function NewsletterModal() {
     window.addEventListener('scroll', onScroll, { passive: true })
 
     const onPointerLeave = (e) => {
-      // exit-intent: mouse leaves through the top of the viewport
       if (e.clientY <= 0) triggerOnce()
     }
     document.addEventListener('mouseleave', onPointerLeave)
@@ -93,7 +85,6 @@ export default function NewsletterModal() {
     }
   }, [eligible, pathname])
 
-  // Focus management
   useEffect(() => {
     if (!open) return
     previouslyFocused.current = document.activeElement
@@ -158,63 +149,85 @@ export default function NewsletterModal() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-ink/60 backdrop-blur-sm p-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] pl-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))]"
+          className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center bg-ink/55 backdrop-blur-[2px] p-[max(1rem,env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom,0px))] pl-[max(1rem,env(safe-area-inset-left,0px))] pr-[max(1rem,env(safe-area-inset-right,0px))]"
           role="dialog"
           aria-modal="true"
           aria-labelledby="newsletter-heading"
           onClick={dismiss}
         >
           <m.div
-            initial={{ y: 24, opacity: 0, scale: 0.97 }}
-            animate={{ y: 0, opacity: 1, scale: 1 }}
+            initial={{ y: 28, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
             exit={{ y: 24, opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-md max-h-[min(90dvh,calc(100dvh-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-2rem))] overflow-y-auto overscroll-contain bg-white shadow-2xl mx-auto"
+            className="relative w-full max-w-lg max-h-[min(90dvh,calc(100dvh-env(safe-area-inset-top,0px)-env(safe-area-inset-bottom,0px)-2rem))] overflow-y-auto overscroll-contain bg-white shadow-2xl mx-auto border-t-2 border-plum"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={dismiss}
               aria-label="Close newsletter signup"
-              className="tap-safe absolute top-2 right-2 p-2 text-stone hover:text-ink transition-colors"
+              className="tap-safe absolute top-2.5 right-2.5 z-10 p-2 text-white/80 hover:text-white sm:text-stone sm:hover:text-ink transition-colors bg-ink/25 sm:bg-transparent rounded-sm"
             >
               <X className="w-4 h-4" />
             </button>
 
-            <div className="px-7 py-9 sm:px-9 sm:py-10">
+            {/* Real Farwa photo — not a generic SaaS popup header */}
+            <div className="relative h-[7.5rem] sm:h-[8.5rem] overflow-hidden bg-plum-deep">
+              <Image
+                src="/facial.jpg"
+                alt=""
+                fill
+                quality={55}
+                sizes="(max-width: 512px) 100vw, 512px"
+                className="object-cover object-[50%_28%] opacity-90"
+                aria-hidden
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    'linear-gradient(to top, rgba(63,22,49,0.92) 0%, rgba(63,22,49,0.35) 55%, rgba(63,22,49,0.45) 100%)',
+                }}
+              />
+              <p className="absolute bottom-3 left-6 right-12 text-accent-gold text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)]">
+                Farwa · PECHS
+              </p>
+            </div>
+
+            <div className="px-6 py-7 sm:px-8 sm:py-8">
               {state === 'success' ? (
-                <div role="status" aria-live="polite" className="text-center">
-                  <div className="w-14 h-14 mx-auto mb-5 bg-[#e8f5e3] flex items-center justify-center rounded-full">
-                    <Check className="w-7 h-7 text-[#4a9b3f]" strokeWidth={2.5} />
+                <div role="status" aria-live="polite">
+                  <div className="w-11 h-11 mb-4 bg-plum/10 flex items-center justify-center border border-plum/25">
+                    <Check className="w-5 h-5 text-plum" strokeWidth={2.5} />
                   </div>
-                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-syne)] font-bold text-xl text-ink uppercase tracking-tight mb-2">
+                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-unbounded)] font-bold text-xl text-ink tracking-tight mb-2">
                     Welcome!
                   </h2>
-                  <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-6">
+                  <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-6 leading-relaxed">
                     You&apos;re on the list. We send seasonal tips and slot news occasionally — never often, never spam.
                   </p>
                   <button
                     type="button"
                     onClick={dismiss}
-                    className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3"
+                    className="tap-safe inline-flex items-center justify-center gap-2 bg-plum-deep text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3 hover:bg-plum transition-colors"
                   >
                     Continue browsing
                   </button>
                 </div>
               ) : (
                 <>
-                  <p className="text-accent-gold-deep text-[10px] tracking-[0.32em] uppercase font-[family-name:var(--font-inter)] font-medium mb-3">
+                  <p className="text-plum text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] font-medium mb-2.5">
                     — Salon updates
                   </p>
-                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-[1.65rem] text-ink leading-tight mb-3">
-                    Seasonal tips from <span className="text-accent-gold-deep">the chair</span>
+                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-unbounded)] font-bold text-[1.45rem] sm:text-[1.65rem] text-ink leading-tight mb-2.5">
+                    Tips from the chair at Farwa
                   </h2>
-                  <p className="text-stone text-[13px] font-[family-name:var(--font-inter)] font-light leading-relaxed mb-6">
-                    Plus monthly seasonal tips, bridal timelines, and early access to slots in peak season. No spam — promise.
+                  <p className="text-stone text-[13px] font-[family-name:var(--font-inter)] font-light leading-relaxed mb-6 max-w-sm">
+                    Occasional bridal timelines, seasonal care notes, and early word on peak-season slots.
                   </p>
 
                   <form onSubmit={onSubmit} className="flex flex-col gap-3">
-                    {/* honeypot */}
                     <input
                       type="text"
                       name="website"
@@ -238,7 +251,7 @@ export default function NewsletterModal() {
                         placeholder="your@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:border-ink"
+                        className="w-full border border-border-soft bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:border-plum focus:ring-1 focus:ring-plum/20"
                       />
                     </div>
                     <div>
@@ -251,7 +264,7 @@ export default function NewsletterModal() {
                         maxLength={60}
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:border-ink"
+                        className="w-full border border-border-soft bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:border-plum focus:ring-1 focus:ring-plum/20"
                       />
                     </div>
 
@@ -265,18 +278,18 @@ export default function NewsletterModal() {
                       type="submit"
                       disabled={state === 'submitting'}
                       aria-busy={state === 'submitting'}
-                      className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-stone disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                      className="tap-safe inline-flex items-center justify-center gap-2 bg-plum-deep text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-plum disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                     >
                       {state === 'submitting' ? 'Saving…' : <>Join the list <ArrowUpRight className="w-3.5 h-3.5" /></>}
                     </button>
                   </form>
 
                   <p className="mt-4 text-stone text-[10px] font-[family-name:var(--font-inter)]">
-                    We never share your email. Unsubscribe any time.{' '}
+                    We never share your email.{' '}
                     <button
                       type="button"
                       onClick={dismiss}
-                      className="underline underline-offset-2 hover:text-stone"
+                      className="underline underline-offset-2 hover:text-ink"
                     >
                       No thanks
                     </button>
