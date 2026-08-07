@@ -275,6 +275,46 @@ To cancel or reschedule, please let us know at least 2 hours before your appoint
 Would you like to reschedule for another time? 📅
 ```
 
+### `/confirm` — Appointment confirmation (manual fallback)
+```
+Assalam-o-Alaikum {name}! 🌸 Your Farwa Beauty Salon appointment is confirmed.
+
+📅 {date} · {time}
+✨ {service}
+
+We are at Plot 165/G-1, Saima Terrace, Block 3 PECHS. Reply here if you need to reschedule (at least 2 hours notice). See you soon!
+```
+
+---
+
+## 5c. Morning confirm + evening review playbook (staff, no Cloud API)
+
+Run this every open day. Nothing here needs Meta approval — it uses the Bookings Google Sheet + WhatsApp Business on the salon phone.
+
+### Morning (before 11 AM) — Sheet → WhatsApp confirms
+
+1. Open the Bookings sheet (or wait for the **9 AM digest email** from Apps Script — subject starts with `📅 Today's bookings`).
+2. On the **salon phone**, open that email → tap **Send confirm** for each client.
+3. WhatsApp opens with the confirm pre-filled (name, service, time) → press send.
+4. Skip anyone already messaged. Mark chats with label **🔵 Appointment Booked**.
+
+**Manual fallback (no email):** filter the sheet to today's date → for each Confirmed row, use quick reply `/confirm` and fill `{name}`, `{date}`, `{time}`, `{service}`.
+
+**One-time Apps Script setup** (if morning digest is missing): paste current `google-apps-script/EmailBot.gs` → run **`setupTriggers`** → optionally run **`sendMorningConfirmDigest`** once to test.
+
+### During the day
+
+- New online bookings still trigger the 5-minute email alert — reply on WhatsApp if the client has not already confirmed.
+- Honour only offers that are live on [farwasalon.com/deals](https://farwasalon.com/deals). Through **14 Aug 2026**: Freedom Deal = **14%** at the counter when the basket is **Rs 1,400+**. No promo codes. No 20% / 10% language.
+
+### Evening (after last client) — post-visit review ask
+
+Follow **§5b The Review Engine** (7 PM digest with one-tap review asks). Happy clients only; never incentivize reviews.
+
+### When Cloud API is ready (engineering, not staff)
+
+Outbound confirms can move to Meta templates later. Env-gated code lives in `lib/whatsapp-cloud.js` and is called from `POST /api/book` only when credentials + `WHATSAPP_SEND_BOOKING_CONFIRM=true` are set. Until then, this morning digest is the production path.
+
 ---
 
 ## 5b. The Review Engine ⭐ (highest-impact routine in this doc)
@@ -373,22 +413,23 @@ ago for the follow-up nudge. Nothing to type, nothing to remember.
 1. Open the Bookings Google Sheet → **Extensions → Apps Script**
 2. Replace the whole file with the current `google-apps-script/EmailBot.gs`
 3. In the editor, select **`setupTriggers`** from the function dropdown → **Run**
-   (authorize when prompted) — this creates the daily 7 PM digest alongside the
-   existing 5-minute booking check
-4. Test it: select **`sendReviewDigest`** → **Run** — the digest for today
-   arrives in the salon inbox immediately
+   (authorize when prompted) — this creates the **9 AM confirm digest**, the
+   daily **7 PM review digest**, and the existing 5-minute booking check
+4. Test morning path: select **`sendMorningConfirmDigest`** → **Run**
+5. Test evening path: select **`sendReviewDigest`** → **Run** — the digest for
+   today arrives in the salon inbox immediately
 
-**Daily use:** open the 7 PM email *on the salon phone* → tap a button per
-client → WhatsApp opens with the personalized message → press send. Skip anyone
-who seemed unhappy (send `/recover` instead). The quick replies above remain the
-manual fallback.
+**Daily use:** morning email → tap confirm per client; 7 PM email → tap review
+asks. Skip anyone who seemed unhappy (send `/recover` instead). The quick
+replies above remain the manual fallback.
 
 ### The weekly rhythm
 
 | When | What |
 |------|------|
-| 7 PM daily (automatic) | Digest email arrives — tap through the day's review asks |
-| In the same digest | "Nudge" section lists 3-day-old visits — once only, skip repliers |
+| ~9 AM daily (automatic) | Confirm digest — tap through today's appointment confirms |
+| 7 PM daily (automatic) | Review digest — tap through the day's review asks |
+| In the same evening digest | "Nudge" section lists 3-day-old visits — once only, skip repliers |
 | Friday | Count total Google reviews; aim for +2–3 per week |
 | Friday | Reply to any new Google reviews |
 
@@ -441,13 +482,28 @@ Set up these labels to organize chats:
 
 ---
 
-## 8. WhatsApp Business API (Future)
+## 8. WhatsApp Business API (future — env-gated stub already in repo)
 
-For scaling beyond manual replies, consider the WhatsApp Business API:
-- Automated appointment reminders
-- Booking confirmation messages
-- Review request automation (24-hour delay after appointment)
-- Integration with a booking system
-- Chatbot for common queries
+For scaling beyond manual replies, use the WhatsApp Cloud API:
 
-This requires a Business Solution Provider (BSP) like Twilio, MessageBird, or WATI.
+- Automated appointment confirmations (`booking_confirmed` template)
+- Booking reminders (24h / 2h)
+- Review request automation (after appointment)
+
+**Engineering status:** `lib/whatsapp-cloud.js` + optional call from `POST /api/book`
+ship disabled by default. Set all of:
+
+```env
+WHATSAPP_TOKEN=
+WHATSAPP_PHONE_NUMBER_ID=
+WHATSAPP_SEND_BOOKING_CONFIRM=true
+# optional overrides:
+# WHATSAPP_TEMPLATE_BOOKING_CONFIRMED=booking_confirmed
+# WHATSAPP_TEMPLATE_LANG=en
+```
+
+Without those vars / flag, booking still succeeds and the morning Sheet→WA digest
+(§5c) remains the staff path. Templates must be approved in Meta before turning
+the flag on. Full architecture notes: `docs/integrations-execution.md` Path B.
+
+Providers if you prefer a BSP: Twilio, MessageBird, or WATI.

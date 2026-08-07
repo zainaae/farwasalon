@@ -101,13 +101,33 @@ Bare searches like **"beauty salon"** usually show the **Map Pack** first. Compl
 
 ### Request indexing after deploy
 
-In Search Console → URL Inspection → Request indexing:
+In Search Console → **URL Inspection** → paste each URL → **Request indexing**.
 
-- `https://farwasalon.com/`
-- `https://farwasalon.com/beauty-salon-karachi`
-- `https://farwasalon.com/services`
-- `https://farwasalon.com/services/threading-in-pechs-karachi`
-- `https://farwasalon.com/book`
+Do this after every production deploy that changes money-page copy, titles, or
+meta (especially trust/price/deal updates). Quota is limited (~10/day); hit the
+money URLs first.
+
+#### Money URLs — re-request checklist (Aug 2026 trust/copy deploy)
+
+- [ ] `https://farwasalon.com/`
+- [ ] `https://farwasalon.com/prices`
+- [ ] `https://farwasalon.com/services/eyebrow-tattoo`
+- [ ] `https://farwasalon.com/blog/eyebrow-microblading-karachi-guide`
+- [ ] `https://farwasalon.com/deals`
+- [ ] `https://farwasalon.com/freedom-deal`
+- [ ] `https://farwasalon.com/faq`
+
+#### Also useful (secondary)
+
+- [ ] `https://farwasalon.com/beauty-salon-karachi`
+- [ ] `https://farwasalon.com/services`
+- [ ] `https://farwasalon.com/book`
+- [ ] `https://farwasalon.com/services/threading-in-pechs-karachi`
+
+In URL Inspection, confirm **Coverage = URL is on Google** (or “Discovered /
+Crawled”) and that the live title/meta match the site (Freedom Deal meta must
+say **14%** through 14 Aug 2026; microblading **Rs 20,000** — no retired
+`first-facial-10` / 10% / 20% off language).
 
 ### Track the right queries (Performance report)
 
@@ -120,3 +140,5 @@ npm run ping:indexnow
 ```
 
 Requires `public/farwa-salon-indexnow.txt` live at `https://farwasalon.com/farwa-salon-indexnow.txt`.
+IndexNow covers Bing/Yandex-style engines; **GSC URL Inspection above is still
+required for Google** — you cannot skip the checklist.

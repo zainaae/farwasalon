@@ -38,6 +38,22 @@ Cancel links look like: `/book/cancel?id=FBS-…` (the signed cancel token is st
 |----------|-------------|
 | `INDEXNOW_SECRET` | Protects `/api/indexnow` |
 
+## WhatsApp Cloud API (optional outbound confirms)
+
+Disabled by default. Staff path today: morning Sheet→WA digest
+(`docs/whatsapp-business-setup.md` §5c + `google-apps-script/EmailBot.gs`).
+
+| Variable | Description |
+|----------|-------------|
+| `WHATSAPP_TOKEN` | Meta permanent token |
+| `WHATSAPP_PHONE_NUMBER_ID` | WhatsApp phone number ID from Meta |
+| `WHATSAPP_SEND_BOOKING_CONFIRM` | Set `true` / `1` to send after successful `POST /api/book` |
+| `WHATSAPP_TEMPLATE_BOOKING_CONFIRMED` | Optional; default `booking_confirmed` |
+| `WHATSAPP_TEMPLATE_LANG` | Optional; default `en` |
+
+Without token + phone ID, `lib/whatsapp-cloud.js` no-ops and logs `skip-unconfigured`.
+Do not enable the flag until the template is Meta-approved.
+
 ## Google Places (homepage reviews)
 
 | Variable | Description |
