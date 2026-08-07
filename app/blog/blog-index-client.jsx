@@ -4,9 +4,12 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
+import ArrowUpRight from '../components/icon-sprite.jsx'
+import WaCta from '../components/wa-cta.jsx'
 import { useBooking } from '../../src/shared.jsx'
 import { BreadcrumbJsonLd } from '../json-ld.jsx'
 import PageCloseCta from '../components/page-close-cta.jsx'
+import { WA_NUMBER } from '../../src/data.js'
 
 function formatBlogDate(dateStr) {
   return new Date(`${dateStr}T12:00:00`).toLocaleDateString('en-PK', {
@@ -40,7 +43,7 @@ export default function BlogIndexClient({ posts }) {
         ]} />
 
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8 title-stack max-w-lg">
-          <p className="hero-fade-up eyebrow">— Guides from the chair</p>
+          <p className="hero-fade-up eyebrow text-plum">— Guides from the chair</p>
           <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
             Beauty tips &amp; guides
           </h1>
@@ -84,10 +87,10 @@ export default function BlogIndexClient({ posts }) {
                   </div>
                 )}
                 <div className="min-w-0 pt-1">
-                  <p className="text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)] text-accent-gold-deep mb-3">
+                  <p className="text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)] text-berry mb-3">
                     Featured · {featured.category}
                   </p>
-                  <h2 className="font-[family-name:var(--font-syne)] font-bold text-xl md:text-2xl lg:text-3xl text-ink leading-snug mb-3 group-hover:text-stone transition-colors">
+                  <h2 className="font-[family-name:var(--font-syne)] font-bold text-xl md:text-2xl lg:text-3xl text-ink leading-snug mb-3 group-hover:text-plum transition-colors">
                     {featured.title}
                   </h2>
                   <p className="text-body mb-4 max-w-md line-clamp-3">
@@ -136,63 +139,102 @@ export default function BlogIndexClient({ posts }) {
             : `Showing ${inCategory.length} ${activeCategory} article${inCategory.length === 1 ? '' : 's'}`}
         </p>
 
-        {list.length > 0 && (
-          <ul className="flex flex-col divide-y divide-border-soft border-t border-border-soft">
-            {list.map((post) => (
-              <li key={post.slug}>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-5 md:py-6"
-                >
-                  {/* The date used to lead the row from a 7rem rail on the
-                      left. Two things were wrong with that: the whole corpus
-                      published on one day, so the rail scanned as the same
-                      string repeated down the page, and it pushed the title
-                      and excerpt 136px right while the actual right-hand
-                      column — a "Read" affordance held at opacity-0 until
-                      hover — left ~400px of the row permanently blank. Moving
-                      the one piece of real information over there closes the
-                      void with something worth reading and gives the title
-                      back its width. */}
-                  <div className="min-w-0 flex-1">
-                    <p className="text-[10px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1">
-                      {post.category}
-                      <span className="text-border-soft mx-2" aria-hidden="true">·</span>
-                      {post.readTime}
-                    </p>
-                    <h2 className="font-[family-name:var(--font-syne)] font-semibold text-lg md:text-xl text-ink leading-snug group-hover:text-stone transition-colors">
-                      {post.title}
-                    </h2>
-                    <p className="text-body text-sm mt-2 line-clamp-2 max-w-2xl">
-                      {post.description}
-                    </p>
-                  </div>
-                  <div className="shrink-0 sm:text-right sm:w-32 flex items-center sm:items-end gap-2 sm:gap-1 sm:flex-col">
-                    <time
-                      dateTime={post.date}
-                      className="text-stone text-[11px] font-[family-name:var(--font-inter)] tabular-nums"
+        {/* Quoti sticky panel fills the former dead right column: list scrolls,
+            Book + WhatsApp stay put. Mobile keeps a single column. */}
+        <div className="lg:grid lg:grid-cols-12 lg:gap-x-10 xl:gap-x-14 lg:items-start">
+          <div className="lg:col-span-8 min-w-0">
+            {list.length > 0 && (
+              <ul className="flex flex-col divide-y divide-border-soft border-t border-border-soft">
+                {list.map((post) => (
+                  <li key={post.slug}>
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-5 md:py-6"
                     >
-                      {formatBlogDate(post.date)}
-                    </time>
-                    {/* Reserved space is what made the old affordance cost a
-                        column; this one sits under the date it shares a cell
-                        with, so hidden-until-hover costs nothing. */}
-                    <span
-                      aria-hidden="true"
-                      className="hidden sm:inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-ink opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      Read <ChevronRight className="w-3 h-3" />
-                    </span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+                      {/* The date used to lead the row from a 7rem rail on the
+                          left. Two things were wrong with that: the whole corpus
+                          published on one day, so the rail scanned as the same
+                          string repeated down the page, and it pushed the title
+                          and excerpt 136px right while the actual right-hand
+                          column — a "Read" affordance held at opacity-0 until
+                          hover — left ~400px of the row permanently blank. Moving
+                          the one piece of real information over there closes the
+                          void with something worth reading and gives the title
+                          back its width. */}
+                      <div className="min-w-0 flex-1">
+                        <p className="text-[10px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1">
+                          {post.category}
+                          <span className="text-border-soft mx-2" aria-hidden="true">·</span>
+                          {post.readTime}
+                        </p>
+                        <h2 className="font-[family-name:var(--font-syne)] font-semibold text-lg md:text-xl text-ink leading-snug group-hover:text-plum transition-colors">
+                          {post.title}
+                        </h2>
+                        <p className="text-body text-sm mt-2 line-clamp-2 max-w-2xl">
+                          {post.description}
+                        </p>
+                      </div>
+                      <div className="shrink-0 sm:text-right sm:w-32 flex items-center sm:items-end gap-2 sm:gap-1 sm:flex-col">
+                        <time
+                          dateTime={post.date}
+                          className="text-stone text-[11px] font-[family-name:var(--font-inter)] tabular-nums"
+                        >
+                          {formatBlogDate(post.date)}
+                        </time>
+                        {/* Reserved space is what made the old affordance cost a
+                            column; this one sits under the date it shares a cell
+                            with, so hidden-until-hover costs nothing. */}
+                        <span
+                          aria-hidden="true"
+                          className="hidden sm:inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-ink opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          Read <ChevronRight className="w-3 h-3" />
+                        </span>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
 
-        {list.length === 0 && (
-          <p className="text-body text-sm py-8">No guides in this category yet.</p>
-        )}
+            {list.length === 0 && (
+              <p className="text-body text-sm py-8">No guides in this category yet.</p>
+            )}
+          </div>
+
+          <aside className="hidden lg:block lg:col-span-4">
+            <div className="lg:sticky lg:top-28 panel-plum p-6 xl:p-7">
+              <p className="text-accent-gold text-[10px] tracking-[0.22em] uppercase font-[family-name:var(--font-inter)] mb-3">
+                — PECHS studio
+              </p>
+              <p
+                className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-snug mb-3"
+                style={{ fontSize: 'clamp(1.15rem, 1.6vw, 1.45rem)', letterSpacing: '-0.02em' }}
+              >
+                Ready to book from a guide?
+              </p>
+              <p className="text-white/70 text-sm font-light font-[family-name:var(--font-inter)] leading-relaxed mb-6">
+                Live slots online, or WhatsApp if you prefer a quick confirm. No prepayment.
+              </p>
+              <div className="flex flex-col gap-3">
+                <button
+                  type="button"
+                  onClick={() => booking.open()}
+                  className="btn-loud btn-loud--light tap-safe w-full inline-flex items-center justify-center gap-2 !min-h-12 !px-5 !py-3 !text-[12px]"
+                >
+                  Book a Consultation <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                </button>
+                <WaCta
+                  href={`https://wa.me/${WA_NUMBER}`}
+                  from="blog-index-rail"
+                  className="tap-safe inline-flex items-center justify-center gap-2 min-h-12 px-5 py-3 text-[12px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] text-white border border-white/70 hover:bg-white/10 transition-colors w-full"
+                >
+                  WhatsApp us
+                </WaCta>
+              </div>
+            </div>
+          </aside>
+        </div>
       </div>
 
       <PageCloseCta

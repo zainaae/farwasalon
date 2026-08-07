@@ -42,8 +42,10 @@ export default function FaqClient() {
 
       <section className="bg-white py-16 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <div className="title-stack">
-            <p className="hero-fade-up eyebrow">— Common questions</p>
+          {/* Quoti asymmetric title: loud stack left, intentional void right —
+              the mist accordion below does the reading job. Plum marks the brand edge. */}
+          <div className="title-stack max-w-2xl lg:max-w-[28rem] border-l-2 border-plum pl-5 lg:pl-6">
+            <p className="hero-fade-up eyebrow text-plum">— Common questions</p>
             <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
               Frequently asked questions
             </h1>

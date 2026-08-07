@@ -83,7 +83,7 @@ function MenuRow({ cat }) {
         <span className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <h3 className="font-[family-name:var(--font-syne)] font-semibold text-ink text-base sm:text-lg md:text-xl leading-tight">{cat}</h3>
           {POPULAR_CATS.has(cat) && (
-            <span className="text-[9px] tracking-[0.18em] uppercase font-semibold font-[family-name:var(--font-inter)] text-accent-gold-deep">Most booked</span>
+            <span className="text-[9px] tracking-[0.18em] uppercase font-semibold font-[family-name:var(--font-inter)] text-berry">Most booked</span>
           )}
         </span>
         {meta.tagline && (
@@ -180,8 +180,8 @@ export default function ServicesClient() {
         <div>
           {MENU_CHAPTERS.map(({ name, caption, cats }) => (
             <section key={name} aria-label={name}>
-              <div className="flex items-baseline gap-4 pt-10 pb-3 border-b border-ink/30 first:pt-2">
-                <h2 className="section-title text-accent-gold-deep">{name}</h2>
+              <div className="flex items-baseline gap-4 pt-10 pb-3 border-b border-plum first:pt-2">
+                <h2 className="section-title text-plum">{name}</h2>
                 <span className="eyebrow">{caption}</span>
               </div>
               {cats.map((cat) => <MenuRow key={cat} cat={cat} />)}

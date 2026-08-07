@@ -389,7 +389,7 @@ function ProblemBand() {
 
   return (
     <section
-      className="cv-auto problem-band grain-on-dark bg-ink py-16 md:py-20 border-t border-white/10"
+      className="cv-auto problem-band grain-on-dark py-16 md:py-20 border-t border-white/10"
       aria-labelledby="problem-band-heading"
     >
       {/* Padding inside the cap, same as every other band — see StatsStrip. */}
@@ -968,7 +968,7 @@ function TestimonialsPreview({ placesEnabled }) {
 
 function CtaBand() {
   return (
-    <section className="cv-auto cta-band grain-on-dark bg-ink py-16 sm:py-20 md:py-[5rem] px-4 sm:px-5 md:px-10 border-t border-white/10">
+    <section className="cv-auto cta-band grain-on-dark bg-plum-deep py-16 sm:py-20 md:py-[5rem] px-4 sm:px-5 md:px-10 border-t border-white/10">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center text-center gap-8">
         <m.div
           initial={{ opacity: 0, y: 20 }}
