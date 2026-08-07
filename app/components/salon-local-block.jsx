@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import ArrowUpRight from './icon-sprite.jsx'
 import WaCta from './wa-cta.jsx'
 import Link from 'next/link'
 import { MapPin, Clock, Phone, Star } from 'lucide-react'
@@ -119,21 +118,19 @@ export default function SalonLocalBlock({ variant = 'light', className = '' }) {
                 </a>
               </li>
             </ul>
-            <div className="flex flex-wrap gap-3 mt-6">
-              <Link
-                href="/book"
-                className={`btn-primary ${dark ? '!bg-white !text-ink hover:!bg-nude !border-white' : ''}`}
-              >
-                Book online <ArrowUpRight className="w-3.5 h-3.5" />
+            <p className={`mt-6 text-sm font-[family-name:var(--font-inter)] ${dark ? 'text-white/75' : 'text-stone'}`}>
+              <Link href="/book" className={`link-underline font-medium ${dark ? 'text-white' : 'text-ink'}`}>
+                Book online
               </Link>
+              <span className={dark ? 'text-white/40' : 'text-stone/50'}> · </span>
               <WaCta
                 href={`https://wa.me/${WA_NUMBER}`}
                 from="local-block"
-                className={`btn-secondary ${dark ? '!border-white/30 !text-white hover:!border-white hover:!bg-white/10' : ''}`}
+                className={`link-underline font-medium ${dark ? 'text-white' : 'text-ink'}`}
               >
                 WhatsApp
               </WaCta>
-            </div>
+            </p>
           </div>
           <div>
             <LazyMapsEmbed />

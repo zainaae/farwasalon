@@ -1422,26 +1422,6 @@ button.tap-safe,
   transform: scale(1.04);
 }
 
-/* Sticky booking-story — plum edge glow on the active step. */
-.booking-story-step {
-  border-left: 2px solid transparent;
-  padding-left: 1rem;
-  margin-left: -1rem;
-  transition:
-    border-color var(--dur-med) var(--ease-out),
-    opacity var(--dur-med) var(--ease-out);
-}
-.booking-story-step--active {
-  border-left-color: var(--plum);
-}
-/* Inactive hierarchy stays via heading text-stone in JSX — never container opacity. */
-.booking-story-frame {
-  transition: box-shadow var(--dur-long) var(--ease-out);
-}
-.booking-story-frame--live {
-  box-shadow: var(--shadow-plum);
-}
-
 /* CSS section enter for pages without framer on a given block. */
 @keyframes themeRise {
   from { opacity: 0; transform: translateY(18px); }
@@ -1494,76 +1474,6 @@ button.tap-safe,
 .grain-on-dark > * {
   position: relative;
   z-index: 2;
-}
-
-.problem-band {
-  background-color: var(--plum-deep);
-  background-image:
-    radial-gradient(70% 90% at 88% 12%, rgba(158, 42, 82, 0.28), transparent 55%),
-    linear-gradient(180deg, #4a1a39 0%, var(--plum-deep) 48%, #2a0f21 100%);
-}
-
-/* Numbered friction list — replaces equal SaaS problem cards */
-.problem-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.problem-list-row {
-  transition: background-color var(--dur-med) var(--ease-out);
-}
-.problem-list-row:hover {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.problem-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 17rem;
-  padding: 1.5rem 1.35rem 1.5rem 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-left: 3px solid var(--berry);
-  background: rgba(255, 255, 255, 0.04);
-  transition:
-    transform var(--dur-med) var(--ease-out),
-    border-color var(--dur-med) var(--ease-out),
-    background-color var(--dur-med) var(--ease-out),
-    box-shadow var(--dur-med) var(--ease-out);
-}
-.problem-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255, 255, 255, 0.22);
-  border-left-color: var(--accent-gold);
-  background: rgba(255, 255, 255, 0.07);
-  box-shadow: var(--shadow-plum);
-}
-.problem-card-index {
-  display: block;
-  font-size: clamp(3.25rem, 8vw, 4.75rem);
-  line-height: 0.85;
-  letter-spacing: -0.04em;
-}
-.problem-band-rail {
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-.problem-band-rail::-webkit-scrollbar { display: none; }
-
-@keyframes bookingKenBurns {
-  from { transform: scale(1); }
-  to   { transform: scale(1.06); }
-}
-.booking-story-img--live {
-  animation: bookingKenBurns 8s var(--ease-out) forwards;
-}
-.booking-story-num {
-  letter-spacing: -0.04em;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .problem-card:hover { transform: none; box-shadow: none; }
-  .booking-story-img--live { animation: none; }
 }
 
 /* Quoti-style sticky rail — fills the dead right/left column with a job,

@@ -49,7 +49,7 @@ export async function generateMetadata({ params }) {
      app/services/[categorySlug]/page.jsx. */
   const title = `Beauty Salon for ${area.name} | Farwa PECHS`
   const descHead = `Coming from ${area.name}? Farwa Beauty Salon is ${content.driveTime} away, `
-  const descTail = ` Women-only studio in Block 3 PECHS, 100+ services from Rs 100.`
+  const descTail = ` Women-only studio in Block 3 PECHS, 102 services from Rs 100.`
   const routeBudget = 155 - descHead.length - descTail.length
   const route =
     content.route.length <= routeBudget
@@ -168,7 +168,7 @@ export default async function AreaPage({ params }) {
             })}
           </ul>
           <p className="text-stone text-[13px] font-[family-name:var(--font-inter)] font-light max-w-2xl">
-            All 100+ rates stay on the{' '}
+            All 102 rates stay on the{' '}
             <Link href="/prices" className="link-underline text-ink font-medium">price list</Link> —
             the number you read is the number at the counter.
           </p>

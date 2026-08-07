@@ -68,8 +68,8 @@ export default function DealsPage() {
     <main id="main" className="page-content">
       <JsonLd data={buildDealsSchema(deals)} />
       <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
-        <div className="title-stack mb-3 max-w-3xl">
-          <p className="eyebrow">— Current offers</p>
+        <div className="title-stack mb-3 max-w-3xl border-l-2 border-plum pl-5 lg:pl-6">
+          <p className="eyebrow text-plum">— Current offers</p>
           <h1 className="display-page text-ink">
             Salon deals in Karachi
           </h1>
@@ -152,7 +152,7 @@ export default function DealsPage() {
           <p className="text-body text-sm max-w-2xl mb-3">
             Most Karachi salon deals exist because the base prices are unlisted — the
             &ldquo;discount&rdquo; comes off a number you were never shown. Our starting prices are
-            published for all 100+ services, so a deal here is a real reduction, not theatre.
+            published for all 102 services, so a deal here is a real reduction, not theatre.
             New offers are added for the wedding season and slow weekdays — check back monthly,
             or join the newsletter (footer) to hear first.
           </p>

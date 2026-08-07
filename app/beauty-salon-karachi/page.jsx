@@ -86,7 +86,7 @@ export default function BeautySalonKarachiPage() {
                 trials, mehndi, and full wedding packages.
               </li>
               <li>
-                <strong className="font-medium text-ink">100+ services</strong> — threading, Rica wax, organic
+                <strong className="font-medium text-ink">102 services</strong> — threading, Rica wax, organic
                 facials, hair colour, manicures, and massage under one roof.
               </li>
               <li>

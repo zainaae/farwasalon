@@ -28,8 +28,8 @@ export const metadata = {
 
 function BookHeading() {
   return (
-    <div className="mb-10 md:mb-14 border-b border-border-soft pb-8 title-stack">
-      <p className="eyebrow">— Book online · PECHS</p>
+    <div className="mb-10 md:mb-14 border-b border-border-soft pb-8 title-stack border-l-2 border-plum pl-5 lg:pl-6">
+      <p className="eyebrow text-plum">— Book online · PECHS</p>
       <h1 className="display-page text-ink break-words">
         Book online
       </h1>
