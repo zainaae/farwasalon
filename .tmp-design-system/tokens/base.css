@@ -1,0 +1,52 @@
+/* Farwa Beauty Salon — base styles + component CSS classes.
+   Lifted from app/globals.css; exact values, no rounding. */
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:#fff;color:#0d0d0d;font-family:var(--font-inter);font-weight:300;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,video,svg{max-width:100%}
+::selection{background:var(--selection);color:#0d0d0d}
+a{color:var(--ink);transition:color .2s ease,border-color .2s ease,background-color .2s ease}
+a:hover{color:var(--stone)}
+/* Focus ring — deep gold, 2px, offset 3 (WCAG 2.4.11) */
+*:focus{outline:none}
+a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--accent-gold-deep);outline-offset:3px;border-radius:1px}
+/* Layout */
+.section-shell{width:100%;max-width:80rem;margin-inline:auto;padding-inline:1rem}
+@media (min-width:640px){.section-shell{padding-inline:1.25rem}}
+@media (min-width:768px){.section-shell{padding-inline:2.5rem}}
+.section-pad{padding-top:3.5rem;padding-bottom:3.5rem}
+@media (min-width:768px){.section-pad{padding-top:4.5rem;padding-bottom:4.5rem}}
+/* Flow spacing scale — 28 : 48 : 96 (1.7x / 2x steps) */
+.flow-tight{margin-bottom:1.75rem}
+.flow{margin-bottom:3rem}
+.flow-loose{margin-bottom:6rem}
+@media (min-width:768px){.flow-loose{margin-bottom:7.5rem}}
+/* Buttons — square, uppercase, tracked-out Inter 600 */
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:.875rem 1.5rem;font-family:var(--font-inter);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--ink);border:1px solid var(--ink);cursor:pointer;text-decoration:none;transition:background-color .2s ease,transform .15s ease}
+.btn-primary:hover{background:var(--stone);color:#fff}
+.btn-primary:active{transform:scale(.98)}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:.875rem 1.5rem;font-family:var(--font-inter);font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:transparent;border:1px solid var(--ink);cursor:pointer;text-decoration:none;transition:background-color .2s ease,color .2s ease}
+.btn-secondary:hover{background:var(--mist);color:var(--ink)}
+/* Tab pill — filter chips */
+.tab-pill{flex-shrink:0;min-height:44px;padding:.5rem .75rem;font-family:var(--font-inter);font-size:11px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);background:transparent;border:1px solid var(--border-soft);cursor:pointer;transition:border-color .2s ease,color .2s ease,background-color .2s ease}
+.tab-pill:hover{border-color:var(--ink);color:var(--ink)}
+.tab-pill-active{color:#fff;background:var(--ink);border-color:var(--ink)}
+/* Cards & panels */
+.card-link{display:flex;align-items:center;justify-content:space-between;gap:.5rem;min-height:44px;padding:.75rem 1rem;font-family:var(--font-inter);font-size:.75rem;color:var(--ink);text-decoration:none;background:rgba(248,245,241,.55);border:1px solid var(--border-soft);transition:border-color .2s ease,background-color .2s ease,box-shadow .2s ease}
+.card-link:hover{border-color:rgba(13,13,13,.22);background:var(--mist);box-shadow:var(--shadow-soft);color:var(--ink)}
+.panel-soft{background:var(--mist);border:1px solid var(--border-soft)}
+.panel-muted{background:rgba(248,245,241,.85);border:1px solid var(--border-soft)}
+.quick-pick-card{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:.125rem;width:100%;min-height:4rem;height:100%;padding:.625rem .75rem;background:#fff;border:1px solid var(--border-soft);cursor:pointer;text-decoration:none;transition:border-color .2s ease,background-color .2s ease,box-shadow .2s ease}
+.quick-pick-card:hover{border-color:var(--ink);background:var(--mist);box-shadow:var(--shadow-soft)}
+.quick-pick-card--all{border-style:dashed;border-color:rgba(13,13,13,.3)}
+.shadow-soft{box-shadow:var(--shadow-soft)}
+.shadow-card{box-shadow:var(--shadow-card)}
+/* Inputs */
+.input-field{width:100%;min-height:44px;padding:.75rem 1rem;font-family:var(--font-inter);font-size:1rem;font-weight:300;color:var(--ink);background:#fff;border:1px solid var(--border-soft);transition:border-color .2s ease,box-shadow .2s ease}
+.input-field::placeholder{color:rgba(107,95,87,.55)}
+.input-field:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 1px var(--ink)}
+.input-field:focus-visible{outline:2px solid var(--accent-gold-deep);outline-offset:3px}
+/* Link underline reveal */
+.link-underline{position:relative;text-decoration:none}
+.link-underline::after{content:'';position:absolute;left:0;bottom:-1px;width:0;height:1px;background:currentColor;transition:width .3s cubic-bezier(.4,0,.2,1)}
+.link-underline:hover::after{width:100%}
+.tap-safe{min-height:44px}

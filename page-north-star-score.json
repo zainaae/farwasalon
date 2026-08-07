@@ -1,0 +1,116 @@
+[
+  {
+    "route": "/",
+    "kind": "home",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/services",
+    "kind": "money",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/book",
+    "kind": "flow",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/book/confirmation",
+    "kind": "flow",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/book/cancel",
+    "kind": "flow",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/prices",
+    "kind": "money",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/bridal",
+    "kind": "money",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/deals",
+    "kind": "money",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/freedom-deal",
+    "kind": "money",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/about",
+    "kind": "info",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/faq",
+    "kind": "info",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/contact",
+    "kind": "money",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/gallery",
+    "kind": "info",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/blog",
+    "kind": "info",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/blog/[slug]",
+    "kind": "info",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/privacy",
+    "kind": "legal",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/beauty-salon-karachi",
+    "kind": "seo",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/areas/[area]",
+    "kind": "seo",
+    "ok": true,
+    "gaps": []
+  },
+  {
+    "route": "/services/[category]",
+    "kind": "money",
+    "ok": true,
+    "gaps": []
+  }
+]

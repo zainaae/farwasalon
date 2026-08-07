@@ -1,14 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import ArrowUpRight from '../components/icon-sprite.jsx'
-import WaCta from '../components/wa-cta.jsx'
-import Link from 'next/link'
 import { m } from 'framer-motion'
-import { ChevronDown, MessageCircle } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { CTA_PRIMARY_LABEL } from '../../src/shared.jsx'
 import { FAQ_GROUPS } from '../../src/faq-data.js'
 import { WA_DEFAULT } from '../../src/data.js'
+import PageCloseCta from '../components/page-close-cta.jsx'
 
 function FaqItem({ faq, index }) {
   const [open, setOpen] = useState(false)
@@ -44,10 +42,12 @@ export default function FaqClient() {
 
       <section className="bg-white py-16 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <p className="hero-fade-up eyebrow mb-3">— Common questions</p>
-          <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
-            Frequently asked questions
-          </h1>
+          <div className="title-stack">
+            <p className="hero-fade-up eyebrow">— Common questions</p>
+            <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
+              Frequently asked questions
+            </h1>
+          </div>
         </div>
       </section>
 
@@ -67,30 +67,16 @@ export default function FaqClient() {
         </div>
       </section>
 
-      <section className="bg-ink py-16 md:py-20">
-        <div className="section-shell flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <m.div initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <h2 className="font-[family-name:var(--font-unbounded)] font-bold text-xl md:text-2xl text-white mb-2">
-              Still have questions?
-            </h2>
-            <p className="text-mist/80 text-sm font-[family-name:var(--font-inter)] font-light max-w-md">
-              WhatsApp us — we usually reply within a few hours during salon hours.
-            </p>
-          </m.div>
-          <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
-            className="flex flex-wrap items-center gap-4">
-            <WaCta href={WA_DEFAULT} from="faq"
-              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-nude transition-colors duration-300">
-              <MessageCircle className="w-3.5 h-3.5" /> Message on WhatsApp
-            </WaCta>
-            <Link href="/book"
-              className="link-underline !inline-flex items-center gap-1.5 text-white/60 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors">
-              <span className="min-w-0">{CTA_PRIMARY_LABEL}</span>
-              <ArrowUpRight className="w-3 h-3 shrink-0" aria-hidden="true" />
-            </Link>
-          </m.div>
-        </div>
-      </section>
+      <PageCloseCta
+        eyebrow="— Still have questions?"
+        title="Message us on WhatsApp"
+        body="We usually reply within a few hours during salon hours. Or book a live slot online."
+        bookHref="/book"
+        bookLabel={CTA_PRIMARY_LABEL}
+        waHref={WA_DEFAULT}
+        waFrom="faq"
+        waLabel="Message on WhatsApp"
+      />
     </main>
   )
 }

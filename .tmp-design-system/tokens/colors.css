@@ -1,0 +1,51 @@
+/* Farwa Beauty Salon — color tokens. Source: app/globals.css + tailwind.config.js */
+:root{
+  /* Base palette */
+  --white:#ffffff;
+  --ink:#0d0d0d;            /* near-black — headings, primary buttons, dark bands */
+  --ink-warm:#0d0609;       /* hero/photo backdrop black (warm) */
+  --nude:#e8ddd5;           /* warm nude tint */
+  --mist:#f8f5f1;           /* soft warm off-white surface */
+  --cream:#f5f2ec;
+  --stone:#6b5f57;          /* warm grey-brown — body text, secondary labels */
+  --border-soft:#e4ddd7;    /* hairline borders everywhere */
+  --accent-gold:#c9a98a;    /* champagne gold — decorative, on-dark accents */
+  --accent-gold-deep:#82664a; /* deep gold — gold TEXT on light bg (5.3:1 on white) */
+
+  /* Logo palette — sampled from assets/logo.jpg (plum→berry gradient wordmark).
+     The emphasis accent: badges, highlights, brand moments on light grounds.
+     Gold stays the ambient accent; plum is the loud one — use sparingly. */
+  --plum-deep:#3f1631;      /* dark aubergine — gradient start, dark brand grounds */
+  --plum:#6e2044;           /* mid plum */
+  --berry:#9e2a52;          /* bright berry — gradient end; text-safe on white (≈7:1) */
+  --plum-gradient:linear-gradient(135deg,#3f1631 0%,#6e2044 48%,#9e2a52 100%); /* @kind other */
+
+  /* Semantic aliases */
+  --surface-page:var(--white);
+  --surface-soft:var(--mist);
+  --surface-dark:var(--ink);
+  --text-heading:var(--ink);
+  --text-body:var(--stone);
+  --text-on-dark:#ffffff;
+  --text-on-dark-muted:rgba(255,255,255,0.7);
+  --border-default:var(--border-soft);
+  --focus-ring:var(--accent-gold-deep);
+  --accent-brand:var(--berry); /* emphasis accent from the logo */
+  --selection:rgba(201,169,138,0.35);
+
+  /* Shadows — soft, never harsh */
+  --shadow-soft:0 2px 12px rgba(13,13,13,0.05);
+  --shadow-card:0 8px 32px rgba(13,13,13,0.08);
+
+  /* Radius — the brand is SQUARE. 2px max, most surfaces 0. */
+  --radius:0.125rem;
+
+  /* Independence Day campaign palette (seasonal, /freedom-deal only) */
+  --azadi-paper:#f0ffd8;
+  --azadi-tint:#d4ecba;
+  --azadi-green:#1c7d47;
+  --azadi-deep:#102d1b;
+  --azadi-mid:#174926;
+  --azadi-lift:#f6ffe6;
+  --azadi-fall:#e6f7c8;
+}

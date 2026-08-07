@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import ArrowUpRight from '../components/icon-sprite.jsx'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
 import { useBooking } from '../../src/shared.jsx'
 import { BreadcrumbJsonLd } from '../json-ld.jsx'
+import PageCloseCta from '../components/page-close-cta.jsx'
 
 function formatBlogDate(dateStr) {
   return new Date(`${dateStr}T12:00:00`).toLocaleDateString('en-PK', {
@@ -39,12 +39,12 @@ export default function BlogIndexClient({ posts }) {
           { name: 'Blog', url: 'https://farwasalon.com/blog' },
         ]} />
 
-        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
-          <p className="hero-fade-up eyebrow mb-4">— Guides from the chair</p>
-          <h1 className="hero-rise display-page text-ink mb-4" style={{ animationDuration: '0.9s' }}>
+        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8 title-stack max-w-lg">
+          <p className="hero-fade-up eyebrow">— Guides from the chair</p>
+          <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
             Beauty tips &amp; guides
           </h1>
-          <p className="hero-fade-up text-body max-w-lg" style={{ animationDelay: '0.15s' }}>
+          <p className="hero-fade-up text-body" style={{ animationDelay: '0.15s' }}>
             Expert advice from our team — bridal prep timelines, skincare for Karachi weather, and professional tips you can use at home.
           </p>
         </div>
@@ -161,20 +161,16 @@ export default function BlogIndexClient({ posts }) {
         {list.length === 0 && (
           <p className="text-body text-sm py-8">No guides in this category yet.</p>
         )}
-
-        <div className="mt-12 pt-8 border-t border-border-soft flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <p className="text-body">
-            Have a beauty question? We&apos;d love to answer it.
-          </p>
-          <button
-            type="button"
-            onClick={() => booking.open()}
-            className="tap-safe btn-primary"
-          >
-            Book a Consultation <ArrowUpRight className="w-4 h-4" />
-          </button>
-        </div>
       </div>
+
+      <PageCloseCta
+        eyebrow="— Ready when you are"
+        title="Book a consultation at the PECHS studio"
+        body="Have a beauty question? Book a live slot online, or WhatsApp us."
+        waFrom="blog-index"
+        onBookClick={() => booking.open()}
+        bookLabel="Book a Consultation"
+      />
     </main>
   )
 }

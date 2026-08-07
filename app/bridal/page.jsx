@@ -2,6 +2,7 @@ import Link from 'next/link'
 import ArrowUpRight from '../components/icon-sprite.jsx'
 import Image from 'next/image'
 import WaCta from '../components/wa-cta.jsx'
+import PageCloseCta from '../components/page-close-cta.jsx'
 import { Clock, MapPin, Phone } from 'lucide-react'
 import JsonLd from '../json-ld'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
@@ -309,26 +310,6 @@ export default function BridalLandingPage() {
             </section>
           )}
 
-          <section className="flow panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="bridal-book-cta">
-            <h2 id="bridal-book-cta" className="section-title mb-2">
-              Lock your bridal date
-            </h2>
-            <p className="text-body text-sm mb-5">
-              Start with a Bridal Trial (Rs 8,000) or WhatsApp your wedding week — we confirm slots before you travel to PECHS.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
-                className="tap-safe btn-primary"
-              >
-                Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
-              </Link>
-              <WaCta href={WA_DEFAULT} from="bridal-cta" className="tap-safe btn-secondary">
-                WhatsApp wedding plan
-              </WaCta>
-            </div>
-          </section>
-
           <section className="mb-8" aria-labelledby="bridal-read-heading">
             <h2 id="bridal-read-heading" className="section-title mb-4">
               Planning guides
@@ -357,7 +338,7 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <p className="pt-6 border-t border-border-soft text-xs text-stone font-[family-name:var(--font-inter)]">
+          <p className="pt-6 border-t border-border-soft text-xs text-stone font-[family-name:var(--font-inter)] mb-10">
             <Link href="/" className="link-underline hover:text-ink font-medium">Back to home</Link>
             {' · '}
             <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>
@@ -367,6 +348,17 @@ export default function BridalLandingPage() {
             </Link>
           </p>
         </div>
+
+        <PageCloseCta
+          eyebrow="— Bridal · PECHS"
+          title="Lock your bridal date"
+          body="Start with a Bridal Trial (Rs 8,000) or WhatsApp your wedding week — we confirm slots before you travel to PECHS."
+          bookHref={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
+          bookLabel="Book Bridal Trial"
+          waHref={WA_DEFAULT}
+          waFrom="bridal-close"
+          waLabel="WhatsApp wedding plan"
+        />
       </main>
     </>
   )
