@@ -41,8 +41,8 @@ export default function BeautySalonKarachiPage() {
           flag "Review has multiple aggregate ratings" on this URL. */}
       <main id="main" className="page-content">
         <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
-          <div className="title-stack mb-6 max-w-2xl">
-            <p className="eyebrow">— Karachi beauty salon</p>
+          <div className="title-stack mb-6 max-w-2xl border-l-2 border-plum pl-5 lg:pl-6">
+            <p className="eyebrow text-plum">— Karachi beauty salon</p>
             <h1 className="display-page text-ink">
               Beauty Salon in Karachi — PECHS
             </h1>
@@ -57,7 +57,7 @@ export default function BeautySalonKarachiPage() {
           </p>
 
           <div className="cta-cluster mb-4">
-            <Link href="/book" className="btn-primary">
+            <Link href="/book" className="btn-loud">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
             <WaCta href="https://wa.me/923222782254" from="karachi-hub" className="btn-secondary">

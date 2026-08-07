@@ -14,10 +14,10 @@ export default function GalleryClient() {
 
       <div className="section-shell section-pad">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border-soft pb-10 md:pb-12">
-          <div className="title-stack max-w-xl">
+          <div className="title-stack max-w-xl border-l-2 border-plum pl-5 lg:pl-6">
             {/* CSS entrances — framer initial{opacity:0} + overflow-hidden clipped
                 "DO" until hydrate; same LCP fix pattern as /services. */}
-            <p className="hero-fade-up eyebrow">— Gallery</p>
+            <p className="hero-fade-up eyebrow text-plum">— Gallery</p>
             {/* No overflow-hidden — it clipped Unbounded descenders on "DO". */}
             <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
               What we do
@@ -31,7 +31,7 @@ export default function GalleryClient() {
           <button
             type="button"
             onClick={() => booking.open()}
-            className="hero-fade-up tap-safe btn-primary shrink-0 self-start"
+            className="hero-fade-up tap-safe btn-loud shrink-0 self-start !min-h-12 !text-[12px]"
             style={{ animationDelay: '0.2s' }}
           >
             Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />

@@ -123,12 +123,13 @@ export default function ServicesClient() {
             everything means one left edge, one rule length, and margins that
             read as margins. */}
         <div className="max-w-4xl mx-auto">
-        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8 title-stack">
+        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
           {/* CSS entrances — framer's initial{opacity:0} kept this header
               invisible until hydration, making the intro paragraph a ~5.5s
               LCP (same failure mode the homepage hero had).
               No overflow-hidden: it clipped Unbounded on the title. */}
-          <p className="hero-fade-up eyebrow">— Services · PECHS</p>
+          <div className="title-stack max-w-2xl lg:max-w-[28rem] border-l-2 border-plum pl-5 lg:pl-6">
+          <p className="hero-fade-up eyebrow text-plum">— Services · PECHS</p>
           <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
             Our services
           </h1>
@@ -137,7 +138,7 @@ export default function ServicesClient() {
             Book online in under a minute, or message us on WhatsApp.
           </p>
           <div className="hero-fade-up cta-cluster" style={{ animationDelay: '0.3s' }}>
-            <Link href="/book" className="tap-safe btn-primary !py-2.5 !px-5">
+            <Link href="/book" className="tap-safe btn-loud !min-h-12 !py-2.5 !px-5 !text-[12px]">
               Book online <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
             <WaCta href="https://wa.me/923222782254" from="services-index"
@@ -148,6 +149,7 @@ export default function ServicesClient() {
               className="tap-safe link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors flex items-center">
               Full price list
             </Link>
+          </div>
           </div>
 
           <ol className="hero-fade-up mt-8 pt-6 border-t border-border-soft flex flex-col sm:flex-row sm:flex-wrap gap-4 sm:gap-8" style={{ animationDelay: '0.35s' }} aria-label="How a visit works">

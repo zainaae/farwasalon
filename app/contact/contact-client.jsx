@@ -51,8 +51,8 @@ export default function ContactClient() {
 
       <section className="bg-white py-14 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <div className="title-stack">
-            <p className="hero-fade-up eyebrow">— Contact</p>
+          <div className="title-stack max-w-2xl border-l-2 border-plum pl-5 lg:pl-6">
+            <p className="hero-fade-up eyebrow text-plum">— Contact</p>
             <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
               Find us or ask us
             </h1>
@@ -62,7 +62,7 @@ export default function ContactClient() {
               <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#6b9b5f]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
               Next slot <span className="text-ink font-medium ml-1">{slot.label}</span>
             </span>
-            <Link href="/book" className="tap-safe btn-primary text-[10px] sm:text-[11px] !py-2.5 !px-5">
+            <Link href="/book" className="tap-safe btn-loud !min-h-11 !py-2.5 !px-5 !text-[11px]">
               <Sparkles className="w-3 h-3" /> Book online
             </Link>
           </div>

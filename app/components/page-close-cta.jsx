@@ -5,7 +5,8 @@ import { WA_NUMBER } from '../../src/data.js'
 
 /**
  * Shared close for interior money/info pages — Farwa theme master:
- * decisive Book + WhatsApp pair on logo plum-deep (not a purple wash).
+ * decisive Book + WhatsApp on logo plum-deep. Asymmetric layout (not a
+ * centered SaaS CTA slab). No purple wash, no glassmorphism.
  */
 export default function PageCloseCta({
   eyebrow = '— Visit us in PECHS',
@@ -24,41 +25,49 @@ export default function PageCloseCta({
     'btn-loud btn-loud--light tap-safe w-full sm:w-auto inline-flex items-center justify-center gap-2'
 
   return (
-    <section className="cv-auto grain-on-dark bg-plum-deep py-20 sm:py-24 px-4 sm:px-5 md:px-10 border-t border-white/10">
-      <div className="max-w-screen-xl mx-auto flex flex-col items-center text-center gap-8 sm:gap-10">
-        <div className="w-full max-w-2xl">
+    <section
+      className="cv-auto grain-on-dark border-t border-white/10 py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10"
+      style={{
+        background:
+          'radial-gradient(70% 100% at 100% 0%, rgba(158,42,82,0.28), transparent 55%), linear-gradient(145deg, #4a1a39 0%, var(--plum-deep) 45%, #2a0f21 100%)',
+      }}
+    >
+      <div className="max-w-screen-xl mx-auto grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
+        <div className="lg:col-span-7">
           <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-4">
             {eyebrow}
           </p>
           <h2
-            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.12] text-balance mx-auto"
-            style={{ fontSize: 'clamp(1.75rem, 4.5vw + 0.4rem, 3rem)', letterSpacing: '-0.02em', maxWidth: '18ch' }}
+            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.12] text-balance"
+            style={{ fontSize: 'clamp(1.75rem, 4.5vw + 0.4rem, 3rem)', letterSpacing: '-0.02em', maxWidth: '14ch' }}
           >
             {title}
           </h2>
           {body ? (
-            <p className="text-body mt-4 mx-auto max-w-md text-white/70">{body}</p>
+            <p className="text-body mt-4 max-w-md text-white/70">{body}</p>
           ) : null}
         </div>
-        <div className="cta-cluster justify-center w-full max-w-xl">
-          {onBookClick ? (
-            <button type="button" onClick={onBookClick} className={bookClass}>
-              {bookLabel} <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
-            </button>
-          ) : (
-            <Link href={bookHref} className={bookClass}>
-              {bookLabel} <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
-            </Link>
-          )}
-          <WaCta
-            href={wa}
-            from={waFrom}
-            className="btn-ghost-on-dark tap-safe w-full sm:w-auto"
-          >
-            {waLabel}
-          </WaCta>
+        <div className="lg:col-span-5 flex flex-col gap-5">
+          <div className="cta-cluster w-full">
+            {onBookClick ? (
+              <button type="button" onClick={onBookClick} className={bookClass}>
+                {bookLabel} <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
+              </button>
+            ) : (
+              <Link href={bookHref} className={bookClass}>
+                {bookLabel} <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
+              </Link>
+            )}
+            <WaCta
+              href={wa}
+              from={waFrom}
+              className="btn-ghost-on-dark tap-safe w-full sm:w-auto"
+            >
+              {waLabel}
+            </WaCta>
+          </div>
+          {children}
         </div>
-        {children}
       </div>
     </section>
   )

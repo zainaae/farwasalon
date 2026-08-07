@@ -20,8 +20,8 @@ export default function AboutClient() {
         <div className="section-shell">
           {/* CSS entrances — framer initial{opacity:0} left this hero blank until
               hydration (same LCP failure mode fixed on /services). */}
-          <div className="title-stack">
-            <p className="hero-fade-up eyebrow">— Est. 2008 · PECHS, Karachi</p>
+          <div className="title-stack max-w-2xl lg:max-w-[28rem] border-l-2 border-plum pl-5 lg:pl-6">
+            <p className="hero-fade-up eyebrow text-plum">— Est. 2008 · PECHS, Karachi</p>
             <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
               Our story
             </h1>
@@ -122,7 +122,7 @@ export default function AboutClient() {
                   </div>
                 ))}
               </div>
-              <Link href="/book" className="tap-safe btn-primary self-start mt-2">
+              <Link href="/book" className="tap-safe btn-loud self-start mt-2 !min-h-12 !px-6 !text-[12px]">
                 Book with us <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
             </m.div>

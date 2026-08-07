@@ -110,8 +110,8 @@ export default async function AreaPage({ params }) {
           </ol>
         </nav>
 
-        <div className="title-stack mb-5 max-w-2xl">
-          <p className="eyebrow">— Coming from {area.name}</p>
+        <div className="title-stack mb-5 max-w-2xl border-l-2 border-plum pl-5 lg:pl-6">
+          <p className="eyebrow text-plum">— Coming from {area.name}</p>
           <h1 className="display-page text-ink">
             Beauty Salon for {area.name}
             <span className="block text-stone text-base md:text-lg font-[family-name:var(--font-inter)] font-light mt-2">
@@ -192,7 +192,7 @@ export default async function AreaPage({ params }) {
         </section>
 
         <div className="flex flex-wrap items-center gap-3 mb-12">
-          <Link href="/book" className="tap-safe btn-primary !py-2.5 !px-5">
+          <Link href="/book" className="tap-safe btn-loud !min-h-12 !py-2.5 !px-5 !text-[12px]">
             Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
           <WaCta href={WA_DEFAULT} from="area-page" className="tap-safe btn-secondary !py-2.5 !px-5">
