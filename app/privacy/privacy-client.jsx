@@ -32,7 +32,7 @@ export default function PrivacyClient() {
                   <strong className="font-medium text-ink">Online booking:</strong> When you book at /book, we store your name, phone number, chosen service(s), date, and time in our Google Sheet so we can run the appointment diary. A cancel code for that booking is also saved on this device (see below).
                 </li>
                 <li>
-                  <strong className="font-medium text-ink">Newsletter:</strong> If you subscribe, your email (and first name if you give one) is stored in our Google Sheet&apos;s Subscribers tab so we can send updates and welcome offers.
+                  <strong className="font-medium text-ink">Newsletter:</strong> If you subscribe, your email (and first name if you give one) is stored in our Google Sheet&apos;s Subscribers tab so we can send occasional salon updates.
                 </li>
                 <li>
                   <strong className="font-medium text-ink">On this device:</strong> Confirmation and cancellation details for a booking you made here are kept in this browser&apos;s local storage (and sometimes session storage) so you can reopen the confirmation or cancel link on the same phone without putting your name or phone in the URL.

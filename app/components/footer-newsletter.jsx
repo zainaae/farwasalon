@@ -38,7 +38,7 @@ export default function FooterNewsletter() {
       <div className="mb-10 pb-8 border-b border-border-soft">
         <p className="flex items-center gap-2 text-sm font-[family-name:var(--font-inter)] text-ink">
           <Check className="w-4 h-4 text-accent-gold shrink-0" />
-          Thanks — beauty tips and offers will land in your inbox.
+          Thanks — beauty tips will land in your inbox when we send them.
         </p>
       </div>
     )
@@ -50,7 +50,7 @@ export default function FooterNewsletter() {
         Salon updates
       </p>
       <p className="text-stone text-xs font-[family-name:var(--font-inter)] mb-3 max-w-md">
-        Occasional PECHS beauty tips and offers — no spam.
+        Occasional PECHS beauty tips — no spam.
       </p>
       <form onSubmit={onSubmit} className="flex flex-col sm:flex-row gap-2 max-w-md min-w-0 w-full">
         <label htmlFor="footer-nl-email" className="sr-only">

@@ -120,11 +120,11 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
           </nav>
 
           <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="mb-8 pb-8 border-b border-border-soft">
-            <p className="eyebrow mb-2">
+            className="mb-8 pb-8 border-b border-border-soft title-stack">
+            <p className="eyebrow">
               — {services.length} services{minPrice != null ? ` · from ${formatPrice(minPrice)}` : ''}
             </p>
-            <h1 id="service-category-title" className="display-page text-ink mb-3">{pageH1}</h1>
+            <h1 id="service-category-title" className="display-page text-ink">{pageH1}</h1>
             <p id="service-category-desc" className="text-body max-w-prose leading-[1.7]">{meta.desc}</p>
             <div className="cta-cluster mt-5">
               <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">

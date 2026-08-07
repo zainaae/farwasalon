@@ -415,7 +415,7 @@ Post 2–3 times per week:
 | Day | Content Type | Example |
 |-----|-------------|---------|
 | Monday | Beauty Tip | "3 steps to prep your skin before a facial..." |
-| Wednesday | Offer / Promo | "This week only: 20% off all facials!" |
+| Wednesday | Offer / Promo | Only if listed on farwasalon.com/deals — else a tip: "Facials from Rs 1,400. Book online or WhatsApp" |
 | Friday | Showcase | Before/after photo or bridal transformation |
 
 ### Promote the Channel

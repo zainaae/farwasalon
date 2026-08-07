@@ -212,7 +212,7 @@ Post weekly to keep the listing active and visible. Google Posts appear directly
 ### Weekly Posting Schedule
 | Day | Post Type | Example |
 |-----|-----------|---------|
-| Sunday | **Offer** | "20% off facials this week! Book on WhatsApp" |
+| Sunday | **Offer** | Only post a % deal if it is live on farwasalon.com/deals — e.g. "Facials from Rs 1,400. Book on WhatsApp" (never invent 20%/10% copy) |
 | Tuesday | **What's New** | Before/after transformation photo |
 | Thursday | **Event** | "Bridal season bookings open — limited slots!" |
 

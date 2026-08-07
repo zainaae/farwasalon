@@ -1,3 +1,16 @@
+/* This modal used to promise "Get 10% off your first facial" and, on success,
+   "Your 10% off code will arrive in your inbox shortly."
+
+   Nothing sent it. appendSubscriber() writes to a Subscribers tab that has
+   exactly one caller and zero readers — no ESP, no template, no send path, no
+   unsubscribe endpoint. Every person who signed up was told a code was coming
+   and then heard nothing, which teaches them the business does not follow
+   through. On a site whose entire position is that the printed price is the
+   price, that was the most expensive sentence on it.
+
+   The promise is gone rather than the signup. What it now says is the truth:
+   occasional updates, and only that. If a welcome offer is ever wanted back,
+   the send path has to exist first — the discount is the easy half. */
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
@@ -178,7 +191,7 @@ export default function NewsletterModal() {
                     Welcome!
                   </h2>
                   <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-6">
-                    Your 10% off code will arrive in your inbox shortly. We&apos;ll only send you the good stuff.
+                    You&apos;re on the list. We send seasonal tips and slot news occasionally — never often, never spam.
                   </p>
                   <button
                     type="button"
@@ -191,10 +204,10 @@ export default function NewsletterModal() {
               ) : (
                 <>
                   <p className="text-accent-gold-deep text-[10px] tracking-[0.32em] uppercase font-[family-name:var(--font-inter)] font-medium mb-3">
-                    — A welcome gift
+                    — Salon updates
                   </p>
                   <h2 id="newsletter-heading" className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-[1.65rem] text-ink leading-tight mb-3">
-                    Get <span className="text-accent-gold-deep">10% off</span> your first facial
+                    Seasonal tips from <span className="text-accent-gold-deep">the chair</span>
                   </h2>
                   <p className="text-stone text-[13px] font-[family-name:var(--font-inter)] font-light leading-relaxed mb-6">
                     Plus monthly seasonal tips, bridal timelines, and early access to slots in peak season. No spam — promise.
@@ -254,7 +267,7 @@ export default function NewsletterModal() {
                       aria-busy={state === 'submitting'}
                       className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-stone disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                     >
-                      {state === 'submitting' ? 'Saving…' : <>Get my 10% off <ArrowUpRight className="w-3.5 h-3.5" /></>}
+                      {state === 'submitting' ? 'Saving…' : <>Join the list <ArrowUpRight className="w-3.5 h-3.5" /></>}
                     </button>
                   </form>
 

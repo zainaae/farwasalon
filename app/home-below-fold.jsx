@@ -66,8 +66,9 @@ function StatsStrip() {
       <div className="max-w-screen-xl mx-auto">
         <div className="grid md:grid-cols-2 gap-8 md:gap-14 items-end">
           <m.div initial={{ y: 28, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}>
-            <p className="eyebrow mb-3">— Est. 2008 · PECHS</p>
+            viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+            className="title-stack">
+            <p className="eyebrow">— Est. 2008 · PECHS</p>
             <h2 className="display-page max-w-xl text-ink">
               A beauty studio with {YEARS_ACTIVE} years of care
             </h2>
@@ -261,8 +262,9 @@ function FeaturedServices() {
     <section className="cv-auto bg-mist section-pad border-t border-border-soft">
       <div className="section-shell">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between mb-8 md:mb-10">
-          <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <p className="eyebrow mb-2">— What we do</p>
+          <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
+            className="title-stack">
+            <p className="eyebrow">— What we do</p>
             <h2 className="display-page text-ink">Our services</h2>
           </m.div>
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
@@ -661,8 +663,8 @@ function TestimonialsPreview({ placesEnabled }) {
         <m.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
           className="flex flex-col gap-4 sm:gap-5 sm:flex-row sm:items-end sm:justify-between mb-8 sm:mb-10 md:mb-12">
-          <div className="min-w-0">
-            <p className="eyebrow mb-2">— Client reviews</p>
+          <div className="min-w-0 title-stack">
+            <p className="eyebrow">— Client reviews</p>
             <h2 className="display-page text-ink">What clients say</h2>
           </div>
           <div className="reviews-rating-row shrink-0 self-start sm:self-auto">

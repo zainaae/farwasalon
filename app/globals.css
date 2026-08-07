@@ -185,7 +185,7 @@
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--stone);
-    line-height: 1.4;
+    line-height: 1.55;
   }
   .section-title {
     /* var(--font-unbounded) first, like .display-section. Unbounded loads with
@@ -197,20 +197,33 @@
     font-family: var(--font-unbounded), 'Unbounded', sans-serif;
     font-weight: 700;
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    line-height: 1.2;
+    line-height: 1.28;
     letter-spacing: -0.02em;
     color: var(--ink);
     text-wrap: balance;
+    padding-block: 0.08em;
   }
   .text-body {
     font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-weight: 300;
     font-size: 0.9375rem;
-    line-height: 1.65;
+    line-height: 1.72;
     color: var(--stone);
   }
   @media (min-width: 768px) {
     .text-body { font-size: 1rem; }
+  }
+  /* Title stack rhythm: eyebrow → display → body. Unbounded and Inter sit
+     glued when margins match the optical size of the glyphs; these defaults
+     open the gap without a redesign. Tailwind mb-* on children still wins. */
+  .title-stack > .eyebrow {
+    margin-bottom: 0.875rem;
+  }
+  .title-stack > .display-page {
+    margin-bottom: 1.25rem;
+  }
+  .title-stack > .text-body {
+    margin-bottom: 0;
   }
   .card-link {
     display: flex;
@@ -666,10 +679,10 @@
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   font-size: clamp(1.5rem, 3vw, 2.7rem);
-  line-height: 1.12;
+  line-height: 1.18;
   letter-spacing: -0.02em;
   overflow-wrap: anywhere;
-  padding-block: 0.04em;
+  padding-block: 0.1em;
   text-wrap: balance;
 }
 /* Em-dash ornaments inside display titles used font-light italic Unbounded —

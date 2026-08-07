@@ -143,7 +143,7 @@ export async function mockSubscribeApi(page: Page) {
   })
 }
 
-/** Open newsletter modal by accelerating the 25s delay timer in tests. */
+/** Open newsletter modal via engagement scroll (60% depth). */
 export async function openNewsletterModal(page: Page) {
   await page.addInitScript(() => {
     try {
@@ -155,7 +155,7 @@ export async function openNewsletterModal(page: Page) {
   await page.goto('/')
   // The modal is engagement-gated: it opens at 60% scroll depth. The scroll
   // listener attaches after hydration, so keep nudging until it reacts.
-  const dialog = page.getByRole('dialog', { name: /10% off/i })
+  const dialog = page.getByRole('dialog', { name: /seasonal tips|salon updates/i })
   for (let i = 0; i < 30; i++) {
     if (await dialog.isVisible().catch(() => false)) break
     await page.evaluate(() => {
