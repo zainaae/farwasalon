@@ -81,7 +81,9 @@ export default function PricesPage() {
           {YEARS_ACTIVE}+ years · women-only studio · {rating.ratingValue}★ · {rating.reviewCount} Google reviews · cash, JazzCash, EasyPaisa · Mon–Sat 11–7
         </p>
 
-        <div className="cta-cluster mb-8">
+        {/* Mobile sticky already is Call / WhatsApp / Book — stacking the same
+            pair here made fold 1 a CTA pile. Desktop keeps both. */}
+        <div className="cta-cluster mb-8 hidden md:flex">
           <Link href="/book" className="tap-safe btn-loud w-full sm:w-auto justify-center">
             Book online <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>

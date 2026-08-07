@@ -33,7 +33,16 @@ export default function GalleryClient() {
           </div>
           <Link
             href="/book"
-            className="hero-fade-up tap-safe btn-loud shrink-0 self-start !min-h-12 !text-[12px]"
+            className="hero-fade-up tap-safe btn-loud shrink-0 self-start !min-h-12 !text-[12px] hidden md:inline-flex"
+            style={{ animationDelay: '0.2s' }}
+          >
+            Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+          </Link>
+          {/* Mobile sticky already carries Book — keep a quiet in-flow link for
+              crawlers / e2e without a second loud pill on fold 1. */}
+          <Link
+            href="/book"
+            className="hero-fade-up tap-safe md:hidden inline-flex items-center gap-1.5 min-h-[44px] text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] link-underline self-start"
             style={{ animationDelay: '0.2s' }}
           >
             Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />

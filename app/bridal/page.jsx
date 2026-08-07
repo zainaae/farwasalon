@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import ArrowUpRight from '../components/icon-sprite.jsx'
 import Image from 'next/image'
-import WaCta from '../components/wa-cta.jsx'
 import PageCloseCta from '../components/page-close-cta.jsx'
 import { Clock, MapPin, Phone } from 'lucide-react'
 import JsonLd from '../json-ld'
@@ -59,6 +58,13 @@ export default function BridalLandingPage() {
   const rating = getAggregateRating()
   const packages = SERVICES.Bridal || []
   const trialServiceId = getServiceIdByName('Bridal Trial')
+  const fullPackageServiceId = getServiceIdByName('Full Bridal Package')
+  const fullPackageHref = fullPackageServiceId
+    ? `/book?serviceId=${fullPackageServiceId}`
+    : '/book?category=Bridal'
+  const trialHref = trialServiceId
+    ? `/book?serviceId=${trialServiceId}`
+    : '/book?category=Bridal'
   const faqSchema = buildFaqPageSchema(BRIDAL_FAQS)
 
   return (
@@ -98,25 +104,28 @@ export default function BridalLandingPage() {
               mixBlendMode: 'overlay',
             }}
           />
-          <div className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-5 md:px-10 pb-10 sm:pb-12 md:pb-14 pt-24">
+          {/* Mobile: clear sticky Call/WA/Book chrome. Desktop keeps tighter pad. */}
+          <div className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-5 md:px-10 pb-[max(6.75rem,env(safe-area-inset-bottom,0px)+5.5rem)] sm:pb-12 md:pb-14 pt-24">
             <div className="max-w-screen-xl mx-auto w-full min-w-0">
               <div className="title-stack mb-6 max-w-2xl">
-                <p className="eyebrow eyebrow--on-dark">— Bridal · from Rs 8,000</p>
+                <p className="eyebrow eyebrow--on-dark">— Bridal · Full Package Rs 25,000</p>
                 <h1 id="bridal-headline" className="display-page text-white">
                   Bridal makeup in PECHS, Karachi
                 </h1>
                 <p id="bridal-lede" className="text-white/80 md:text-lg leading-relaxed font-[family-name:var(--font-inter)] font-light">
-                  Farwa in PECHS has styled weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000,
-                  Engagement Rs 12,000, Full Bridal Package Rs 25,000.
+                  Farwa in PECHS has styled weddings since 2008 — Full Bridal Package Rs 25,000
+                  (hair, makeup, draping, touch-ups). Mehndi from Rs 10,000 · Engagement Rs 12,000 ·
+                  Bridal Trial Rs 8,000.
                 </p>
               </div>
 
+              {/* One loud Book on the fold; sticky chrome already carries Call/WA/Book. */}
               <div className="cta-cluster mb-4">
                 <Link
-                  href={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
+                  href={fullPackageHref}
                   className="btn-loud btn-loud--light tap-safe w-full sm:w-auto"
                 >
-                  Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
+                  Book Full Bridal Package <ArrowUpRight className="w-4 h-4" />
                 </Link>
                 <Link
                   href="/prices"
@@ -126,9 +135,12 @@ export default function BridalLandingPage() {
                 </Link>
               </div>
               <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-[family-name:var(--font-inter)]">
-                <WaCta href={WA_DEFAULT} from="bridal-inline" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-white/75 hover:text-white">
-                  WhatsApp wedding plan
-                </WaCta>
+                <Link
+                  href={trialHref}
+                  className="tap-safe inline-flex items-center min-h-[44px] link-underline text-white/75 hover:text-white"
+                >
+                  Or book Bridal Trial (Rs 8,000)
+                </Link>
                 <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-white/75 hover:text-white">
                   Directions
                 </a>
@@ -145,7 +157,22 @@ export default function BridalLandingPage() {
             <p className="text-body text-sm max-w-2xl mb-5 leading-relaxed">
               Mehndi, engagement, nikkah, barat, and walima — each maps to a published package with a clear starting price.
             </p>
-            <div className="overflow-x-auto max-w-4xl">
+            {/* Mobile: stacked rows (4-col table wraps into mush under ~430px). */}
+            <ul className="md:hidden max-w-4xl divide-y divide-border-soft border-t border-b border-border-soft">
+              {EVENT_TAXONOMY.map((row) => (
+                <li key={row.event} className="py-3.5 flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <p className="text-ink font-medium font-[family-name:var(--font-syne)] text-sm">{row.event}</p>
+                    <p className="text-stone text-xs font-[family-name:var(--font-inter)] mt-0.5 leading-snug">{row.look}</p>
+                    <p className="text-stone/80 text-[11px] font-[family-name:var(--font-inter)] mt-1">{row.mapsTo}</p>
+                  </div>
+                  <p className="shrink-0 text-ink font-[family-name:var(--font-fraunces)] font-bold text-sm tabular-nums pt-0.5">
+                    {formatPrice(row.price)}
+                  </p>
+                </li>
+              ))}
+            </ul>
+            <div className="hidden md:block overflow-x-auto max-w-4xl">
               <table className="w-full border-collapse text-sm font-[family-name:var(--font-inter)]">
                 <thead>
                   <tr className="border-b border-ink/30 text-left">
@@ -365,9 +392,9 @@ export default function BridalLandingPage() {
         <PageCloseCta
           eyebrow="— Bridal · PECHS"
           title="Lock your bridal date"
-          body="Start with a Bridal Trial (Rs 8,000) or WhatsApp your wedding week — we confirm slots before you travel to PECHS."
-          bookHref={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
-          bookLabel="Book Bridal Trial"
+          body="Full Bridal Package is Rs 25,000 — or book a Bridal Trial (Rs 8,000) first. WhatsApp your wedding week and we confirm slots before you travel to PECHS."
+          bookHref={fullPackageHref}
+          bookLabel="Book Full Bridal Package"
           waHref={WA_DEFAULT}
           waFrom="bridal-close"
           waLabel="WhatsApp wedding plan"

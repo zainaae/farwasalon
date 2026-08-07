@@ -4,7 +4,7 @@ import { useState } from 'react'
 import ArrowUpRight from '../components/icon-sprite.jsx'
 import { m } from 'framer-motion'
 import Link from 'next/link'
-import { Check, MapPin, Phone, Clock, Sparkles, MessageCircle, ChevronDown, X } from 'lucide-react'
+import { Check, MapPin, Phone, Clock, MessageCircle, ChevronDown, X } from 'lucide-react'
 import { IgIcon } from '../../src/shared.jsx'
 import LiveAvailability from '../services/live-availability.jsx'
 import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track, PREFERRED_TIME_OPTIONS } from '../../src/data.js'
@@ -57,10 +57,9 @@ export default function ContactClient() {
             </h1>
           </div>
           <div className="hero-fade-up mt-6 max-w-xl" style={{ animationDelay: '0.2s' }}>
+            {/* Compact live strip already links to /book when slots are free.
+                Extra loud Book here + sticky Call/WA/Book made fold 1 a pile. */}
             <LiveAvailability compact />
-            <Link href="/book" className="tap-safe btn-loud !min-h-11 !py-2.5 !px-5 !text-[11px] mt-3 inline-flex">
-              <Sparkles className="w-3 h-3" /> Book online
-            </Link>
           </div>
         </div>
       </section>

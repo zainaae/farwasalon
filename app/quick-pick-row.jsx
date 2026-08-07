@@ -23,11 +23,31 @@ function minPriceFor(category) {
   return prices.length ? Math.min(...prices) : null
 }
 
+function maxPriceFor(category) {
+  const list = SERVICES[category]
+  if (!Array.isArray(list)) return null
+  const prices = list.map((s) => s.pricePkr).filter((p) => typeof p === 'number')
+  return prices.length ? Math.max(...prices) : null
+}
+
 export default function QuickPickRow() {
-  const items = QUICK_PICK_CATEGORIES.filter((c) => SERVICES[c]?.length).map((c) => ({
-    category: c,
-    minPrice: minPriceFor(c),
-  }))
+  const items = QUICK_PICK_CATEGORIES.filter((c) => SERVICES[c]?.length).map((c) => {
+    /* Bridal marketing leads with the Full Package ceiling, not the trial floor. */
+    if (c === 'Bridal') {
+      const ceiling = maxPriceFor(c)
+      return {
+        category: c,
+        priceLabel: ceiling != null ? `Package ${formatPrice(ceiling)}` : null,
+        ariaPrice: ceiling != null ? `package ${formatPrice(ceiling)}` : '',
+      }
+    }
+    const minPrice = minPriceFor(c)
+    return {
+      category: c,
+      priceLabel: minPrice != null ? `From ${formatPrice(minPrice)}` : null,
+      ariaPrice: minPrice != null ? `from ${formatPrice(minPrice)}` : '',
+    }
+  })
 
   if (items.length === 0) return null
 
@@ -57,20 +77,20 @@ export default function QuickPickRow() {
         </div>
 
         <div className="quick-pick-grid">
-          {items.map(({ category, minPrice }) => (
+          {items.map(({ category, priceLabel, ariaPrice }) => (
             <div key={category} className="min-w-0 h-full">
               <Link
                 href={`/book?category=${encodeURIComponent(category)}`}
                 onClick={() => track('QuickPick', { category })}
-                aria-label={`Book ${category}${minPrice ? ` — from ${formatPrice(minPrice)}` : ''}`}
+                aria-label={`Book ${category}${ariaPrice ? ` — ${ariaPrice}` : ''}`}
                 className="tap-safe quick-pick-card"
               >
                 <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full min-h-[2.5em]">
                   {category}
                 </span>
-                {minPrice != null ? (
+                {priceLabel ? (
                   <span className="text-accent-gold-deep text-[10px] font-[family-name:var(--font-inter)] font-medium truncate w-full">
-                    From {formatPrice(minPrice)}
+                    {priceLabel}
                   </span>
                 ) : (
                   <span className="text-stone text-[10px] font-[family-name:var(--font-inter)]">View options</span>
