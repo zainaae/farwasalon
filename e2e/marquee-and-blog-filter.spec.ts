@@ -1,38 +1,40 @@
 /**
- * Two fixes that a build cannot catch.
- *
- * The homepage marquee doubles its photo list so the strip can loop. When
- * those figures became links, the clones became tab stops — 26 of them for 13
- * destinations, inside a strip that is still moving.
+ * Homepage editorial marquee was removed (Sprint B′ / owned-only media) —
+ * destinations live in FeaturedServices / QuickPick. If a doubled loop strip
+ * returns, clones must not be tab stops or screen-reader content.
  *
  * The blog index featured the newest post of ALL categories and rendered it
  * above the filter, so choosing Hair still led with a Seasonal article.
  */
 import { test, expect } from '@playwright/test'
 
-test('marquee loop clones are not tab stops or screen-reader content', async ({ page }) => {
+test('homepage has no editorial marquee loop strip', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' })
 
   const links = page.locator('a[aria-label$="see more"], a[aria-label$="see gallery"]')
   const total = await links.count()
-  expect(total, 'the strip still renders a doubled list').toBeGreaterThan(0)
+
+  /* Empty EDITORIAL_PHOTOS — no marquee. If a strip is reintroduced, keep the
+     clone a11y contract: half reachable, half tabindex=-1 + aria-hidden. */
+  if (total === 0) {
+    expect(total, 'editorial marquee stays removed until owned photos land').toBe(0)
+    return
+  }
+
+  expect(total % 2, 'loop strip still doubles its list').toBe(0)
 
   const reachable = page.locator(
     'a[aria-label$="see more"]:not([tabindex="-1"]), a[aria-label$="see gallery"]:not([tabindex="-1"])',
   )
   expect(await reachable.count(), 'exactly half the strip is reachable').toBe(total / 2)
 
-  // every unreachable one is also hidden from assistive tech
   const hidden = page.locator(
     'a[aria-label$="see more"][tabindex="-1"][aria-hidden="true"], a[aria-label$="see gallery"][tabindex="-1"][aria-hidden="true"]',
   )
   expect(await hidden.count(), 'clones are aria-hidden too').toBe(total / 2)
 
-  // and no destination is announced twice
   const labels = await reachable.evaluateAll((els) =>
     els
-      /* getClientRects() is empty for anything not laid out, and unlike
-         offsetParent it is defined on SVGElement as well as HTMLElement. */
       .filter((e) => e.getClientRects().length > 0)
       .map((e) => e.getAttribute('aria-label')),
   )
