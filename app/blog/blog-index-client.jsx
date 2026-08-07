@@ -6,7 +6,6 @@ import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
 import ArrowUpRight from '../components/icon-sprite.jsx'
 import WaCta from '../components/wa-cta.jsx'
-import { useBooking } from '../../src/shared.jsx'
 import { BreadcrumbJsonLd } from '../json-ld.jsx'
 import PageCloseCta from '../components/page-close-cta.jsx'
 import { WA_NUMBER } from '../../src/data.js'
@@ -20,7 +19,6 @@ function formatBlogDate(dateStr) {
 }
 
 export default function BlogIndexClient({ posts }) {
-  const booking = useBooking()
   const [activeCategory, setActiveCategory] = useState('All')
 
   const categories = ['All', ...Array.from(new Set(posts.map((p) => p.category).filter(Boolean))).sort()]
@@ -217,13 +215,12 @@ export default function BlogIndexClient({ posts }) {
                 Live slots online, or WhatsApp if you prefer a quick confirm. No prepayment.
               </p>
               <div className="flex flex-col gap-3">
-                <button
-                  type="button"
-                  onClick={() => booking.open()}
+                <Link
+                  href="/book"
                   className="btn-loud btn-loud--light tap-safe w-full inline-flex items-center justify-center gap-2 !min-h-12 !px-5 !py-3 !text-[12px]"
                 >
                   Book a Consultation <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
-                </button>
+                </Link>
                 <WaCta
                   href={`https://wa.me/${WA_NUMBER}`}
                   from="blog-index-rail"
@@ -241,8 +238,8 @@ export default function BlogIndexClient({ posts }) {
         eyebrow="— Ready when you are"
         title="Book a consultation at the PECHS studio"
         body="Have a beauty question? Book a live slot online, or WhatsApp us."
+        bookHref="/book"
         waFrom="blog-index"
-        onBookClick={() => booking.open()}
         bookLabel="Book a Consultation"
       />
     </main>

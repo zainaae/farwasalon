@@ -560,8 +560,8 @@ export default function BookClient() {
           {['Service', 'Date & Time', 'Details'].map((label, i) => (
             <div key={label} className="flex items-center gap-1.5 sm:gap-2 shrink-0" role="listitem">
               <span className={`w-7 h-7 flex items-center justify-center text-[11px] font-[family-name:var(--font-inter)] font-bold transition-colors ${
-                i < step ? 'bg-ink text-white' :
-                i === step ? 'bg-ink text-white' :
+                i < step ? 'bg-plum-deep text-white' :
+                i === step ? 'bg-plum-deep text-white' :
                 'border border-border-soft text-stone'
               }`}>
                 {i < step ? <Check className="w-3.5 h-3.5" /> : i + 1}
@@ -597,11 +597,11 @@ export default function BookClient() {
           </div>
         )}
 
-        <div className="h-[2px] bg-border-soft w-full mb-8">
+        <div className="h-px bg-border-soft w-full mb-8 overflow-hidden">
           <m.div
-            className="h-full bg-gradient-to-r from-accent-gold to-[#8b6d59]"
+            className="h-full bg-plum"
             animate={{ width: `${((step + 1) / 3) * 100}%` }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           />
         </div>
 
@@ -763,7 +763,7 @@ export default function BookClient() {
               </div>
 
               {selectedServices.length > 0 && (
-                <div className="sticky bottom-0 z-[1] pt-5 mt-6 border-t border-border-soft bg-white pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]">
+                <div className="sticky bottom-0 z-[1] pt-5 mt-6 book-step-footer pb-[max(0.75rem,env(safe-area-inset-bottom,0px))]">
                   <div className="flex items-center justify-between gap-4">
                     <div className="min-w-0">
                       <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink uppercase truncate">
@@ -925,12 +925,13 @@ export default function BookClient() {
                       <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-4">
                         {slotsError || 'No open slots for this date. Try another day or message us on WhatsApp.'}
                       </p>
-                      <a
-                        href="https://wa.me/923222782254"
+                      <WaCta
+                        href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hi Farwa — I need help finding an available time.')}`}
+                        from="book-slots-empty"
                         className="text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] underline underline-offset-2"
                       >
                         WhatsApp the salon
-                      </a>
+                      </WaCta>
                     </m.div>
                   ) : (
                     <div className="grid grid-cols-3 min-[420px]:grid-cols-4 md:grid-cols-6 gap-2">
@@ -942,11 +943,11 @@ export default function BookClient() {
                             type="button"
                             onClick={() => available && setSelectedTime(time)}
                             disabled={!available}
-                            className={`tap-safe min-h-[44px] py-3 border text-[11px] tracking-wide font-[family-name:var(--font-syne)] font-bold transition-colors ${
+                            className={`book-slot tap-safe min-h-[44px] py-3 text-[11px] tracking-wide font-[family-name:var(--font-syne)] font-bold ${
                               sel
-                                ? 'bg-ink text-white border-ink'
+                                ? 'book-slot-selected'
                                 : available
-                                  ? 'border-border-soft text-ink hover:border-ink hover:bg-mist'
+                                  ? 'book-slot-available text-ink'
                                   : 'border-border-soft text-stone/25 cursor-not-allowed line-through'
                             }`}
                           >

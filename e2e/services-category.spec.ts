@@ -68,7 +68,8 @@ test.describe('Services pages', () => {
     await expect(dialog).toBeVisible()
     await expect(dialog.getByRole('heading', { name: /haircut & blowdry/i })).toBeVisible()
 
-    const bookLink = page.getByRole('link', { name: /book haircut & blowdry/i })
+    // Modal CTA uses a distinct accessible name from the row Book link.
+    const bookLink = dialog.getByRole('link', { name: /continue to book haircut & blowdry/i })
     await expect(bookLink).toHaveAttribute('href', /\/book\?serviceId=\d+/)
   })
 
@@ -79,7 +80,7 @@ test.describe('Services pages', () => {
     await expect(dialog).toBeVisible()
     await expect(dialog.getByRole('heading', { name: /full bridal package/i })).toBeVisible()
 
-    const bookLink = page.getByRole('link', { name: /book full bridal package/i })
+    const bookLink = dialog.getByRole('link', { name: /continue to book full bridal package/i })
     await expect(bookLink).toHaveAttribute('href', /\/book\?serviceId=\d+/)
   })
 

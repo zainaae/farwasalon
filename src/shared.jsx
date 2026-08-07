@@ -5,9 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
-import { X, Menu, ChevronLeft, ChevronRight, Sparkles, Phone, MessageCircle } from 'lucide-react'
+import { X, Menu, ChevronLeft, ChevronRight, Phone, MessageCircle } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatServicePrice, formatDuration, track, CAT_SLUGS } from './site-config.js'
-import { useBooking } from './booking-context.jsx'
 import { useNextSlot } from './use-next-slot.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
 import {
@@ -194,7 +193,6 @@ export function WordmarkDivider() {
 export function ServiceModal({ service, onClose }) {
   const dialogRef  = useRef(null)
   const returnRef  = useRef(null)
-  const booking    = useBooking()
   const titleId    = 'svc-modal-title'
   const descId     = 'svc-modal-desc'
 
@@ -279,14 +277,20 @@ export function ServiceModal({ service, onClose }) {
               </div>
             )}
             <div className="mt-auto flex flex-col gap-2">
-              <button type="button"
-                onClick={() => { booking.addService(service, 'modal'); onClose() }}
-                className="inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-4 hover:bg-stone active:scale-[0.98] transition-[background-color,transform] duration-300">
-                <Sparkles className="w-3.5 h-3.5" /> Add to Booking
-              </button>
+              <Link
+                href={`/book?serviceId=${service.id}`}
+                aria-label={`Continue to book ${service.name}`}
+                onClick={() => {
+                  track('BookingStarted', { source: 'service-modal', category: service.category || 'none' })
+                  onClose()
+                }}
+                className="btn-primary tap-safe w-full"
+              >
+                Book {service.name} <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+              </Link>
               <a href={waLink(service.name)} target="_blank" rel="noreferrer"
                 onClick={() => { track('WhatsAppIntent', { from: 'service-modal', service: service.name }); onClose() }}
-                className="inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
+                className="tap-safe inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
                 Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -487,14 +491,14 @@ export function StickyMobileCTA({ hidden = false }) {
         style={{ bottom: 'max(0.6rem, env(safe-area-inset-bottom, 0px))' }}
         aria-label="Quick contact and booking"
       >
-        <div className="sticky-cta-enter pointer-events-auto mx-3.5 flex flex-col rounded-lg bg-ink/[0.92] backdrop-blur-md shadow-lg shadow-ink/25 border border-white/[0.08] min-w-0 max-w-[calc(100vw-1.75rem)] overflow-hidden">
+        <div className="sticky-cta-enter pointer-events-auto mx-3.5 flex flex-col rounded-sm bg-ink/[0.94] backdrop-blur-md shadow-soft border border-white/[0.08] min-w-0 max-w-[calc(100vw-1.75rem)] overflow-hidden">
           {showSlotHint && (
-            <p className="px-3 pt-1 pb-0 text-center text-[8px] tracking-[0.12em] uppercase text-white/35 font-[family-name:var(--font-inter)] leading-none">
+            <p className="px-3 pt-1.5 pb-0 text-center text-[8px] tracking-[0.12em] uppercase text-white/40 font-[family-name:var(--font-inter)] leading-none">
               <span
-                className={`inline-block w-1 h-1 rounded-full mr-1.5 align-middle ${slot.open ? 'bg-[#9cd48c]' : 'bg-[#c9a98a]'}`}
+                className={`inline-block w-1 h-1 rounded-full mr-1.5 align-middle ${slot.open ? 'bg-[#9cd48c]' : 'bg-[var(--accent-gold)]'}`}
                 aria-hidden="true"
               />
-              Next slot <span className="text-white/65 font-medium">{slot.label}</span>
+              Next slot <span className="text-white/70 font-medium">{slot.label}</span>
             </p>
           )}
           <div className="flex items-stretch gap-0.5 p-1">
@@ -522,7 +526,7 @@ export function StickyMobileCTA({ hidden = false }) {
             <Link
               href="/book"
               aria-label="Book an appointment online"
-              className="tap-safe min-h-[44px] flex-[1.3] inline-flex items-center justify-center gap-1.5 bg-white text-ink active:scale-[0.98] text-[10px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] rounded-md py-2.5"
+              className="tap-safe min-h-[44px] flex-[1.3] inline-flex items-center justify-center gap-1.5 bg-white text-ink active:scale-[0.98] text-[10px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] rounded-sm py-2.5"
             >
               Book <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
             </Link>

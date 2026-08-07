@@ -30,6 +30,7 @@ export default function WorkShowcaseCard({ src, label, alt, video, index, featur
             src={src}
             alt={alt || label}
             fill
+            quality={60}
             className="object-cover"
             sizes={featured ? '(max-width: 768px) 100vw, 55vw' : '(max-width: 768px) 100vw, 28vw'}
             priority={featured}
