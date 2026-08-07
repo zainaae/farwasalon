@@ -14,23 +14,8 @@ function getCatMeta(cat) {
   return CAT_META[cat] || { img: '/bleachpolish.jpg', tagline: 'Expert beauty services tailored for you.' }
 }
 
+const SERVICE_COUNT = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 const POPULAR_CATS = new Set(['Threading', 'Facials', 'Bridal'])
-
-const AVAILABILITY_HINTS = {
-  'Threading': 'Usually available same-day',
-  'Rica Hot Wax': 'Usually available same-day',
-  'Honey Wax': 'Usually available same-day',
-  'Rica Wax': 'Usually available same-day',
-  'Bleach & Polish': 'Usually available same-day',
-  'Massage': 'Usually available same-day',
-  'Hair Treatments': 'Book 1–2 days ahead',
-  'Cleansing': 'Book 1–2 days ahead',
-  'Facials': 'Book 1–2 days ahead',
-  'Nails': 'Book 1–2 days ahead',
-  'Bridal': 'Book 1–2 weeks ahead',
-  'Hair': 'Book 1–2 days ahead',
-  'Eyebrow Tattoo': 'Book 3–5 days ahead',
-}
 
 /* The menu is grouped into editorial chapters instead of a card grid —
    a ruled, priced list reads like a couture menu and prints every
@@ -50,7 +35,6 @@ function MenuRow({ cat }) {
   const prices = services.map(s => s.pricePkr).filter(Boolean)
   const minPrice = prices.length ? Math.min(...prices) : null
   const href = `/services/${CAT_SLUGS[cat]}`
-  const availability = AVAILABILITY_HINTS[cat]
 
   return (
     <Link
@@ -59,12 +43,14 @@ function MenuRow({ cat }) {
       /* Four columns from md, not three. The middle column was a single 983px
          `1fr` with a tagline capped at max-w-xl, and the longest tagline in the
          menu only runs ~330px — so every row carried ~650px of dead white and
-         the menu region, 1,901px tall, was about 1.2M px2 of it. The count and
-         availability move into their own right-aligned column, which turns two
-         edges and a gap into three columns of information.
+         the menu region, 1,901px tall, was about 1.2M px2 of it. The count
+         moves into its own right-aligned column, which turns two edges and a
+         gap into three columns of information.
 
          Explicitly placed rather than rendered twice: on small screens it sits
-         under the tagline in column 2, at md it moves to column 3. */
+         under the tagline in column 2, at md it moves to column 3.
+         Availability claims live only in LiveAvailability above — static
+         "same-day" hints contradicted a fully-booked widget. */
       className="group grid grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] md:grid-cols-[4.5rem_minmax(0,1fr)_auto_auto] items-center gap-x-4 sm:gap-x-6 gap-y-1.5 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
       <span className="row-span-2 md:row-span-1 relative block w-14 h-[4.2rem] sm:w-[4.5rem] sm:h-[5.4rem] shrink-0 border border-border-soft p-[3px] bg-white media-zoom">
         <span className="relative block w-full h-full overflow-hidden">
@@ -91,7 +77,7 @@ function MenuRow({ cat }) {
         )}
       </span>
       <p className="col-start-2 row-start-2 md:col-start-3 md:row-start-1 md:text-right md:self-center text-stone text-[11px] font-[family-name:var(--font-inter)] whitespace-nowrap">
-        {count} services{availability ? ` · ${availability.toLowerCase()}` : ''}
+        {count} services
       </p>
       <span className="col-start-3 row-start-1 row-span-2 md:col-start-4 md:row-start-1 md:row-span-1 text-right shrink-0">
         {minPrice && (
@@ -134,7 +120,7 @@ export default function ServicesClient() {
             Our services
           </h1>
           <p className="hero-fade-up text-body max-w-lg mb-6" style={{ animationDelay: '0.2s' }}>
-            Thirteen specialities, 100+ services in PECHS, Karachi — every starting price printed from Rs 100.
+            Thirteen specialities, {SERVICE_COUNT} services in PECHS, Karachi — every starting price printed from Rs 100.
             Book online in under a minute, or message us on WhatsApp.
           </p>
           <div className="hero-fade-up cta-cluster" style={{ animationDelay: '0.3s' }}>

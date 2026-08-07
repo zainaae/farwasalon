@@ -15,7 +15,7 @@ import {
 import { GOOGLE_GBP_STATS, FACEBOOK_TESTIMONIALS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK } from '../src/data.js'
+import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, GOOGLE_REVIEW_LINK } from '../src/data.js'
 import { EDITORIAL_PHOTOS } from '../src/salon-media.js'
 import {
   getGbpStatsForDisplay,
@@ -254,13 +254,9 @@ function ServiceMediaPanel({ hovered }) {
   )
 }
 
-const HOME_SERVICE_TABS = SERVICE_FILTER_TABS
-
 function FeaturedServices() {
   const categories = Object.keys(SERVICES)
   const [hovered, setHovered] = useState(null)
-  const [activeTab, setActiveTab] = useState('All')
-  const visibleCategories = filterServiceCategories(categories, activeTab)
 
   return (
     <section className="cv-auto bg-white section-pad border-t border-border-soft">
@@ -268,7 +264,6 @@ function FeaturedServices() {
         <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline sm:justify-between mb-10 md:mb-12 lg:mb-14">
           <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
             className="title-stack">
-            <p className="eyebrow">— What we do</p>
             <h2 className="display-page text-ink">Our services</h2>
           </m.div>
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
@@ -287,35 +282,8 @@ function FeaturedServices() {
           </m.div>
 
           <div>
-            <m.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="service-filter-grid mb-6"
-              role="group"
-              aria-label="Filter service categories"
-            >
-              {/* aria-pressed, not role=tab. The tab pattern commits to
-                  arrow-key roving focus and an owned tabpanel; there is no
-                  keydown handler in this file and no role=tabpanel anywhere in
-                  it. The blog index already made this call. */}
-              {HOME_SERVICE_TABS.map((tab) => (
-                <button
-                  key={tab}
-                  type="button"
-                  aria-pressed={activeTab === tab}
-                  onClick={() => {
-                    setActiveTab(tab)
-                    setHovered(null)
-                  }}
-                  className={`tap-safe tab-pill ${activeTab === tab ? 'tab-pill-active' : ''}`}
-                >
-                  <span className="line-clamp-2 leading-tight">{tab}</span>
-                </button>
-              ))}
-            </m.div>
             <div className="divide-y divide-border-soft border-t border-border-soft bg-white/70 px-3 sm:px-4 -mx-3 sm:-mx-4">
-              {visibleCategories.map((cat, i) => (
+              {categories.map((cat, i) => (
                 <div key={cat}>
                   <Link href={`/services/${CAT_SLUGS[cat]}`}
                     onMouseEnter={() => setHovered(cat)}
@@ -346,12 +314,6 @@ function FeaturedServices() {
                 </div>
               ))}
             </div>
-
-            <div className="mt-8 pt-6 border-t border-[#e4ddd7]">
-              <p className="text-body text-xs">
-                Book any service online — or <WaCta href={`https://wa.me/${WA_NUMBER}`} from="services-blurb" className="underline hover:text-ink transition-colors">reach us on WhatsApp</WaCta>.
-              </p>
-            </div>
           </div>
         </div>
       </div>
@@ -370,7 +332,7 @@ function TrustPillars() {
     },
     {
       num: '02',
-      title: 'Book Online, Walk In Welcome',
+      title: 'Book online · walk-ins when free',
       desc: 'Real-time slots online, WhatsApp for questions, and walk-ins when we have room.',
     },
     {
@@ -769,7 +731,9 @@ function TestimonialsPreview({ placesEnabled }) {
             <h2 className="display-page text-ink">What clients say</h2>
           </div>
           <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
-            <StarRating size={11} className="text-stone/80" label={`${GOOGLE_GBP_STATS.rating} out of 5 stars`} />
+            {/* Text only — StarRating fills five stars and would claim a perfect
+                rating next to the honest 4.6★ aggregate. Per-review cards keep
+                their own stars. */}
             <span className="text-stone text-[10px] sm:text-[11px] font-[family-name:var(--font-inter)] leading-snug whitespace-nowrap">
               {ratingLabel}
             </span>

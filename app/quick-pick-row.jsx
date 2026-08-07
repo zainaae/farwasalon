@@ -31,12 +31,12 @@ export default function QuickPickRow() {
 
   if (items.length === 0) return null
 
-  /* Flat strip under the deal band. Extra mobile bottom pad so the sticky
-     Call/WA/Book bar does not eat the last price row when fold 2 is on screen. */
+  /* Flat strip under the deal band. StickyMobileCTA owns the spacer for the
+     Call/WA/Book bar — do not double-pad here or fold 2 reads as empty white. */
   return (
     <section
       aria-labelledby="quickpick-heading"
-      className="cv-auto bg-white border-b border-border-soft pt-8 md:pt-10 pb-[calc(8.25rem+env(safe-area-inset-bottom,0px))] md:pb-10"
+      className="cv-auto bg-white border-b border-border-soft pt-8 md:pt-10 pb-8 md:pb-10"
     >
       <div className="section-shell">
         <div className="flex items-baseline justify-between gap-4 mb-5 md:mb-6">

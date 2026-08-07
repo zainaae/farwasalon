@@ -53,7 +53,7 @@ export const metadata = {
     template: '%s | Farwa Beauty Salon',
   },
   description:
-    'Beauty salon in PECHS, Karachi — bridal, facials, threading, waxing & nails since 2008. 100+ services from Rs 100. Book online.',
+    'Beauty salon in PECHS, Karachi — bridal, facials, threading, waxing & nails since 2008. 102 services from Rs 100. Book online.',
   keywords: [
     'beauty salon Karachi',
     'beauty parlour PECHS',
