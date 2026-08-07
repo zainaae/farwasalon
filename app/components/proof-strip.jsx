@@ -50,7 +50,9 @@ export default function ProofStrip() {
   return (
     <aside className="bg-ink border-t border-white/10" aria-label="Why clients choose Farwa">
       <div className="section-shell py-5 md:py-6">
-        <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3.5 md:gap-x-10 md:gap-y-3">
+        {/* Mobile: 2×2 so stats don’t wrap into a messy chip pile.
+            Desktop: single centered row with hairlines. */}
+        <ul className="grid grid-cols-2 gap-x-4 gap-y-4 md:flex md:flex-wrap md:items-center md:justify-center md:gap-x-10 md:gap-y-3">
           {items.map(({ key, lead, label, href, ariaLabel }, i) => {
             const body = (
               <>
@@ -58,7 +60,7 @@ export default function ProofStrip() {
                   {lead}
                 </span>
                 {label ? (
-                  <span className="text-white/70 text-[11px] md:text-xs font-[family-name:var(--font-inter)] leading-none">
+                  <span className="text-white/70 text-[10px] md:text-xs font-[family-name:var(--font-inter)] leading-snug md:leading-none">
                     {label}
                   </span>
                 ) : null}
@@ -66,9 +68,7 @@ export default function ProofStrip() {
             )
 
             return (
-              <li key={key} className="flex items-center">
-                {/* Hairline between items, never before the first one. Hidden at
-                    the wrap point so a second row does not start with a rule. */}
+              <li key={key} className="flex items-center min-w-0">
                 {i > 0 && (
                   <span aria-hidden="true" className="hidden md:block w-px h-6 bg-white/15 mr-10" />
                 )}
@@ -77,12 +77,14 @@ export default function ProofStrip() {
                     href={href}
                     {...(href.startsWith('http') ? { target: '_blank', rel: 'noreferrer' } : {})}
                     {...(ariaLabel ? { 'aria-label': ariaLabel } : {})}
-                    className="tap-safe inline-flex items-center gap-2 hover:opacity-80 transition-opacity"
+                    className="tap-safe inline-flex flex-col md:flex-row md:items-center gap-1 md:gap-2 hover:opacity-80 transition-opacity min-w-0"
                   >
                     {body}
                   </Link>
                 ) : (
-                  <span className="inline-flex items-center gap-2">{body}</span>
+                  <span className="inline-flex flex-col md:flex-row md:items-center gap-1 md:gap-2 min-w-0">
+                    {body}
+                  </span>
                 )}
               </li>
             )

@@ -36,10 +36,12 @@ export default function HomeHero() {
         className="absolute inset-0 z-[1]"
         style={{
           /* Harder left/bottom scoop so type sits on dark ground and the bridal
-             face stays lit on the right — depth from light falloff, not flat wash. */
+             face stays lit on the right — depth from light falloff, not flat wash.
+             Mobile gets a deeper bottom scoop so the support line stays readable
+             over jewelry highlights. */
           background:
-            'linear-gradient(to top, rgba(13,6,9,0.94) 0%, rgba(13,6,9,0.55) 28%, rgba(13,6,9,0.08) 58%, rgba(13,6,9,0.35) 100%), ' +
-            'linear-gradient(to right, rgba(13,6,9,0.82) 0%, rgba(13,6,9,0.48) 32%, rgba(13,6,9,0.08) 62%, rgba(13,6,9,0) 82%)',
+            'linear-gradient(to top, rgba(13,6,9,0.96) 0%, rgba(13,6,9,0.72) 22%, rgba(13,6,9,0.22) 48%, rgba(13,6,9,0.08) 62%, rgba(13,6,9,0.4) 100%), ' +
+            'linear-gradient(to right, rgba(13,6,9,0.88) 0%, rgba(13,6,9,0.55) 28%, rgba(13,6,9,0.12) 58%, rgba(13,6,9,0) 82%)',
         }}
       />
 
@@ -63,12 +65,14 @@ export default function HomeHero() {
 
       <div
         id="hero-copy"
-        className="absolute inset-x-0 bottom-0 z-10 px-5 sm:px-6 md:px-10 pb-[max(7rem,env(safe-area-inset-bottom,0px)+5.25rem)] sm:pb-14 md:pb-16"
+        className="absolute inset-x-0 bottom-0 z-10 px-5 sm:px-6 md:px-10 pb-[max(5.75rem,env(safe-area-inset-bottom,0px)+4.5rem)] sm:pb-14 md:pb-16"
       >
         <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
+          {/* Mobile: nav already says FARWA — skip a third brand line.
+              Desktop keeps the salon · PECHS lede. */}
           <p
             id="hero-lede"
-            className="hero-lcp text-white/80 text-[10px] sm:text-[11px] tracking-[0.32em] uppercase font-[family-name:var(--font-inter)] mb-4 md:mb-5"
+            className="hero-lcp hidden md:block text-white/80 text-[11px] tracking-[0.32em] uppercase font-[family-name:var(--font-inter)] mb-5"
           >
             Farwa Beauty Salon &middot; PECHS
           </p>
@@ -77,21 +81,21 @@ export default function HomeHero() {
               so e2e + crawlers still see Beauty Salon / PECHS / Karachi. */}
           <h1
             id="hero-headline"
-            className="hero-lcp text-white leading-[0.96] mb-4 md:mb-5 font-[family-name:var(--font-unbounded)]"
+            className="hero-lcp text-white leading-[0.96] mb-3 md:mb-5 font-[family-name:var(--font-unbounded)]"
             style={{ letterSpacing: '-0.035em' }}
           >
             {/* nowrap + fluid size capped to viewport so the brand never orphans
                 as "Farw / a" on 390px. Subtitle keeps overflow-wrap. */}
             <span
               className="block text-white font-bold whitespace-nowrap"
-              style={{ fontSize: 'clamp(2.75rem, 11.5vw, 8.5rem)' }}
+              style={{ fontSize: 'clamp(2.5rem, 10vw, 8.5rem)' }}
             >
               Farwa
             </span>
             <span
-              className="block text-white/90 font-normal mt-3.5 md:mt-4 max-w-[16ch] sm:max-w-[18ch]"
+              className="block text-white/90 font-normal mt-2.5 md:mt-4 max-w-[16ch] sm:max-w-[18ch]"
               style={{
-                fontSize: 'clamp(1.1rem, 3vw, 2rem)',
+                fontSize: 'clamp(1.05rem, 2.8vw, 2rem)',
                 letterSpacing: '-0.02em',
                 lineHeight: 1.22,
                 overflowWrap: 'anywhere',
@@ -102,13 +106,15 @@ export default function HomeHero() {
           </h1>
 
           <p
-            className="hero-lcp text-white/80 text-[15px] sm:text-base md:text-lg font-light leading-snug mb-8 md:mb-9 max-w-md font-[family-name:var(--font-inter)]"
+            className="hero-lcp text-white/85 text-[14px] sm:text-base md:text-lg font-light leading-snug mb-0 md:mb-9 max-w-md font-[family-name:var(--font-inter)] drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)]"
           >
             Bridal, hair &amp; skin with Rubina since 2008.
           </p>
 
+          {/* Mobile sticky bar already is Call / WhatsApp / Book — stacking the
+              same pair here made the first screen nonsense. Desktop keeps both. */}
           <div
-            className="hero-fade-up cta-cluster items-stretch sm:items-center"
+            className="hero-fade-up cta-cluster items-stretch sm:items-center hidden md:flex mt-8"
             style={{ animationDelay: '0.32s' }}
           >
             <Link
