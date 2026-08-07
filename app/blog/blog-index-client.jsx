@@ -29,6 +29,7 @@ export default function BlogIndexClient({ posts }) {
      led with a Seasonal article labelled "Featured · Seasonal". The feature
      slot is the newest post of whatever is being shown. */
   const inCategory = sorted.filter((p) => activeCategory === 'All' || p.category === activeCategory)
+
   const featured = inCategory[0]
   const list = inCategory.slice(1)
 
@@ -195,7 +196,14 @@ export default function BlogIndexClient({ posts }) {
               </ul>
             )}
 
-            {list.length === 0 && (
+            {/* Gate on inCategory, not on list. list is inCategory minus the
+                featured article, so any category holding exactly one post —
+                Brows, Threading, Waxing, Massage, Makeup, five of the sixteen
+                chips — put that post in the feature slot, left list empty, and
+                fired this message directly beneath the very article it was
+                denying the existence of. The page contradicted itself.
+                inCategory is what "is there anything here" actually means. */}
+            {inCategory.length === 0 && (
               <p className="text-body text-sm py-8">No guides in this category yet.</p>
             )}
           </div>
