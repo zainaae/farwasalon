@@ -185,14 +185,15 @@ CRON_SECRET=...                 # Protect /api/cron/*
 
 #### Implementation checklist
 
-1. `lib/whatsapp-cloud.js` — `sendTemplate(toE164, templateName, components[])`.
-2. On successful `POST /api/book` — optional immediate `booking_confirmed` (if `WHATSAPP_TOKEN` set).
-3. `app/api/cron/whatsapp-reminders/route.js` — verify `Authorization: Bearer ${CRON_SECRET}`; query sheet; send due reminders.
-4. **vercel.json** cron:
+1. `lib/whatsapp-cloud.js` — `sendWhatsAppTemplate` + `maybeSendBookingConfirmed` (ships env-gated; no-ops without credentials / flag).
+2. On successful `POST /api/book` — optional immediate `booking_confirmed` when `WHATSAPP_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID`, and `WHATSAPP_SEND_BOOKING_CONFIRM=true` are set.
+3. **Staff path until then:** morning Sheet→WA digest (`sendMorningConfirmDigest` in `google-apps-script/EmailBot.gs`) — see `docs/whatsapp-business-setup.md` §5a.
+4. `app/api/cron/whatsapp-reminders/route.js` — still future; verify `Authorization: Bearer ${CRON_SECRET}`; query sheet; send due reminders.
+5. **vercel.json** cron (when reminders ship):
    ```json
    { "crons": [{ "path": "/api/cron/whatsapp-reminders", "schedule": "0 * * * *" }] }
    ```
-5. Sheet columns: `reminded_24h`, `reminded_2h`, `review_sent` (YES/empty).
+6. Sheet columns for reminders (later): `reminded_24h`, `reminded_2h`, `review_sent` (YES/empty).
 
 #### Providers (if you don’t want raw Meta API)
 
@@ -212,8 +213,8 @@ All need the same approved templates.
 
 ### Path C — Hybrid (recommended for Farwa)
 
-1. **Now:** Apps Script email on new booking (`google-apps-script/EmailBot.gs`) + manual WA reminders.
-2. **Next:** Cloud API only for `booking_confirmed` + `appointment_reminder_24h`.
+1. **Now:** Apps Script email on new booking (`google-apps-script/EmailBot.gs`) + **morning confirm digest** + manual WA review asks (evening digest).
+2. **Next:** Cloud API only for `booking_confirmed` + `appointment_reminder_24h` (flag on after Meta approval).
 3. **Later:** review_request + JazzCash paid confirmation template.
 
 ---

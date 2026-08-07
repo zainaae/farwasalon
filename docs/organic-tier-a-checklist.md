@@ -65,6 +65,14 @@ Confirm sitemaps: `/sitemap.xml` + children. IndexNow on `master` deploy (`npm r
 - [ ] Post weekly (offer, bridal tip, or book online)
 - [ ] Answer every review within 48h
 - [ ] Seed Q&A: threading from Rs 100/200; bridal from Rs 8,000; walk-ins when free; women-only; parking nearby
+- [ ] **Freedom / trust scrub (through 14 Aug 2026):** follow `docs/google-business-profile.md` §5b — remove 15k / 20% / 10%-code posts; one clean 14% Freedom post; staff honour Freedom until 14 Aug then printed list only; sync `GOOGLE_GBP_STATS`
+
+## GSC money URL re-request (after trust/copy deploys)
+
+URL Inspection → Request indexing (also in `docs/search-console-setup.md` + `docs/indexation-worklist.md` §1b):
+
+- [ ] `/` · `/prices` · `/services/eyebrow-tattoo` · `/blog/eyebrow-microblading-karachi-guide`
+- [ ] `/deals` · `/freedom-deal` · `/faq`
 
 ## Reviews
 

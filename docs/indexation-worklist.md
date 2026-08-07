@@ -9,6 +9,32 @@ Generated 2026-07-30 from the deployed sitemaps. 62 URLs total
 
 ---
 
+## 1b. Money URLs — GSC re-request after trust/copy deploys (owner)
+
+Engineering can ping IndexNow (`npm run ping:indexnow` / CI on `master`).
+**Google still needs a human in Search Console.** After each production deploy
+that changes prices, deals, or trust claims:
+
+1. Open [Google Search Console](https://search.google.com/search-console) → property `farwasalon.com`
+2. **URL Inspection** → paste one URL → wait for result → **Request indexing**
+3. Work the money list first (quota ~10/day):
+
+| # | URL | Why |
+|---|-----|-----|
+| 1 | `https://farwasalon.com/` | Home trust + deal strip |
+| 2 | `https://farwasalon.com/prices` | Full rate card |
+| 3 | `https://farwasalon.com/services/eyebrow-tattoo` | Microblading Rs 20,000 |
+| 4 | `https://farwasalon.com/blog/eyebrow-microblading-karachi-guide` | Money blog |
+| 5 | `https://farwasalon.com/deals` | Live offers only |
+| 6 | `https://farwasalon.com/freedom-deal` | 14% meta through 14 Aug 2026 |
+| 7 | `https://farwasalon.com/faq` | Price / booking answers |
+
+Same checklist lives in [`search-console-setup.md`](./search-console-setup.md)
+(Request indexing after deploy). Spot-check the Inspection HTML preview: no
+`first-facial-10`, no invented 20%/10% off copy, Freedom still **14%** until end date.
+
+---
+
 ## 1. Re-request indexing — 9 rewritten posts
 
 These were 108-236 words and were very likely your "Crawled - currently not
