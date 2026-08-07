@@ -4,7 +4,7 @@ import { visibleMain } from './helpers'
 test.describe('Home — mobile CTA bar', () => {
   test.use({ viewport: { width: 390, height: 844 } })
 
-  test('hero, service tabs, and sticky tel/wa/book CTAs', async ({ page }) => {
+  test('hero, services list, and sticky tel/wa/book CTAs', async ({ page }) => {
     await page.goto('/')
     await expect(visibleMain(page)).toBeVisible()
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
@@ -24,20 +24,17 @@ test.describe('Home — mobile CTA bar', () => {
       await expect(servicesLink).toBeVisible()
     }
 
-    /* These filters used to declare role=tablist/role=tab with aria-selected.
-       That contract promises arrow-key roving focus and an owned tabpanel, and
-       neither exists — so the roles were removed in favour of aria-pressed
-       toggle buttons, and this test follows the corrected semantics. */
+    /* Honesty pass dropped the home service filter pills — the section is now
+       a straight category list into /services/[slug], not aria-pressed tabs. */
     const servicesSection = page.locator('section').filter({
-      has: page.getByRole('group', { name: 'Filter service categories' }),
+      has: page.getByRole('heading', { name: 'Our services' }),
     })
     await servicesSection.scrollIntoViewIfNeeded()
-    const threading = page.getByRole('button', { name: 'Threading', exact: true })
-    await threading.click()
-    await expect(threading).toHaveAttribute('aria-pressed', 'true')
     const categoryLinks = servicesSection.locator('.divide-y').getByRole('link')
-    await expect(categoryLinks).toHaveCount(1)
-    await expect(categoryLinks.first()).toContainText(/threading/i)
+    await expect(categoryLinks.first()).toBeVisible()
+    await expect(
+      servicesSection.getByRole('link', { name: /threading/i }).first(),
+    ).toHaveAttribute('href', /\/services\/threading/)
   })
 
   test('sticky mobile CTA hidden on /book', async ({ page }) => {
