@@ -56,8 +56,8 @@ export default function PricesPage() {
     <main id="main" className="page-content">
       {faqSchema && <JsonLd data={faqSchema} />}
       <JsonLd data={buildPriceListSchema()} />
-      <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
-          <div className="title-stack mb-3 max-w-2xl border-l-2 border-plum pl-5 lg:pl-6">
+      <div className="section-shell pt-14 md:pt-[4.5rem] pb-8 md:pb-10 min-h-0">
+        <div className="title-stack mb-3 max-w-2xl border-l-2 border-plum pl-5 lg:pl-6">
           <p className="eyebrow text-plum">— Price list · updated {UPDATED}</p>
           <h1 className="display-page text-ink">
             Salon price list — from Rs 100
@@ -82,7 +82,7 @@ export default function PricesPage() {
           {YEARS_ACTIVE}+ years · women-only studio · {rating.ratingValue}★ · {rating.reviewCount} Google reviews · cash, JazzCash, EasyPaisa · Mon–Sat 11–7
         </p>
 
-        <div className="cta-cluster mb-7">
+        <div className="cta-cluster mb-8">
           <Link href="/book" className="tap-safe btn-loud w-full sm:w-auto justify-center">
             Book online <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
@@ -91,11 +91,14 @@ export default function PricesPage() {
             Ask on WhatsApp
           </WaCta>
         </div>
+      </div>
 
-        <div className="-mx-4 sm:-mx-5 md:-mx-10 mb-10">
-          <DealBanner />
-        </div>
+      {/* Same DealStrip as home — full-bleed Azadi band, shared section-shell. */}
+      <div className="mb-10 md:mb-12">
+        <DealBanner from="prices" />
+      </div>
 
+      <div className="section-shell pb-10 md:pb-12 min-h-0">
         {/* Only the pill row sticks. The label and the guide link used to sit
             inside the sticky box too, which made it 144px tall on a phone —
             with the 57px header that is 198px of permanent chrome, 24% of a

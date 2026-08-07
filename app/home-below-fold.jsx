@@ -322,8 +322,7 @@ function FeaturedServices() {
 }
 
 function TrustPillars() {
-  /* #42 calm trust chapter — three honest claims, no CTA pile-up.
-     Photo anchor kept from the later problem band so this is not a mist slab. */
+  /* Calm trust chapter — mist + plum, not a black slab with a mismatched glow shot. */
   const pillars = [
     {
       num: '01',
@@ -344,39 +343,31 @@ function TrustPillars() {
 
   return (
     <section
-      className="cv-auto bg-ink border-t border-white/10"
+      className="cv-auto bg-mist border-t border-border-soft"
       aria-labelledby="trust-pillars-heading"
-      style={{ backgroundImage: 'radial-gradient(75% 120% at 16% 0%, rgba(201,169,138,0.10), transparent 60%)' }}
     >
       <div className="max-w-screen-xl mx-auto">
         <div className="grid lg:grid-cols-12 lg:items-stretch">
-          <div className="relative lg:col-span-5 min-h-[240px] sm:min-h-[300px] lg:min-h-0 overflow-hidden">
-            <div className="relative h-full min-h-[240px] lg:min-h-full aspect-[5/4] lg:aspect-auto lg:absolute lg:inset-0">
+          <div className="relative lg:col-span-5 min-h-[220px] sm:min-h-[280px] lg:min-h-0 overflow-hidden order-2 lg:order-1">
+            <div className="relative h-full min-h-[220px] lg:min-h-full aspect-[5/4] lg:aspect-auto lg:absolute lg:inset-0">
               <Image
-                src="/glow3.jpg"
-                alt="Facial glow treatment at Farwa Beauty Salon, PECHS"
+                src="/bridal.jpg"
+                alt="Bridal makeup and styling at Farwa Beauty Salon, PECHS"
                 fill
                 quality={55}
                 sizes="(max-width: 1023px) 100vw, 42vw"
-                className="object-cover object-[50%_30%]"
-              />
-              <div
-                className="absolute inset-0"
-                style={{
-                  background:
-                    'linear-gradient(to top, rgba(13,13,13,0.55) 0%, rgba(13,13,13,0.08) 50%, rgba(13,13,13,0.28) 100%)',
-                }}
+                className="object-cover object-[50%_22%]"
               />
             </div>
           </div>
 
-          <div className="lg:col-span-7 px-4 sm:px-5 md:px-10 py-14 md:py-16 lg:py-[4.5rem]">
+          <div className="lg:col-span-7 px-4 sm:px-5 md:px-10 py-14 md:py-16 lg:py-[4.5rem] bg-white order-1 lg:order-2 lg:border-l border-border-soft">
             <m.p
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               id="trust-pillars-heading"
-              className="text-accent-gold text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-8 md:mb-10"
+              className="eyebrow text-plum mb-8 md:mb-10"
             >
               — Why choose Farwa
             </m.p>
@@ -388,13 +379,13 @@ function TrustPillars() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.65 }}
-                  className="border-t border-white/10 pt-6 md:pt-7"
+                  className="border-t border-plum/25 pt-6 md:pt-7"
                 >
-                  <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-accent-gold mb-3.5">{p.num}</p>
-                  <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-[17px] text-white mb-2.5 leading-snug">
+                  <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-plum mb-3.5">{p.num}</p>
+                  <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-[17px] text-ink mb-2.5 leading-snug">
                     {p.title}
                   </h3>
-                  <p className="text-nude/90 text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">
+                  <p className="text-stone text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">
                     {p.desc}
                   </p>
                 </m.div>
@@ -828,27 +819,10 @@ function TestimonialsPreview({ placesEnabled }) {
 }
 
 function CtaBand() {
-  /* Photo-backed close — not another flat plum slab. Same loud Book + WhatsApp
-     pair as PageCloseCta; tertiary links stay quiet underneath. */
+  /* Solid plum close — no weak bridal stock behind “Visit us”. Matches PageCloseCta. */
   return (
-    <section className="cv-auto cta-band relative overflow-hidden border-t border-white/10">
-      <Image
-        src="/bridal.jpg"
-        alt=""
-        fill
-        quality={55}
-        sizes="100vw"
-        className="object-cover object-[50%_28%] pointer-events-none"
-        aria-hidden
-      />
-      <div
-        className="absolute inset-0 grain-on-dark"
-        style={{
-          background:
-            'linear-gradient(105deg, rgba(63,22,49,0.94) 0%, rgba(63,22,49,0.82) 42%, rgba(13,6,9,0.72) 100%)',
-        }}
-      />
-      <div className="relative z-[2] max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-16 sm:py-20 md:py-[5rem]">
+    <section className="cv-auto cta-band grain-on-dark bg-plum-deep py-16 sm:py-20 md:py-[5rem] px-4 sm:px-5 md:px-10 border-t border-white/10">
+      <div className="max-w-screen-xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
           <m.div
             initial={{ opacity: 0, y: 20 }}
@@ -912,50 +886,35 @@ function CtaBand() {
 }
 
 function FounderNote() {
+  /* Quote only — we do not have a cleared founder portrait. A client hair
+     shot labeled as Rubina was wrong context. */
   return (
-    <section className="cv-auto bg-mist border-t border-border-soft">
-      <div className="max-w-screen-xl mx-auto grid md:grid-cols-12 md:gap-0 items-stretch">
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="relative md:col-span-5 min-h-[280px] md:min-h-[420px] overflow-hidden"
+    <section className="cv-auto bg-white border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
+      <m.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-3xl mx-auto text-center"
+      >
+        <p className="eyebrow text-plum mb-6">— The House</p>
+        <blockquote
+          className="display-quote text-ink mx-auto"
+          style={{ maxWidth: '24ch' }}
         >
-          <Image
-            src="/hairdo.jpg"
-            alt="Hair styling at Farwa Beauty Salon with founder Rubina"
-            fill
-            quality={60}
-            sizes="(max-width: 767px) 100vw, 42vw"
-            className="object-cover object-[50%_20%]"
-          />
-        </m.div>
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-40px' }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="md:col-span-7 flex flex-col justify-center px-5 sm:px-8 md:px-12 lg:px-16 py-14 sm:py-16 md:py-20 bg-white md:border-l border-border-soft"
+          &ldquo;Trends visit Karachi every season. Grace stays. I opened this
+          salon in 2008 to give every woman on this street both.&rdquo;
+        </blockquote>
+        <p className="mt-7 text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] text-stone">
+          Rubina · Founder, Farwa Beauty Salon
+        </p>
+        <Link
+          href="/about"
+          className="tap-safe mt-8 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-plum-deep hover:text-ink transition-colors"
         >
-          <p className="eyebrow mb-6">— The House</p>
-          <blockquote
-            className="font-[family-name:var(--font-syne)] font-medium text-ink text-balance leading-[1.3]"
-            style={{ fontSize: 'clamp(1.25rem, 3.2vw, 2rem)', maxWidth: '22ch' }}>
-            &ldquo;Trends visit Karachi every season. Grace stays. I opened this
-            salon in 2008 to give every woman on this street both.&rdquo;
-          </blockquote>
-          <p className="mt-6 text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] text-stone">
-            Rubina · Founder, Farwa Beauty Salon
-          </p>
-          <Link
-            href="/about"
-            className="tap-safe mt-8 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-ink hover:text-stone transition-colors self-start"
-          >
-            Meet Rubina <ChevronRight className="w-3.5 h-3.5" />
-          </Link>
-        </m.div>
-      </div>
+          Our story <ChevronRight className="w-3.5 h-3.5" />
+        </Link>
+      </m.div>
     </section>
   )
 }
