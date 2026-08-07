@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, type Page } from '@playwright/test'
 import {
   mockBookApi,
   mockCancelApi,
@@ -17,7 +17,7 @@ test.describe('Book pages smoke', () => {
       name: 'Tester',
       date: '2026-05-20',
       time: '10:00',
-      duration: 10,
+      duration: '10',
     })
     const res = await page.goto(
       '/book/confirmation?id=smoke-001&date=2026-05-20&time=10:00&duration=10',
@@ -39,7 +39,7 @@ test.describe('Book pages smoke', () => {
    confirmation page wrote. The token and the customer name used to ride in the
    query string, where Plausible and the Meta Pixel both report location.href
    verbatim. Seed storage the way a real booking would. */
-async function seedConfirmation(page, id: string, extra: Record<string, string> = {}) {
+async function seedConfirmation(page: Page, id: string, extra: Record<string, string> = {}) {
   const payload = JSON.stringify({
     id,
     cancelToken: 'test-token',
@@ -52,7 +52,7 @@ async function seedConfirmation(page, id: string, extra: Record<string, string> 
     ...extra,
   })
   await page.addInitScript(
-    ([key, raw]) => {
+    ([key, raw]: string[]) => {
       try { localStorage.setItem(key as string, raw as string) } catch { /* ignore */ }
       try { sessionStorage.setItem(key as string, raw as string) } catch { /* ignore */ }
     },
