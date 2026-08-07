@@ -14,6 +14,7 @@ import { buildPriceListSchema, getMenuStats } from '../../lib/service-schema.js'
 import { PRICES_PAGE_FAQS } from '../../src/faq-data.js'
 import QuoteBuilder from './quote-builder'
 import DealBanner from '../components/deal-banner'
+import PageCloseCta from '../components/page-close-cta.jsx'
 
 const title = 'Salon Price List Karachi 2026 — From Rs 100 | Farwa'
 const description =
@@ -206,23 +207,7 @@ export default function PricesPage() {
           </dl>
         </section>
 
-        <section className="mt-14 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="prices-book-cta">
-          <h2 id="prices-book-cta" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-lg md:text-xl mb-2">
-            Ready to book?
-          </h2>
-          <p className="text-body text-sm mb-5 max-w-xl">
-            Pick a service online — real-time slots, printed PKR rates, confirmation on the spot.
-          </p>
-          <div className="flex flex-wrap items-center gap-3">
-            <Link href="/book" className="tap-safe btn-primary">
-              Book online <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-            <WaCta href="https://wa.me/923222782254" from="prices-footer"
-              className="tap-safe btn-secondary">
-              Ask on WhatsApp
-            </WaCta>
-          </div>
-        </section>
+        <PageCloseCta waFrom="prices-footer" />
 
         <section className="mt-24 md:mt-30 pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
           <h2 id="prices-faq-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-6">

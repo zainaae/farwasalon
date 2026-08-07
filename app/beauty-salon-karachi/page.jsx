@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import ArrowUpRight from '../components/icon-sprite.jsx'
 import WaCta from '../components/wa-cta.jsx'
+import PageCloseCta from '../components/page-close-cta.jsx'
 import { NEIGHBORHOODS } from '../../src/location-seo.js'
 import { AREA_CONTENT } from '../../src/area-content.js'
 import { MapPin, Clock, Phone } from 'lucide-react'
@@ -40,15 +41,17 @@ export default function BeautySalonKarachiPage() {
           flag "Review has multiple aggregate ratings" on this URL. */}
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
-          <p className="eyebrow mb-4">— Karachi beauty salon</p>
-          <h1 className="display-page text-ink mb-6 max-w-2xl">
-            Beauty Salon in Karachi — PECHS
-          </h1>
-          <p className="text-body md:text-lg max-w-3xl mb-4">
-            Farwa Beauty Salon has been a home for bridal makeup, facials, threading, waxing, hair, and nail
-            services in PECHS Block 3 since 2008. Transparent pricing from Rs 100, a calm women-only studio,
-            and online booking — one PECHS address (not an at-home parlour), one team you can trust.
-          </p>
+          <div className="title-stack mb-6 max-w-2xl">
+            <p className="eyebrow">— Karachi beauty salon</p>
+            <h1 className="display-page text-ink">
+              Beauty Salon in Karachi — PECHS
+            </h1>
+            <p className="text-body md:text-lg">
+              Farwa Beauty Salon has been a home for bridal makeup, facials, threading, waxing, hair, and nail
+              services in PECHS Block 3 since 2008. Transparent pricing from Rs 100, a calm women-only studio,
+              and online booking — one PECHS address (not an at-home parlour), one team you can trust.
+            </p>
+          </div>
           <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-3xl mb-8">
             {SALON_ADDRESS_LINES[0]} · {SALON_ADDRESS_LINES[1]} · {SALON_PHONE_DISPLAY}
           </p>
@@ -203,6 +206,13 @@ export default function BeautySalonKarachiPage() {
             </p>
           </section>
         </div>
+
+        <PageCloseCta
+          eyebrow="— Visit us in PECHS"
+          title="Book online in under a minute"
+          body="One PECHS studio for clients across Karachi — live slots online, or WhatsApp."
+          waFrom="karachi-hub-close"
+        />
       </main>
     </>
   )

@@ -1,10 +1,12 @@
 import Link from 'next/link'
 import ArrowUpRight from '../../components/icon-sprite.jsx'
+import WaCta from '../../components/wa-cta.jsx'
+import PageCloseCta from '../../components/page-close-cta.jsx'
 import { notFound } from 'next/navigation'
 import { MapPin, Clock, Car } from 'lucide-react'
 import { NEIGHBORHOODS, TOP_SERVICES } from '../../../src/location-seo.js'
 import { AREA_CONTENT } from '../../../src/area-content.js'
-import { CAT_SLUGS, SERVICES, formatPrice, YEARS_ACTIVE, MAPS_LINK } from '../../../src/data.js'
+import { CAT_SLUGS, SERVICES, formatPrice, YEARS_ACTIVE, MAPS_LINK, WA_DEFAULT } from '../../../src/data.js'
 import JsonLd from '../../json-ld'
 import { pageSocialMeta } from '../../../lib/page-metadata.js'
 import { BreadcrumbJsonLd } from '../../json-ld.jsx'
@@ -108,13 +110,15 @@ export default async function AreaPage({ params }) {
           </ol>
         </nav>
 
-        <p className="eyebrow mb-4">— Coming from {area.name}</p>
-        <h1 className="display-page text-ink mb-5 max-w-2xl">
-          Beauty Salon for {area.name}
-          <span className="block text-stone text-base md:text-lg font-[family-name:var(--font-inter)] font-light mt-2">
-            One studio in Block 3, PECHS — {content.driveTime} away
-          </span>
-        </h1>
+        <div className="title-stack mb-5 max-w-2xl">
+          <p className="eyebrow">— Coming from {area.name}</p>
+          <h1 className="display-page text-ink">
+            Beauty Salon for {area.name}
+            <span className="block text-stone text-base md:text-lg font-[family-name:var(--font-inter)] font-light mt-2">
+              One studio in Block 3, PECHS — {content.driveTime} away
+            </span>
+          </h1>
+        </div>
 
         <dl className="flex flex-wrap gap-x-8 gap-y-3 mb-8 pb-8 border-b border-border-soft">
           <Fact icon={<Car className="w-4 h-4 text-stone shrink-0 mt-0.5" aria-hidden="true" />}
@@ -191,6 +195,9 @@ export default async function AreaPage({ params }) {
           <Link href="/book" className="tap-safe btn-primary !py-2.5 !px-5">
             Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
+          <WaCta href={WA_DEFAULT} from="area-page" className="tap-safe btn-secondary !py-2.5 !px-5">
+            WhatsApp
+          </WaCta>
           <Link href="/prices" className="tap-safe btn-secondary !py-2.5 !px-5">
             See the price list
           </Link>
@@ -214,6 +221,14 @@ export default async function AreaPage({ params }) {
           </ul>
         </section>
       </div>
+
+      <PageCloseCta
+        eyebrow={`— Coming from ${area.name}`}
+        title="Book a visit at the PECHS studio"
+        body={`${content.driveTime} from ${area.name}. Live slots online, or WhatsApp if you prefer.`}
+        waHref={WA_DEFAULT}
+        waFrom="area-close"
+      />
     </main>
   )
 }

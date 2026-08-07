@@ -1,12 +1,11 @@
 import Link from 'next/link'
-import ArrowUpRight from '../../components/icon-sprite.jsx'
-import WaCta from '../../components/wa-cta.jsx'
 import Image from 'next/image'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
 import { WA_DEFAULT, YEARS_ACTIVE, CAT_SLUGS, CAT_META } from '../../../src/data.js'
 import { BLOG_POSTS } from '../../../src/blog-data.js'
 import { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildArticleSchema, countBlogWords } from '../../../lib/business-schema.js'
+import PageCloseCta from '../../components/page-close-cta.jsx'
 
 function getRelatedPosts(post, currentSlug, limit = 3) {
   const others = BLOG_POSTS.filter((p) => p.slug !== currentSlug)
@@ -132,14 +131,9 @@ export default function BlogArticle({ slug }) {
               candidates — and the featured image is preloaded to be one. They
               were fading in from opacity 0, which is precisely the delay the
               hero already had to fix (see .hero-lcp in globals.css). */}
-          <header className="mb-10 pb-8 border-b border-border-soft">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-[family-name:var(--font-inter)] bg-mist px-2 py-1">
-                {post.category}
-              </span>
-              <span className="text-stone text-[10px] font-[family-name:var(--font-inter)]">{post.readTime}</span>
-            </div>
-            <h1 className="display-page text-ink mb-3">
+          <header className="mb-10 pb-8 border-b border-border-soft title-stack">
+            <p className="eyebrow">— {post.category} · {post.readTime}</p>
+            <h1 className="display-page text-ink">
               {post.title}
             </h1>
             <p className="text-stone text-sm font-light">
@@ -260,17 +254,7 @@ export default function BlogArticle({ slug }) {
             </section>
           )}
 
-          <div className="pt-8 border-t border-border-soft flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <Link href="/book" className="tap-safe btn-primary">
-              Book Online <ArrowUpRight className="w-4 h-4" />
-            </Link>
-            <WaCta
-              href={WA_DEFAULT}
-              from="blog-article"
-              className="text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
-            >
-              Or WhatsApp us
-            </WaCta>
+          <div className="pt-8 border-t border-border-soft">
             <Link
               href="/blog"
               className="text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
@@ -297,6 +281,14 @@ export default function BlogArticle({ slug }) {
           })()}
         </div>
       </div>
+
+      <PageCloseCta
+        eyebrow="— From the chair · PECHS"
+        title="Book online in under a minute"
+        body={`${YEARS_ACTIVE}+ years in PECHS — live slots online, or WhatsApp if you prefer.`}
+        waHref={WA_DEFAULT}
+        waFrom="blog-article"
+      />
     </main>
   )
 }

@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { m } from 'framer-motion'
 import { AnimatedNumber } from '../../src/shared.jsx'
 import SalonLocalBlock from '../components/salon-local-block.jsx'
+import PageCloseCta from '../components/page-close-cta.jsx'
 import { SERVICES, YEARS_ACTIVE, MONTHLY_APPOINTMENTS } from '../../src/data.js'
 
 const CATEGORY_COUNT = Object.keys(SERVICES).length
@@ -19,10 +20,12 @@ export default function AboutClient() {
         <div className="section-shell">
           {/* CSS entrances — framer initial{opacity:0} left this hero blank until
               hydration (same LCP failure mode fixed on /services). */}
-          <p className="hero-fade-up eyebrow mb-3">— Est. 2008 · PECHS, Karachi</p>
-          <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
-            Our story
-          </h1>
+          <div className="title-stack">
+            <p className="hero-fade-up eyebrow">— Est. 2008 · PECHS, Karachi</p>
+            <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
+              Our story
+            </h1>
+          </div>
         </div>
       </section>
 
@@ -149,23 +152,12 @@ export default function AboutClient() {
         </m.div>
       </section>
 
-      <section className="bg-white py-16 md:py-20">
-        <m.div className="section-shell flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <m.h2 initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
-            className="section-title">
-            Come in and experience it yourself.
-          </m.h2>
-          <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}
-            className="flex flex-wrap items-center gap-4">
-            <Link href="/book" className="tap-safe btn-primary">
-              Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" />
-            </Link>
-            <Link href="/services" className="link-underline text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors">
-              Our Services
-            </Link>
-          </m.div>
-        </m.div>
-      </section>
+      <PageCloseCta
+        eyebrow="— Come experience it"
+        title="Book a visit at the PECHS studio"
+        body="Founder-led standards since 2008 — book online or WhatsApp when you are ready."
+        waFrom="about-close"
+      />
 
       <SalonLocalBlock />
     </main>

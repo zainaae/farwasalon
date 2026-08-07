@@ -8,6 +8,7 @@ import { Check, MapPin, Phone, Clock, Sparkles, MessageCircle, ChevronDown, X } 
 import { IgIcon } from '../../src/shared.jsx'
 import { useNextSlot } from '../../src/use-next-slot.js'
 import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track, PREFERRED_TIME_OPTIONS } from '../../src/data.js'
+import PageCloseCta from '../components/page-close-cta.jsx'
 
 export default function ContactClient() {
   const [name,    setName]    = useState('')
@@ -50,10 +51,12 @@ export default function ContactClient() {
 
       <section className="bg-white py-14 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <p className="hero-fade-up eyebrow mb-3">— Contact</p>
-          <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
-            Find us or ask us
-          </h1>
+          <div className="title-stack">
+            <p className="hero-fade-up eyebrow">— Contact</p>
+            <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
+              Find us or ask us
+            </h1>
+          </div>
           <div className="hero-fade-up mt-6 flex flex-wrap items-center gap-3 sm:gap-4" style={{ animationDelay: '0.2s' }}>
             <span className="inline-flex items-center gap-2 border border-border-soft px-3 py-2 text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)] text-stone">
               <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#6b9b5f]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
@@ -294,6 +297,14 @@ export default function ContactClient() {
 
         </div>
       </section>
+
+      <PageCloseCta
+        eyebrow="— Visit us in PECHS"
+        title="Book online in under a minute"
+        body="Prefer the form above? Send on WhatsApp. Or lock a live slot online — no prepayment."
+        waHref={WA_DEFAULT}
+        waFrom="contact-close"
+      />
     </main>
   )
 }
