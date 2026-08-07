@@ -460,7 +460,7 @@ function ProblemBand() {
               </p>
             </m.div>
 
-            <ol className="problem-list divide-y divide-white/12 border-y border-white/12" role="list">
+            <ol className="problem-list divide-y divide-white/[0.12] border-y border-white/[0.12]" role="list">
               {problems.map((p, i) => (
                 <m.li
                   key={p.num}
