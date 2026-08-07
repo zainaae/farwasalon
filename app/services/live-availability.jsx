@@ -106,7 +106,7 @@ export default function LiveAvailability({ compact = false }) {
       {free > 0 && (
         <Link
           href="/book"
-          className="tap-safe shrink-0 inline-flex items-center gap-1 text-ink text-[10px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] hover:text-stone transition-colors"
+          className="tap-safe shrink-0 hidden md:inline-flex items-center gap-1 text-ink text-[10px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] hover:text-stone transition-colors"
         >
           {CTA_PRIMARY_LABEL} <ArrowUpRight className="w-3 h-3" />
         </Link>
