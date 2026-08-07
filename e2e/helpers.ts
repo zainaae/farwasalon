@@ -143,27 +143,4 @@ export async function mockSubscribeApi(page: Page) {
   })
 }
 
-/** Open newsletter modal via engagement scroll (60% depth). */
-export async function openNewsletterModal(page: Page) {
-  await page.addInitScript(() => {
-    try {
-      localStorage.removeItem('farwa-newsletter-seen')
-    } catch {
-      // private mode
-    }
-  })
-  await page.goto('/')
-  // The modal is engagement-gated: it opens at 60% scroll depth. The scroll
-  // listener attaches after hydration, so keep nudging until it reacts.
-  // Accessible name comes from aria-labelledby → #newsletter-heading (h2).
-  const dialog = page.getByRole('dialog', { name: /tips from the chair|salon updates|seasonal tips/i })
-  for (let i = 0; i < 30; i++) {
-    if (await dialog.isVisible().catch(() => false)) break
-    await page.evaluate(() => {
-      window.scrollTo({ top: document.documentElement.scrollHeight * 0.85, behavior: 'instant' })
-      window.dispatchEvent(new Event('scroll'))
-    })
-    await page.waitForTimeout(250)
-  }
-  await expect(dialog).toBeVisible({ timeout: 5_000 })
-}
+/** Newsletter popup was removed — footer subscribe remains. */

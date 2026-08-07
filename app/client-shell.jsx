@@ -20,10 +20,6 @@ const SiteFooter = dynamic(() => import('./components/site-footer'), {
   loading: () => <div className="min-h-[28rem] bg-white" aria-hidden />,
 })
 
-const NewsletterModal = dynamic(() => import('./newsletter-modal'), {
-  ssr: false,
-})
-
 function ScrollProgress() {
   const barRef = useRef(null)
   const [ready, setReady] = useState(false)
@@ -150,18 +146,7 @@ export default function ClientShell({ children }) {
   const isHome = pathname === '/'
   const hideSticky = pathname.startsWith('/book')
   const useMobileCtaBar = shouldShowMobileCtaBar(pathname)
-  const [showNewsletter, setShowNewsletter] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
-
-  useEffect(() => {
-    const enable = () => setShowNewsletter(true)
-    if ('requestIdleCallback' in window) {
-      const id = requestIdleCallback(enable, { timeout: 2500 })
-      return () => cancelIdleCallback(id)
-    }
-    const t = setTimeout(enable, 1500)
-    return () => clearTimeout(t)
-  }, [])
 
   const stickyHidden = hideSticky || mobileNavOpen
 
@@ -182,7 +167,6 @@ export default function ClientShell({ children }) {
           ) : (
             <StickyWA hidden={stickyHidden} />
           )}
-          {showNewsletter ? <NewsletterModal /> : null}
       </MotionConfig>
     </LazyMotion>
   )
