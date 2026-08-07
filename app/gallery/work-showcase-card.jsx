@@ -8,7 +8,7 @@ export default function WorkShowcaseCard({ src, label, alt, video, index }) {
   return (
     <figure className="w-full max-w-md min-w-0 mx-auto">
       <div className="border border-accent-gold/50 p-2 sm:p-3 bg-white">
-        <div className="relative aspect-[4/5] overflow-hidden bg-mist">
+        <div className="relative aspect-[4/5] overflow-hidden bg-mist media-zoom">
           {video ? (
             <LazyVideo
               src={video}

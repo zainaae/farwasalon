@@ -66,7 +66,7 @@ function MenuRow({ cat }) {
          Explicitly placed rather than rendered twice: on small screens it sits
          under the tagline in column 2, at md it moves to column 3. */
       className="group grid grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] md:grid-cols-[4.5rem_minmax(0,1fr)_auto_auto] items-center gap-x-4 sm:gap-x-6 gap-y-1.5 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
-      <span className="row-span-2 md:row-span-1 relative block w-14 h-[4.2rem] sm:w-[4.5rem] sm:h-[5.4rem] shrink-0 border border-border-soft p-[3px] bg-white">
+      <span className="row-span-2 md:row-span-1 relative block w-14 h-[4.2rem] sm:w-[4.5rem] sm:h-[5.4rem] shrink-0 border border-border-soft p-[3px] bg-white media-zoom">
         <span className="relative block w-full h-full overflow-hidden">
           <Image
             src={meta.img}
@@ -75,7 +75,7 @@ function MenuRow({ cat }) {
             sizes="72px"
             quality={60}
             loading="lazy"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="object-cover"
           />
         </span>
       </span>
@@ -136,7 +136,7 @@ export default function ServicesClient() {
             Thirteen specialities, 100+ services in PECHS, Karachi — every starting price printed from Rs 100.
             Book online in under a minute, or message us on WhatsApp.
           </p>
-          <div className="hero-fade-up flex flex-wrap items-center gap-3" style={{ animationDelay: '0.3s' }}>
+          <div className="hero-fade-up cta-cluster" style={{ animationDelay: '0.3s' }}>
             <Link href="/book" className="tap-safe btn-primary !py-2.5 !px-5">
               Book online <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
@@ -180,9 +180,9 @@ export default function ServicesClient() {
         <div>
           {MENU_CHAPTERS.map(({ name, caption, cats }) => (
             <section key={name} aria-label={name}>
-              <div className="flex items-baseline gap-4 pt-10 pb-3 border-b border-plum first:pt-2">
-                <h2 className="section-title text-plum">{name}</h2>
-                <span className="eyebrow">{caption}</span>
+              <div className="chapter-rail">
+                <h2 className="section-title">{name}</h2>
+                <span className="eyebrow mb-0">{caption}</span>
               </div>
               {cats.map((cat) => <MenuRow key={cat} cat={cat} />)}
             </section>

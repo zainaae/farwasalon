@@ -535,7 +535,7 @@ function BookingStory() {
                 </Link>
                 {/* Mobile: show step image inline so sticky chapter still works without a second sticky fight. */}
                 <div
-                  className={`md:hidden mt-6 border border-border-soft bg-white p-1 shadow-card transition-opacity duration-500 ${
+                  className={`md:hidden mt-6 media-zoom border border-border-soft bg-white p-1 shadow-card transition-opacity duration-500 ${
                     active === i ? 'opacity-100' : 'opacity-45'
                   }`}
                 >
@@ -555,7 +555,9 @@ function BookingStory() {
           </div>
 
           <div className="hidden md:block sticky top-[calc(50vh-260px)] h-[520px]">
-            <div className="relative h-full border border-border-soft bg-white p-1 shadow-card overflow-hidden">
+            <div className={`booking-story-frame relative h-full border border-border-soft bg-white p-1 overflow-hidden ${
+              active >= 0 ? 'booking-story-frame--live shadow-card' : 'shadow-card'
+            }`}>
               {BOOKING_STEPS.map((s, i) => (
                 <Image
                   key={s.n}
@@ -952,7 +954,7 @@ function TestimonialsPreview({ placesEnabled }) {
           </p>
           <div className="reviews-cta-actions flex flex-col min-[480px]:flex-row sm:flex-row items-stretch gap-3 w-full lg:w-auto lg:max-w-xl">
             <a href={GOOGLE_REVIEW_LINK} target="_blank" rel="noreferrer"
-              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-5 sm:px-6 py-3 hover:bg-stone transition-colors duration-300">
+              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-5 sm:px-6 py-3 hover:bg-plum transition-colors duration-300">
               Write a Google review <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
             </a>
             <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
@@ -967,6 +969,8 @@ function TestimonialsPreview({ placesEnabled }) {
 }
 
 function CtaBand() {
+  /* Same plum close language as PageCloseCta — home keeps a quieter tertiary
+     link row under the Book + WhatsApp pair. */
   return (
     <section className="cv-auto cta-band grain-on-dark bg-plum-deep py-16 sm:py-20 md:py-[5rem] px-4 sm:px-5 md:px-10 border-t border-white/10">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center text-center gap-8">
@@ -975,7 +979,7 @@ function CtaBand() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="w-full max-w-2xl"
+          className="w-full max-w-2xl title-stack"
         >
           <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-4">&mdash; Visit us in PECHS</p>
           <h2
@@ -993,7 +997,7 @@ function CtaBand() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full max-w-xl"
+          className="cta-cluster justify-center w-full max-w-xl"
         >
           <Link
             href="/book"
@@ -1004,7 +1008,7 @@ function CtaBand() {
           <WaCta
             href={`https://wa.me/${WA_NUMBER}`}
             from="cta-band"
-            className="tap-safe inline-flex items-center justify-center gap-2 min-h-14 px-8 py-3.5 text-[13px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] text-white border border-white/70 hover:bg-white/10 transition-colors w-full sm:w-auto"
+            className="btn-ghost-on-dark tap-safe w-full sm:w-auto"
           >
             WhatsApp us
           </WaCta>
@@ -1021,12 +1025,6 @@ function CtaBand() {
             className="tap-safe link-underline text-white/55 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
           >
             Bridal
-          </Link>
-          <Link
-            href="/beauty-salon-karachi"
-            className="tap-safe link-underline text-white/55 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
-          >
-            Beauty salon Karachi
           </Link>
         </div>
       </div>
@@ -1046,7 +1044,7 @@ function FounderNote() {
       >
         <p className="eyebrow mb-6">— The House</p>
         <blockquote
-          className="font-[family-name:var(--font-syne)] italic text-ink text-balance leading-[1.3]"
+          className="font-[family-name:var(--font-syne)] font-medium text-ink text-balance leading-[1.3]"
           style={{ fontSize: 'clamp(1.35rem, 3.6vw, 2.25rem)' }}>
           &ldquo;Trends visit Karachi every season. Grace stays. I opened this
           salon in 2008 to give every woman on this street both.&rdquo;
