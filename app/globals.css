@@ -116,15 +116,17 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
+    /* Quieter luxury: half the chroma of the first living wash — atmosphere,
+       not a berry spotlight behind every mist gap. */
     background:
-      radial-gradient(ellipse 70% 55% at 12% 18%, rgba(158, 42, 82, 0.09), transparent 62%),
-      radial-gradient(ellipse 55% 45% at 88% 12%, rgba(110, 32, 68, 0.07), transparent 58%),
-      radial-gradient(ellipse 50% 40% at 72% 88%, rgba(63, 22, 49, 0.06), transparent 60%),
-      radial-gradient(ellipse 40% 35% at 28% 78%, rgba(201, 169, 138, 0.07), transparent 65%),
+      radial-gradient(ellipse 70% 55% at 12% 18%, rgba(158, 42, 82, 0.045), transparent 62%),
+      radial-gradient(ellipse 55% 45% at 88% 12%, rgba(110, 32, 68, 0.035), transparent 58%),
+      radial-gradient(ellipse 50% 40% at 72% 88%, rgba(63, 22, 49, 0.03), transparent 60%),
+      radial-gradient(ellipse 40% 35% at 28% 78%, rgba(201, 169, 138, 0.05), transparent 65%),
       linear-gradient(165deg, #ffffff 0%, var(--mist) 48%, #f3eee8 100%);
     background-repeat: no-repeat;
     transform: translateZ(0);
-    animation: living-drift 36s ease-in-out infinite alternate;
+    animation: living-drift 42s ease-in-out infinite alternate;
     will-change: transform;
   }
   body > * {
@@ -570,9 +572,9 @@
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(ellipse 80% 120% at 12% 0%, rgba(158, 42, 82, 0.32), transparent 55%),
-      radial-gradient(ellipse 50% 60% at 90% 80%, rgba(110, 32, 68, 0.22), transparent 50%);
-    animation: living-bloom 26s ease-in-out infinite alternate;
+      radial-gradient(ellipse 80% 120% at 12% 0%, rgba(158, 42, 82, 0.18), transparent 55%),
+      radial-gradient(ellipse 50% 60% at 90% 80%, rgba(110, 32, 68, 0.12), transparent 50%);
+    animation: living-bloom 32s ease-in-out infinite alternate;
     will-change: transform, opacity;
   }
   .reviews-featured > * {
@@ -841,12 +843,13 @@
     width: 100%;
     padding: 1rem;
     text-align: left;
+    background: rgba(255, 255, 255, 0.55);
     border: 1px solid var(--border-soft);
     transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
   }
   .book-category-btn:hover {
-    border-color: var(--ink);
-    background: var(--mist);
+    border-color: color-mix(in srgb, var(--plum) 35%, var(--border-soft));
+    background: #fff;
     box-shadow: var(--shadow-soft);
   }
   .book-slot {
@@ -858,13 +861,18 @@
     transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
   }
   .book-slot-available:hover {
-    border-color: var(--ink);
+    border-color: color-mix(in srgb, var(--plum) 40%, var(--border-soft));
     background: var(--mist);
   }
   .book-slot-selected {
-    border-color: var(--ink);
-    background: var(--ink);
+    border-color: var(--plum-deep);
+    background: var(--plum-deep);
     color: #fff;
+  }
+  /* Booking sticky footer — mist ground so it doesn't flash a white slab. */
+  .book-step-footer {
+    background: color-mix(in srgb, var(--mist) 92%, #fff);
+    border-top: 1px solid var(--border-soft);
   }
 }
 
@@ -1392,18 +1400,19 @@ button.tap-safe,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.625rem;
-  min-height: 56px;
-  padding: 1.2rem 2.5rem;
+  gap: 0.5rem;
+  /* Quieter luxury: one step down from carnival 56px / 14px / lift-2. */
+  min-height: 48px;
+  padding: 0.95rem 1.85rem;
   font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #fff;
   background: var(--ink);
   border: 1px solid var(--ink);
-  box-shadow: inset 0 -2px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: none;
   text-decoration: none;
   transition:
     background-color var(--dur-med) var(--ease-out),
@@ -1416,14 +1425,12 @@ button.tap-safe,
   background: var(--plum);
   color: #fff;
   border-color: var(--plum);
-  transform: translateY(-2px);
-  box-shadow:
-    inset 0 -2px 0 rgba(255, 255, 255, 0.1),
-    var(--shadow-plum);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-plum);
 }
 .btn-loud:active {
-  transform: translateY(1px) scale(0.985);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.18);
+  transform: translateY(0) scale(0.985);
+  box-shadow: none;
 }
 .btn-loud:focus-visible {
   outline: 2px solid var(--berry);
@@ -1437,9 +1444,7 @@ button.tap-safe,
   color: var(--ink);
   background: #fff;
   border-color: #fff;
-  box-shadow:
-    inset 0 -2px 0 rgba(13, 13, 13, 0.06),
-    0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: none;
 }
 .btn-loud--light::before {
   content: '';
@@ -1463,10 +1468,8 @@ button.tap-safe,
   background: transparent;
   color: var(--plum-deep);
   border-color: var(--nude);
-  transform: translateY(-2px);
-  box-shadow:
-    inset 0 -2px 0 rgba(63, 22, 49, 0.08),
-    var(--shadow-plum);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-soft);
 }
 .btn-loud--light:hover::before {
   transform: scale(48);
@@ -1484,10 +1487,8 @@ button.tap-safe,
   background: var(--plum);
   border-color: var(--plum);
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow:
-    inset 0 -2px 0 rgba(255, 255, 255, 0.1),
-    var(--shadow-plum);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-plum);
 }
 
 /* Secondary close on plum/ink finales — same language as PageCloseCta WhatsApp. */
@@ -1496,16 +1497,16 @@ button.tap-safe,
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  min-height: 56px;
-  padding: 0.875rem 2rem;
+  min-height: 48px;
+  padding: 0.875rem 1.75rem;
   font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #fff;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.55);
   text-decoration: none;
   transition:
     background-color var(--dur-med) var(--ease-out),
@@ -1619,12 +1620,12 @@ button.tap-safe,
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 55% 45% at 18% 28%, rgba(158, 42, 82, 0.13), transparent 68%),
-    radial-gradient(ellipse 50% 40% at 86% 18%, rgba(110, 32, 68, 0.10), transparent 65%),
-    radial-gradient(ellipse 45% 50% at 58% 92%, rgba(63, 22, 49, 0.08), transparent 62%),
-    radial-gradient(ellipse 38% 32% at 32% 72%, rgba(201, 169, 138, 0.10), transparent 70%);
+    radial-gradient(ellipse 55% 45% at 18% 28%, rgba(158, 42, 82, 0.06), transparent 68%),
+    radial-gradient(ellipse 50% 40% at 86% 18%, rgba(110, 32, 68, 0.05), transparent 65%),
+    radial-gradient(ellipse 45% 50% at 58% 92%, rgba(63, 22, 49, 0.04), transparent 62%),
+    radial-gradient(ellipse 38% 32% at 32% 72%, rgba(201, 169, 138, 0.06), transparent 70%);
   background-repeat: no-repeat;
-  animation: living-drift 28s ease-in-out infinite alternate;
+  animation: living-drift 36s ease-in-out infinite alternate;
   will-change: transform;
 }
 .living-band > * {
@@ -1647,11 +1648,11 @@ button.tap-safe,
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 70% 90% at 100% 0%, rgba(158, 42, 82, 0.38), transparent 55%),
-    radial-gradient(ellipse 55% 70% at 0% 100%, rgba(110, 32, 68, 0.28), transparent 52%),
-    radial-gradient(ellipse 40% 40% at 48% 55%, rgba(201, 169, 138, 0.10), transparent 60%);
+    radial-gradient(ellipse 70% 90% at 100% 0%, rgba(158, 42, 82, 0.22), transparent 55%),
+    radial-gradient(ellipse 55% 70% at 0% 100%, rgba(110, 32, 68, 0.16), transparent 52%),
+    radial-gradient(ellipse 40% 40% at 48% 55%, rgba(201, 169, 138, 0.06), transparent 60%);
   background-repeat: no-repeat;
-  animation: living-bloom 22s ease-in-out infinite alternate;
+  animation: living-bloom 28s ease-in-out infinite alternate;
   will-change: transform, opacity;
 }
 .living-band--deep > * {
@@ -1665,9 +1666,9 @@ button.tap-safe,
 }
 .living-band--soft::before {
   background:
-    radial-gradient(ellipse 60% 50% at 8% 0%, rgba(158, 42, 82, 0.07), transparent 60%),
-    radial-gradient(ellipse 50% 45% at 96% 8%, rgba(110, 32, 68, 0.05), transparent 58%),
-    radial-gradient(ellipse 55% 40% at 50% 100%, rgba(232, 221, 213, 0.55), transparent 70%);
+    radial-gradient(ellipse 60% 50% at 8% 0%, rgba(158, 42, 82, 0.04), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 96% 8%, rgba(110, 32, 68, 0.03), transparent 58%),
+    radial-gradient(ellipse 55% 40% at 50% 100%, rgba(232, 221, 213, 0.4), transparent 70%);
 }
 
 /* Reviews strip edge fades — 21st Testimonials Marquee pattern. */
@@ -1760,12 +1761,12 @@ button.tap-safe,
   transform: translate(-50%, -50%) rotate(0deg);
 }
 .faq-item-num {
-  font-family: var(--font-unbounded), system-ui, sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: var(--plum);
-  opacity: 0.7;
+  opacity: 0.75;
   font-variant-numeric: tabular-nums;
   flex-shrink: 0;
   min-width: 1.5rem;

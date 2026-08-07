@@ -1,14 +1,13 @@
 'use client'
 
+import Link from 'next/link'
 import ArrowUpRight from '../components/icon-sprite.jsx'
-import { SmoothyGallery, useBooking } from '../../src/shared.jsx'
+import { SmoothyGallery } from '../../src/shared.jsx'
 import { WA_DEFAULT, GALLERY_PHOTOS, GALLERY_SHOWCASE_ITEMS } from '../../src/data.js'
 import WorkShowcaseCard from './work-showcase-card.jsx'
 import PageCloseCta from '../components/page-close-cta.jsx'
 
 export default function GalleryClient() {
-  const booking = useBooking()
-
   return (
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
 
@@ -28,14 +27,13 @@ export default function GalleryClient() {
               below.
             </p>
           </div>
-          <button
-            type="button"
-            onClick={() => booking.open()}
+          <Link
+            href="/book"
             className="hero-fade-up tap-safe btn-loud shrink-0 self-start !min-h-12 !text-[12px]"
             style={{ animationDelay: '0.2s' }}
           >
             Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -83,9 +81,9 @@ export default function GalleryClient() {
         eyebrow="— Ready when you are"
         title="Book a visit at the PECHS studio"
         body="See the work in person — live slots online, or WhatsApp if you prefer."
+        bookHref="/book"
         waHref={WA_DEFAULT}
         waFrom="gallery"
-        onBookClick={() => booking.open()}
       />
     </main>
   )

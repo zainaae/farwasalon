@@ -30,7 +30,7 @@ export default function PageCloseCta({
     >
       <div className="max-w-screen-xl mx-auto grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
         <div className="lg:col-span-7">
-          <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-4">
+          <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.22em] uppercase font-[family-name:var(--font-inter)] mb-4">
             {eyebrow}
           </p>
           <h2

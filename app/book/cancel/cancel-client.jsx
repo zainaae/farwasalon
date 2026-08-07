@@ -155,7 +155,7 @@ function CancelContent() {
   if (details === null) {
     return (
       <div className="w-full max-w-lg text-center" aria-live="polite">
-        <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+        <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-2xl text-ink tracking-tight mb-2">
           Cancel appointment
         </h1>
         <p className="text-body text-sm">Loading your booking…</p>
@@ -169,7 +169,7 @@ function CancelContent() {
         <div className="w-16 h-16 mx-auto mb-6 bg-[#e8f5e3] flex items-center justify-center rounded-full">
           <Check className="w-8 h-8 text-[#4a9b3f]" strokeWidth={2.5} />
         </div>
-        <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+        <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-2xl text-ink tracking-tight mb-2">
           Already cancelled
         </h1>
         <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-8">
@@ -188,7 +188,7 @@ function CancelContent() {
         <div className="w-16 h-16 mx-auto mb-6 bg-mist flex items-center justify-center rounded-full">
           <AlertTriangle className="w-7 h-7 text-stone" strokeWidth={2} />
         </div>
-        <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+        <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-2xl text-ink tracking-tight mb-2">
           Invalid cancellation link
         </h1>
         <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-4">
@@ -220,7 +220,7 @@ function CancelContent() {
         <div className="w-16 h-16 mx-auto mb-6 bg-[#e8f5e3] flex items-center justify-center rounded-full">
           <Check className="w-8 h-8 text-[#4a9b3f]" strokeWidth={2.5} />
         </div>
-        <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
+        <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-2xl md:text-3xl text-ink tracking-tight mb-2">
           Cancelled
         </h1>
         <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-4">
@@ -263,7 +263,7 @@ function CancelContent() {
         <AlertTriangle className="w-7 h-7 text-[#c44a4a]" strokeWidth={2} />
       </div>
 
-      <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
+      <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-2xl md:text-3xl text-ink tracking-tight mb-2">
         Cancel appointment?
       </h1>
       <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-8">
@@ -348,7 +348,7 @@ export default function CancelClient() {
         <Suspense
           fallback={
             <div className="w-full max-w-lg text-center">
-              <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+              <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-2xl text-ink tracking-tight mb-2">
                 Cancel appointment
               </h1>
               <p className="text-stone text-sm font-[family-name:var(--font-inter)]">Loading…</p>

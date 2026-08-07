@@ -177,7 +177,7 @@ function ConfirmationContent() {
       <main id="main" className="page-content">
         <div className="section-shell section-pad flex items-center justify-center min-h-screen">
           <div className="max-w-md text-center" aria-live="polite">
-            <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+            <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-2xl text-ink tracking-tight mb-2">
               Booking confirmed
             </h1>
             <p className="text-body">Loading confirmation…</p>
@@ -192,7 +192,7 @@ function ConfirmationContent() {
       <main id="main" className="page-content">
         <m.div className="section-shell section-pad min-h-screen flex items-center justify-center">
           <div className="max-w-md text-center">
-            <h1 className="font-[family-name:var(--font-syne)] font-bold text-xl text-ink uppercase mb-3">Invalid confirmation link</h1>
+            <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-xl text-ink mb-3">Invalid confirmation link</h1>
             <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-6">
               This page needs a valid booking reference. If you booked on this phone, open{' '}
               <Link href="/book" className="underline hover:text-ink">Book</Link>
@@ -212,7 +212,7 @@ function ConfirmationContent() {
       <main id="main" className="page-content">
         <m.div className="section-shell section-pad min-h-screen flex items-start justify-center">
           <div className="w-full max-w-lg text-center">
-            <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+            <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-2xl text-ink tracking-tight mb-2">
               This booking was cancelled
             </h1>
             <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-8">
@@ -241,7 +241,7 @@ function ConfirmationContent() {
           </div>
 
           <div role="status" aria-live="polite">
-            <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl md:text-3xl text-ink uppercase tracking-tight mb-2">
+            <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-2xl md:text-3xl text-ink tracking-tight mb-2">
               You&apos;re set
             </h1>
             <p className={`text-stone text-sm font-[family-name:var(--font-inter)] font-light ${waHint ? 'mb-2' : 'mb-6'}`}>
@@ -384,7 +384,7 @@ export default function ConfirmationClient() {
       <main id="main" className="page-content">
         <div className="section-shell section-pad flex items-center justify-center min-h-screen">
           <div className="max-w-md text-center">
-            <h1 className="font-[family-name:var(--font-syne)] font-bold text-2xl text-ink uppercase tracking-tight mb-2">
+            <h1 className="font-[family-name:var(--font-fraunces)] font-bold text-2xl text-ink tracking-tight mb-2">
               Booking confirmed
             </h1>
             <p className="text-body">Loading confirmation…</p>
