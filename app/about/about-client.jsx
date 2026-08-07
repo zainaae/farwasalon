@@ -152,14 +152,14 @@ export default function AboutClient() {
         </m.div>
       </section>
 
+      <SalonLocalBlock />
+
       <PageCloseCta
         eyebrow="— Come experience it"
         title="Book a visit at the PECHS studio"
         body="Founder-led standards since 2008 — book online or WhatsApp when you are ready."
         waFrom="about-close"
       />
-
-      <SalonLocalBlock />
     </main>
   )
 }

@@ -56,7 +56,7 @@ export default function PricesPage() {
     <main id="main" className="page-content">
       {faqSchema && <JsonLd data={faqSchema} />}
       <JsonLd data={buildPriceListSchema()} />
-      <div className="section-shell section-pad min-h-0">
+      <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
         <div className="title-stack mb-3 max-w-2xl">
           <p className="eyebrow">— Price list · updated {UPDATED}</p>
           <h1 className="display-page text-ink">
@@ -79,7 +79,7 @@ export default function PricesPage() {
           a floor and it is confirmed with you before anything starts.
         </p>
         <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-2xl mb-6 leading-relaxed">
-          {YEARS_ACTIVE}+ years · women-only studio · {rating.ratingValue}★ Google · cash, JazzCash, EasyPaisa · Mon–Sat 11–7
+          {YEARS_ACTIVE}+ years · women-only studio · {rating.ratingValue}★ · {rating.reviewCount} Google reviews · cash, JazzCash, EasyPaisa · Mon–Sat 11–7
         </p>
 
         <div className="cta-cluster mb-7">
@@ -207,8 +207,6 @@ export default function PricesPage() {
           </dl>
         </section>
 
-        <PageCloseCta waFrom="prices-footer" />
-
         <section className="mt-24 md:mt-30 pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
           <h2 id="prices-faq-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-6">
             Price questions
@@ -243,6 +241,8 @@ export default function PricesPage() {
           <Link href="/beauty-salon-karachi" className="link-underline hover:text-ink font-medium">Beauty salon Karachi</Link>
         </p>
       </div>
+
+      <PageCloseCta waFrom="prices-footer" />
     </main>
   )
 }

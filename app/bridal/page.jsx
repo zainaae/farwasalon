@@ -72,59 +72,73 @@ export default function BridalLandingPage() {
       />
       {faqSchema && <JsonLd data={faqSchema} />}
       <main id="main" className="page-content">
-        <div className="section-shell section-pad min-h-0">
-          <div className="title-stack mb-10 max-w-2xl">
-            <p className="eyebrow">— Bridal · from Rs 8,000</p>
-            <h1 id="bridal-headline" className="display-page text-ink">
-              Bridal makeup in PECHS, Karachi
-            </h1>
-            <p id="bridal-lede" className="text-body md:text-lg leading-relaxed">
-              Farwa in PECHS has styled weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000,
-              Engagement Rs 12,000, Full Bridal Package Rs 25,000.
-            </p>
-          </div>
+        {/* Full-bleed bridal plane — title-stack sits on the media, not above a cropped inset. */}
+        <section className="relative w-full min-h-[min(88svh,820px)] max-h-[920px] overflow-hidden bg-[#0d0609]">
+          <Image
+            src="/bridal.jpg"
+            alt="Bridal makeup at Farwa Beauty Salon, PECHS Karachi"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[50%_28%] md:object-[55%_30%] pointer-events-none"
+          />
+          <div
+            className="absolute inset-0 z-[1]"
+            style={{
+              background:
+                'linear-gradient(to top, rgba(13,6,9,0.90) 0%, rgba(13,6,9,0.52) 34%, rgba(13,6,9,0.18) 62%, rgba(13,6,9,0.28) 100%), ' +
+                'linear-gradient(to right, rgba(13,6,9,0.55) 0%, rgba(13,6,9,0.28) 36%, rgba(13,6,9,0.06) 68%, rgba(13,6,9,0) 88%)',
+            }}
+          />
+          <div
+            className="absolute inset-0 pointer-events-none z-[2]"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+              backgroundSize: '180px',
+              opacity: 0.04,
+              mixBlendMode: 'overlay',
+            }}
+          />
+          <div className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-5 md:px-10 pb-10 sm:pb-12 md:pb-14 pt-24">
+            <div className="max-w-screen-xl mx-auto w-full min-w-0">
+              <div className="title-stack mb-6 max-w-2xl">
+                <p className="eyebrow eyebrow--on-dark">— Bridal · from Rs 8,000</p>
+                <h1 id="bridal-headline" className="display-page text-white">
+                  Bridal makeup in PECHS, Karachi
+                </h1>
+                <p id="bridal-lede" className="text-white/80 md:text-lg leading-relaxed font-[family-name:var(--font-inter)] font-light">
+                  Farwa in PECHS has styled weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000,
+                  Engagement Rs 12,000, Full Bridal Package Rs 25,000.
+                </p>
+              </div>
 
-          <div className="cta-cluster mb-4">
-            <Link
-              href={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
-              className="tap-safe btn-primary w-full sm:w-auto justify-center"
-            >
-              Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
-            </Link>
-            <Link href="/prices" className="tap-safe btn-secondary w-full sm:w-auto justify-center">
-              Full price list
-            </Link>
-          </div>
-          <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-[family-name:var(--font-inter)] mb-14">
-            <WaCta href={WA_DEFAULT} from="bridal-inline" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
-              WhatsApp wedding plan
-            </WaCta>
-            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
-              Directions
-            </a>
-          </p>
-
-          <figure className="flow-loose">
-            <div className="relative aspect-[16/10] md:aspect-[2/1] overflow-hidden bg-mist border border-border-soft">
-              <Image
-                src="/bridal.jpg"
-                alt="Bridal makeup at Farwa Beauty Salon, PECHS Karachi"
-                fill
-                priority
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 768px"
-              />
+              <div className="cta-cluster mb-4">
+                <Link
+                  href={trialServiceId ? `/book?serviceId=${trialServiceId}` : '/book?category=Bridal'}
+                  className="tap-safe inline-flex items-center justify-center gap-2 bg-white text-ink text-[12px] md:text-[13px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-7 md:px-8 py-3.5 hover:bg-nude active:scale-[0.98] transition-colors w-full sm:w-auto"
+                >
+                  Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/prices"
+                  className="tap-safe inline-flex items-center justify-center gap-2 border border-white/70 text-white text-[12px] md:text-[13px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-7 md:px-8 py-3.5 hover:bg-white/10 transition-colors w-full sm:w-auto"
+                >
+                  Full price list
+                </Link>
+              </div>
+              <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-[family-name:var(--font-inter)]">
+                <WaCta href={WA_DEFAULT} from="bridal-inline" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-white/75 hover:text-white">
+                  WhatsApp wedding plan
+                </WaCta>
+                <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-white/75 hover:text-white">
+                  Directions
+                </a>
+              </p>
             </div>
-            <figcaption className="mt-4 max-w-xl">
-              <p className="font-[family-name:var(--font-unbounded)] font-bold text-ink text-lg sm:text-xl leading-[1.05] tracking-tight">
-                From the chair
-              </p>
-              <p className="mt-1.5 text-stone text-xs font-[family-name:var(--font-inter)] font-light">
-                Bridal work at the PECHS studio.
-              </p>
-            </figcaption>
-          </figure>
+          </div>
+        </section>
 
+        <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
           <section className="mb-14" aria-labelledby="event-taxonomy-heading">
             <h2 id="event-taxonomy-heading" className="section-title mb-3">
               Event looks → Farwa packages
