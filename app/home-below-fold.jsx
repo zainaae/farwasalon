@@ -290,7 +290,7 @@ function FeaturedServices() {
                     onMouseLeave={() => setHovered(null)}
                     className="group flex items-center justify-between py-4 md:py-5 gap-4">
                     <div className="flex items-center gap-4 min-w-0">
-                      <span className="font-[family-name:var(--font-unbounded)] text-[10px] text-stone shrink-0 w-5 tabular-nums">
+                      <span className="font-[family-name:var(--font-fraunces)] text-[10px] text-stone shrink-0 w-5 tabular-nums">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="min-w-0">
@@ -366,7 +366,7 @@ function TrustPillars() {
               transition={{ delay: i * 0.1, duration: 0.65 }}
               className="border-t border-plum/25 pt-6 md:pt-7"
             >
-              <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-plum mb-3.5">{p.num}</p>
+              <p className="font-[family-name:var(--font-fraunces)] text-[10px] text-plum mb-3.5">{p.num}</p>
               <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-[17px] text-ink mb-2.5 leading-snug">
                 {p.title}
               </h3>
@@ -818,7 +818,7 @@ function CtaBand() {
           >
             <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-4">&mdash; Visit us in PECHS</p>
             <h2
-              className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.12] text-balance"
+              className="font-[family-name:var(--font-fraunces)] font-bold text-white leading-[1.12] text-balance"
               style={{ fontSize: 'clamp(1.9rem, 5vw + 0.4rem, 3.5rem)', letterSpacing: '-0.02em', maxWidth: '14ch' }}
             >
               Book online in under a minute

@@ -39,7 +39,7 @@ export default function AboutClient() {
               { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-US')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
             ].map(({ display, final, label }) => (
               <div key={label} className="min-w-0">
-                <p className="font-[family-name:var(--font-unbounded)] font-bold text-2xl md:text-3xl text-ink mb-1">
+                <p className="font-[family-name:var(--font-fraunces)] font-bold text-2xl md:text-3xl text-ink mb-1">
                   <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
                 </p>
                 <p className="text-body text-[11px]">{label}</p>
@@ -77,7 +77,7 @@ export default function AboutClient() {
                       {i < 7 && <div className="w-px h-10 bg-border-soft mt-1" />}
                     </div>
                     <div className="pb-2">
-                      <p className="font-[family-name:var(--font-unbounded)] font-bold text-xs text-ink mb-0.5">{milestone.year}</p>
+                      <p className="font-[family-name:var(--font-fraunces)] font-bold text-xs text-ink mb-0.5">{milestone.year}</p>
                       <p className="text-body text-sm">{milestone.text}</p>
                     </div>
                   </m.div>
@@ -143,7 +143,7 @@ export default function AboutClient() {
             ].map((p, i) => (
               <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
                 className="border-t border-white/10 pt-7">
-                <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-mist/80 mb-4">{p.num}</p>
+                <p className="font-[family-name:var(--font-fraunces)] text-[10px] text-mist/80 mb-4">{p.num}</p>
                 <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
                 <p className="text-mist/80 text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">{p.desc}</p>
               </m.div>

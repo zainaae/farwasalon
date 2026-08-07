@@ -54,7 +54,7 @@ export default function DealStrip({ from = 'home' } = {}) {
               <p className="mb-1 font-[family-name:var(--font-inter)] text-[10px] font-semibold uppercase tracking-[0.2em] text-[color:var(--azadi-green)]">
                 {live ? `Now on · ${range}` : `Starts 5 August · ${range}`}
               </p>
-              <p className="font-[family-name:var(--font-unbounded)] text-[15px] font-bold leading-snug text-[color:var(--azadi-deep)] md:text-base">
+              <p className="font-[family-name:var(--font-fraunces)] text-[15px] font-bold leading-snug text-[color:var(--azadi-deep)] md:text-base">
                 Freedom Deal — 14% off when your visit hits Rs 1,400
               </p>
             </div>

@@ -56,7 +56,7 @@ export default function ProofStrip() {
           {items.map(({ key, lead, label, href, ariaLabel }, i) => {
             const body = (
               <>
-                <span className="font-[family-name:var(--font-unbounded)] font-bold text-white text-[15px] md:text-base leading-none tabular-nums">
+                <span className="font-[family-name:var(--font-fraunces)] font-bold text-white text-[15px] md:text-base leading-none tabular-nums">
                   {lead}
                 </span>
                 {label ? (

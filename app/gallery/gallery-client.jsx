@@ -18,7 +18,7 @@ export default function GalleryClient() {
             {/* CSS entrances — framer initial{opacity:0} + overflow-hidden clipped
                 "DO" until hydrate; same LCP fix pattern as /services. */}
             <p className="hero-fade-up eyebrow text-plum">— Gallery</p>
-            {/* No overflow-hidden — it clipped Unbounded descenders on "DO". */}
+            {/* No overflow-hidden — it clipped display descenders on "DO". */}
             <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
               What we do
             </h1>

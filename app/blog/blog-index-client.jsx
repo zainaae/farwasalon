@@ -208,7 +208,7 @@ export default function BlogIndexClient({ posts }) {
                 — PECHS studio
               </p>
               <p
-                className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-snug mb-3"
+                className="font-[family-name:var(--font-fraunces)] font-bold text-white leading-snug mb-3"
                 style={{ fontSize: 'clamp(1.15rem, 1.6vw, 1.45rem)', letterSpacing: '-0.02em' }}
               >
                 Ready to book from a guide?

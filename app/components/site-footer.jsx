@@ -42,7 +42,7 @@ export default function SiteFooter() {
                   e.currentTarget.nextSibling.style.display = 'block'
                 }}
               />
-              <span style={{ display: 'none' }} className="font-[family-name:var(--font-unbounded)] font-bold text-sm text-ink">
+              <span style={{ display: 'none' }} className="font-[family-name:var(--font-fraunces)] font-bold text-sm text-ink">
                 FARWA
               </span>
             </Link>
