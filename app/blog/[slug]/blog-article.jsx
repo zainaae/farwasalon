@@ -217,8 +217,8 @@ export default function BlogArticle({ slug }) {
 
           <div className="mt-10 pt-8 border-t border-border-soft">
             <div className="flex items-start gap-4 mb-8">
-              <div className="w-12 h-12 rounded-full bg-mist flex items-center justify-center flex-shrink-0">
-                <span className="text-ink font-[family-name:var(--font-syne)] font-bold text-lg">R</span>
+              <div className="w-12 h-12 shrink-0 border border-border-soft bg-mist flex items-center justify-center">
+                <span className="text-plum font-[family-name:var(--font-syne)] font-bold text-lg">R</span>
               </div>
               <div>
                 <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink">

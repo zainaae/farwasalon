@@ -57,8 +57,8 @@ export default function PricesPage() {
       {faqSchema && <JsonLd data={faqSchema} />}
       <JsonLd data={buildPriceListSchema()} />
       <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
-        <div className="title-stack mb-3 max-w-2xl">
-          <p className="eyebrow">— Price list · updated {UPDATED}</p>
+          <div className="title-stack mb-3 max-w-2xl border-l-2 border-plum pl-5 lg:pl-6">
+          <p className="eyebrow text-plum">— Price list · updated {UPDATED}</p>
           <h1 className="display-page text-ink">
             Salon price list — from Rs 100
           </h1>
@@ -83,7 +83,7 @@ export default function PricesPage() {
         </p>
 
         <div className="cta-cluster mb-7">
-          <Link href="/book" className="tap-safe btn-primary w-full sm:w-auto justify-center">
+          <Link href="/book" className="tap-safe btn-loud w-full sm:w-auto justify-center">
             Book online <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
           <WaCta href="https://wa.me/923222782254" from="prices-quote"
