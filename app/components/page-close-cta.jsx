@@ -26,11 +26,7 @@ export default function PageCloseCta({
 
   return (
     <section
-      className="cv-auto grain-on-dark border-t border-white/10 py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10"
-      style={{
-        background:
-          'radial-gradient(70% 100% at 100% 0%, rgba(158,42,82,0.28), transparent 55%), linear-gradient(145deg, #4a1a39 0%, var(--plum-deep) 45%, #2a0f21 100%)',
-      }}
+      className="cv-auto living-band--deep grain-on-dark border-t border-white/10 py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10"
     >
       <div className="max-w-screen-xl mx-auto grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
         <div className="lg:col-span-7">

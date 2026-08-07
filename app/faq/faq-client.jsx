@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import { m } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
 import { CTA_PRIMARY_LABEL } from '../../src/shared.jsx'
 import { FAQ_GROUPS } from '../../src/faq-data.js'
 import { WA_DEFAULT } from '../../src/data.js'
@@ -10,6 +9,7 @@ import PageCloseCta from '../components/page-close-cta.jsx'
 
 function FaqItem({ faq, index }) {
   const [open, setOpen] = useState(false)
+  const num = String(index + 1).padStart(2, '0')
   return (
     <m.div
       initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }}
@@ -19,16 +19,17 @@ function FaqItem({ faq, index }) {
       <button
         type="button"
         onClick={() => setOpen(o => !o)}
-        className="tap-safe w-full flex items-center justify-between gap-4 min-h-[44px] py-5 text-left"
+        className="faq-item-trigger tap-safe w-full flex items-center gap-3 sm:gap-4 min-h-[44px] py-5 text-left"
         aria-expanded={open}
         aria-controls={`faq-panel-${index}`}
         aria-label={faq.q}
       >
-        <span className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink leading-snug">{faq.q}</span>
-        <ChevronDown className={`w-4 h-4 text-stone shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
+        <span className="faq-item-num" aria-hidden="true">{num}</span>
+        <span className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink leading-snug flex-1 min-w-0">{faq.q}</span>
+        <span className="faq-item-icon" aria-hidden="true" />
       </button>
       <div id={`faq-panel-${index}`} role="region" className={`overflow-hidden transition-[max-height,padding,margin] duration-200 ${open ? 'max-h-[28rem] pb-5 -mt-1' : 'max-h-0'}`}>
-        <p className="text-body text-sm">{faq.a}</p>
+        <p className="text-body text-sm pl-8 sm:pl-10">{faq.a}</p>
       </div>
     </m.div>
   )
@@ -64,7 +65,7 @@ export default function FaqClient() {
           --stone (6.18:1 on white, ~5.9:1 here), the questions are --ink. The
           one token that would have failed is --accent-gold-deep, which drops
           to 3.98:1 on --nude — the reason this is mist and not nude. */}
-      <section className="py-14 md:py-20 bg-mist border-y border-border-soft">
+      <section className="living-band py-14 md:py-20 border-y border-border-soft">
         <div className="max-w-screen-md mx-auto px-4 sm:px-5">
           {FAQ_GROUPS.map((group) => (
             <div key={group.topic} className="mb-12 last:mb-0">
