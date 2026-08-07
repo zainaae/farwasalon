@@ -26,7 +26,6 @@ export const metadata = {
     title,
     description,
     path: '/beauty-salon-karachi',
-    image: '/bridal.jpg',
     imageAlt: 'Beauty salon in PECHS Karachi — Farwa Beauty Salon',
   }),
 }

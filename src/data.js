@@ -1,3 +1,5 @@
+import { SALON_OWNED } from './salon-media.js'
+
 export {
   WA_NUMBER,
   MAPS_LINK,
@@ -20,6 +22,8 @@ export {
   slugToCategory,
   PREFERRED_TIME_OPTIONS,
   SALON_HOURS,
+  formatSalonHoursLine,
+  formatSalonHoursExact,
 } from './site-config.js'
 
 /* ─── Services ────────────────────────────────────────────────── */
@@ -34,6 +38,10 @@ const s = (name, category, pricePkr = null, durationMinutes = null, opts = {}) =
   id: _id++, name, category, pricePkr, durationMinutes, ...opts,
 })
 const HAIR_DEPENDENT = { fromPrice: true }
+
+/** ISO date the printed menu in SERVICES was last checked against the floor price list.
+ *  Bump in the same commit that changes any pricePkr. Enforced by src/prices-freshness.test.js. */
+export const PRICES_LAST_VERIFIED = '2026-08-07'
 
 export const SERVICES = {
 
@@ -276,12 +284,14 @@ export function getAddonsForService(serviceId) {
     .filter(Boolean)
 }
 
-/** Featured service samples for gallery showcase (single image per service — not before/after pairs).
- *  Bridal leads — strongest photo dominance; glow + nails stack beside. */
+/** Featured gallery showcase — owned studio media only (no stock bridal stills). */
 export const GALLERY_SHOWCASE_ITEMS = [
-  { src: '/bridal.jpg', label: 'Bridal styling', alt: 'Bridal makeup and styling at Farwa Beauty Salon' },
-  { src: '/glow3.jpg', label: 'Threading & glow facial', alt: 'Facial glow treatment at Farwa Beauty Salon' },
-  { src: '/pedicure.jpg', label: 'Manicure & pedicure', alt: 'Nail services at Farwa Beauty Salon', video: '/manicurephotography.mp4' },
+  {
+    src: SALON_OWNED.nailsPoster,
+    label: 'Manicure & pedicure',
+    alt: 'Nail services at Farwa Beauty Salon',
+    video: SALON_OWNED.nailsVideo,
+  },
 ]
 
 /*
@@ -290,7 +300,7 @@ export const GALLERY_SHOWCASE_ITEMS = [
  * All 13 categories now have unique dedicated images.
  */
 export const CAT_META = {
-  'Threading':       { img: '/threading.jpg',    video: '/threading.mp4',
+  'Threading':       { img: '/threading.jpg',
     tagline: 'Precise brow & face threading from Rs 100' },
   'Rica Hot Wax':    { img: '/waxing.jpg',
     tagline: 'Gentle Rica stripless wax for face from Rs 150' },
@@ -300,33 +310,29 @@ export const CAT_META = {
     tagline: 'Premium Rica body wax from Rs 600' },
   'Bleach & Polish': { img: '/bleachpolish.jpg',
     tagline: 'Instant glow bleach & polish from Rs 400' },
-  'Massage':         { img: '/massage.jpg',      video: '/massage.mp4',
+  'Massage':         { img: '/massage.jpg',
     tagline: 'Head, back & full body massage from Rs 700' },
   'Hair Treatments': { img: '/hairtreatment.jpg',
     tagline: 'Protein, repair & scalp treatments from Rs 2,000' },
-  'Cleansing':       { img: '/facialcleansing.jpg',      video: '/cleansing.mp4',
+  'Cleansing':       { img: '/facialcleansing.jpg',
     tagline: 'Deep pore cleansing facials from Rs 1,200' },
-  'Facials':         { img: '/glow3.jpg',        video: '/facials.mp4',
+  'Facials':         { img: '/glow3.jpg',
     tagline: '11 facials for every skin type from Rs 1,400' },
   'Nails':           { img: '/pedicure.jpg',       video: '/manicurephotography.mp4',
     tagline: 'Manicure, pedicure & nail art from Rs 300' },
-  'Bridal':          { img: '/bridal.jpg',       video: '/bridal-makeup.mp4',
-    tagline: 'Bridal makeup & trials from Rs 8,000' },
-  'Hair':            { img: '/hairdo.jpg',       video: '/hairstyling.mp4',
+  'Bridal':          { img: '/bridal.jpg',
+    tagline: 'Full bridal package Rs 25,000 — trials and event looks available' },
+  'Hair':            { img: '/hairdo.jpg',
     tagline: 'Cuts, colour & styling from Rs 1,500' },
-  'Eyebrow Tattoo':  { img: '/eyebrowtattoo.jpg',  video: '/eyebrowtattoo.mp4',
+  'Eyebrow Tattoo':  { img: '/eyebrowtattoo.jpg',
     tagline: 'Microblading & powder brows from Rs 20,000' },
 }
 
+/** Owned-only gallery strip — SALON_OWNED nails poster (+ optional video). */
 export const GALLERY_PHOTOS = [
-  { src: '/threading.jpg',  label: 'Threading' },
-  { src: '/bridal.jpg',     label: 'Bridal' },
-  { src: '/hairdo.jpg',     label: 'Hair Styling' },
-  { src: '/glow3.jpg',      label: 'Facial' },
-  { src: '/pedicure.jpg',   label: 'Pedicure' },
-  { src: '/bleachpolish.jpg',      label: 'Glow' },
-  { src: '/bridal2.jpg',    label: 'Bridal Look' },
-  { src: '/hairtreatment.jpg', label: 'Radiance' },
-  { src: '/oilwax.jpg',     label: 'Beauty' },
-  { src: '/waxing.jpg',     label: 'Waxing' },
+  {
+    src: SALON_OWNED.nailsPoster,
+    label: 'Nail craft',
+    video: SALON_OWNED.nailsVideo,
+  },
 ]

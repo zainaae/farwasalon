@@ -1,13 +1,21 @@
 import GalleryClient from './gallery-client'
+import { pageSocialMeta } from '../../lib/page-metadata.js'
 
-/* Imagery here illustrates services — not claimed as client before/afters.
-   Keep the SERP blurb quiet: studio framing + book path, no Instagram-as-proof. */
+/* Owned studio media only — no stock bridal stills in the gallery or OG. */
+const title = 'Salon Work Gallery — Farwa Beauty Salon PECHS'
+const description =
+  'Owned studio work at Farwa Beauty Salon in PECHS, Karachi — nails and craft details. Visit the studio or book online.'
+
 export const metadata = {
-  title: 'Salon Work Gallery — Bridal, Hair & Facials in Karachi',
-  description:
-    'Services at Farwa Beauty Salon in PECHS, Karachi — bridal, hair, facials, threading and nails. Visit the studio or book online.',
+  title,
+  description,
   alternates: { canonical: '/gallery' },
-  openGraph: { type: 'website', images: [{ url: '/bridal2.jpg', width: 1200, height: 630, alt: 'Bridal, hair and beauty services offered at Farwa Beauty Salon, PECHS Karachi' }] },
+  ...pageSocialMeta({
+    title,
+    description,
+    path: '/gallery',
+    imageAlt: 'Studio craft at Farwa Beauty Salon, PECHS Karachi',
+  }),
 }
 
 export default function GalleryPage() {

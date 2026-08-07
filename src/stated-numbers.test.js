@@ -149,7 +149,7 @@ describe('hard-numbers band uses live stated figures', () => {
     expect(home).toMatch(/GOOGLE_GBP_STATS/)
     expect(home).toMatch(/YEARS_ACTIVE/)
     expect(home).toMatch(/MONTHLY_APPOINTMENTS/)
-    expect(home).toMatch(/SALON_HOURS/)
+    expect(home).toMatch(/formatSalonHoursExact|formatSalonHoursLine|SALON_HOURS/)
     expect(home, 'must not invent Quoti-style outside-hours %').not.toMatch(/40\s*%/)
   })
 })

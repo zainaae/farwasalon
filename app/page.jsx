@@ -20,7 +20,7 @@ export const metadata = {
   title: { absolute: title },
   description,
   alternates: { canonical: '/' },
-  ...pageSocialMeta({ title, description, path: '/', image: '/bridal.jpg', imageAlt: 'Farwa Beauty Salon — PECHS Karachi' }),
+  ...pageSocialMeta({ title, description, path: '/', imageAlt: 'Farwa Beauty Salon — PECHS Karachi' }),
 }
 
 export default function HomePage() {

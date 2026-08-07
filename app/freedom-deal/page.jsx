@@ -41,7 +41,6 @@ export async function generateMetadata() {
         title: ENDED_TITLE,
         description: ENDED_DESCRIPTION,
         path: '/freedom-deal',
-        image: '/bridal.jpg',
         imageAlt: 'Farwa Beauty Salon — PECHS Karachi',
       }),
     }

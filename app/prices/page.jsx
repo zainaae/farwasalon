@@ -28,7 +28,6 @@ export const metadata = {
     title,
     description,
     path: '/prices',
-    image: '/glow3.jpg',
     imageAlt: 'Published salon price list — Farwa Beauty Salon PECHS Karachi',
   }),
 }
@@ -59,12 +58,12 @@ export default function PricesPage() {
       <div className="section-shell pt-14 md:pt-[4.5rem] pb-8 md:pb-10 min-h-0">
         <div className="title-stack mb-3 max-w-2xl border-l-2 border-plum pl-5 lg:pl-6">
           <p className="eyebrow text-plum">— Price list · updated {UPDATED}</p>
+          <p className="numeral-hero text-ink mb-2" aria-hidden="true">
+            {menu.total}
+          </p>
           <h1 className="display-page text-ink">
-            Salon price list — from Rs 100
+            Printed prices — every service on the menu
           </h1>
-          {/* The claim lives here, on the page that proves it. It used to live on
-              the homepage while this page said only "every priced service", so
-              nothing that read one read the other. */}
           <p className="text-body md:text-lg leading-relaxed">
             This is the full published price list for Farwa Beauty Salon in Block 3 PECHS, Karachi:
             all <strong className="font-medium text-ink">{menu.total} services</strong> across{' '}
@@ -73,7 +72,7 @@ export default function PricesPage() {
           </p>
         </div>
         <p className="text-body text-sm max-w-2xl mb-3 leading-relaxed">
-          {menu.fixed} of those are fixed rates — what the table says is what you pay. The
+          {menu.fixed} of those are fixed rates — what the list says is what you pay. The
           remaining {menu.startingFrom}{' '}are hair and hair-treatment services shown as
           &ldquo;from&rdquo;, because length and density genuinely change the work; that figure is
           a floor and it is confirmed with you before anything starts.
@@ -138,8 +137,8 @@ export default function PricesPage() {
             Bridal packages
           </h2>
           <p className="text-body text-sm mb-3">
-            Bridal Trial Rs 8,000 · Mehndi Rs 10,000 · Engagement Rs 12,000 · Full Bridal Package Rs 25,000 —
-            inclusions and event mapping on the bridal page.
+            Full Bridal Package <strong className="text-ink font-medium">Rs 25,000</strong> — about five hours covering hair, makeup, draping, touch-ups and event presence.
+            Separate SKUs: Bridal Trial, Mehndi / Dholki, and Engagement looks — see the bridal page for inclusions.
           </p>
           <Link href="/bridal" className="btn-secondary !py-2 !px-4">
             Bridal makeup packages <ArrowUpRight className="w-3.5 h-3.5" />
@@ -149,7 +148,7 @@ export default function PricesPage() {
         <div className="grid gap-12 md:gap-14">
           {categories.map((cat) => (
             <section key={cat} aria-labelledby={`prices-${CAT_SLUGS[cat]}`}>
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink/30 pb-2.5 mb-1">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink/30 pb-2.5 mb-4">
                 <h2 id={`prices-${CAT_SLUGS[cat]}`} className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl">
                   {cat}
                 </h2>
@@ -166,25 +165,30 @@ export default function PricesPage() {
                   </Link>
                 </div>
               </div>
-              <table className="w-full border-collapse">
-                <caption className="sr-only">{cat} prices at Farwa Beauty Salon, PECHS Karachi</caption>
-                <thead className="sr-only">
-                  <tr><th scope="col">Service</th><th scope="col">Duration</th><th scope="col">Price</th></tr>
-                </thead>
-                <tbody>
-                  {SERVICES[cat].map((s) => (
-                    <tr key={s.id} className="border-b border-border-soft">
-                      <td className="py-2.5 pr-3 text-ink text-[14px] sm:text-[15px] font-[family-name:var(--font-inter)] font-light">{s.name}</td>
-                      <td className="py-2.5 pr-3 text-right text-stone/80 text-[12px] font-[family-name:var(--font-inter)] whitespace-nowrap tabular-nums hidden sm:table-cell">
-                        {s.durationMinutes ? formatDuration(s.durationMinutes) : ''}
-                      </td>
-                      <td className="py-2.5 text-right font-[family-name:var(--font-fraunces)] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap tabular-nums">
-                        {formatServicePrice(s)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <ul className="flex flex-col gap-3" aria-label={`${cat} prices`}>
+                {SERVICES[cat].map((s) => (
+                  <li key={s.id} className="price-rail border-b border-border-soft pb-3 last:border-0">
+                    <div className="price-rail__name min-w-0">
+                      <span className="text-ink text-[14px] sm:text-[15px] font-[family-name:var(--font-inter)] font-light">
+                        {s.name}
+                      </span>
+                      {s.durationMinutes ? (
+                        <span className="block text-stone/80 text-[11px] font-[family-name:var(--font-inter)] tabular-nums mt-0.5">
+                          {formatDuration(s.durationMinutes)}
+                        </span>
+                      ) : null}
+                    </div>
+                    <span className="price-rail__leader" aria-hidden="true" />
+                    <span className="price-rail__price">{formatServicePrice(s)}</span>
+                    <Link
+                      href={`/book?service=${encodeURIComponent(s.name)}&category=${encodeURIComponent(cat)}`}
+                      className="tap-safe shrink-0 text-[10px] tracking-[0.14em] uppercase font-semibold text-plum hover:text-ink ml-2"
+                    >
+                      Book
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </section>
           ))}
         </div>

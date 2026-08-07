@@ -6,7 +6,7 @@ import { m } from 'framer-motion'
 import Link from 'next/link'
 import { Check, MapPin, Phone, Clock, Sparkles, MessageCircle, ChevronDown, X } from 'lucide-react'
 import { IgIcon } from '../../src/shared.jsx'
-import { useNextSlot } from '../../src/use-next-slot.js'
+import LiveAvailability from '../services/live-availability.jsx'
 import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track, PREFERRED_TIME_OPTIONS } from '../../src/data.js'
 import PageCloseCta from '../components/page-close-cta.jsx'
 
@@ -17,7 +17,6 @@ export default function ContactClient() {
   const [addNonce, setAddNonce] = useState(0)
   const [date,    setDate]    = useState('')
   const [time,    setTime]    = useState('')
-  const slot    = useNextSlot()
 
   const addService = (svcName) => {
     const n = String(svcName).trim()
@@ -57,12 +56,9 @@ export default function ContactClient() {
               Find us or ask us
             </h1>
           </div>
-          <div className="hero-fade-up mt-6 flex flex-wrap items-center gap-3 sm:gap-4" style={{ animationDelay: '0.2s' }}>
-            <span className="inline-flex items-center gap-2 border border-border-soft px-3 py-2 text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)] text-stone">
-              <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#6b9b5f]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
-              Next slot <span className="text-ink font-medium ml-1">{slot.label}</span>
-            </span>
-            <Link href="/book" className="tap-safe btn-loud !min-h-11 !py-2.5 !px-5 !text-[11px]">
+          <div className="hero-fade-up mt-6 max-w-xl" style={{ animationDelay: '0.2s' }}>
+            <LiveAvailability compact />
+            <Link href="/book" className="tap-safe btn-loud !min-h-11 !py-2.5 !px-5 !text-[11px] mt-3 inline-flex">
               <Sparkles className="w-3 h-3" /> Book online
             </Link>
           </div>

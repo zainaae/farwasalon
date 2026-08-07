@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "prebuild": "node ./node_modules/vitest/vitest.mjs run src/gbp-stats-freshness.test.js",
+    "prebuild": "node ./node_modules/vitest/vitest.mjs run src/gbp-stats-freshness.test.js src/prices-freshness.test.js",
     "start": "next start",
     "lint": "eslint .",
     "test": "node ./node_modules/vitest/vitest.mjs run",
