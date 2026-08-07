@@ -35,6 +35,6 @@ test.describe('Newsletter modal', () => {
     await page.evaluate(() => {
       document.dispatchEvent(new MouseEvent('mouseleave', { clientY: -1, bubbles: true }))
     })
-    await expect(page.getByRole('dialog', { name: /salon updates|seasonal tips/i })).toBeVisible({ timeout: 5_000 })
+    await expect(page.getByRole('dialog', { name: /tips from the chair|salon updates|seasonal tips/i })).toBeVisible({ timeout: 5_000 })
   })
 })
