@@ -265,7 +265,7 @@ count, `lastVerified`) so the website matches Maps — see
 | Through **14 Aug 2026** | Freedom Deal: **14%** at the counter when the basket is **Rs 1,400+**. No codes. |
 | From **15 Aug 2026** | Printed / website price list only. Do not mention Freedom, 14%, or old 20%/10% language. |
 
-WhatsApp morning confirms + evening review asks: [`whatsapp-business-setup.md`](./whatsapp-business-setup.md) §5c / §5b.
+WhatsApp morning confirms + evening review asks: [`whatsapp-business-setup.md`](./whatsapp-business-setup.md) §5a / §5b.
 
 ### Post Template
 ```

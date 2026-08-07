@@ -287,7 +287,7 @@ We are at Plot 165/G-1, Saima Terrace, Block 3 PECHS. Reply here if you need to 
 
 ---
 
-## 5c. Morning confirm + evening review playbook (staff, no Cloud API)
+## 5a. Morning confirm + evening review playbook (staff, no Cloud API)
 
 Run this every open day. Nothing here needs Meta approval — it uses the Bookings Google Sheet + WhatsApp Business on the salon phone.
 
@@ -503,7 +503,7 @@ WHATSAPP_SEND_BOOKING_CONFIRM=true
 ```
 
 Without those vars / flag, booking still succeeds and the morning Sheet→WA digest
-(§5c) remains the staff path. Templates must be approved in Meta before turning
+(§5a) remains the staff path. Templates must be approved in Meta before turning
 the flag on. Full architecture notes: `docs/integrations-execution.md` Path B.
 
 Providers if you prefer a BSP: Twilio, MessageBird, or WATI.

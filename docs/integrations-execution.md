@@ -187,7 +187,7 @@ CRON_SECRET=...                 # Protect /api/cron/*
 
 1. `lib/whatsapp-cloud.js` — `sendWhatsAppTemplate` + `maybeSendBookingConfirmed` (ships env-gated; no-ops without credentials / flag).
 2. On successful `POST /api/book` — optional immediate `booking_confirmed` when `WHATSAPP_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID`, and `WHATSAPP_SEND_BOOKING_CONFIRM=true` are set.
-3. **Staff path until then:** morning Sheet→WA digest (`sendMorningConfirmDigest` in `google-apps-script/EmailBot.gs`) — see `docs/whatsapp-business-setup.md` §5c.
+3. **Staff path until then:** morning Sheet→WA digest (`sendMorningConfirmDigest` in `google-apps-script/EmailBot.gs`) — see `docs/whatsapp-business-setup.md` §5a.
 4. `app/api/cron/whatsapp-reminders/route.js` — still future; verify `Authorization: Bearer ${CRON_SECRET}`; query sheet; send due reminders.
 5. **vercel.json** cron (when reminders ship):
    ```json

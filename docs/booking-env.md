@@ -41,7 +41,7 @@ Cancel links look like: `/book/cancel?id=FBS-…` (the signed cancel token is st
 ## WhatsApp Cloud API (optional outbound confirms)
 
 Disabled by default. Staff path today: morning Sheet→WA digest
-(`docs/whatsapp-business-setup.md` §5c + `google-apps-script/EmailBot.gs`).
+(`docs/whatsapp-business-setup.md` §5a + `google-apps-script/EmailBot.gs`).
 
 | Variable | Description |
 |----------|-------------|
