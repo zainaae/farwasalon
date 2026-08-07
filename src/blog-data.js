@@ -4,7 +4,7 @@ export const BLOG_POSTS = [
   ...GROWTH_POSTS,
   {
     slug: 'party-makeup-karachi-guide',
-    title: 'Party Makeup in Karachi — What It Costs, What You Get, and How to Book',
+    title: 'Party Makeup in Karachi — Costs & What Is Included',
     description: 'Party makeup rates in Karachi explained: what published salon lists charge, what a look includes, and how Farwa in PECHS quotes yours over WhatsApp in minutes.',
     featuredImage: '/bridal.jpg',
     date: '2026-07-24',
@@ -45,7 +45,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'keratin-treatment-price-karachi',
-    title: 'Keratin Treatment in Karachi — Real Price Ranges, and What Actually Determines Yours',
+    title: 'Keratin Treatment Price in Karachi — Real Ranges',
     description: 'What keratin really costs in Karachi, why quotes vary by hair length, keratin vs protein vs Wellaplex — and how Farwa in PECHS quotes yours before you book.',
     featuredImage: '/hairtreatment.jpg',
     date: '2026-07-24',
@@ -326,7 +326,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'monsoon-hair-skin-care-karachi',
-    title: 'Monsoon Beauty Survival Guide for Karachi — Frizz, Sticky Skin, and What Actually Works',
+    title: 'Monsoon Hair & Skin Care in Karachi — What Works',
     description: 'How to handle Karachi monsoon humidity: taming hair frizz, keeping oily skin clear, and which salon treatments are worth booking in July and August.',
     featuredImage: '/hairtreatment.jpg',
     date: '2026-07-17',
@@ -669,7 +669,7 @@ export const BLOG_POSTS = [
     category: 'Skincare',
     relatedCategories: ['Facials', 'Cleansing', 'Bleach & Polish'],
     content: [
-      { type: 'p', text: 'Karachi\'s summer is relentless — the humidity, the heat, the dust. Your skincare routine needs to adapt, but many women make the same mistakes year after year. After 17+ years of treating Karachi skin, here\'s what we see most often at Farwa Beauty Salon.' },
+      { type: 'p', text: 'Karachi\'s summer is relentless — the humidity, the heat, the dust. Your skincare routine needs to adapt, but many women make the same mistakes year after year. After 18 years of treating Karachi skin, here\'s what we see most often at Farwa Beauty Salon.' },
       { type: 'p', text: 'The good news is that most summer skin problems are completely preventable. Small adjustments to your routine can make the difference between dull, breakout-prone skin and a clear, healthy complexion that thrives even in 40-degree heat. Let us walk you through the five most common mistakes — and exactly how to fix them.' },
 
       { type: 'h2', text: '1. Skipping Moisturiser Because "It\'s Too Hot"' },
@@ -727,7 +727,7 @@ export const BLOG_POSTS = [
     lastModified: '2026-04-28',
     readTime: '6 min read',
     author: 'Rubina',
-    category: 'Guide',
+    category: 'Guides',
     relatedCategories: ['Threading', 'Rica Hot Wax', 'Honey Wax'],
     content: [
       { type: 'p', text: 'It\'s one of the most common questions we get at Farwa Beauty Salon: "Should I thread or wax?" The answer depends on the area being treated, your skin sensitivity, and what results you\'re after. Here\'s an honest breakdown from our team.' },
@@ -1046,7 +1046,7 @@ export const BLOG_POSTS = [
     lastModified: '2026-04-25',
     readTime: '7 min read',
     author: 'Rubina',
-    category: 'Guide',
+    category: 'Guides',
     relatedCategories: ['Threading', 'Facials', 'Nails'],
     content: [
       { type: 'p', text: 'Walking into a beauty salon for the first time can feel intimidating — especially if you are not sure what to expect, what to ask for, or how things work. Whether you are a college student booking your first facial, a bride-to-be exploring options, or someone who has simply never had the occasion, this guide will help you feel confident and prepared. At Farwa Beauty Salon in PECHS, Karachi, we welcome first-time visitors every week — here is what we wish everyone knew before their first appointment.' },

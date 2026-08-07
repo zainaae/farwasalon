@@ -1,9 +1,8 @@
-'use client'
-
 import Link from 'next/link'
+import ArrowUpRight from '../../components/icon-sprite.jsx'
+import WaCta from '../../components/wa-cta.jsx'
 import Image from 'next/image'
-import { m } from 'framer-motion'
-import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { WA_DEFAULT, YEARS_ACTIVE, CAT_SLUGS, CAT_META } from '../../../src/data.js'
 import { BLOG_POSTS } from '../../../src/blog-data.js'
 import { BreadcrumbJsonLd } from '../../json-ld.jsx'
@@ -56,7 +55,14 @@ function ArticleJsonLd({ post }) {
   )
 }
 
-export default function BlogArticleClient({ slug }) {
+/**
+ * A server component. It was a client one, so the whole of BLOG_POSTS — 29
+ * articles, 178 KB, 91% of it prose — was bundled into a chunk referenced by
+ * 103 prerendered documents, to render one article. Nothing here was ever
+ * interactive: the only client API in 307 lines was four framer-motion
+ * entrance tweens.
+ */
+export default function BlogArticle({ slug }) {
   const post = BLOG_POSTS.find((p) => p.slug === slug)
 
   if (!post) {
@@ -95,7 +101,7 @@ export default function BlogArticleClient({ slug }) {
 
         <div className="max-w-2xl">
           <nav aria-label="Breadcrumb" className="mb-5">
-            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-['Inter']">
+            <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-[family-name:var(--font-inter)]">
               <li>
                 <Link href="/" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
                   Home
@@ -112,32 +118,28 @@ export default function BlogArticleClient({ slug }) {
             </ol>
           </nav>
 
-          <m.div
-            initial={{ opacity: 0, x: -16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div className="article-slide-in">
             <Link
               href="/blog"
-              className="tap-safe inline-flex items-center gap-2 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors mb-7"
+              className="tap-safe inline-flex items-center gap-2 text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors mb-7"
             >
               <ChevronLeft className="w-3.5 h-3.5" /> All Articles
             </Link>
-          </m.div>
+          </div>
 
-          <m.header
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-10 pb-8 border-b border-border-soft"
-          >
+          {/* No entrance animation below this line. The header holds the h1 and
+              the block further down holds the article body — both LCP
+              candidates — and the featured image is preloaded to be one. They
+              were fading in from opacity 0, which is precisely the delay the
+              hero already had to fix (see .hero-lcp in globals.css). */}
+          <header className="mb-10 pb-8 border-b border-border-soft">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-['Inter'] bg-mist px-2 py-1">
+              <span className="text-[9px] tracking-[0.24em] uppercase text-stone font-[family-name:var(--font-inter)] bg-mist px-2 py-1">
                 {post.category}
               </span>
-              <span className="text-stone text-[10px] font-['Inter']">{post.readTime}</span>
+              <span className="text-stone text-[10px] font-[family-name:var(--font-inter)]">{post.readTime}</span>
             </div>
-            <h1 className="font-['Unbounded'] font-bold text-2xl md:text-3xl text-ink leading-tight mb-3">
+            <h1 className="display-page text-ink mb-3">
               {post.title}
             </h1>
             <p className="text-stone text-sm font-light">
@@ -154,27 +156,21 @@ export default function BlogArticleClient({ slug }) {
                 </>
               )}
             </p>
-          </m.header>
+          </header>
 
           {post.featuredImage && (
-            <m.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}
-              className="relative overflow-hidden mb-10 aspect-[16/9]">
+            <div className="relative overflow-hidden mb-10 aspect-[16/9]">
               <Image src={post.featuredImage} alt={post.title} fill className="object-cover" priority />
-            </m.div>
+            </div>
           )}
 
-          <m.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="prose-farwa"
-          >
+          <div className="prose-farwa">
             {post.content.map((block, i) => {
               if (block.type === 'h2') {
                 return (
                   <h2
                     key={i}
-                    className="font-['Syne'] font-bold text-lg text-ink mt-8 mb-3"
+                    className="font-[family-name:var(--font-syne)] font-bold text-lg text-ink mt-8 mb-3"
                   >
                     {block.text}
                   </h2>
@@ -184,7 +180,7 @@ export default function BlogArticleClient({ slug }) {
                 return (
                   <h3
                     key={i}
-                    className="font-['Syne'] font-bold text-sm text-ink mt-5 mb-2"
+                    className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mt-5 mb-2"
                   >
                     {block.text}
                   </h3>
@@ -194,7 +190,7 @@ export default function BlogArticleClient({ slug }) {
                 return (
                   <ul
                     key={i}
-                    className="list-disc pl-5 mb-4 space-y-1.5 text-stone text-[15px] font-light leading-relaxed font-['Inter'] marker:text-[#c9a98a]"
+                    className="list-disc pl-5 mb-4 space-y-1.5 text-stone text-[15px] font-light leading-relaxed font-[family-name:var(--font-inter)] marker:text-[#c9a98a]"
                   >
                     {block.items?.map((item, j) => (
                       <li key={j}>{renderText(item)}</li>
@@ -206,7 +202,7 @@ export default function BlogArticleClient({ slug }) {
                 return (
                   <ol
                     key={i}
-                    className="list-decimal pl-5 mb-4 space-y-1.5 text-stone text-[15px] font-light leading-relaxed font-['Inter'] marker:text-[#c9a98a]"
+                    className="list-decimal pl-5 mb-4 space-y-1.5 text-stone text-[15px] font-light leading-relaxed font-[family-name:var(--font-inter)] marker:text-[#c9a98a]"
                   >
                     {block.items?.map((item, j) => (
                       <li key={j}>{renderText(item)}</li>
@@ -217,25 +213,25 @@ export default function BlogArticleClient({ slug }) {
               return (
                 <p
                   key={i}
-                  className="text-stone text-[15px] font-light leading-relaxed mb-4 font-['Inter']"
+                  className="text-stone text-[15px] font-light leading-relaxed mb-4 font-[family-name:var(--font-inter)]"
                 >
                   {renderText(block.text)}
                 </p>
               )
             })}
-          </m.div>
+          </div>
 
           <div className="mt-10 pt-8 border-t border-border-soft">
             <div className="flex items-start gap-4 mb-8">
               <div className="w-12 h-12 rounded-full bg-mist flex items-center justify-center flex-shrink-0">
-                <span className="text-ink font-['Syne'] font-bold text-lg">R</span>
+                <span className="text-ink font-[family-name:var(--font-syne)] font-bold text-lg">R</span>
               </div>
               <div>
-                <p className="font-['Syne'] font-bold text-sm text-ink">
+                <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink">
                   <Link href="/about#rubina" className="link-underline">{post.author || 'Rubina'}</Link>
                 </p>
-                <p className="text-stone text-xs font-['Inter'] mt-0.5">Founder, Farwa Beauty Salon</p>
-                <p className="text-stone text-[13px] font-light font-['Inter'] mt-2 leading-relaxed">
+                <p className="text-stone text-xs font-[family-name:var(--font-inter)] mt-0.5">Founder, Farwa Beauty Salon</p>
+                <p className="text-stone text-[13px] font-light font-[family-name:var(--font-inter)] mt-2 leading-relaxed">
                   {`Rubina founded Farwa Beauty Salon in 2008 and has spent ${YEARS_ACTIVE}+ years perfecting bridal artistry, skincare, and brow techniques in Karachi. She writes to help women make confident beauty decisions.`}
                 </p>
               </div>
@@ -244,7 +240,7 @@ export default function BlogArticleClient({ slug }) {
 
           {post.relatedCategories?.length > 0 && (
             <section className="pt-8 border-t border-border-soft">
-              <h2 className="font-['Syne'] font-bold text-base text-ink mb-4">Related Services</h2>
+              <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-4">Related Services</h2>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 {post.relatedCategories.map((cat) => {
                   const meta = CAT_META[cat]
@@ -255,7 +251,7 @@ export default function BlogArticleClient({ slug }) {
                       <Image src={meta.img} alt="" fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 50vw, 33vw" />
                       <div className="absolute inset-0 bg-ink/50 group-hover:bg-ink/60 transition-colors" />
                       <div className="absolute inset-0 flex items-end p-3">
-                        <span className="text-white font-['Syne'] font-bold text-xs uppercase">{cat}</span>
+                        <span className="text-white font-[family-name:var(--font-syne)] font-bold text-xs uppercase">{cat}</span>
                       </div>
                     </Link>
                   )
@@ -268,17 +264,16 @@ export default function BlogArticleClient({ slug }) {
             <Link href="/book" className="tap-safe btn-primary">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <a
+            <WaCta
               href={WA_DEFAULT}
-              target="_blank"
-              rel="noreferrer"
-              className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
+              from="blog-article"
+              className="text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
             >
               Or WhatsApp us
-            </a>
+            </WaCta>
             <Link
               href="/blog"
-              className="text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors"
+              className="text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
             >
               ← More articles
             </Link>
@@ -288,12 +283,12 @@ export default function BlogArticleClient({ slug }) {
             const related = getRelatedPosts(post, slug, 3)
             return related.length > 0 && (
               <section className="mt-10 pt-8 border-t border-border-soft">
-                <h2 className="font-['Syne'] font-bold text-base text-ink mb-4">Related Articles</h2>
+                <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-4">Related Articles</h2>
                 <div className="space-y-4">
                   {related.map((p) => (
                     <Link key={p.slug} href={`/blog/${p.slug}`} className="block group">
-                      <p className="font-['Syne'] font-bold text-sm text-ink group-hover:text-stone transition-colors leading-snug">{p.title}</p>
-                      <p className="text-stone text-xs font-['Inter'] mt-1 line-clamp-1">{p.description}</p>
+                      <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink group-hover:text-stone transition-colors leading-snug">{p.title}</p>
+                      <p className="text-stone text-xs font-[family-name:var(--font-inter)] mt-1 line-clamp-1">{p.description}</p>
                     </Link>
                   ))}
                 </div>

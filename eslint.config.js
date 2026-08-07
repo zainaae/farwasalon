@@ -21,7 +21,7 @@ export default defineConfig([
       },
     },
     rules: {
-      'no-unused-vars': ['error', { varsIgnorePattern: '(^[A-Z_]|^motion$|^m$)', caughtErrorsIgnorePattern: '^_' }],
+      'no-unused-vars': ['error', { varsIgnorePattern: '(^[A-Z_]|^motion$|^m$)', argsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' }],
       'react-hooks/refs': 'off',
     },
   },

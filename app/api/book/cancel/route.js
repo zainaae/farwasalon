@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getSheetRows, updateBookingStatus, isConfigured } from '../../../../lib/google-sheets.js'
-import { checkRateLimit } from '../../../../lib/rate-limit.js'
+import { checkRateLimit, getClientIp } from '../../../../lib/rate-limit.js'
 import { isAllowedOrigin } from '../../../../lib/origin-check.js'
 import { verifyCancelToken, phoneLast4 } from '../../../../lib/booking-cancel-token.js'
 import { CANCELLATION_MIN_HOURS } from '../../../../lib/booking-duration.js'
@@ -11,8 +11,8 @@ export async function POST(request) {
   if (!isAllowedOrigin(request)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
-  const rl = checkRateLimit(ip, { window: 600, max: 10 })
+  const ip = getClientIp(request)
+  const rl = checkRateLimit(ip, { scope: 'book-cancel', window: 600, max: 10 })
   if (rl.limited) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again later.' },
@@ -106,7 +106,17 @@ export async function POST(request) {
   }
 
   try {
-    await updateBookingStatus(bookingId, 'Cancelled')
+    /* A no-op is not a success. updateBookingStatus returns false when auth is
+       missing or the row cannot be found; treating that as cancelled told the
+       customer she was free while the salon still held her station. */
+    const written = await updateBookingStatus(bookingId, 'Cancelled')
+    if (!written) {
+      logger.error('/api/book/cancel', 'status-update-noop', { ip: hashIp(ip), bookingId })
+      return NextResponse.json(
+        { error: 'We could not cancel that booking. Please WhatsApp the salon so we can free the slot.' },
+        { status: 502 },
+      )
+    }
   } catch (err) {
     logger.error('/api/book/cancel', 'status-update-failed', { ip: hashIp(ip), bookingId, ...errCtx(err) })
     return NextResponse.json(

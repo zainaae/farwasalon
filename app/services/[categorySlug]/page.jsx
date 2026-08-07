@@ -3,6 +3,7 @@ import { CAT_SLUGS, CAT_META, SERVICES, slugToCategory, formatPrice } from '../.
 import { CAT_SEO } from '../../../src/cat-seo-content.js'
 import { parseLocationSlug, getAllLocationServiceSlugs } from '../../../src/location-seo.js'
 import CategoryDetailClient from './category-detail-client'
+import { getRelatedBlogPostsForCategory } from '../../../src/blog-data.js'
 import LocationServicePage from './location-service-page'
 import LocationServiceSchema from './location-service-schema'
 import { pageSocialMeta } from '../../../lib/page-metadata.js'
@@ -115,5 +116,13 @@ export default async function CategoryPage({ params }) {
   const category = slugToCategory(categorySlug)
   if (!category) notFound()
 
-  return <CategoryDetailClient categorySlug={categorySlug} />
+  /* Resolved here. The helper returns three {slug,title,description} objects,
+     but reaching it from the browser meant bundling all 29 article bodies with
+     it on all 73 /services/* pages. */
+  return (
+    <CategoryDetailClient
+      categorySlug={categorySlug}
+      relatedBlogs={category ? getRelatedBlogPostsForCategory(category, 3) : []}
+    />
+  )
 }

@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -10,7 +10,7 @@
   --stone:  #6b5f57;
   --border-soft: #e4ddd7;
   --accent-gold: #c9a98a;
-  --accent-gold-deep: #82664a; /* gold for text on light bg â€” 5.3:1 on white, 4.9:1 on mist */
+  --accent-gold-deep: #82664a; /* gold for text on light bg — 5.3:1 on white, 4.9:1 on mist */
   --shadow-soft: 0 2px 12px rgba(13, 13, 13, 0.05);
   --shadow-card: 0 8px 32px rgba(13, 13, 13, 0.08);
 
@@ -91,14 +91,14 @@
   }
 }
 
-/* â”€â”€ Urdu Nastaliq â”€â”€ */
+/* ── Urdu Nastaliq ── */
 .font-nastaliq {
   font-family: 'Noto Nastaliq Urdu', serif;
   font-weight: 400;
   line-height: 1.8;
 }
 
-/* â”€â”€ Horizontal scroll-snap â”€â”€ */
+/* ── Horizontal scroll-snap ── */
 .snap-x-row {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
@@ -107,7 +107,7 @@
 .snap-x-row::-webkit-scrollbar { display: none; }
 .snap-center-child > * { scroll-snap-align: center; scroll-snap-stop: always; }
 
-/* â”€â”€ Colour utilities â”€â”€ */
+/* ── Colour utilities ── */
 @layer utilities {
   .bg-ink    { background-color: #0d0d0d !important; }
   .bg-white  { background-color: #ffffff !important; }
@@ -129,7 +129,7 @@
   .shadow-card { box-shadow: var(--shadow-card); }
 }
 
-/* â”€â”€ Layout & typography components â”€â”€ */
+/* ── Layout & typography components ── */
 @layer components {
   .section-shell {
     width: 100%;
@@ -145,6 +145,27 @@
   @media (min-width: 768px) {
     .section-shell { padding-left: 2.5rem; padding-right: 2.5rem; }
   }
+  /* A flow scale for interior pages.
+     Measured, /prices and /bridal ran 25 consecutive section boundaries every
+     one of which fell between 47 and 56px — CV under 5%. A sub-note, a sibling
+     topic and a total change of subject all got the same gap, so the page had
+     no way to say "new subject".
+
+     This is a margin scale, not a padding one, and deliberately so:
+     .section-pad appears exactly once per page, on the outer shell wrapper.
+     Every interior <section> computes padding: 0 and all real spacing comes
+     from mb-* utilities, so retuning .section-pad would only move each page's
+     top and bottom frame.
+
+     28 : 48 : 96 -> ratios of 1.7x and 2x. Both clear the 1.5x a spacing step
+     needs to read as a level change. 48px is today's value, unchanged, so
+     anything left alone keeps its current rhythm. */
+  .flow-tight { margin-bottom: 1.75rem; }
+  .flow       { margin-bottom: 3rem; }
+  .flow-loose { margin-bottom: 6rem; }
+  @media (min-width: 768px) {
+    .flow-loose { margin-bottom: 7.5rem; }
+  }
   .section-pad {
     padding-top: 3.5rem;
     padding-bottom: 3.5rem;
@@ -152,31 +173,57 @@
   @media (min-width: 768px) {
     .section-pad { padding-top: 4.5rem; padding-bottom: 4.5rem; }
   }
+  /* .eyebrow hardcodes --stone, which is 6.18:1 on white but only 3.15:1 on
+     --ink. Two sections used it on a dark ground and failed AA there; two
+     others already worked around it, each a different way. --accent-gold is
+     8.82:1 on ink — its best number anywhere — so the dark variant is both
+     the fix and the cheapest way to put the accent on more pages. */
+  .eyebrow--on-dark { color: var(--accent-gold); }
   .eyebrow {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 10px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: var(--stone);
-    line-height: 1.4;
+    line-height: 1.55;
   }
   .section-title {
-    font-family: 'Unbounded', sans-serif;
+    /* var(--font-unbounded) first, like .display-section. Unbounded loads with
+       display:optional, so when it is not ready inside the ~100ms block period
+       the browser discards it for that page load — and a bare `Unbounded` with
+       nothing after it lands on the default serif. The next/font variable
+       carries the metric-matched fallback, so the page degrades to something
+       that looks like the design instead of to Times. */
+    font-family: var(--font-unbounded), 'Unbounded', sans-serif;
     font-weight: 700;
     font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    line-height: 1.15;
+    line-height: 1.28;
     letter-spacing: -0.02em;
     color: var(--ink);
+    text-wrap: balance;
+    padding-block: 0.08em;
   }
   .text-body {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-weight: 300;
     font-size: 0.9375rem;
-    line-height: 1.65;
+    line-height: 1.72;
     color: var(--stone);
   }
   @media (min-width: 768px) {
     .text-body { font-size: 1rem; }
+  }
+  /* Title stack rhythm: eyebrow → display → body. Unbounded and Inter sit
+     glued when margins match the optical size of the glyphs; these defaults
+     open the gap without a redesign. Tailwind mb-* on children still wins. */
+  .title-stack > .eyebrow {
+    margin-bottom: 0.875rem;
+  }
+  .title-stack > .display-page {
+    margin-bottom: 1.25rem;
+  }
+  .title-stack > .text-body {
+    margin-bottom: 0;
   }
   .card-link {
     display: flex;
@@ -185,7 +232,7 @@
     gap: 0.5rem;
     min-height: 44px;
     padding: 0.75rem 1rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 0.75rem;
     color: var(--ink);
     background: rgba(248, 245, 241, 0.55);
@@ -204,7 +251,7 @@
     gap: 0.5rem;
     min-height: 44px;
     padding: 0.875rem 1.5rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 12.5px;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -223,7 +270,7 @@
     gap: 0.5rem;
     min-height: 44px;
     padding: 0.875rem 1.5rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 12.5px;
     font-weight: 600;
     letter-spacing: 0.14em;
@@ -238,9 +285,14 @@
     flex-shrink: 0;
     min-height: 44px;
     padding: 0.5rem 0.75rem;
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.14em;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    /* Was 10px at the inherited weight 300. That measures 6.18:1 on white —
+       it passes AA on paper and still read as barely-there, because the cause
+       was never colour: it was hairline weight at 10px with wide tracking.
+       Size and weight fix the legibility without touching the palette. */
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--stone);
     border: 1px solid var(--border-soft);
@@ -290,7 +342,16 @@
       padding-right: 0;
     }
   }
-  /* Featured Services category filters â€” equal-width grid (sidebar column narrows at md) */
+  /* Category filters on /blog: 15 chips wrap to a second row above md and
+     orphan the last three onto a line of their own. Keep the mobile one-row
+     behaviour at every width. Must come after the .tab-scroller md override —
+     same specificity, so source order decides. */
+  .blog-filter-row,
+  .blog-filter-row:is(.tab-scroller) {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  /* Featured Services category filters — equal-width grid (sidebar column narrows at md) */
   .service-filter-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -321,13 +382,15 @@
     white-space: normal;
     line-height: 1.25;
     padding: 0.5rem 0.375rem;
-    font-size: 9px;
+    /* No font-size here. This grid was re-shrinking .tab-pill to 9px — the
+       smallest interactive text on the site, and a silent revert of the 11px/500
+       legibility fix. The padding and tracking below are what actually solve
+       the three-column fit. */
     letter-spacing: 0.1em;
     scroll-snap-align: unset;
   }
   @media (min-width: 640px) {
     .service-filter-grid .tab-pill {
-      font-size: 10px;
       letter-spacing: 0.12em;
       padding: 0.5rem 0.5rem;
     }
@@ -415,7 +478,7 @@
     }
   }
   .review-excerpt-link {
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.12em;
@@ -451,11 +514,20 @@
   @media (min-width: 768px) {
     .page-content { padding-top: calc(3.5rem + env(safe-area-inset-top, 0px)); }
   }
-  /* Mobile Call/WA/Book bar: keep /prices jump chips + anchors clear of the fixed CTA */
+  /* The /prices jump nav is sticky on MOBILE ONLY, which is where a 9,000px
+     price list actually needs a skim rail and where .tab-scroller is already
+     a one-row horizontal scroller.
+
+     It was briefly sticky at every width. Above md the shared .tab-scroller
+     switches to flex-wrap, so it became a 174px opaque white block that rode
+     down over the table it indexes — service names hidden, their prices still
+     visible past its right edge, rows reading as bare numbers. Forcing one
+     scrollable row instead fixed the covering but pushed the last categories
+     off the right edge, and nobody horizontal-scrolls on a desktop.
+
+     On desktop it simply wraps and scrolls away: all 14 categories visible,
+     nothing covered. Sticky earns its cost on a phone, not on a 1200px page. */
   @media (max-width: 767px) {
-    html {
-      scroll-padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
-    }
     .page-content nav[aria-label="Price list categories"] {
       position: sticky;
       top: calc(3.375rem + env(safe-area-inset-top, 0px));
@@ -463,10 +535,28 @@
       background: #fff;
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-soft);
+    }
+  }
+  /* Anchor offset must match the real chrome, or every jump-nav click parks
+     its target underneath the nav that sent you there. It was 4.5rem of nav
+     allowance against a nav that measured 144px on a phone — targets landed
+     ~70px under it. The sticky element is one ~60px row now. */
+  .page-content [id^="prices-"],
+  .page-content #quote {
+    scroll-margin-top: calc(3.5rem + env(safe-area-inset-top, 0px) + 3.75rem);
+  }
+  @media (max-width: 767px) {
+    html {
+      scroll-padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    }
+    .page-content nav[aria-label="Price list categories"] {
       scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
     }
-    .page-content [id^="prices-"] {
-      scroll-margin-top: calc(3.375rem + env(safe-area-inset-top, 0px) + 5.75rem);
+    .page-content [id^="prices-"],
+    .page-content #quote {
+      /* 4.25rem, not 5.75rem: the sticky element is a single ~65px pill row now. */
+      scroll-margin-top: calc(3.375rem + env(safe-area-inset-top, 0px) + 4.25rem);
       scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
     }
   }
@@ -474,7 +564,7 @@
     width: 100%;
     min-height: 44px;
     padding: 0.75rem 1rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 1rem;
     font-weight: 300;
     color: var(--ink);
@@ -511,7 +601,9 @@
     box-shadow: 0 0 0 1px var(--ink);
   }
   .input-field:focus-visible {
-    outline: 2px solid var(--accent-gold);
+    /* #c9a98a measured 2.20:1 — under the 3:1 WCAG 2.4.11 floor. The deep gold
+       matches the site-standard ring everywhere else. */
+    outline: 2px solid var(--accent-gold-deep);
     outline-offset: 3px;
   }
   .panel-muted {
@@ -533,7 +625,7 @@
   .book-slot {
     min-height: 44px;
     padding: 0.625rem 0.75rem;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     font-size: 0.75rem;
     border: 1px solid var(--border-soft);
     transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
@@ -549,7 +641,7 @@
   }
 }
 
-/* â”€â”€ Display fonts â”€â”€ */
+/* ── Display fonts ── */
 .display-hero {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
@@ -560,16 +652,52 @@
 .display-section {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
-  font-size: clamp(1.75rem, 4.5vw, 5.5rem);
-  line-height: 0.95;
+  /* Cap at ~4.25rem — 5.5rem made two-word banners (Our Services) dominate
+     the viewport and fight the body. Short all-caps banners still read large. */
+  font-size: clamp(1.75rem, 4.2vw, 4.25rem);
+  /* 0.95 clipped Unbounded ascenders/descenders inside overflow-hidden parents
+     and stacked lines ("WHAT WE" / "DO") looked glued. */
+  line-height: 1.08;
   letter-spacing: -0.02em;
   overflow-wrap: anywhere;
+  padding-block: 0.06em;
+  text-wrap: balance;
 }
-.display-card {
-  font-family: var(--font-syne), 'Syne', sans-serif;
+/* The inner-page h1 rung.
+   Measured across the site there were SEVEN distinct h1 sizes — 108, 80, 65,
+   42, 40, 34, 30, 28 — so "page title" meant nothing consistent. The
+   .display-section suits a short banner (OUR STORY, WHAT WE DO); it is far
+   too large for "Facials in PECHS, Karachi". Inner pages need their own rung,
+   and there wasn't one.
+
+   .display-card used to sit here at clamp(1.2rem, 2.5vw, 2rem) in Syne. That
+   measured SMALLER than .section-title on mobile (19.2 vs 20px) and identical
+   to it at 1024 — a fourth name for a rung that already existed. This is the
+   geometric mean between .display-section and .section-title (28px),
+   in Unbounded to match the display face its neighbours use. */
+.display-page {
+  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(1.5rem, 3vw, 2.7rem);
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+  padding-block: 0.1em;
+  text-wrap: balance;
+}
+/* Em-dash ornaments inside display titles used font-light italic Unbounded —
+   a weight/style the face barely supports, so the dash floated as a mistyped
+   glyph. Keep the dash roman, slightly quieter, optically centered. */
+.display-dash {
+  display: inline-block;
+  margin-inline: 0.28em;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.55em;
+  line-height: 1;
+  color: var(--border-soft);
+  vertical-align: 0.12em;
+  letter-spacing: 0;
 }
 @keyframes heroScrollBar {
   from { transform: translateY(-100%); }
@@ -596,7 +724,7 @@
   }
 }
 
-/* â”€â”€ Underline reveal â”€â”€ */
+/* ── Underline reveal ── */
 .link-underline {
   position: relative;
 }
@@ -651,14 +779,29 @@
   opacity: 1;
 }
 
-/* â”€â”€ Marquee â”€â”€ */
+/* ── Marquee ── */
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-.marquee-track { animation: marquee 22s linear infinite; }
+/* One track element now serves both breakpoints (see EditorialSlideshow).
+   The speeds still differ — a phone shows fewer cards, so the same duration
+   would feel slower — so the duration is the only thing that varies. */
+.editorial-marquee-track {
+  animation: marquee 45s linear infinite;
+}
+@media (min-width: 768px) {
+  .editorial-marquee-track { animation-duration: 65s; }
+}
+.editorial-marquee:hover .editorial-marquee-track,
+.editorial-marquee:focus-within .editorial-marquee-track {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .editorial-marquee-track { animation: none !important; }
+}
 
-/* â”€â”€ Loader â”€â”€ */
+/* ── Loader ── */
 .loader {
   width: 32px; height: 32px;
   border: 1.5px solid #e4ddd7;
@@ -676,20 +819,20 @@
   animation: fadeIn 0.5s ease forwards;
 }
 
-/* â”€â”€ Spotlight â”€â”€ */
+/* ── Spotlight ── */
 @keyframes spotlight {
   0%   { opacity: 0; transform: translate(-72%,-62%) scale(0.5); }
   100% { opacity: 1; transform: translate(-50%,-40%) scale(1); }
 }
 .animate-spotlight { animation: spotlight 2s ease .75s 1 forwards; }
 
-/* â”€â”€ String wave (Stringtune fallback) â”€â”€ */
+/* ── String wave (Stringtune fallback) ── */
 @keyframes stringWave {
   from { transform: scaleY(1) translateY(0px); }
   to   { transform: scaleY(-1) translateY(-4px); }
 }
 
-/* â”€â”€ Modal backdrop â”€â”€ */
+/* ── Modal backdrop ── */
 .modal-backdrop {
   position: fixed; inset: 0; z-index: 200;
   background: rgba(13,13,13,0.6);
@@ -711,7 +854,7 @@
   display: none;
 }
 
-/* â”€â”€ Skip-to-content link (a11y) â”€â”€ */
+/* ── Skip-to-content link (a11y) ── */
 .skip-link {
   position: absolute;
   top: -60px;
@@ -720,7 +863,7 @@
   background: #0d0d0d;
   color: #fff;
   padding: 10px 18px;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -736,7 +879,7 @@
   outline-offset: 2px;
 }
 
-/* â”€â”€ Global focus-visible ring â”€â”€ */
+/* ── Global focus-visible ring ── */
 *:focus { outline: none; }
 a:focus-visible,
 button:focus-visible,
@@ -750,7 +893,7 @@ textarea:focus-visible,
   border-radius: 1px;
 }
 
-/* â”€â”€ Responsive FB iframe card â”€â”€ */
+/* ── Responsive FB iframe card ── */
 .fb-embed-frame {
   position: relative;
   width: 100%;
@@ -763,7 +906,7 @@ textarea:focus-visible,
   border: 0;
 }
 
-/* â”€â”€ Image quality â”€â”€ */
+/* ── Image quality ── */
 img {
   image-rendering: auto;
   -ms-interpolation-mode: bicubic;
@@ -772,10 +915,10 @@ img[data-max-native] {
   image-rendering: high-quality;
 }
 
-/* â”€â”€ Prevent video controls interception â”€â”€ */
+/* ── Prevent video controls interception ── */
 video[aria-hidden="true"] { pointer-events: none; }
 
-/* â”€â”€ Reduced motion â”€â”€ */
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
@@ -783,18 +926,15 @@ video[aria-hidden="true"] { pointer-events: none; }
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .marquee-track,
-  [style*="animation: marquee"] { animation: none !important; }
-  video { playback-rate: 1 !important; }
 }
 
-/* â”€â”€ Ken Burns hero animation (mobile) â”€â”€ */
+/* ── Ken Burns hero animation (mobile) ── */
 @keyframes kenburns {
   0%   { transform: scale(1)    translate(0, 0); }
   100% { transform: scale(1.12) translate(-1.5%, -1%); }
 }
 
-/* â”€â”€ Navbar slide-in (replaces framer-motion for perf) â”€â”€ */
+/* ── Navbar slide-in (replaces framer-motion for perf) ── */
 @keyframes navSlideIn {
   from { transform: translateY(-32px); opacity: 0; }
   to   { transform: translateY(0);     opacity: 1; }
@@ -824,6 +964,14 @@ video[aria-hidden="true"] { pointer-events: none; }
   transform: none !important;
   opacity: 1 !important;
 }
+/* The blog article's back-link keeps its entrance as CSS. It is decorative and
+   sits above nothing that matters, unlike the header and body below it. */
+@keyframes articleSlideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.article-slide-in { animation: articleSlideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
 .hero-fade-up {
   animation: heroFadeUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -831,13 +979,13 @@ video[aria-hidden="true"] { pointer-events: none; }
   animation: heroFade 0.55s ease both;
 }
 
-/* â”€â”€ content-visibility for below-fold sections (paint-holding) â”€â”€ */
+/* ── content-visibility for below-fold sections (paint-holding) ── */
 .cv-auto {
   content-visibility: auto;
   contain-intrinsic-size: auto 600px;
 }
 
-/* â”€â”€ Touch target floor (WCAG 2.5.5; holds at browser zoom-out) â”€â”€ */
+/* ── Touch target floor (WCAG 2.5.5; holds at browser zoom-out) ── */
 .tap-safe {
   min-height: 44px;
 }
@@ -894,13 +1042,15 @@ button.tap-safe,
   display: inline-block;
 }
 .azadi-display {
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   font-size: clamp(2.6rem, 8vw, 5rem);
-  line-height: 0.92;
+  /* 0.92 glued stacked lines and clipped Unbounded caps ("14%", "Off"). */
+  line-height: 1.12;
   letter-spacing: -0.035em;
   color: var(--azadi-deep);
   overflow-wrap: anywhere;
+  padding-block: 0.12em;
 }
 .azadi-btn {
   display: inline-flex;
@@ -909,7 +1059,7 @@ button.tap-safe,
   gap: 0.5rem;
   min-height: 48px;
   padding: 0.95rem 1.75rem;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
   font-size: 12.5px;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -943,7 +1093,7 @@ button.tap-safe,
   border-bottom: 1px solid var(--azadi-tint);
 }
 .azadi-strip-figure {
-  font-family: 'Unbounded', sans-serif;
+  font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   font-size: clamp(2.75rem, 9vw, 4.5rem);
   line-height: 0.85;

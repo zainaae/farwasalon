@@ -1,9 +1,10 @@
 'use client'
 
 import { useState } from 'react'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import { m } from 'framer-motion'
 import Link from 'next/link'
-import { Check, ArrowUpRight, MapPin, Phone, Clock, Sparkles, MessageCircle, ChevronDown, X } from 'lucide-react'
+import { Check, MapPin, Phone, Clock, Sparkles, MessageCircle, ChevronDown, X } from 'lucide-react'
 import { IgIcon } from '../../src/shared.jsx'
 import { useNextSlot } from '../../src/use-next-slot.js'
 import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track, PREFERRED_TIME_OPTIONS } from '../../src/data.js'
@@ -49,24 +50,19 @@ export default function ContactClient() {
 
       <section className="bg-white py-14 md:py-20 border-b border-border-soft">
         <div className="section-shell">
-          <m.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="eyebrow mb-3">— Contact</m.p>
-          <div className="overflow-hidden">
-            <m.h1 initial={{ y: '60%', opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-              className="display-section text-ink">
-              <span className="block">FIND US</span> <span className="block">OR ASK US</span>
-            </m.h1>
-          </div>
-          <m.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35, duration: 0.6 }}
-            className="mt-6 flex flex-wrap items-center gap-3 sm:gap-4">
-            <span className="inline-flex items-center gap-2 border border-border-soft px-3 py-2 text-[10px] tracking-[0.2em] uppercase font-['Inter'] text-stone">
+          <p className="hero-fade-up eyebrow mb-3">— Contact</p>
+          <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
+            Find us or ask us
+          </h1>
+          <div className="hero-fade-up mt-6 flex flex-wrap items-center gap-3 sm:gap-4" style={{ animationDelay: '0.2s' }}>
+            <span className="inline-flex items-center gap-2 border border-border-soft px-3 py-2 text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)] text-stone">
               <span className={`w-1.5 h-1.5 rounded-full ${slot.open ? 'bg-[#6b9b5f]' : 'bg-[#c9a98a]'} animate-pulse`} aria-hidden="true" />
               Next slot <span className="text-ink font-medium ml-1">{slot.label}</span>
             </span>
             <Link href="/book" className="tap-safe btn-primary text-[10px] sm:text-[11px] !py-2.5 !px-5">
               <Sparkles className="w-3 h-3" /> Book online
             </Link>
-          </m.div>
+          </div>
         </div>
       </section>
 
@@ -83,14 +79,14 @@ export default function ContactClient() {
                   <MapPin className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
                 </div>
                 <div>
-                  <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">Location</p>
-                  <p className="text-stone text-sm font-light font-['Inter']">
+                  <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-0.5">Location</p>
+                  <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)]">
                     Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400
                   </p>
-                  <p className="text-stone text-[11px] font-['Inter'] mt-0.5">
+                  <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] mt-0.5">
                     Women-only PECHS studio · one branch · not an at-home parlour
                   </p>
-                  <p className="text-stone text-[11px] font-['Inter'] mt-0.5 hover:text-ink transition-colors">Get directions →</p>
+                  <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] mt-0.5 hover:text-ink transition-colors">Get directions →</p>
                 </div>
               </a>
               <a href="tel:+923222782254"
@@ -99,9 +95,9 @@ export default function ContactClient() {
                   <Phone className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
                 </div>
                 <div>
-                  <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">Phone</p>
-                  <p className="text-stone text-sm font-light font-['Inter']">+92 322 278 2254</p>
-                  <p className="text-stone text-[11px] font-['Inter'] mt-0.5 group-hover:text-ink transition-colors">Tap to call →</p>
+                  <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-0.5">Phone</p>
+                  <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)]">+92 322 278 2254</p>
+                  <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] mt-0.5 group-hover:text-ink transition-colors">Tap to call →</p>
                 </div>
               </a>
               <a href={WA_DEFAULT} target="_blank" rel="noreferrer"
@@ -110,9 +106,9 @@ export default function ContactClient() {
                   <MessageCircle className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
                 </div>
                 <div>
-                  <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">WhatsApp</p>
-                  <p className="text-stone text-sm font-light font-['Inter']">+92 322 278 2254</p>
-                  <p className="text-stone text-[11px] font-['Inter'] mt-0.5 group-hover:text-ink transition-colors">Message us →</p>
+                  <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-0.5">WhatsApp</p>
+                  <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)]">+92 322 278 2254</p>
+                  <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] mt-0.5 group-hover:text-ink transition-colors">Message us →</p>
                 </div>
               </a>
               <a href={IG_LINK} target="_blank" rel="noreferrer"
@@ -121,8 +117,8 @@ export default function ContactClient() {
                   <IgIcon className="w-3.5 h-3.5 text-stone group-hover:text-ink transition-colors" />
                 </div>
                 <div>
-                  <p className="font-['Syne'] font-bold text-sm text-ink mb-0.5">Instagram</p>
-                  <p className="text-stone text-sm font-light font-['Inter']">@farwasalon</p>
+                  <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-0.5">Instagram</p>
+                  <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)]">@farwasalon</p>
                 </div>
               </a>
               <div className="flex items-start gap-4">
@@ -130,11 +126,11 @@ export default function ContactClient() {
                   <Clock className="w-3.5 h-3.5 text-stone" />
                 </div>
                 <div>
-                  <p className="font-['Syne'] font-bold text-sm text-ink mb-1">Opening Hours</p>
-                  <p className="text-stone text-sm font-light font-['Inter']">Monday – Saturday</p>
-                  <p className="text-stone text-sm font-['Inter']">11–7</p>
-                  <p className="text-stone text-sm font-light font-['Inter'] mt-1">Closed Sunday</p>
-                  <p className="text-stone text-[11px] font-['Inter'] mt-2">
+                  <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-1">Opening Hours</p>
+                  <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)]">Monday – Saturday</p>
+                  <p className="text-stone text-sm font-[family-name:var(--font-inter)]">11–7</p>
+                  <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)] mt-1">Closed Sunday</p>
+                  <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] mt-2">
                     Book online · WhatsApp · walk-ins when free. Minutes from Tariq Road.
                   </p>
                 </div>
@@ -152,7 +148,7 @@ export default function ContactClient() {
                 style={{ border: 0 }}
               />
               <a href={MAPS_LINK} target="_blank" rel="noreferrer"
-                className="tap-safe absolute bottom-3 right-3 inline-flex min-h-[44px] items-center gap-1.5 bg-white text-ink text-[10px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-3.5 py-2.5 shadow-md hover:bg-nude transition-colors">
+                className="tap-safe absolute bottom-3 right-3 inline-flex min-h-[44px] items-center gap-1.5 bg-white text-ink text-[10px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] px-3.5 py-2.5 shadow-md hover:bg-nude transition-colors">
                 Open in Maps <ArrowUpRight className="w-3 h-3" aria-hidden="true" />
               </a>
             </div>
@@ -176,7 +172,7 @@ export default function ContactClient() {
 
             <form onSubmit={handleWhatsApp} className="flex flex-col gap-4" aria-label="Booking request form">
               <div>
-                <label htmlFor="booking-name" className="block text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5">
+                <label htmlFor="booking-name" className="block text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1.5">
                   Your name
                 </label>
                 <input id="booking-name" name="name" type="text" placeholder="Your name" autoComplete="name"
@@ -185,7 +181,7 @@ export default function ContactClient() {
               </div>
 
               <div>
-                <label htmlFor="booking-phone" className="block text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5">
+                <label htmlFor="booking-phone" className="block text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1.5">
                   Phone number
                 </label>
                 <input id="booking-phone" name="phone" type="tel" placeholder="03xx-xxxxxxx" autoComplete="tel"
@@ -194,14 +190,14 @@ export default function ContactClient() {
               </div>
 
               <fieldset className="panel-soft px-5 py-4">
-                <legend className="text-[11px] font-['Inter'] text-stone px-1">Services (add one or more)</legend>
+                <legend className="text-[11px] font-[family-name:var(--font-inter)] text-stone px-1">Services (add one or more)</legend>
                 {picked.length === 0 ? (
                   <p id="booking-services-hint" className="text-stone text-xs font-light mb-3">Pick from the menu below — you can add multiple.</p>
                 ) : (
                   <ul className="flex flex-wrap gap-2 mb-3" aria-label="Services to book">
                     {picked.map((s) => (
                       <li key={s}>
-                        <span className="inline-flex items-center gap-1 pl-3 pr-1 py-1 bg-mist border border-border-soft text-xs font-['Syne'] font-semibold uppercase text-ink">
+                        <span className="inline-flex items-center gap-1 pl-3 pr-1 py-1 bg-mist border border-border-soft text-xs font-[family-name:var(--font-syne)] font-semibold uppercase text-ink">
                           <span className="max-w-[14rem] truncate">{s}</span>
                           <button type="button" className="tap-safe p-1.5 text-stone hover:text-ink" onClick={() => removeService(s)} aria-label={`Remove ${s}`}>
                             <X className="w-3.5 h-3.5" />
@@ -234,14 +230,14 @@ export default function ContactClient() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label htmlFor="booking-date" className="block text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5">
+                  <label htmlFor="booking-date" className="block text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1.5">
                     Preferred date
                   </label>
                   <input id="booking-date" name="date" type="date" value={date} onChange={e => setDate(e.target.value)}
                     className="input-field" />
                 </div>
                 <div>
-                  <label htmlFor="booking-time" className="block text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-1.5">
+                  <label htmlFor="booking-time" className="block text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1.5">
                     Preferred time
                   </label>
                   <div className="relative">
@@ -262,7 +258,7 @@ export default function ContactClient() {
                 Send on WhatsApp <ArrowUpRight className="w-4 h-4" />
               </button>
               {picked.length === 0 && (
-                <p className="text-stone text-xs font-['Inter'] font-light -mt-1">
+                <p className="text-stone text-xs font-[family-name:var(--font-inter)] font-light -mt-1">
                   Add at least one service above to send your WhatsApp request.
                 </p>
               )}
@@ -270,18 +266,18 @@ export default function ContactClient() {
 
             {submitted && (
               <div className="mt-4 p-4 border border-[#9cd48c]/40 bg-[#f4faf2]">
-                <p className="text-ink text-sm font-['Inter'] font-medium flex items-center gap-2">
+                <p className="text-ink text-sm font-[family-name:var(--font-inter)] font-medium flex items-center gap-2">
                   <Check className="w-4 h-4 text-[#6b9b5f] shrink-0" /> Message opened in WhatsApp
                 </p>
-                <p className="text-stone text-xs font-['Inter'] mt-1">We&apos;ll confirm your appointment within a few hours.</p>
+                <p className="text-stone text-xs font-[family-name:var(--font-inter)] mt-1">We&apos;ll confirm your appointment within a few hours.</p>
               </div>
             )}
 
             {fallbackUrl && (
               <div className="mt-4 p-4 border border-[#c9a98a]/40 bg-[#faf7f5]">
-                <p className="text-ink text-sm font-['Inter'] font-medium mb-1">Popup blocked by your browser</p>
+                <p className="text-ink text-sm font-[family-name:var(--font-inter)] font-medium mb-1">Popup blocked by your browser</p>
                 <a href={fallbackUrl} target="_blank" rel="noreferrer"
-                  className="text-[#8b6d59] text-sm font-['Inter'] underline hover:text-ink">
+                  className="text-[#8b6d59] text-sm font-[family-name:var(--font-inter)] underline hover:text-ink">
                   Click here to open WhatsApp manually →
                 </a>
               </div>
@@ -289,7 +285,7 @@ export default function ContactClient() {
 
             <div className="flex flex-wrap gap-x-5 gap-y-2 mt-5">
               {['No card required','Quick confirmation'].map(t => (
-                <span key={t} className="flex items-center gap-1.5 text-[10px] text-stone font-['Inter']">
+                <span key={t} className="flex items-center gap-1.5 text-[10px] text-stone font-[family-name:var(--font-inter)]">
                   <Check className="w-3 h-3 text-ink/40 shrink-0" /> {t}
                 </span>
               ))}

@@ -1,9 +1,24 @@
+/* This modal used to promise "Get 10% off your first facial" and, on success,
+   "Your 10% off code will arrive in your inbox shortly."
+
+   Nothing sent it. appendSubscriber() writes to a Subscribers tab that has
+   exactly one caller and zero readers — no ESP, no template, no send path, no
+   unsubscribe endpoint. Every person who signed up was told a code was coming
+   and then heard nothing, which teaches them the business does not follow
+   through. On a site whose entire position is that the printed price is the
+   price, that was the most expensive sentence on it.
+
+   The promise is gone rather than the signup. What it now says is the truth:
+   occasional updates, and only that. If a welcome offer is ever wanted back,
+   the send path has to exist first — the discount is the easy half. */
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import ArrowUpRight from './components/icon-sprite.jsx'
 import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
-import { X, Check, ArrowUpRight } from 'lucide-react'
+import { X, Check } from 'lucide-react'
+import { track } from '../src/site-config.js'
 
 const STORAGE_KEY = 'farwa-newsletter-seen'
 const SCROLL_DEPTH = 0.6
@@ -38,7 +53,14 @@ export default function NewsletterModal() {
   const firstInputRef = useRef(null)
 
   // Decide whether this route should ever surface the modal.
-  const eligible = !pathname?.startsWith('/book') && !pathname?.startsWith('/cancel')
+  /* Allowlist, not denylist. This previously ran anywhere except /book and
+     /cancel, so at 60% scroll depth it locked the body and covered whatever
+     the visitor had scrolled to: the reviews block on the homepage, the middle
+     of the hair table on /prices, the FAQ on /bridal. The most engaged visitor
+     on the site got interrupted on a decision page and asked for an email —
+     a channel this salon does not run on — with no way to book inside the
+     dialog. It belongs where someone is reading, not deciding. */
+  const eligible = pathname === '/' || pathname?.startsWith('/blog')
 
   useEffect(() => {
     if (!eligible || alreadySeen()) return
@@ -49,6 +71,7 @@ export default function NewsletterModal() {
       if (fired) return
       fired = true
       setOpen(true)
+      track('NewsletterOpen')
     }
 
     // Engagement-gated only: never ambush a visitor who just arrived.
@@ -164,29 +187,29 @@ export default function NewsletterModal() {
                   <div className="w-14 h-14 mx-auto mb-5 bg-[#e8f5e3] flex items-center justify-center rounded-full">
                     <Check className="w-7 h-7 text-[#4a9b3f]" strokeWidth={2.5} />
                   </div>
-                  <h2 id="newsletter-heading" className="font-['Syne'] font-bold text-xl text-ink uppercase tracking-tight mb-2">
+                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-syne)] font-bold text-xl text-ink uppercase tracking-tight mb-2">
                     Welcome!
                   </h2>
-                  <p className="text-stone text-sm font-['Inter'] font-light mb-6">
-                    Your 10% off code will arrive in your inbox shortly. We&apos;ll only send you the good stuff.
+                  <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mb-6">
+                    You&apos;re on the list. We send seasonal tips and slot news occasionally — never often, never spam.
                   </p>
                   <button
                     type="button"
                     onClick={dismiss}
-                    className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3"
+                    className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3"
                   >
                     Continue browsing
                   </button>
                 </div>
               ) : (
                 <>
-                  <p className="text-accent-gold-deep text-[10px] tracking-[0.32em] uppercase font-['Inter'] font-medium mb-3">
-                    — A welcome gift
+                  <p className="text-accent-gold-deep text-[10px] tracking-[0.32em] uppercase font-[family-name:var(--font-inter)] font-medium mb-3">
+                    — Salon updates
                   </p>
-                  <h2 id="newsletter-heading" className="font-['Unbounded'] font-bold text-2xl sm:text-[1.65rem] text-ink leading-tight mb-3">
-                    Get <span className="text-accent-gold-deep">10% off</span> your first facial
+                  <h2 id="newsletter-heading" className="font-[family-name:var(--font-unbounded)] font-bold text-2xl sm:text-[1.65rem] text-ink leading-tight mb-3">
+                    Seasonal tips from <span className="text-accent-gold-deep">the chair</span>
                   </h2>
-                  <p className="text-stone text-[13px] font-['Inter'] font-light leading-relaxed mb-6">
+                  <p className="text-stone text-[13px] font-[family-name:var(--font-inter)] font-light leading-relaxed mb-6">
                     Plus monthly seasonal tips, bridal timelines, and early access to slots in peak season. No spam — promise.
                   </p>
 
@@ -215,7 +238,7 @@ export default function NewsletterModal() {
                         placeholder="your@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-['Inter'] placeholder:text-stone/50 focus:outline-none focus:border-ink"
+                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:outline-none focus:border-ink"
                       />
                     </div>
                     <div>
@@ -228,12 +251,12 @@ export default function NewsletterModal() {
                         maxLength={60}
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-['Inter'] placeholder:text-stone/50 focus:outline-none focus:border-ink"
+                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:outline-none focus:border-ink"
                       />
                     </div>
 
                     {error && (
-                      <p role="alert" aria-live="assertive" className="text-[#c44a4a] text-xs font-['Inter']">
+                      <p role="alert" aria-live="assertive" className="text-[#c44a4a] text-xs font-[family-name:var(--font-inter)]">
                         {error}
                       </p>
                     )}
@@ -242,13 +265,13 @@ export default function NewsletterModal() {
                       type="submit"
                       disabled={state === 'submitting'}
                       aria-busy={state === 'submitting'}
-                      className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-stone disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
+                      className="tap-safe inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-stone disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
                     >
-                      {state === 'submitting' ? 'Saving…' : <>Get my 10% off <ArrowUpRight className="w-3.5 h-3.5" /></>}
+                      {state === 'submitting' ? 'Saving…' : <>Join the list <ArrowUpRight className="w-3.5 h-3.5" /></>}
                     </button>
                   </form>
 
-                  <p className="mt-4 text-stone text-[10px] font-['Inter']">
+                  <p className="mt-4 text-stone text-[10px] font-[family-name:var(--font-inter)]">
                     We never share your email. Unsubscribe any time.{' '}
                     <button
                       type="button"

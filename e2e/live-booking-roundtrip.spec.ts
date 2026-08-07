@@ -54,12 +54,17 @@ test('live: book via UI, verify confirmation, cancel via UI', async ({ page }) =
   await page.getByRole('button', { name: 'Confirm Booking' }).click()
 
   // Confirmation = the real sheet row exists (route verifies before responding)
-  await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible({
+  await expect(page.getByRole('heading', { name: /you're set/i })).toBeVisible({
     timeout: 30_000,
   })
+  // Analytics scrub removes `id` from the address after first paint; read the
+  // Booking ID from the confirmation UI (or durable cancel link) instead.
+  const bookingIdText = page.getByText(/^FBS-[A-F0-9]+$/i).first()
+  await expect(bookingIdText).toBeVisible({ timeout: 10_000 })
+  const bookingId = (await bookingIdText.textContent())?.trim()
+  expect(bookingId, 'confirmation must show a booking id').toBeTruthy()
   const url = new URL(page.url())
-  const bookingId = url.searchParams.get('id')
-  expect(bookingId, 'confirmation must carry a booking id').toBeTruthy()
+  expect(url.searchParams.get('id'), 'id must be scrubbed from confirmation URL').toBeNull()
   // Cancel token must NEVER be in the URL (Plausible + Meta Pixel transmit href).
   expect(url.searchParams.get('token')).toBeNull()
   expect(page.url()).not.toMatch(/token=/)

@@ -24,12 +24,17 @@ test.describe('Home — mobile CTA bar', () => {
       await expect(servicesLink).toBeVisible()
     }
 
+    /* These filters used to declare role=tablist/role=tab with aria-selected.
+       That contract promises arrow-key roving focus and an owned tabpanel, and
+       neither exists — so the roles were removed in favour of aria-pressed
+       toggle buttons, and this test follows the corrected semantics. */
     const servicesSection = page.locator('section').filter({
-      has: page.getByRole('tablist', { name: 'Filter service categories' }),
+      has: page.getByRole('group', { name: 'Filter service categories' }),
     })
     await servicesSection.scrollIntoViewIfNeeded()
-    await page.getByRole('tab', { name: 'Threading' }).click()
-    await expect(page.getByRole('tab', { name: 'Threading' })).toHaveAttribute('aria-selected', 'true')
+    const threading = page.getByRole('button', { name: 'Threading', exact: true })
+    await threading.click()
+    await expect(threading).toHaveAttribute('aria-pressed', 'true')
     const categoryLinks = servicesSection.locator('.divide-y').getByRole('link')
     await expect(categoryLinks).toHaveCount(1)
     await expect(categoryLinks.first()).toContainText(/threading/i)

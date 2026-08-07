@@ -1,8 +1,10 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import ArrowUpRight from './icon-sprite.jsx'
+import WaCta from './wa-cta.jsx'
 import Link from 'next/link'
-import { MapPin, Clock, Phone, Star, ArrowUpRight } from 'lucide-react'
+import { MapPin, Clock, Phone, Star } from 'lucide-react'
 import { MAPS_LINK, WA_NUMBER } from '../../src/data.js'
 import {
   SALON_ADDRESS_LINES,
@@ -56,7 +58,7 @@ function LazyMapsEmbed() {
           href={MAPS_LINK}
           target="_blank"
           rel="noreferrer"
-          className="flex h-full w-full items-center justify-center text-stone text-xs font-['Inter'] tracking-wide underline underline-offset-2 hover:text-ink"
+          className="flex h-full w-full items-center justify-center text-stone text-xs font-[family-name:var(--font-inter)] tracking-wide underline underline-offset-2 hover:text-ink"
         >
           View map on Google Maps
         </a>
@@ -88,7 +90,7 @@ export default function SalonLocalBlock({ variant = 'light', className = '' }) {
             >
               Farwa Beauty Salon · PECHS, Karachi
             </h2>
-            <ul className={`space-y-3 text-sm font-['Inter'] font-light ${dark ? 'text-white/75' : 'text-stone'}`}>
+            <ul className={`space-y-3 text-sm font-[family-name:var(--font-inter)] font-light ${dark ? 'text-white/75' : 'text-stone'}`}>
               <li className="flex items-start gap-2">
                 <MapPin className={`w-4 h-4 shrink-0 mt-0.5 ${dark ? 'text-[#c9a98a]' : 'text-ink'}`} />
                 <span>{SALON_ADDRESS_LINES[0]}</span>
@@ -124,19 +126,18 @@ export default function SalonLocalBlock({ variant = 'light', className = '' }) {
               >
                 Book online <ArrowUpRight className="w-3.5 h-3.5" />
               </Link>
-              <a
+              <WaCta
                 href={`https://wa.me/${WA_NUMBER}`}
-                target="_blank"
-                rel="noreferrer"
+                from="local-block"
                 className={`btn-secondary ${dark ? '!border-white/30 !text-white hover:!border-white hover:!bg-white/10' : ''}`}
               >
                 WhatsApp
-              </a>
+              </WaCta>
             </div>
           </div>
           <div>
             <LazyMapsEmbed />
-            <p className={`mt-2 text-[10px] font-['Inter'] ${dark ? 'text-white/60' : 'text-stone'}`}>
+            <p className={`mt-2 text-[10px] font-[family-name:var(--font-inter)] ${dark ? 'text-white/60' : 'text-stone'}`}>
               <a
                 href={MAPS_LINK}
                 target="_blank"

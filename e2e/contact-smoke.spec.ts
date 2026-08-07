@@ -3,7 +3,8 @@ import { test, expect } from '@playwright/test'
 test.describe('Contact page', () => {
   test('loads form and WhatsApp booking flow', async ({ page }) => {
     await page.goto('/contact')
-    await expect(page.getByRole('heading', { name: /book your appointment/i })).toBeVisible()
+    /* Contact heads "Find us / ask us"; online booking lives on /book. */
+    await expect(page.getByRole('heading', { name: /find us|ask us/i })).toBeVisible()
     await expect(page.getByRole('form', { name: /booking request form/i })).toBeVisible()
     await expect(page.getByRole('link', { name: /whatsapp/i }).first()).toHaveAttribute(
       'href',

@@ -43,10 +43,10 @@ Welcome to Farwa Beauty Salon — Karachi's trusted beauty destination in PECHS 
 
 Our Services:
 💄 Bridal Makeup & Packages (Barat, Walima, Mehndi)
-💆 Facials (Whitening, Hydra, Gold, Anti-Aging)
-💇 Hair Treatments (Keratin, Protein, Color, Styling)
+💆 Facials (Whitening, White Glow, HD Whitening, Janssen)
+💇 Haircut, Blowdry, Colour & Protein treatments
 🧖 Waxing & Threading (Full Body, Face)
-💅 Nails (Manicure, Pedicure, Gel, Acrylics)
+💅 Nails (Manicure, Pedicure, SPA)
 💆 Massage (Full Body, Back & Shoulder)
 
 Why choose us?
@@ -122,12 +122,12 @@ Founded: 2008
 
 ### Skincare / Facials
 ```
-#FacialTreatment #GlowingSkin #SkincareTips #HydraFacial #GoldFacial #WhiteningFacial #SkincareRoutine #FacialKarachi #SkinGlow #ClearSkin
+#FacialTreatment #GlowingSkin #SkincareTips #WhiteningFacial #HDWhitening #WhiteGlowFacial #SkincareRoutine #FacialKarachi #SkinGlow #ClearSkin
 ```
 
 ### Hair
 ```
-#HairTransformation #KeratinTreatment #HairColor #Balayage #HairStyling #HairSalonKarachi #HealthyHair #HairGoals #HairTreatment #ProteinTreatment
+#HairTransformation #HairColor #Blowdry #HairStyling #HairSalonKarachi #HealthyHair #HairGoals #HairTreatment #ProteinTreatment #HaircutKarachi
 ```
 
 ### Waxing / Threading

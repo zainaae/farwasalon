@@ -1,7 +1,9 @@
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import ArrowUpRight from '../components/icon-sprite.jsx'
+import WaCta from '../components/wa-cta.jsx'
 import { SERVICES, CAT_SLUGS, formatServicePrice, formatDuration, YEARS_ACTIVE } from '../../src/data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
+import { LAST_SERVICE_UPDATE } from '../../lib/sitemap-data.js'
 import JsonLd from '../json-ld'
 import {
   buildFaqPageSchema,
@@ -30,7 +32,16 @@ export const metadata = {
   }),
 }
 
-const UPDATED = '24 July 2026'
+const UPDATED = formatListDate(LAST_SERVICE_UPDATE)
+
+/* The "updated" eyebrow must agree with the sitemap <lastmod> for the menu.
+   Both read LAST_SERVICE_UPDATE, so a menu edit bumps one constant and both
+   surfaces follow — the page cannot claim a fresher date than the sitemap
+   does, or vice versa. */
+function formatListDate(ymd) {
+  const [y, m, d] = ymd.split('-').map(Number)
+  return new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(y, m - 1, d))
+}
 
 export default function PricesPage() {
   const categories = Object.keys(SERVICES)
@@ -45,26 +56,28 @@ export default function PricesPage() {
       {faqSchema && <JsonLd data={faqSchema} />}
       <JsonLd data={buildPriceListSchema()} />
       <div className="section-shell section-pad min-h-0">
-        <p className="eyebrow mb-4">— Price list · updated {UPDATED}</p>
-        <h1 className="display-section text-ink mb-4 max-w-3xl">
-          Salon Price List Karachi 2026 — From Rs 100
-        </h1>
-        {/* The claim lives here, on the page that proves it. It used to live on
-            the homepage while this page said only "every priced service", so
-            nothing that read one read the other. */}
-        <p className="text-body md:text-lg max-w-2xl mb-3 leading-relaxed">
-          This is the full published price list for Farwa Beauty Salon in Block 3 PECHS, Karachi:
-          all <strong className="font-medium text-ink">{menu.total} services</strong> across{' '}
-          {menu.categories} categories, and <strong className="font-medium text-ink">every one of
-          them carries a printed price</strong> in Pakistani Rupees. No hidden quotes.
-        </p>
+        <div className="title-stack mb-3 max-w-2xl">
+          <p className="eyebrow">— Price list · updated {UPDATED}</p>
+          <h1 className="display-page text-ink">
+            Salon price list — from Rs 100
+          </h1>
+          {/* The claim lives here, on the page that proves it. It used to live on
+              the homepage while this page said only "every priced service", so
+              nothing that read one read the other. */}
+          <p className="text-body md:text-lg leading-relaxed">
+            This is the full published price list for Farwa Beauty Salon in Block 3 PECHS, Karachi:
+            all <strong className="font-medium text-ink">{menu.total} services</strong> across{' '}
+            {menu.categories} categories, and <strong className="font-medium text-ink">every one of
+            them carries a printed price</strong> in Pakistani Rupees. No hidden quotes.
+          </p>
+        </div>
         <p className="text-body text-sm max-w-2xl mb-3 leading-relaxed">
           {menu.fixed} of those are fixed rates — what the table says is what you pay. The
-          remaining {menu.startingFrom} are hair and hair-treatment services shown as
+          remaining {menu.startingFrom}{' '}are hair and hair-treatment services shown as
           &ldquo;from&rdquo;, because length and density genuinely change the work; that figure is
           a floor and it is confirmed with you before anything starts.
         </p>
-        <p className="text-stone text-sm font-['Inter'] font-light max-w-2xl mb-6 leading-relaxed">
+        <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-2xl mb-6 leading-relaxed">
           {YEARS_ACTIVE}+ years · women-only studio · {rating.ratingValue}★ Google · cash, JazzCash, EasyPaisa · Mon–Sat 11–7
         </p>
 
@@ -72,19 +85,29 @@ export default function PricesPage() {
           <Link href="/book" className="tap-safe btn-primary w-full sm:w-auto justify-center">
             Book online <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
-          <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer"
+          <WaCta href="https://wa.me/923222782254" from="prices-quote"
             className="tap-safe btn-secondary w-full sm:w-auto justify-center">
             Ask on WhatsApp
-          </a>
+          </WaCta>
         </div>
 
         <div className="-mx-4 sm:-mx-5 md:-mx-10 mb-10">
           <DealBanner />
         </div>
 
-        <nav aria-label="Price list categories" className="mb-12 max-w-4xl">
-          <p className="text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone mb-2.5">Jump to category</p>
-          <ul className="tab-scroller text-sm font-['Inter'] pb-1">
+        {/* Only the pill row sticks. The label and the guide link used to sit
+            inside the sticky box too, which made it 144px tall on a phone —
+            with the 57px header that is 198px of permanent chrome, 24% of a
+            390x844 viewport, on the longest page of the site. They are
+            ordinary flow content now and the sticky element is one row. */}
+        <p className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2.5">Jump to category</p>
+        <nav aria-label="Price list categories" className="w-full">
+          <ul className="tab-scroller text-sm font-[family-name:var(--font-inter)] pb-1">
+            <li>
+              <a href="#quote" className="tap-safe tab-pill inline-flex items-center">
+                Quote builder
+              </a>
+            </li>
             {categories.map((cat) => (
               <li key={cat}>
                 <a
@@ -96,18 +119,18 @@ export default function PricesPage() {
               </li>
             ))}
           </ul>
-          <p className="mt-3 text-stone text-sm font-light">
-            How to read a rate list:{' '}
-            <Link href="/blog/salon-price-list-karachi-2026" className="link-underline hover:text-ink text-ink font-medium">
-              Salon Price List Karachi 2026 guide
-            </Link>
-          </p>
         </nav>
+        <p className="mt-3 mb-12 text-stone text-sm font-light">
+          How to read a rate list:{' '}
+          <Link href="/blog/salon-price-list-karachi-2026" className="link-underline hover:text-ink text-ink font-medium">
+            Salon Price List Karachi 2026 guide
+          </Link>
+        </p>
 
         <QuoteBuilder />
 
-        <section className="mb-12 panel-soft p-5 md:p-6 shadow-soft max-w-3xl" aria-labelledby="prices-bridal-strip">
-          <h2 id="prices-bridal-strip" className="font-['Syne'] font-semibold text-ink text-lg mb-2">
+        <section className="flow panel-soft p-5 md:p-6 shadow-soft" aria-labelledby="prices-bridal-strip">
+          <h2 id="prices-bridal-strip" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-lg mb-2">
             Bridal packages
           </h2>
           <p className="text-body text-sm mb-3">
@@ -123,18 +146,18 @@ export default function PricesPage() {
           {categories.map((cat) => (
             <section key={cat} aria-labelledby={`prices-${CAT_SLUGS[cat]}`}>
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-ink/30 pb-2.5 mb-1">
-                <h2 id={`prices-${CAT_SLUGS[cat]}`} className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl">
+                <h2 id={`prices-${CAT_SLUGS[cat]}`} className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl">
                   {cat}
                 </h2>
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                   <Link
                     href={`/book?category=${encodeURIComponent(cat)}`}
-                    className="tap-safe inline-flex min-h-[44px] items-center text-[11px] tracking-[0.14em] uppercase font-['Inter'] font-semibold text-ink hover:text-stone transition-colors"
+                    className="tap-safe inline-flex min-h-[44px] items-center text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] font-semibold text-ink hover:text-stone transition-colors"
                   >
                     Book {cat === 'Eyebrow Tattoo' ? 'brows' : cat}
                   </Link>
                   <Link href={`/services/${CAT_SLUGS[cat]}`}
-                    className="tap-safe inline-flex min-h-[44px] items-center text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone hover:text-ink transition-colors">
+                    className="tap-safe inline-flex min-h-[44px] items-center text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone hover:text-ink transition-colors">
                     About →
                   </Link>
                 </div>
@@ -147,11 +170,11 @@ export default function PricesPage() {
                 <tbody>
                   {SERVICES[cat].map((s) => (
                     <tr key={s.id} className="border-b border-border-soft">
-                      <td className="py-2.5 pr-3 text-ink text-[14px] sm:text-[15px] font-['Inter'] font-light">{s.name}</td>
-                      <td className="py-2.5 pr-3 text-right text-stone/80 text-[12px] font-['Inter'] whitespace-nowrap tabular-nums hidden sm:table-cell">
+                      <td className="py-2.5 pr-3 text-ink text-[14px] sm:text-[15px] font-[family-name:var(--font-inter)] font-light">{s.name}</td>
+                      <td className="py-2.5 pr-3 text-right text-stone/80 text-[12px] font-[family-name:var(--font-inter)] whitespace-nowrap tabular-nums hidden sm:table-cell">
                         {s.durationMinutes ? formatDuration(s.durationMinutes) : ''}
                       </td>
-                      <td className="py-2.5 text-right font-['Unbounded'] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap tabular-nums">
+                      <td className="py-2.5 text-right font-[family-name:var(--font-unbounded)] font-bold text-ink text-[13px] sm:text-sm whitespace-nowrap tabular-nums">
                         {formatServicePrice(s)}
                       </td>
                     </tr>
@@ -165,8 +188,8 @@ export default function PricesPage() {
         {/* The other half of a complete price list is what is not on it. Same
             source as the `additionalProperty` boundaries in the salon JSON-LD,
             so the visible text and the machine-readable claim cannot disagree. */}
-        <section className="mt-14 max-w-3xl" aria-labelledby="prices-not-offered">
-          <h2 id="prices-not-offered" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-3">
+        <section className="mt-24 md:mt-30 max-w-2xl" aria-labelledby="prices-not-offered">
+          <h2 id="prices-not-offered" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-3">
             What is not on this list
           </h2>
           <p className="text-body text-sm mb-4">
@@ -176,15 +199,15 @@ export default function PricesPage() {
           <dl className="space-y-3">
             {SERVICE_BOUNDARIES.map((b) => (
               <div key={b.name} className="text-sm">
-                <dt className="font-['Syne'] font-bold text-ink inline">{b.name}: </dt>
+                <dt className="font-[family-name:var(--font-syne)] font-bold text-ink inline">{b.name}: </dt>
                 <dd className="text-body inline">{b.value}</dd>
               </div>
             ))}
           </dl>
         </section>
 
-        <section className="mt-14 panel-soft p-6 md:p-8 shadow-soft max-w-3xl" aria-labelledby="prices-book-cta">
-          <h2 id="prices-book-cta" className="font-['Syne'] font-semibold text-ink text-lg md:text-xl mb-2">
+        <section className="mt-14 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="prices-book-cta">
+          <h2 id="prices-book-cta" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-lg md:text-xl mb-2">
             Ready to book?
           </h2>
           <p className="text-body text-sm mb-5 max-w-xl">
@@ -194,38 +217,38 @@ export default function PricesPage() {
             <Link href="/book" className="tap-safe btn-primary">
               Book online <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
-            <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer"
+            <WaCta href="https://wa.me/923222782254" from="prices-footer"
               className="tap-safe btn-secondary">
               Ask on WhatsApp
-            </a>
+            </WaCta>
           </div>
         </section>
 
-        <section className="mt-14 pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
-          <h2 id="prices-faq-heading" className="font-['Syne'] font-semibold text-ink text-xl md:text-2xl mb-6">
+        <section className="mt-24 md:mt-30 pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
+          <h2 id="prices-faq-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-6">
             Price questions
           </h2>
-          <dl className="space-y-5 max-w-3xl">
+          <dl className="space-y-5 max-w-lg">
             {PRICES_PAGE_FAQS.map((f) => (
               <div key={f.q}>
-                <dt className="font-['Syne'] font-bold text-sm text-ink">{f.q}</dt>
-                <dd className="mt-1.5 text-body text-sm">{f.a}</dd>
+                <dt className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink">{f.q}</dt>
+                <dd className="mt-1.5 text-body">{f.a}</dd>
               </div>
             ))}
           </dl>
         </section>
 
-        <p className="mt-10 text-[11px] tracking-[0.14em] uppercase font-['Inter'] text-stone/80 max-w-2xl">
+        <p className="mt-10 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone/80 max-w-2xl">
           All prices in Pakistani Rupees (Rs). Cash, JazzCash and EasyPaisa accepted at the salon.
           Listed rates are starting prices, not a tax invoice.
         </p>
-        <p className="mt-4 text-[12px] text-stone font-['Inter'] font-light max-w-2xl">
+        <p className="mt-4 text-[12px] text-stone font-[family-name:var(--font-inter)] font-light max-w-2xl">
           The special works — <Link href="/blog/party-makeup-karachi-guide" className="link-underline text-ink font-medium">party makeup</Link>,
           custom looks, event hairdos, and <Link href="/blog/keratin-treatment-price-karachi" className="link-underline text-ink font-medium">keratin</Link> —
           are quoted per person because they genuinely vary.{' '}
           <a href="#quote" className="link-underline text-ink font-medium">Construct your quote above</a> — it arrives in minutes and is binding once given.
         </p>
-        <p className="mt-6 pt-6 border-t border-border-soft text-xs text-stone font-['Inter'] flex flex-wrap gap-x-3 gap-y-2">
+        <p className="mt-6 pt-6 border-t border-border-soft text-xs text-stone font-[family-name:var(--font-inter)] flex flex-wrap gap-x-3 gap-y-2">
           <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>
           <Link href="/bridal" className="link-underline hover:text-ink font-medium">Bridal makeup</Link>
           <Link href="/blog/manicure-pedicure-price-list-karachi" className="link-underline hover:text-ink font-medium">Nails price guide</Link>

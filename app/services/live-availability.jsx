@@ -1,11 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import ArrowUpRight from '../components/icon-sprite.jsx'
 import Link from 'next/link'
 import { m } from 'framer-motion'
-import { Clock, ArrowUpRight } from 'lucide-react'
+import { Clock } from 'lucide-react'
 import { CTA_PRIMARY_LABEL } from '../../src/shared.jsx'
-import { toLocalDateString } from '../../lib/date-local.js'
+import { salonTodayString } from '../../lib/date-local.js'
 
 const REFRESH_MS = 60_000
 
@@ -15,7 +16,10 @@ export default function LiveAvailability() {
   useEffect(() => {
     let active = true
     async function load() {
-      const today = toLocalDateString(new Date())
+      /* "Today" in salon time, matching how /api/slots judges past dates.
+         Using device-local today would fetch a date the server sees as past
+         for visitors west of Karachi, 400, and silently hide the widget. */
+      const today = salonTodayString()
       try {
         // Allow short CDN/browser cache (slots route sets s-maxage=15).
         const res = await fetch(`/api/slots?date=${today}`)
@@ -59,7 +63,7 @@ export default function LiveAvailability() {
       >
         <div className="flex items-center gap-2 min-w-0 flex-1">
           <Clock className="w-4 h-4 text-stone shrink-0" aria-hidden="true" />
-          <p className="text-stone text-xs font-['Inter']">
+          <p className="text-stone text-xs font-[family-name:var(--font-inter)]">
             <span className="font-medium text-ink">{state.reason}.</span> Browse services and book ahead for the next open day.
           </p>
         </div>
@@ -91,7 +95,7 @@ export default function LiveAvailability() {
         >
           <span className={`absolute inset-0 rounded-full ${tone.dot} animate-ping opacity-60`} />
         </span>
-        <p className="text-ink text-xs font-['Inter']">
+        <p className="text-ink text-xs font-[family-name:var(--font-inter)]">
           <span className="text-stone tracking-wider uppercase text-[10px] mr-2">Live · today</span>
           {tone.label}
         </p>
@@ -99,7 +103,7 @@ export default function LiveAvailability() {
       {free > 0 && (
         <Link
           href="/book"
-          className="tap-safe shrink-0 inline-flex items-center gap-1 text-ink text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] hover:text-stone transition-colors"
+          className="tap-safe shrink-0 inline-flex items-center gap-1 text-ink text-[10px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] hover:text-stone transition-colors"
         >
           {CTA_PRIMARY_LABEL} <ArrowUpRight className="w-3 h-3" />
         </Link>

@@ -1,6 +1,7 @@
 import Link from 'next/link'
+import ArrowUpRight from '../../components/icon-sprite.jsx'
 import { notFound } from 'next/navigation'
-import { ArrowUpRight, MapPin, Clock, Car } from 'lucide-react'
+import { MapPin, Clock, Car } from 'lucide-react'
 import { NEIGHBORHOODS, TOP_SERVICES } from '../../../src/location-seo.js'
 import { AREA_CONTENT } from '../../../src/area-content.js'
 import { CAT_SLUGS, SERVICES, formatPrice, YEARS_ACTIVE, MAPS_LINK } from '../../../src/data.js'
@@ -21,8 +22,8 @@ function Fact({ icon, label, value }) {
     <div className="flex items-start gap-2.5">
       {icon}
       <div>
-        <dt className="text-stone text-[10px] tracking-[0.18em] uppercase font-['Inter']">{label}</dt>
-        <dd className="text-ink text-sm font-['Inter'] mt-0.5">{value}</dd>
+        <dt className="text-stone text-[10px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)]">{label}</dt>
+        <dd className="text-ink text-sm font-[family-name:var(--font-inter)] mt-0.5">{value}</dd>
       </div>
     </div>
   )
@@ -98,7 +99,7 @@ export default async function AreaPage({ params }) {
 
       <div className="section-shell section-pad min-h-0">
         <nav aria-label="Breadcrumb" className="mb-5">
-          <ol className="flex flex-wrap items-center gap-2 text-stone text-[11px] font-['Inter']">
+          <ol className="flex flex-wrap items-center gap-2 text-stone text-[11px] font-[family-name:var(--font-inter)]">
             <li><Link href="/" className="link-underline hover:text-ink">Home</Link></li>
             <li aria-hidden="true">/</li>
             <li><Link href="/beauty-salon-karachi" className="link-underline hover:text-ink">Areas</Link></li>
@@ -108,9 +109,9 @@ export default async function AreaPage({ params }) {
         </nav>
 
         <p className="eyebrow mb-4">— Coming from {area.name}</p>
-        <h1 className="font-['Unbounded'] font-bold text-2xl md:text-[2.1rem] text-ink mb-5 max-w-3xl leading-tight tracking-tight">
+        <h1 className="display-page text-ink mb-5 max-w-2xl">
           Beauty Salon for {area.name}
-          <span className="block text-stone text-base md:text-lg font-['Inter'] font-light mt-2">
+          <span className="block text-stone text-base md:text-lg font-[family-name:var(--font-inter)] font-light mt-2">
             One studio in Block 3, PECHS — {content.driveTime} away
           </span>
         </h1>
@@ -125,7 +126,7 @@ export default async function AreaPage({ params }) {
         </dl>
 
         <section aria-labelledby="getting-here" className="mb-10 max-w-2xl">
-          <h2 id="getting-here" className="font-['Syne'] font-semibold text-ink text-lg md:text-xl mb-3">
+          <h2 id="getting-here" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-lg md:text-xl mb-3">
             Getting here from {area.name}
           </h2>
           <p className="text-body text-sm md:text-[15px] leading-relaxed mb-4">{content.gettingHere}</p>
@@ -133,7 +134,7 @@ export default async function AreaPage({ params }) {
         </section>
 
         <section aria-labelledby="worth-it" className="mb-10 max-w-2xl">
-          <h2 id="worth-it" className="font-['Syne'] font-semibold text-ink text-lg md:text-xl mb-3">
+          <h2 id="worth-it" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-lg md:text-xl mb-3">
             What is worth booking from this distance
           </h2>
           <p className="text-body text-sm md:text-[15px] leading-relaxed mb-4">{content.worthTheTrip}</p>
@@ -141,7 +142,7 @@ export default async function AreaPage({ params }) {
         </section>
 
         <section aria-labelledby="services" className="mb-10">
-          <h2 id="services" className="font-['Syne'] font-semibold text-ink text-lg md:text-xl mb-4">
+          <h2 id="services" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-lg md:text-xl mb-4">
             Every service, with its price
           </h2>
           <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 max-w-2xl mb-4">
@@ -153,7 +154,7 @@ export default async function AreaPage({ params }) {
                 <li key={svc.slug}>
                   <Link
                     href={`/services/${CAT_SLUGS[svc.category] ?? 'services'}`}
-                    className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-['Inter']"
+                    className="tap-safe inline-flex items-center min-h-[44px] link-underline text-ink text-sm font-[family-name:var(--font-inter)]"
                   >
                     {svc.name}
                     {floor && <span className="text-stone ml-2">from {floor}</span>}
@@ -162,7 +163,7 @@ export default async function AreaPage({ params }) {
               )
             })}
           </ul>
-          <p className="text-stone text-[13px] font-['Inter'] font-light max-w-2xl">
+          <p className="text-stone text-[13px] font-[family-name:var(--font-inter)] font-light max-w-2xl">
             All 100+ rates stay on the{' '}
             <Link href="/prices" className="link-underline text-ink font-medium">price list</Link> —
             the number you read is the number at the counter.
@@ -170,14 +171,14 @@ export default async function AreaPage({ params }) {
         </section>
 
         <section aria-labelledby="visit" className="mb-10 max-w-2xl">
-          <h2 id="visit" className="font-['Syne'] font-semibold text-ink text-lg md:text-xl mb-3">
+          <h2 id="visit" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-lg md:text-xl mb-3">
             One address, {YEARS_ACTIVE} years
           </h2>
           <address className="not-italic text-body text-sm leading-relaxed mb-3">
             {SALON_ADDRESS_LINES.map((line) => <span key={line} className="block">{line}</span>)}
             <span className="block mt-2">{SALON_PHONE_DISPLAY} · Mon–Sat 11am–7pm</span>
           </address>
-          <p className="text-stone text-[13px] font-['Inter'] font-light">
+          <p className="text-stone text-[13px] font-[family-name:var(--font-inter)] font-light">
             Women-only studio. We do not run branches and we do not send anyone to homes —
             every appointment is at Block 3.{' '}
             <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="link-underline text-ink font-medium">
@@ -196,7 +197,7 @@ export default async function AreaPage({ params }) {
         </div>
 
         <section aria-labelledby="other-areas" className="pt-8 border-t border-border-soft">
-          <h2 id="other-areas" className="font-['Syne'] font-semibold text-ink text-base mb-3">
+          <h2 id="other-areas" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-base mb-3">
             Other areas we see clients from
           </h2>
           <ul className="flex flex-wrap gap-x-4 gap-y-1">
@@ -204,7 +205,7 @@ export default async function AreaPage({ params }) {
               <li key={n.slug}>
                 <Link
                   href={`/areas/${n.slug}`}
-                  className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink"
+                  className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-[family-name:var(--font-inter)] hover:text-ink"
                 >
                   {n.name}
                 </Link>

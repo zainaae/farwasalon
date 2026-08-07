@@ -1,19 +1,22 @@
 'use client'
 
 import { useState, useEffect, useMemo } from 'react'
+import ArrowUpRight from './components/icon-sprite.jsx'
+import WaCta from './components/wa-cta.jsx'
 import Link from 'next/link'
 import Image from 'next/image'
 import { m } from 'framer-motion'
-import { ArrowUpRight, ChevronRight, Star, Quote } from 'lucide-react'
+import { ChevronRight, Quote } from 'lucide-react'
+import StarRating from './components/star-rating.jsx'
 import {
-  AnimatedNumber, LazyVideo, CAT_SLUGS,
+  LazyVideo, CAT_SLUGS,
   WordmarkDivider,
 } from '../src/shared.jsx'
 import { formatPrice } from '../src/data.js'
 import { GOOGLE_GBP_STATS, FACEBOOK_TESTIMONIALS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
-import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK, MONTHLY_APPOINTMENTS } from '../src/data.js'
+import { SERVICES, CAT_META, YEARS_ACTIVE, WA_NUMBER, SERVICE_FILTER_TABS, filterServiceCategories, GOOGLE_REVIEW_LINK } from '../src/data.js'
 import { EDITORIAL_PHOTOS } from '../src/salon-media.js'
 import {
   getGbpStatsForDisplay,
@@ -23,9 +26,6 @@ import {
   sortByRecency,
   newestPostedAt,
 } from '../lib/google-reviews.js'
-
-const CATEGORY_COUNT = Object.keys(SERVICES).length
-const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 
 /* The testimonials themselves now live in src/google-reviews-data.js, with an
    absolute `postedAt` each, so the freshness tests can see them and so the
@@ -58,48 +58,33 @@ function EditorialMedia({ item, className = '' }) {
 }
 
 function StatsStrip() {
+  /* Story band only. The four trust figures live in ProofStrip under the hero —
+     repeating years / appointments / service count here made the page feel like
+     it was restating itself, and overflow-hidden on the title clipped Unbounded. */
   return (
-    <section className="cv-auto bg-white py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10">
+    <section className="cv-auto bg-white py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10 border-b border-border-soft">
       <div className="max-w-screen-xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
-          <div className="overflow-hidden">
-            <m.div initial={{ y: '40%', opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
-              viewport={{ once: true, margin: '-80px' }} transition={{ duration: 1.0, ease: [0.16,1,0.3,1] }}>
-              <p className="eyebrow mb-3">— Est. 2008 · PECHS</p>
-              <h2 className="display-section max-w-2xl">
-                A beauty studio with {YEARS_ACTIVE} years of care
-              </h2>
-            </m.div>
-          </div>
+        <div className="grid md:grid-cols-2 gap-8 md:gap-14 items-end">
+          <m.div initial={{ y: 28, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+            className="title-stack">
+            <p className="eyebrow">— Est. 2008 · PECHS</p>
+            <h2 className="display-page max-w-xl text-ink">
+              A beauty studio with {YEARS_ACTIVE} years of care
+            </h2>
+          </m.div>
           <m.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.15 }}
-            className="flex flex-col gap-6 sm:gap-7">
-            <p className="text-stone text-[15px] sm:text-base leading-relaxed font-light max-w-xl">
-              For over {YEARS_ACTIVE} years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
+            viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.12 }}
+            className="flex flex-col gap-5 sm:gap-6 md:pb-1">
+            <p className="text-body max-w-xl">
+              For over {YEARS_ACTIVE}{' '}years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-4 border-t border-border-soft pt-6 sm:pt-7">
-              {[
-                { display: `${YEARS_ACTIVE}+`,  final: YEARS_ACTIVE, label: 'Years of expertise' },
-                { display: String(CATEGORY_COUNT), final: CATEGORY_COUNT, label: 'Specialities, one roof' },
-                { display: String(SERVICE_COUNT), final: SERVICE_COUNT, label: 'Services, every price printed' },
-                { display: `${MONTHLY_APPOINTMENTS.toLocaleString('en-US')}+`, final: MONTHLY_APPOINTMENTS, label: 'Appointments a month' },
-              ].map(({ display, final, label }) => (
-                <div key={label} className="min-w-0">
-                  <p className="font-['Unbounded'] font-bold text-2xl sm:text-3xl md:text-4xl text-ink mb-1.5 leading-none">
-                    {final !== null
-                      ? <AnimatedNumber display={display} final={final} ariaLabel={`${display} ${label}`} />
-                      : display}
-                  </p>
-                  <p className="text-stone text-[11px] tracking-wide font-['Inter'] leading-tight">{label}</p>
-                </div>
-              ))}
-            </div>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-              <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-['Inter'] group w-fit">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1 border-t border-border-soft">
+              <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-[family-name:var(--font-inter)] group w-fit pt-4">
                 <span className="link-underline">Book a visit</span>
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               </Link>
-              <Link href="/about" className="tap-safe text-stone hover:text-ink text-[11px] tracking-wide font-['Inter'] transition-colors">
+              <Link href="/about" className="tap-safe text-stone hover:text-ink text-[11px] tracking-wide font-[family-name:var(--font-inter)] transition-colors pt-4">
                 Our story
               </Link>
             </div>
@@ -111,43 +96,76 @@ function StatsStrip() {
 }
 
 function EditorialSlideshow() {
+  /* The list is doubled so the strip can loop seamlessly. The second copy is
+     the same 13 photos, so it is presentational: without aria-hidden a screen
+     reader reads the gallery twice, and without tabIndex -1 a keyboard user
+     tabs 26 stops through 13 destinations — inside a strip that is still
+     moving. Only the first copy is reachable. */
   const doubled = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
+  const isClone = (i) => i >= EDITORIAL_PHOTOS.length
 
   return (
-    <section className="cv-auto bg-white border-y border-[#e4ddd7] overflow-x-clip max-w-full" aria-label="Editorial photo showcase">
-      <div className="md:hidden py-3 w-full max-w-full overflow-x-clip">
-        <div className="flex w-max max-w-none" style={{ animation: 'marquee 45s linear infinite' }}>
-          {doubled.map((p, i) => (
-            <figure key={i}
-              className="relative shrink-0 overflow-hidden mx-[5px]"
-              style={{ width: 'min(62vw, 230px)', height: 'min(82vw, 306px)' }}>
-              <EditorialMedia item={p} />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-              <figcaption className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-                <span className="text-white text-[10px] tracking-[0.2em] uppercase font-['Inter'] font-medium leading-none">
-                  {p.label}
+    <section
+      className="cv-auto editorial-marquee bg-mist border-y border-[#e4ddd7] overflow-x-clip max-w-full"
+      aria-label="Editorial photo showcase"
+    >
+      <div className="section-shell flex items-end justify-between gap-4 pt-5 pb-2 px-4 sm:px-5 md:px-10">
+        <p className="eyebrow mb-0">— The work</p>
+        <Link
+          href="/gallery"
+          className="tap-safe inline-flex items-center gap-1.5 text-[10px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-ink hover:text-stone transition-colors"
+        >
+          See the work <ArrowUpRight className="w-3 h-3" />
+        </Link>
+      </div>
+
+      {/* One track, restyled per breakpoint. This was two — a md:hidden
+          scroller and a hidden md:block one — over the same doubled list, so
+          all 13 photos shipped four times (2 breakpoints x the loop clone) as
+          52 cards, and ~30 KB of the document was display:none on any given
+          device. That is the same bug the reviews grid below already had; the
+          comment there explains it at length.
+
+          The two differed in ways that are all expressible responsively: card
+          size, margin, gradient depth, and a mobile-only index numeral. The
+          track speed differed too (45s vs 65s) — that now lives in one class
+          with a media query, in globals.css. */}
+      <div className="py-3 md:py-2 w-full max-w-full overflow-x-clip md:isolate">
+        <div className="editorial-marquee-track flex w-max max-w-none will-change-transform">
+          {doubled.map((p, i) => {
+            const href = p.href || '/gallery'
+            return (
+              <Link
+                key={i}
+                href={href}
+                className="relative shrink-0 overflow-hidden group mx-[5px] md:mx-1.5 w-[min(62vw,230px)] h-[min(82vw,306px)] md:w-[260px] md:h-auto md:aspect-[3/4] lg:w-[300px] xl:w-[330px]"
+                aria-label={`${p.label} — see gallery`}
+                aria-hidden={isClone(i) || undefined}
+                tabIndex={isClone(i) ? -1 : undefined}
+              >
+                <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+                <span className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
+                  <span className="text-white text-[10px] tracking-[0.2em] md:tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] font-medium leading-none">
+                    {p.label}
+                  </span>
+                  <span className="md:hidden text-white/60 text-[9px] font-[family-name:var(--font-inter)] tabular-nums">
+                    {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
+                  </span>
                 </span>
-                <span className="text-white/60 text-[9px] font-['Inter'] tabular-nums">
-                  {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
-                </span>
-              </figcaption>
-            </figure>
-          ))}
+              </Link>
+            )
+          })}
         </div>
       </div>
 
-      <div className="hidden md:block py-2 w-full max-w-full overflow-x-clip isolate">
-        <div className="flex w-max max-w-none will-change-transform" style={{ animation: 'marquee 65s linear infinite' }}>
-          {doubled.map((p, i) => (
-            <div key={i} className="relative shrink-0 w-[260px] lg:w-[300px] xl:w-[330px] aspect-[3/4] mx-1.5 overflow-hidden group cursor-default">
-              <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent" />
-              <span className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.18em] uppercase font-['Inter'] font-medium">
-                {p.label}
-              </span>
-            </div>
-          ))}
-        </div>
+      <div className="section-shell px-4 sm:px-5 md:px-10 pb-5 pt-1">
+        <Link
+          href="/gallery"
+          className="tap-safe link-underline text-stone hover:text-ink text-[11px] font-[family-name:var(--font-inter)] transition-colors"
+        >
+          Browse the full gallery
+        </Link>
       </div>
     </section>
   )
@@ -179,7 +197,7 @@ function ServiceMediaPanel({ hovered }) {
   return (
     <div className="relative w-full h-full bg-[#0d0609]">
       <Image
-        src="/bridal2.jpg"
+        src="/threading.jpg"
         alt=""
         fill
         quality={50}
@@ -221,10 +239,10 @@ function ServiceMediaPanel({ hovered }) {
         />
       )}
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 bg-gradient-to-t from-ink/80 to-transparent z-10">
-        <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-['Inter'] transition-colors duration-300">
+        <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)] transition-colors duration-300">
           {hovered ?? 'Farwa Beauty Salon'}
         </p>
-        <p className="text-white font-['Syne'] font-bold text-sm transition-colors duration-300">
+        <p className="text-white font-[family-name:var(--font-syne)] font-bold text-sm transition-colors duration-300">
           {hovered ? `${SERVICES[hovered]?.length} services` : 'PECHS, Karachi'}
         </p>
       </div>
@@ -241,25 +259,26 @@ function FeaturedServices() {
   const visibleCategories = filterServiceCategories(categories, activeTab)
 
   return (
-    <section className="cv-auto bg-white section-pad border-t border-border-soft">
+    <section className="cv-auto bg-mist section-pad border-t border-border-soft">
       <div className="section-shell">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between mb-10 md:mb-12">
-          <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <p className="eyebrow mb-2">— What we do</p>
-            <h2 className="display-section">Our Services</h2>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between mb-8 md:mb-10">
+          <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
+            className="title-stack">
+            <p className="eyebrow">— What we do</p>
+            <h2 className="display-page text-ink">Our services</h2>
           </m.div>
           <m.div initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
             className="shrink-0 self-start sm:self-auto">
             <Link href="/services"
-              className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-colors duration-300">
-              View All <ArrowUpRight className="w-3 h-3" />
+              className="inline-flex items-center gap-1.5 text-[10px] md:text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] text-ink border border-ink px-4 md:px-5 py-2.5 hover:bg-ink hover:text-white transition-colors duration-300">
+              Full menu <ArrowUpRight className="w-3 h-3" />
             </Link>
           </m.div>
         </div>
 
-        <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 md:gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-start">
           <m.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-            className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24">
+            className="relative overflow-hidden aspect-[4/3] md:aspect-[3/4] md:sticky md:top-24 shadow-soft">
             <ServiceMediaPanel hovered={hovered} />
           </m.div>
 
@@ -269,15 +288,18 @@ function FeaturedServices() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="service-filter-grid mb-6"
-              role="tablist"
+              role="group"
               aria-label="Filter service categories"
             >
+              {/* aria-pressed, not role=tab. The tab pattern commits to
+                  arrow-key roving focus and an owned tabpanel; there is no
+                  keydown handler in this file and no role=tabpanel anywhere in
+                  it. The blog index already made this call. */}
               {HOME_SERVICE_TABS.map((tab) => (
                 <button
                   key={tab}
                   type="button"
-                  role="tab"
-                  aria-selected={activeTab === tab}
+                  aria-pressed={activeTab === tab}
                   onClick={() => {
                     setActiveTab(tab)
                     setHovered(null)
@@ -288,32 +310,30 @@ function FeaturedServices() {
                 </button>
               ))}
             </m.div>
-            <div className="divide-y divide-border-soft border-t border-border-soft">
+            <div className="divide-y divide-border-soft border-t border-border-soft bg-white/70 px-3 sm:px-4 -mx-3 sm:-mx-4">
               {visibleCategories.map((cat, i) => (
-                <m.div key={cat}
-                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.04 }}>
+                <div key={cat}>
                   <Link href={`/services/${CAT_SLUGS[cat]}`}
                     onMouseEnter={() => setHovered(cat)}
                     onMouseLeave={() => setHovered(null)}
                     className="group flex items-center justify-between py-4 md:py-5 gap-4">
                     <div className="flex items-center gap-4 min-w-0">
-                      <span className="font-['Unbounded'] text-[10px] text-stone shrink-0 w-5 tabular-nums">
+                      <span className="font-[family-name:var(--font-unbounded)] text-[10px] text-stone shrink-0 w-5 tabular-nums">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                       <span className="min-w-0">
-                        <span className="block font-['Syne'] font-bold text-sm md:text-base uppercase text-ink group-hover:text-stone transition-colors duration-200 truncate">
+                        <span className="block font-[family-name:var(--font-syne)] font-bold text-sm md:text-base uppercase text-ink group-hover:text-stone transition-colors duration-200 truncate">
                           {cat}
                         </span>
                         {CAT_META[cat]?.tagline && (
-                          <span className="block text-stone text-[11px] font-['Inter'] mt-0.5 truncate">
+                          <span className="block text-stone text-[11px] font-[family-name:var(--font-inter)] mt-0.5 truncate">
                             {CAT_META[cat].tagline}
                           </span>
                         )}
                       </span>
                     </div>
                     <div className="flex items-center gap-3 shrink-0">
-                      <span className="text-stone text-[11px] font-['Inter'] hidden sm:block">
+                      <span className="text-stone text-[11px] font-[family-name:var(--font-inter)] hidden sm:block">
                         {(() => {
                           const prices = SERVICES[cat].map((s) => s.pricePkr).filter(Boolean)
                           return prices.length
@@ -324,16 +344,15 @@ function FeaturedServices() {
                       <ArrowUpRight className="w-3.5 h-3.5 text-stone/40 group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-[transform,color] duration-200" />
                     </div>
                   </Link>
-                </m.div>
+                </div>
               ))}
             </div>
 
-            <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
-              className="mt-8 pt-6 border-t border-[#e4ddd7]">
-              <p className="text-stone text-xs font-['Inter'] font-light">
-                Book any service online — or <a href={`https://wa.me/${WA_NUMBER}`} target="_blank" rel="noreferrer" className="underline hover:text-ink transition-colors">reach us on WhatsApp</a>.
+            <div className="mt-8 pt-6 border-t border-[#e4ddd7]">
+              <p className="text-body text-xs">
+                Book any service online — or <WaCta href={`https://wa.me/${WA_NUMBER}`} from="services-blurb" className="underline hover:text-ink transition-colors">reach us on WhatsApp</WaCta>.
               </p>
-            </m.div>
+            </div>
           </div>
         </div>
       </div>
@@ -342,23 +361,32 @@ function FeaturedServices() {
 }
 
 function TrustPillars() {
+  /* Flat #0d0d0d with three short paragraphs across the left two-thirds was
+      329x1440px of the least interesting surface on the site — the band read
+      as a gap between sections rather than as a chapter. The hero already
+      earns its dark field with a weighted gradient; this is the same idea in
+      one declaration, no JS, and the gold is the accent's best number
+      anywhere (8.82:1 on ink). */
   return (
-    <section className="cv-auto bg-ink py-14 md:py-16 px-4 sm:px-5 md:px-10">
+    <section
+      className="cv-auto bg-ink py-14 md:py-16 px-4 sm:px-5 md:px-10"
+      style={{ backgroundImage: 'radial-gradient(75% 120% at 16% 0%, rgba(201,169,138,0.10), transparent 60%)' }}
+    >
       <div className="max-w-screen-xl mx-auto">
         <m.p initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-          className="text-accent-gold text-[10px] tracking-[0.28em] uppercase font-['Inter'] mb-10">— Why choose Farwa</m.p>
+          className="text-accent-gold text-[10px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-10">— Why choose Farwa</m.p>
         <div className="grid md:grid-cols-3 gap-8 md:gap-10">
           {[
             { num: '01', title: `${YEARS_ACTIVE} Years in PECHS`, desc: 'Since 2008 — the same chair-side standard whether you are in for ten minutes or a full bridal day.' },
-            { num: '02', title: 'Book Online, Walk In Welcome', desc: 'Real-time slots on farwasalon.com/book, WhatsApp for questions, and walk-ins when we have room.' },
+            { num: '02', title: 'Book Online, Walk In Welcome', desc: 'Real-time slots online, WhatsApp for questions, and walk-ins when we have room.' },
             { num: '03', title: 'Transparent PKR Pricing', desc: 'Every service listed with PKR on the site — no surprise quotes at the counter.' },
           ].map((p, i) => (
             <m.div key={p.num} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.7 }}
               className="border-t border-white/10 pt-7">
-              <p className="font-['Unbounded'] text-[10px] text-accent-gold mb-4">{p.num}</p>
-              <h3 className="font-['Syne'] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
-              <p className="text-nude/90 text-sm font-light leading-relaxed font-['Inter']">{p.desc}</p>
+              <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-accent-gold mb-4">{p.num}</p>
+              <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-lg text-white mb-3 leading-snug">{p.title}</h3>
+              <p className="text-nude/90 text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">{p.desc}</p>
             </m.div>
           ))}
         </div>
@@ -374,21 +402,22 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
   return (
     <article
       className={`group panel-soft shadow-soft flex flex-col overflow-hidden transition-shadow duration-300 hover:shadow-card ${
-        compact ? 'shrink-0 snap-start w-[85vw] max-w-[320px]' : 'h-full min-h-[260px] sm:min-h-[272px]'
+        compact
+          ? 'shrink-0 snap-start w-[85vw] max-w-[320px]'
+          : /* swipe card on mobile, equal-height grid cell from md up */
+            'shrink-0 snap-start w-[85vw] max-w-[320px] md:shrink md:w-auto md:max-w-none md:h-full md:min-h-[272px]'
       }`}
     >
       <header className="flex items-center justify-between px-5 py-3.5 sm:py-4 border-b border-border-soft">
         <div className="flex items-center gap-3 min-w-0">
           <div className="w-9 h-9 bg-mist border border-border-soft flex items-center justify-center shrink-0">
-            <span className="text-ink font-['Syne'] font-semibold text-[11px]">{post.initials}</span>
+            <span className="text-ink font-[family-name:var(--font-syne)] font-semibold text-[11px]">{post.initials}</span>
           </div>
           <div className="min-w-0">
-            <p className="font-['Syne'] font-semibold text-[13px] text-ink truncate leading-tight">{post.name}</p>
+            <p className="font-[family-name:var(--font-syne)] font-semibold text-[13px] text-ink truncate leading-tight">{post.name}</p>
             <div className="flex items-center gap-1.5 mt-0.5">
-              <div className="flex gap-0.5 text-stone/70" aria-hidden="true">
-                {[...Array(5)].map((_, s) => <Star key={s} className="w-2 h-2 fill-current" />)}
-              </div>
-              <span className="text-stone text-[9px] font-['Inter']">· {post.date}</span>
+              <StarRating size={8} className="text-stone/70" />
+              <span className="text-stone text-[9px] font-[family-name:var(--font-inter)]">· {post.date}</span>
             </div>
           </div>
         </div>
@@ -402,7 +431,7 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
       <div className="flex-1 px-5 py-4 sm:py-5 flex flex-col bg-white min-h-0">
         <Quote className="w-3.5 h-3.5 text-accent-gold/35 mb-2.5 rotate-180 shrink-0" aria-hidden="true" />
         <blockquote
-          className={`text-stone text-[13px] md:text-sm font-light leading-relaxed font-['Inter'] flex-1 ${
+          className={`text-stone text-[13px] md:text-sm font-light leading-relaxed font-[family-name:var(--font-inter)] flex-1 ${
             clampQuote ? 'line-clamp-4 sm:line-clamp-5' : ''
           }`}
         >
@@ -420,10 +449,10 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
           </a>
         )}
         <div className="flex items-center justify-between gap-3 mt-auto pt-4 border-t border-border-soft">
-          <span className="text-stone text-[9px] tracking-[0.18em] uppercase font-['Inter'] truncate">
+          <span className="text-stone text-[9px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] truncate">
             {post.service}
           </span>
-          <span className="inline-flex items-center gap-1 text-stone text-[9px] tracking-[0.16em] uppercase font-['Inter'] shrink-0">
+          <span className="inline-flex items-center gap-1 text-stone text-[9px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] shrink-0">
             {sourceLabel}
           </span>
         </div>
@@ -514,7 +543,7 @@ function ReviewDatingNote({ posts, sourceName }) {
   if (!absolute) return null
 
   return (
-    <p className="text-stone text-[10px] sm:text-[11px] font-['Inter'] font-light leading-relaxed mb-4 sm:mb-5 max-w-xl">
+    <p className="text-stone text-[10px] sm:text-[11px] font-[family-name:var(--font-inter)] font-light leading-relaxed mb-4 sm:mb-5 max-w-xl">
       Newest here is from {absolute}. Each is shown with the month it was
       posted, newest first — anything more recent is on {sourceName}.
     </p>
@@ -525,45 +554,46 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
   if (!posts.length) return null
 
   const desktopCols = posts.length >= 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'
-  const desktopLimit = posts.length >= 3 ? posts.length : 2
 
   return (
     <div className={`reviews-block-divider ${divided ? '' : 'border-t-0 pt-0'} ${className}`}>
       <div className="flex items-center justify-between gap-4 mb-3 sm:mb-4">
         <p className="eyebrow mb-0">— {label}</p>
         <a href={viewAllHref} target="_blank" rel="noreferrer"
-          className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] transition-colors inline-flex items-center gap-1 shrink-0">
+          className="text-stone hover:text-ink text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] transition-colors inline-flex items-center gap-1 shrink-0">
           View all <ArrowUpRight className="w-2.5 h-2.5" />
         </a>
       </div>
 
       <ReviewDatingNote posts={posts} sourceName={sourceName} />
 
-      <p className="md:hidden text-stone text-[9px] tracking-[0.18em] uppercase font-['Inter'] mb-2.5">
+      <p className="md:hidden text-stone text-[9px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] mb-2.5">
         Swipe for more reviews →
       </p>
-      <div className="md:hidden flex gap-3.5 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none">
-        {posts.map((post) => (
-          <ReviewCard key={`${label}-${post.name}-${post.quote.slice(0, 24)}`} post={post} compact excerpt />
-        ))}
-      </div>
+      {/* One render, restyled per breakpoint. This used to be two blocks — a
+          md:hidden scroller and a hidden md:grid — so every review shipped
+          twice and half the DOM was display:none on any given device. On the
+          homepage that was 20 <blockquote> for 10 reviews. The two differed
+          only in layout: `compact` swapped the card's width classes, and
+          desktopLimit resolved to posts.length for any list of 3 or more, so
+          neither showed different content. Responsive classes express the same
+          thing once.
 
-      <div className={`hidden md:grid ${desktopCols} gap-4 sm:gap-5 max-w-5xl items-stretch`}>
-        {posts.slice(0, desktopLimit).map((post, i) => (
-          <m.div key={`${label}-${post.name}`} className="h-full"
-            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ delay: i * 0.07, duration: 0.6, ease: [0.16,1,0.3,1] }}>
-            <ReviewCard post={post} excerpt />
-          </m.div>
+          The per-card stagger went with it. In a horizontal scroller
+          whileInView leaves off-screen cards at opacity 0 until they are
+          scrolled to, which is the wrong behaviour for a swipe row. */}
+      <div className={`flex gap-3.5 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none md:mx-0 md:px-0 md:pb-0 md:overflow-visible md:grid ${desktopCols} md:gap-5 md:max-w-5xl md:items-stretch`}>
+        {posts.map((post) => (
+          <ReviewCard key={`${label}-${post.name}-${post.quote.slice(0, 24)}`} post={post} excerpt />
         ))}
       </div>
     </div>
   )
 }
 
-function TestimonialsPreview() {
+function TestimonialsPreview({ placesEnabled }) {
   const [reviewIdx, setReviewIdx] = useState(0)
+  const [paused, setPaused] = useState(false)
   const [ratingLabel, setRatingLabel] = useState(initialRatingLabel)
   const [featuredReviews, setFeaturedReviews] = useState(
     manualPayload?.reviews?.length ? manualPayload.reviews : FALLBACK_FEATURED_REVIEWS,
@@ -579,6 +609,15 @@ function TestimonialsPreview() {
 
   useEffect(() => {
     let cancelled = false
+
+    /* Skip the round trip entirely when the Places API is not wired. Production
+       returns {"source":"google-manual","configured":false} with review data
+       byte-identical to what was already server-rendered from
+       src/google-reviews-data.js — so this was a fetch, a JSON parse and a full
+       re-render of the reviews subtree that could not change a pixel, fired on
+       every visit to the page whose LCP we care about most. It starts doing
+       real work the moment GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID are set. */
+    if (!placesEnabled) return undefined
 
     async function loadReviews() {
       try {
@@ -605,15 +644,15 @@ function TestimonialsPreview() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [placesEnabled])
 
   useEffect(() => {
-    if (featuredReviews.length <= 1) return undefined
+    if (featuredReviews.length <= 1 || paused) return undefined
     const id = setInterval(() => {
       setReviewIdx((i) => (i + 1) % featuredReviews.length)
     }, 8000)
     return () => clearInterval(id)
-  }, [featuredReviews.length])
+  }, [featuredReviews.length, paused])
 
   const featured = featuredReviews[reviewIdx]
   const featuredSourceLabel = featured.source === 'google' ? 'Google' : 'Facebook'
@@ -624,57 +663,76 @@ function TestimonialsPreview() {
         <m.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
           className="flex flex-col gap-4 sm:gap-5 sm:flex-row sm:items-end sm:justify-between mb-8 sm:mb-10 md:mb-12">
-          <div className="min-w-0">
-            <p className="eyebrow mb-2">— Client reviews</p>
-            <h2 className="display-section">What clients say</h2>
+          <div className="min-w-0 title-stack">
+            <p className="eyebrow">— Client reviews</p>
+            <h2 className="display-page text-ink">What clients say</h2>
           </div>
           <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
-            <div className="flex gap-0.5 text-stone/80" role="img" aria-label={`${GOOGLE_GBP_STATS.rating} out of 5 stars`}>
-              {[...Array(5)].map((_, s) => <Star key={s} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />)}
-            </div>
-            <span className="text-stone text-[10px] sm:text-[11px] font-['Inter'] leading-snug whitespace-nowrap">
+            <StarRating size={11} className="text-stone/80" label={`${GOOGLE_GBP_STATS.rating} out of 5 stars`} />
+            <span className="text-stone text-[10px] sm:text-[11px] font-[family-name:var(--font-inter)] leading-snug whitespace-nowrap">
               {ratingLabel}
             </span>
           </div>
         </m.div>
 
-        <m.figure initial={{ opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
+        <m.figure
+          initial={{ opacity: 0, y: 32 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
           className="reviews-featured relative px-6 py-9 sm:px-9 sm:py-10 md:px-12 md:py-11 mb-8 sm:mb-10 md:mb-12"
-          aria-live="polite">
+          aria-live="polite"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocusCapture={() => setPaused(true)}
+          onBlurCapture={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false)
+          }}
+        >
           <Quote className="reviews-featured-mark absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 sm:w-10 sm:h-10 rotate-180 pointer-events-none" aria-hidden="true" />
-          <blockquote className={`relative z-[1] font-['Syne'] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6 sm:line-clamp-none' : ''}`}>
+          <blockquote className={`relative z-[1] font-[family-name:var(--font-syne)] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6' : ''}`}>
             {featured.quote}
           </blockquote>
           {featured.translation && (
-            <p className="relative z-[1] text-stone text-center text-sm font-light mt-4 sm:mt-5 font-['Inter'] max-w-xl mx-auto leading-relaxed">
+            <p className="relative z-[1] text-stone text-center text-sm font-light mt-4 sm:mt-5 font-[family-name:var(--font-inter)] max-w-xl mx-auto leading-relaxed">
               {featured.translation}
             </p>
           )}
           <figcaption className="relative z-[1] flex flex-col items-center gap-3.5 mt-7 sm:mt-8">
             <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-              <span className="text-stone text-[10px] tracking-[0.2em] uppercase font-['Inter']">
+              <span className="text-stone text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)]">
                 {featured.name}
               </span>
               <span className="text-stone/40 hidden sm:inline" aria-hidden="true">·</span>
               <a href={featured.link} target="_blank" rel="noreferrer"
-                className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-['Inter'] inline-flex items-center gap-1 transition-colors">
+                className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] inline-flex items-center gap-1 transition-colors">
                 {featuredSourceLabel}{' '}
                 <ArrowUpRight className="w-2.5 h-2.5" />
               </a>
             </div>
+              {/* Was role=tablist/role=tab with aria-selected, and the dot itself
+                  was the hit box: 6x6 px, a quarter of the WCAG 2.5.8 floor.
+                  role=tab also promises arrow-key roving focus and an owned
+                  tabpanel, neither of which exists here.
+
+                  Both are solved the way the photo dots in shared.jsx already
+                  solve them — a 44px padded button wrapping a small visual bar,
+                  in a labelled group with aria-current. */}
             {featuredReviews.length > 1 && (
-              <div className="flex items-center gap-1.5" role="tablist" aria-label="Featured reviews">
+              <div className="flex items-center" role="group" aria-label="Featured reviews">
                 {featuredReviews.map((r, i) => (
                   <button
                     key={r.name}
                     type="button"
-                    role="tab"
-                    aria-selected={reviewIdx === i}
+                    aria-current={reviewIdx === i ? 'true' : undefined}
                     aria-label={`Show review by ${r.name}`}
                     onClick={() => setReviewIdx(i)}
-                    className={`h-1.5 rounded-full transition-[width,background-color] ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30 hover:bg-stone/50'}`}
-                  />
+                    className="tap-safe min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
+                  >
+                    <span
+                      className={`block h-1.5 rounded-full transition-[width,background-color] ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30'}`}
+                    />
+                  </button>
                 ))}
               </div>
             )}
@@ -698,16 +756,16 @@ function TestimonialsPreview() {
 
         <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="reviews-cta-row pt-8 sm:pt-10 border-t border-border-soft flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 sm:gap-6">
-          <p className="text-stone text-[11px] sm:text-xs font-light font-['Inter'] tracking-wide max-w-sm">
+          <p className="text-stone text-[11px] sm:text-xs font-light font-[family-name:var(--font-inter)] tracking-wide max-w-sm">
             Loved your visit? Help us spread the word.
           </p>
           <div className="reviews-cta-actions flex flex-col min-[480px]:flex-row sm:flex-row items-stretch gap-3 w-full lg:w-auto lg:max-w-xl">
             <a href={GOOGLE_REVIEW_LINK} target="_blank" rel="noreferrer"
-              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-5 sm:px-6 py-3 hover:bg-stone transition-colors duration-300">
+              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-5 sm:px-6 py-3 hover:bg-stone transition-colors duration-300">
               Write a Google review <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
             </a>
             <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
-              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-['Inter'] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-5 sm:px-6 py-3 bg-white">
+              className="tap-safe reviews-cta-btn inline-flex flex-1 items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-5 sm:px-6 py-3 bg-white">
               Follow on Facebook <ArrowUpRight className="w-3 h-3 shrink-0" />
             </a>
           </div>
@@ -716,7 +774,6 @@ function TestimonialsPreview() {
     </section>
   )
 }
-
 
 function CtaBand() {
   return (
@@ -729,9 +786,9 @@ function CtaBand() {
           transition={{ duration: 0.8 }}
           className="w-full lg:flex-1 lg:min-w-0"
         >
-          <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-['Inter'] mb-3">&mdash; Visit us in PECHS</p>
+          <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-3">&mdash; Visit us in PECHS</p>
           <h2
-            className="font-['Unbounded'] font-bold text-white leading-[1.05] text-balance max-w-2xl lg:max-w-none"
+            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.08] text-balance max-w-2xl lg:max-w-none ps-[0.35em] pe-[0.04em] pb-[0.04em]"
             style={{ fontSize: 'clamp(1.9rem, 5.5vw + 0.5rem, 4rem)' }}
           >
             Ready for your glow? We&apos;re ready for you.
@@ -747,37 +804,36 @@ function CtaBand() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3">
             <Link
               href="/book"
-              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-[background-color,transform] duration-300 w-full sm:w-auto justify-center sm:justify-start"
+              className="tap-safe inline-flex items-center gap-2 bg-white text-ink text-[11px] sm:text-[12px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 sm:px-7 md:px-8 py-3.5 md:py-4 hover:bg-nude active:scale-[0.97] transition-[background-color,transform] duration-300 w-full sm:w-auto justify-center sm:justify-start"
             >
               Book an Appointment <ArrowUpRight className="w-4 h-4 shrink-0" />
             </Link>
             <Link
               href="/prices"
-              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
+              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
             >
               Price list
             </Link>
             <Link
               href="/bridal"
-              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
+              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
             >
               Bridal
             </Link>
             <Link
               href="/beauty-salon-karachi"
-              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
+              className="tap-safe link-underline text-white/60 text-[11px] sm:text-[12px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors flex items-center justify-center sm:justify-start whitespace-nowrap"
             >
               Beauty salon Karachi
             </Link>
           </div>
-          <a
+          <WaCta
             href={`https://wa.me/${WA_NUMBER}`}
-            target="_blank"
-            rel="noreferrer"
-            className="tap-safe text-white/60 text-[10px] tracking-[0.12em] uppercase font-['Inter'] hover:text-white transition-colors flex items-center justify-center sm:justify-start lg:justify-end min-w-0"
+            from="cta-band"
+            className="tap-safe text-white/60 text-[10px] tracking-[0.12em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors flex items-center justify-center sm:justify-start lg:justify-end min-w-0"
           >
             Or reach us on WhatsApp
-          </a>
+          </WaCta>
         </m.div>
       </div>
     </section>
@@ -786,19 +842,31 @@ function CtaBand() {
 
 function FounderNote() {
   return (
-    <section className="cv-auto bg-mist border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
-      <div className="max-w-3xl mx-auto text-center">
+    <section className="cv-auto bg-white border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
+      <m.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-40px' }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-3xl mx-auto text-center"
+      >
         <p className="eyebrow mb-6">— The House</p>
         <blockquote
-          className="font-['Syne'] italic text-ink text-balance leading-[1.3]"
+          className="font-[family-name:var(--font-syne)] italic text-ink text-balance leading-[1.3]"
           style={{ fontSize: 'clamp(1.35rem, 3.6vw, 2.25rem)' }}>
           &ldquo;Trends visit Karachi every season. Grace stays. I opened this
           salon in 2008 to give every woman on this street both.&rdquo;
         </blockquote>
-        <p className="mt-6 text-[11px] tracking-[0.28em] uppercase font-['Inter'] text-stone">
+        <p className="mt-6 text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] text-stone">
           Rubina · Founder, Farwa Beauty Salon
         </p>
-      </div>
+        <Link
+          href="/about"
+          className="tap-safe mt-8 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-ink hover:text-stone transition-colors"
+        >
+          Meet Rubina <ChevronRight className="w-3.5 h-3.5" />
+        </Link>
+      </m.div>
     </section>
   )
 }
@@ -814,7 +882,7 @@ function FounderNote() {
    client components server-render unless you opt out. The opt-out was the
    whole problem. The eight sections already carry `.cv-auto`
    (content-visibility: auto), so offscreen ones cost nothing to render. */
-export default function HomeBelowFold() {
+export default function HomeBelowFold({ placesEnabled = false }) {
   return (
     <>
       <QuickPickRow />
@@ -825,7 +893,7 @@ export default function HomeBelowFold() {
       <TrustPillars />
       <SalonLocalBlock />
       <FounderNote />
-      <TestimonialsPreview />
+      <TestimonialsPreview placesEnabled={placesEnabled} />
       <CtaBand />
     </>
   )

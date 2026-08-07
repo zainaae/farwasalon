@@ -2,8 +2,8 @@
 export const GROWTH_POSTS = [
   {
     slug: 'eid-salon-booking-guide-karachi',
-    title: 'Eid Salon Booking in Karachi — When to Book and What It Costs',
-    description: 'Chand Raat is the busiest salon night of the year in Karachi. When to book threading, facials and mehndi-night looks, what each costs at Farwa in PECHS, and how to avoid the queue.',
+    title: 'Eid Salon Booking in Karachi — When & How to Book',
+    description: 'Chand Raat is the busiest salon night in Karachi. When to book threading, facials and mehndi looks, what each costs at Farwa PECHS, and how to skip the queue.',
     featuredImage: '/glow3.jpg',
     date: '2026-07-29',
     lastModified: '2026-07-29',
@@ -92,7 +92,7 @@ export const GROWTH_POSTS = [
   },
   {
     slug: 'face-polish-karachi-loreal-diamond-sandal',
-    title: 'Face Polish Karachi — Loreal, Diamond & Sandal From Rs 900',
+    title: 'Face Polish Karachi Prices — Loreal, Diamond, Sandal',
     description:
       'Face polish in Karachi — Loreal Rs 900, Diamond Rs 1,000, Sandal Rs 1,200 at Farwa PECHS. Instant glow prices, no DM-for-rates.',
     featuredImage: '/bleachpolish.jpg',
@@ -306,7 +306,7 @@ export const GROWTH_POSTS = [
   },
   {
     slug: 'janssen-vs-hd-whitening-facial-karachi',
-    title: 'Janssen vs HD Whitening Facial Karachi — Is Double Worth It?',
+    title: 'Janssen vs HD Whitening Facial Karachi — Worth It?',
     description:
       'HD Whitening Facial Rs 3,000 vs Janssen Whitening Facial Rs 5,500 at Farwa PECHS — which brightening facial for Karachi skin.',
     featuredImage: '/glow.jpg',
@@ -356,7 +356,7 @@ export const GROWTH_POSTS = [
   },
   {
     slug: 'deep-cleansing-vs-facial-karachi',
-    title: 'Deep Cleansing vs Facial Karachi — Which One Your Skin Needs',
+    title: 'Deep Cleansing vs Facial in Karachi — Which to Book',
     description:
       'Deep cleansing facial Karachi from Rs 1,200 vs full facials from Rs 1,400 — when to book HD, acne, or Janssen cleansing at Farwa PECHS.',
     featuredImage: '/facialcleansing.jpg',
@@ -416,7 +416,7 @@ export const GROWTH_POSTS = [
   },
   {
     slug: 'salon-near-tariq-road-pechs',
-    title: 'Beauty Salon Near Tariq Road — Farwa in Block 3 PECHS',
+    title: 'Beauty Salon Near Tariq Road — Farwa in PECHS',
     description:
       'Beauty salon near Tariq Road — Farwa in Block 3 PECHS, minutes from shopping. Women-only, printed prices from Rs 100, book online.',
     featuredImage: '/glow3.jpg',

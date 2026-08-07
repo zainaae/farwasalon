@@ -1,10 +1,11 @@
 'use client'
 import { useEffect, useRef, useState, useCallback } from 'react'
+import ArrowUpRight from '../app/components/icon-sprite.jsx'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
-import { X, Menu, ArrowUpRight, ChevronLeft, ChevronRight, Sparkles, Phone, MessageCircle } from 'lucide-react'
+import { X, Menu, ChevronLeft, ChevronRight, Sparkles, Phone, MessageCircle } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatServicePrice, formatDuration, track, CAT_SLUGS } from './site-config.js'
 import { useBooking } from './booking-context.jsx'
 import { useNextSlot } from './use-next-slot.js'
@@ -24,45 +25,6 @@ export function SkipLink() {
     <a href="#main" className="skip-link">
       Skip to content
     </a>
-  )
-}
-
-/* ─── Responsive Facebook post embed (scales iframe to container) ── */
-export function FbEmbed({ src, height = 200, title, reviewerName }) {
-  const wrapRef = useRef(null)
-  const [scale,  setScale]  = useState(1)
-  const [ready,  setReady]  = useState(false)
-  useEffect(() => {
-    const el = wrapRef.current
-    if (!el) return
-    const compute = () => {
-      const w = el.offsetWidth
-      if (w > 0) {
-        setScale(Math.min(1, w / 500))
-        setReady(true)
-      }
-    }
-    compute()
-    const ro = new ResizeObserver(compute)
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [])
-  return (
-    <div ref={wrapRef} className="fb-embed-frame"
-      style={{ height: ready ? height * scale : height }}>
-      <iframe
-        src={src}
-        width="500"
-        height={height}
-        style={{ transform: `scale(${scale})`, width: '500px' }}
-        scrolling="no"
-        frameBorder="0"
-        allowFullScreen
-        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        title={title || (reviewerName ? `Review by ${reviewerName} on Facebook` : 'Facebook review')}
-        loading="lazy"
-      />
-    </div>
   )
 }
 
@@ -164,8 +126,8 @@ export function SmoothyGallery({ photos }) {
               width={420} height={560} sizes="clamp(260px, 36vw, 420px)"
               className="w-full h-full object-cover select-none" />
             <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-ink/70 via-ink/30 to-transparent">
-              <p className="text-white text-[10px] tracking-[0.22em] uppercase font-['Inter']">{p.label}</p>
-              <p className="text-white/50 text-[10px] font-['Inter'] mt-0.5 tabular-nums">{String(i + 1).padStart(2,'0')} / {String(count).padStart(2,'0')}</p>
+              <p className="text-white text-[10px] tracking-[0.22em] uppercase font-[family-name:var(--font-inter)]">{p.label}</p>
+              <p className="text-white/50 text-[10px] font-[family-name:var(--font-inter)] mt-0.5 tabular-nums">{String(i + 1).padStart(2,'0')} / {String(count).padStart(2,'0')}</p>
             </figcaption>
           </figure>
         ))}
@@ -215,11 +177,11 @@ export function WordmarkDivider() {
     <div aria-hidden="true" className="bg-white border-y border-border-soft overflow-hidden">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-5 sm:py-6 md:py-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-3 md:gap-8 text-center sm:text-left">
         <span className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a98a]/50 to-[#c9a98a]" />
-        <span className="font-['Unbounded'] font-bold text-ink tracking-[0.3em] text-[11px] md:text-[13px] shrink-0">
+        <span className="font-[family-name:var(--font-unbounded)] font-bold text-ink tracking-[0.3em] text-[11px] md:text-[13px] shrink-0">
           F · B · S
         </span>
         <span className="hidden sm:inline text-[#c9a98a] text-xs" aria-hidden="true">✦</span>
-        <span className="font-['Unbounded'] italic font-light text-stone text-[11px] md:text-[13px] shrink-0 tracking-wide">
+        <span className="font-[family-name:var(--font-unbounded)] italic font-light text-stone text-[11px] md:text-[13px] shrink-0 tracking-wide">
           Since 2008
         </span>
         <span className="flex-1 h-px bg-gradient-to-l from-transparent via-[#c9a98a]/50 to-[#c9a98a]" />
@@ -284,15 +246,18 @@ export function ServiceModal({ service, onClose }) {
           transition={{ type: 'spring', stiffness: 280, damping: 28 }} onClick={e => e.stopPropagation()}>
           <div className="p-6 md:p-8 flex flex-col max-h-[min(85dvh,calc(100dvh-2rem))] overflow-y-auto overscroll-contain">
             <div className="flex justify-between items-start mb-5">
-              <span className="text-[10px] tracking-[0.2em] uppercase text-stone font-['Inter']">{service.category}</span>
+              <span className="text-[10px] tracking-[0.2em] uppercase text-stone font-[family-name:var(--font-inter)]">{service.category}</span>
+              {/* -m-2 keeps the icon where it was while the hit box grows to
+                  44px; without it this was exactly the 20x20 icon. The booking
+                  sheet's close button already does this. */}
               <button onClick={onClose} aria-label="Close dialog"
-                className="text-stone hover:text-ink transition-colors"><X className="w-5 h-5" /></button>
+                className="tap-safe -m-2 p-2 inline-flex items-center justify-center text-stone hover:text-ink transition-colors"><X className="w-5 h-5" /></button>
             </div>
-            <h2 id={titleId} className="font-['Unbounded'] font-bold text-lg md:text-xl text-ink mb-2 leading-tight uppercase">
+            <h2 id={titleId} className="font-[family-name:var(--font-unbounded)] font-bold text-lg md:text-xl text-ink mb-2 leading-tight uppercase">
               {service.name}
             </h2>
             {(service.pricePkr != null || service.durationMinutes != null) && (
-              <p className="text-[#c9a98a] text-sm font-['Inter'] font-medium mb-4 flex items-center gap-2">
+              <p className="text-accent-gold-deep text-sm font-[family-name:var(--font-inter)] font-medium mb-4 flex items-center gap-2">
                 {service.pricePkr != null && <span>{formatServicePrice(service)}</span>}
                 {service.pricePkr != null && service.durationMinutes != null && <span className="text-stone/30">·</span>}
                 {service.durationMinutes != null && <span>{formatDuration(service.durationMinutes)}</span>}
@@ -303,7 +268,7 @@ export function ServiceModal({ service, onClose }) {
             )}
             {hasIncludes && (
               <div className="mb-7">
-                <p className="text-[10px] tracking-widest uppercase font-medium text-stone mb-2 font-['Inter']">What's included</p>
+                <p className="text-[10px] tracking-widest uppercase font-medium text-stone mb-2 font-[family-name:var(--font-inter)]">What's included</p>
                 <ul className="flex flex-col gap-1.5">
                   {service.includes.map(item => (
                     <li key={item} className="flex items-center gap-2 text-sm text-ink font-light">
@@ -316,11 +281,12 @@ export function ServiceModal({ service, onClose }) {
             <div className="mt-auto flex flex-col gap-2">
               <button type="button"
                 onClick={() => { booking.addService(service, 'modal'); onClose() }}
-                className="inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-4 hover:bg-stone active:scale-[0.98] transition-[background-color,transform] duration-300">
+                className="inline-flex items-center justify-center gap-2 bg-ink text-white text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-4 hover:bg-stone active:scale-[0.98] transition-[background-color,transform] duration-300">
                 <Sparkles className="w-3.5 h-3.5" /> Add to Booking
               </button>
-              <a href={waLink(service.name)} target="_blank" rel="noreferrer" onClick={onClose}
-                className="inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
+              <a href={waLink(service.name)} target="_blank" rel="noreferrer"
+                onClick={() => { track('WhatsAppIntent', { from: 'service-modal', service: service.name }); onClose() }}
+                className="inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
                 Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -337,7 +303,7 @@ function Logo({ light }) {
   /* Fixed-height shell so wordmark ↔ image swap never shifts the header row. */
   const shell = 'inline-flex items-center justify-center h-8 w-auto max-w-[10rem]'
   const wordmark =
-    "font-['Unbounded'] font-bold text-[12px] md:text-[13px] lg:text-[14px] tracking-[0.14em] md:tracking-[0.16em] leading-none"
+    "font-[family-name:var(--font-unbounded)] font-bold text-[12px] md:text-[13px] lg:text-[14px] tracking-[0.14em] md:tracking-[0.16em] leading-none"
 
   /* On dark transparent hero: white text looks cleaner than inverting the JPG
      (JPG has white background so brightness-0+invert turns it into a flat white blob) */
@@ -425,7 +391,7 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
             return (
               <Link key={href} href={href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`nav-link shrink-0 h-11 min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-['Inter'] transition-colors duration-200 whitespace-nowrap
+                className={`nav-link shrink-0 h-11 min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-[family-name:var(--font-inter)] transition-colors duration-200 whitespace-nowrap
                 ${hideOnDesktop ? 'md:hidden' : ''}
                 ${wideOnly ? 'hidden lg:inline-flex' : ''}
                 ${isActive ? `nav-link--active ${light ? 'nav-link--on-light text-ink' : 'nav-link--on-dark text-white'}` : (light ? 'text-stone hover:text-ink' : 'text-white/65 hover:text-white')}`}>
@@ -436,7 +402,7 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
         </nav>
         <div className="justify-self-end flex items-center gap-2 sm:gap-3 shrink-0 min-w-0 h-11">
           <Link href="/book"
-            className={`hidden md:inline-flex items-center justify-center gap-1.5 h-11 min-h-[44px] text-[11px] lg:text-[12px] tracking-[0.14em] uppercase font-semibold font-['Inter'] leading-none px-4 lg:px-5 rounded-sm border transition-colors duration-300 whitespace-nowrap active:scale-[0.98] ${
+            className={`hidden md:inline-flex items-center justify-center gap-1.5 h-11 min-h-[44px] text-[11px] lg:text-[12px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] leading-none px-4 lg:px-5 rounded-sm border transition-colors duration-300 whitespace-nowrap active:scale-[0.98] ${
               light
                 ? 'bg-ink text-white border-ink hover:bg-stone hover:border-stone'
                 : 'bg-transparent text-white border-white/70 hover:bg-white hover:text-ink hover:border-white'
@@ -461,12 +427,12 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
             <div className="px-5 py-5 flex flex-col gap-1">
               {navLinks.map(({ label, href }) => (
                 <Link key={href} href={href} onClick={() => setMenuOpen(false)}
-                  className="tap-safe inline-flex items-center min-h-[44px] text-[11px] tracking-[0.18em] uppercase text-stone hover:text-ink font-['Inter']">
+                  className="tap-safe inline-flex items-center min-h-[44px] text-[11px] tracking-[0.18em] uppercase text-stone hover:text-ink font-[family-name:var(--font-inter)]">
                   {label}
                 </Link>
               ))}
               <Link href="/book" onClick={() => setMenuOpen(false)}
-                className="tap-safe inline-flex items-center justify-center min-h-[44px] bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-['Inter'] px-5 py-3 w-full sm:w-fit mt-3">
+                className="tap-safe inline-flex items-center justify-center min-h-[44px] bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] px-5 py-3 w-full sm:w-fit mt-3">
                 Book an Appointment
               </Link>
             </div>
@@ -490,7 +456,10 @@ export function shouldShowMobileCtaBar(pathname) {
     pathname === '/prices' ||
     pathname === '/gallery' ||
     pathname === '/beauty-salon-karachi' ||
-    pathname === '/contact'
+    pathname === '/contact' ||
+    pathname === '/freedom-deal' ||
+    pathname === '/deals' ||
+    pathname === '/about'
   ) {
     return true
   }
@@ -520,7 +489,7 @@ export function StickyMobileCTA({ hidden = false }) {
       >
         <div className="sticky-cta-enter pointer-events-auto mx-3.5 flex flex-col rounded-lg bg-ink/[0.92] backdrop-blur-md shadow-lg shadow-ink/25 border border-white/[0.08] min-w-0 max-w-[calc(100vw-1.75rem)] overflow-hidden">
           {showSlotHint && (
-            <p className="px-3 pt-1.5 pb-0 text-center text-[8.5px] tracking-[0.14em] uppercase text-white/40 font-['Inter'] leading-none">
+            <p className="px-3 pt-1.5 pb-0 text-center text-[8.5px] tracking-[0.14em] uppercase text-white/40 font-[family-name:var(--font-inter)] leading-none">
               <span
                 className={`inline-block w-1 h-1 rounded-full mr-1.5 align-middle ${slot.open ? 'bg-[#9cd48c]' : 'bg-[#c9a98a]'}`}
                 aria-hidden="true"
@@ -533,7 +502,7 @@ export function StickyMobileCTA({ hidden = false }) {
               href={`tel:+${WA_NUMBER}`}
               aria-label="Call the salon"
               onClick={() => track('CallIntent', { from: 'sticky-bar' })}
-              className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/80 hover:text-white active:scale-[0.98] text-[10px] tracking-[0.12em] uppercase font-medium font-['Inter'] py-2.5 transition-colors"
+              className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/80 hover:text-white active:scale-[0.98] text-[10px] tracking-[0.12em] uppercase font-medium font-[family-name:var(--font-inter)] py-2.5 transition-colors"
             >
               <Phone className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
               Call
@@ -543,8 +512,9 @@ export function StickyMobileCTA({ hidden = false }) {
               href={WA_DEFAULT}
               target="_blank"
               rel="noreferrer"
+              onClick={() => track('WhatsAppIntent', { from: 'sticky-bar' })}
               aria-label="Message the salon on WhatsApp"
-              className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/80 hover:text-white active:scale-[0.98] text-[10px] tracking-[0.12em] uppercase font-medium font-['Inter'] py-2.5 transition-colors"
+              className="tap-safe min-h-[44px] flex-1 inline-flex items-center justify-center gap-1.5 text-white/80 hover:text-white active:scale-[0.98] text-[10px] tracking-[0.12em] uppercase font-medium font-[family-name:var(--font-inter)] py-2.5 transition-colors"
             >
               <MessageCircle className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
               WhatsApp
@@ -552,7 +522,7 @@ export function StickyMobileCTA({ hidden = false }) {
             <Link
               href="/book"
               aria-label="Book an appointment online"
-              className="tap-safe min-h-[44px] flex-[1.3] inline-flex items-center justify-center gap-1.5 bg-white text-ink active:scale-[0.98] text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] rounded-md py-2.5"
+              className="tap-safe min-h-[44px] flex-[1.3] inline-flex items-center justify-center gap-1.5 bg-white text-ink active:scale-[0.98] text-[10px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] rounded-md py-2.5"
             >
               Book <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
             </Link>
@@ -573,7 +543,7 @@ export function StickyWA({ hidden = false }) {
         style={{ bottom: 'max(0.6rem, env(safe-area-inset-bottom, 0px))' }}>
         <div className="sticky-cta-enter">
           <Link href="/book"
-            className="tap-safe min-h-[44px] pointer-events-auto inline-flex items-center gap-2 bg-ink/[0.92] backdrop-blur-md text-white text-[10px] tracking-[0.14em] uppercase font-semibold font-['Inter'] px-7 py-3 rounded-lg border border-white/[0.08] shadow-lg shadow-ink/25">
+            className="tap-safe min-h-[44px] pointer-events-auto inline-flex items-center gap-2 bg-ink/[0.92] backdrop-blur-md text-white text-[10px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-7 py-3 rounded-lg border border-white/[0.08] shadow-lg shadow-ink/25">
             Book Online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
         </div>

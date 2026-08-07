@@ -1,5 +1,8 @@
 import Link from 'next/link'
-import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react'
+import ArrowUpRight from '../components/icon-sprite.jsx'
+import Image from 'next/image'
+import WaCta from '../components/wa-cta.jsx'
+import { Clock, MapPin, Phone } from 'lucide-react'
 import JsonLd from '../json-ld'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import {
@@ -69,14 +72,16 @@ export default function BridalLandingPage() {
       {faqSchema && <JsonLd data={faqSchema} />}
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
-          <p className="eyebrow mb-4">— Bridal · from Rs 8,000</p>
-          <h1 id="bridal-headline" className="font-['Unbounded'] font-bold text-[1.85rem] sm:text-3xl md:text-[2.6rem] text-ink mb-5 max-w-2xl leading-[1.12] tracking-tight">
-            Bridal Makeup Karachi — Packages from Rs 8,000
-          </h1>
-          <p id="bridal-lede" className="text-body md:text-lg max-w-2xl mb-8 leading-relaxed">
-            Farwa in PECHS has styled weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000,
-            Engagement Rs 12,000, Full Bridal Package Rs 25,000.
-          </p>
+          <div className="title-stack mb-10 max-w-2xl">
+            <p className="eyebrow">— Bridal · from Rs 8,000</p>
+            <h1 id="bridal-headline" className="display-page text-ink">
+              Bridal makeup in PECHS, Karachi
+            </h1>
+            <p id="bridal-lede" className="text-body md:text-lg leading-relaxed">
+              Farwa in PECHS has styled weddings since 2008 — Bridal Trial Rs 8,000, Mehndi Rs 10,000,
+              Engagement Rs 12,000, Full Bridal Package Rs 25,000.
+            </p>
+          </div>
 
           <div className="cta-cluster mb-4">
             <Link
@@ -89,14 +94,35 @@ export default function BridalLandingPage() {
               Full price list
             </Link>
           </div>
-          <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-['Inter'] mb-14">
-            <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
+          <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-[family-name:var(--font-inter)] mb-14">
+            <WaCta href={WA_DEFAULT} from="bridal-inline" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
               WhatsApp wedding plan
-            </a>
+            </WaCta>
             <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone hover:text-ink">
               Directions
             </a>
           </p>
+
+          <figure className="flow-loose">
+            <div className="relative aspect-[16/10] md:aspect-[2/1] overflow-hidden bg-mist border border-border-soft">
+              <Image
+                src="/bridal.jpg"
+                alt="Bridal makeup at Farwa Beauty Salon, PECHS Karachi"
+                fill
+                priority
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </div>
+            <figcaption className="mt-4 max-w-xl">
+              <p className="font-[family-name:var(--font-unbounded)] font-bold text-ink text-lg sm:text-xl leading-[1.05] tracking-tight">
+                From the chair
+              </p>
+              <p className="mt-1.5 text-stone text-xs font-[family-name:var(--font-inter)] font-light">
+                Bridal work at the PECHS studio.
+              </p>
+            </figcaption>
+          </figure>
 
           <section className="mb-14" aria-labelledby="event-taxonomy-heading">
             <h2 id="event-taxonomy-heading" className="section-title mb-3">
@@ -106,13 +132,13 @@ export default function BridalLandingPage() {
               Mehndi, engagement, nikkah, barat, and walima — each maps to a published package with a clear starting price.
             </p>
             <div className="overflow-x-auto max-w-4xl">
-              <table className="w-full border-collapse text-sm font-['Inter']">
+              <table className="w-full border-collapse text-sm font-[family-name:var(--font-inter)]">
                 <thead>
                   <tr className="border-b border-ink/30 text-left">
-                    <th className="py-2 pr-3 font-['Syne'] text-ink">Event</th>
-                    <th className="py-2 pr-3 font-['Syne'] text-ink">Look</th>
-                    <th className="py-2 pr-3 font-['Syne'] text-ink">Maps to</th>
-                    <th className="py-2 text-right font-['Syne'] text-ink">From</th>
+                    <th className="py-2 pr-3 font-[family-name:var(--font-syne)] text-ink">Event</th>
+                    <th className="py-2 pr-3 font-[family-name:var(--font-syne)] text-ink">Look</th>
+                    <th className="py-2 pr-3 font-[family-name:var(--font-syne)] text-ink">Maps to</th>
+                    <th className="py-2 text-right font-[family-name:var(--font-syne)] text-ink">From</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -121,7 +147,7 @@ export default function BridalLandingPage() {
                       <td className="py-2.5 pr-3 text-ink font-medium">{row.event}</td>
                       <td className="py-2.5 pr-3 text-stone">{row.look}</td>
                       <td className="py-2.5 pr-3 text-stone">{row.mapsTo}</td>
-                      <td className="py-2.5 text-right text-ink font-['Unbounded'] font-bold text-xs">
+                      <td className="py-2.5 text-right text-ink font-[family-name:var(--font-unbounded)] font-bold text-xs tabular-nums">
                         {formatPrice(row.price)}
                       </td>
                     </tr>
@@ -131,15 +157,15 @@ export default function BridalLandingPage() {
             </div>
           </section>
 
-          <section className="mb-12" aria-labelledby="packages-heading">
+          <section className="flow-loose" aria-labelledby="packages-heading">
             <h2 id="packages-heading" className="section-title mb-4">
               Bridal packages (PKR) — what&apos;s included
             </h2>
             <ul className="grid md:grid-cols-2 gap-4 max-w-4xl">
               {packages.map((pkg) => (
                 <li key={pkg.id} className="panel-soft p-5 shadow-soft flex flex-col">
-                  <h3 className="font-['Syne'] font-bold text-sm text-ink uppercase mb-1">{pkg.name}</h3>
-                  <p className="text-stone text-xs font-['Inter'] mb-2">
+                  <h3 className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink uppercase mb-1">{pkg.name}</h3>
+                  <p className="text-stone text-xs font-[family-name:var(--font-inter)] mb-2">
                     {formatPrice(pkg.pricePkr)}
                     {pkg.durationMinutes ? ` · ~${Math.round(pkg.durationMinutes / 60)}h` : ''}
                   </p>
@@ -147,7 +173,7 @@ export default function BridalLandingPage() {
                   {Array.isArray(pkg.includes) && pkg.includes.length > 0 && (
                     <>
                       <p className="text-[10px] tracking-[0.14em] uppercase text-stone mb-1">Included</p>
-                      <ul className="text-stone text-xs font-['Inter'] list-disc pl-4 space-y-1 mb-3">
+                      <ul className="text-stone text-xs font-[family-name:var(--font-inter)] list-disc pl-4 space-y-1 mb-3">
                         {pkg.includes.map((item) => (
                           <li key={item}>{item}</li>
                         ))}
@@ -155,7 +181,7 @@ export default function BridalLandingPage() {
                     </>
                   )}
                   <p className="text-[10px] tracking-[0.14em] uppercase text-stone mb-1">Not included by default</p>
-                  <ul className="text-stone text-xs font-['Inter'] list-disc pl-4 space-y-1 mb-4">
+                  <ul className="text-stone text-xs font-[family-name:var(--font-inter)] list-disc pl-4 space-y-1 mb-4">
                     <li>Guest / family makeup (book separately)</li>
                     <li>Pre-wedding facials &amp; threading (add from the menu)</li>
                     <li>Jewellery hire or outfit draping beyond dupatta/hijab styling listed</li>
@@ -171,7 +197,7 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <section className="mb-12" aria-labelledby="timeline-heading">
+          <section className="flow-loose" aria-labelledby="timeline-heading">
             <h2 id="timeline-heading" className="section-title mb-4">
               Pre-bridal timeline
             </h2>
@@ -181,7 +207,7 @@ export default function BridalLandingPage() {
               <li><strong className="text-ink font-medium">2–4 weeks out</strong> — complete trial; refine shade &amp; hair; continue threading.</li>
               <li><strong className="text-ink font-medium">Wedding week</strong> — light services only; avoid new skincare experiments.</li>
             </ol>
-            <p className="mt-4 text-sm font-['Inter']">
+            <p className="mt-4 text-sm font-[family-name:var(--font-inter)]">
               Full guide:{' '}
               <Link href="/blog/bridal-beauty-timeline" className="link-underline hover:text-ink text-ink font-medium">
                 bridal beauty timeline
@@ -193,7 +219,7 @@ export default function BridalLandingPage() {
             </p>
           </section>
 
-          <section className="mb-12" aria-labelledby="catchment-heading">
+          <section className="flow-tight" aria-labelledby="catchment-heading">
             <h2 id="catchment-heading" className="section-title mb-4">
               Brides from across Karachi
             </h2>
@@ -213,7 +239,7 @@ export default function BridalLandingPage() {
                 ['Mehndi & engagement looks', '/blog/mehndi-engagement-makeup-karachi'],
               ].map(([label, href]) => (
                 <li key={href}>
-                  <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-['Inter'] hover:text-ink">
+                  <Link href={href} className="tap-safe inline-flex items-center min-h-[44px] link-underline text-stone text-sm font-[family-name:var(--font-inter)] hover:text-ink">
                     {label}
                   </Link>
                 </li>
@@ -221,7 +247,7 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <section className="mb-12" aria-labelledby="why-bridal-heading">
+          <section className="flow-loose" aria-labelledby="why-bridal-heading">
             <h2 id="why-bridal-heading" className="section-title mb-4">
               Why brides choose Farwa
             </h2>
@@ -237,11 +263,11 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-bridal-heading">
-            <h2 id="visit-bridal-heading" className="section-title text-lg mb-4">
+          <section className="flow-loose panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-bridal-heading">
+            <h2 id="visit-bridal-heading" className="section-title mb-4">
               Studio &amp; consultation
             </h2>
-            <ul className="space-y-3 text-sm font-['Inter'] text-stone font-light">
+            <ul className="space-y-3 text-sm font-[family-name:var(--font-inter)] text-stone font-light">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-ink" />
                 {SALON_ADDRESS_LINES[0]}
@@ -257,7 +283,7 @@ export default function BridalLandingPage() {
                 </a>
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-4 text-xs font-['Inter']">
+            <div className="mt-4 flex flex-wrap gap-4 text-xs font-[family-name:var(--font-inter)]">
               <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="link-underline hover:text-ink">
                 Directions on Google Maps
               </a>
@@ -268,23 +294,23 @@ export default function BridalLandingPage() {
           </section>
 
           {BRIDAL_FAQS.length > 0 && (
-            <section className="mb-12" aria-labelledby="bridal-faq-heading">
+            <section className="flow" aria-labelledby="bridal-faq-heading">
               <h2 id="bridal-faq-heading" className="section-title mb-4">
                 Bridal FAQ
               </h2>
-              <dl className="max-w-3xl space-y-6">
+              <dl className="max-w-lg space-y-6">
                 {BRIDAL_FAQS.map((f) => (
                   <div key={f.q}>
-                    <dt className="font-['Syne'] font-bold text-sm text-ink mb-1">{f.q}</dt>
-                    <dd className="text-body text-sm">{f.a}</dd>
+                    <dt className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-1">{f.q}</dt>
+                    <dd className="text-body">{f.a}</dd>
                   </div>
                 ))}
               </dl>
             </section>
           )}
 
-          <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft max-w-3xl" aria-labelledby="bridal-book-cta">
-            <h2 id="bridal-book-cta" className="section-title text-lg mb-2">
+          <section className="flow panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="bridal-book-cta">
+            <h2 id="bridal-book-cta" className="section-title mb-2">
               Lock your bridal date
             </h2>
             <p className="text-body text-sm mb-5">
@@ -297,9 +323,9 @@ export default function BridalLandingPage() {
               >
                 Book Bridal Trial <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <a href={WA_DEFAULT} target="_blank" rel="noreferrer" className="tap-safe btn-secondary">
+              <WaCta href={WA_DEFAULT} from="bridal-cta" className="tap-safe btn-secondary">
                 WhatsApp wedding plan
-              </a>
+              </WaCta>
             </div>
           </section>
 
@@ -307,7 +333,7 @@ export default function BridalLandingPage() {
             <h2 id="bridal-read-heading" className="section-title mb-4">
               Planning guides
             </h2>
-            <ul className="flex flex-col gap-2 text-sm font-['Inter']">
+            <ul className="flex flex-col gap-2 text-sm font-[family-name:var(--font-inter)]">
               <li>
                 <Link href="/blog/best-bridal-makeup-packages-karachi-2026" className="link-underline hover:text-ink">
                   Bridal packages &amp; cost in Karachi 2026
@@ -331,7 +357,7 @@ export default function BridalLandingPage() {
             </ul>
           </section>
 
-          <p className="pt-6 border-t border-border-soft text-xs text-stone font-['Inter']">
+          <p className="pt-6 border-t border-border-soft text-xs text-stone font-[family-name:var(--font-inter)]">
             <Link href="/" className="link-underline hover:text-ink font-medium">Back to home</Link>
             {' · '}
             <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>

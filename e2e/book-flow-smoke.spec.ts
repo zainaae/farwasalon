@@ -10,11 +10,20 @@ import {
 
 test.describe('Book pages smoke', () => {
   test('/book/confirmation returns 200 with valid query params', async ({ page }) => {
+    /* Real bookings write the record before redirect; URL only carries
+       wall-clock ids and is scrubbed client-side. Seed storage the same way. */
+    await seedConfirmation(page, 'smoke-001', {
+      service: 'Eyebrow Threading',
+      name: 'Tester',
+      date: '2026-05-20',
+      time: '10:00',
+      duration: 10,
+    })
     const res = await page.goto(
-      '/book/confirmation?id=smoke-001&date=2026-05-20&time=10:00&service=Eyebrow%20Threading&name=Tester&duration=10',
+      '/book/confirmation?id=smoke-001&date=2026-05-20&time=10:00&duration=10',
     )
     expect(res?.status()).toBe(200)
-    await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /you're set/i })).toBeVisible()
   })
 
   test('/book/cancel returns 200 for a booking held in durable storage', async ({ page }) => {
@@ -99,7 +108,7 @@ test.describe('Booking flow', () => {
     await page.locator('#bk-phone').fill('03001234567')
     await page.getByRole('button', { name: 'Confirm Booking' }).click()
     await expect(page).toHaveURL(/\/book\/confirmation/, { timeout: 15_000 })
-    await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /you're set/i })).toBeVisible()
   })
 
   test('slots error path when API returns empty', async ({ page }) => {
@@ -137,7 +146,7 @@ test.describe('Booking flow', () => {
       try { sessionStorage.setItem('farwa-confirm-e2e-001', raw) } catch { /* ignore */ }
     })
     await page.goto('/book/confirmation?id=e2e-001&date=2026-05-20&time=10:00&duration=10')
-    await expect(page.getByRole('heading', { name: /you're booked/i })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /you're set/i })).toBeVisible()
     await expect(page.getByText(/Eyebrow Threading/i)).toBeVisible()
     await expect(page.getByText(/Tester/i)).toBeVisible()
     expect(page.url()).not.toContain('token=')

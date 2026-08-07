@@ -1,6 +1,9 @@
+'use client'
+
 import Link from 'next/link'
+import ArrowUpRight from './icon-sprite.jsx'
 import Image from 'next/image'
-import { ArrowUpRight } from 'lucide-react'
+import { track } from '../../src/site-config.js'
 import { getHeadlineDeal, getActiveDeals, formatDealRange } from '../../src/deals-data.js'
 
 /* Home-page campaign band. Renders only while the headline offer is announced
@@ -16,13 +19,14 @@ export default function DealStrip() {
   const live = getActiveDeals().some((d) => d.id === deal.id)
   const range = formatDealRange(deal)
   const href = deal.id === 'freedom-deal-2026' ? '/freedom-deal' : '/deals'
+  const onDealClick = () => track('DealStripClick', { from: 'home', deal: deal.id, live })
 
   return (
     <aside className="azadi-strip" aria-label={live ? 'Current offer' : 'Upcoming offer'}>
       <div className="section-shell py-8 md:py-10">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 md:gap-10">
           {deal.image && (
-            <Link href={href} className="shrink-0 self-center sm:self-auto" tabIndex={-1} aria-hidden="true">
+            <Link href={href} onClick={onDealClick} className="shrink-0 self-center sm:self-auto" tabIndex={-1} aria-hidden="true">
               <Image
                 src={deal.image}
                 alt=""
@@ -41,19 +45,19 @@ export default function DealStrip() {
           </p>
 
           <div className="min-w-0 flex-1">
-            <p className="text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-['Inter'] text-[color:var(--azadi-green)] mb-1.5">
+            <p className="text-[10px] md:text-[11px] tracking-[0.24em] uppercase font-semibold font-[family-name:var(--font-inter)] text-[color:var(--azadi-green)] mb-1.5">
               {live ? `Now on · ${range}` : `Starts 5 August · ${range}`}
             </p>
-            <p className="font-['Unbounded'] font-bold text-[color:var(--azadi-deep)] text-lg md:text-2xl leading-tight mb-1.5">
+            <p className="font-[family-name:var(--font-unbounded)] font-bold text-[color:var(--azadi-deep)] text-lg md:text-2xl leading-tight mb-1.5">
               Freedom Deal — 14% off
             </p>
-            <p className="text-[color:var(--azadi-deep)]/70 text-[13px] md:text-sm font-['Inter'] font-light max-w-md">
+            <p className="text-[color:var(--azadi-deep)]/70 text-[13px] md:text-sm font-[family-name:var(--font-inter)] font-light max-w-md">
               Independence Day offer — when your visit totals Rs 1,400 or more.
               Combine any services to get there.
             </p>
           </div>
 
-          <Link href={href} className="tap-safe azadi-btn shrink-0 self-stretch sm:self-auto justify-center">
+          <Link href={href} onClick={onDealClick} className="tap-safe azadi-btn shrink-0 self-stretch sm:self-auto justify-center">
             {live ? 'See the offer' : 'Details'}
             <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>

@@ -45,14 +45,20 @@ test('cancel — tampered token is rejected by the real API', async ({ page }) =
   await expect(page.getByText('Your appointment has been cancelled')).toHaveCount(0)
 })
 
-test('cancel — garbage token shows error, no stored booking shows invalid-link UI', async ({ page }) => {
+test('cancel — garbage token is rejected by the real API', async ({ page }) => {
   await seedToken(page, 'FBS-X', 'not-a-token')
   await page.goto('/book/cancel?id=FBS-X', { waitUntil: 'domcontentloaded' })
   await page.getByRole('button', { name: /cancel/i }).first().click()
-  await expect(page.getByText(/invalid|expired|failed|not found|unable/i).first()).toBeVisible({
+  // Missing BOOKING_CANCEL_SECRET also fail-closes here (verify → null).
+  await expect(page.getByText(/invalid|expired|failed|not found|unable|required/i).first()).toBeVisible({
     timeout: 15_000,
   })
+  await expect(page.getByText('Your appointment has been cancelled')).toHaveCount(0)
+})
 
+test('cancel — no booking id or stored token shows invalid-link UI', async ({ page }) => {
+  /* Fresh context: bare /book/cancel must not restore a prior farwa-conf-id
+     from an earlier test in the same browser session. */
   await page.goto('/book/cancel', { waitUntil: 'domcontentloaded' })
   await expect(page.getByText('Invalid cancellation link')).toBeVisible()
 })

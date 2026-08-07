@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { isAllowedOrigin } from '../../../lib/origin-check.js'
-import { checkRateLimit } from '../../../lib/rate-limit.js'
+import { checkRateLimit, getClientIp } from '../../../lib/rate-limit.js'
 import { logger, hashIp } from '../../../lib/logger.js'
 
 export const runtime = 'nodejs'
@@ -12,14 +12,17 @@ export async function POST(request) {
   if (!isAllowedOrigin(request)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
-  const rl = checkRateLimit(`err:${ip}`, { window: 600, max: 10 })
+  const ip = getClientIp(request)
+  const rl = checkRateLimit(ip, { scope: 'log-error', window: 600, max: 10 })
   if (rl.limited) return new NextResponse(null, { status: 429 })
 
   let body
   try {
     body = await request.json()
   } catch {
+    return new NextResponse(null, { status: 400 })
+  }
+  if (!body || typeof body !== 'object' || Array.isArray(body)) {
     return new NextResponse(null, { status: 400 })
   }
 

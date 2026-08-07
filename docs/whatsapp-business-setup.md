@@ -87,49 +87,53 @@ For each service:
 #### Threading
 | Item | Price | Description |
 |------|-------|-------------|
-| Eyebrow Threading | PKR 150 | Precise eyebrow shaping by expert beauticians |
-| Full Face Threading | PKR 600 | Complete face threading including eyebrows, upper lip, chin, forehead & sideburns |
+| Eyebrow Threading | PKR 200 | Precise eyebrow shaping by expert beauticians (10 min) |
+| Full Face Threading | PKR 1,200 | Complete face threading including eyebrows, upper lip, chin, forehead & sideburns (25 min) |
 
 #### Waxing
 | Item | Price | Description |
 |------|-------|-------------|
-| Full Arms Wax | PKR 500 | Smooth, gentle waxing for full arms |
-| Full Legs Wax | PKR 700 | Complete leg waxing, smooth finish |
-| Full Body Wax | PKR 3,500 | Head-to-toe waxing package for silky-smooth skin |
+| Full Arms Honey Wax | PKR 700 | Smooth, gentle waxing for full arms (25 min) |
+| Full Legs Honey Wax | PKR 1,200 | Complete leg waxing, smooth finish (40 min) |
+| Full Body Honey Wax | PKR 2,800 | Head-to-toe waxing package for silky-smooth skin (60 min) |
 
 #### Facials
 | Item | Price | Description |
 |------|-------|-------------|
-| Whitening Facial | PKR 1,500 | Brightening facial for radiant, even-toned skin |
-| Hydra Facial | PKR 3,500 | Deep hydration facial for plump, glowing skin |
-| Gold Facial | PKR 2,500 | Luxurious gold-infused facial for anti-aging glow |
+| Whitening Facial | PKR 1,900 | Brightening facial for radiant, even-toned skin (55 min) |
+| White Glow Facial | PKR 2,000 | Brightening facial with a finish that reads well in photographs (55 min) |
+| HD Whitening Facial | PKR 3,000 | High-definition brightening — our most-booked facial above Rs 2,000 (65 min) |
 
 #### Bridal
 | Item | Price | Description |
 |------|-------|-------------|
-| Bridal Makeup (Barat) | PKR 15,000+ | Stunning bridal look for your big day with premium products |
-| Full Bridal Package | PKR 35,000+ | Complete package: barat, walima, mehndi makeup + trial session |
-| Bridal Trial Session | PKR 5,000 | Perfect your bridal look before the wedding |
+| Full Bridal Package | PKR 25,000 | All-day bridal hair, makeup, draping & touch-ups (300 min) |
+| Bridal Trial | PKR 8,000 | Full preview of your wedding look, with photos for reference (120 min) |
+| Engagement Look | PKR 12,000 | Glam styling with makeup, hair set & lash application (150 min) |
+| Mehndi / Dholki Look | PKR 10,000 | Festive makeup with flower or jewellery hair styling (120 min) |
 
 #### Hair
 | Item | Price | Description |
 |------|-------|-------------|
-| Hair Protein Treatment | PKR 3,000+ | Repair and strengthen damaged hair |
-| Keratin Treatment | PKR 5,000+ | Smooth, frizz-free hair for weeks |
-| Hair Color (Global) | PKR 3,000+ | Full hair coloring with premium dyes |
+| Haircut & Blowdry | From PKR 2,000 | Precision cut and professional blowdry (60 min) |
+| Hair Colour | From PKR 4,000 | Full colour, highlights, balayage or toning (120 min) |
+| Blowdry & Styling | From PKR 1,500 | Salon-quality blowdry and finish (45 min) |
+| Normal Protein Treatment | From PKR 2,000 | Repair and strengthen damaged hair (45 min) |
 
 #### Nails
 | Item | Price | Description |
 |------|-------|-------------|
-| Luxury Manicure | PKR 1,200 | Premium manicure with hand massage and nail care |
-| Luxury Pedicure | PKR 1,500 | Relaxing pedicure with foot massage |
-| Gel Nails | PKR 2,000+ | Long-lasting gel nail polish application |
+| Normal Manicure | PKR 900 | Shape, cuticle care, buff and polish (30 min) |
+| Normal Pedicure | PKR 1,000 | Callus and dryness care that holds for weeks (35 min) |
+| SPA Manicure | PKR 1,400 | Soak, scrub, cuticle care, mask, hand massage & polish (45 min) |
+| SPA Pedicure | PKR 1,400 | Soak, scrub, callus attention, mask, massage & polish (45 min) |
 
 #### Massage
 | Item | Price | Description |
 |------|-------|-------------|
-| Full Body Massage | PKR 3,000 | 60-minute relaxing full body massage |
-| Back & Shoulder Massage | PKR 1,500 | Targeted tension relief massage |
+| Full Body Massage | PKR 2,500 | 40-minute full body massage with oil |
+| Back Massage | PKR 700 | 15-minute back and shoulder massage |
+| Head Massage & Wash | PKR 1,500 | Scalp work followed by wash and dry (30 min) |
 
 > **Tip:** Use high-quality photos for each catalog item. Before/after shots work best for services like facials and bridal makeup.
 
@@ -197,12 +201,12 @@ Assalam-o-Alaikum! 🌸 Thank you for contacting Farwa Beauty Salon. How can we 
 ```
 Here are our popular services and prices:
 
-💆 Facials: PKR 1,000–3,500
-💅 Manicure/Pedicure: PKR 500–1,500
-🧖 Waxing (Full Body): PKR 3,500
-✨ Threading (Full Face): PKR 600
-💇 Hair Treatments: PKR 1,500–15,000
-💄 Bridal Packages: PKR 35,000+
+💆 Facials: PKR 1,400–5,500
+💅 Manicure/Pedicure: PKR 300–1,600
+🧖 Waxing (Full Body): PKR 2,800–4,000
+✨ Threading (Full Face): PKR 1,200
+💇 Hair Treatments: PKR 2,000–3,000
+💄 Bridal Packages: PKR 8,000–25,000
 
 For our complete menu, visit: farwasalon.com
 
@@ -214,16 +218,15 @@ Would you like to book an appointment? 📅
 Thank you for your interest in our bridal services! 💍✨
 
 Our bridal packages include:
-💄 Barat Makeup: PKR 15,000–30,000
-👰 Walima Makeup: PKR 12,000–25,000
-🌙 Mehndi Night: PKR 8,000–15,000
-📦 Full Package (all events + trial): PKR 35,000–70,000
+👰 Full Bridal Package: PKR 25,000
+💄 Bridal Trial: PKR 8,000
+💍 Engagement Look: PKR 12,000
+🌙 Mehndi / Dholki Look: PKR 10,000
 
 Each package includes:
-✅ Consultation
-✅ Trial session
+✅ Professional makeup
+✅ Hair styling
 ✅ Premium products
-✅ Hairstyling included
 
 📅 When is your event date?
 We recommend booking 2–3 months in advance for the best availability.
@@ -412,7 +415,7 @@ Post 2–3 times per week:
 | Day | Content Type | Example |
 |-----|-------------|---------|
 | Monday | Beauty Tip | "3 steps to prep your skin before a facial..." |
-| Wednesday | Offer / Promo | "This week only: 20% off all facials!" |
+| Wednesday | Offer / Promo | Only if listed on farwasalon.com/deals — else a tip: "Facials from Rs 1,400. Book online or WhatsApp" |
 | Friday | Showcase | Before/after photo or bridal transformation |
 
 ### Promote the Channel

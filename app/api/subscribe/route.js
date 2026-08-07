@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { appendSubscriber, isConfigured, sheetsErrorDetail } from '../../../lib/google-sheets.js'
-import { checkRateLimit } from '../../../lib/rate-limit.js'
+import { checkRateLimit, getClientIp } from '../../../lib/rate-limit.js'
 import { isAllowedOrigin } from '../../../lib/origin-check.js'
 import { requireStringField } from '../../../lib/sanitize.js'
 import { isValidEmail, normalizeEmail } from '../../../lib/email-validate.js'
@@ -10,8 +10,8 @@ export async function POST(request) {
   if (!isAllowedOrigin(request)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   }
-  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
-  const rl = checkRateLimit(ip, { window: 300, max: 5 })
+  const ip = getClientIp(request)
+  const rl = checkRateLimit(ip, { scope: 'subscribe', window: 300, max: 5 })
   if (rl.limited) {
     return NextResponse.json(
       { error: 'Too many requests. Please try again later.' },

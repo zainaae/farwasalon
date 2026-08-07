@@ -1,7 +1,7 @@
 import Image from 'next/image'
+import WaCta from './components/wa-cta.jsx'
 import Link from 'next/link'
 import { WA_NUMBER } from '../src/site-config.js'
-import HomeHeroVideo from './home-hero-video'
 
 const HERO_POSTER = '/bridal2.jpg'
 
@@ -22,19 +22,33 @@ export default function HomeHero() {
         fetchPriority="high"
         quality={60}
         sizes="(max-width: 768px) 100vw, 100vw"
-        className="hero-lcp object-cover scale-[1.01] pointer-events-none"
-        style={{ objectPosition: '50% 35%' }}
+        /* Focal point moves right as the viewport widens. The copy occupies the
+           left of the frame, and at desktop widths a centred crop put the
+           headline straight across the bride's face. Portrait keeps her
+           centred; from md up she sits in the right third with the type on
+           clear ground. */
+        className="hero-lcp object-cover scale-[1.01] pointer-events-none object-[50%_35%] md:object-[68%_28%]"
       />
 
-      <HomeHeroVideo />
+      {/* No desktop video. /hero-mp4.mp4 is stock b-roll — a blow-dry on a
+          client who looks nothing like the ones who walk into Block 3 — and it
+          sat on top of this bridal still, so desktop got the generic first
+          impression and only mobile saw the real one. The still is the
+          stronger asset on every screen. Restore HomeHeroVideo when there is
+          owned PECHS footage to put here (docs/salon-photography-guide.md). */}
 
       <div
         id="hero-overlay"
         className="absolute inset-0 z-[1]"
         style={{
-          opacity: 0.48,
+          /* One even wash over the whole frame is what made this read flat:
+             every part of the image sat at the same tone, so nothing receded
+             and nothing came forward. Weighted to the bottom-left instead,
+             where the copy sits — that buys contrast for the type and leaves
+             the top-right of the photograph bright. */
           background:
-            'linear-gradient(to top, rgba(13,6,9,0.88) 0%, rgba(13,6,9,0.55) 38%, rgba(13,6,9,0.22) 68%, rgba(13,6,9,0.35) 100%)',
+            'linear-gradient(to top, rgba(13,6,9,0.88) 0%, rgba(13,6,9,0.44) 24%, rgba(13,6,9,0.10) 56%, rgba(13,6,9,0.24) 100%), ' +
+            'linear-gradient(to right, rgba(13,6,9,0.60) 0%, rgba(13,6,9,0.34) 28%, rgba(13,6,9,0.06) 58%, rgba(13,6,9,0) 78%)',
         }}
       />
 
@@ -66,29 +80,29 @@ export default function HomeHero() {
         <div className="max-w-screen-2xl mx-auto min-w-0 w-full">
           <p
             id="hero-lede"
-            className="hero-lcp text-white/65 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-['Inter'] mb-5 md:mb-7"
+            className="hero-lcp text-white/80 text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-[family-name:var(--font-inter)] mb-5 md:mb-7"
           >
             Farwa Beauty Salon &middot; Est. 2008
           </p>
 
+          {/* H1 uses next/font CSS var + display:optional Unbounded so LCP is not
+              blocked on webfont swap. Poster remains priority/high fetchPriority. */}
           <h1
             id="hero-headline"
-            className="hero-lcp text-white leading-[0.96] mb-4 md:mb-5 break-words"
+            className="hero-lcp text-white leading-[0.96] mb-4 md:mb-5 break-words font-[family-name:var(--font-unbounded)]"
             style={{
-              fontFamily: 'var(--font-unbounded), Unbounded, sans-serif',
               fontSize: 'clamp(2.5rem, 8.8vw, 6.75rem)',
               letterSpacing: '-0.03em',
               maxWidth: '13ch',
             }}
           >
             <span className="block text-white font-bold">Beauty Salon in PECHS</span>
-            <span className="block text-white/80 font-light italic mt-1">Karachi</span>
+            <span className="block text-white font-normal mt-1">Karachi</span>
           </h1>
 
           <p
-            className="text-white/90 leading-[1.15] mb-8 md:mb-9 break-words"
+            className="text-white/90 leading-[1.15] mb-8 md:mb-9 break-words font-[family-name:var(--font-unbounded)]"
             style={{
-              fontFamily: 'var(--font-unbounded), Unbounded, sans-serif',
               fontSize: 'clamp(1.05rem, 3.2vw, 1.75rem)',
               letterSpacing: '-0.01em',
               maxWidth: '22ch',
@@ -97,7 +111,7 @@ export default function HomeHero() {
             {thesis.map((line) => (
               <span
                 key={line.text}
-                className={`block ${line.em ? 'text-white/95 font-medium' : 'text-white/70 font-light italic'}`}
+                className={`block ${line.em ? 'text-white/95 font-bold' : 'text-white/85 font-normal'}`}
               >
                 {line.text}
               </span>
@@ -110,7 +124,7 @@ export default function HomeHero() {
           >
             <Link
               href="/book"
-              className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2.5 bg-white text-ink text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-semibold font-['Inter'] px-8 md:px-10 py-[1.05rem] md:py-[1.2rem] hover:bg-nude active:scale-[0.98] transition-colors duration-300"
+              className="tap-safe inline-flex items-center justify-center sm:justify-start gap-2.5 bg-white text-ink text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-8 md:px-10 py-[1.05rem] md:py-[1.2rem] hover:bg-nude active:scale-[0.98] transition-colors duration-300"
             >
               Book an Appointment
               <svg
@@ -131,18 +145,17 @@ export default function HomeHero() {
             </Link>
             <Link
               href="/services"
-              className="tap-safe link-underline self-center text-white/75 text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-['Inter'] hover:text-white transition-colors"
+              className="tap-safe link-underline self-center text-white/75 text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
             >
               Explore Services
             </Link>
-            <a
+            <WaCta
               href={`https://wa.me/${WA_NUMBER}`}
-              target="_blank"
-              rel="noreferrer"
-              className="tap-safe hidden sm:inline-flex text-white/50 text-[10px] tracking-[0.14em] uppercase font-['Inter'] hover:text-white/80 transition-colors"
+              from="hero"
+              className="tap-safe link-underline self-center hidden sm:inline-flex text-white/75 text-[12px] md:text-[13px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
             >
               Or WhatsApp us
-            </a>
+            </WaCta>
           </div>
         </div>
       </div>
@@ -155,7 +168,7 @@ export default function HomeHero() {
         <div className="w-px h-9 bg-white/20 relative overflow-hidden">
           <div className="hero-scroll-bar absolute top-0 left-0 w-full bg-white/80" style={{ height: '40%' }} />
         </div>
-        <span className="text-white/45 text-[9px] tracking-[0.22em] uppercase font-['Inter'] rotate-90 origin-center mt-2">
+        <span className="text-white/45 text-[9px] tracking-[0.22em] uppercase font-[family-name:var(--font-inter)] rotate-90 origin-center mt-2">
           scroll
         </span>
       </div>

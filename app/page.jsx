@@ -1,10 +1,13 @@
 import HomeHero from './home-hero'
 import DealStrip from './components/deal-strip'
-/* Imported directly rather than through next/dynamic. The chunk is only used
-   on this route, so splitting it measured byte-for-byte identical (787 KB of
-   scripts either way) — Next preloads it for hydration regardless. The
-   indirection bought nothing, so it is gone. */
+import ProofStrip from './components/proof-strip'
+/* Static import — not next/dynamic with a loading fallback. That pattern
+   streams the placeholder into the initial HTML and only fills below-fold
+   after the client chunk; with JS off (crawlers / our SEO e2e) <main> shrunk
+   to ~59 words. Client components still SSR; the eight sections already use
+   content-visibility: auto so offscreen cost stays low. */
 import HomeBelowFold from './home-below-fold'
+import { isGooglePlacesConfigured } from '../lib/google-places.js'
 import JsonLd from './json-ld'
 import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
 import { pageSocialMeta } from '../lib/page-metadata.js'
@@ -31,8 +34,9 @@ export default function HomePage() {
       />
       <main id="main" className="overflow-x-clip max-w-full min-w-0">
         <HomeHero />
+        <ProofStrip />
         <DealStrip />
-        <HomeBelowFold />
+        <HomeBelowFold placesEnabled={isGooglePlacesConfigured()} />
       </main>
     </>
   )

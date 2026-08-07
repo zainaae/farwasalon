@@ -1,7 +1,9 @@
 import Link from 'next/link'
+import ArrowUpRight from '../components/icon-sprite.jsx'
+import WaCta from '../components/wa-cta.jsx'
 import { NEIGHBORHOODS } from '../../src/location-seo.js'
 import { AREA_CONTENT } from '../../src/area-content.js'
-import { ArrowUpRight, MapPin, Clock, Phone } from 'lucide-react'
+import { MapPin, Clock, Phone } from 'lucide-react'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import {
   SALON_ADDRESS_LINES,
@@ -39,7 +41,7 @@ export default function BeautySalonKarachiPage() {
       <main id="main" className="page-content">
         <div className="section-shell section-pad min-h-0">
           <p className="eyebrow mb-4">— Karachi beauty salon</p>
-          <h1 className="font-['Unbounded'] font-bold text-3xl md:text-[2.5rem] text-ink mb-6 max-w-3xl leading-tight tracking-tight">
+          <h1 className="display-page text-ink mb-6 max-w-2xl">
             Beauty Salon in Karachi — PECHS
           </h1>
           <p className="text-body md:text-lg max-w-3xl mb-4">
@@ -47,7 +49,7 @@ export default function BeautySalonKarachiPage() {
             services in PECHS Block 3 since 2008. Transparent pricing from Rs 100, a calm women-only studio,
             and online booking — one PECHS address (not an at-home parlour), one team you can trust.
           </p>
-          <p className="text-stone text-sm font-['Inter'] font-light max-w-3xl mb-8">
+          <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-3xl mb-8">
             {SALON_ADDRESS_LINES[0]} · {SALON_ADDRESS_LINES[1]} · {SALON_PHONE_DISPLAY}
           </p>
 
@@ -55,11 +57,11 @@ export default function BeautySalonKarachiPage() {
             <Link href="/book" className="btn-primary">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <a href="https://wa.me/923222782254" target="_blank" rel="noreferrer" className="btn-secondary">
+            <WaCta href="https://wa.me/923222782254" from="karachi-hub" className="btn-secondary">
               WhatsApp
-            </a>
+            </WaCta>
           </div>
-          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-['Inter'] mb-12">
+          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)] mb-12">
             <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Directions
             </a>
@@ -94,10 +96,10 @@ export default function BeautySalonKarachiPage() {
           </section>
 
           <section className="mb-12 panel-soft p-6 md:p-8 shadow-soft" aria-labelledby="visit-heading">
-            <h2 id="visit-heading" className="section-title text-lg mb-4">
+            <h2 id="visit-heading" className="section-title mb-4">
               Visit the salon
             </h2>
-            <ul className="space-y-3 text-sm font-['Inter'] text-stone font-light">
+            <ul className="space-y-3 text-sm font-[family-name:var(--font-inter)] text-stone font-light">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-ink" />
                 {SALON_ADDRESS_LINES[0]}
@@ -113,7 +115,7 @@ export default function BeautySalonKarachiPage() {
                 </a>
               </li>
             </ul>
-            <div className="mt-4 flex flex-wrap gap-4 text-xs font-['Inter']">
+            <div className="mt-4 flex flex-wrap gap-4 text-xs font-[family-name:var(--font-inter)]">
               <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="link-underline hover:text-ink">
                 Directions on Google Maps
               </a>
@@ -170,7 +172,7 @@ export default function BeautySalonKarachiPage() {
                 </li>
               ))}
             </ul>
-            <p className="mt-8 pt-6 border-t border-border-soft text-xs text-stone font-['Inter']">
+            <p className="mt-8 pt-6 border-t border-border-soft text-xs text-stone font-[family-name:var(--font-inter)]">
               <Link href="/" className="link-underline hover:text-ink font-medium">
                 Back to home
               </Link>
