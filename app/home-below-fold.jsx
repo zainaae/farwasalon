@@ -119,7 +119,7 @@ function EditorialSlideshow() {
 
   return (
     <section
-      className="cv-auto editorial-marquee bg-mist border-y border-[#e4ddd7] overflow-x-clip max-w-full"
+      className="cv-auto editorial-marquee living-band border-y border-[#e4ddd7] overflow-x-clip max-w-full"
       aria-label="Editorial photo showcase"
     >
       <div className="section-shell flex items-end justify-between gap-4 pt-7 pb-4 px-4 sm:px-5 md:px-10 md:pt-8 md:pb-5">
@@ -343,7 +343,7 @@ function TrustPillars() {
 
   return (
     <section
-      className="cv-auto bg-mist border-t border-border-soft"
+      className="cv-auto living-band border-t border-border-soft"
       aria-labelledby="trust-pillars-heading"
     >
       <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-16 lg:py-[4.5rem]">
@@ -613,6 +613,7 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
 
       <ReviewDatingNote posts={posts} sourceName={sourceName} />
 
+      <div className="reviews-strip-fade">
       <div
         className={`reviews-strip-rail flex gap-4 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none md:mx-0 md:px-0 md:pb-0 md:overflow-visible md:grid ${desktopCols} md:gap-5 md:max-w-5xl md:items-stretch`}
       >
@@ -623,6 +624,7 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
             excerpt
           />
         ))}
+      </div>
       </div>
     </div>
   )
@@ -695,7 +697,7 @@ function TestimonialsPreview({ placesEnabled }) {
   const featuredSourceLabel = featured.source === 'google' ? 'Google' : 'Facebook'
 
   return (
-    <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-white border-t border-border-soft">
+    <section className="cv-auto living-band living-band--soft relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden border-t border-border-soft">
       <div className="relative max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
         <m.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
@@ -804,7 +806,7 @@ function TestimonialsPreview({ placesEnabled }) {
 function CtaBand() {
   /* Solid plum close — no weak bridal stock behind “Visit us”. Matches PageCloseCta. */
   return (
-    <section className="cv-auto cta-band grain-on-dark bg-plum-deep py-16 sm:py-20 md:py-[5rem] px-4 sm:px-5 md:px-10 border-t border-white/10">
+    <section className="cv-auto cta-band living-band--deep grain-on-dark py-16 sm:py-20 md:py-[5rem] px-4 sm:px-5 md:px-10 border-t border-white/10">
       <div className="max-w-screen-xl mx-auto">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
           <m.div
@@ -872,7 +874,7 @@ function FounderNote() {
   /* Quote only — we do not have a cleared founder portrait. A client hair
      shot labeled as Rubina was wrong context. */
   return (
-    <section className="cv-auto bg-white border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
+    <section className="cv-auto living-band--soft living-band border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
       <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
