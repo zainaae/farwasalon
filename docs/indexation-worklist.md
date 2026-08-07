@@ -155,7 +155,16 @@ page's worth of genuinely different things to say about it.
 
 ## 4. Expected in GSC as "Page with redirect" — correct, ignore
 
-These 301 deliberately. They should never be indexed.
+These permanently redirect. They should never be indexed. After the Aug 2026
+absolute-destination fix, each is a **single hop** to the apex 200 URL (even
+when crawled on `www`).
+
+**"Redirect error" is different from "Page with redirect".** Redirect error
+means Google could not finish the hop (chain, loop, or target 404). That
+showed up in the Jul 28–Aug 5 validation window while location hubs were
+briefly retired (best-* → -in-* → 404) and while www + relative Location
+headers chained through an extra hop. Re-run **Validate fix** in GSC after
+deploying absolute apex destinations; do not delete these redirects.
 
     https://farwasalon.com/team
     https://farwasalon.com/pricing
@@ -169,3 +178,4 @@ These 301 deliberately. They should never be indexed.
     https://farwasalon.com/14-august-sale
     https://farwasalon.com/14-august-offer
     https://farwasalon.com/blog/full-body-wax-honey-vs-rica-karachi
+    /* plus legacy /services/best-{service}-{neighborhood} → canonical -in- hubs */

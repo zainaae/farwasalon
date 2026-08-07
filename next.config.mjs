@@ -1,4 +1,5 @@
 import { getBestLocationRedirects } from './src/location-seo.js'
+import { toCanonicalUrl } from './lib/canonical-origin.js'
 
 /** @type {import('next').NextConfig} */
 const isDev = process.env.NODE_ENV === 'development'
@@ -62,31 +63,35 @@ const nextConfig = {
        same query is keyword cannibalisation, and Google treats thin
        location/name variants of one offer as doorway pages. Redirects capture
        typed traffic, printed URLs and any inbound link with none of that risk. */
-    { source: '/azadi-sale', destination: '/freedom-deal', permanent: true },
-    { source: '/azadi-deal', destination: '/freedom-deal', permanent: true },
-    { source: '/azaadi-sale', destination: '/freedom-deal', permanent: true },
-    { source: '/azadi-offer', destination: '/freedom-deal', permanent: true },
-    { source: '/jashn-e-azadi', destination: '/freedom-deal', permanent: true },
-    { source: '/independence-day-offer', destination: '/freedom-deal', permanent: true },
-    { source: '/independence-sale', destination: '/freedom-deal', permanent: true },
-    { source: '/14-august-sale', destination: '/freedom-deal', permanent: true },
-    { source: '/14-august-offer', destination: '/freedom-deal', permanent: true },
+    /* Destinations are absolute apex URLs. Relative Location on www keeps the
+       crawler on www for one hop (next.config runs before proxy.js), which
+       Search Console reports as Redirect error for aliases like
+       /independence-sale and legacy /services/best-*. */
+    { source: '/azadi-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
+    { source: '/azadi-deal', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
+    { source: '/azaadi-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
+    { source: '/azadi-offer', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
+    { source: '/jashn-e-azadi', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
+    { source: '/independence-day-offer', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
+    { source: '/independence-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
+    { source: '/14-august-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
+    { source: '/14-august-offer', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
     {
       /* Retired: a 151-word post competing with the substantial Rica-vs-honey
          guide for the same query. Its full-body angle was absorbed there, so
          this 301 consolidates the signal instead of splitting it. */
       source: '/blog/full-body-wax-honey-vs-rica-karachi',
-      destination: '/blog/rica-wax-vs-honey-wax-karachi',
+      destination: toCanonicalUrl('/blog/rica-wax-vs-honey-wax-karachi'),
       permanent: true,
     },
     {
       source: '/team',
-      destination: '/about',
+      destination: toCanonicalUrl('/about'),
       permanent: true,
     },
     {
       source: '/pricing',
-      destination: '/prices',
+      destination: toCanonicalUrl('/prices'),
       permanent: true,
     },
     {
