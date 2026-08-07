@@ -972,7 +972,7 @@ function FounderNote() {
           style={{ maxWidth: '24ch' }}
         >
           &ldquo;Trends visit Karachi every season. Grace stays. This salon
-          opened in {FOUNDING_YEAR} to give every woman on this street both.&rdquo;
+          opened in {FOUNDING_YEAR}{' '}to give every woman on this street both.&rdquo;
         </blockquote>
         <p className="mt-7 text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] text-stone">
           Farwa Beauty Salon · PECHS

@@ -250,13 +250,14 @@ describe('service id helpers', () => {
   })
 })
 
-/* Hair services depend on length and density, so their printed rate is a floor
-   rather than a quote. The qualifier has to be everywhere a price is shown — a
-   menu that says "from Rs 4,000" and a booking screen that says "Rs 4,000" is
-   the surprise-at-the-counter this site exists to avoid. */
-describe('hair prices are marked as starting prices', () => {
-  it('every Hair and Hair Treatments service carries fromPrice', () => {
-    for (const cat of ['Hair', 'Hair Treatments']) {
+/* Hair / bridal / hair-treatment rates depend on length and density, so the
+   printed figure is a floor rather than a quote. The qualifier has to show
+   everywhere a price is shown — a menu that says "from Rs 4,000" and a booking
+   screen that says "Rs 4,000" is the surprise-at-the-counter this site exists
+   to avoid. */
+describe('hair and bridal prices are marked as starting prices', () => {
+  it('every Hair, Hair Treatments, and Bridal service carries fromPrice', () => {
+    for (const cat of ['Hair', 'Hair Treatments', 'Bridal']) {
       for (const svc of SERVICES[cat]) {
         expect(svc.fromPrice, `${cat} / ${svc.name}`).toBe(true)
       }
@@ -273,6 +274,7 @@ describe('hair prices are marked as starting prices', () => {
 
   it('formatServicePrice prefixes only the variable ones', () => {
     expect(formatServicePrice(SERVICES['Hair'].find((s) => s.name === 'Hair Colour'))).toBe('from Rs 4,000')
+    expect(formatServicePrice(SERVICES['Bridal'].find((s) => s.name === 'Bridal Trial'))).toBe('from Rs 8,000')
     expect(formatServicePrice(SERVICES['Threading'][0])).toBe('Rs 200')
     expect(formatServicePrice(null)).toBeNull()
     expect(formatServicePrice({ pricePkr: null })).toBeNull()
