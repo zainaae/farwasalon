@@ -1179,7 +1179,7 @@ button.tap-safe,
   background-image: radial-gradient(75% 120% at 16% 0%, rgba(201, 169, 138, 0.08), transparent 60%);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .booking-story-step { opacity: 1 !important; }
-}
+/* Booking-story inactive steps must not use container opacity on .bg-mist —
+   that blended text to ~1.6–2.3:1 (axe color-contrast). Hierarchy is via
+   heading text-stone + sticky/mobile media opacity instead. */
 

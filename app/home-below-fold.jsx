@@ -504,15 +504,17 @@ function BookingStory() {
               <div
                 key={s.n}
                 data-booking-step={i}
-                className={`booking-story-step flex flex-col justify-center py-10 md:py-0 md:min-h-[58vh] transition-opacity duration-500 ${
-                  active === i ? 'opacity-100' : 'opacity-40 md:opacity-[0.35]'
+                className={`booking-story-step flex flex-col justify-center py-10 md:py-0 md:min-h-[58vh] ${
+                  active === i ? 'booking-story-step--active' : 'booking-story-step--inactive'
                 }`}
               >
                 <span className="font-[family-name:var(--font-unbounded)] font-bold text-[13px] text-[var(--accent-gold-deep)]">
                   {s.n}
                 </span>
                 <h3
-                  className="font-[family-name:var(--font-unbounded)] font-bold text-ink mt-3 mb-3.5 leading-[1.15]"
+                  className={`font-[family-name:var(--font-unbounded)] font-bold mt-3 mb-3.5 leading-[1.15] transition-colors duration-500 ${
+                    active === i ? 'text-ink' : 'text-stone'
+                  }`}
                   style={{ fontSize: 'clamp(1.35rem, 2.4vw, 2rem)', letterSpacing: '-0.02em' }}
                 >
                   {s.t}
@@ -525,7 +527,11 @@ function BookingStory() {
                   Book online →
                 </Link>
                 {/* Mobile: show step image inline so sticky chapter still works without a second sticky fight. */}
-                <div className="md:hidden mt-6 border border-border-soft bg-white p-1 shadow-card">
+                <div
+                  className={`md:hidden mt-6 border border-border-soft bg-white p-1 shadow-card transition-opacity duration-500 ${
+                    active === i ? 'opacity-100' : 'opacity-45'
+                  }`}
+                >
                   <Image
                     src={s.img}
                     alt={s.alt}
