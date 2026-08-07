@@ -559,7 +559,7 @@ function BookingStory() {
               <li key={s.n} className="flex items-center gap-2">
                 <span
                   className={`booking-progress-dot font-[family-name:var(--font-unbounded)] text-[11px] font-bold tabular-nums transition-colors duration-500 ${
-                    i === active ? 'text-plum' : i < active ? 'text-ink' : 'text-stone/40'
+                    i === active ? 'text-plum' : i < active ? 'text-ink' : 'text-stone'
                   }`}
                 >
                   {s.n}
@@ -589,7 +589,7 @@ function BookingStory() {
               >
                 <span
                   className={`booking-story-num font-[family-name:var(--font-unbounded)] font-bold leading-none transition-colors duration-500 ${
-                    active === i ? 'text-plum' : 'text-stone/35'
+                    active === i ? 'text-plum' : 'text-stone'
                   }`}
                   style={{ fontSize: 'clamp(2.75rem, 6vw, 4.5rem)' }}
                   aria-hidden="true"

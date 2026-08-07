@@ -1540,7 +1540,7 @@ button.tap-safe,
   box-shadow: var(--shadow-plum);
 }
 
-/* Booking-story inactive steps must not use container opacity on .bg-mist —
-   that blended text to ~1.6–2.3:1 (axe color-contrast). Hierarchy is via
-   heading text-stone + sticky/mobile media opacity instead. */
+/* Booking-story inactive steps must not use container opacity or text-stone/NN
+   on .bg-mist — those blend to ~1.6–1.8:1 (axe color-contrast). Hierarchy is
+   via full text-stone on headings/nums/progress + sticky/mobile media opacity. */
 
