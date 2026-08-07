@@ -44,7 +44,9 @@ export default function BookPage() {
   return (
     <Suspense fallback={
       <main id="main" className="page-content overflow-x-clip">
-        <div className="section-shell section-pad min-h-0 min-w-0 max-w-full overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
+        {/* Matches book-client.jsx: no max-w-full, or the fallback renders at
+            a different gutter than the page it is holding space for. */}
+        <div className="section-shell section-pad min-h-0 min-w-0 overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
           <BookHeading />
           {/* Reserve the height the real step-1 picker occupies (measured:
               ~960px mobile / ~770px desktop). Without it the footer sat one

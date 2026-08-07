@@ -68,7 +68,13 @@ export default function QuickPickRow() {
                 aria-label={`Book ${category}${minPrice ? ` — from ${formatPrice(minPrice)}` : ''}`}
                 className="tap-safe quick-pick-card"
               >
-                <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full">
+                {/* min-h reserves both lines on every card. The card centres its
+                  content, so "Eyebrow Tattoo" — the one name that wraps —
+                  grew taller than its neighbours and pushed its price a line
+                  below theirs, breaking the only horizontal edge this strip
+                  has. 2.5em is two lines at leading-tight, and it is in em so
+                  it tracks the 11px/12px breakpoint change. */}
+              <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full min-h-[2.5em]">
                   {category}
                 </span>
                 {minPrice != null ? (
@@ -88,7 +94,8 @@ export default function QuickPickRow() {
               aria-label={`View all ${CATEGORY_COUNT} service categories`}
               className="tap-safe quick-pick-card quick-pick-card--all"
             >
-              <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full">
+              {/* Same reserved two lines as the service cards above. */}
+              <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full min-h-[2.5em]">
                 View all {CATEGORY_COUNT}
               </span>
               <span className="text-stone text-[10px] font-[family-name:var(--font-inter)]">Categories</span>

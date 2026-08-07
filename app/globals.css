@@ -11,8 +11,16 @@
   --border-soft: #e4ddd7;
   --accent-gold: #c9a98a;
   --accent-gold-deep: #82664a; /* gold for text on light bg — 5.3:1 on white, 4.9:1 on mist */
+  /* Logo palette — sampled from public/logo-source.png / assets/logo.jpg
+     (plum→berry wordmark). Gold stays ambient; plum is the brand loud accent.
+     Use for sticky rails, finale bands, rules, and hover energy — not a
+     full-site purple wash. */
+  --plum-deep: #3f1631;
+  --plum: #6e2044;
+  --berry: #9e2a52; /* ≈7:1 on white — safe for small text */
   --shadow-soft: 0 2px 12px rgba(13, 13, 13, 0.05);
   --shadow-card: 0 8px 32px rgba(13, 13, 13, 0.08);
+  --shadow-plum: 0 8px 28px rgba(63, 22, 49, 0.14);
 
   /* Independence Day campaign — sampled from the Freedom Deal poster so the
      page and the artwork share one palette. Used only by /freedom-deal and the
@@ -125,8 +133,17 @@
   }
   .text-accent-gold { color: var(--accent-gold) !important; }
   .text-accent-gold-deep { color: var(--accent-gold-deep) !important; }
+  .bg-plum-deep { background-color: var(--plum-deep) !important; }
+  .bg-plum { background-color: var(--plum) !important; }
+  .bg-berry { background-color: var(--berry) !important; }
+  .text-plum-deep { color: var(--plum-deep) !important; }
+  .text-plum { color: var(--plum) !important; }
+  .text-berry { color: var(--berry) !important; }
+  .border-plum { border-color: var(--plum) !important; }
+  .border-plum-deep { border-color: var(--plum-deep) !important; }
   .shadow-soft { box-shadow: var(--shadow-soft); }
   .shadow-card { box-shadow: var(--shadow-card); }
+  .shadow-plum { box-shadow: var(--shadow-plum); }
 }
 
 /* ── Layout & typography components ── */
@@ -261,7 +278,7 @@
     border: 1px solid var(--ink);
     transition: background-color 0.2s ease, transform 0.15s ease;
   }
-  .btn-primary:hover { background: var(--stone); }
+  .btn-primary:hover { background: var(--plum); border-color: var(--plum); }
   .btn-primary:active { transform: scale(0.98); }
   .btn-secondary {
     display: inline-flex;
@@ -1156,14 +1173,19 @@ button.tap-safe,
   text-decoration: none;
   transition: background-color 0.2s ease, transform 0.15s ease;
 }
-.btn-loud:hover { background: var(--stone); color: #fff; }
+.btn-loud:hover { background: var(--plum); color: #fff; border-color: var(--plum); }
 .btn-loud:active { transform: scale(0.98); }
 .btn-loud--light {
   color: var(--ink);
   background: #fff;
   border-color: #fff;
 }
-.btn-loud--light:hover { background: var(--nude); color: var(--ink); }
+.btn-loud--light:hover { background: var(--nude); color: var(--plum-deep); }
+.btn-loud--plum {
+  background: var(--plum-deep);
+  border-color: var(--plum-deep);
+}
+.btn-loud--plum:hover { background: var(--plum); border-color: var(--plum); color: #fff; }
 
 .grain-on-dark {
   position: relative;
@@ -1186,7 +1208,28 @@ button.tap-safe,
 }
 
 .problem-band {
-  background-image: radial-gradient(75% 120% at 16% 0%, rgba(201, 169, 138, 0.08), transparent 60%);
+  background-color: var(--plum-deep);
+  background-image: radial-gradient(75% 120% at 16% 0%, rgba(158, 42, 82, 0.22), transparent 58%);
+}
+
+/* Quoti-style sticky rail — fills the dead right/left column with a job,
+   not with empty canvas. Plum hairline marks the brand edge. */
+.editorial-sticky-rail {
+  border-left: 2px solid var(--plum);
+  padding-left: 1.25rem;
+}
+@media (min-width: 1024px) {
+  .editorial-sticky-rail {
+    position: sticky;
+    top: 7rem;
+    padding-left: 1.5rem;
+  }
+}
+
+.panel-plum {
+  background: var(--plum-deep);
+  color: #fff;
+  box-shadow: var(--shadow-plum);
 }
 
 /* Booking-story inactive steps must not use container opacity on .bg-mist —

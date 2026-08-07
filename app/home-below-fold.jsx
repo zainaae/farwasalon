@@ -60,10 +60,16 @@ function EditorialMedia({ item, className = '' }) {
 function StatsStrip() {
   /* Story band only. The four trust figures live in ProofStrip under the hero —
      repeating years / appointments / service count here made the page feel like
-     it was restating itself, and overflow-hidden on the title clipped Unbounded. */
+     it was restating itself, and overflow-hidden on the title clipped Unbounded.
+
+     Gutter has to match the rest of the page. Padding on the <section> plus
+     the 1280 cap on the inner div puts content at x=80, because the cap is
+     applied after the padding is already spent; every other band pads inside
+     the cap and lands at x=120. Two sections were doing it the first way, so
+     the left edge stepped in and out by 40px as you scrolled. */
   return (
-    <section className="cv-auto bg-white py-14 sm:py-16 md:py-[4.5rem] px-4 sm:px-5 md:px-10 border-b border-border-soft">
-      <div className="max-w-screen-xl mx-auto">
+    <section className="cv-auto bg-white py-14 sm:py-16 md:py-[4.5rem] border-b border-border-soft">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
         <div className="grid md:grid-cols-2 gap-8 md:gap-14 items-end">
           <m.div initial={{ y: 28, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
@@ -383,10 +389,11 @@ function ProblemBand() {
 
   return (
     <section
-      className="cv-auto problem-band grain-on-dark bg-ink py-16 md:py-20 px-4 sm:px-5 md:px-10 border-t border-white/10"
+      className="cv-auto problem-band grain-on-dark py-16 md:py-20 border-t border-white/10"
       aria-labelledby="problem-band-heading"
     >
-      <div className="max-w-screen-xl mx-auto">
+      {/* Padding inside the cap, same as every other band — see StatsStrip. */}
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
         <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -624,11 +631,13 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
             <ArrowUpRight className="w-2.5 h-2.5" />
           </a>
         )}
-        <div className="flex items-center justify-between gap-3 mt-auto pt-4 border-t border-border-soft">
-          <span className="text-stone text-[9px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] truncate">
-            {post.service}
-          </span>
-          <span className="inline-flex items-center gap-1 text-stone text-[9px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] shrink-0">
+        <div className="flex items-center gap-3 mt-auto pt-4 border-t border-border-soft">
+          {post.service && (
+            <span className="text-stone text-[9px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] truncate">
+              {post.service}
+            </span>
+          )}
+          <span className="inline-flex items-center gap-1 text-stone text-[9px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] shrink-0 ml-auto">
             {sourceLabel}
           </span>
         </div>
@@ -669,7 +678,13 @@ function toReviewCard(post, now) {
     name: post.name,
     initials: post.initials || reviewInitials(post.name),
     date: reviewCardDate(post, now),
-    service: post.service || (post.source === 'google' ? 'Google review' : 'Facebook'),
+    /* null, not the source name. This slot holds the service the reviewer
+       actually had — "Facials", "Threading" — which is the only reason a
+       footer line is worth the space. Defaulting it to the platform meant a
+       Google card read "Read on Google", then "GOOGLE REVIEW", then "GOOGLE",
+       three times over, under a section header already saying "FROM GOOGLE".
+       When there is no service to name, the line simply does not render. */
+    service: post.service || null,
     quote: post.quote,
     link: post.link,
     source: post.source || 'facebook',
@@ -680,7 +695,7 @@ function toReviewCard(post, now) {
 function toGoogleCards(reviews, now) {
   return sortByRecency(reviews)
     .slice(0, 6)
-    .map((r) => toReviewCard({ ...r, service: 'Google review', source: 'google' }, now))
+    .map((r) => toReviewCard({ ...r, source: 'google' }, now))
 }
 
 /** null on the server and the first client render, the real clock after mount. */
@@ -953,7 +968,7 @@ function TestimonialsPreview({ placesEnabled }) {
 
 function CtaBand() {
   return (
-    <section className="cv-auto cta-band grain-on-dark bg-ink py-16 sm:py-20 md:py-[5rem] px-4 sm:px-5 md:px-10 border-t border-white/10">
+    <section className="cv-auto cta-band grain-on-dark bg-plum-deep py-16 sm:py-20 md:py-[5rem] px-4 sm:px-5 md:px-10 border-t border-white/10">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center text-center gap-8">
         <m.div
           initial={{ opacity: 0, y: 20 }}

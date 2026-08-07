@@ -238,7 +238,7 @@ export default function NewsletterModal() {
                         placeholder="your@email.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:outline-none focus:border-ink"
+                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:border-ink"
                       />
                     </div>
                     <div>
@@ -251,7 +251,7 @@ export default function NewsletterModal() {
                         maxLength={60}
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:outline-none focus:border-ink"
+                        className="w-full border border-[#e4ddd7] bg-white px-3.5 py-3 text-ink text-sm font-[family-name:var(--font-inter)] placeholder:text-stone/50 focus:border-ink"
                       />
                     </div>
 

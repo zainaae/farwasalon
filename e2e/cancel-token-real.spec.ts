@@ -5,9 +5,9 @@
 // used to ride in the URL, where Plausible and the Meta Pixel both report
 // location.href verbatim — a bearer credential handed to third parties on every
 // view. The route's HMAC verification is unchanged; only the transport moved.
-import { test, expect } from '@playwright/test'
+import { test, expect, type Page } from '@playwright/test'
 
-async function seedToken(page, id: string, cancelToken: string) {
+async function seedToken(page: Page, id: string, cancelToken: string) {
   const payload = JSON.stringify({
     id,
     cancelToken,
@@ -19,7 +19,7 @@ async function seedToken(page, id: string, cancelToken: string) {
     savedAt: Date.now(),
   })
   await page.addInitScript(
-    ([key, raw]) => {
+    ([key, raw]: string[]) => {
       try { localStorage.setItem(key as string, raw as string) } catch { /* ignore */ }
       try { sessionStorage.setItem(key as string, raw as string) } catch { /* ignore */ }
     },

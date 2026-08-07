@@ -30,7 +30,11 @@ test('marquee loop clones are not tab stops or screen-reader content', async ({ 
 
   // and no destination is announced twice
   const labels = await reachable.evaluateAll((els) =>
-    els.filter((e) => e.offsetParent !== null).map((e) => e.getAttribute('aria-label')),
+    els
+      /* getClientRects() is empty for anything not laid out, and unlike
+         offsetParent it is defined on SVGElement as well as HTMLElement. */
+      .filter((e) => e.getClientRects().length > 0)
+      .map((e) => e.getAttribute('aria-label')),
   )
   expect(new Set(labels).size, 'each visible destination appears once').toBe(labels.length)
 })

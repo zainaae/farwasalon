@@ -10,9 +10,9 @@
  * duplication was hiding, since a broken breakpoint still had a second copy to
  * fall back on.
  */
-import { test, expect } from '@playwright/test'
+import { test, expect, type Page } from '@playwright/test'
 
-const rows = (page) => page.locator('div.snap-x')
+const rows = (page: Page) => page.locator('div.snap-x')
 
 test('each review is in the DOM exactly once', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' })
@@ -44,7 +44,7 @@ test('reviews rows: scroller on mobile, wrapping grid on desktop', async ({ page
     expect(b!.x, `row ${r} mobile: cards sit side by side`).toBeGreaterThan(a!.x)
     expect(Math.abs(a!.y - b!.y), `row ${r} mobile: one line`).toBeLessThan(20)
     expect(
-      await rows(page).nth(r).evaluate((el) => el.scrollWidth > el.clientWidth + 4),
+      await rows(page).nth(r).evaluate((el: Element) => el.scrollWidth > el.clientWidth + 4),
       `row ${r} mobile: actually scrollable`,
     ).toBe(true)
   }
@@ -58,7 +58,7 @@ test('reviews rows: scroller on mobile, wrapping grid on desktop', async ({ page
     expect(n, `row ${r}: same DOM at both widths`).toBe(perRow[r])
 
     expect(
-      await rows(page).nth(r).evaluate((el) => getComputedStyle(el).overflowX),
+      await rows(page).nth(r).evaluate((el: Element) => getComputedStyle(el).overflowX),
       `row ${r} desktop: horizontal scrolling is off`,
     ).toBe('visible')
 

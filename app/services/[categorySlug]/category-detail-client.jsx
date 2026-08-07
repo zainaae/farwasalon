@@ -80,7 +80,16 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
   return (
     <main id="main" className="page-content">
       <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
-        <div className="max-w-3xl">
+        {/* Quoti element rhythm, Farwa skin: sticky title/CTA rail + scrolling
+            menu column. The old max-w-3xl (no mx-auto) amputated ~430px of
+            canvas on the right; max-w-4xl mx-auto fixed the amputation but
+            left both gutters empty. The sticky rail now owns the left column
+            as a job — Book + WhatsApp stay in view while the price list
+            scrolls — so the asymmetry reads editorial, not unfinished.
+
+            Prose still caps itself (max-w-prose / max-w-2xl); the list takes
+            the full menu column. */}
+        <div>
           <BreadcrumbJsonLd items={[
             { name: 'Home', url: 'https://farwasalon.com/' },
             { name: 'Services', url: 'https://farwasalon.com/services' },
@@ -102,7 +111,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
             return faqSchema ? <JsonLd data={faqSchema} /> : null
           })()}
 
-          <nav aria-label="Breadcrumb" className="mb-5">
+          <nav aria-label="Breadcrumb" className="mb-5 lg:mb-8">
             <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-[family-name:var(--font-inter)]">
               <li>
                 <Link href="/" className="tap-safe inline-flex items-center min-h-[44px] px-1 -mx-1 hover:text-ink transition-colors">
@@ -120,36 +129,40 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
             </ol>
           </nav>
 
-          <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-            className="mb-8 pb-8 border-b border-border-soft title-stack">
-            <p className="eyebrow">
-              — {services.length} services{minPrice != null ? ` · from ${formatPrice(minPrice)}` : ''}
-            </p>
-            <h1 id="service-category-title" className="display-page text-ink">{pageH1}</h1>
-            <p id="service-category-desc" className="text-body max-w-prose leading-[1.7]">{meta.desc}</p>
-            <div className="cta-cluster mt-5">
-              <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">
-                Book online <ArrowUpRight className="w-4 h-4" />
-              </Link>
-              <WaCta href={WA_DEFAULT} from="service-category" className="tap-safe btn-secondary">
-                WhatsApp
-              </WaCta>
-            </div>
-            <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)]">
-              <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
-                Directions
-              </a>
-              <Link href="/prices" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
-                Full price list
-              </Link>
-              {areaLinks[0] && (
-                <Link href={areaLinks[0].href} className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
-                  {areaLinks[0].label}
-                </Link>
-              )}
-            </p>
-          </m.div>
+          <div className="lg:grid lg:grid-cols-12 lg:gap-x-10 xl:gap-x-14 lg:items-start">
+            <aside className="lg:col-span-4 editorial-sticky-rail mb-10 lg:mb-0">
+              <m.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+                className="title-stack pb-6 lg:pb-0 lg:border-0 border-b border-border-soft">
+                <p className="eyebrow text-plum">
+                  — {services.length} services{minPrice != null ? ` · from ${formatPrice(minPrice)}` : ''}
+                </p>
+                <h1 id="service-category-title" className="display-page text-ink">{pageH1}</h1>
+                <p id="service-category-desc" className="text-body max-w-prose leading-[1.7]">{meta.desc}</p>
+                <div className="cta-cluster mt-5">
+                  <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">
+                    Book online <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                  <WaCta href={WA_DEFAULT} from="service-category" className="tap-safe btn-secondary">
+                    WhatsApp
+                  </WaCta>
+                </div>
+                <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)]">
+                  <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+                    Directions
+                  </a>
+                  <Link href="/prices" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+                    Full price list
+                  </Link>
+                  {areaLinks[0] && (
+                    <Link href={areaLinks[0].href} className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+                      {areaLinks[0].label}
+                    </Link>
+                  )}
+                </p>
+              </m.div>
+            </aside>
 
+            <div className="lg:col-span-8 min-w-0">
           {pageBlocks.length > 0 && (
             <section className="mb-10 space-y-4 max-w-2xl">
               {pageBlocks.map((block, i) => {
@@ -178,45 +191,61 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
             </section>
           )}
 
-          <ul className="divide-y divide-border-soft">
+          <ul className="divide-y divide-border-soft border-t border-border-soft">
             {services.map((s, i) => {
               const opens = canOpen(s)
+
+              /* Price flush right, at the name's weight, in its own cell.
+                 It used to sit under the name as an 11px gold line, which put
+                 every figure on a ragged left edge behind a heading — so
+                 comparing the Rs 1,800 facial against the Rs 5,500 one meant
+                 reading the whole list instead of running an eye down a rail.
+                 Position now carries "this is the price"; ink instead of gold
+                 also takes it from 3.4:1 to full contrast at the size people
+                 actually squint at. */
+              const priceCell = (s.pricePkr != null || s.durationMinutes != null) && (
+                <div className="shrink-0 text-right">
+                  {s.pricePkr != null && (
+                    <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink leading-tight tabular-nums">
+                      {formatServicePrice(s)}
+                    </p>
+                  )}
+                  {s.durationMinutes != null && (
+                    <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] font-light mt-0.5 tabular-nums">
+                      {formatDuration(s.durationMinutes)}
+                    </p>
+                  )}
+                </div>
+              )
+
               return (
                 <m.li key={s.id}
                   initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.025 }}
-                  className="flex items-center justify-between py-4 gap-4">
+                  className="flex items-center py-4 gap-5 sm:gap-8">
                   {opens ? (
                     <button type="button" onClick={() => openFor(s)}
-                      className="min-w-0 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2">
-                      <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink uppercase leading-tight group-hover:text-stone transition-colors">
+                      className="flex-1 min-w-0 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2">
+                      <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink uppercase leading-tight group-hover:text-plum transition-colors">
                         {s.name}
                       </p>
-                      {(s.pricePkr != null || s.durationMinutes != null) && (
-                        <p className="text-accent-gold-deep text-[11px] font-[family-name:var(--font-inter)] mt-0.5">
-                          {s.pricePkr != null && formatServicePrice(s)}
-                          {s.pricePkr != null && s.durationMinutes != null && ' · '}
-                          {s.durationMinutes != null && formatDuration(s.durationMinutes)}
-                        </p>
-                      )}
                       {s.desc && (
-                        <p className="text-stone text-[11px] font-light mt-0.5 line-clamp-1 hidden sm:block">{s.desc}</p>
+                        /* max-sm:hidden, not `hidden sm:block`. The old pair set
+                           display:block at sm and up, which overrode the
+                           display:-webkit-box that line-clamp needs — so the
+                           clamp never applied and rows ran 1 or 2 lines at
+                           random. Touching display only below sm lets it work. */
+                        <p className="text-stone text-[12px] font-light mt-1 leading-relaxed max-w-[30rem] line-clamp-3 max-sm:hidden">{s.desc}</p>
                       )}
                     </button>
                   ) : (
-                    <div className="min-w-0">
+                    <div className="flex-1 min-w-0">
                       <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink uppercase leading-tight">
                         {s.name}
                       </p>
-                      {(s.pricePkr != null || s.durationMinutes != null) && (
-                        <p className="text-accent-gold-deep text-[11px] font-[family-name:var(--font-inter)] mt-0.5">
-                          {s.pricePkr != null && formatServicePrice(s)}
-                          {s.pricePkr != null && s.durationMinutes != null && ' · '}
-                          {s.durationMinutes != null && formatDuration(s.durationMinutes)}
-                        </p>
-                      )}
                     </div>
                   )}
+                  {priceCell}
                   <Link
                     href={`/book?serviceId=${s.id}`}
                     aria-label={`Book ${s.name}`}
@@ -228,8 +257,16 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
             })}
           </ul>
 
+          {/* All 13 of these routes measured 0 shadowed elements and a single
+              flat ground end to end, so a 1px top rule was the only thing
+              separating a block of prose from the price list above it. The FAQ
+              is the right place to put the page's one step of ground: it is a
+              different kind of content from the menu, it sits at the bottom
+              where a tonal close reads as an ending, and mist keeps --stone at
+              ~5.9:1 for the answers. Same panel-soft + shadow-soft the blog
+              featured card uses; no hover lift, since nothing here is clickable. */}
           {faqs.length > 0 && (
-            <section className="mt-12 pt-10 border-t border-border-soft">
+            <section className="mt-12 panel-soft shadow-soft p-6 sm:p-8 md:p-10">
               <h2 className="font-[family-name:var(--font-unbounded)] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
                 Frequently Asked Questions
               </h2>
@@ -237,7 +274,11 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                 {faqs.map((faq, i) => (
                   <div key={i} className="py-5">
                     <dt className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-2">{faq.q}</dt>
-                    <dd className="text-stone text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">{faq.a}</dd>
+                    {/* max-w-prose because widening this page's column to
+                        max-w-4xl pushed these answers to ~100 characters a
+                        line. The list above wanted the extra width; running
+                        prose never does. */}
+                    <dd className="text-stone text-sm font-light leading-relaxed font-[family-name:var(--font-inter)] max-w-prose">{faq.a}</dd>
                   </div>
                 ))}
               </dl>
@@ -328,6 +369,8 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
           )}
 
           {modal && <ServiceModal service={modal} onClose={() => setModal(null)} />}
+            </div>
+          </div>
         </div>
       </div>
 

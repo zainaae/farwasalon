@@ -4,8 +4,8 @@ import WaCta from './wa-cta.jsx'
 import { WA_NUMBER } from '../../src/data.js'
 
 /**
- * Shared ink close for interior money/info pages — Quoti × Farwa north star:
- * decisive Book + WhatsApp pair on ink, no plum, no staccato.
+ * Shared close for interior money/info pages — Quoti × Farwa north star:
+ * decisive Book + WhatsApp pair on logo plum-deep (not a purple wash).
  */
 export default function PageCloseCta({
   eyebrow = '— Visit us in PECHS',
@@ -23,7 +23,7 @@ export default function PageCloseCta({
     'btn-loud btn-loud--light tap-safe w-full sm:w-auto inline-flex items-center justify-center gap-2'
 
   return (
-    <section className="cv-auto grain-on-dark bg-ink py-20 sm:py-24 px-4 sm:px-5 md:px-10 border-t border-white/10">
+    <section className="cv-auto grain-on-dark bg-plum-deep py-20 sm:py-24 px-4 sm:px-5 md:px-10 border-t border-white/10">
       <div className="max-w-screen-xl mx-auto flex flex-col items-center text-center gap-8 sm:gap-10">
         <div className="w-full max-w-2xl">
           <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-4">

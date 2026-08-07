@@ -513,7 +513,14 @@ export default function BookClient() {
 
   return (
     <main id="main" className="page-content overflow-x-clip">
-      <div className="section-shell section-pad min-h-0 min-w-0 max-w-full overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
+      {/* No max-w-full here. .section-shell is max-width:80rem, and the
+          utility's max-width:100% beat it — so the conversion page ran its
+          shell to the full viewport and started content at x=40 while every
+          other page on the site starts at x=120. It was redundant as well as
+          harmful: width:100% already prevents the container exceeding its
+          parent, and min-w-0 + overflow-x-clip handle the child that forces
+          a scrollbar, which is what it was reaching for. */}
+      <div className="section-shell section-pad min-h-0 min-w-0 overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
 
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
           <m.h1
@@ -535,9 +542,12 @@ export default function BookClient() {
               <> Combine anything toward {formatPrice(dealThreshold)} for the Freedom Deal ({dealRange}).</>
             ) : null}
           </m.p>
-          <p className="mt-3 text-[10px] tracking-[0.12em] uppercase font-[family-name:var(--font-inter)] text-stone">
-            1. Service → 2. Date &amp; time → 3. Your details
-          </p>
+          {/* The step sequence used to be printed here as plain text and then
+              again 110px below as the real numbered stepper, with the same
+              three labels. The stepper says it better, shows which step you
+              are on, and is already announced to screen readers by the
+              sr-only live region beneath it — so this line was telling every
+              visitor the same thing twice before they had done anything. */}
         </div>
 
         {step === 0 && <UpcomingBookings />}
