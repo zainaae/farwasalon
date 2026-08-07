@@ -394,7 +394,7 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
                 className={`nav-link shrink-0 h-11 min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-[family-name:var(--font-inter)] transition-colors duration-200 whitespace-nowrap
                 ${hideOnDesktop ? 'md:hidden' : ''}
                 ${wideOnly ? 'hidden lg:inline-flex' : ''}
-                ${isActive ? `nav-link--active ${light ? 'nav-link--on-light text-ink' : 'nav-link--on-dark text-white'}` : (light ? 'text-stone hover:text-ink' : 'text-white/65 hover:text-white')}`}>
+                ${isActive ? `nav-link--active ${light ? 'nav-link--on-light text-ink' : 'nav-link--on-dark text-white'}` : (light ? 'text-ink/60 hover:text-ink' : 'text-white/65 hover:text-white')}`}>
                 {label}
               </Link>
             )
@@ -480,7 +480,7 @@ export function StickyMobileCTA({ hidden = false }) {
     <>
       <div
         aria-hidden
-        className={`md:hidden shrink-0 ${showSlotHint ? 'h-[calc(5.75rem+env(safe-area-inset-bottom,0px))]' : 'h-[calc(4.75rem+env(safe-area-inset-bottom,0px))]'}`}
+        className={`md:hidden shrink-0 ${showSlotHint ? 'h-[calc(7rem+env(safe-area-inset-bottom,0px))]' : 'h-[calc(5.5rem+env(safe-area-inset-bottom,0px))]'}`}
       />
       <nav
         className="fixed z-50 left-0 right-0 md:hidden max-w-[100vw] pointer-events-none"

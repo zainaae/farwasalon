@@ -36,7 +36,7 @@ export default function QuickPickRow() {
   return (
     <section
       aria-labelledby="quickpick-heading"
-      className="cv-auto bg-white border-b border-border-soft pt-8 md:pt-10 pb-[calc(6.75rem+env(safe-area-inset-bottom,0px))] md:pb-10"
+      className="cv-auto bg-white border-b border-border-soft pt-8 md:pt-10 pb-[calc(8.25rem+env(safe-area-inset-bottom,0px))] md:pb-10"
     >
       <div className="section-shell">
         <div className="flex items-baseline justify-between gap-4 mb-5 md:mb-6">
