@@ -99,7 +99,7 @@ export default async function AreaPage({ params }) {
         ]}
       />
 
-      <div className="section-shell section-pad min-h-0">
+      <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
         <nav aria-label="Breadcrumb" className="mb-5">
           <ol className="flex flex-wrap items-center gap-2 text-stone text-[11px] font-[family-name:var(--font-inter)]">
             <li><Link href="/" className="link-underline hover:text-ink">Home</Link></li>

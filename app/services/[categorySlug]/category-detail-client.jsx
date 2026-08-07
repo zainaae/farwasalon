@@ -79,7 +79,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
 
   return (
     <main id="main" className="page-content">
-      <div className="section-shell section-pad min-h-0">
+      <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
         <div className="max-w-3xl">
           <BreadcrumbJsonLd items={[
             { name: 'Home', url: 'https://farwasalon.com/' },

@@ -216,7 +216,7 @@ export default function AzadiSalePage() {
         </div>
       </section>
 
-      <div className="section-shell section-pad min-h-0">
+      <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
         <section aria-labelledby="azadi-qualifying" className="mb-14">
           <h2 id="azadi-qualifying" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-4">
             How it works

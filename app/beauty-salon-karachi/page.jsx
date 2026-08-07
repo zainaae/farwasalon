@@ -40,7 +40,7 @@ export default function BeautySalonKarachiPage() {
           aggregateRating) on every page — emitting it again here made GSC
           flag "Review has multiple aggregate ratings" on this URL. */}
       <main id="main" className="page-content">
-        <div className="section-shell section-pad min-h-0">
+        <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
           <div className="title-stack mb-6 max-w-2xl">
             <p className="eyebrow">— Karachi beauty salon</p>
             <h1 className="display-page text-ink">

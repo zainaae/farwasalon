@@ -421,23 +421,28 @@
     justify-content: center;
     gap: 0.125rem;
     width: 100%;
-    min-height: 4rem;
+    min-height: 3.25rem;
     height: 100%;
-    padding: 0.625rem 0.75rem;
-    border: 1px solid var(--border-soft);
-    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    padding: 0.5rem 0.625rem;
+    border: 1px solid transparent;
+    border-bottom-color: var(--border-soft);
+    transition: border-color 0.2s ease, background-color 0.2s ease;
   }
   .quick-pick-card:hover {
-    border-color: var(--ink);
+    border-color: transparent;
+    border-bottom-color: var(--ink);
     background: var(--mist);
-    box-shadow: var(--shadow-soft);
+    box-shadow: none;
   }
   .quick-pick-card--all {
-    border-style: dashed;
-    border-color: rgba(13, 13, 13, 0.3);
+    border-style: solid;
+    border-color: transparent;
+    border-bottom-style: dashed;
+    border-bottom-color: rgba(13, 13, 13, 0.3);
   }
   .quick-pick-card--all:hover {
-    border-color: var(--ink);
+    border-color: transparent;
+    border-bottom-color: var(--ink);
   }
   .panel-soft {
     background: var(--mist);
@@ -1101,6 +1106,11 @@ button.tap-safe,
   color: var(--azadi-green);
 }
 .azadi-strip-figure span { font-size: 0.4em; vertical-align: super; letter-spacing: 0; }
+.azadi-strip-figure--soft {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  line-height: 0.9;
+  opacity: 0.92;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .azadi-in {

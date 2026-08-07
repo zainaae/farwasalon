@@ -67,7 +67,7 @@ export default function DealsPage() {
   return (
     <main id="main" className="page-content">
       <JsonLd data={buildDealsSchema(deals)} />
-      <div className="section-shell section-pad min-h-0">
+      <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
         <div className="title-stack mb-3 max-w-3xl">
           <p className="eyebrow">— Current offers</p>
           <h1 className="display-page text-ink">
