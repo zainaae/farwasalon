@@ -153,31 +153,38 @@ function checkNewBookings() {
  * Also lists clients from 3 days ago for the single follow-up nudge.
  *
  * Setup: run setupTriggers() once from the editor (replaces the old
- * setupTrigger — it creates BOTH the 5-min booking check and the
- * daily 19:00 digest).
+ * setupTrigger — it creates the 5-min booking check, the 9 AM confirm
+ * digest, and the daily 19:00 review digest).
  * ══════════════════════════════════════════════════════════════════ */
 
 var REVIEW_LINK = 'https://farwasalon.com/review';
 var DIGEST_HOUR = 19; // 7 PM PKT — right after closing
 var SALON_TZ = 'Asia/Karachi';
 
-/** Creates both triggers (idempotent). Run once after pasting. */
+var CONFIRM_DIGEST_HOUR = 9; // 9 AM PKT — morning Sheet→WA confirms
+
+/** Creates booking-check + morning confirm + evening review triggers (idempotent). */
 function setupTriggers() {
   setupTrigger(); // existing 5-minute booking-notification trigger
+  ensureDailyTrigger_('sendMorningConfirmDigest', CONFIRM_DIGEST_HOUR);
+  ensureDailyTrigger_('sendReviewDigest', DIGEST_HOUR);
+}
+
+function ensureDailyTrigger_(handlerName, hour) {
   var triggers = ScriptApp.getProjectTriggers();
   for (var t = 0; t < triggers.length; t++) {
-    if (triggers[t].getHandlerFunction() === 'sendReviewDigest') {
-      Logger.log('Trigger for sendReviewDigest already exists.');
+    if (triggers[t].getHandlerFunction() === handlerName) {
+      Logger.log('Trigger for ' + handlerName + ' already exists.');
       return;
     }
   }
-  ScriptApp.newTrigger('sendReviewDigest')
+  ScriptApp.newTrigger(handlerName)
     .timeBased()
     .everyDays(1)
-    .atHour(DIGEST_HOUR)
+    .atHour(hour)
     .inTimezone(SALON_TZ)
     .create();
-  Logger.log('Created daily ' + DIGEST_HOUR + ':00 trigger for sendReviewDigest.');
+  Logger.log('Created daily ' + hour + ':00 trigger for ' + handlerName + '.');
 }
 
 /** '0322 2782254' / '+92 322...' / '92322...' -> '923222782254' for wa.me */
@@ -228,6 +235,61 @@ function nudgeMessage(name) {
 function waLink(phone, message) {
   var num = waNumber(phone);
   return num ? 'https://wa.me/' + num + '?text=' + encodeURIComponent(message) : '';
+}
+
+function confirmMessage(name, service, time) {
+  var first = firstName(name);
+  return 'Assalam-o-Alaikum ' + first + '! 🌸 Your Farwa Beauty Salon appointment is confirmed.\n\n' +
+    '📅 Today · ' + String(time || '') + '\n' +
+    '✨ ' + String(service || 'your service') + '\n\n' +
+    'We are at Plot 165/G-1, Saima Terrace, Block 3 PECHS. Reply here if you need to reschedule (at least 2 hours notice). See you soon!';
+}
+
+/**
+ * Morning email: today's bookings with one-tap WhatsApp confirm messages.
+ * Run manually any morning via sendMorningConfirmDigest, or rely on the 9 AM trigger.
+ */
+function sendMorningConfirmDigest() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Bookings');
+  if (!sheet) throw new Error('Sheet "Bookings" not found.');
+  var lastRow = sheet.getLastRow();
+  if (lastRow <= 1) return;
+
+  var notifyTo = String(SALON_NOTIFY_EMAIL || '').trim();
+  if (!notifyTo || notifyTo.indexOf('@') === -1) {
+    throw new Error('Set SALON_NOTIFY_EMAIL at the top of EmailBot.gs.');
+  }
+
+  var data = sheet.getRange(2, 1, lastRow, 13).getValues();
+  var today = Utilities.formatDate(new Date(), SALON_TZ, 'yyyy-MM-dd');
+  var todays = clientsForDate(data, today);
+
+  if (todays.length === 0) {
+    Logger.log('Morning confirm digest: no bookings for ' + today);
+    return;
+  }
+
+  var html = '<div style="font-family:Arial,sans-serif;max-width:560px;">' +
+    '<h2 style="margin:0 0 4px;">📅 Today&#39;s bookings — ' + today + '</h2>' +
+    '<p style="color:#666;margin:0 0 16px;font-size:13px;">Open on the salon phone. Tap <strong>Send confirm</strong> per client — WhatsApp opens with the message ready. Press send. Skip anyone you already messaged.</p>' +
+    '<h3 style="margin:16px 0 4px;">Confirmed clients (' + todays.length + ')</h3><table style="border-collapse:collapse;width:100%;">';
+
+  for (var i = 0; i < todays.length; i++) {
+    var c = todays[i];
+    html += digestRowHtml(c, [
+      { label: 'Send confirm', href: waLink(c.phone, confirmMessage(c.name, c.service, c.time)) }
+    ]);
+  }
+  html += '</table>' +
+    '<p style="color:#999;font-size:12px;margin-top:20px;">Evening: the 7 PM review digest covers post-visit Google asks. Freedom Deal (if live): honour 14% at counter for baskets Rs 1,400+ through 14 Aug — no promo codes.</p></div>';
+
+  MailApp.sendEmail({
+    to: notifyTo,
+    subject: '📅 Today\'s bookings: ' + todays.length + ' confirm' + (todays.length === 1 ? '' : 's'),
+    body: 'Open this email on the salon phone to send one-tap WhatsApp confirms.',
+    htmlBody: html
+  });
+  Logger.log('Morning confirm digest sent: ' + todays.length + ' clients.');
 }
 
 /** Collect non-cancelled bookings for a date, de-duped by phone. */

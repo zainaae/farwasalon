@@ -25,6 +25,7 @@ import {
   parseAddonIdsParam,
   resolveBookingServices,
 } from '../../../lib/booking-duration.js'
+import { maybeSendBookingConfirmed } from '../../../lib/whatsapp-cloud.js'
 
 export async function POST(request) {
   if (!isAllowedOrigin(request)) {
@@ -345,6 +346,23 @@ export async function POST(request) {
     date,
     phoneLast4: phoneLast4(clientPhone),
   })
+
+  /* Outbound WA confirm is opt-in and no-ops without Cloud API env / flag.
+     Never await-fail the booking — the sheet row is already Confirmed. */
+  try {
+    await maybeSendBookingConfirmed({
+      clientName,
+      clientPhone,
+      service: serviceLabel,
+      date,
+      time,
+    })
+  } catch (waErr) {
+    logger.warn('/api/book', 'whatsapp-confirm-threw', {
+      bookingId,
+      ...errCtx(waErr),
+    })
+  }
 
   return NextResponse.json({
     success: true,

@@ -212,9 +212,60 @@ Post weekly to keep the listing active and visible. Google Posts appear directly
 ### Weekly Posting Schedule
 | Day | Post Type | Example |
 |-----|-----------|---------|
-| Sunday | **Offer** | Only post a % deal if it is live on farwasalon.com/deals — e.g. "Facials from Rs 1,400. Book on WhatsApp" (never invent 20%/10% copy) |
+| Sunday | **Offer** | Only post a % deal if it is live on farwasalon.com/deals — e.g. "Facials from Rs 1,400. Book on WhatsApp" (never invent 20%/10% copy; never invent promo codes) |
 | Tuesday | **What's New** | Before/after transformation photo |
 | Thursday | **Event** | "Bridal season bookings open — limited slots!" |
+
+---
+
+## 5b. Freedom Deal + trust scrub (owner ops — do this week)
+
+Engineering cannot log into GBP or WhatsApp as the owner. Complete this checklist
+in Google Business Profile and on the salon phone.
+
+### Scrub stale posts / offers
+
+Delete or unpublish any Google Post, WhatsApp Status, Channel post, or print
+flyer that still says:
+
+- Microblading at **Rs 15,000** (live price is **Rs 20,000**)
+- **20% off** / **10% off** / “10% code” / first-facial promo codes
+- Any deal not listed on [farwasalon.com/deals](https://farwasalon.com/deals)
+
+### One clean Freedom post (live through 14 Aug 2026)
+
+```
+📍 Farwa Beauty Salon · PECHS Block 3
+
+Freedom Deal — 14% off
+
+Any visit that totals Rs 1,400 or more gets 14% off at the counter.
+Combine any services. No promo code. Ends 14 August 2026.
+
+📞 +92 322 278 2254
+🌐 farwasalon.com/freedom-deal
+```
+
+CTA button → Website → `https://farwasalon.com/freedom-deal` (or Book → `/book`).
+
+### NAP / hours + site stats
+
+Confirm GBP matches the locked NAP:
+
+`Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400 · Mon–Sat 11–7 · Closed Sunday · +92 322 278 2254`
+
+Then update `GOOGLE_GBP_STATS` in `src/google-reviews-data.js` (rating, review
+count, `lastVerified`) so the website matches Maps — see
+[`manual-google-reviews.md`](./manual-google-reviews.md).
+
+### Staff brief
+
+| Until | Honour |
+|-------|--------|
+| Through **14 Aug 2026** | Freedom Deal: **14%** at the counter when the basket is **Rs 1,400+**. No codes. |
+| From **15 Aug 2026** | Printed / website price list only. Do not mention Freedom, 14%, or old 20%/10% language. |
+
+WhatsApp morning confirms + evening review asks: [`whatsapp-business-setup.md`](./whatsapp-business-setup.md) §5a / §5b.
 
 ### Post Template
 ```
