@@ -10,8 +10,11 @@ import { salonTodayString } from '../../lib/date-local.js'
 
 const REFRESH_MS = 60_000
 
-export default function LiveAvailability() {
+export default function LiveAvailability({ compact = false }) {
   const [state, setState] = useState({ status: 'loading' })
+  const shell = compact
+    ? 'mb-0 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-border-soft bg-mist/80 px-3.5 py-2.5 shadow-soft max-w-full min-w-0'
+    : 'mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft max-w-full min-w-0'
 
   useEffect(() => {
     let active = true
@@ -57,7 +60,7 @@ export default function LiveAvailability() {
       <m.div
         initial={{ opacity: 0, y: -8 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft max-w-full min-w-0"
+        className={shell}
         role="status"
         aria-live="polite"
       >
@@ -84,7 +87,7 @@ export default function LiveAvailability() {
     <m.div
       initial={{ opacity: 0, y: -8 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border border-border-soft bg-mist/80 px-4 py-3 shadow-soft max-w-full min-w-0"
+      className={shell}
       role="status"
       aria-live="polite"
     >

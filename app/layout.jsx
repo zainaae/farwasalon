@@ -23,17 +23,14 @@ const inter = Inter({
 
 const fraunces = Fraunces({
   subsets: ['latin'],
-  /* Soft optical serif for brand display — bridal warmth without Unbounded's
-     industrial block. 400 covers italic/light brand lines; 700 is the H1 hit.
-     display:optional so LCP is not held on webfont swap.
-
-     preload deliberately OFF (same rationale as the old Unbounded setup):
-     avoid racing the LCP bridal still on mid-range Pakistani mobile data. */
+  /* Soft optical serif for brand display. Numerals + letterpress craft depend
+     on this face actually loading — swap + preload so mid-range PK mobile
+     still gets Fraunces after LCP (stock bridal still is no longer the OG LCP). */
   weight: ['400', '600', '700'],
   style: ['normal', 'italic'],
   variable: '--font-fraunces',
-  display: 'optional',
-  preload: false,
+  display: 'swap',
+  preload: true,
   adjustFontFallback: true,
 })
 
@@ -61,23 +58,15 @@ export const metadata = {
     'Farwa Beauty Salon',
   ],
   metadataBase: new URL('https://farwasalon.com'),
+  /* OG/Twitter images come from app/opengraph-image.jsx + twitter-image.jsx
+     (ImageResponse) — do not pin stock bridal stills here. */
   openGraph: {
     type: 'website',
     siteName: 'Farwa Beauty Salon',
     locale: 'en_PK',
-    images: [{
-      url: '/bridal.jpg',
-      width: 1200,
-      height: 630,
-      alt: 'Farwa Beauty Salon — Bridal, Facials & Threading in PECHS Karachi',
-    }],
   },
   twitter: {
     card: 'summary_large_image',
-    images: [{
-      url: '/bridal.jpg',
-      alt: 'Farwa Beauty Salon — Bridal, Facials & Threading in PECHS Karachi',
-    }],
   },
   robots: { index: true, follow: true },
   icons: {

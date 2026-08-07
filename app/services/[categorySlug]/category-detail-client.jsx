@@ -206,7 +206,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
               const priceCell = (s.pricePkr != null || s.durationMinutes != null) && (
                 <div className="shrink-0 text-right">
                   {s.pricePkr != null && (
-                    <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink leading-tight tabular-nums">
+                    <p className="font-[family-name:var(--font-fraunces)] font-bold text-[15px] sm:text-base text-ink leading-tight tabular-nums">
                       {formatServicePrice(s)}
                     </p>
                   )}

@@ -38,21 +38,18 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     await page.goto('/gallery')
     await expect(visibleMain(page)).toBeVisible()
     await expect(page.getByRole('heading', { name: /Services we offer/i })).toBeVisible()
-    // Quiet studio framing — no Instagram-as-main-proof trust blocker.
-    /* Asserts the copy does NOT claim a provenance the repo cannot back.
-       SALON_OWNED lists only the nail video; docs/salon-photography-guide.md
-       says some sections use stock. The page may describe what it shows — it
-       may not claim the images are the salon's own. */
-    await expect(page.getByText(/services we offer in our PECHS studio/i)).toBeVisible()
+    /* Owned-only gallery: nail craft from SALON_OWNED. No stock bridal/threading
+       tiles; copy may claim ownership for what is actually on camera. */
+    await expect(page.getByText(/Owned studio craft from our PECHS chair/i)).toBeVisible()
     await expect(page.getByText(/not stock before-and-afters/i)).toHaveCount(0)
     await expect(page.getByText(/real clients go up on\s+our Instagram/i)).toHaveCount(0)
     // Quieter luxury routes Book to /book (Link), not the WhatsApp sheet button.
     const bookCta = page.getByRole('link', { name: /Book an Appointment/i }).first()
     await expect(bookCta).toBeVisible()
     await expect(bookCta).toHaveAttribute('href', '/book')
-    await expect(page.getByText('Threading & glow facial')).toBeVisible()
-    await expect(page.getByText('Bridal styling')).toBeVisible()
     await expect(page.getByText('Manicure & pedicure')).toBeVisible()
+    await expect(page.getByText('Threading & glow facial')).toHaveCount(0)
+    await expect(page.getByText('Bridal styling')).toHaveCount(0)
   })
 
   test('accessibility smoke — no empty buttons, images have alt on home', async ({ page }) => {

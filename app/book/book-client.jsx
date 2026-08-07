@@ -247,6 +247,10 @@ export default function BookClient() {
   const [error, setError] = useState('')
   const [phoneError, setPhoneError] = useState('')
 
+  useEffect(() => {
+    track('BookingStarted', { source: 'book-page' })
+  }, [])
+
   const headlineDeal = getHeadlineDeal()
   const dealLive = headlineDeal ? isDealActive(headlineDeal) : false
   const dealUpcoming = headlineDeal ? isDealUpcoming(headlineDeal) : false
@@ -473,9 +477,7 @@ export default function BookClient() {
         openWa: '1',
       })
 
-      /* The conversion. BookingStarted was already tracked at step 1, so this
-         is what makes booking completion rate measurable at all. Fired before
-         the redirect so it survives the navigation. */
+      /* The conversion. BookingStarted fires once on mount; this completes the funnel. */
       track('BookingCompleted', {
         service: data.booking.service,
         category: primaryService?.category,

@@ -18,9 +18,9 @@ import {
 import { CAT_SLUGS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice, WA_DEFAULT } from '../../src/data.js'
 import { CAT_FAQS } from '../../src/cat-seo-content.js'
 
-const title = 'Bridal Makeup Karachi — From Rs 8,000 | Farwa'
+const title = 'Bridal Makeup Karachi — Full Package Rs 25,000 | Farwa'
 const description =
-  'Bridal makeup in PECHS, Karachi from Rs 8,000 — trials, engagement & mehndi looks. 18+ years of wedding styling. Book online or WhatsApp today.'
+  'Bridal makeup in PECHS, Karachi — Full Bridal Package Rs 25,000 (hair, makeup, draping, touch-ups, event presence). Trials and event looks available. Book online.'
 
 export const metadata = {
   title: { absolute: title },
@@ -30,7 +30,6 @@ export const metadata = {
     title,
     description,
     path: '/bridal',
-    image: '/bridal.jpg',
     imageAlt: 'Bridal makeup in PECHS Karachi — Farwa Beauty Salon',
   }),
 }

@@ -28,7 +28,7 @@ export async function generateMetadata() {
       title,
       description,
       path: '/deals',
-      image: freedomVisible ? '/freedom-deal-og-14pc.jpg' : '/bridal.jpg',
+      image: freedomVisible ? '/freedom-deal-og-14pc.jpg' : undefined,
       imageAlt: freedomVisible
         ? 'Freedom Deal — 14% off when your visit totals Rs 1,400 or more, 5–14 August 2026'
         : 'Salon deals at Farwa Beauty Salon, PECHS Karachi',

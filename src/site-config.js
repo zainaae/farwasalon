@@ -10,6 +10,21 @@ export const WA_DEFAULT = `https://wa.me/${WA_NUMBER}?text=Hi%21%20I%27d%20like%
 /** Salon hours Mon–Sat 11:00–19:00. Preferred-time pickers use hourly starts;
  *  last option is 6:00 PM so a visit can finish by close. */
 export const SALON_HOURS = { open: '11:00', close: '19:00', days: 'Mon–Sat' }
+
+/** Compact display from SALON_HOURS — "Mon–Sat 11–7". One format site-wide. */
+export function formatSalonHoursLine(hours = SALON_HOURS) {
+  const to12 = (hhmm) => {
+    const h = Number(String(hhmm).split(':')[0])
+    if (!Number.isFinite(h)) return hhmm
+    return String(h % 12 || 12)
+  }
+  return `${hours.days} ${to12(hours.open)}–${to12(hours.close)}`
+}
+
+/** Full 24h-style span — "Mon–Sat 11:00–19:00". */
+export function formatSalonHoursExact(hours = SALON_HOURS) {
+  return `${hours.days} ${hours.open}–${hours.close}`
+}
 export const PREFERRED_TIME_OPTIONS = [
   '11:00 AM',
   '12:00 PM',
@@ -93,17 +108,25 @@ const META_EVENTS = {
   CallIntent: 'Contact',
 }
 
-export function track(event, props) {
-  window.plausible?.(event, { props })
+export function track(event, props = {}) {
+  /* Always attach path so Plausible can slice WhatsAppIntent / BookingStarted
+     by landing route for the 14-day rollback gate (see docs/metrics-rollback.md). */
+  const path =
+    typeof window !== 'undefined' && window.location && typeof window.location.pathname === 'string'
+      ? window.location.pathname
+      : undefined
+  const enriched = path != null ? { path, ...props } : { ...props }
+
+  window.plausible?.(event, { props: enriched })
 
   const metaEvent = META_EVENTS[event]
   if (metaEvent && typeof window.fbq === 'function') {
     /* Value + currency only where a real basket exists — Meta uses them to
        optimise for higher-value bookings, and inventing them would poison it. */
     const payload =
-      props?.value != null
-        ? { value: Number(props.value) || 0, currency: 'PKR', content_name: props.service }
-        : { content_name: props?.service || props?.from }
+      enriched?.value != null
+        ? { value: Number(enriched.value) || 0, currency: 'PKR', content_name: enriched.service }
+        : { content_name: enriched?.service || enriched?.from }
     window.fbq('track', metaEvent, payload)
   }
 }

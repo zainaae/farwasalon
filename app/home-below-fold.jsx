@@ -9,12 +9,13 @@ import { m } from 'framer-motion'
 import { ChevronRight, Quote } from 'lucide-react'
 import StarRating from './components/star-rating.jsx'
 import {
-  LazyVideo, CAT_SLUGS,
+  CAT_SLUGS,
   WordmarkDivider,
 } from '../src/shared.jsx'
 import { GOOGLE_GBP_STATS, FACEBOOK_TESTIMONIALS } from '../src/google-reviews-data.js'
 import SalonLocalBlock from './components/salon-local-block.jsx'
 import QuickPickRow from './quick-pick-row.jsx'
+import LiveAvailability from './services/live-availability.jsx'
 import {
   SERVICES,
   ALL_SERVICES,
@@ -22,11 +23,10 @@ import {
   YEARS_ACTIVE,
   FOUNDING_YEAR,
   MONTHLY_APPOINTMENTS,
-  SALON_HOURS,
+  formatSalonHoursLine,
   WA_NUMBER,
   GOOGLE_REVIEW_LINK,
 } from '../src/data.js'
-import { EDITORIAL_PHOTOS } from '../src/salon-media.js'
 import {
   getGbpStatsForDisplay,
   getManualReviewsPayload,
@@ -49,22 +49,6 @@ const FALLBACK_FEATURED_REVIEWS = FB_TESTIMONIALS_BY_RECENCY.slice(0, 2).map((p)
   link: p.link,
   postedAt: p.postedAt,
 }))
-
-function EditorialMedia({ item, className = '' }) {
-  // Still via next/image only — raw <video poster> was pulling ~80KB JPEGs on first paint.
-  return (
-    <Image
-      src={item.src}
-      alt={item.label}
-      loading="lazy"
-      width={330}
-      height={440}
-      quality={55}
-      sizes="(max-width: 768px) 70vw, 330px"
-      className={`w-full h-full object-cover ${className}`}
-    />
-  )
-}
 
 function StatsStrip() {
   /* Story band with a real photo anchor — not another mist title-stack slab. */
@@ -118,79 +102,8 @@ function StatsStrip() {
   )
 }
 
-function EditorialSlideshow() {
-  /* The list is doubled so the strip can loop seamlessly. The second copy is
-     the same 13 photos, so it is presentational: without aria-hidden a screen
-     reader reads the gallery twice, and without tabIndex -1 a keyboard user
-     tabs 26 stops through 13 destinations — inside a strip that is still
-     moving. Only the first copy is reachable. */
-  const doubled = [...EDITORIAL_PHOTOS, ...EDITORIAL_PHOTOS]
-  const isClone = (i) => i >= EDITORIAL_PHOTOS.length
-
-  return (
-    <section
-      className="cv-auto editorial-marquee living-band border-y border-[#e4ddd7] overflow-x-clip max-w-full"
-      aria-label="Editorial photo showcase"
-    >
-      <div className="section-shell flex items-end justify-between gap-4 pt-7 pb-4 px-4 sm:px-5 md:px-10 md:pt-8 md:pb-5">
-        <p className="eyebrow mb-0 text-plum">— The work</p>
-        <Link
-          href="/gallery"
-          className="tap-safe inline-flex items-center gap-1.5 text-[10px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-plum-deep hover:text-ink transition-colors"
-        >
-          See the work <ArrowUpRight className="w-3 h-3" />
-        </Link>
-      </div>
-
-      {/* One track, restyled per breakpoint. This was two — a md:hidden
-          scroller and a hidden md:block one — over the same doubled list, so
-          all 13 photos shipped four times (2 breakpoints x the loop clone) as
-          52 cards, and ~30 KB of the document was display:none on any given
-          device. That is the same bug the reviews grid below already had; the
-          comment there explains it at length.
-
-          The two differed in ways that are all expressible responsively: card
-          size, margin, gradient depth, and a mobile-only index numeral. The
-          track speed differed too (45s vs 65s) — that now lives in one class
-          with a media query, in globals.css. */}
-      <div className="py-3 md:py-2 w-full max-w-full overflow-x-clip md:isolate">
-        <div className="editorial-marquee-track flex w-max max-w-none will-change-transform">
-          {doubled.map((p, i) => {
-            const href = p.href || '/gallery'
-            return (
-              <Link
-                key={i}
-                href={href}
-                className="relative shrink-0 overflow-hidden group mx-[5px] md:mx-1.5 w-[min(62vw,230px)] h-[min(82vw,306px)] md:w-[260px] md:h-auto md:aspect-[3/4] lg:w-[300px] xl:w-[330px]"
-                aria-label={`${p.label} — see gallery`}
-                aria-hidden={isClone(i) || undefined}
-                tabIndex={isClone(i) ? -1 : undefined}
-              >
-                <EditorialMedia item={p} className="transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/[0.88] via-ink/35 to-transparent" />
-                <span className="absolute bottom-3 left-3 right-3 flex items-end justify-between">
-                  <span className="text-white text-[10px] tracking-[0.2em] md:tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] font-medium leading-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.65)]">
-                    {p.label}
-                  </span>
-                  <span className="md:hidden text-white/70 text-[9px] font-[family-name:var(--font-inter)] tabular-nums drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)]">
-                    {String((i % EDITORIAL_PHOTOS.length) + 1).padStart(2, '0')}
-                  </span>
-                </span>
-              </Link>
-            )
-          })}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/** The panel's video exists only to answer a hover. A touch device never
- *  hovers, so on mobile it was 753 KB of metered data — more than three times
- *  the page's entire gzipped JS — downloaded to sit still behind a text list.
- *  `(hover: hover)` is the exact capability it depends on, so that is the gate.
- *  Same reduced-motion and desktop checks as the hero video, for the same
- *  reasons. */
+/** Category hover clips only — no default /ct.mp4 bed. Touch devices never
+ *  hover, so the gate matches the capability the clip answers. */
 function useHoverVideoEnabled() {
   const [enabled, setEnabled] = useState(false)
   useEffect(() => {
@@ -217,20 +130,9 @@ function ServiceMediaPanel({ hovered }) {
         quality={50}
         sizes="(max-width: 768px) 100vw, 45vw"
         className="object-cover object-center transition-opacity duration-500 pointer-events-none"
-        style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
+        style={{ opacity: (hovered && (activeVideo || CAT_META[hovered]?.img)) ? 0 : 1 }}
         aria-hidden
       />
-      {videoEnabled && (
-        <LazyVideo
-          src="/ct.mp4"
-          muted
-          loop
-          playsInline
-          aria-hidden
-          className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
-          style={{ opacity: (hovered && activeVideo) ? 0 : 1 }}
-        />
-      )}
       {hovered && !CAT_META[hovered]?.video && (
         <Image
           key={hovered}
@@ -348,7 +250,7 @@ function HardNumbersBand() {
     {
       num: '02',
       title: 'Back-and-forth just to get a slot',
-      lead: `${SALON_HOURS.days} ${SALON_HOURS.open}–${SALON_HOURS.close}`,
+      lead: formatSalonHoursLine(),
       desc: 'Pick a live slot online in under a minute. Cancel free up to 2 hours before. No prepayment.',
     },
     {
@@ -858,13 +760,8 @@ function CtaBand() {
             transition={{ duration: 0.7, delay: 0.1 }}
             className="lg:col-span-5 flex flex-col gap-5"
           >
+            {/* Loud Book already lives in the hero — keep one WA here + quiet Book. */}
             <div className="cta-cluster w-full">
-              <Link
-                href="/book"
-                className="btn-loud btn-loud--light tap-safe w-full sm:w-auto"
-              >
-                Book an Appointment <ArrowUpRight className="w-4 h-4 shrink-0" />
-              </Link>
               <WaCta
                 href={`https://wa.me/${WA_NUMBER}`}
                 from="cta-band"
@@ -874,6 +771,12 @@ function CtaBand() {
               </WaCta>
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <Link
+                href="/book"
+                className="tap-safe link-underline text-white/70 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
+              >
+                Book an Appointment
+              </Link>
               <Link
                 href="/prices"
                 className="tap-safe link-underline text-white/55 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
@@ -943,8 +846,10 @@ export default function HomeBelowFold({ placesEnabled = false }) {
   return (
     <>
       <QuickPickRow />
+      <div className="section-shell pt-5 md:pt-6">
+        <LiveAvailability compact />
+      </div>
       <StatsStrip />
-      <EditorialSlideshow />
       <WordmarkDivider />
       <FeaturedServices />
       <HardNumbersBand />

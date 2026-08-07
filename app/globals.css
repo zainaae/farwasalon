@@ -12,8 +12,8 @@
   --mist:   #f8f5f1;
   --stone:  #6b5f57;
   --border-soft: #e4ddd7;
-  --accent-gold: #c9a98a;
-  --accent-gold-deep: #82664a; /* gold for text on light bg — 5.3:1 on white, 4.9:1 on mist */
+  --accent-gold: #c9a98a; /* dark grounds only — 8.8:1 on ink; do not use on mist/nude */
+  --accent-gold-deep: #82664a; /* light grounds — fails on --nude; prefer --berry on nude */
   /* Logo palette — sampled from public/logo-source.png / assets/logo.jpg
      (plum→berry wordmark). Gold stays ambient; plum is the brand loud accent.
      Use for sticky rails, finale bands, rules, and hover energy — not a
@@ -923,6 +923,65 @@
   text-wrap: balance;
   font-feature-settings: 'kern' 1, 'liga' 1;
 }
+
+/* Printed-price numeral system — counts/proof heroes, never bridal floor prices.
+   Mobile-first clamps: 22vw so phones get loud numerals; cap at desktop. */
+.numeral-hero {
+  font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(3.25rem, 22vw, 13rem);
+  line-height: 0.92;
+  letter-spacing: var(--track-display-tight);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'kern' 1, 'tnum' 1, 'lnum' 1;
+}
+.numeral-display {
+  font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 8vw, 5rem);
+  line-height: 1;
+  letter-spacing: var(--track-display);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: 'kern' 1, 'tnum' 1, 'lnum' 1;
+}
+.price-rail {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  width: 100%;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.price-rail__name {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.price-rail__leader {
+  flex: 1 1 auto;
+  min-width: 1.5rem;
+  border-bottom: 1px dotted color-mix(in srgb, var(--stone) 45%, transparent);
+  transform: translateY(-0.35em);
+}
+.price-rail__price {
+  flex: 0 0 auto;
+  font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 2.4vw, 1.15rem);
+  color: var(--ink);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+@media (max-width: 767px) {
+  .price-rail {
+    flex-wrap: wrap;
+    gap: 0.15rem 0.75rem;
+  }
+  .price-rail__leader {
+    display: none;
+  }
+  .price-rail__price {
+    margin-left: auto;
+  }
+}
 .display-quote {
   font-family: var(--font-syne), 'Syne', sans-serif;
   font-weight: 600;
@@ -1031,7 +1090,7 @@
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-/* One track element now serves both breakpoints (see EditorialSlideshow).
+/* Editorial marquee track styles (marquee removed from home; keep for any reuse).
    The speeds still differ — a phone shows fewer cards, so the same duration
    would feel slower — so the duration is the only thing that varies. */
 .editorial-marquee-track {

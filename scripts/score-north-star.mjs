@@ -50,6 +50,11 @@ for (const [route, page, body, kind] of checks) {
     if (!btnLoud) gaps.push('missing loud CTA')
     if (/More glow|display-staccato/.test(src)) gaps.push('BAD Quoti dress')
     if (!/Farwa Beauty Salon|PECHS/.test(src)) gaps.push('weak brand in hero files')
+    if (!/LiveAvailability/.test(src)) gaps.push('missing live availability on home')
+    if (/EditorialSlideshow/.test(src)) gaps.push('EditorialSlideshow must be removed')
+    if (!/formatSalonHoursLine|formatSalonHoursExact/.test(src)) {
+      gaps.push('hours not using single-format helper')
+    }
   } else if (kind === 'flow' || kind === 'legal') {
     if (/display-staccato|More glow|plum-gradient|380 Google/.test(src)) gaps.push('BAD Quoti dress')
   } else {
