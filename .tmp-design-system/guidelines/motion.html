@@ -1,0 +1,14 @@
+<!-- @dsCard group="Motion" viewport="700x180" name="Motion language" subtitle="Exponential ease-out; 120/220/420ms; rise + fade entrances" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>body{margin:0;padding:20px 24px;background:#fff;font-family:var(--font-inter)}.row{display:flex;gap:24px;align-items:flex-start}.b{flex:1;display:flex;flex-direction:column;gap:6px}.l{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone)}.demo{height:52px;background:var(--mist);border:1px solid var(--border-soft);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.dot{width:14px;height:14px;background:var(--ink);animation:slide 1.8s var(--ease-out) infinite}
+@keyframes slide{0%{transform:translateX(-60px);opacity:0}40%,80%{transform:translateX(0);opacity:1}100%{transform:translateX(0);opacity:0}}
+.pill{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;background:var(--ink);color:#fff;padding:10px 18px;cursor:pointer;border:0;transition:background-color .2s ease,transform .15s ease}
+.pill:hover{background:var(--stone)}.pill:active{transform:scale(.98)}
+.lu{position:relative;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);cursor:pointer;align-self:center}
+</style></head>
+<body><div class="row">
+<div class="b"><span class="l">ease-out entrance</span><div class="demo"><span class="dot"></span></div><span style="font-size:9px;color:var(--stone)">cubic-bezier(.16,1,.3,1) · 120/220/420ms</span></div>
+<div class="b"><span class="l">hover / press</span><div class="demo"><button class="pill">Hover me</button></div><span style="font-size:9px;color:var(--stone)">ink→stone hover · scale(.98) press</span></div>
+<div class="b"><span class="l">underline reveal</span><div class="demo"><span class="lu link-underline">Explore Services</span></div><span style="font-size:9px;color:var(--stone)">.link-underline — width 0→100%</span></div>
+</div></body></html>

@@ -1,10 +1,13 @@
 import Link from 'next/link'
 import ArrowUpRight from '../components/icon-sprite.jsx'
 import Image from 'next/image'
+import WaCta from '../components/wa-cta.jsx'
+import PageCloseCta from '../components/page-close-cta.jsx'
 import { getActiveDeals, getUpcomingDeals, getHeadlineDeal, isDealActive, isDealUpcoming, formatDealRange, DEALS } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import { SITE_ORIGIN, SALON_ID } from '../../lib/business-schema.js'
+import { WA_DEFAULT } from '../../src/data.js'
 
 const title = 'Salon Deals Karachi — Real Offers, Real Prices | Farwa'
 const description =
@@ -76,10 +79,18 @@ export default function DealsPage() {
             If a deal is listed here, it is honoured at the counter, no conditions invented on arrival.
           </p>
         </div>
-        <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-2xl mb-10 leading-relaxed">
+        <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-2xl mb-6 leading-relaxed">
           No fake countdowns. When a deal has an end date, it is printed on the deal — and it really ends.
           No promo codes by email — if nothing is listed, the printed price list is the price.
         </p>
+        <div className="cta-cluster mb-10">
+          <Link href="/book" className="tap-safe btn-primary w-full sm:w-auto justify-center">
+            Book online <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+          <WaCta href={WA_DEFAULT} from="deals-hero" className="tap-safe btn-secondary w-full sm:w-auto justify-center">
+            WhatsApp
+          </WaCta>
+        </div>
 
         {deals.length === 0 ? (
           <div className="panel-soft p-6 md:p-8 max-w-3xl mb-4">
@@ -150,6 +161,14 @@ export default function DealsPage() {
           </Link>
         </section>
       </div>
+
+      <PageCloseCta
+        eyebrow="— Ready when you are"
+        title="Book online in under a minute"
+        body="Printed prices, live slots, no prepayment. Or WhatsApp if you prefer."
+        waHref={WA_DEFAULT}
+        waFrom="deals-close"
+      />
     </main>
   )
 }

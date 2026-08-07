@@ -1,0 +1,34 @@
+/* Bold motifs — Quoti structure energy, Farwa ink/gold/mist skin.
+   Prefer structure (problem band, sticky story, loud close) over dress. */
+
+/* Staccato display — campaign / poster only, never the default home hero.
+   Use <span class="line"> children for bold claim + quiet counterpoint. */
+/* line-height must stay ≥ 1.05 — tighter values clip Unbounded descenders */
+.display-staccato{font-family:var(--font-unbounded);font-weight:700;font-size:clamp(3rem,9vw,8.5rem);line-height:1.05;letter-spacing:-.03em;overflow-wrap:anywhere;padding-block:.08em}
+.display-staccato .line{display:block}
+.display-staccato .line--quiet{font-weight:400;color:inherit;opacity:.88}
+
+/* Loud CTA — the repeated conversion button. Bigger than .btn-primary, same voice. */
+.btn-loud{display:inline-flex;align-items:center;justify-content:center;gap:.625rem;min-height:56px;padding:1.2rem 2.5rem;font-family:var(--font-inter);font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;background:var(--ink);border:1px solid var(--ink);cursor:pointer;text-decoration:none;transition:background-color .2s ease,transform .15s ease}
+.btn-loud:hover{background:var(--stone);color:#fff}
+.btn-loud:active{transform:scale(.98)}
+.btn-loud--light{color:var(--ink);background:#fff;border-color:#fff}
+.btn-loud--light:hover{background:var(--nude);color:var(--ink)}
+
+/* Torn section edge — organic hand-torn transition between bands.
+   Max 2 per page. Prefer hairlines when the page already reads clean.
+   Set color to the band ABOVE (top tear) or BELOW (bottom tear); sits flush against it. */
+.edge-tear{display:block;width:100%;height:26px;background:currentColor;clip-path:polygon(0 0,100% 0,100% 38%,96% 62%,92% 30%,87% 70%,82% 42%,77% 82%,71% 35%,66% 68%,60% 28%,55% 74%,49% 45%,44% 88%,38% 40%,33% 66%,27% 25%,21% 72%,16% 38%,10% 80%,5% 45%,0 65%)}
+.edge-tear--flip{transform:scaleY(-1)}
+
+/* Grain — barely-there noise texture over a band (the hero already uses this motif). */
+.grain{position:relative;isolation:isolate}
+.grain::after{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.05;mix-blend-mode:multiply;background-size:180px;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.grain--on-dark::after{mix-blend-mode:overlay;opacity:.06}
+.grain>*{position:relative;z-index:2}
+
+/* Avatar proof — square mats (brand is square; never pills/circles on Farwa).
+   Prefer ProofStrip for homepage trust; ReviewProof only below the fold. */
+.avatar-strip{display:flex;align-items:center}
+.avatar-strip img{width:44px;height:44px;border-radius:0;object-fit:cover;border:2px solid #fff;margin-left:-8px}
+.avatar-strip img:first-child{margin-left:0}

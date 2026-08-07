@@ -1,0 +1,24 @@
+/* Farwa Beauty Salon — typography tokens + type classes. Source: app/globals.css */
+:root{
+  --font-inter:'Inter',system-ui,sans-serif;          /* body — weight 300 default */
+  --font-unbounded:'Unbounded',sans-serif;            /* display — 700 (400 for brand lines) */
+  --font-syne:'Syne',sans-serif;                      /* card/menu subheads — 600/700 */
+  --font-nastaliq:'Noto Nastaliq Urdu',serif;         /* Urdu signature */
+}
+/* Display ladder — three rungs, all Unbounded 700, -0.02em */
+.display-hero{font-family:var(--font-unbounded);font-weight:700;font-size:clamp(3.5rem,12vw,12rem);line-height:.9;letter-spacing:-.02em}
+.display-section{font-family:var(--font-unbounded);font-weight:700;font-size:clamp(1.75rem,4.2vw,4.25rem);line-height:1.08;letter-spacing:-.02em;overflow-wrap:anywhere;padding-block:.06em;text-wrap:balance}
+.display-page{font-family:var(--font-unbounded);font-weight:700;font-size:clamp(1.5rem,3vw,2.7rem);line-height:1.18;letter-spacing:-.02em;overflow-wrap:anywhere;padding-block:.1em;text-wrap:balance}
+.section-title{font-family:var(--font-unbounded);font-weight:700;font-size:clamp(1.25rem,2.5vw,1.75rem);line-height:1.28;letter-spacing:-.02em;color:var(--ink);text-wrap:balance;padding-block:.08em}
+/* Labels & body */
+.eyebrow{font-family:var(--font-inter);font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--stone);line-height:1.55}
+.eyebrow--on-dark{color:var(--accent-gold)}
+.text-body{font-family:var(--font-inter);font-weight:300;font-size:.9375rem;line-height:1.72;color:var(--stone)}
+@media (min-width:768px){.text-body{font-size:1rem}}
+/* Title stack rhythm: eyebrow → display → body (matches app/globals.css) */
+.title-stack > .eyebrow{margin-bottom:.875rem}
+.title-stack > .display-page{margin-bottom:1.25rem}
+.title-stack > .text-body{margin-bottom:0}
+.font-nastaliq{font-family:var(--font-nastaliq);font-weight:400;line-height:1.8}
+.display-dash{display:inline-block;margin-inline:.28em;font-style:normal;font-weight:700;font-size:.55em;line-height:1;color:var(--border-soft);vertical-align:.12em;letter-spacing:0}
+

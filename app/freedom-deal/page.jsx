@@ -5,6 +5,7 @@ import { DEALS, isDealActive, isDealUpcoming, isDealEnded, formatDealRange } fro
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import WaCta from '../components/wa-cta'
+import PageCloseCta from '../components/page-close-cta.jsx'
 import { SITE_ORIGIN, SALON_ID, buildFaqPageSchema } from '../../lib/business-schema.js'
 import { SITE_LAUNCH } from '../../lib/sitemap-data.js'
 
@@ -111,7 +112,7 @@ export default function AzadiSalePage() {
               book online or WhatsApp when you are ready.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3 mb-10">
             <Link href="/book" className="tap-safe btn-primary">
               Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
             </Link>
@@ -119,6 +120,12 @@ export default function AzadiSalePage() {
             <Link href="/deals" className="tap-safe link-underline text-ink text-sm font-medium">Current deals</Link>
           </div>
         </div>
+        <PageCloseCta
+          eyebrow="— Offer ended · PECHS"
+          title="Book at printed rates"
+          body="The Freedom Deal window is closed. Live slots online, or WhatsApp when you are ready."
+          waFrom="freedom-deal-ended"
+        />
       </main>
     )
   }
@@ -253,7 +260,7 @@ export default function AzadiSalePage() {
           </dl>
         </section>
 
-        <p className="text-xs text-stone font-[family-name:var(--font-inter)] flex flex-wrap gap-x-3 gap-y-2">
+        <p className="text-xs text-stone font-[family-name:var(--font-inter)] flex flex-wrap gap-x-3 gap-y-2 mb-4">
           <Link href="/deals" className="link-underline hover:text-ink font-medium">All current deals</Link>
           <Link href="/prices" className="link-underline hover:text-ink font-medium">Full price list</Link>
           <Link href="/services/facials" className="link-underline hover:text-ink font-medium">Facials</Link>
@@ -261,6 +268,15 @@ export default function AzadiSalePage() {
           <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>
         </p>
       </div>
+
+      <PageCloseCta
+        eyebrow="— Freedom Deal · PECHS"
+        title="Build your combo online"
+        body="Once your visit hits Rs 1,400, 14% comes off at the counter. Book a live slot, or WhatsApp a combo list."
+        waHref="https://wa.me/923222782254?text=Freedom%20Deal%20—%20help%20me%20build%20a%20Rs%201%2C400%20combo"
+        waFrom="freedom-deal-close"
+        waLabel="WhatsApp a combo"
+      />
     </main>
   )
 }

@@ -1,0 +1,263 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/chrome/**",
+              "components/core/**",
+              "components/icons/**",
+              "components/menu/**",
+              "ui_kits/website/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Inter|Unbounded|Syne|Noto Nastaliq Urdu))/i]",
+        "message": "Font not provided by the design system. Available: Inter, Unbounded, Syne, Noto Nastaliq Urdu."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ArrowUpRight'] > JSXAttribute > JSXIdentifier[name!=/^(?:size|className|label|key|ref|className|style|children)$/]",
+        "message": "<ArrowUpRight> doesn't accept that prop. Declared props: size, className, label."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|arrow|as|href|children|className|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: variant, arrow, as, href, children, className."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='as'] > Literal[value!=/^(?:button|a)$/]",
+        "message": "<Button> as must be one of 'button' | 'a'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CardLink'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|href|key|ref|className|style|children)$/]",
+        "message": "<CardLink> doesn't accept that prop. Declared props: children, href."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='IgIcon'] > JSXAttribute > JSXIdentifier[name!=/^(?:size|className|key|ref|className|style|children)$/]",
+        "message": "<IgIcon> doesn't accept that prop. Declared props: size, className."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='InputField'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|hint|id|placeholder|type|value|onChange|className|key|ref|className|style|children)$/]",
+        "message": "<InputField> doesn't accept that prop. Declared props: label, hint, id, placeholder, type, value, onChange, className."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='MenuRow'] > JSXAttribute > JSXIdentifier[name!=/^(?:img|name|tagline|count|availability|fromPrice|popular|onClick|key|ref|className|style|children)$/]",
+        "message": "<MenuRow> doesn't accept that prop. Declared props: img, name, tagline, count, availability, fromPrice, popular, onClick."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Navbar'] > JSXAttribute > JSXIdentifier[name!=/^(?:light|active|links|logoSrc|onNavigate|key|ref|className|style|children)$/]",
+        "message": "<Navbar> doesn't accept that prop. Declared props: light, active, links, logoSrc, onNavigate."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ProofStrip'] > JSXAttribute > JSXIdentifier[name!=/^(?:items|key|ref|className|style|children)$/]",
+        "message": "<ProofStrip> doesn't accept that prop. Declared props: items."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='QuickPickCard'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|meta|all|onClick|key|ref|className|style|children)$/]",
+        "message": "<QuickPickCard> doesn't accept that prop. Declared props: title, meta, all, onClick."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ReviewProof'] > JSXAttribute > JSXIdentifier[name!=/^(?:images|rating|line|onDark|key|ref|className|style|children)$/]",
+        "message": "<ReviewProof> doesn't accept that prop. Declared props: images, rating, line, onDark."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StarRating'] > JSXAttribute > JSXIdentifier[name!=/^(?:count|size|className|label|key|ref|className|style|children)$/]",
+        "message": "<StarRating> doesn't accept that prop. Declared props: count, size, className, label."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StickyMobileCTA'] > JSXAttribute > JSXIdentifier[name!=/^(?:slotLabel|showSlotHint|key|ref|className|style|children)$/]",
+        "message": "<StickyMobileCTA> doesn't accept that prop. Declared props: slotLabel, showSlotHint."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='TabPill'] > JSXAttribute > JSXIdentifier[name!=/^(?:active|children|className|onClick|key|ref|className|style|children)$/]",
+        "message": "<TabPill> doesn't accept that prop. Declared props: active, children, className, onClick."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='UrduSignature'] > JSXAttribute > JSXIdentifier[name!=/^(?:className|style|key|ref|className|style|children)$/]",
+        "message": "<UrduSignature> doesn't accept that prop. Declared props: className, style."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "ArrowUpRight": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "CardLink": {
+        "replaces": []
+      },
+      "IgIcon": {
+        "replaces": []
+      },
+      "InputField": {
+        "replaces": []
+      },
+      "MenuRow": {
+        "replaces": []
+      },
+      "Navbar": {
+        "replaces": []
+      },
+      "ProofStrip": {
+        "replaces": []
+      },
+      "QuickPickCard": {
+        "replaces": []
+      },
+      "ReviewProof": {
+        "replaces": []
+      },
+      "StarRating": {
+        "replaces": []
+      },
+      "StickyMobileCTA": {
+        "replaces": []
+      },
+      "TabPill": {
+        "replaces": []
+      },
+      "UrduSignature": {
+        "replaces": []
+      },
+      "WordmarkDivider": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--accent-brand",
+      "--accent-gold",
+      "--accent-gold-deep",
+      "--azadi-deep",
+      "--azadi-fall",
+      "--azadi-green",
+      "--azadi-lift",
+      "--azadi-mid",
+      "--azadi-paper",
+      "--azadi-tint",
+      "--berry",
+      "--border-default",
+      "--border-soft",
+      "--cream",
+      "--dur-long",
+      "--dur-micro",
+      "--dur-short",
+      "--ease-in",
+      "--ease-out",
+      "--focus-ring",
+      "--font-inter",
+      "--font-nastaliq",
+      "--font-syne",
+      "--font-unbounded",
+      "--ink",
+      "--ink-warm",
+      "--mist",
+      "--nude",
+      "--plum",
+      "--plum-deep",
+      "--plum-gradient",
+      "--radius",
+      "--selection",
+      "--shadow-card",
+      "--shadow-soft",
+      "--stone",
+      "--surface-dark",
+      "--surface-page",
+      "--surface-soft",
+      "--text-body",
+      "--text-heading",
+      "--text-on-dark",
+      "--text-on-dark-muted",
+      "--white"
+    ],
+    "tokenKinds": {
+      "--white": "color",
+      "--ink": "color",
+      "--ink-warm": "color",
+      "--nude": "color",
+      "--mist": "color",
+      "--cream": "color",
+      "--stone": "color",
+      "--border-soft": "color",
+      "--accent-gold": "color",
+      "--accent-gold-deep": "color",
+      "--plum-deep": "color",
+      "--plum": "color",
+      "--berry": "color",
+      "--plum-gradient": "other",
+      "--surface-page": "color",
+      "--surface-soft": "color",
+      "--surface-dark": "color",
+      "--text-heading": "font",
+      "--text-body": "font",
+      "--text-on-dark": "font",
+      "--text-on-dark-muted": "font",
+      "--border-default": "color",
+      "--focus-ring": "color",
+      "--accent-brand": "color",
+      "--selection": "color",
+      "--shadow-soft": "shadow",
+      "--shadow-card": "shadow",
+      "--radius": "radius",
+      "--azadi-paper": "color",
+      "--azadi-tint": "color",
+      "--azadi-green": "color",
+      "--azadi-deep": "color",
+      "--azadi-mid": "color",
+      "--azadi-lift": "color",
+      "--azadi-fall": "color",
+      "--font-inter": "font",
+      "--font-unbounded": "font",
+      "--font-syne": "font",
+      "--font-nastaliq": "font",
+      "--ease-out": "other",
+      "--ease-in": "other",
+      "--dur-micro": "other",
+      "--dur-short": "other",
+      "--dur-long": "other"
+    },
+    "fontFamilies": [
+      "Inter",
+      "Noto Nastaliq Urdu",
+      "Syne",
+      "Unbounded"
+    ]
+  }
+}

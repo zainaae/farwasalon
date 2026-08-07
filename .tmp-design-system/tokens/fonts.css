@@ -1,0 +1,4 @@
+/* Farwa Salon webfonts. The production site self-hosts these via next/font;
+   they are all Google Fonts, loaded here from the Google CDN (exact same faces,
+   no substitution). Inter 300 is the body weight — not 400. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Unbounded:wght@400;700&family=Syne:wght@600;700&family=Noto+Nastaliq+Urdu:wght@400&display=swap');

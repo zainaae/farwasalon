@@ -4,7 +4,18 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist', '.next', '.next-ci', 'node_modules', 'coverage', 'playwright-report', 'test-results']),
+  /* Design-system kit is a standalone Babel/CDN prototype (React as global).
+     Keep it out of the Next app lint gate — it is not production app code. */
+  globalIgnores([
+    'dist',
+    '.next',
+    '.next-ci',
+    'node_modules',
+    'coverage',
+    'playwright-report',
+    'test-results',
+    '.tmp-design-system/**',
+  ]),
   {
     files: ['**/*.{js,jsx}'],
     extends: [

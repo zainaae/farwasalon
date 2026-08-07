@@ -1,0 +1,36 @@
+<!-- @dsCard group="Components" viewport="700x300" name="Core" subtitle="Button, TabPill, InputField, QuickPickCard, CardLink" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>body{background:#fff;padding:20px 24px}</style></head>
+<body><div id="root"></div>
+<script type="text/babel">
+const { Button, TabPill, InputField, QuickPickCard, CardLink } = window.FarwaSalonDesignSystem_f6c92b;
+function Demo(){
+  return (
+    <div style={{display:'flex',flexDirection:'column',gap:18}}>
+      <div style={{display:'flex',alignItems:'center',gap:12,flexWrap:'wrap'}}>
+        <Button arrow>Book an Appointment</Button>
+        <Button variant="secondary">WhatsApp</Button>
+        <a href="#" onClick={(e)=>e.preventDefault()} className="link-underline" style={{fontFamily:'var(--font-inter)',fontSize:12,letterSpacing:'0.16em',textTransform:'uppercase',color:'var(--stone)'}}>Explore Services</a>
+      </div>
+      <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+        <TabPill active>All</TabPill><TabPill>Bridal</TabPill><TabPill>Facials</TabPill><TabPill>Threading</TabPill><TabPill>Nails</TabPill>
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr 1fr',gap:8,maxWidth:560}}>
+        <QuickPickCard title="Threading" meta="From Rs 100" />
+        <QuickPickCard title="Facials" meta="From Rs 1,400" />
+        <QuickPickCard title="Bridal" meta="From Rs 8,000" />
+        <QuickPickCard title="View all 13" meta="Categories" all />
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16,maxWidth:560,alignItems:'end'}}>
+        <InputField label="Your name" placeholder="Ayesha Khan" />
+        <CardLink>Full price list</CardLink>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script></body></html>

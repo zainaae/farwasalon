@@ -8,6 +8,7 @@ import { ChevronRight } from 'lucide-react'
 import { SERVICES, CAT_META, CAT_SLUGS, track, formatPrice } from '../../src/data.js'
 import { AREAS_HUB_HREF, getClientFacingAreaLinks } from '../../lib/location-links.js'
 import LiveAvailability from './live-availability'
+import PageCloseCta from '../components/page-close-cta.jsx'
 
 function getCatMeta(cat) {
   return CAT_META[cat] || { img: '/bleachpolish.jpg', tagline: 'Expert beauty services tailored for you.' }
@@ -118,6 +119,7 @@ export default function ServicesClient() {
               invisible until hydration, making the intro paragraph a ~5.5s
               LCP (same failure mode the homepage hero had).
               No overflow-hidden: it clipped Unbounded on the title. */}
+          <p className="hero-fade-up eyebrow">— Services · PECHS</p>
           <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
             Our services
           </h1>
@@ -204,6 +206,7 @@ export default function ServicesClient() {
           </ul>
         </section>
       </div>
+      <PageCloseCta waFrom="services-index" />
     </main>
   )
 }

@@ -1,0 +1,23 @@
+/* Farwa Beauty Salon — motion language. Exponential ease-out entrances,
+   three duration buckets. Never browser-default `ease`. */
+:root{
+  --ease-out:cubic-bezier(0.16,1,0.3,1); /* @kind other */
+  --ease-in:cubic-bezier(0.7,0,0.84,0); /* @kind other */
+  --dur-micro:120ms; /* @kind other */
+  --dur-short:220ms; /* @kind other */
+  --dur-long:420ms; /* @kind other */
+}
+@keyframes heroRise{from{transform:translateY(.35em)}to{transform:translateY(0)}}
+@keyframes heroFadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes heroFade{from{opacity:0}to{opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes navSlideIn{from{transform:translateY(-32px);opacity:0}to{transform:translateY(0);opacity:1}}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-rise{animation:heroRise .7s var(--ease-out) both}
+/* LCP candidates: no entrance animation (paint immediately). From app/globals.css */
+.hero-lcp{animation:none!important;transform:none!important;opacity:1!important}
+.hero-fade-up{animation:heroFadeUp .65s var(--ease-out) both}
+.hero-fade{animation:heroFade .55s ease both}
+.animate-fadeIn{animation:fadeIn .5s ease forwards}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}}

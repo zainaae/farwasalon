@@ -16,6 +16,7 @@ import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
 import { SITE_ORIGIN, buildSpeakableSchema, buildFaqPageSchema } from '../../../lib/business-schema.js'
 import { AREAS_HUB_HREF, getClientFacingAreaLinksForCategory } from '../../../lib/location-links.js'
 import { WA_DEFAULT, MAPS_LINK } from '../../../src/site-config.js'
+import PageCloseCta from '../../components/page-close-cta.jsx'
 
 function getCatMeta(cat) {
   const base = CAT_META[cat] || { img: '/bleachpolish.jpg' }
@@ -329,6 +330,15 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
           {modal && <ServiceModal service={modal} onClose={() => setModal(null)} />}
         </div>
       </div>
+
+      <PageCloseCta
+        eyebrow={`— ${category} · PECHS`}
+        title="Book online in under a minute"
+        body="Live slots for this category, or WhatsApp if you prefer a quick confirm."
+        bookHref={`/book?category=${encodeURIComponent(category)}`}
+        waHref={WA_DEFAULT}
+        waFrom="service-category-close"
+      />
     </main>
   )
 }
