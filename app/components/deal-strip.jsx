@@ -35,7 +35,7 @@ export default function DealStrip() {
                 width={1000}
                 height={1414}
                 loading="lazy"
-                quality={70}
+                quality={65}
                 sizes="80px"
                 className="w-[72px] md:w-[84px] h-auto block"
               />
