@@ -331,66 +331,6 @@ function FeaturedServices() {
   )
 }
 
-function TrustPillars() {
-  /* Calm trust chapter — mist + plum, not a black slab with a mismatched glow shot. */
-  const pillars = [
-    {
-      num: '01',
-      title: `${YEARS_ACTIVE} Years in PECHS`,
-      desc: `Since ${FOUNDING_YEAR} — the same chair-side standard whether you are in for ten minutes or a full bridal day.`,
-    },
-    {
-      num: '02',
-      title: 'Book online · walk-ins when free',
-      desc: 'Real-time slots online, WhatsApp for questions, and walk-ins when we have room.',
-    },
-    {
-      num: '03',
-      title: 'Transparent PKR Pricing',
-      desc: 'Every service listed with PKR on the site — no surprise quotes at the counter.',
-    },
-  ]
-
-  return (
-    <section
-      className="cv-auto living-band border-t border-border-soft"
-      aria-labelledby="trust-pillars-heading"
-    >
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-16 lg:py-[4.5rem]">
-        <m.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          id="trust-pillars-heading"
-          className="eyebrow text-plum mb-8 md:mb-10"
-        >
-          — Why choose Farwa
-        </m.p>
-        <div className="grid sm:grid-cols-3 gap-8 md:gap-9">
-          {pillars.map((p, i) => (
-            <m.div
-              key={p.num}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.65 }}
-              className="border-t border-plum/25 pt-6 md:pt-7"
-            >
-              <p className="font-[family-name:var(--font-fraunces)] text-[10px] text-plum mb-3.5">{p.num}</p>
-              <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-[17px] text-ink mb-2.5 leading-snug">
-                {p.title}
-              </h3>
-              <p className="text-stone text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">
-                {p.desc}
-              </p>
-            </m.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 /* Quoti structure (named pains + hard figures) — Farwa skin/truth only.
    Figures must stay enforceable via src/stated-numbers.test.js. No invented %. */
 function HardNumbersBand() {
@@ -1008,7 +948,6 @@ export default function HomeBelowFold({ placesEnabled = false }) {
       <WordmarkDivider />
       <FeaturedServices />
       <HardNumbersBand />
-      <TrustPillars />
       <SalonLocalBlock />
       <FounderNote />
       <TestimonialsPreview placesEnabled={placesEnabled} />
