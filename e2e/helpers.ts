@@ -129,18 +129,4 @@ export async function mockCancelApi(page: Page) {
   })
 }
 
-export async function mockSubscribeApi(page: Page) {
-  await page.route('**/api/subscribe', async (route) => {
-    if (route.request().method() !== 'POST') {
-      await route.continue()
-      return
-    }
-    await route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify({ ok: true }),
-    })
-  })
-}
-
-/** Newsletter popup was removed — footer subscribe remains. */
+/** Newsletter capture removed — no modal, footer form, or /api/subscribe. */

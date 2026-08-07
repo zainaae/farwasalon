@@ -8,7 +8,6 @@ import { MessageCircle, Star } from 'lucide-react'
 import { WA_DEFAULT, IG_LINK, MAPS_LINK, CAT_SLUGS } from '../../src/site-config.js'
 import { SALON_ADDRESS_LINES } from '../../lib/business-schema.js'
 import { AREAS_HUB_HREF, getFooterAreaLinks } from '../../lib/location-links.js'
-import FooterNewsletter from './footer-newsletter.jsx'
 import {
   UrduSignature,
   IgIcon,
@@ -188,7 +187,6 @@ export default function SiteFooter() {
               </ul>
             </div>
           </div>
-          <FooterNewsletter />
           <div className="mb-10 pb-8 border-b border-border-soft">
             <p className="text-[10px] tracking-[0.2em] uppercase font-medium font-[family-name:var(--font-inter)] text-ink mb-3">
               Areas we serve

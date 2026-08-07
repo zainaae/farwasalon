@@ -154,7 +154,7 @@ export default function DealsPage() {
             &ldquo;discount&rdquo; comes off a number you were never shown. Our starting prices are
             published for all 102 services, so a deal here is a real reduction, not theatre.
             New offers are added for the wedding season and slow weekdays — check back monthly,
-            or join the newsletter (footer) to hear first.
+            or follow us on Instagram for new announcements.
           </p>
           <Link href="/prices" className="link-underline text-ink text-sm font-medium">
             See the full price list →
