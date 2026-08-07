@@ -80,7 +80,15 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
   return (
     <main id="main" className="page-content">
       <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
-        <div className="max-w-3xl">
+        {/* Centred, and one step wider than it was. This column was max-w-3xl
+            with no mx-auto, so on a 1440px screen every one of these 13 pages
+            put 767px of content against the left rule and left ~430px of dead
+            canvas down the right — an amputation, not a margin. Widening the
+            prose was never the risk: the description carries its own
+            max-w-prose and the intro blocks their own max-w-2xl, so the only
+            thing this wrapper actually governs is the price list, which is
+            tabular and wants the room. */}
+        <div className="max-w-4xl mx-auto">
           <BreadcrumbJsonLd items={[
             { name: 'Home', url: 'https://farwasalon.com/' },
             { name: 'Services', url: 'https://farwasalon.com/services' },
@@ -181,42 +189,58 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
           <ul className="divide-y divide-border-soft">
             {services.map((s, i) => {
               const opens = canOpen(s)
+
+              /* Price flush right, at the name's weight, in its own cell.
+                 It used to sit under the name as an 11px gold line, which put
+                 every figure on a ragged left edge behind a heading — so
+                 comparing the Rs 1,800 facial against the Rs 5,500 one meant
+                 reading the whole list instead of running an eye down a rail.
+                 Position now carries "this is the price"; ink instead of gold
+                 also takes it from 3.4:1 to full contrast at the size people
+                 actually squint at. */
+              const priceCell = (s.pricePkr != null || s.durationMinutes != null) && (
+                <div className="shrink-0 text-right">
+                  {s.pricePkr != null && (
+                    <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink leading-tight tabular-nums">
+                      {formatServicePrice(s)}
+                    </p>
+                  )}
+                  {s.durationMinutes != null && (
+                    <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] font-light mt-0.5 tabular-nums">
+                      {formatDuration(s.durationMinutes)}
+                    </p>
+                  )}
+                </div>
+              )
+
               return (
                 <m.li key={s.id}
                   initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.025 }}
-                  className="flex items-center justify-between py-4 gap-4">
+                  className="flex items-center py-4 gap-5 sm:gap-8">
                   {opens ? (
                     <button type="button" onClick={() => openFor(s)}
-                      className="min-w-0 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2">
+                      className="flex-1 min-w-0 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-ink focus-visible:ring-offset-2">
                       <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink uppercase leading-tight group-hover:text-stone transition-colors">
                         {s.name}
                       </p>
-                      {(s.pricePkr != null || s.durationMinutes != null) && (
-                        <p className="text-accent-gold-deep text-[11px] font-[family-name:var(--font-inter)] mt-0.5">
-                          {s.pricePkr != null && formatServicePrice(s)}
-                          {s.pricePkr != null && s.durationMinutes != null && ' · '}
-                          {s.durationMinutes != null && formatDuration(s.durationMinutes)}
-                        </p>
-                      )}
                       {s.desc && (
-                        <p className="text-stone text-[11px] font-light mt-0.5 line-clamp-1 hidden sm:block">{s.desc}</p>
+                        /* max-sm:hidden, not `hidden sm:block`. The old pair set
+                           display:block at sm and up, which overrode the
+                           display:-webkit-box that line-clamp needs — so the
+                           clamp never applied and rows ran 1 or 2 lines at
+                           random. Touching display only below sm lets it work. */
+                        <p className="text-stone text-[12px] font-light mt-1 leading-relaxed max-w-[30rem] line-clamp-3 max-sm:hidden">{s.desc}</p>
                       )}
                     </button>
                   ) : (
-                    <div className="min-w-0">
+                    <div className="flex-1 min-w-0">
                       <p className="font-[family-name:var(--font-syne)] font-bold text-[13px] text-ink uppercase leading-tight">
                         {s.name}
                       </p>
-                      {(s.pricePkr != null || s.durationMinutes != null) && (
-                        <p className="text-accent-gold-deep text-[11px] font-[family-name:var(--font-inter)] mt-0.5">
-                          {s.pricePkr != null && formatServicePrice(s)}
-                          {s.pricePkr != null && s.durationMinutes != null && ' · '}
-                          {s.durationMinutes != null && formatDuration(s.durationMinutes)}
-                        </p>
-                      )}
                     </div>
                   )}
+                  {priceCell}
                   <Link
                     href={`/book?serviceId=${s.id}`}
                     aria-label={`Book ${s.name}`}

@@ -49,9 +49,23 @@ export default function BlogIndexClient({ posts }) {
           </p>
         </div>
 
+        {/* The one piece of ground on this page. /blog rendered 98% white
+              top to bottom with no elevation anywhere, so the featured post
+              read as the first row of the list rather than as the thing above
+              it — a bottom rule was doing all the work.
+
+              Mist rather than nude, on measurement: --accent-gold-deep is
+              3.98:1 on --nude, which fails the "Featured ·" eyebrow at 10px.
+              It is 4.9:1 on --mist. Mist is only ΔL* 3.3 off white and would
+              not separate across a full-bleed band, but inside a bounded panel
+              the hairline and the shadow carry the edge and the tone only has
+            to confirm it. Both tokens already exist; nothing new invented. */}
         {featured && (
-          <article className="mb-12 md:mb-16 border-b border-border-soft pb-12">
-            <Link href={`/blog/${featured.slug}`} className="group block">
+          <article className="mb-12 md:mb-16">
+            <Link
+              href={`/blog/${featured.slug}`}
+              className="group block panel-soft shadow-soft hover:shadow-card transition-shadow duration-300 p-5 sm:p-7 md:p-9"
+            >
               {/* items-center, not items-start. The image column runs ~620px
                   and the title/dek/meta stack ends around 240px, so top-aligning
                   them left roughly 200px of dead white beside the tallest block
@@ -130,12 +144,16 @@ export default function BlogIndexClient({ posts }) {
                   href={`/blog/${post.slug}`}
                   className="group flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 py-5 md:py-6"
                 >
-                  <time
-                    dateTime={post.date}
-                    className="shrink-0 text-stone text-[11px] font-[family-name:var(--font-inter)] tabular-nums sm:w-28"
-                  >
-                    {formatBlogDate(post.date)}
-                  </time>
+                  {/* The date used to lead the row from a 7rem rail on the
+                      left. Two things were wrong with that: the whole corpus
+                      published on one day, so the rail scanned as the same
+                      string repeated down the page, and it pushed the title
+                      and excerpt 136px right while the actual right-hand
+                      column — a "Read" affordance held at opacity-0 until
+                      hover — left ~400px of the row permanently blank. Moving
+                      the one piece of real information over there closes the
+                      void with something worth reading and gives the title
+                      back its width. */}
                   <div className="min-w-0 flex-1">
                     <p className="text-[10px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-stone mb-1">
                       {post.category}
@@ -149,9 +167,23 @@ export default function BlogIndexClient({ posts }) {
                       {post.description}
                     </p>
                   </div>
-                  <span className="hidden sm:inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-                    Read <ChevronRight className="w-3 h-3" />
-                  </span>
+                  <div className="shrink-0 sm:text-right sm:w-32 flex items-center sm:items-end gap-2 sm:gap-1 sm:flex-col">
+                    <time
+                      dateTime={post.date}
+                      className="text-stone text-[11px] font-[family-name:var(--font-inter)] tabular-nums"
+                    >
+                      {formatBlogDate(post.date)}
+                    </time>
+                    {/* Reserved space is what made the old affordance cost a
+                        column; this one sits under the date it shares a cell
+                        with, so hidden-until-hover costs nothing. */}
+                    <span
+                      aria-hidden="true"
+                      className="hidden sm:inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-ink opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      Read <ChevronRight className="w-3 h-3" />
+                    </span>
+                  </div>
                 </Link>
               </li>
             ))}
