@@ -51,7 +51,18 @@ export default function FaqClient() {
         </div>
       </section>
 
-      <section className="py-14 md:py-20">
+      {/* A real band, not a panel. This section is a direct child of <main>,
+          so unlike the category pages it can take a full-bleed ground without
+          breaking out of section-shell — and a page that measured 0 shadowed
+          elements across 322 of them needs the ground more than it needs a
+          card. White header -> mist accordion -> the close CTA now gives the
+          page three tonal steps instead of one continuous sheet.
+
+          Mist is safe for everything inside: .eyebrow and .text-body are both
+          --stone (6.18:1 on white, ~5.9:1 here), the questions are --ink. The
+          one token that would have failed is --accent-gold-deep, which drops
+          to 3.98:1 on --nude — the reason this is mist and not nude. */}
+      <section className="py-14 md:py-20 bg-mist border-y border-border-soft">
         <div className="max-w-screen-md mx-auto px-4 sm:px-5">
           {FAQ_GROUPS.map((group) => (
             <div key={group.topic} className="mb-12 last:mb-0">

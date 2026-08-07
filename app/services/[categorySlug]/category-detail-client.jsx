@@ -252,8 +252,16 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
             })}
           </ul>
 
+          {/* All 13 of these routes measured 0 shadowed elements and a single
+              flat ground end to end, so a 1px top rule was the only thing
+              separating a block of prose from the price list above it. The FAQ
+              is the right place to put the page's one step of ground: it is a
+              different kind of content from the menu, it sits at the bottom
+              where a tonal close reads as an ending, and mist keeps --stone at
+              ~5.9:1 for the answers. Same panel-soft + shadow-soft the blog
+              featured card uses; no hover lift, since nothing here is clickable. */}
           {faqs.length > 0 && (
-            <section className="mt-12 pt-10 border-t border-border-soft">
+            <section className="mt-12 panel-soft shadow-soft p-6 sm:p-8 md:p-10">
               <h2 className="font-[family-name:var(--font-unbounded)] font-bold text-lg md:text-xl text-ink mb-6 uppercase">
                 Frequently Asked Questions
               </h2>
@@ -261,7 +269,11 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                 {faqs.map((faq, i) => (
                   <div key={i} className="py-5">
                     <dt className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-2">{faq.q}</dt>
-                    <dd className="text-stone text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">{faq.a}</dd>
+                    {/* max-w-prose because widening this page's column to
+                        max-w-4xl pushed these answers to ~100 characters a
+                        line. The list above wanted the extra width; running
+                        prose never does. */}
+                    <dd className="text-stone text-sm font-light leading-relaxed font-[family-name:var(--font-inter)] max-w-prose">{faq.a}</dd>
                   </div>
                 ))}
               </dl>
