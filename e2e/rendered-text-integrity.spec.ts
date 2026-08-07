@@ -45,7 +45,7 @@ for (const path of PAGES) {
 
 test('the two known collapse sites render with their spaces intact', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' })
-  expect(await page.locator('#main').innerText()).toMatch(/For over \d+ years,/)
+  expect(await page.locator('#main').innerText()).toMatch(/For over \d+ years in/)
 
   await page.goto('/prices', { waitUntil: 'domcontentloaded' })
   expect(await page.locator('#main').innerText()).toMatch(/remaining \d+ are hair/)
