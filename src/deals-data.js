@@ -1,8 +1,22 @@
+/* Dates here are Asia/Karachi dates, not UTC ones.
+
+   These five helpers each computed `today` with now.toISOString().slice(0,10),
+   which is the UTC date. Karachi is UTC+5, so between midnight and 5 AM local
+   the UTC date is still yesterday — and the campaign therefore kept
+   advertising itself for the first five hours of the day AFTER it ended, and
+   stayed dark for the first five hours of the day it opened. Proven against
+   2026-08-14T21:00:00Z, which is 2 AM on the 15th in Karachi: getActiveDeals
+   still returned freedom-deal-2026.
+
+   salonTodayString() is the salon's own date and already existed in
+   lib/date-local.js for exactly this reason. */
 /** Real, honest deals only — no fake urgency, no "today only" that renews
  *  daily. Each deal the owner adds here appears on /deals with Offer schema;
  *  expired deals drop off automatically at build/render time.
  *
  *  Shape: validUntil (YYYY-MM-DD, inclusive) or null for evergreen. */
+
+import { salonTodayString } from '../lib/date-local.js'
 export const DEALS = [
   {
     /* 14% for Pakistan's Independence Day on the 14th. Terms otherwise per the
@@ -45,7 +59,7 @@ export const DEALS = [
 
 /** Deals still valid on the given date (defaults to today). */
 export function getActiveDeals(now = new Date()) {
-  const today = now.toISOString().slice(0, 10)
+  const today = salonTodayString(now)
   return DEALS.filter(
     (d) => (!d.validFrom || d.validFrom <= today) && (!d.validUntil || d.validUntil >= today),
   )
@@ -53,7 +67,7 @@ export function getActiveDeals(now = new Date()) {
 
 /** Deals announced but not yet open — shown as "starts <date>", never claimable. */
 export function getUpcomingDeals(now = new Date()) {
-  const today = now.toISOString().slice(0, 10)
+  const today = salonTodayString(now)
   return DEALS.filter(
     (d) =>
       d.teaseFrom &&
@@ -71,7 +85,7 @@ export function getHeadlineDeal(now = new Date()) {
 /** True while validFrom…validUntil (inclusive) covers today. */
 export function isDealActive(deal, now = new Date()) {
   if (!deal) return false
-  const today = now.toISOString().slice(0, 10)
+  const today = salonTodayString(now)
   return (
     (!deal.validFrom || deal.validFrom <= today) &&
     (!deal.validUntil || deal.validUntil >= today)
@@ -81,7 +95,7 @@ export function isDealActive(deal, now = new Date()) {
 /** True in the tease window: announced, not yet claimable. */
 export function isDealUpcoming(deal, now = new Date()) {
   if (!deal?.teaseFrom || !deal?.validFrom) return false
-  const today = now.toISOString().slice(0, 10)
+  const today = salonTodayString(now)
   return (
     deal.teaseFrom <= today &&
     deal.validFrom > today &&
@@ -92,7 +106,7 @@ export function isDealUpcoming(deal, now = new Date()) {
 /** True after validUntil (inclusive window ended). Upcoming deals are not ended. */
 export function isDealEnded(deal, now = new Date()) {
   if (!deal?.validUntil) return false
-  const today = now.toISOString().slice(0, 10)
+  const today = salonTodayString(now)
   return deal.validUntil < today
 }
 
