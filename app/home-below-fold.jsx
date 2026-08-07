@@ -346,52 +346,35 @@ function TrustPillars() {
       className="cv-auto bg-mist border-t border-border-soft"
       aria-labelledby="trust-pillars-heading"
     >
-      <div className="max-w-screen-xl mx-auto">
-        <div className="grid lg:grid-cols-12 lg:items-stretch">
-          <div className="relative lg:col-span-5 min-h-[220px] sm:min-h-[280px] lg:min-h-0 overflow-hidden order-2 lg:order-1">
-            <div className="relative h-full min-h-[220px] lg:min-h-full aspect-[5/4] lg:aspect-auto lg:absolute lg:inset-0">
-              <Image
-                src="/bridal.jpg"
-                alt="Bridal makeup and styling at Farwa Beauty Salon, PECHS"
-                fill
-                quality={55}
-                sizes="(max-width: 1023px) 100vw, 42vw"
-                className="object-cover object-[50%_22%]"
-              />
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 px-4 sm:px-5 md:px-10 py-14 md:py-16 lg:py-[4.5rem] bg-white order-1 lg:order-2 lg:border-l border-border-soft">
-            <m.p
-              initial={{ opacity: 0, y: 16 }}
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-16 lg:py-[4.5rem]">
+        <m.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          id="trust-pillars-heading"
+          className="eyebrow text-plum mb-8 md:mb-10"
+        >
+          — Why choose Farwa
+        </m.p>
+        <div className="grid sm:grid-cols-3 gap-8 md:gap-9">
+          {pillars.map((p, i) => (
+            <m.div
+              key={p.num}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              id="trust-pillars-heading"
-              className="eyebrow text-plum mb-8 md:mb-10"
+              transition={{ delay: i * 0.1, duration: 0.65 }}
+              className="border-t border-plum/25 pt-6 md:pt-7"
             >
-              — Why choose Farwa
-            </m.p>
-            <div className="grid sm:grid-cols-3 gap-8 md:gap-9">
-              {pillars.map((p, i) => (
-                <m.div
-                  key={p.num}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.65 }}
-                  className="border-t border-plum/25 pt-6 md:pt-7"
-                >
-                  <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-plum mb-3.5">{p.num}</p>
-                  <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-[17px] text-ink mb-2.5 leading-snug">
-                    {p.title}
-                  </h3>
-                  <p className="text-stone text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">
-                    {p.desc}
-                  </p>
-                </m.div>
-              ))}
-            </div>
-          </div>
+              <p className="font-[family-name:var(--font-unbounded)] text-[10px] text-plum mb-3.5">{p.num}</p>
+              <h3 className="font-[family-name:var(--font-syne)] font-bold text-base md:text-[17px] text-ink mb-2.5 leading-snug">
+                {p.title}
+              </h3>
+              <p className="text-stone text-sm font-light leading-relaxed font-[family-name:var(--font-inter)]">
+                {p.desc}
+              </p>
+            </m.div>
+          ))}
         </div>
       </div>
     </section>
