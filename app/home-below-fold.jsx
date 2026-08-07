@@ -899,8 +899,8 @@ function FounderNote() {
       >
         <p className="eyebrow text-plum mb-6">— The House</p>
         <blockquote
-          className="font-[family-name:var(--font-syne)] font-medium text-ink text-balance leading-[1.35] mx-auto"
-          style={{ fontSize: 'clamp(1.35rem, 3.4vw, 2.15rem)', maxWidth: '24ch' }}
+          className="display-quote text-ink mx-auto"
+          style={{ maxWidth: '24ch' }}
         >
           &ldquo;Trends visit Karachi every season. Grace stays. I opened this
           salon in 2008 to give every woman on this street both.&rdquo;

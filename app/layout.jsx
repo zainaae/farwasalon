@@ -13,7 +13,9 @@ import { buildBeautySalonSchema, buildWebSiteSchema } from '../lib/business-sche
    late webfont swap (fallback stays if the face isn't ready in time). */
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
+  /* 400 default body; 300 kept for existing font-light utilities;
+     500 eyebrows; 600 buttons. */
+  weight: ['300', '400', '500', '600'],
   variable: '--font-inter',
   display: 'swap',
   preload: false,

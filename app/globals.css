@@ -51,6 +51,16 @@
   --dur-med:   var(--dur-short);
   --dur-long:  420ms;
 
+  /* Type lookmax — optical hierarchy, not seven random H1 sizes.
+     Display = Unbounded 700 (tight track). UI labels = Inter 500–600.
+     Body = Inter 400 (300 reads anemic on mist). Pull quotes = Syne. */
+  --track-display: -0.035em;
+  --track-display-tight: -0.045em;
+  --track-eyebrow: 0.22em;
+  --leading-display: 1.05;
+  --leading-page: 1.12;
+  --leading-body: 1.65;
+
   /* shadcn tokens */
   --background: 30 20% 99%;
   --foreground: 0 0% 5%;
@@ -86,7 +96,9 @@
     background: #ffffff;
     color: #0d0d0d;
     font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
-    font-weight: 300;
+    font-weight: 400;
+    font-optical-sizing: auto;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -210,11 +222,12 @@
   .eyebrow--on-dark { color: var(--accent-gold); }
   .eyebrow {
     font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.28em;
+    font-size: 0.6875rem; /* 11px — 10px looked dusty */
+    font-weight: 500;
+    letter-spacing: var(--track-eyebrow);
     text-transform: uppercase;
     color: var(--stone);
-    line-height: 1.55;
+    line-height: 1.45;
   }
   .section-title {
     /* var(--font-unbounded) first, like .display-section. Unbounded loads with
@@ -225,33 +238,45 @@
        that looks like the design instead of to Times. */
     font-family: var(--font-unbounded), 'Unbounded', sans-serif;
     font-weight: 700;
-    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-    line-height: 1.28;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+    line-height: var(--leading-page);
+    letter-spacing: var(--track-display);
     color: var(--ink);
     text-wrap: balance;
-    padding-block: 0.08em;
+    padding-block: 0.06em;
+    font-feature-settings: 'kern' 1, 'liga' 1;
   }
   .text-body {
     font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 0.9375rem;
-    line-height: 1.72;
+    line-height: var(--leading-body);
     color: var(--stone);
+    letter-spacing: -0.005em;
   }
   @media (min-width: 768px) {
-    .text-body { font-size: 1rem; }
+    .text-body { font-size: 1.0625rem; line-height: 1.68; }
+  }
+  .text-lead {
+    font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    line-height: 1.55;
+    letter-spacing: -0.015em;
+    color: var(--stone);
+    max-width: 36em;
   }
   /* Title stack rhythm: eyebrow → display → body. Unbounded and Inter sit
      glued when margins match the optical size of the glyphs; these defaults
      open the gap without a redesign. Tailwind mb-* on children still wins. */
   .title-stack > .eyebrow {
-    margin-bottom: 0.875rem;
+    margin-bottom: 1rem;
   }
   .title-stack > .display-page {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.15rem;
   }
-  .title-stack > .text-body {
+  .title-stack > .text-body,
+  .title-stack > .text-lead {
     margin-bottom: 0;
   }
   .card-link {
@@ -805,22 +830,24 @@
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   font-size: clamp(3.5rem, 12vw, 12rem);
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  line-height: 0.88;
+  letter-spacing: var(--track-display-tight);
+  font-feature-settings: 'kern' 1, 'liga' 1;
 }
 .display-section {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
   /* Cap at ~4.25rem — 5.5rem made two-word banners (Our Services) dominate
      the viewport and fight the body. Short all-caps banners still read large. */
-  font-size: clamp(1.75rem, 4.2vw, 4.25rem);
+  font-size: clamp(1.85rem, 4.4vw, 4.25rem);
   /* 0.95 clipped Unbounded ascenders/descenders inside overflow-hidden parents
      and stacked lines ("WHAT WE" / "DO") looked glued. */
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  line-height: var(--leading-display);
+  letter-spacing: var(--track-display);
   overflow-wrap: anywhere;
-  padding-block: 0.06em;
+  padding-block: 0.05em;
   text-wrap: balance;
+  font-feature-settings: 'kern' 1, 'liga' 1;
 }
 /* The inner-page h1 rung.
    Measured across the site there were SEVEN distinct h1 sizes — 108, 80, 65,
@@ -837,12 +864,22 @@
 .display-page {
   font-family: var(--font-unbounded), 'Unbounded', sans-serif;
   font-weight: 700;
-  font-size: clamp(1.5rem, 3vw, 2.7rem);
-  line-height: 1.18;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.65rem, 3.4vw, 2.85rem);
+  line-height: var(--leading-page);
+  letter-spacing: var(--track-display);
   overflow-wrap: anywhere;
-  padding-block: 0.1em;
+  padding-block: 0.08em;
   text-wrap: balance;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+}
+.display-quote {
+  font-family: var(--font-syne), 'Syne', sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.35rem, 3.2vw, 2.15rem);
+  line-height: 1.28;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  font-feature-settings: 'kern' 1, 'liga' 1;
 }
 /* Em-dash ornaments inside display titles used font-light italic Unbounded —
    a weight/style the face barely supports, so the dash floated as a mistyped
