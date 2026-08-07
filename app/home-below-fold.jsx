@@ -58,44 +58,52 @@ function EditorialMedia({ item, className = '' }) {
 }
 
 function StatsStrip() {
-  /* Story band only. The four trust figures live in ProofStrip under the hero —
-     repeating years / appointments / service count here made the page feel like
-     it was restating itself, and overflow-hidden on the title clipped Unbounded.
-
-     Gutter has to match the rest of the page. Padding on the <section> plus
-     the 1280 cap on the inner div puts content at x=80, because the cap is
-     applied after the padding is already spent; every other band pads inside
-     the cap and lands at x=120. Two sections were doing it the first way, so
-     the left edge stepped in and out by 40px as you scrolled. */
+  /* Story band with a real photo anchor — not another mist title-stack slab. */
   return (
-    <section className="cv-auto bg-white py-14 sm:py-16 md:py-[4.5rem] border-b border-border-soft">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-14 items-end">
-          <m.div initial={{ y: 28, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, margin: '-80px' }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-            className="title-stack">
+    <section className="cv-auto bg-white border-b border-border-soft overflow-hidden">
+      <div className="max-w-screen-xl mx-auto grid md:grid-cols-12 items-stretch">
+        <m.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="md:col-span-7 flex flex-col justify-center px-4 sm:px-5 md:px-10 py-14 sm:py-16 md:py-[4.5rem]"
+        >
+          <div className="title-stack max-w-xl">
             <p className="eyebrow">— Est. 2008 · PECHS</p>
             <h2 className="display-page max-w-xl text-ink">
               A beauty studio with {YEARS_ACTIVE} years of care
             </h2>
-          </m.div>
-          <m.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.9, delay: 0.12 }}
-            className="flex flex-col gap-5 sm:gap-6 md:pb-1">
-            <p className="text-body max-w-xl">
-              For over {YEARS_ACTIVE}{' '}years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
-            </p>
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1 border-t border-border-soft">
-              <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-[family-name:var(--font-inter)] group w-fit pt-4">
-                <span className="link-underline">Book a visit</span>
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
-              <Link href="/about" className="tap-safe text-stone hover:text-ink text-[11px] tracking-wide font-[family-name:var(--font-inter)] transition-colors pt-4">
-                Our story
-              </Link>
-            </div>
-          </m.div>
-        </div>
+          </div>
+          <p className="text-body max-w-xl mt-5">
+            For over {YEARS_ACTIVE}{' '}years, Farwa Beauty Salon has been a steady favourite in PECHS, Karachi. Expert care, a warm welcome, and results that speak for themselves &mdash; every single visit.
+          </p>
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-5 mt-2 border-t border-border-soft">
+            <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-[family-name:var(--font-inter)] group w-fit pt-4">
+              <span className="link-underline">Book a visit</span>
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+            </Link>
+            <Link href="/about" className="tap-safe text-stone hover:text-ink text-[11px] tracking-wide font-[family-name:var(--font-inter)] transition-colors pt-4">
+              Our story
+            </Link>
+          </div>
+        </m.div>
+        <m.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.9, delay: 0.08 }}
+          className="relative md:col-span-5 min-h-[240px] md:min-h-full aspect-[5/4] md:aspect-auto overflow-hidden"
+        >
+          <Image
+            src="/facial.jpg"
+            alt="Facial treatment at Farwa Beauty Salon, PECHS"
+            fill
+            quality={55}
+            sizes="(max-width: 767px) 100vw, 40vw"
+            className="object-cover object-[50%_25%]"
+          />
+        </m.div>
       </div>
     </section>
   )
@@ -265,7 +273,7 @@ function FeaturedServices() {
   const visibleCategories = filterServiceCategories(categories, activeTab)
 
   return (
-    <section className="cv-auto bg-mist section-pad border-t border-border-soft">
+    <section className="cv-auto bg-white section-pad border-t border-border-soft">
       <div className="section-shell">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-baseline sm:justify-between mb-8 md:mb-10">
           <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
@@ -367,8 +375,9 @@ function FeaturedServices() {
 }
 
 function ProblemBand() {
-  /* Friction chapter — Quoti rhythm, Farwa craft.
-     Giant indices + plum-edge cards + loud CTA so the band isn't a dead-end. */
+  /* Friction chapter — Quoti rhythm without SaaS card theatre.
+     Photo anchors the band; friction reads as a numbered list, not three
+     equal cardboard tiles on a flat plum slab. */
   const problems = [
     {
       num: '01',
@@ -395,94 +404,113 @@ function ProblemBand() {
 
   return (
     <section
-      className="problem-band grain-on-dark py-16 sm:py-20 md:py-24 border-t border-white/10"
+      className="problem-band grain-on-dark border-t border-white/10"
       aria-labelledby="problem-band-heading"
     >
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16 lg:items-end mb-10 md:mb-14">
-          <m.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 title-stack"
-          >
-            <p className="eyebrow eyebrow--on-dark mb-4">— The salon problem</p>
-            <h2
-              id="problem-band-heading"
-              className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.08] text-balance max-w-[14ch]"
-              style={{ fontSize: 'clamp(2rem, 4.8vw, 3.75rem)', letterSpacing: '-0.03em' }}
-            >
-              The hard part isn&apos;t the service.
-            </h2>
-          </m.div>
+      <div className="max-w-screen-xl mx-auto px-0 md:px-10 md:py-16 lg:py-20">
+        <div className="grid lg:grid-cols-12 lg:gap-x-10 xl:gap-x-14 lg:items-stretch">
+          {/* Media column — real work, not another mist panel */}
           <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5 mt-5 lg:mt-0 lg:pb-1"
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="relative lg:col-span-5 min-h-[42vw] sm:min-h-[320px] lg:min-h-0 overflow-hidden"
           >
-            <p className="text-white/70 text-[15px] md:text-base font-light leading-relaxed font-[family-name:var(--font-inter)] max-w-sm">
-              It&apos;s the guessing, the waiting, the back-and-forth. We took those out.
-            </p>
-          </m.div>
-        </div>
-
-        {/* Mobile: horizontal snap. Desktop: staggered card row. */}
-        <div
-          className="problem-band-rail flex max-md:overflow-x-auto max-md:snap-x max-md:snap-mandatory max-md:pb-2 max-md:-mx-4 max-md:px-4 sm:max-md:-mx-5 sm:max-md:px-5 md:grid md:grid-cols-3 md:gap-5 gap-4"
-          role="list"
-        >
-          {problems.map((p, i) => (
-            <m.article
-              key={p.num}
-              role="listitem"
-              initial={false}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: i * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className={`problem-card group max-md:snap-center max-md:shrink-0 max-md:w-[78vw] max-md:max-w-[300px] ${
-                i === 1 ? 'md:mt-6' : i === 2 ? 'md:mt-3' : ''
-              }`}
-              style={{ animationDelay: `${0.08 + i * 0.1}s` }}
-            >
-              <span
-                className="problem-card-index font-[family-name:var(--font-unbounded)] font-bold text-white/15 group-hover:text-berry/50 transition-colors duration-500"
-                aria-hidden="true"
-              >
-                {p.num}
-              </span>
-              <h3 className="font-[family-name:var(--font-syne)] font-semibold text-[17px] md:text-lg text-white leading-snug mt-3 mb-3 relative">
-                {p.title}
-              </h3>
-              <p className="text-white/65 text-[13.5px] font-light leading-relaxed font-[family-name:var(--font-inter)] relative grow">
-                {p.fix}
+            <div className="relative h-full min-h-[280px] lg:min-h-full aspect-[4/5] lg:aspect-auto lg:absolute lg:inset-0">
+              <Image
+                src="/glow3.jpg"
+                alt="Facial glow treatment at Farwa Beauty Salon, PECHS"
+                fill
+                quality={60}
+                sizes="(max-width: 1023px) 100vw, 42vw"
+                className="object-cover object-[50%_30%]"
+              />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    'linear-gradient(to top, rgba(63,22,49,0.72) 0%, rgba(63,22,49,0.15) 45%, rgba(63,22,49,0.35) 100%)',
+                }}
+              />
+              <p className="absolute bottom-5 left-5 right-5 text-white/85 text-[10px] tracking-[0.22em] uppercase font-[family-name:var(--font-inter)]">
+                Farwa · PECHS Block 3
               </p>
-              <Link
-                href={p.href}
-                className="tap-safe relative mt-6 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] text-accent-gold hover:text-white transition-colors self-start"
-              >
-                {p.cta} <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
-              </Link>
-            </m.article>
-          ))}
-        </div>
+            </div>
+          </m.div>
 
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="cta-cluster mt-10 md:mt-14 pt-8 border-t border-white/15"
-        >
-          <Link href="/book" className="btn-loud btn-loud--light tap-safe">
-            Book a slot <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
-          </Link>
-          <Link href="/prices" className="btn-ghost-on-dark tap-safe">
-            See all prices
-          </Link>
-        </m.div>
+          <div className="lg:col-span-7 px-4 sm:px-5 md:px-0 py-12 sm:py-14 lg:py-2 flex flex-col justify-center">
+            <m.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="mb-8 md:mb-10"
+            >
+              <p className="eyebrow eyebrow--on-dark mb-4">— The salon problem</p>
+              <h2
+                id="problem-band-heading"
+                className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.08] text-balance max-w-[14ch]"
+                style={{ fontSize: 'clamp(1.85rem, 4.4vw, 3.35rem)', letterSpacing: '-0.03em' }}
+              >
+                The hard part isn&apos;t the service.
+              </h2>
+              <p className="mt-4 text-white/70 text-[15px] md:text-base font-light leading-relaxed font-[family-name:var(--font-inter)] max-w-md">
+                It&apos;s the guessing, the waiting, the back-and-forth. We took those out.
+              </p>
+            </m.div>
+
+            <ol className="problem-list divide-y divide-white/12 border-y border-white/12" role="list">
+              {problems.map((p, i) => (
+                <m.li
+                  key={p.num}
+                  role="listitem"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ delay: i * 0.08, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                  className="problem-list-row group grid grid-cols-[auto_1fr] gap-x-4 sm:gap-x-5 py-5 sm:py-6"
+                >
+                  <span
+                    className="font-[family-name:var(--font-unbounded)] font-bold text-berry/70 text-lg sm:text-xl tabular-nums leading-none pt-0.5"
+                    aria-hidden="true"
+                  >
+                    {p.num}
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="font-[family-name:var(--font-syne)] font-semibold text-[16px] sm:text-[17px] md:text-lg text-white leading-snug">
+                      {p.title}
+                    </h3>
+                    <p className="mt-1.5 text-white/65 text-[13.5px] font-light leading-relaxed font-[family-name:var(--font-inter)] max-w-md">
+                      {p.fix}
+                    </p>
+                    <Link
+                      href={p.href}
+                      className="tap-safe mt-3 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] text-accent-gold hover:text-white transition-colors"
+                    >
+                      {p.cta} <ChevronRight className="w-3.5 h-3.5" aria-hidden="true" />
+                    </Link>
+                  </div>
+                </m.li>
+              ))}
+            </ol>
+
+            <m.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="cta-cluster mt-8 md:mt-10"
+            >
+              <Link href="/book" className="btn-loud btn-loud--light tap-safe">
+                Book a slot <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
+              </Link>
+              <Link href="/prices" className="btn-ghost-on-dark tap-safe">
+                See all prices
+              </Link>
+            </m.div>
+          </div>
+        </div>
       </div>
     </section>
   )
@@ -608,7 +636,7 @@ function BookingStory() {
                 {active === i && (
                   <Link
                     href="/book"
-                    className="btn-primary tap-safe self-start !min-h-12"
+                    className="btn-loud tap-safe self-start !min-h-12 !px-6 !py-3 !text-[12px]"
                   >
                     Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                   </Link>
@@ -675,8 +703,8 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
   const sourceLabel = post.source === 'google' ? 'Google' : 'Facebook'
   const clampQuote = excerpt || compact
 
-  /* Excerpt strip under the featured pull-quote — quote-forward tiles with
-     plum edge, not the old header-only mist chips. */
+  /* Excerpt strip — typographic quote tiles, no circular initial avatars
+     (AI-template tell). Name + date carry the attribution. */
   if (excerpt) {
     return (
       <m.article
@@ -694,24 +722,18 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
           aria-label={`${post.name}'s review on ${sourceLabel}`}
         >
           <Quote
-            className="review-strip-card__mark w-7 h-7 rotate-180 shrink-0"
+            className="review-strip-card__mark w-6 h-6 rotate-180 shrink-0"
             aria-hidden="true"
           />
           <blockquote className="review-strip-card__quote flex-1 font-[family-name:var(--font-syne)] font-light italic text-ink leading-[1.4] text-[15px] sm:text-base line-clamp-4">
             {post.quote}
           </blockquote>
-          <footer className="review-strip-card__foot mt-auto pt-5 flex items-center gap-3">
-            <span
-              className="review-strip-card__avatar shrink-0 w-10 h-10 flex items-center justify-center font-[family-name:var(--font-syne)] font-semibold text-[11px] tracking-wide"
-              aria-hidden="true"
-            >
-              {post.initials}
-            </span>
-            <span className="min-w-0 flex-1">
+          <footer className="review-strip-card__foot mt-auto pt-5 flex items-end justify-between gap-3 border-t border-border-soft">
+            <span className="min-w-0">
               <span className="block font-[family-name:var(--font-syne)] font-semibold text-[13px] text-ink truncate leading-tight">
                 {post.name}
               </span>
-              <span className="mt-1 flex items-center gap-1.5">
+              <span className="mt-1.5 flex items-center gap-1.5">
                 <StarRating size={9} className="text-plum/70" />
                 {post.date ? (
                   <span className="text-stone text-[10px] font-[family-name:var(--font-inter)]">
@@ -720,7 +742,7 @@ function ReviewCard({ post, compact = false, excerpt = false }) {
                 ) : null}
               </span>
             </span>
-            <ArrowUpRight className="review-strip-card__arrow w-4 h-4 shrink-0" aria-hidden="true" />
+            <ArrowUpRight className="review-strip-card__arrow w-4 h-4 shrink-0 mb-0.5" aria-hidden="true" />
           </footer>
         </a>
       </m.article>
@@ -895,10 +917,7 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
     <div className={`reviews-block-divider reviews-strip ${divided ? '' : 'border-t-0 pt-0'} ${className}`}>
       <div className="flex items-end justify-between gap-4 mb-2 sm:mb-3">
         <div className="min-w-0">
-          <p className="eyebrow mb-1.5">— {label}</p>
-          <p className="hidden sm:block text-ink font-[family-name:var(--font-syne)] font-semibold text-sm sm:text-[15px] leading-snug">
-            More voices, newest first
-          </p>
+          <p className="eyebrow mb-0">— {label}</p>
         </div>
         <a
           href={viewAllHref}
@@ -915,9 +934,6 @@ function ReviewGridSection({ label, viewAllHref, posts, sourceName, className = 
       <p className="md:hidden text-plum text-[9px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] mb-3">
         Swipe for more →
       </p>
-      {/* One render, restyled per breakpoint — mobile snap scroller, md+ grid.
-          Excerpt cards use whileInView rise; off-screen swipe cards animate
-          when they enter, which is fine for this denser quote-forward strip. */}
       <div
         className={`reviews-strip-rail flex gap-4 overflow-x-auto pb-3 -mx-4 px-4 snap-x snap-mandatory scrollbar-none md:mx-0 md:px-0 md:pb-0 md:overflow-visible md:grid ${desktopCols} md:gap-5 md:max-w-5xl md:items-stretch`}
       >
@@ -1000,7 +1016,7 @@ function TestimonialsPreview({ placesEnabled }) {
   const featuredSourceLabel = featured.source === 'google' ? 'Google' : 'Facebook'
 
   return (
-    <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-mist border-t border-border-soft">
+    <section className="cv-auto relative py-16 sm:py-[4.5rem] md:py-20 overflow-hidden bg-white border-t border-border-soft">
       <div className="relative max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10">
         <m.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }} transition={{ duration: 0.8 }}
@@ -1022,7 +1038,7 @@ function TestimonialsPreview({ placesEnabled }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-60px' }}
           transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
-          className="reviews-featured relative px-6 py-9 sm:px-9 sm:py-10 md:px-12 md:py-11 mb-8 sm:mb-10 md:mb-12"
+          className="reviews-featured relative px-6 py-10 sm:px-9 sm:py-12 md:px-14 md:py-14 mb-10 sm:mb-12 md:mb-14"
           aria-live="polite"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
@@ -1031,35 +1047,27 @@ function TestimonialsPreview({ placesEnabled }) {
             if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false)
           }}
         >
-          <Quote className="reviews-featured-mark absolute top-4 left-4 sm:top-6 sm:left-6 w-8 h-8 sm:w-10 sm:h-10 rotate-180 pointer-events-none" aria-hidden="true" />
-          <blockquote className={`relative z-[1] font-[family-name:var(--font-syne)] italic font-light text-ink leading-[1.42] text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-2 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6' : ''}`}>
+          <Quote className="reviews-featured-mark absolute top-5 left-5 sm:top-7 sm:left-7 w-8 h-8 sm:w-10 sm:h-10 rotate-180 pointer-events-none" aria-hidden="true" />
+          <blockquote className={`relative z-[1] font-[family-name:var(--font-syne)] italic font-light text-white leading-[1.42] text-left sm:text-center max-w-2xl mx-auto text-xl sm:text-[1.35rem] md:text-2xl px-1 sm:px-6 ${featured.quote.length > 280 ? 'line-clamp-6' : ''}`}>
             {featured.quote}
           </blockquote>
           {featured.translation && (
-            <p className="relative z-[1] text-stone text-center text-sm font-light mt-4 sm:mt-5 font-[family-name:var(--font-inter)] max-w-xl mx-auto leading-relaxed">
+            <p className="relative z-[1] text-white/65 text-left sm:text-center text-sm font-light mt-4 sm:mt-5 font-[family-name:var(--font-inter)] max-w-xl mx-auto leading-relaxed">
               {featured.translation}
             </p>
           )}
-          <figcaption className="relative z-[1] flex flex-col items-center gap-3.5 mt-7 sm:mt-8">
-            <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-              <span className="text-stone text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)]">
+          <figcaption className="relative z-[1] flex flex-col items-start sm:items-center gap-3.5 mt-7 sm:mt-8">
+            <div className="flex flex-wrap items-center justify-start sm:justify-center gap-x-2 gap-y-1">
+              <span className="text-white/75 text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-inter)]">
                 {featured.name}
               </span>
-              <span className="text-stone/40 hidden sm:inline" aria-hidden="true">·</span>
+              <span className="text-white/35 hidden sm:inline" aria-hidden="true">·</span>
               <a href={featured.link} target="_blank" rel="noreferrer"
-                className="text-stone/70 hover:text-ink text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] inline-flex items-center gap-1 transition-colors">
+                className="text-white/60 hover:text-white text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] inline-flex items-center gap-1 transition-colors">
                 {featuredSourceLabel}{' '}
                 <ArrowUpRight className="w-2.5 h-2.5" />
               </a>
             </div>
-              {/* Was role=tablist/role=tab with aria-selected, and the dot itself
-                  was the hit box: 6x6 px, a quarter of the WCAG 2.5.8 floor.
-                  role=tab also promises arrow-key roving focus and an owned
-                  tabpanel, neither of which exists here.
-
-                  Both are solved the way the photo dots in shared.jsx already
-                  solve them — a 44px padded button wrapping a small visual bar,
-                  in a labelled group with aria-current. */}
             {featuredReviews.length > 1 && (
               <div className="flex items-center" role="group" aria-label="Featured reviews">
                 {featuredReviews.map((r, i) => (
@@ -1072,7 +1080,7 @@ function TestimonialsPreview({ placesEnabled }) {
                     className="tap-safe min-h-[44px] min-w-[44px] inline-flex items-center justify-center"
                   >
                     <span
-                      className={`block h-1.5 rounded-full transition-[width,background-color] ${reviewIdx === i ? 'w-6 bg-ink' : 'w-1.5 bg-stone/30'}`}
+                      className={`block h-1.5 rounded-full transition-[width,background-color] ${reviewIdx === i ? 'w-6 bg-white' : 'w-1.5 bg-white/30'}`}
                     />
                   </button>
                 ))}
@@ -1118,63 +1126,83 @@ function TestimonialsPreview({ placesEnabled }) {
 }
 
 function CtaBand() {
-  /* Same plum close language as PageCloseCta — home keeps a quieter tertiary
-     link row under the Book + WhatsApp pair. */
+  /* Photo-backed close — not another flat plum slab. Same loud Book + WhatsApp
+     pair as PageCloseCta; tertiary links stay quiet underneath. */
   return (
-    <section className="cv-auto cta-band grain-on-dark bg-plum-deep py-16 sm:py-20 md:py-[5rem] px-4 sm:px-5 md:px-10 border-t border-white/10">
-      <div className="max-w-screen-xl mx-auto flex flex-col items-center text-center gap-8">
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="w-full max-w-2xl title-stack"
-        >
-          <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-4">&mdash; Visit us in PECHS</p>
-          <h2
-            className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.12] text-balance mx-auto"
-            style={{ fontSize: 'clamp(1.9rem, 5vw + 0.4rem, 3.5rem)', letterSpacing: '-0.02em', maxWidth: '18ch' }}
+    <section className="cv-auto cta-band relative overflow-hidden border-t border-white/10">
+      <Image
+        src="/bridal.jpg"
+        alt=""
+        fill
+        quality={55}
+        sizes="100vw"
+        className="object-cover object-[50%_28%] pointer-events-none"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 grain-on-dark"
+        style={{
+          background:
+            'linear-gradient(105deg, rgba(63,22,49,0.94) 0%, rgba(63,22,49,0.82) 42%, rgba(13,6,9,0.72) 100%)',
+        }}
+      />
+      <div className="relative z-[2] max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-16 sm:py-20 md:py-[5rem]">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="lg:col-span-7"
           >
-            Book online in under a minute
-          </h2>
-          <p className="text-body mt-4 mx-auto max-w-md text-white/70">
-            No prepayment. Cancel free up to 2 hours before. Or message us on WhatsApp — whichever is easier for you.
-          </p>
-        </m.div>
-        <m.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="cta-cluster justify-center w-full max-w-xl"
-        >
-          <Link
-            href="/book"
-            className="btn-loud btn-loud--light tap-safe w-full sm:w-auto"
+            <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-4">&mdash; Visit us in PECHS</p>
+            <h2
+              className="font-[family-name:var(--font-unbounded)] font-bold text-white leading-[1.12] text-balance"
+              style={{ fontSize: 'clamp(1.9rem, 5vw + 0.4rem, 3.5rem)', letterSpacing: '-0.02em', maxWidth: '14ch' }}
+            >
+              Book online in under a minute
+            </h2>
+            <p className="text-body mt-4 max-w-md text-white/70">
+              No prepayment. Cancel free up to 2 hours before. Or message us on WhatsApp — whichever is easier for you.
+            </p>
+          </m.div>
+          <m.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="lg:col-span-5 flex flex-col gap-5"
           >
-            Book an Appointment <ArrowUpRight className="w-4 h-4 shrink-0" />
-          </Link>
-          <WaCta
-            href={`https://wa.me/${WA_NUMBER}`}
-            from="cta-band"
-            className="btn-ghost-on-dark tap-safe w-full sm:w-auto"
-          >
-            WhatsApp us
-          </WaCta>
-        </m.div>
-        <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 pt-2">
-          <Link
-            href="/prices"
-            className="tap-safe link-underline text-white/55 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
-          >
-            Price list
-          </Link>
-          <Link
-            href="/bridal"
-            className="tap-safe link-underline text-white/55 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
-          >
-            Bridal
-          </Link>
+            <div className="cta-cluster w-full">
+              <Link
+                href="/book"
+                className="btn-loud btn-loud--light tap-safe w-full sm:w-auto"
+              >
+                Book an Appointment <ArrowUpRight className="w-4 h-4 shrink-0" />
+              </Link>
+              <WaCta
+                href={`https://wa.me/${WA_NUMBER}`}
+                from="cta-band"
+                className="btn-ghost-on-dark tap-safe w-full sm:w-auto"
+              >
+                WhatsApp us
+              </WaCta>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <Link
+                href="/prices"
+                className="tap-safe link-underline text-white/55 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
+              >
+                Price list
+              </Link>
+              <Link
+                href="/bridal"
+                className="tap-safe link-underline text-white/55 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-white transition-colors"
+              >
+                Bridal
+              </Link>
+            </div>
+          </m.div>
         </div>
       </div>
     </section>
@@ -1183,31 +1211,49 @@ function CtaBand() {
 
 function FounderNote() {
   return (
-    <section className="cv-auto bg-white border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
-      <m.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-40px' }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-3xl mx-auto text-center"
-      >
-        <p className="eyebrow mb-6">— The House</p>
-        <blockquote
-          className="font-[family-name:var(--font-syne)] font-medium text-ink text-balance leading-[1.3]"
-          style={{ fontSize: 'clamp(1.35rem, 3.6vw, 2.25rem)' }}>
-          &ldquo;Trends visit Karachi every season. Grace stays. I opened this
-          salon in 2008 to give every woman on this street both.&rdquo;
-        </blockquote>
-        <p className="mt-6 text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] text-stone">
-          Rubina · Founder, Farwa Beauty Salon
-        </p>
-        <Link
-          href="/about"
-          className="tap-safe mt-8 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-ink hover:text-stone transition-colors"
+    <section className="cv-auto bg-mist border-t border-border-soft">
+      <div className="max-w-screen-xl mx-auto grid md:grid-cols-12 md:gap-0 items-stretch">
+        <m.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="relative md:col-span-5 min-h-[280px] md:min-h-[420px] overflow-hidden"
         >
-          Meet Rubina <ChevronRight className="w-3.5 h-3.5" />
-        </Link>
-      </m.div>
+          <Image
+            src="/hairdo.jpg"
+            alt="Hair styling at Farwa Beauty Salon with founder Rubina"
+            fill
+            quality={60}
+            sizes="(max-width: 767px) 100vw, 42vw"
+            className="object-cover object-[50%_20%]"
+          />
+        </m.div>
+        <m.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="md:col-span-7 flex flex-col justify-center px-5 sm:px-8 md:px-12 lg:px-16 py-14 sm:py-16 md:py-20 bg-white md:border-l border-border-soft"
+        >
+          <p className="eyebrow mb-6">— The House</p>
+          <blockquote
+            className="font-[family-name:var(--font-syne)] font-medium text-ink text-balance leading-[1.3]"
+            style={{ fontSize: 'clamp(1.25rem, 3.2vw, 2rem)', maxWidth: '22ch' }}>
+            &ldquo;Trends visit Karachi every season. Grace stays. I opened this
+            salon in 2008 to give every woman on this street both.&rdquo;
+          </blockquote>
+          <p className="mt-6 text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] text-stone">
+            Rubina · Founder, Farwa Beauty Salon
+          </p>
+          <Link
+            href="/about"
+            className="tap-safe mt-8 inline-flex items-center gap-1.5 text-[11px] tracking-[0.16em] uppercase font-[family-name:var(--font-inter)] text-ink hover:text-stone transition-colors self-start"
+          >
+            Meet Rubina <ChevronRight className="w-3.5 h-3.5" />
+          </Link>
+        </m.div>
+      </div>
     </section>
   )
 }
