@@ -44,7 +44,7 @@ every push and PR to `master`.
 
 ```
 app/                 Next.js App Router — pages, layouts, API routes
-  api/               book, book/cancel, slots, reviews, subscribe, indexnow
+  api/               book, book/cancel, slots, reviews, indexnow
   book/              booking flow: picker → confirmation → cancel
   services/          service categories + location-aware SEO variants
 lib/                 Server/shared logic — booking rules, Sheets, schema, SEO

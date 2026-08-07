@@ -99,7 +99,6 @@ export const EMAILS = {
     'user@',
     'trailing@dot.',
   ],
-  subscribeProbe: (prefix = 'qa-probe') => `${prefix}-${Date.now()}@example.com`,
   e2e: 'e2e-test@example.com',
 }
 
@@ -305,24 +304,6 @@ export const API_SCENARIOS = (ref = new Date()) => {
       method: 'GET',
       path: `/api/slots?date=${weekday}&serviceId=${sid}&addonIds=2`,
       expectStatus: 200,
-    },
-    {
-      id: 'subscribe-valid',
-      method: 'POST',
-      path: '/api/subscribe',
-      body: {
-        email: EMAILS.subscribeProbe('qa-workflow'),
-        firstName: 'QA',
-        source: 'qa-workflow-run',
-      },
-      expectStatusIn: [200, 503],
-    },
-    {
-      id: 'subscribe-invalid-email',
-      method: 'POST',
-      path: '/api/subscribe',
-      body: { email: 'not-an-email', firstName: 'QA', source: 'qa-workflow-run' },
-      expectStatus: 400,
     },
     {
       id: 'book-past-date',

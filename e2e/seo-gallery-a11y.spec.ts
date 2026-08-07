@@ -101,14 +101,6 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     await expect(page.getByRole('heading', { level: 1 })).toContainText(/Beauty Salon in Karachi/i)
     await expect(page.getByRole('link', { name: /Book Online/i }).first()).toBeVisible()
   })
-
-  test('newsletter subscribe API accepts POST', async ({ request }) => {
-    const res = await request.post('/api/subscribe', {
-      data: { email: 'e2e-test@example.com', firstName: 'E2E', website: '' },
-    })
-    // 503 when Sheets env is missing locally; 502 only on transient upstream failure
-    expect([200, 400, 503]).toContain(res.status())
-  })
 })
 
 /* The homepage once shipped 55 words and zero <h2> because its below-fold

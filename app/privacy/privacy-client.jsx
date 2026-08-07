@@ -21,7 +21,7 @@ export default function PrivacyClient() {
             <div>
               <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">Who we are</h2>
               <p className="text-body text-sm">
-                Farwa Beauty Salon is a beauty studio in PECHS, Karachi, Pakistan. This page explains what happens when you use farwasalon.com — online booking, the newsletter, and a few third-party tools.
+                Farwa Beauty Salon is a beauty studio in PECHS, Karachi, Pakistan. This page explains what happens when you use farwasalon.com — online booking and a few third-party tools.
               </p>
             </div>
 
@@ -30,9 +30,6 @@ export default function PrivacyClient() {
               <ul className="text-body text-sm list-disc pl-5 space-y-1.5">
                 <li>
                   <strong className="font-medium text-ink">Online booking:</strong> When you book at /book, we store your name, phone number, chosen service(s), date, and time in our Google Sheet so we can run the appointment diary. A cancel code for that booking is also saved on this device (see below).
-                </li>
-                <li>
-                  <strong className="font-medium text-ink">Newsletter:</strong> If you subscribe, your email (and first name if you give one) is stored in our Google Sheet&apos;s Subscribers tab so we can send occasional salon updates.
                 </li>
                 <li>
                   <strong className="font-medium text-ink">On this device:</strong> Confirmation and cancellation details for a booking you made here are kept in this browser&apos;s local storage (and sometimes session storage) so you can reopen the confirmation or cancel link on the same phone without putting your name or phone in the URL.
@@ -71,14 +68,14 @@ export default function PrivacyClient() {
             <div>
               <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">How long we keep it</h2>
               <p className="text-body text-sm">
-                Booking rows stay in our Google Sheet while we need them for the diary and follow-up. Newsletter emails stay until you ask to be removed. Data on your device stays until you clear site data or cancel/remove that booking record. WhatsApp and Google retain their own copies under their policies.
+                Booking rows stay in our Google Sheet while we need them for the diary and follow-up. Data on your device stays until you clear site data or cancel/remove that booking record. WhatsApp and Google retain their own copies under their policies.
               </p>
             </div>
 
             <div>
               <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">Your rights</h2>
               <p className="text-body text-sm">
-                You can ask us to correct or delete booking or newsletter details we hold. Message the salon on WhatsApp at +92 322 2782254 with your name, phone or email, and (if relevant) Booking ID — we will handle the request from the sheet. Clearing this site&apos;s data in your browser removes the local confirmation/cancel copy on that device only.
+                You can ask us to correct or delete booking details we hold. Message the salon on WhatsApp at +92 322 2782254 with your name, phone, and (if relevant) Booking ID — we will handle the request from the sheet. Clearing this site&apos;s data in your browser removes the local confirmation/cancel copy on that device only.
               </p>
             </div>
 

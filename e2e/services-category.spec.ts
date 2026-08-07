@@ -44,7 +44,6 @@ test.describe('Services pages', () => {
   }
 
   test('/services menu lists all 13 categories with printed prices', async ({ page }) => {
-    await page.addInitScript(() => localStorage.setItem('farwa-newsletter-seen', '1'))
     await page.goto('/services')
     await expect(page.getByRole('link', { name: /threading/i }).first()).toBeVisible()
 
