@@ -46,8 +46,7 @@ for (const [route, page, body, kind] of checks) {
   const gaps = []
 
   if (kind === 'home') {
-    if (!/problem-band|ProblemBand/.test(src)) gaps.push('missing problem band')
-    if (!src.includes('booking-story')) gaps.push('missing sticky booking')
+    if (!/hard-numbers-band|HardNumbersBand/.test(src)) gaps.push('missing hard-numbers band')
     if (!btnLoud) gaps.push('missing loud CTA')
     if (/More glow|display-staccato/.test(src)) gaps.push('BAD Quoti dress')
     if (!/Farwa Beauty Salon|PECHS/.test(src)) gaps.push('weak brand in hero files')

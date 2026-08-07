@@ -50,9 +50,11 @@ export default function SiteFooter() {
             <UrduSignature className="hidden sm:inline text-stone/80" />
           </div>
           <div className="flex flex-col sm:items-end gap-2">
+            {/* Quiet text Book — loud Book lives in CtaBand / PageCloseCta above.
+                Avoid twin ink buttons ~230px apart on home (and other closes). */}
             <Link
               href="/book"
-              className="tap-safe inline-flex items-center gap-2 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] px-6 py-3 hover:bg-stone transition-colors duration-300"
+              className="tap-safe link-underline inline-flex items-center gap-1.5 text-ink text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] hover:text-plum-deep transition-colors"
             >
               {CTA_PRIMARY_LABEL} <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>

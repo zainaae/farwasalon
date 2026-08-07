@@ -34,7 +34,7 @@ export default function BlogIndexClient({ posts }) {
   const list = inCategory.slice(1)
 
   return (
-    <main id="main" className="page-content">
+    <main id="main" className="page-content pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">
       <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
         <BreadcrumbJsonLd items={[
           { name: 'Home', url: 'https://farwasalon.com/' },
@@ -223,11 +223,12 @@ export default function BlogIndexClient({ posts }) {
                 Live slots online, or WhatsApp if you prefer a quick confirm. No prepayment.
               </p>
               <div className="flex flex-col gap-3">
+                {/* One loud Book lives in PageCloseCta below; rail keeps WA only. */}
                 <Link
                   href="/book"
-                  className="btn-loud btn-loud--light tap-safe w-full inline-flex items-center justify-center gap-2 !min-h-12 !px-5 !py-3 !text-[12px]"
+                  className="tap-safe link-underline inline-flex items-center gap-1.5 text-white/85 text-[12px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] hover:text-white transition-colors"
                 >
-                  Book a Consultation <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
+                  See live slots <ArrowUpRight className="w-3.5 h-3.5 shrink-0" aria-hidden="true" />
                 </Link>
                 <WaCta
                   href={`https://wa.me/${WA_NUMBER}`}

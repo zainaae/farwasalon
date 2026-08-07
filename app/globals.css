@@ -1597,7 +1597,12 @@ button.tap-safe,
 }
 
 /* ── Living gradient bands (21st Silk Blend pattern → Farwa tokens) ──
-   Soft radial mesh that drifts. CSS-only; paused under reduced-motion. */
+   Soft radial mesh that drifts. CSS-only; paused under reduced-motion.
+
+   Contrast rule (Claude crosscheck): overlapping blooms can drop --stone on
+   mist from ~6.18:1 toward ~4.78:1 as the 36s loop moves. Keep bloom alphas
+   modest so stone body stays ≥ ~4.5:1. Never place --accent-gold-deep text on
+   a living-band (fails ~4.1:1 in the thin spot) — use plum / ink / white. */
 @keyframes living-drift {
   0%   { transform: translate3d(-1.5%, -1%, 0) scale(1); }
   100% { transform: translate3d(2.5%, 1.5%, 0) scale(1.05); }
@@ -1620,10 +1625,10 @@ button.tap-safe,
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 55% 45% at 18% 28%, rgba(158, 42, 82, 0.06), transparent 68%),
-    radial-gradient(ellipse 50% 40% at 86% 18%, rgba(110, 32, 68, 0.05), transparent 65%),
-    radial-gradient(ellipse 45% 50% at 58% 92%, rgba(63, 22, 49, 0.04), transparent 62%),
-    radial-gradient(ellipse 38% 32% at 32% 72%, rgba(201, 169, 138, 0.06), transparent 70%);
+    radial-gradient(ellipse 55% 45% at 18% 28%, rgba(158, 42, 82, 0.045), transparent 68%),
+    radial-gradient(ellipse 50% 40% at 86% 18%, rgba(110, 32, 68, 0.035), transparent 65%),
+    radial-gradient(ellipse 45% 50% at 58% 92%, rgba(63, 22, 49, 0.03), transparent 62%),
+    radial-gradient(ellipse 38% 32% at 32% 72%, rgba(201, 169, 138, 0.04), transparent 70%);
   background-repeat: no-repeat;
   animation: living-drift 36s ease-in-out infinite alternate;
   will-change: transform;
@@ -1666,9 +1671,9 @@ button.tap-safe,
 }
 .living-band--soft::before {
   background:
-    radial-gradient(ellipse 60% 50% at 8% 0%, rgba(158, 42, 82, 0.04), transparent 60%),
-    radial-gradient(ellipse 50% 45% at 96% 8%, rgba(110, 32, 68, 0.03), transparent 58%),
-    radial-gradient(ellipse 55% 40% at 50% 100%, rgba(232, 221, 213, 0.4), transparent 70%);
+    radial-gradient(ellipse 60% 50% at 8% 0%, rgba(158, 42, 82, 0.03), transparent 60%),
+    radial-gradient(ellipse 50% 45% at 96% 8%, rgba(110, 32, 68, 0.025), transparent 58%),
+    radial-gradient(ellipse 55% 40% at 50% 100%, rgba(232, 221, 213, 0.35), transparent 70%);
 }
 
 /* Reviews strip edge fades — 21st Testimonials Marquee pattern. */
