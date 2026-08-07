@@ -1,4 +1,5 @@
 import { CAT_SLUGS } from './data.js'
+import { toCanonicalUrl } from '../lib/canonical-origin.js'
 
 export const NEIGHBORHOODS = [
   {
@@ -167,11 +168,14 @@ export function getBestLocationRedirects() {
     const categorySlug = CAT_SLUGS[svc.category] || 'services'
     for (const loc of NEIGHBORHOODS) {
       const inSlug = `${svc.slug}-in-${loc.slug}`
+      const path = prioritySet.has(inSlug)
+        ? `/services/${inSlug}`
+        : `/services/${categorySlug}`
       redirects.push({
         source: `/services/best-${svc.slug}-${loc.slug}`,
-        destination: prioritySet.has(inSlug)
-          ? `/services/${inSlug}`
-          : `/services/${categorySlug}`,
+        /* Absolute so www + next.config do not chain through a relative hop
+           before proxy.js can send the crawler to the apex host. */
+        destination: toCanonicalUrl(path),
         permanent: true,
       })
     }
