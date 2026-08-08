@@ -570,9 +570,11 @@ export function StickyWA({ hidden = false }) {
 
 /* ─── Lazy video — IntersectionObserver-controlled ─────────────── */
 // eslint-disable-next-line no-unused-vars -- autoPlay is IO-controlled, not forwarded to <video>
-export function LazyVideo({ src, poster, className, autoPlay, ...props }) {
+export function LazyVideo({ src, poster, className, autoPlay, playing = true, ...props }) {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
+  const playingRef = useRef(playing)
+  playingRef.current = playing
 
   useEffect(() => {
     const el = ref.current
@@ -587,7 +589,7 @@ export function LazyVideo({ src, poster, className, autoPlay, ...props }) {
     const io = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setVisible(true)
-        el.play?.().catch(() => {})
+        if (playingRef.current) el.play?.().catch(() => {})
       } else {
         el.pause?.()
       }
@@ -595,6 +597,13 @@ export function LazyVideo({ src, poster, className, autoPlay, ...props }) {
     io.observe(el)
     return () => io.disconnect()
   }, [])
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el || !visible) return
+    if (playing) el.play?.().catch(() => {})
+    else el.pause?.()
+  }, [playing, visible])
 
   const webm = webmSourceFor(src)
 
