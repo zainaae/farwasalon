@@ -195,9 +195,15 @@ export default async function AreaPage({ params }) {
           <Link href="/book" className="tap-safe btn-loud !min-h-12 !py-2.5 !px-5 !text-[12px]">
             Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
-          <WaCta href={WA_DEFAULT} from="area-page" className="tap-safe btn-secondary !py-2.5 !px-5">
-            WhatsApp
-          </WaCta>
+          <span className="hidden md:contents">
+            <WaCta
+              href={WA_DEFAULT}
+              from="area-page"
+              className="tap-safe btn-secondary !py-2.5 !px-5"
+            >
+              WhatsApp
+            </WaCta>
+          </span>
           <Link href="/prices" className="tap-safe btn-secondary !py-2.5 !px-5">
             See the price list
           </Link>

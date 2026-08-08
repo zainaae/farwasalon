@@ -54,13 +54,15 @@ export default function PageCloseCta({
                 {bookLabel} <ArrowUpRight className="w-4 h-4 shrink-0" aria-hidden="true" />
               </Link>
             )}
-            <WaCta
-              href={wa}
-              from={waFrom}
-              className="btn-ghost-on-dark tap-safe w-full sm:w-auto"
-            >
-              {waLabel}
-            </WaCta>
+            <span className="hidden md:contents">
+              <WaCta
+                href={wa}
+                from={waFrom}
+                className="btn-ghost-on-dark tap-safe w-full sm:w-auto"
+              >
+                {waLabel}
+              </WaCta>
+            </span>
           </div>
           {children}
         </div>

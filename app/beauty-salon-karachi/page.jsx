@@ -59,11 +59,17 @@ export default function BeautySalonKarachiPage() {
             <Link href="/book" className="btn-loud">
               Book Online <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <WaCta href="https://wa.me/923222782254" from="karachi-hub" className="btn-secondary">
-              WhatsApp
-            </WaCta>
+            <span className="hidden md:contents">
+              <WaCta
+                href="https://wa.me/923222782254"
+                from="karachi-hub"
+                className="btn-secondary"
+              >
+                WhatsApp
+              </WaCta>
+            </span>
           </div>
-          <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)] mb-12">
+          <p className="hidden md:flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)] mb-12">
             <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Directions
             </a>
@@ -72,6 +78,11 @@ export default function BeautySalonKarachiPage() {
             </Link>
             <Link href="/bridal" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
               Bridal makeup
+            </Link>
+          </p>
+          <p className="md:hidden mb-12 text-sm font-[family-name:var(--font-inter)]">
+            <Link href="/prices" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+              Price list
             </Link>
           </p>
 
