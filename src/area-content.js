@@ -90,7 +90,7 @@ export const AREA_CONTENT = {
     gettingHere:
       'Clifton and the Sea View side reach us in around twenty to twenty-five minutes. The run is easier outside office hours in either direction, and the last stretch into Block 3 is quiet residential road rather than main-artery traffic.',
     worthTheTrip:
-      'Most of what brings Clifton clients across is bridal and pre-event work, where the trial matters more than the distance. A Bridal Trial at Rs 8,000 is two hours and worth planning a clear afternoon around — you will want to sit with the look rather than rush off.',
+      'Most of what brings Clifton clients across is bridal and pre-event work, where the trial matters more than the distance. A Bridal Trial from Rs 8,000 is two hours and worth planning a clear afternoon around — you will want to sit with the look rather than rush off.',
     timing:
       'For bridal, book the trial four to six weeks out and the main appointment as early as you can; wedding season fills our diary before anything else does. For a single facial, a weekday morning is a far easier drive than a Saturday.',
   },

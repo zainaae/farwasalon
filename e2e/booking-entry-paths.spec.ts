@@ -41,7 +41,7 @@ test.describe('Booking entry paths', () => {
     await expect(page.getByRole('button', { name: /Normal Facial/i })).toBeVisible()
   })
 
-  test('/prices row Book → category expands (service= name is legacy query)', async ({ page }) => {
+  test('/prices row Book → ?service=Name selects that service', async ({ page }) => {
     await page.goto('/prices')
     const threadingSection = page.locator('section').filter({
       has: page.getByRole('heading', { name: /^Threading$/i }),
@@ -50,10 +50,12 @@ test.describe('Booking entry paths', () => {
     await expect(rowBook).toHaveAttribute('href', /\/book\?service=.*&category=Threading/)
     await rowBook.click()
     await expect(page).toHaveURL(/\/book\?/)
+    await expect(page).toHaveURL(/service=/)
     await expect(page).toHaveURL(/category=Threading/)
-    /* Category expands; named `service=` is not yet mapped to a selection
-       (book-client reads serviceId / category only). Assert category path works. */
-    await expect(page.getByRole('button', { name: /Eyebrow Threading/i })).toBeVisible()
+    /* Named service from the prices row is pre-selected — Next advances. */
+    await expect(page.getByRole('button', { name: 'Remove Eyebrow Threading' })).toBeVisible()
+    await page.getByRole('button', { name: 'Next' }).click()
+    await expect(page.getByText('— Pick a date')).toBeVisible()
   })
 
   test('/bridal package Book → serviceId preselected, can advance', async ({ page }) => {

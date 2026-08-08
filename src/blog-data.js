@@ -102,19 +102,19 @@ export const BLOG_POSTS = [
       { type: 'h2', text: 'What Mehndi Makeup Should Feel Like' },
       {
         type: 'p',
-        text: 'Mehndi and dholki nights are colourful, loud, and long. Makeup needs to hold through dancing, hugs, and phone flash — not just the stage walk. Our Mehndi / Dholki Look (Rs 10,000, ~2 hours) includes festive makeup, flower or jewellery hair styling, and setting spray. Think warmer tones, brighter eyes, and hair that survives the evening, not a soft nikkah face copied onto a party.',
+        text: 'Mehndi and dholki nights are colourful, loud, and long. Makeup needs to hold through dancing, hugs, and phone flash — not just the stage walk. Our Mehndi / Dholki Look (from Rs 10,000, ~2 hours) includes festive makeup, flower or jewellery hair styling, and setting spray. Think warmer tones, brighter eyes, and hair that survives the evening, not a soft nikkah face copied onto a party.',
       },
 
       { type: 'h2', text: 'Engagement Look — Glam Without Full Barat Drama' },
       {
         type: 'p',
-        text: 'Engagement portraits and stage photos sit between soft and bridal glam. The Engagement Look (Rs 12,000, ~2.5 hours) covers makeup, hair set, and lashes — romantic and camera-ready without the Full Bridal Package timeline. Many clients book engagement first, then trial and barat later; rates stay on the [bridal landing page](/bridal) and the [published price list](/prices).',
+        text: 'Engagement portraits and stage photos sit between soft and bridal glam. The Engagement Look (from Rs 12,000, ~2.5 hours) covers makeup, hair set, and lashes — romantic and camera-ready without the Full Bridal Package timeline. Many clients book engagement first, then trial and barat later; rates stay on the [bridal landing page](/bridal) and the [published price list](/prices).',
       },
 
       { type: 'h2', text: 'How These Compare to the Full Bridal Package' },
       {
         type: 'p',
-        text: 'Single-event mehndi and engagement looks are priced per function. The [Full Bridal Package](/bridal) (Rs 25,000) is the all-day signature — hair, makeup, draping, touch-up kit, and event presence. Bridal Trial is Rs 8,000 and should sit 2–4 weeks before the wedding. Read the full package breakdown in our [bridal makeup packages guide](/blog/best-bridal-makeup-packages-karachi-2026).',
+        text: 'Single-event mehndi and engagement looks are priced per function. The [Full Bridal Package](/bridal) (from Rs 25,000) is the all-day signature — hair, makeup, draping, touch-up kit, and event presence. Bridal Trial is from Rs 8,000 and should sit 2–4 weeks before the wedding. Final bridal quotes depend on hair and are confirmed before the day. Read the full package breakdown in our [bridal makeup packages guide](/blog/best-bridal-makeup-packages-karachi-2026).',
       },
 
       { type: 'h2', text: 'Prep That Actually Helps Pre-Wedding Events' },
@@ -127,17 +127,17 @@ export const BLOG_POSTS = [
       { type: 'h3', text: 'Q: How much does mehndi makeup cost in Karachi?' },
       {
         type: 'p',
-        text: 'A: At Farwa in PECHS, Mehndi / Dholki Look is Rs 10,000. Celebrity studios often charge several times that for one pre-wedding event; we publish the rate and confirm before you sit down.',
+        text: 'A: At Farwa in PECHS, Mehndi / Dholki Look starts from Rs 10,000. Celebrity studios often charge several times that for one pre-wedding event; we publish the floor and confirm the final quote for your hair before you sit down.',
       },
       { type: 'h3', text: 'Q: What is included in an engagement makeup package?' },
       {
         type: 'p',
-        text: 'A: Our Engagement Look (Rs 12,000) includes makeup application, hair set, and lash application. Dupatta or jewellery styling can be arranged when you WhatsApp your outfit details.',
+        text: 'A: Our Engagement Look (from Rs 12,000) includes makeup application, hair set, and lash application. Dupatta or jewellery styling can be arranged when you WhatsApp your outfit details.',
       },
       { type: 'h3', text: 'Q: Should I book a trial for mehndi or only for barat?' },
       {
         type: 'p',
-        text: 'A: A Bridal Trial (Rs 8,000) is essential before the main wedding look. For mehndi, bring reference photos and your outfit colour — many brides skip a separate mehndi trial if they already know the artist from engagement.',
+        text: 'A: A Bridal Trial (from Rs 8,000) is essential before the main wedding look. For mehndi, bring reference photos and your outfit colour — many brides skip a separate mehndi trial if they already know the artist from engagement.',
       },
       { type: 'h3', text: 'Q: Can I book mehndi and engagement on different days?' },
       {
@@ -508,7 +508,7 @@ export const BLOG_POSTS = [
         'Deep cleansing from Rs 1,200 · facials from Rs 1,400',
         'Haircut & blowdry from Rs 2,000 · hair colour from Rs 4,000',
         'Microblading / powder brows from Rs 20,000',
-        'Bridal trial Rs 8,000 · mehndi Rs 10,000 · engagement Rs 12,000 · full bridal Rs 25,000',
+        'Bridal trial from Rs 8,000 · mehndi from Rs 10,000 · engagement from Rs 12,000 · full bridal from Rs 25,000',
       ]},
 
       { type: 'h2', text: 'Threading and Face Waxing — Rs 100 to Rs 1,200' },
@@ -533,7 +533,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Microblading and powder brows are the biggest-ticket non-bridal service in any Karachi salon. At Farwa, [eyebrow tattoo](/services/eyebrow-tattoo) starts at Rs 20,000 including consultation, numbing, the procedure, and an aftercare kit. Results last 12 to 18 months. Be wary of Rs 8,000 "deals" — pigment quality and hygiene are exactly the places you do not want a discount on your face.' },
 
       { type: 'h2', text: 'Bridal Makeup — from Rs 8,000 per event' },
-      { type: 'p', text: 'Bridal Trial Rs 8,000 · Mehndi / Dholki Rs 10,000 · Engagement Rs 12,000 · Full Bridal Package Rs 25,000. Premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event; our [bridal packages](/bridal) use the same professional techniques at printed rates. Deep dives: [bridal packages guide](/blog/best-bridal-makeup-packages-karachi-2026) and [mehndi & engagement makeup](/blog/mehndi-engagement-makeup-karachi).' },
+      { type: 'p', text: 'Bridal Trial from Rs 8,000 · Mehndi / Dholki from Rs 10,000 · Engagement from Rs 12,000 · Full Bridal Package from Rs 25,000 — printed floors; final quote depends on hair and is confirmed before the day. Premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event; our [bridal packages](/bridal) use the same professional techniques at printed starting rates. Deep dives: [bridal packages guide](/blog/best-bridal-makeup-packages-karachi-2026) and [mehndi & engagement makeup](/blog/mehndi-engagement-makeup-karachi).' },
 
       { type: 'h2', text: 'How This Compares to the Big-Name Parlours' },
       { type: 'p', text: 'Since the famous salons rarely publish rates, third-party price-tracker sites do it for them. Per those published lists, a single bridal event at the best-known Karachi parlours runs roughly Rs 23,000 to Rs 33,000, multi-event packages start around Rs 48,000, and a classic look starts around Rs 12,000. The premium studios publish roughly Rs 30,000 to Rs 45,000 per event. None of this makes those salons wrong; it makes the comparison simple: at Farwa the complete full bridal package costs about what one event costs at a big name, the techniques and product houses (Janssen, Wella, Rica) are the same professional grade, and the price you read here is the price you pay.' },
@@ -546,7 +546,7 @@ export const BLOG_POSTS = [
       { type: 'h3', text: 'Q: Are these prices final?' },
       { type: 'p', text: 'A: They are honest starting prices. Longer hair, larger areas, or add-ons can raise a quote, but you will always know before we begin.' },
       { type: 'h3', text: 'Q: How do your prices compare to the big-name Karachi salons?' },
-      { type: 'p', text: 'A: The honest answer varies by service, and we would rather give you the real numbers than a slogan. On threading the market around us starts near Rs 500 against our Rs 200. On bridal the premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event against our Rs 25,000 full package. The bigger difference is that most of them publish nothing at all — the rate appears when they see you. The thread, the wax and the product houses are the same professional grade.' },
+      { type: 'p', text: 'A: The honest answer varies by service, and we would rather give you the real numbers than a slogan. On threading the market around us starts near Rs 500 against our Rs 200. On bridal the premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event against our Full Bridal Package from Rs 25,000. The bigger difference is that most of them publish nothing at all — the rate appears when they see you. The thread, the wax and the product houses are the same professional grade.' },
       { type: 'h3', text: 'Q: Do you accept cards?' },
       { type: 'p', text: 'A: We accept cash, JazzCash, and EasyPaisa at the salon. Every price is in PKR.' },
 
@@ -869,19 +869,19 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: 'Bridal Makeup Cost in Karachi (Farwa 2026)' },
       { type: 'ul', items: [
-        'Bridal Trial — Rs 8,000 (~2 hours)',
-        'Mehndi / Dholki Look — Rs 10,000 (~2 hours)',
-        'Engagement Look — Rs 12,000 (~2.5 hours)',
-        'Full Bridal Package — Rs 25,000 (all-day signature)',
+        'Bridal Trial — from Rs 8,000 (~2 hours)',
+        'Mehndi / Dholki Look — from Rs 10,000 (~2 hours)',
+        'Engagement Look — from Rs 12,000 (~2.5 hours)',
+        'Full Bridal Package — from Rs 25,000 (all-day signature)',
       ]},
-      { type: 'p', text: 'These are the same PKR figures on our [price list](/prices) and [bridal page](/bridal). For mehndi and engagement detail, read [mehndi & engagement makeup Karachi](/blog/mehndi-engagement-makeup-karachi).' },
+      { type: 'p', text: 'These are the same PKR starting floors on our [price list](/prices) and [bridal page](/bridal). Final bridal quote depends on hair and is confirmed before the day. For mehndi and engagement detail, read [mehndi & engagement makeup Karachi](/blog/mehndi-engagement-makeup-karachi).' },
 
       { type: 'h2', text: 'What Is Typically Included in a Bridal Package?' },
-      { type: 'p', text: 'A standard bridal makeup package in Karachi usually covers the base makeup application (foundation, concealer, contouring, setting), eye makeup with lashes, lip colour, brow detailing, and dupatta or hijab draping. Higher-tier packages add hairstyling, jewellery setting, a bridal trial session, and touch-up service at the venue. At Farwa, our Full Bridal Package (Rs 25,000) includes bridal makeup, hair styling, dupatta draping, a touch-up kit, and event presence — transparent PKR rates for mehndi through barat and walima styling.' },
+      { type: 'p', text: 'A standard bridal makeup package in Karachi usually covers the base makeup application (foundation, concealer, contouring, setting), eye makeup with lashes, lip colour, brow detailing, and dupatta or hijab draping. Higher-tier packages add hairstyling, jewellery setting, a bridal trial session, and touch-up service at the venue. At Farwa, our Full Bridal Package (from Rs 25,000) includes bridal makeup, hair styling, dupatta draping, a touch-up kit, and event presence — transparent starting PKR rates for mehndi through barat and walima styling.' },
       { type: 'p', text: 'Some packages also include pre-wedding services like a facial the day before, brow threading, and a finishing skin treatment. Always ask for a written breakdown of what is included so there are no surprises on the day. Verbal promises can be forgotten, but a clear service list ensures accountability.' },
 
       { type: 'h2', text: 'Price Ranges to Expect in 2026' },
-      { type: 'p', text: 'Budget-friendly packages in Karachi typically start around Rs 8,000–15,000 for a single-event bridal look. At Farwa, published single-event and trial rates sit in that band (trial Rs 8,000; engagement Rs 12,000; mehndi Rs 10,000), with our Full Bridal Package at Rs 25,000. High-end packages from celebrity artists can run Rs 50,000–150,000 or more. The key difference is not always the products — it is the experience, the attention to detail, and the time dedicated to you.' },
+      { type: 'p', text: 'Budget-friendly packages in Karachi typically start around Rs 8,000–15,000 for a single-event bridal look. At Farwa, published single-event and trial floors sit in that band (trial from Rs 8,000; engagement from Rs 12,000; mehndi from Rs 10,000), with our Full Bridal Package from Rs 25,000. High-end packages from celebrity artists can run Rs 50,000–150,000 or more. The key difference is not always the products — it is the experience, the attention to detail, and the time dedicated to you.' },
       { type: 'p', text: 'When evaluating price, consider what is included beyond just the makeup. Does the package cover hairstyling? Is the trial session separate? Will the artist travel to your venue? Are touch-ups included? A package that seems expensive might actually be better value when you factor in all these extras compared to a cheaper option with hidden add-on fees.' },
 
       { type: 'h2', text: 'Why the Bridal Trial Is Non-Negotiable' },
@@ -914,7 +914,7 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: 'Frequently Asked Questions' },
       { type: 'h3', text: 'Q: How much does bridal makeup cost in Karachi?' },
-      { type: 'p', text: 'A: At Farwa in PECHS, bridal starts at Rs 8,000 for a trial, with mehndi Rs 10,000, engagement Rs 12,000, and the Full Bridal Package Rs 25,000. Premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event — we publish every rate on farwasalon.com/bridal.' },
+      { type: 'p', text: 'A: At Farwa in PECHS, bridal starts from Rs 8,000 for a trial, with mehndi from Rs 10,000, engagement from Rs 12,000, and the Full Bridal Package from Rs 25,000 — quote floors that depend on hair, confirmed before the day. Premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event — we publish every starting rate on farwasalon.com/bridal.' },
       { type: 'h3', text: 'Q: Can I request specific brands for my bridal makeup?' },
       { type: 'p', text: 'A: Absolutely. At Farwa, we work with MAC, Huda Beauty, Charlotte Tilbury, Kryolan, and other premium brands. If you have a preference or an allergy to certain ingredients, let us know during your consultation and we will accommodate your request.' },
       { type: 'h3', text: 'Q: How long does bridal makeup take?' },

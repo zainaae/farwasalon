@@ -256,7 +256,7 @@ export const GROWTH_POSTS = [
     slug: 'haircut-blowdry-hair-colour-cost-karachi',
     title: 'Haircut, Blowdry & Colour Cost in Karachi — Printed Rates',
     description:
-      'Haircut & blowdry Rs 2,000, hair colour from Rs 4,000, blowdry Rs 1,500, bridal hair Rs 8,000 at Farwa PECHS — published Karachi hair salon rates.',
+      'Haircut & blowdry from Rs 2,000, hair colour from Rs 4,000, blowdry from Rs 1,500, bridal hair from Rs 8,000 at Farwa PECHS — published Karachi hair salon rates.',
     featuredImage: '/hairtreatment.jpg',
     date: '2026-07-24',
     lastModified: '2026-07-30',
@@ -265,7 +265,7 @@ export const GROWTH_POSTS = [
     category: 'Hair',
     relatedCategories: ['Hair', 'Hair Treatments', 'Bridal'],
     content: [
-      { type: 'p', text: 'Hair salon cost in Karachi with printed figures: Haircut & Blowdry Rs 2,000 (~60 min), Blowdry & Styling Rs 1,500, Hair Colour from Rs 4,000 (full colour, highlights, balayage, toning), Bridal Hair Styling Rs 8,000. See the [hair menu](/services/hair).' },
+      { type: 'p', text: 'Hair salon cost in Karachi with printed starting floors: Haircut & Blowdry from Rs 2,000 (~60 min), Blowdry & Styling from Rs 1,500, Hair Colour from Rs 4,000 (full colour, highlights, balayage, toning), Bridal Hair Styling from Rs 8,000. Length and density decide the final quote — we confirm before we start. See the [hair menu](/services/hair).' },
       { type: 'h2', text: 'Balayage & Colour — What Is Included' },
       { type: 'p', text: 'Colour services include consultation, application, toning where needed, and blowdry. Longer or denser hair can adjust the quote — we confirm before starting. Bond care: pair colour with [Wellaplex](/services/hair-treatments) (Rs 3,000) when hair is processed.' },
       { type: 'h2', text: 'Why Colour Says From Rs 4,000' },
@@ -277,7 +277,7 @@ export const GROWTH_POSTS = [
       { type: 'p', text: 'When we see that, we say so and recommend a repair first: [Normal Protein Treatment](/services/hair-treatments) at Rs 2,000, or [Wellaplex](/services/hair-treatments) at Rs 3,000 if the damage is chemical. It means one extra visit and Rs 2,000 to Rs 3,000 before you get the colour you came for, which nobody enjoys hearing. It is still cheaper than colouring twice. There is a fuller breakdown of which treatment does what in our [hair treatments guide](/blog/complete-guide-hair-treatments-karachi).' },
 
       { type: 'h2', text: 'Cut and Blowdry — Where the Rs 500 Goes' },
-      { type: 'p', text: 'Haircut and Blowdry is Rs 2,000 and includes shampoo, the cut, and a styled finish. Blowdry and Styling alone is Rs 1,500. The gap is smaller than clients expect, which is why booking a blowdry when you actually wanted a cut is a false economy — you are paying three quarters of the price for none of the shape.' },
+      { type: 'p', text: 'Haircut and Blowdry starts from Rs 2,000 and includes shampoo, the cut, and a styled finish. Blowdry and Styling alone starts from Rs 1,500. The gap is smaller than clients expect, which is why booking a blowdry when you actually wanted a cut is a false economy — you are paying three quarters of the price for none of the shape.' },
       { type: 'p', text: 'Book the blowdry on its own when you have an event and your cut is still holding. Book the cut when the ends are splitting or the shape has grown out, which for most hair is every ten to twelve weeks. If you are unsure, come in for the cut; a good shape makes every subsequent blowdry faster and better.' },
 
       { type: 'h2', text: 'What Longer Hair Should Expect' },
@@ -287,11 +287,11 @@ export const GROWTH_POSTS = [
       { type: 'p', text: 'We do offer keratin smoothing — it is one of only two services not printed on the menu, because the honest price depends on your hair length and density. Read the [keratin price guide](/blog/keratin-treatment-price-karachi) and WhatsApp a photo of your hair for a binding quote. Fixed-price repair options (protein, Wellaplex) stay printed on the [hair treatments menu](/services/hair-treatments).' },
       { type: 'h2', text: 'Frequently Asked Questions' },
       { type: 'h3', text: 'Q: How much is a women\'s haircut in Karachi?' },
-      { type: 'p', text: 'A: At Farwa, Haircut & Blowdry is Rs 2,000 including shampoo, cut, and styled blowdry.' },
+      { type: 'p', text: 'A: At Farwa, Haircut & Blowdry starts from Rs 2,000 including shampoo, cut, and styled blowdry — final quote depends on length and density.' },
       { type: 'h3', text: 'Q: How much does hair colour cost?' },
       { type: 'p', text: 'A: From Rs 4,000 for colour services including balayage and highlights options — exact quote depends on length and technique.' },
       { type: 'h3', text: 'Q: Do you do bridal hair only?' },
-      { type: 'p', text: 'A: Bridal Hair Styling is Rs 8,000, and hair is also inside the [Full Bridal Package](/bridal) (Rs 25,000).' },
+      { type: 'p', text: 'A: Bridal Hair Styling starts from Rs 8,000, and hair is also inside the [Full Bridal Package](/bridal) (from Rs 25,000).' },
       { type: 'h3', text: 'Q: How long does hair colour take?' },
       { type: 'p', text: 'A: About two hours for a standard full colour, including toning and the blowdry. Balayage or a significant lift runs longer. Book it as an afternoon rather than squeezing it before somewhere you need to be.' },
       { type: 'h3', text: 'Q: How soon can I wash coloured hair?' },
