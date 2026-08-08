@@ -113,9 +113,6 @@ function QuoteBuilderInner() {
                   <button key={w.id} type="button" onClick={() => setPickedId(w.id)}
                     aria-pressed={workId === w.id} className={pill(workId === w.id)}>
                     {w.label}
-                    {w.service?.pricePkr != null && (
-                      <span className="ml-1.5 font-normal opacity-70">{quoteFloorLabel(w.service)}</span>
-                    )}
                   </button>
                 ))}
               </div>
