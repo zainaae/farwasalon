@@ -9,6 +9,7 @@ import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ServiceModal, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
+import { hairQuotePath, isHairQuoteCategory } from '../../../lib/quote-request.js'
 import { CAT_FAQS, CAT_SEO, CAT_RELATED, CAT_PAGE_BLOCKS } from '../../../src/cat-seo-content.js'
 import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
@@ -147,6 +148,16 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                     </WaCta>
                   </span>
                 </div>
+                {isHairQuoteCategory(category) && (
+                  <p className="mt-2">
+                    <Link
+                      href="/prices?quote=1#quote"
+                      className="tap-safe inline-flex min-h-[44px] items-center text-sm font-[family-name:var(--font-inter)] text-stone hover:text-ink link-underline"
+                    >
+                      Get a quote
+                    </Link>
+                  </p>
+                )}
                 <p className="mt-3 hidden md:flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)]">
                   <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
                     Directions
@@ -252,12 +263,23 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                     </div>
                   )}
                   {priceCell}
-                  <Link
-                    href={`/book?serviceId=${s.id}`}
-                    aria-label={`Book ${s.name}`}
-                    className="btn-primary shrink-0 !px-3.5 md:!px-4 !py-2.5 !text-[10px] !tracking-[0.12em]">
-                    Book <ArrowUpRight className="w-3 h-3" />
-                  </Link>
+                  <div className="shrink-0 flex flex-col items-end gap-1 sm:flex-row sm:items-center sm:gap-3">
+                    <Link
+                      href={`/book?serviceId=${s.id}`}
+                      aria-label={`Book ${s.name}`}
+                      className="btn-primary shrink-0 !px-3.5 md:!px-4 !py-2.5 !text-[10px] !tracking-[0.12em]">
+                      Book <ArrowUpRight className="w-3 h-3" />
+                    </Link>
+                    {isHairQuoteCategory(category) && (
+                      <Link
+                        href={hairQuotePath(s.id)}
+                        aria-label={`Get a quote for ${s.name}`}
+                        className="tap-safe inline-flex min-h-[44px] items-center text-[11px] tracking-[0.08em] uppercase font-[family-name:var(--font-inter)] text-stone hover:text-ink link-underline"
+                      >
+                        Get a quote
+                      </Link>
+                    )}
+                  </div>
                 </m.li>
               )
             })}

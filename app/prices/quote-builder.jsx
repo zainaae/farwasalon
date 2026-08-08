@@ -1,67 +1,133 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useEffect, useMemo, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import ArrowUpRight from '../components/icon-sprite.jsx'
+import WaCta from '../components/wa-cta.jsx'
+import {
+  QUOTE_DENSITIES,
+  QUOTE_LENGTHS,
+  buildQuoteWaHref,
+  getHairQuoteServices,
+  getQuoteServiceById,
+  isHairQuoteService,
+  quoteFloorLabel,
+} from '../../lib/quote-request.js'
 
-/* The two-tier pricing model: every fixed service is printed on this page;
-   the "special works" (custom makeup looks, event hairdos, keratin) genuinely
-   vary per person — so instead of a fake number, this builds a structured
-   WhatsApp quote request. The reply is a binding quote. */
+/* Special works (no printed SKU) plus catalog Hair / Hair Treatments floors.
+   Length + density make the WhatsApp request honest; the reply is the quote. */
 
-const WORKS = [
+const SPECIAL_WORKS = [
   { id: 'party', label: 'Party Makeup', asks: ['look'] },
   { id: 'signature', label: 'Signature / Engagement Look', asks: ['look'] },
-  { id: 'hairdo', label: 'Event Hairdo & Styling', asks: ['length'] },
-  { id: 'keratin', label: 'Keratin Smoothing', asks: ['length'] },
-  { id: 'custom', label: 'Something Custom', asks: ['look', 'length'] },
+  { id: 'hairdo', label: 'Event Hairdo & Styling', asks: ['length', 'density'] },
+  { id: 'keratin', label: 'Keratin Smoothing', asks: ['length', 'density'] },
+  { id: 'custom', label: 'Something Custom', asks: ['look', 'length', 'density'] },
 ]
 
 const LOOKS = ['Soft glam', 'Full glam', 'Not sure yet']
-const LENGTHS = ['Short', 'Shoulder length', 'Long', 'Very long']
 
-export default function QuoteBuilder() {
-  const [work, setWork] = useState(WORKS[0])
+function catalogWork(service) {
+  return {
+    id: `svc-${service.id}`,
+    serviceId: service.id,
+    label: service.name,
+    category: service.category,
+    service,
+    asks: ['length', 'density'],
+  }
+}
+
+function linkedHairWorkId(searchParams) {
+  const service = getQuoteServiceById(searchParams.get('serviceId'))
+  return service && isHairQuoteService(service) ? `svc-${service.id}` : null
+}
+
+function QuoteBuilderInner() {
+  const searchParams = useSearchParams()
+  const hairServices = useMemo(() => getHairQuoteServices().map(catalogWork), [])
+  const works = useMemo(() => [...SPECIAL_WORKS, ...hairServices], [hairServices])
+  const deepWorkId = linkedHairWorkId(searchParams)
+
+  const [pickedId, setPickedId] = useState(null)
   const [look, setLook] = useState('')
   const [length, setLength] = useState('')
+  const [density, setDensity] = useState('')
   const [date, setDate] = useState('')
+  const [note, setNote] = useState('')
 
-  const parts = [
-    `Quote please — ${work.label}`,
-    work.asks.includes('look') && look ? `look: ${look}` : null,
-    work.asks.includes('length') && length ? `hair: ${length}` : null,
-    date ? `date: ${date}` : null,
-  ].filter(Boolean)
-  const waHref = `https://wa.me/923222782254?text=${encodeURIComponent(parts.join(', ') + ' (via farwasalon.com/prices)')}`
+  /* Deep-link wins until the guest picks a different work. */
+  const workId = pickedId ?? deepWorkId ?? SPECIAL_WORKS[0].id
+  const work = works.find((w) => w.id === workId) || works[0]
+  const floorLabel = work.service ? quoteFloorLabel(work.service) : null
+
+  useEffect(() => {
+    const quoteFlag = searchParams.get('quote')
+    if (quoteFlag === '1' || deepWorkId || window.location.hash === '#quote') {
+      requestAnimationFrame(() => {
+        document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
+    }
+  }, [searchParams, deepWorkId])
+
+  const waHref = buildQuoteWaHref({
+    label: work.label,
+    floorLabel,
+    look: work.asks.includes('look') ? look : '',
+    length: work.asks.includes('length') ? length : '',
+    density: work.asks.includes('density') ? density : '',
+    date,
+    note,
+  })
 
   const pill = (active) =>
     `tap-safe tab-pill ${active ? 'tab-pill-active' : ''}`
 
   return (
     <section id="quote" className="mb-12 panel-soft p-5 md:p-7 shadow-soft max-w-3xl" aria-labelledby="quote-heading">
-      <p className="text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)] text-accent-gold-deep mb-2">
-        The special works · quoted per person
+      <p className="text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)] text-plum mb-2">
+        Quote
       </p>
-      <h2 id="quote-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-2">
-        Construct your quote
+      <h2 id="quote-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-5">
+        Get a quote
       </h2>
-      <p className="text-body text-sm mb-5 max-w-xl">
-        Custom makeup looks, event hairdos, and keratin vary by look and hair — the only honest
-        price is quoted for you. Pick below, send it, and the quote that comes back is binding:
-        confirmed before you book, unchanged at the counter.
-      </p>
 
       <div className="flex flex-col gap-4">
         <div>
           <p className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">The work</p>
           <div className="flex flex-wrap gap-2">
-            {WORKS.map((w) => (
-              <button key={w.id} type="button" onClick={() => setWork(w)}
-                aria-pressed={work.id === w.id} className={pill(work.id === w.id)}>
+            {SPECIAL_WORKS.map((w) => (
+              <button key={w.id} type="button" onClick={() => setPickedId(w.id)}
+                aria-pressed={workId === w.id} className={pill(workId === w.id)}>
                 {w.label}
               </button>
             ))}
           </div>
+          {hairServices.length > 0 && (
+            <div className="mt-3">
+              <p className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">
+                Hair menu
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {hairServices.map((w) => (
+                  <button key={w.id} type="button" onClick={() => setPickedId(w.id)}
+                    aria-pressed={workId === w.id} className={pill(workId === w.id)}>
+                    {w.label}
+                    {w.service?.pricePkr != null && (
+                      <span className="ml-1.5 font-normal opacity-70">{quoteFloorLabel(w.service)}</span>
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
+
+        {floorLabel && (
+          <p className="text-sm font-[family-name:var(--font-inter)] text-ink">
+            Floor <span className="font-medium tabular-nums">{floorLabel}</span>
+          </p>
+        )}
 
         {work.asks.includes('look') && (
           <div>
@@ -79,9 +145,9 @@ export default function QuoteBuilder() {
 
         {work.asks.includes('length') && (
           <div>
-            <p className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">Hair length</p>
+            <p className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">Length</p>
             <div className="flex flex-wrap gap-2">
-              {LENGTHS.map((l) => (
+              {QUOTE_LENGTHS.map((l) => (
                 <button key={l} type="button" onClick={() => setLength(length === l ? '' : l)}
                   aria-pressed={length === l} className={pill(length === l)}>
                   {l}
@@ -91,9 +157,23 @@ export default function QuoteBuilder() {
           </div>
         )}
 
+        {work.asks.includes('density') && (
+          <div>
+            <p className="text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">Density</p>
+            <div className="flex flex-wrap gap-2">
+              {QUOTE_DENSITIES.map((d) => (
+                <button key={d} type="button" onClick={() => setDensity(density === d ? '' : d)}
+                  aria-pressed={density === d} className={pill(density === d)}>
+                  {d}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div>
           <label htmlFor="quote-date" className="block text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">
-            Event date <span className="normal-case tracking-normal">(optional)</span>
+            Date <span className="normal-case tracking-normal">(optional)</span>
           </label>
           <input
             id="quote-date"
@@ -104,15 +184,40 @@ export default function QuoteBuilder() {
           />
         </div>
 
+        <div>
+          <label htmlFor="quote-note" className="block text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone mb-2">
+            Note <span className="normal-case tracking-normal">(optional)</span>
+          </label>
+          <input
+            id="quote-note"
+            type="text"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="Colour goals, damage, event…"
+            className="w-full max-w-md border border-border-soft bg-white px-3.5 py-2.5 text-ink text-sm font-[family-name:var(--font-inter)] focus:border-ink"
+          />
+        </div>
+
         <div className="flex flex-wrap items-center gap-3 pt-1">
-          <a href={waHref} target="_blank" rel="noreferrer" className="tap-safe btn-primary">
+          <WaCta href={waHref} from="prices-quote-builder" className="tap-safe btn-primary">
             Send for a quote <ArrowUpRight className="w-3.5 h-3.5" />
-          </a>
-          <p className="text-stone text-[12px] font-[family-name:var(--font-inter)] font-light">
-            Opens WhatsApp with your request pre-written — add a reference photo there.
-          </p>
+          </WaCta>
         </div>
       </div>
     </section>
+  )
+}
+
+export default function QuoteBuilder() {
+  return (
+    <Suspense fallback={
+      <section id="quote" className="mb-12 panel-soft p-5 md:p-7 shadow-soft max-w-3xl" aria-labelledby="quote-heading">
+        <h2 id="quote-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl">
+          Get a quote
+        </h2>
+      </section>
+    }>
+      <QuoteBuilderInner />
+    </Suspense>
   )
 }

@@ -15,6 +15,7 @@ import { PRICES_PAGE_FAQS } from '../../src/faq-data.js'
 import QuoteBuilder from './quote-builder'
 import DealBanner from '../components/deal-banner'
 import PageCloseCta from '../components/page-close-cta.jsx'
+import { hairQuotePath, isHairQuoteCategory } from '../../lib/quote-request.js'
 
 const title = 'Salon Price List Karachi 2026 — From Rs 100 | Farwa'
 const description =
@@ -161,6 +162,14 @@ export default function PricesPage() {
                   >
                     Book {cat === 'Eyebrow Tattoo' ? 'brows' : cat}
                   </Link>
+                  {isHairQuoteCategory(cat) && (
+                    <a
+                      href="#quote"
+                      className="tap-safe inline-flex min-h-[44px] items-center text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone hover:text-ink transition-colors"
+                    >
+                      Get a quote
+                    </a>
+                  )}
                   <Link href={`/services/${CAT_SLUGS[cat]}`}
                     className="tap-safe inline-flex min-h-[44px] items-center text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone hover:text-ink transition-colors">
                     About →
@@ -182,12 +191,22 @@ export default function PricesPage() {
                     </div>
                     <span className="price-rail__leader" aria-hidden="true" />
                     <span className="price-rail__price">{formatServicePrice(s)}</span>
-                    <Link
-                      href={`/book?service=${encodeURIComponent(s.name)}&category=${encodeURIComponent(cat)}`}
-                      className="tap-safe shrink-0 text-[10px] tracking-[0.14em] uppercase font-semibold text-plum hover:text-ink ml-2"
-                    >
-                      Book
-                    </Link>
+                    <span className="shrink-0 ml-2 inline-flex flex-col items-end gap-0.5 sm:flex-row sm:items-center sm:gap-x-2.5">
+                      <Link
+                        href={`/book?service=${encodeURIComponent(s.name)}&category=${encodeURIComponent(cat)}`}
+                        className="tap-safe text-[10px] tracking-[0.14em] uppercase font-semibold text-plum hover:text-ink"
+                      >
+                        Book
+                      </Link>
+                      {isHairQuoteCategory(cat) && (
+                        <Link
+                          href={hairQuotePath(s.id)}
+                          className="tap-safe text-[10px] tracking-[0.14em] uppercase text-stone hover:text-ink font-normal"
+                        >
+                          Get quote
+                        </Link>
+                      )}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -235,10 +254,14 @@ export default function PricesPage() {
           Listed rates are starting prices, not a tax invoice.
         </p>
         <p className="mt-4 text-[12px] text-stone font-[family-name:var(--font-inter)] font-light max-w-2xl">
-          The special works — <Link href="/blog/party-makeup-karachi-guide" className="link-underline text-ink font-medium">party makeup</Link>,
-          custom looks, event hairdos, and <Link href="/blog/keratin-treatment-price-karachi" className="link-underline text-ink font-medium">keratin</Link> —
-          are quoted per person because they genuinely vary.{' '}
-          <a href="#quote" className="link-underline text-ink font-medium">Construct your quote above</a> — it arrives in minutes and is binding once given.
+          Special works and hair floors —{' '}
+          <a href="#quote" className="link-underline text-ink font-medium">Get a quote</a>
+          {' '}·{' '}
+          <Link href="/blog/party-makeup-karachi-guide" className="link-underline text-ink font-medium">party makeup</Link>
+          {' · '}
+          <Link href="/blog/keratin-treatment-price-karachi" className="link-underline text-ink font-medium">keratin</Link>
+          {' · '}
+          <Link href="/blog/haircut-blowdry-hair-colour-cost-karachi" className="link-underline text-ink font-medium">haircut &amp; colour</Link>
         </p>
         <p className="mt-6 pt-6 border-t border-border-soft text-xs text-stone font-[family-name:var(--font-inter)] flex flex-wrap gap-x-3 gap-y-2">
           <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>
