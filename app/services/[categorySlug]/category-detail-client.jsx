@@ -9,7 +9,7 @@ import { ChevronLeft } from 'lucide-react'
 import Link from 'next/link'
 import { ServiceModal, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
-import { hairQuotePath, isHairQuoteCategory } from '../../../lib/quote-request.js'
+import { hairQuotePath, isHairQuoteCategory, isHairQuoteService } from '../../../lib/quote-request.js'
 import { CAT_FAQS, CAT_SEO, CAT_RELATED, CAT_PAGE_BLOCKS } from '../../../src/cat-seo-content.js'
 import { CAT_META_DESC } from '../../../src/cat-meta-desc.js'
 import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
@@ -270,7 +270,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                       className="btn-primary shrink-0 !px-3.5 md:!px-4 !py-2.5 !text-[10px] !tracking-[0.12em]">
                       Book <ArrowUpRight className="w-3 h-3" />
                     </Link>
-                    {isHairQuoteCategory(category) && (
+                    {isHairQuoteService(s) && (
                       <Link
                         href={hairQuotePath(s.id)}
                         aria-label={`Get a quote for ${s.name}`}

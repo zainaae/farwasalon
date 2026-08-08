@@ -15,7 +15,7 @@ import { PRICES_PAGE_FAQS } from '../../src/faq-data.js'
 import QuoteBuilder from './quote-builder'
 import DealBanner from '../components/deal-banner'
 import PageCloseCta from '../components/page-close-cta.jsx'
-import { hairQuotePath, isHairQuoteCategory } from '../../lib/quote-request.js'
+import { hairQuotePath, isHairQuoteCategory, isHairQuoteService } from '../../lib/quote-request.js'
 
 const title = 'Salon Price List Karachi 2026 — From Rs 100 | Farwa'
 const description =
@@ -198,7 +198,7 @@ export default function PricesPage() {
                       >
                         Book
                       </Link>
-                      {isHairQuoteCategory(cat) && (
+                      {isHairQuoteService(s) && (
                         <Link
                           href={hairQuotePath(s.id)}
                           className="tap-safe text-[10px] tracking-[0.14em] uppercase text-stone hover:text-ink font-normal"

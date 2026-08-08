@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
 import { X, Menu, ChevronLeft, ChevronRight, Phone, MessageCircle } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatServicePrice, formatDuration, track, CAT_SLUGS } from './site-config.js'
-import { hairQuotePath, isHairQuoteCategory } from '../lib/quote-request.js'
+import { hairQuotePath, isHairQuoteCategory, isHairQuoteService } from '../lib/quote-request.js'
 import { useNextSlot } from './use-next-slot.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
 import {
@@ -289,7 +289,7 @@ export function ServiceModal({ service, onClose }) {
               >
                 Book {service.name} <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
               </Link>
-              {isHairQuoteCategory(service.category) && (
+              {isHairQuoteService(service) && (
                 <Link
                   href={hairQuotePath(service.id)}
                   onClick={onClose}
