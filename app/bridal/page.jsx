@@ -14,7 +14,7 @@ import {
   buildFaqPageSchema,
   getAggregateRating,
 } from '../../lib/business-schema.js'
-import { CAT_SLUGS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice, WA_DEFAULT } from '../../src/data.js'
+import { CAT_SLUGS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice, formatServicePrice, WA_DEFAULT } from '../../src/data.js'
 import { CAT_FAQS } from '../../src/cat-seo-content.js'
 
 const title = 'Bridal Makeup Karachi — Full Package Rs 25,000 | Farwa'
@@ -45,7 +45,7 @@ const EVENT_TAXONOMY = [
 const BRIDAL_FAQS = [
   {
     q: 'How much does bridal makeup cost in Karachi?',
-    a: 'Market bands for a single bridal event often run roughly Rs 8,000–35,000+ at published parlours, with celebrity studios far higher. At Farwa in PECHS: Bridal Trial Rs 8,000, Mehndi Rs 10,000, Engagement Rs 12,000, Full Bridal Package Rs 25,000 — printed PKR on farwasalon.com/prices.',
+    a: 'Market bands for a single bridal event often run roughly Rs 8,000–35,000+ at published parlours, with celebrity studios far higher. At Farwa in PECHS printed floors are: Bridal Trial from Rs 8,000, Mehndi from Rs 10,000, Engagement from Rs 12,000, Full Bridal Package from Rs 25,000 — final quote depends on hair, confirmed before the day. See farwasalon.com/prices.',
   },
   ...(CAT_FAQS.Bridal || []),
   {
@@ -113,9 +113,9 @@ export default function BridalLandingPage() {
                   Bridal makeup in PECHS, Karachi
                 </h1>
                 <p id="bridal-lede" className="text-white/80 md:text-lg leading-relaxed font-[family-name:var(--font-inter)] font-light">
-                  Farwa in PECHS has styled weddings since 2008 — Full Bridal Package Rs 25,000
-                  (hair, makeup, draping, touch-ups). Mehndi from Rs 10,000 · Engagement Rs 12,000 ·
-                  Bridal Trial Rs 8,000.
+                  Farwa in PECHS has styled weddings since 2008 — Full Bridal Package from Rs 25,000
+                  (hair, makeup, draping, touch-ups; final quote before the day). Mehndi from Rs 10,000 ·
+                  Engagement from Rs 12,000 · Bridal Trial from Rs 8,000.
                 </p>
               </div>
 
@@ -139,7 +139,7 @@ export default function BridalLandingPage() {
                   href={trialHref}
                   className="tap-safe inline-flex items-center min-h-[44px] link-underline text-white/75 hover:text-white"
                 >
-                  Or book Bridal Trial (Rs 8,000)
+                  Or book Bridal Trial (from Rs 8,000)
                 </Link>
                 <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-white/75 hover:text-white">
                   Directions
@@ -155,7 +155,7 @@ export default function BridalLandingPage() {
               Event looks → Farwa packages
             </h2>
             <p className="text-body text-sm max-w-2xl mb-5 leading-relaxed">
-              Mehndi, engagement, nikkah, barat, and walima — each maps to a published package with a clear starting price.
+              Mehndi, engagement, nikkah, barat, and walima — each maps to a published package with a clear starting floor (hair length and density decide the final quote).
             </p>
             {/* Mobile: stacked rows (4-col table wraps into mush under ~430px). */}
             <ul className="md:hidden max-w-4xl divide-y divide-border-soft border-t border-b border-border-soft">
@@ -167,7 +167,7 @@ export default function BridalLandingPage() {
                     <p className="text-stone/80 text-[11px] font-[family-name:var(--font-inter)] mt-1">{row.mapsTo}</p>
                   </div>
                   <p className="shrink-0 text-ink font-[family-name:var(--font-fraunces)] font-bold text-sm tabular-nums pt-0.5">
-                    {formatPrice(row.price)}
+                    from {formatPrice(row.price)}
                   </p>
                 </li>
               ))}
@@ -200,14 +200,17 @@ export default function BridalLandingPage() {
 
           <section className="flow-loose" aria-labelledby="packages-heading">
             <h2 id="packages-heading" className="section-title mb-4">
-              Bridal packages (PKR) — what&apos;s included
+              Bridal packages (PKR) — starting floors
             </h2>
+            <p className="text-body text-sm max-w-2xl mb-4 leading-relaxed">
+              Every bridal look includes hair, so the printed figure is a quote floor — not a locked online total. We confirm your final PKR before the appointment.
+            </p>
             <ul className="grid md:grid-cols-2 gap-4 max-w-4xl">
               {packages.map((pkg) => (
                 <li key={pkg.id} className="panel-soft p-5 shadow-soft flex flex-col">
                   <h3 className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink uppercase mb-1">{pkg.name}</h3>
                   <p className="text-stone text-xs font-[family-name:var(--font-inter)] mb-2">
-                    {formatPrice(pkg.pricePkr)}
+                    {formatServicePrice(pkg)}
                     {pkg.durationMinutes ? ` · ~${Math.round(pkg.durationMinutes / 60)}h` : ''}
                   </p>
                   {pkg.desc && <p className="text-body text-sm mb-3">{pkg.desc}</p>}
@@ -244,7 +247,7 @@ export default function BridalLandingPage() {
             </h2>
             <ol className="max-w-3xl space-y-3 text-body text-sm list-decimal pl-5 marker:text-accent-gold">
               <li><strong className="text-ink font-medium">3–6 months out</strong> — monthly facials / cleansing; lock peak-season dates.</li>
-              <li><strong className="text-ink font-medium">6–8 weeks out</strong> — book Bridal Trial (Rs 8,000); plan mehndi &amp; engagement slots.</li>
+              <li><strong className="text-ink font-medium">6–8 weeks out</strong> — book Bridal Trial (from Rs 8,000); plan mehndi &amp; engagement slots.</li>
               <li><strong className="text-ink font-medium">2–4 weeks out</strong> — complete trial; refine shade &amp; hair; continue threading.</li>
               <li><strong className="text-ink font-medium">Wedding week</strong> — light services only; avoid new skincare experiments.</li>
             </ol>
@@ -392,7 +395,7 @@ export default function BridalLandingPage() {
         <PageCloseCta
           eyebrow="— Bridal · PECHS"
           title="Lock your bridal date"
-          body="Full Bridal Package is Rs 25,000 — or book a Bridal Trial (Rs 8,000) first. WhatsApp your wedding week and we confirm slots before you travel to PECHS."
+          body="Full Bridal Package from Rs 25,000 — or book a Bridal Trial (from Rs 8,000) first. Final bridal quote depends on hair; we confirm before the day. WhatsApp your wedding week and we hold slots before you travel to PECHS."
           bookHref={fullPackageHref}
           bookLabel="Book Full Bridal Package"
           waHref={WA_DEFAULT}

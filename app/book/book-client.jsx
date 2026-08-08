@@ -688,6 +688,14 @@ export default function BookClient() {
                 </div>
               )}
 
+              {/* Quote floors must not depend on a live deal band — hair/bridal
+                  baskets need the disclaimer whenever anything variable is selected. */}
+              {priceIsFrom && selectedServices.length > 0 && !(dealThreshold > 0) && (
+                <p className="mb-6 max-w-md text-[11px] text-stone font-[family-name:var(--font-inter)] font-light">
+                  Starting from {totalLabel} — hair and bridal prices are quote floors. Final PKR depends on your hair and is confirmed before the appointment.
+                </p>
+              )}
+
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
                 {CATEGORIES.map((cat) => {
                   const services = SERVICES[cat]

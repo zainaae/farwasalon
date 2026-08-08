@@ -73,7 +73,7 @@ export default function PricesPage() {
         </div>
         <p className="text-body text-sm max-w-2xl mb-3 leading-relaxed">
           {menu.fixed} of those are fixed rates — what the list says is what you pay. The
-          remaining {menu.startingFrom}{' '}are hair and hair-treatment services shown as
+          remaining {menu.startingFrom}{' '}are hair, hair-treatment, and bridal services shown as
           &ldquo;from&rdquo;, because length and density genuinely change the work; that figure is
           a floor and it is confirmed with you before anything starts.
         </p>
@@ -139,8 +139,8 @@ export default function PricesPage() {
             Bridal packages
           </h2>
           <p className="text-body text-sm mb-3">
-            Full Bridal Package <strong className="text-ink font-medium">Rs 25,000</strong> — about five hours covering hair, makeup, draping, touch-ups and event presence.
-            Separate SKUs: Bridal Trial, Mehndi / Dholki, and Engagement looks — see the bridal page for inclusions.
+            Full Bridal Package <strong className="text-ink font-medium">from Rs 25,000</strong> — about five hours covering hair, makeup, draping, touch-ups and event presence.
+            Separate SKUs: Bridal Trial, Mehndi / Dholki, and Engagement looks — each a starting floor; final quote before the day. See the bridal page for inclusions.
           </p>
           <Link href="/bridal" className="btn-secondary !py-2 !px-4">
             Bridal makeup packages <ArrowUpRight className="w-3.5 h-3.5" />
