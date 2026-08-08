@@ -506,17 +506,12 @@
     max-width: 22rem;
     min-width: 0;
   }
+  /* Stay at 3 cols from sm up so 6 tiles fill two even rows (4-col left an empty last-row cell). */
   @media (min-width: 640px) {
     .quick-pick-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 0.55rem 1rem;
       max-width: none;
-    }
-  }
-  @media (min-width: 768px) {
-    .quick-pick-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0.6rem 1.15rem;
     }
   }
   .quick-pick-card {
