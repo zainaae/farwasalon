@@ -119,11 +119,11 @@ export default function ServicesClient() {
           <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
             Our services
           </h1>
-          <p className="hero-fade-up text-body max-w-lg mb-6" style={{ animationDelay: '0.2s' }}>
+          <p className="hero-fade-up text-body max-w-lg" style={{ animationDelay: '0.2s' }}>
             Thirteen specialities, {SERVICE_COUNT} services in PECHS, Karachi — every starting price printed from Rs 100.
             Book online in under a minute, or message us on WhatsApp.
           </p>
-          <div className="hero-fade-up cta-cluster" style={{ animationDelay: '0.3s' }}>
+          <div className="hero-fade-up cta-cluster mt-8" style={{ animationDelay: '0.3s' }}>
             <span className="hidden md:contents">
               <Link href="/book" className="tap-safe btn-loud !min-h-12 !py-2.5 !px-5 !text-[12px]">
                 Book online <ArrowUpRight className="w-3.5 h-3.5" />
