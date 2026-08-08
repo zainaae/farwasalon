@@ -175,7 +175,7 @@ export default function PricesPage() {
                         {s.name}
                       </span>
                       {s.durationMinutes ? (
-                        <span className="block text-stone/80 text-[11px] font-[family-name:var(--font-inter)] tabular-nums mt-0.5">
+                        <span className="block text-stone text-[11px] font-[family-name:var(--font-inter)] tabular-nums mt-0.5">
                           {formatDuration(s.durationMinutes)}
                         </span>
                       ) : null}
@@ -230,7 +230,7 @@ export default function PricesPage() {
           </dl>
         </section>
 
-        <p className="mt-10 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone/80 max-w-2xl">
+        <p className="mt-10 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone max-w-2xl">
           All prices in Pakistani Rupees (Rs). Cash, JazzCash and EasyPaisa accepted at the salon.
           Listed rates are starting prices, not a tax invoice.
         </p>

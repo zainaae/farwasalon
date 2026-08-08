@@ -17,9 +17,9 @@ import {
 import { CAT_SLUGS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice, formatServicePrice, WA_DEFAULT } from '../../src/data.js'
 import { CAT_FAQS } from '../../src/cat-seo-content.js'
 
-const title = 'Bridal Makeup Karachi — Full Package Rs 25,000 | Farwa'
+const title = 'Bridal Makeup Karachi — Full Package from Rs 25,000 | Farwa'
 const description =
-  'Bridal makeup in PECHS, Karachi — Full Bridal Package Rs 25,000 (hair, makeup, draping, touch-ups, event presence). Trials and event looks available. Book online.'
+  'Bridal makeup in PECHS, Karachi — Full Bridal Package from Rs 25,000 (hair, makeup, draping, touch-ups, event presence). Trials and event looks available. Book online.'
 
 export const metadata = {
   title: { absolute: title },
@@ -108,7 +108,7 @@ export default function BridalLandingPage() {
           <div className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-5 md:px-10 pb-[max(6.75rem,env(safe-area-inset-bottom,0px)+5.5rem)] sm:pb-12 md:pb-14 pt-24">
             <div className="max-w-screen-xl mx-auto w-full min-w-0">
               <div className="title-stack mb-6 max-w-2xl">
-                <p className="eyebrow eyebrow--on-dark">— Bridal · Full Package Rs 25,000</p>
+                <p className="eyebrow eyebrow--on-dark">— Bridal · Full Package from Rs 25,000</p>
                 <h1 id="bridal-headline" className="display-page text-white">
                   Bridal makeup in PECHS, Karachi
                 </h1>

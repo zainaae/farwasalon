@@ -56,6 +56,18 @@ test.describe('Hair and bridal quote booking', () => {
     await expect(page.getByText(/Hair and bridal prices start from the printed floor/i)).toBeVisible()
   })
 
+  test('/book?serviceId Wellaplex shows fromPrice floor disclaimer', async ({ page }) => {
+    const serviceId = getServiceIdByName('Wellaplex Stand-Alone Treatment')
+    expect(serviceId).toBeTruthy()
+
+    await page.goto(`/book?serviceId=${serviceId}`)
+    const main = visibleMain(page)
+    await expect(main.getByText(/Wellaplex/i).first()).toBeVisible()
+    await expect(main.getByText(/from Rs 3,000/i).first()).toBeVisible()
+    await expect(main.getByText(/final quote|quote floors|printed floor|hair\/bridal finals/i).first()).toBeVisible()
+    await expect(main.getByText(/^Total Rs 3,000$/)).toHaveCount(0)
+  })
+
   test('bridal serviceId completes mocked booking; WhatsApp has no locked price', async ({ page }) => {
     const serviceId = getServiceIdByName('Full Bridal Package')
     expect(serviceId).toBeTruthy()

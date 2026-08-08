@@ -6,6 +6,9 @@ const A11Y_PAGES = [
   { path: '/', name: 'home' },
   { path: '/book', name: 'book' },
   { path: '/contact', name: 'contact' },
+  { path: '/prices', name: 'prices' },
+  { path: '/bridal', name: 'bridal' },
+  { path: '/gallery', name: 'gallery' },
   { path: '/services/threading', name: 'service category' },
   { path: '/blog/threading-vs-waxing', name: 'blog article' },
 ]
