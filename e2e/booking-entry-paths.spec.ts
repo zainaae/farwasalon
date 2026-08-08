@@ -50,10 +50,10 @@ test.describe('Booking entry paths', () => {
     await expect(rowBook).toHaveAttribute('href', /\/book\?service=.*&category=Threading/)
     await rowBook.click()
     await expect(page).toHaveURL(/\/book\?/)
-    /* Book client canonicalizes named deep-links to serviceId=; assert selection,
-       not the transient service=/category= query that replace() may race away. */
+    await expect(page).toHaveURL(/service=/)
+    await expect(page).toHaveURL(/category=Threading/)
+    /* Named service from the prices row is pre-selected — Next advances. */
     await expect(page.getByRole('button', { name: 'Remove Eyebrow Threading' })).toBeVisible()
-    await expect(page).toHaveURL(/serviceId=\d+/)
     await page.getByRole('button', { name: 'Next' }).click()
     await expect(page.getByText('— Pick a date')).toBeVisible()
   })
