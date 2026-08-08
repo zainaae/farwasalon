@@ -127,8 +127,9 @@ export default function ServicesClient() {
             <Link href="/book" className="tap-safe btn-loud !min-h-12 !py-2.5 !px-5 !text-[12px]">
               Book online <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
+            {/* Sticky Call/WA/Book owns WhatsApp on mobile — keep WA for md+ only. */}
             <WaCta href="https://wa.me/923222782254" from="services-index"
-              className="tap-safe btn-secondary !py-2.5 !px-5">
+              className="tap-safe btn-secondary !py-2.5 !px-5 hidden md:inline-flex">
               WhatsApp
             </WaCta>
             <Link href="/prices"

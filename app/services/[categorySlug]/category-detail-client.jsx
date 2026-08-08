@@ -142,11 +142,12 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                   <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">
                     Book online <ArrowUpRight className="w-4 h-4" />
                   </Link>
-                  <WaCta href={WA_DEFAULT} from="service-category" className="tap-safe btn-secondary">
+                  {/* Sticky chrome owns WA/Call on mobile; keep secondary WA for md+. */}
+                  <WaCta href={WA_DEFAULT} from="service-category" className="tap-safe btn-secondary hidden md:inline-flex">
                     WhatsApp
                   </WaCta>
                 </div>
-                <p className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)]">
+                <p className="mt-3 hidden md:flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)]">
                   <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
                     Directions
                   </a>
@@ -158,6 +159,11 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                       {areaLinks[0].label}
                     </Link>
                   )}
+                </p>
+                <p className="mt-3 md:hidden text-sm font-[family-name:var(--font-inter)]">
+                  <Link href="/prices" className="tap-safe inline-flex items-center min-h-[44px] link-underline hover:text-ink text-stone">
+                    Full price list
+                  </Link>
                 </p>
               </m.div>
             </aside>
