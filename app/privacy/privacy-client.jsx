@@ -14,7 +14,7 @@ export default function PrivacyClient() {
       </section>
 
       <section className="py-14 md:py-20">
-        <div className="max-w-screen-md mx-auto prose-sm">
+        <div className="section-shell max-w-screen-md mx-auto prose-sm">
           <p className="text-stone text-xs font-[family-name:var(--font-inter)] mb-8">Last updated: August 2026</p>
 
           <div className="flex flex-col gap-8">

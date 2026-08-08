@@ -84,7 +84,15 @@ export default function DealsPage() {
           No promo codes by email — if nothing is listed, the printed price list is the price.
         </p>
         <div className="cta-cluster mb-10">
-          <Link href="/book" className="tap-safe btn-loud w-full sm:w-auto justify-center !min-h-12 !text-[12px]">
+          <span className="hidden md:contents">
+            <Link href="/book" className="tap-safe btn-loud w-full sm:w-auto justify-center !min-h-12 !text-[12px]">
+              Book online <ArrowUpRight className="w-3.5 h-3.5" />
+            </Link>
+          </span>
+          <Link
+            href="/book"
+            className="tap-safe md:hidden inline-flex items-center gap-1.5 min-h-[44px] text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] link-underline"
+          >
             Book online <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
           <span className="hidden md:contents">

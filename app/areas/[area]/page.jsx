@@ -191,8 +191,16 @@ export default async function AreaPage({ params }) {
           </p>
         </section>
 
-        <div className="flex flex-wrap items-center gap-3 mb-12">
-          <Link href="/book" className="tap-safe btn-loud !min-h-12 !py-2.5 !px-5 !text-[12px]">
+        <div className="cta-cluster mb-12">
+          <span className="hidden md:contents">
+            <Link href="/book" className="tap-safe btn-loud !min-h-12 !py-2.5 !px-5 !text-[12px]">
+              Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+          </span>
+          <Link
+            href="/book"
+            className="tap-safe md:hidden inline-flex items-center gap-1.5 min-h-[44px] text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] link-underline"
+          >
             Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
           </Link>
           <span className="hidden md:contents">

@@ -111,7 +111,7 @@ export default function AzadiSalePage() {
               book online or WhatsApp when you are ready.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3 mb-10">
+          <div className="cta-cluster mb-10">
             <Link href="/book" className="tap-safe btn-primary">
               Book online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
             </Link>

@@ -51,7 +51,7 @@ function MenuRow({ cat }) {
          under the tagline in column 2, at md it moves to column 3.
          Availability claims live only in LiveAvailability above — static
          "same-day" hints contradicted a fully-booked widget. */
-      className="group grid grid-cols-[3.5rem_1fr_auto] sm:grid-cols-[4.5rem_1fr_auto] md:grid-cols-[4.5rem_minmax(0,1fr)_auto_auto] items-center gap-x-4 sm:gap-x-6 gap-y-1.5 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
+      className="group grid grid-cols-[3.5rem_minmax(0,1fr)_auto] sm:grid-cols-[4.5rem_minmax(0,1fr)_auto] md:grid-cols-[4.5rem_minmax(0,1fr)_auto_auto] items-center gap-x-4 sm:gap-x-6 gap-y-1.5 py-4 sm:py-5 border-b border-border-soft hover:bg-mist/70 transition-colors duration-300 -mx-3 px-3">
       <span className="row-span-2 md:row-span-1 relative block w-14 h-[4.2rem] sm:w-[4.5rem] sm:h-[5.4rem] shrink-0 border border-border-soft p-[3px] bg-white media-zoom">
         <span className="relative block w-full h-full overflow-hidden">
           <Image
@@ -124,7 +124,15 @@ export default function ServicesClient() {
             Book online in under a minute, or message us on WhatsApp.
           </p>
           <div className="hero-fade-up cta-cluster" style={{ animationDelay: '0.3s' }}>
-            <Link href="/book" className="tap-safe btn-loud !min-h-12 !py-2.5 !px-5 !text-[12px]">
+            <span className="hidden md:contents">
+              <Link href="/book" className="tap-safe btn-loud !min-h-12 !py-2.5 !px-5 !text-[12px]">
+                Book online <ArrowUpRight className="w-3.5 h-3.5" />
+              </Link>
+            </span>
+            <Link
+              href="/book"
+              className="tap-safe md:hidden inline-flex items-center gap-1.5 min-h-[44px] text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] link-underline"
+            >
               Book online <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
             <span className="hidden md:contents">

@@ -29,7 +29,7 @@ function FaqItem({ faq, index }) {
         <span className="faq-item-icon" aria-hidden="true" />
       </button>
       <div id={`faq-panel-${index}`} role="region" className={`overflow-hidden transition-[max-height,padding,margin] duration-200 ${open ? 'max-h-[28rem] pb-5 -mt-1' : 'max-h-0'}`}>
-        <p className="text-body text-sm pl-8 sm:pl-10">{faq.a}</p>
+        <p className="text-body text-sm pl-[calc(1.5rem+0.75rem)] sm:pl-[calc(1.5rem+1rem)]">{faq.a}</p>
       </div>
     </m.div>
   )
@@ -41,7 +41,7 @@ export default function FaqClient() {
   return (
     <main id="main" className="page-content">
 
-      <section className="bg-white py-16 md:py-20 border-b border-border-soft">
+      <section className="bg-white py-16 md:py-20">
         <div className="section-shell">
           {/* Quoti asymmetric title: loud stack left, intentional void right —
               the mist accordion below does the reading job. Plum marks the brand edge. */}
@@ -64,9 +64,12 @@ export default function FaqClient() {
           Mist is safe for everything inside: .eyebrow and .text-body are both
           --stone (6.18:1 on white, ~5.9:1 here), the questions are --ink. The
           one token that would have failed is --accent-gold-deep, which drops
-          to 3.98:1 on --nude — the reason this is mist and not nude. */}
+          to 3.98:1 on --nude — the reason this is mist and not nude.
+
+          Single hairline between hero and accordion (not hero border-b + band
+          border-t, which stacked into a 2px seam). */}
       <section className="living-band py-14 md:py-20 border-y border-border-soft">
-        <div className="max-w-screen-md mx-auto px-4 sm:px-5">
+        <div className="section-shell max-w-screen-md mx-auto">
           {FAQ_GROUPS.map((group) => (
             <div key={group.topic} className="mb-12 last:mb-0">
               <h2 className="eyebrow mb-4">{group.topic}</h2>

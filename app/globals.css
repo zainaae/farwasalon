@@ -300,7 +300,8 @@
   .title-stack > .eyebrow {
     margin-bottom: 1rem;
   }
-  .title-stack > .display-page {
+  .title-stack > .display-page,
+  .title-stack > .display-section {
     margin-bottom: 1.15rem;
   }
   .title-stack > .text-body,

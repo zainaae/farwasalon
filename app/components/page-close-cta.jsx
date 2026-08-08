@@ -26,10 +26,10 @@ export default function PageCloseCta({
 
   return (
     <section
-      className="cv-auto living-band--deep grain-on-dark border-t border-white/10 py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10"
+      className="cv-auto living-band--deep grain-on-dark border-t border-white/10 py-16 sm:py-20 md:py-24"
     >
-      <div className="max-w-screen-xl mx-auto grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
-        <div className="lg:col-span-7">
+      <div className="section-shell grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
+        <div className="lg:col-span-7 min-w-0">
           <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.22em] uppercase font-[family-name:var(--font-inter)] mb-4">
             {eyebrow}
           </p>
@@ -43,7 +43,7 @@ export default function PageCloseCta({
             <p className="text-body mt-4 max-w-md text-white/70">{body}</p>
           ) : null}
         </div>
-        <div className="lg:col-span-5 flex flex-col gap-5">
+        <div className="lg:col-span-5 min-w-0 flex flex-col gap-5">
           <div className="cta-cluster w-full">
             {onBookClick ? (
               <button type="button" onClick={onBookClick} className={bookClass}>

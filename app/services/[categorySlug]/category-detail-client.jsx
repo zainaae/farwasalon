@@ -89,7 +89,6 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
 
             Prose still caps itself (max-w-prose / max-w-2xl); the list takes
             the full menu column. */}
-        <div>
           <BreadcrumbJsonLd items={[
             { name: 'Home', url: 'https://farwasalon.com/' },
             { name: 'Services', url: 'https://farwasalon.com/services' },
@@ -378,7 +377,6 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
           {modal && <ServiceModal service={modal} onClose={() => setModal(null)} />}
             </div>
           </div>
-        </div>
       </div>
 
       <PageCloseCta

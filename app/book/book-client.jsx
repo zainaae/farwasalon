@@ -530,12 +530,13 @@ export default function BookClient() {
           a scrollbar, which is what it was reaching for. */}
       <div className="section-shell section-pad min-h-0 min-w-0 overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
 
-        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
+        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8 title-stack border-l-2 border-plum pl-5 lg:pl-6">
+          <p className="eyebrow text-plum">— Book online · PECHS</p>
           <m.h1
             initial={{ y: 16, opacity: 0.85 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="display-page text-ink mb-4 break-words"
+            className="display-page text-ink break-words"
           >
             Book online
           </m.h1>

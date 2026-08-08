@@ -34,7 +34,7 @@ function BookHeading() {
         Book online
       </h1>
       <p className="text-body max-w-lg">
-        Pick a service, choose a date and time, and confirm your appointment in under a minute.
+        Pick one or more services, choose a date and time, and confirm your appointment in under a minute.
       </p>
     </div>
   )

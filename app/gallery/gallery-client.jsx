@@ -22,7 +22,7 @@ export default function GalleryClient() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border-soft pb-10 md:pb-12">
           <div className="title-stack max-w-xl border-l-2 border-plum pl-5 lg:pl-6">
             <p className="hero-fade-up eyebrow text-plum">— Gallery</p>
-            <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
+            <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
               What we do
             </h1>
             <p className="hero-fade-up text-body" style={{ animationDelay: '0.15s' }}>
@@ -34,7 +34,7 @@ export default function GalleryClient() {
           {/* Visibility on a wrapper — `.btn-loud { display: inline-flex }` beats
               Tailwind `hidden`, which previously left a loud Book pill on mobile
               stacked on the quiet link + sticky chrome. */}
-          <div className="hidden md:block shrink-0 self-start">
+          <div className="hidden md:block shrink-0 md:self-end">
             <Link
               href="/book"
               className="hero-fade-up tap-safe btn-loud !min-h-12 !text-[12px]"
@@ -73,7 +73,7 @@ export default function GalleryClient() {
             </div>
           ) : (
             <div className="grid lg:grid-cols-12 gap-5 md:gap-6 lg:gap-7 items-stretch">
-              <div className="lg:col-span-7 min-h-0">
+              <div className="lg:col-span-7 min-w-0 min-h-0">
                 <WorkShowcaseCard
                   src={showcase[0].src}
                   label={showcase[0].label}
@@ -83,7 +83,7 @@ export default function GalleryClient() {
                   featured
                 />
               </div>
-              <div className="lg:col-span-5 grid sm:grid-cols-2 lg:grid-cols-1 gap-5 md:gap-6 lg:content-stretch">
+              <div className="lg:col-span-5 min-w-0 grid sm:grid-cols-2 lg:grid-cols-1 gap-5 md:gap-6 lg:content-stretch">
                 {showcase.slice(1).map((item, i) => (
                   <WorkShowcaseCard
                     key={item.label}
