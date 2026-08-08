@@ -62,7 +62,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'That is why keratin is one of only two services not printed on our [price list](/prices): a single number would be dishonest in one direction or the other. Instead, [send us a photo of your hair length on WhatsApp](https://wa.me/923222782254?text=Keratin%20quote%20please) — you get an exact quote in minutes, confirmed before you book, unchanged at the counter.' },
 
       { type: 'h2', text: 'Keratin vs Protein vs Wellaplex — Which Do You Actually Need?' },
-      { type: 'p', text: 'These get confused constantly, and the wrong choice wastes money. Keratin smooths — it fights frizz and cuts styling time for three to five months; ideal for thick, wavy, humidity-fighting hair. Protein treatments (printed from Rs 2,000 on our menu) rebuild strength in damaged, brittle hair. Wellaplex (Rs 3,000, printed) repairs bond damage from colouring and heat. If your problem is breakage or shedding, start with our [hair treatments](/services/hair-treatments) and read the [hair fall guide](/blog/hair-fall-treatment-karachi-guide) — keratin will not fix hair fall.' },
+      { type: 'p', text: 'These get confused constantly, and the wrong choice wastes money. Keratin smooths — it fights frizz and cuts styling time for three to five months; ideal for thick, wavy, humidity-fighting hair. Protein treatments (printed from Rs 2,000 on our menu) rebuild strength in damaged, brittle hair. Wellaplex (from Rs 3,000) repairs bond damage from colouring and heat. If your problem is breakage or shedding, start with our [hair treatments](/services/hair-treatments) and read the [hair fall guide](/blog/hair-fall-treatment-karachi-guide) — keratin will not fix hair fall.' },
 
       { type: 'h2', text: 'How to Not Get Burned on Keratin in Karachi' },
       { type: 'p', text: 'Ask which formula is used and whether it is formaldehyde-free. Ask if the quote includes the blow-dry and seal (cheap quotes often exclude it). Confirm aftercare: no washing for 48 to 72 hours, sulphate-free shampoo after — if a salon does not mention aftercare unprompted, they are selling product, not results. And get the price in writing before you sit down; a WhatsApp quote is exactly that.' },
@@ -78,7 +78,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Frizz and styling time: keratin. Breakage, dryness, or damage: protein or Wellaplex, printed on our menu from Rs 2,000. Unsure? Send a photo — we will tell you honestly, including when the cheaper printed option is the right one.' },
 
       { type: 'h2', text: 'Get Your Keratin Quote' },
-      { type: 'p', text: 'WhatsApp +92 322 2782254 with a photo of your hair down. Every fixed-price service stays printed on the [full price list](/prices) — keratin is quoted per head because that is the only honest way to price it.' },
+      { type: 'p', text: 'WhatsApp +92 322 2782254 with a photo of your hair down. Fixed-price services stay printed on the [full price list](/prices); hair and hair treatments publish quote floors; keratin is quoted per head because that is the only honest way to price it.' },
     ],
   },
   {
@@ -340,7 +340,7 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: 'Why Monsoon Wrecks Your Hair' },
       { type: 'p', text: 'Frizz is not a styling problem — it is a moisture problem. Humid air pushes water into the hair shaft, and damaged or porous hair swells unevenly. That is why serums alone never fix monsoon frizz: they coat the surface without repairing the structure underneath.' },
-      { type: 'p', text: 'The fix is a bond-repair or protein treatment before the worst of the season. A [Wellaplex bond treatment](/services/hair-treatments) (Rs 3,000) rebuilds the internal bonds so hair stops absorbing humidity unevenly. One session in early July typically holds through August. Pair it with a trim to remove split ends — split ends are open doors for humidity.' },
+      { type: 'p', text: 'The fix is a bond-repair or protein treatment before the worst of the season. A [Wellaplex bond treatment](/services/hair-treatments) (from Rs 3,000) rebuilds the internal bonds so hair stops absorbing humidity unevenly. One session in early July typically holds through August. Pair it with a trim to remove split ends — split ends are open doors for humidity.' },
 
       { type: 'h2', text: 'Sticky, Oily Skin: Wash Less, Cleanse Better' },
       { type: 'p', text: 'Over-washing in humid weather backfires — stripping oil signals your skin to produce more. Twice-daily gentle cleansing plus one professional [deep cleansing](/services/cleansing) (from Rs 1,200) per month keeps pores clear through the sticky season. If you are breaking out, an Acne Cleansing session targets the congestion directly instead of scrubbing your whole face raw.' },
@@ -354,7 +354,7 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: 'Frequently Asked Questions' },
       { type: 'h3', text: 'Q: How do I stop frizzy hair in Karachi humidity?' },
-      { type: 'p', text: 'A: Repair the hair structure rather than coating it — a bond-repair treatment like Wellaplex (Rs 3,000 at Farwa in PECHS) stops hair absorbing humidity unevenly, which is what causes frizz. Serums alone only mask it for an hour.' },
+      { type: 'p', text: 'A: Repair the hair structure rather than coating it — a bond-repair treatment like Wellaplex (from Rs 3,000 at Farwa in PECHS) stops hair absorbing humidity unevenly, which is what causes frizz. Serums alone only mask it for an hour.' },
       { type: 'h3', text: 'Q: Should I get facials during monsoon season?' },
       { type: 'p', text: 'A: Yes, but choose lighter ones. Deep cleansing (from Rs 1,200) and lighter facials work well in humidity; skip heavy cream-based facials until the weather dries out.' },
       { type: 'h3', text: 'Q: How often should oily skin be professionally cleansed in summer?' },
@@ -467,7 +467,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Short broken pieces on your pillow and brush mean breakage — the hair is snapping, not falling from the root. That is damage, and salons fix damage well. Whole strands with a tiny white bulb at the end mean shedding from the root — often stress, hormones, iron deficiency, or post-partum changes. Severe root shedding deserves a doctor visit; treatments help alongside, not instead.' },
 
       { type: 'h2', text: 'What Actually Works at the Salon' },
-      { type: 'p', text: 'For breakage: protein [hair treatments](/services/hair-treatments) (from Rs 2,000) rebuild strength over a course of monthly sessions, and Wellaplex bond therapy (Rs 3,000) repairs chemically-processed or heat-damaged hair at the structural level. For shedding: a Hair Fall Treatment with Ampule (Rs 3,000) delivers actives to the scalp — three monthly sessions is the honest minimum before judging results.' },
+      { type: 'p', text: 'For breakage: protein [hair treatments](/services/hair-treatments) (from Rs 2,000) rebuild strength over a course of monthly sessions, and Wellaplex bond therapy (from Rs 3,000) repairs chemically-processed or heat-damaged hair at the structural level. For shedding: a Hair Fall Treatment with Ampule (from Rs 3,000) delivers actives to the scalp — three monthly sessions is the honest minimum before judging results.' },
       { type: 'p', text: 'The underrated helper: a proper head [massage](/services/massage) (from Rs 700) improves scalp circulation, and our head massage and wash combination doubles as maintenance between treatment sessions.' },
 
       { type: 'h2', text: 'What to Stop Doing at Home' },
@@ -475,7 +475,7 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: 'Frequently Asked Questions' },
       { type: 'h3', text: 'Q: How much does hair fall treatment cost in Karachi?' },
-      { type: 'p', text: 'A: At Farwa in PECHS, hair treatments start at Rs 2,000; a Hair Fall Ampule Treatment is Rs 3,000 per session and Wellaplex bond therapy is Rs 3,000. Plan for three monthly sessions to see honest results.' },
+      { type: 'p', text: 'A: At Farwa in PECHS, hair treatments start from Rs 2,000; a Hair Fall Ampule Treatment is from Rs 3,000 per session and Wellaplex bond therapy is from Rs 3,000 — printed floors confirmed for your hair before we start. Plan for three monthly sessions to see honest results.' },
       { type: 'h3', text: 'Q: How many sessions before hair fall improves?' },
       { type: 'p', text: 'A: Visible improvement usually starts after the second monthly session, with the full result at three to four. Anyone promising results in one session is selling hope, not treatment.' },
       { type: 'h3', text: 'Q: Can salon treatments regrow lost hair?' },
@@ -618,10 +618,10 @@ export const BLOG_POSTS = [
 
       { type: 'h2', text: '4 Months Before: Body Care and Hair Health' },
       { type: 'p', text: 'Start a regular body care routine. Monthly full-body waxing sessions help refine hair growth so that by the time your wedding week arrives, the process is quicker and less painful. Our [Rica hot wax](/services/rica-hot-wax) is gentle enough for sensitive skin and perfect for building a waxing routine. Pair it with a monthly body polish to keep your skin smooth and even-toned.' },
-      { type: 'p', text: 'For your hair, begin a strengthening regimen. If you notice thinning or breakage, start a monthly [hair treatment](/services/hair-treatments) now. Protein treatments (Rs 2,000) and Wellaplex sessions (Rs 3,000) compound over time — four months of consistent care can transform dull, brittle hair into thick, glossy locks that hold any bridal style beautifully.' },
+      { type: 'p', text: 'For your hair, begin a strengthening regimen. If you notice thinning or breakage, start a monthly [hair treatment](/services/hair-treatments) now. Protein treatments (from Rs 2,000) and Wellaplex sessions (from Rs 3,000) compound over time — four months of consistent care can transform dull, brittle hair into thick, glossy locks that hold any bridal style beautifully.' },
 
       { type: 'h2', text: '3 Months Before: Hair Treatments & Colour Planning' },
-      { type: 'p', text: 'If you\'re planning a colour change, now is the time. This gives you enough room for adjustments. Book a Wellaplex treatment (Rs 3,000) to strengthen your hair before any chemical processes. If hair fall is a concern, start a monthly Hair Fall Treatment with Ampule (Rs 3,000) — three sessions can make a visible difference.' },
+      { type: 'p', text: 'If you\'re planning a colour change, now is the time. This gives you enough room for adjustments. Book a Wellaplex treatment (from Rs 3,000) to strengthen your hair before any chemical processes. If hair fall is a concern, start a monthly Hair Fall Treatment with Ampule (from Rs 3,000) — three sessions can make a visible difference.' },
       { type: 'p', text: 'Want highlights, balayage, or a rich brunette tone for the wedding? Our [hair colour services](/services/hair) give you plenty of options. Three months out is ideal because it allows one to two correction sessions if the shade is not exactly right — far better than scrambling the week before your wedding.' },
 
       { type: 'h2', text: '2 Months Before: Nail Care and Relaxation' },
@@ -973,7 +973,7 @@ export const BLOG_POSTS = [
   {
     slug: 'complete-guide-hair-treatments-karachi',
     title: 'Complete Guide to Hair Treatments in Karachi — From Keratin to Protein',
-    description: 'Everything you need to know about professional hair treatments in Karachi — protein Rs 2,000, Wellaplex Rs 3,000, hair-fall and dandruff protocols, plus how keratin is quoted.',
+    description: 'Everything you need to know about professional hair treatments in Karachi — protein from Rs 2,000, Wellaplex from Rs 3,000, hair-fall and dandruff protocols, plus how keratin is quoted.',
     featuredImage: '/hairtreatment.jpg',
     date: '2026-05-03',
     lastModified: '2026-05-03',
@@ -990,7 +990,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'Keratin treatments are especially popular in Karachi because of our humidity. Where a blowout might last a few hours in monsoon season, keratin-treated hair stays smooth and frizz-free regardless of weather. It also cuts your morning styling time dramatically — most clients report going from 30 minutes of straightening to simply air-drying or a quick brush.' },
 
       { type: 'h2', text: 'Protein Treatment' },
-      { type: 'p', text: 'If your hair feels elastic, gummy, or breaks easily when wet, it likely needs protein. Protein treatments like our Hair Fall Treatment with Ampule (Rs 3,000) replenish the structural building blocks of the hair shaft. Unlike keratin, protein treatments work from inside the strand rather than coating the surface. They are perfect for chemically treated, coloured, or heat-damaged hair. Results are cumulative — we recommend a session every four to six weeks for best results.' },
+      { type: 'p', text: 'If your hair feels elastic, gummy, or breaks easily when wet, it likely needs protein. Protein treatments like our Hair Fall Treatment with Ampule (from Rs 3,000) replenish the structural building blocks of the hair shaft. Unlike keratin, protein treatments work from inside the strand rather than coating the surface. They are perfect for chemically treated, coloured, or heat-damaged hair. Results are cumulative — we recommend a session every four to six weeks for best results.' },
       { type: 'p', text: 'A simple test: pull a wet strand of hair gently. If it stretches and stretches before snapping, you need protein. If it snaps immediately with no stretch, you need moisture. If you are unsure, our stylist will perform this assessment during your consultation. Many Karachi women who colour their hair regularly or use straighteners daily are protein-deficient without realising it.' },
 
       { type: 'h2', text: 'Olorchee Treatment' },
@@ -998,7 +998,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'For hair fall specifically, the honest answer is not a conditioning treatment. Our [Hair Fall Treatment with Ampule](/services/hair-treatments) is Rs 3,000 and targets the problem directly. Persistent shedding is worth seeing a dermatologist about rather than treating in a salon chair — conditioning makes hair look and feel better, but it does not change how much of it falls.' },
 
       { type: 'h2', text: 'Wellaplex and Bond Repair' },
-      { type: 'p', text: 'If you colour or bleach your hair regularly, Wellaplex (Rs 3,000 at Farwa) is essential. It works at the molecular level to rebuild the disulphide bonds that chemical processing breaks. This is not a surface-level treatment — it genuinely repairs structural damage. We always recommend Wellaplex alongside any [hair colouring service](/services/hair) to protect hair integrity from the start.' },
+      { type: 'p', text: 'If you colour or bleach your hair regularly, Wellaplex (from Rs 3,000 at Farwa) is essential. It works at the molecular level to rebuild the disulphide bonds that chemical processing breaks. This is not a surface-level treatment — it genuinely repairs structural damage. We always recommend Wellaplex alongside any [hair colouring service](/services/hair) to protect hair integrity from the start.' },
 
       { type: 'h2', text: 'Treatment Comparison at a Glance' },
       { type: 'ul', items: [

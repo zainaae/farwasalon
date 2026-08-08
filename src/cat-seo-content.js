@@ -147,7 +147,7 @@ export const CAT_FAQS = {
     { q: 'Do you do bridal hair styling?', a: 'Yes — bridal hair styling (from Rs 8,000) includes a style consultation, blowout prep, full styling (updos, curls, braids, or sleek looks), and finishing spray. It\'s also part of our Full Bridal Package.' },
     { q: 'What hair colouring options do you offer?', a: 'We offer full-colour, highlights, balayage, and toning starting at Rs 4,000. Colour consultations are included to ensure the perfect shade for your skin tone and hair type. Final quote depends on length and density.' },
     { q: 'How much is a blowdry only?', a: 'Blowdry & Styling starts at Rs 1,500 (~45 min). Haircut & Blowdry starts at Rs 2,000 when you want a cut in the same visit.' },
-    { q: 'Do you offer keratin treatments?', a: 'Yes — but it is quoted per head rather than printed, because the honest price depends on your hair length and density. WhatsApp us a photo for a binding quote. Fixed-price repair options are printed: protein treatment Rs 2,000, Wellaplex Rs 3,000, hair-fall protocols Rs 3,000.' },
+    { q: 'Do you offer keratin treatments?', a: 'Yes — but it is quoted per head rather than printed, because the honest price depends on your hair length and density. WhatsApp us a photo for a binding quote. Repair treatments print as floors: protein from Rs 2,000, Wellaplex from Rs 3,000, hair-fall protocols from Rs 3,000.' },
   ],
   'Eyebrow Tattoo': [
     { q: 'How long does microblading last?', a: 'Microblading typically lasts 12–18 months depending on skin type, sun exposure, and aftercare. Oily skin types may need a touch-up sooner. We provide a complete aftercare kit with every session.' },
@@ -167,9 +167,9 @@ export const CAT_FAQS = {
     { q: 'How do I book a massage in Karachi?', a: 'Book online at farwasalon.com/book, or WhatsApp +92 322 2782254. Live slots Mon–Sat 11–7.' },
   ],
   'Hair Treatments': [
-    { q: 'What is the best treatment for hair fall?', a: 'Our Hair Fall Treatment with Ampule (Rs 3,000) targets thinning and excessive shedding using concentrated nutrient ampules. For best results, we recommend a course of 3 monthly sessions.' },
-    { q: 'What is a Wellaplex treatment?', a: 'Wellaplex (Rs 3,000) is a bond-strengthening treatment that repairs hair damaged by colour, heat, or chemical processing. It restores elasticity, shine, and strength from within the hair shaft.' },
-    { q: 'How often should I get a protein treatment?', a: 'A protein treatment every 6–8 weeks is ideal for maintaining strong, healthy hair. If your hair is chemically processed or heat-styled frequently, monthly treatments give the best protection.' },
+    { q: 'What is the best treatment for hair fall?', a: 'Our Hair Fall Treatment with Ampule (from Rs 3,000) targets thinning and excessive shedding using concentrated nutrient ampules. For best results, we recommend a course of 3 monthly sessions. Final quote depends on the head and is confirmed before we start.' },
+    { q: 'What is a Wellaplex treatment?', a: 'Wellaplex (from Rs 3,000) is a bond-strengthening treatment that repairs hair damaged by colour, heat, or chemical processing. It restores elasticity, shine, and strength from within the hair shaft — printed floor, confirmed for your hair before we start.' },
+    { q: 'How often should I get a protein treatment?', a: 'A protein treatment every 6–8 weeks is ideal for maintaining strong, healthy hair. If your hair is chemically processed or heat-styled frequently, monthly treatments give the best protection. Protein prints from Rs 2,000 as a quote floor.' },
   ],
   'Cleansing': [
     { q: 'What is the difference between HD Cleansing and Acne Cleansing?', a: 'HD Cleansing (Rs 1,700, ~40 min) uses high-definition extraction techniques for general deep pore cleaning. Acne Cleansing (Rs 1,400, ~35 min) specifically targets active breakouts with antibacterial products and gentle extraction.' },
@@ -237,7 +237,7 @@ export const CAT_PAGE_BLOCKS = {
   ],
   Hair: [
     { type: 'h2', text: 'Cut, colour & balayage' },
-    { type: 'p', text: 'Haircut & blowdry from Rs 2,000. Blowdry only from Rs 1,500. Colour / highlights / balayage from Rs 4,000. Bridal hair from Rs 8,000. Hair rates start there and depend on length and density — we confirm before we start. Keratin is offered but quoted per head, not printed — send a photo on WhatsApp. Protein Rs 2,000 and Wellaplex Rs 3,000 are printed.' },
+    { type: 'p', text: 'Haircut & blowdry from Rs 2,000. Blowdry only from Rs 1,500. Colour / highlights / balayage from Rs 4,000. Bridal hair from Rs 8,000. Hair rates start there and depend on length and density — we confirm before we start. Keratin is offered but quoted per head, not printed — send a photo on WhatsApp. Protein from Rs 2,000 and Wellaplex from Rs 3,000 are printed floors on the hair-treatments menu.' },
   ],
   'Eyebrow Tattoo': [
     { type: 'h2', text: 'What every session includes' },
@@ -262,14 +262,14 @@ export const CAT_PAGE_BLOCKS = {
     { type: 'p', text: 'Hair needs about 5mm of growth or the wax cannot grip. Avoid hot showers, fragrance, and tight fabric on the area for 12–24 hours after. This menu is face and small zones only — arms, legs, and full body use the Rica strip-wax menu.' },
   ],
   'Hair Treatments': [
-    { type: 'h2', text: 'Printed treatment menu' },
-    { type: 'p', text: 'Normal Protein Treatment Rs 2,000 (~45 min). Olorchee Treatment Rs 2,500 (~45 min). Hair Fall or Dandruff Treatment with Ampule Rs 3,000 (~40 min). Wellaplex Stand-Alone Treatment Rs 3,000 (~60 min). Every rate above is on the price list — no surprise quote after you sit down.' },
+    { type: 'h2', text: 'Printed treatment floors' },
+    { type: 'p', text: 'Normal Protein Treatment from Rs 2,000 (~45 min). Olorchee Treatment from Rs 2,500 (~45 min). Hair Fall or Dandruff Treatment with Ampule from Rs 3,000 (~40 min). Wellaplex Stand-Alone Treatment from Rs 3,000 (~60 min). These are quote floors — length and density can adjust the final, confirmed before we start.' },
     { type: 'h2', text: 'Which treatment fits' },
     { type: 'p', text: 'Shedding or thinning: Hair Fall with Ampule. Flakes and scalp itch: Dandruff with Ampule. Colour- or heat-damaged shafts: Wellaplex. Everyday strength and shine between colour visits: Protein. Keratin is offered but quoted per head from a photo on WhatsApp — length and density change the product load.' },
   ],
   Bridal: [
-    { type: 'h2', text: 'Published bridal rates' },
-    { type: 'p', text: 'Bridal Trial Rs 8,000 (~2 hrs). Mehndi / Dholki Look Rs 10,000 (~2 hrs). Engagement Look Rs 12,000 (~2.5 hrs). Full Bridal Package Rs 25,000 (~5 hrs) — makeup, hair, dupatta draping, touch-up kit, and event presence. Trial first if you want the look locked before the wedding day.' },
+    { type: 'h2', text: 'Published bridal floors' },
+    { type: 'p', text: 'Bridal Trial from Rs 8,000 (~2 hrs). Mehndi / Dholki Look from Rs 10,000 (~2 hrs). Engagement Look from Rs 12,000 (~2.5 hrs). Full Bridal Package from Rs 25,000 (~5 hrs) — makeup, hair, dupatta draping, touch-up kit, and event presence. Final bridal quote depends on hair and is confirmed before the day. Trial first if you want the look locked before the wedding day.' },
     { type: 'h2', text: 'How to book without guessing' },
     { type: 'p', text: 'Tell us which event (nikkah, mehndi, barat, walima, engagement) and bring reference photos to the trial. The /bridal page has package detail; this page is the itemised menu you can book against. October–March fills first — book 2–3 months ahead when you can.' },
   ],

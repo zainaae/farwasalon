@@ -167,7 +167,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'Do you offer HydraFacial or keratin treatments?',
-        a: 'HydraFacial machines, no. Keratin smoothing, yes — it is quoted per head because the price honestly depends on hair length and density; WhatsApp a photo of your hair to +92 322 2782254 for a binding quote in minutes. Fixed-price options stay printed: facials from a Normal Facial (Rs 1,400) to Janssen Whitening (Rs 5,500), and protein / Wellaplex / hair-fall treatments from Rs 2,000. See farwasalon.com/prices for the full list.',
+        a: 'HydraFacial machines, no. Keratin smoothing, yes — it is quoted per head because the price honestly depends on hair length and density; WhatsApp a photo of your hair to +92 322 2782254 for a binding quote in minutes. Facials stay printed from a Normal Facial (Rs 1,400) to Janssen Whitening (Rs 5,500). Protein / Wellaplex / hair-fall treatments print from Rs 2,000 as quote floors — length and density can adjust the final before we start. See farwasalon.com/prices for the full list.',
       },
     ],
   },
@@ -192,11 +192,11 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'How much is keratin treatment at Farwa?',
-        a: 'Keratin is quoted per head because the price depends on hair length and density. WhatsApp a photo of your hair to +92 322 2782254 for a binding quote in minutes. Fixed-price repair treatments (protein from Rs 2,000, Wellaplex Rs 3,000) are printed on farwasalon.com/prices.',
+        a: 'Keratin is quoted per head because the price depends on hair length and density. WhatsApp a photo of your hair to +92 322 2782254 for a binding quote in minutes. Repair treatments print as floors on farwasalon.com/prices (protein from Rs 2,000, Wellaplex from Rs 3,000) — we confirm the final for your hair before starting.',
       },
       {
         q: 'Why do you publish all your prices online?',
-        a: 'Because unlisted prices can change per customer — printed prices cannot. Every fixed-price service on farwasalon.com shows its rate; only party makeup and keratin are quoted individually (they genuinely vary per person), and those quotes are binding once given. We believe transparent pricing is part of good service.',
+        a: 'Because unlisted prices can change per customer — printed prices cannot. Every fixed-price service on farwasalon.com shows its rate. Hair, hair treatments, and bridal publish quote floors (final depends on the head); party makeup and keratin are quoted individually before you book, and those quotes are binding once given. We believe transparent pricing is part of good service.',
       },
     ],
   },
