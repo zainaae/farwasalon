@@ -1559,6 +1559,7 @@ button.tap-safe,
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  /* Same pitfall as .btn-loud: do not pair with Tailwind `hidden` on this node. */
   min-height: 48px;
   padding: 0.875rem 1.75rem;
   font-family: var(--font-inter), 'Inter', system-ui, sans-serif;

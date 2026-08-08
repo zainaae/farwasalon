@@ -87,9 +87,15 @@ export default function DealsPage() {
           <Link href="/book" className="tap-safe btn-loud w-full sm:w-auto justify-center !min-h-12 !text-[12px]">
             Book online <ArrowUpRight className="w-3.5 h-3.5" />
           </Link>
-          <WaCta href={WA_DEFAULT} from="deals-hero" className="tap-safe btn-secondary w-full sm:w-auto justify-center">
-            WhatsApp
-          </WaCta>
+          <span className="hidden md:contents">
+            <WaCta
+              href={WA_DEFAULT}
+              from="deals-hero"
+              className="tap-safe btn-secondary w-full sm:w-auto justify-center"
+            >
+              WhatsApp
+            </WaCta>
+          </span>
         </div>
 
         {deals.length === 0 ? (

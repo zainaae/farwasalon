@@ -158,8 +158,18 @@ export default function ContactClient() {
               <p className="text-body text-sm mb-5">
                 Pick your service, date, and time online — you&apos;ll get a confirmation page right away.
               </p>
-              <Link href="/book" className="tap-safe btn-primary w-full sm:w-auto justify-center">
-                Book online <ArrowUpRight className="w-4 h-4" />
+              {/* Sticky Call/WA/Book covers Book on mobile. Wrapper: `.btn-primary`
+                  display beats Tailwind `hidden` on the same node. */}
+              <span className="hidden md:contents">
+                <Link href="/book" className="tap-safe btn-primary w-full sm:w-auto justify-center">
+                  Book online <ArrowUpRight className="w-4 h-4" />
+                </Link>
+              </span>
+              <Link
+                href="/book"
+                className="tap-safe md:hidden link-underline text-ink text-sm font-medium font-[family-name:var(--font-inter)]"
+              >
+                Or book online with live slots
               </Link>
             </div>
 

@@ -86,9 +86,15 @@ export default function LocationServicePage({ data, slug }) {
             <Link href={bookHref} className="btn-primary">
               Book online <ArrowUpRight className="w-4 h-4" />
             </Link>
-            <WaCta href={waLink(service.name)} from="location-hub" className="btn-secondary">
-              WhatsApp
-            </WaCta>
+            <span className="hidden md:contents">
+              <WaCta
+                href={waLink(service.name)}
+                from="location-hub"
+                className="btn-secondary"
+              >
+                WhatsApp
+              </WaCta>
+            </span>
           </div>
           <p className="flex flex-wrap gap-x-4 gap-y-1 text-sm font-[family-name:var(--font-inter)] text-stone mb-10">
             <span className="inline-flex items-center gap-1.5 min-h-[44px]">
