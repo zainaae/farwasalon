@@ -56,8 +56,16 @@ export default function BeautySalonKarachiPage() {
           </p>
 
           <div className="cta-cluster mb-4">
-            <Link href="/book" className="btn-loud">
-              Book Online <ArrowUpRight className="w-4 h-4" />
+            <span className="hidden md:contents">
+              <Link href="/book" className="btn-loud">
+                Book Online <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </span>
+            <Link
+              href="/book"
+              className="tap-safe md:hidden inline-flex items-center gap-1.5 min-h-[44px] text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] link-underline"
+            >
+              Book Online <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
             <span className="hidden md:contents">
               <WaCta

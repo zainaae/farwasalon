@@ -22,7 +22,7 @@ export default function AboutClient() {
               hydration (same LCP failure mode fixed on /services). */}
           <div className="title-stack max-w-2xl lg:max-w-[28rem] border-l-2 border-plum pl-5 lg:pl-6">
             <p className="hero-fade-up eyebrow text-plum">— Est. 2008 · PECHS, Karachi</p>
-            <h1 className="hero-rise display-section text-ink" style={{ animationDuration: '0.9s' }}>
+            <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
               Our story
             </h1>
           </div>
@@ -51,8 +51,8 @@ export default function AboutClient() {
 
       <section className="bg-mist py-16 md:py-24">
         <m.div className="section-shell">
-          <div className="grid md:grid-cols-[1fr_1.4fr] gap-12 md:gap-20 items-start">
-            <div>
+          <div className="grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)] gap-12 md:gap-20 items-start">
+            <div className="min-w-0">
               <div className="mb-10">
                 <m.h2 initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.9, ease: [0.16,1,0.3,1] }}
                   className="display-page text-ink">
@@ -87,7 +87,7 @@ export default function AboutClient() {
             {/* id="rubina" is the target of FOUNDER_ID in the schema graph and of
                 every article byline — the anchor is load-bearing, not decorative. */}
             <m.div id="rubina" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
-              className="flex flex-col gap-6 pt-2 md:pt-10 scroll-mt-28">
+              className="min-w-0 flex flex-col gap-6 pt-2 md:pt-10 scroll-mt-28">
               <div className="relative w-full max-w-md aspect-[4/5] overflow-hidden border border-border-soft bg-mist">
                 <Image
                   src="/bridal2.jpg"

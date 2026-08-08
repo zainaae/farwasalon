@@ -112,7 +112,7 @@ export default function BridalLandingPage() {
                 <h1 id="bridal-headline" className="display-page text-white">
                   Bridal makeup in PECHS, Karachi
                 </h1>
-                <p id="bridal-lede" className="text-white/80 md:text-lg leading-relaxed font-[family-name:var(--font-inter)] font-light">
+                <p id="bridal-lede" className="text-lead text-white/80">
                   Farwa in PECHS has styled weddings since 2008 — Full Bridal Package from Rs 25,000
                   (hair, makeup, draping, touch-ups; final quote before the day). Mehndi from Rs 10,000 ·
                   Engagement from Rs 12,000 · Bridal Trial from Rs 8,000.

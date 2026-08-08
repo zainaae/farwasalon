@@ -41,7 +41,7 @@ export default function BlogIndexClient({ posts }) {
           { name: 'Blog', url: 'https://farwasalon.com/blog' },
         ]} />
 
-        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8 title-stack max-w-lg">
+        <div className="mb-10 md:mb-14 border-b border-border-soft pb-8 title-stack max-w-lg border-l-2 border-plum pl-5 lg:pl-6">
           <p className="hero-fade-up eyebrow text-plum">— Guides from the chair</p>
           <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
             Beauty tips &amp; guides
@@ -72,9 +72,9 @@ export default function BlogIndexClient({ posts }) {
                   and the title/dek/meta stack ends around 240px, so top-aligning
                   them left roughly 200px of dead white beside the tallest block
                   on the page. */}
-              <div className="grid md:grid-cols-[1.6fr_1fr] gap-6 md:gap-10 items-center">
+              <div className="grid md:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)] gap-6 md:gap-10 items-center">
                 {featured.featuredImage && (
-                  <div className="relative aspect-[16/10] md:aspect-[16/11] overflow-hidden bg-mist border border-border-soft">
+                  <div className="relative aspect-[16/10] md:aspect-[16/11] overflow-hidden bg-mist border border-border-soft min-w-0">
                     <Image
                       src={featured.featuredImage}
                       alt={featured.title}

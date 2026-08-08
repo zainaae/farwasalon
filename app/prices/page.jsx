@@ -198,7 +198,7 @@ export default function PricesPage() {
         {/* The other half of a complete price list is what is not on it. Same
             source as the `additionalProperty` boundaries in the salon JSON-LD,
             so the visible text and the machine-readable claim cannot disagree. */}
-        <section className="mt-24 md:mt-30 max-w-2xl" aria-labelledby="prices-not-offered">
+        <section className="mt-24 md:mt-[7.5rem] max-w-2xl" aria-labelledby="prices-not-offered">
           <h2 id="prices-not-offered" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-3">
             What is not on this list
           </h2>
@@ -216,7 +216,7 @@ export default function PricesPage() {
           </dl>
         </section>
 
-        <section className="mt-24 md:mt-30 pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
+        <section className="mt-24 md:mt-[7.5rem] pt-10 border-t border-border-soft" aria-labelledby="prices-faq-heading">
           <h2 id="prices-faq-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl mb-6">
             Price questions
           </h2>

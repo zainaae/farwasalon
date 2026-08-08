@@ -65,7 +65,7 @@ export default function ContactClient() {
       </section>
 
       <section className="py-14 md:py-20">
-        <div className="section-shell grid md:grid-cols-[1.2fr_1fr] gap-14 md:gap-20">
+        <div className="section-shell grid md:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] gap-14 md:gap-20">
 
           <m.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
             <p className="eyebrow mb-6">— Find us</p>

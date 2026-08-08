@@ -171,7 +171,7 @@ function FeaturedServices() {
   const [hovered, setHovered] = useState(null)
 
   return (
-    <section className="cv-auto bg-white section-pad border-t border-border-soft">
+    <section className="cv-auto bg-white py-16 md:py-20 lg:py-[5.75rem] border-t border-border-soft">
       <div className="section-shell">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-baseline sm:justify-between mb-10 md:mb-12 lg:mb-14">
           <m.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}
@@ -266,7 +266,7 @@ function HardNumbersBand() {
       className="hard-numbers-band cv-auto living-band--soft living-band border-t border-border-soft"
       aria-labelledby="hard-numbers-heading"
     >
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-5 md:px-10 py-14 md:py-16 lg:py-[4.5rem]">
+      <div className="section-shell py-14 md:py-16 lg:py-[4.5rem]">
         <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -732,15 +732,15 @@ function TestimonialsPreview({ placesEnabled }) {
 function CtaBand() {
   /* Solid plum close — no weak bridal stock behind “Visit us”. Matches PageCloseCta. */
   return (
-    <section className="cv-auto cta-band living-band--deep grain-on-dark py-16 sm:py-20 md:py-[5rem] px-4 sm:px-5 md:px-10 border-t border-white/10">
-      <div className="max-w-screen-xl mx-auto">
+    <section className="cv-auto cta-band living-band--deep grain-on-dark py-16 sm:py-20 md:py-[5rem] border-t border-white/10">
+      <div className="section-shell">
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
           <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="lg:col-span-7"
+            className="lg:col-span-7 min-w-0"
           >
             <p className="text-accent-gold text-[10px] sm:text-[11px] tracking-[0.28em] uppercase font-[family-name:var(--font-inter)] mb-4">&mdash; Visit us in PECHS</p>
             <h2
@@ -758,7 +758,7 @@ function CtaBand() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="lg:col-span-5 flex flex-col gap-5"
+            className="lg:col-span-5 min-w-0 flex flex-col gap-5"
           >
             {/* Loud Book already lives in the hero — keep one WA here + quiet Book. */}
             <div className="cta-cluster w-full">
@@ -801,13 +801,13 @@ function FounderNote() {
   /* House voice — line is salon copy, not a sourced personal quote. No founder
      portrait; do not attribute first-person lines to Rubina by name. */
   return (
-    <section className="cv-auto living-band--soft living-band border-t border-border-soft py-16 sm:py-20 md:py-24 px-4 sm:px-5 md:px-10">
+    <section className="cv-auto living-band--soft living-band border-t border-border-soft py-16 sm:py-20 md:py-24">
       <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-40px' }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-3xl mx-auto text-center"
+        className="section-shell max-w-3xl mx-auto text-center"
       >
         <p className="eyebrow text-plum mb-6">— The House</p>
         <blockquote
