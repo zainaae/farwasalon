@@ -1460,6 +1460,9 @@ button.tap-safe,
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  /* Do not pair `.btn-loud` with Tailwind `hidden` on the same node —
+     this display declaration wins and the control stays visible. Hide via
+     a wrapper (`hidden md:block`) or `max-md:!hidden` instead. */
   /* Quieter luxury: one step down from carnival 56px / 14px / lift-2. */
   min-height: 48px;
   padding: 0.95rem 1.85rem;

@@ -31,13 +31,18 @@ export default function GalleryClient() {
               slot below.
             </p>
           </div>
-          <Link
-            href="/book"
-            className="hero-fade-up tap-safe btn-loud shrink-0 self-start !min-h-12 !text-[12px] hidden md:inline-flex"
-            style={{ animationDelay: '0.2s' }}
-          >
-            Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
-          </Link>
+          {/* Visibility on a wrapper — `.btn-loud { display: inline-flex }` beats
+              Tailwind `hidden`, which previously left a loud Book pill on mobile
+              stacked on the quiet link + sticky chrome. */}
+          <div className="hidden md:block shrink-0 self-start">
+            <Link
+              href="/book"
+              className="hero-fade-up tap-safe btn-loud !min-h-12 !text-[12px]"
+              style={{ animationDelay: '0.2s' }}
+            >
+              Book an Appointment <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
+            </Link>
+          </div>
           {/* Mobile sticky already carries Book — keep a quiet in-flow link for
               crawlers / e2e without a second loud pill on fold 1. */}
           <Link
