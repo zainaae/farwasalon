@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { m, AnimatePresence } from 'framer-motion'
 import { X, Menu, ChevronLeft, ChevronRight, Phone, MessageCircle } from 'lucide-react'
 import { WA_NUMBER, MAPS_LINK, IG_LINK, WA_DEFAULT, waLink, formatPrice, formatServicePrice, formatDuration, track, CAT_SLUGS } from './site-config.js'
+import { hairQuotePath, isHairQuoteCategory } from '../lib/quote-request.js'
 import { useNextSlot } from './use-next-slot.js'
 import { webmSourceFor } from '../lib/video-manifest.js'
 import {
@@ -288,9 +289,22 @@ export function ServiceModal({ service, onClose }) {
               >
                 Book {service.name} <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
               </Link>
+              {isHairQuoteCategory(service.category) && (
+                <Link
+                  href={hairQuotePath(service.id)}
+                  onClick={onClose}
+                  className="tap-safe inline-flex min-h-[44px] items-center justify-center text-sm font-[family-name:var(--font-inter)] text-stone hover:text-ink link-underline"
+                >
+                  Get a quote
+                </Link>
+              )}
+              {/* Hair modal: Book + quiet Quote; sticky already has WA on mobile.
+                  Other categories keep modal WhatsApp. */}
               <a href={waLink(service.name)} target="_blank" rel="noreferrer"
                 onClick={() => { track('WhatsAppIntent', { from: 'service-modal', service: service.name }); onClose() }}
-                className="tap-safe inline-flex items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300">
+                className={`tap-safe items-center justify-center gap-2 border border-border-soft text-ink text-[11px] tracking-[0.16em] uppercase font-semibold font-[family-name:var(--font-inter)] px-6 py-3.5 hover:bg-mist active:scale-[0.98] transition-[background-color,transform] duration-300 ${
+                  isHairQuoteCategory(service.category) ? 'hidden md:inline-flex' : 'inline-flex'
+                }`}>
                 Book on WhatsApp <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
