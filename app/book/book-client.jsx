@@ -19,6 +19,7 @@ import {
 import { getAttribution, formatAttributionCell } from '../../lib/attribution.js'
 import { saveBookingRecord, readBookingRecord, listUpcomingBookings, resolveStoredCancelToken } from '../../lib/booking-storage.js'
 import { getHeadlineDeal, isDealActive, isDealUpcoming, formatDealRange } from '../../src/deals-data.js'
+import { resolveServiceFromNameParam } from '../../lib/book-query.js'
 
 const BOOK_DRAFT_KEY = 'farwa-book-draft'
 
@@ -41,6 +42,7 @@ function loadBookDraft(searchParams) {
 
   const serviceIdParam = searchParams.get('serviceId')
   const serviceIdsParam = searchParams.get('serviceIds')
+  const serviceNameParam = searchParams.get('service')
   const categoryParam = searchParams.get('category')
   const dateParam = searchParams.get('date')
   const timeParam = searchParams.get('time')
@@ -50,6 +52,8 @@ function loadBookDraft(searchParams) {
     ? serviceIdsParam.split(',').map((s) => parseInt(s.trim(), 10)).filter((n) => Number.isFinite(n) && n > 0)
     : []
   const legacyId = serviceIdParam != null ? parseInt(serviceIdParam, 10) : NaN
+  const namedService = resolveServiceFromNameParam(serviceNameParam, categoryParam)
+  const namedIds = namedService ? [namedService.id] : []
   const draftIds = Array.isArray(draft?.serviceIds)
     ? draft.serviceIds.map((id) => parseInt(String(id), 10)).filter((n) => Number.isFinite(n) && n > 0)
     : draft?.serviceId != null
@@ -60,7 +64,9 @@ function loadBookDraft(searchParams) {
     ? idsFromParam
     : Number.isFinite(legacyId) && legacyId > 0
       ? [legacyId]
-      : draftIds
+      : namedIds.length > 0
+        ? namedIds
+        : draftIds
   idList = [...new Set(idList)]
 
   const selectedServices = idList

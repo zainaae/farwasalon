@@ -321,7 +321,7 @@ export const CAT_META = {
   'Nails':           { img: '/pedicure.jpg',       video: '/manicurephotography.mp4',
     tagline: 'Manicure, pedicure & nail art from Rs 300' },
   'Bridal':          { img: '/bridal.jpg',
-    tagline: 'Full bridal package Rs 25,000 — trials and event looks available' },
+    tagline: 'Full bridal package from Rs 25,000 — trials and event looks available' },
   'Hair':            { img: '/hairdo.jpg',
     tagline: 'Cuts, colour & styling from Rs 1,500' },
   'Eyebrow Tattoo':  { img: '/eyebrowtattoo.jpg',

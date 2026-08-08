@@ -71,7 +71,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'How far ahead should I book the bridal trial?',
-        a: 'Schedule your Bridal Trial (Rs 8,000) about 2–4 weeks before the wedding so there is time to adjust shade, hair, or draping. Lock the wedding date 2–3 months ahead in peak season (October–February).',
+        a: 'Schedule your Bridal Trial (from Rs 8,000) about 2–4 weeks before the wedding so there is time to adjust shade, hair, or draping. Lock the wedding date 2–3 months ahead in peak season (October–February).',
       },
       {
         q: 'Do you travel to homes or venues for bridal?',
@@ -176,7 +176,7 @@ export const FAQ_GROUPS = [
     items: [
       {
         q: 'How much does bridal makeup cost in Karachi?',
-        a: 'At Farwa Beauty Salon in PECHS, bridal services start at Rs 8,000 for a Bridal Trial, with Engagement Look at Rs 12,000, Mehndi/Dholki at Rs 10,000, and the Full Bridal Package at Rs 25,000. Premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event, and the best-known names run well past that. We deliver the same techniques with 18 years of practice at printed prices.',
+        a: 'At Farwa Beauty Salon in PECHS, bridal services start from Rs 8,000 for a Bridal Trial, with Engagement Look from Rs 12,000, Mehndi/Dholki from Rs 10,000, and the Full Bridal Package from Rs 25,000 — every bridal look includes hair, so the printed figure is a quote floor confirmed before the day. Premium Karachi studios publish roughly Rs 30,000 to Rs 45,000 for a single event, and the best-known names run well past that. We deliver the same techniques with 18 years of practice at printed starting prices.',
       },
       {
         q: 'How much does threading cost in PECHS?',
