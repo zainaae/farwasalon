@@ -10,6 +10,7 @@ import { ChevronRight, Quote } from 'lucide-react'
 import StarRating from './components/star-rating.jsx'
 import {
   CAT_SLUGS,
+  LazyVideo,
   WordmarkDivider,
 } from '../src/shared.jsx'
 import { GOOGLE_GBP_STATS, FACEBOOK_TESTIMONIALS } from '../src/google-reviews-data.js'
@@ -27,6 +28,8 @@ import {
   WA_NUMBER,
   GOOGLE_REVIEW_LINK,
 } from '../src/data.js'
+import { SERVICE_PANEL_LOOP } from '../src/salon-media.js'
+import { webmSourceFor } from '../lib/video-manifest.js'
 import {
   getGbpStatsForDisplay,
   getManualReviewsPayload,
@@ -102,8 +105,7 @@ function StatsStrip() {
   )
 }
 
-/** Category hover clips only — no default /ct.mp4 bed. Touch devices never
- *  hover, so the gate matches the capability the clip answers. */
+/** Category hover clips only — desktop + real hover. Touch never hovers. */
 function useHoverVideoEnabled() {
   const [enabled, setEnabled] = useState(false)
   useEffect(() => {
@@ -117,26 +119,67 @@ function useHoverVideoEnabled() {
   return enabled
 }
 
+/** Idle owned loop — mobile and desktop. Off when the user asks for less motion. */
+function useOwnedLoopEnabled() {
+  const [enabled, setEnabled] = useState(false)
+  useEffect(() => {
+    queueMicrotask(() => {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      if (!reduce) setEnabled(true)
+    })
+  }, [])
+  return enabled
+}
+
+const PANEL_LOOP = SERVICE_PANEL_LOOP[0]
+
+/**
+ * Sticky services media.
+ *
+ * Why the old static default existed: the panel used to loop /ct.mp4 as a bed,
+ * then that was stripped on mobile (753 KB for a hover answer touch never gets).
+ * Idle fell back to /bridal2.jpg (same still as the hero — phones saw the bride
+ * twice), then /threading.jpg (stock CAT_META poster). Idle is now the one owned
+ * service clip in SERVICE_PANEL_LOOP so phones get motion without stock or hover.
+ * Desktop still swaps on category hover when a clip/img exists.
+ */
 function ServiceMediaPanel({ hovered }) {
+  const hoverVideoEnabled = useHoverVideoEnabled()
+  const loopEnabled = useOwnedLoopEnabled()
   const activeVideo = hovered ? CAT_META[hovered]?.video : null
-  const videoEnabled = useHoverVideoEnabled()
+  /* Same file as the idle loop — keep one decoder, don't mount a second <video>. */
+  const hoverIsDefaultClip = activeVideo === PANEL_LOOP.video
+  const showHoverVideo = Boolean(activeVideo && hoverVideoEnabled && !hoverIsDefaultClip)
+  const showHoverImg = Boolean(hovered && !CAT_META[hovered]?.video)
+  const coverLoop = showHoverVideo || showHoverImg
+  const hoverWebm = showHoverVideo ? webmSourceFor(activeVideo) : null
 
   return (
     <div className="relative w-full h-full bg-[#0d0609]">
       <Image
-        src="/threading.jpg"
+        src={PANEL_LOOP.poster}
         alt=""
         fill
         quality={50}
         sizes="(max-width: 768px) 100vw, 45vw"
         className="object-cover object-center transition-opacity duration-500 pointer-events-none"
-        style={{ opacity: (hovered && (activeVideo || CAT_META[hovered]?.img)) ? 0 : 1 }}
         aria-hidden
       />
-      {hovered && !CAT_META[hovered]?.video && (
+      {loopEnabled && (
+        <LazyVideo
+          src={PANEL_LOOP.video}
+          poster={PANEL_LOOP.poster}
+          playing={!coverLoop}
+          className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-500 ${
+            coverLoop ? 'opacity-0' : 'opacity-100'
+          }`}
+          aria-hidden="true"
+        />
+      )}
+      {showHoverImg && (
         <Image
           key={hovered}
-          src={CAT_META[hovered]?.img || '/bleachpolish.jpg'}
+          src={CAT_META[hovered]?.img || PANEL_LOOP.poster}
           alt={hovered}
           fill
           quality={65}
@@ -145,14 +188,20 @@ function ServiceMediaPanel({ hovered }) {
           aria-hidden="true"
         />
       )}
-      {activeVideo && videoEnabled && (
+      {showHoverVideo && (
         <video
           key={activeVideo}
-          src={activeVideo}
-          autoPlay muted loop playsInline
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none animate-fadeIn"
           aria-hidden="true"
-        />
+        >
+          {hoverWebm && <source src={hoverWebm} type="video/webm" />}
+          <source src={activeVideo} type="video/mp4" />
+        </video>
       )}
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 bg-gradient-to-t from-ink/80 to-transparent z-10">
         <p className="text-white/60 text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)] transition-colors duration-300">
