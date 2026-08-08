@@ -119,8 +119,9 @@ export default function BridalLandingPage() {
                 </p>
               </div>
 
-              {/* One loud Book on the fold; sticky chrome already carries Call/WA/Book. */}
-              <div className="cta-cluster mb-4">
+              {/* One loud Book + one secondary on the fold; sticky already has Call/WA/Book.
+                  Trial + Directions live below the hero / in Visit Us — not competing here. */}
+              <div className="cta-cluster mb-0">
                 <Link
                   href={fullPackageHref}
                   className="btn-loud btn-loud--light tap-safe w-full sm:w-auto"
@@ -134,22 +135,21 @@ export default function BridalLandingPage() {
                   Full price list
                 </Link>
               </div>
-              <p className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-[family-name:var(--font-inter)]">
-                <Link
-                  href={trialHref}
-                  className="tap-safe inline-flex items-center min-h-[44px] link-underline text-white/75 hover:text-white"
-                >
-                  Or book Bridal Trial (from Rs 8,000)
-                </Link>
-                <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe inline-flex items-center min-h-[44px] link-underline text-white/75 hover:text-white">
-                  Directions
-                </a>
-              </p>
             </div>
           </div>
         </section>
 
         <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
+          <p className="mb-8 text-sm font-[family-name:var(--font-inter)] text-stone">
+            Prefer a trial first?{' '}
+            <Link href={trialHref} className="tap-safe link-underline text-ink hover:text-stone font-medium">
+              Book Bridal Trial (from Rs 8,000)
+            </Link>
+            {' · '}
+            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe link-underline text-ink hover:text-stone font-medium">
+              Directions
+            </a>
+          </p>
           <section className="mb-14" aria-labelledby="event-taxonomy-heading">
             <h2 id="event-taxonomy-heading" className="section-title mb-3">
               Event looks → Farwa packages

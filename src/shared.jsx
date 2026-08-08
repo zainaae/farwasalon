@@ -435,6 +435,18 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
                   {label}
                 </Link>
               ))}
+              <a
+                href={MAPS_LINK}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => {
+                  track('DirectionsIntent', { from: 'mobile-nav' })
+                  setMenuOpen(false)
+                }}
+                className="tap-safe inline-flex items-center min-h-[44px] text-[11px] tracking-[0.18em] uppercase text-stone hover:text-ink font-[family-name:var(--font-inter)] mt-2 border-t border-border-soft pt-3"
+              >
+                Visit Us · Directions
+              </a>
               <Link href="/book" onClick={() => setMenuOpen(false)}
                 className="tap-safe inline-flex items-center justify-center min-h-[44px] bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] px-5 py-3 w-full sm:w-fit mt-3">
                 Book an Appointment

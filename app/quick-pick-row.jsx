@@ -4,9 +4,8 @@ import Link from 'next/link'
 import ArrowUpRight from './components/icon-sprite.jsx'
 import { SERVICES, formatPrice, track } from '../src/data.js'
 
-const CATEGORY_COUNT = Object.keys(SERVICES).length
-
-/* Six shortcuts — eight made fold 2 a spreadsheet. Full menu stays one tap away. */
+/* Six shortcuts — eight made fold 2 a spreadsheet. Full menu stays one tap away
+   via the header “All” link (do not add a 7th “View all” grid orphan). */
 const QUICK_PICK_CATEGORIES = [
   'Threading',
   'Bridal',
@@ -98,19 +97,6 @@ export default function QuickPickRow() {
               </Link>
             </div>
           ))}
-          <div className="min-w-0 h-full">
-            <Link
-              href="/services"
-              onClick={() => track('QuickPick', { category: 'all' })}
-              aria-label={`View all ${CATEGORY_COUNT} service categories`}
-              className="tap-safe quick-pick-card quick-pick-card--all"
-            >
-              <span className="font-[family-name:var(--font-syne)] font-bold text-[11px] sm:text-[12px] text-ink uppercase leading-tight line-clamp-2 w-full min-h-[2.5em]">
-                View all {CATEGORY_COUNT}
-              </span>
-              <span className="text-stone text-[10px] font-[family-name:var(--font-inter)]">Categories</span>
-            </Link>
-          </div>
         </div>
       </div>
     </section>
