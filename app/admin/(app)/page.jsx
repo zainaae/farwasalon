@@ -36,7 +36,7 @@ export default async function AdminTodayPage({ searchParams }) {
     <section>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-[family-name:var(--font-fraunces)] text-3xl font-semibold tracking-tight text-ink">
+          <h1 className="font-display text-3xl font-semibold tracking-tight text-ink">
             Today
           </h1>
           <p className="mt-1 text-sm text-ink/60">{ymd} · Asia/Karachi</p>

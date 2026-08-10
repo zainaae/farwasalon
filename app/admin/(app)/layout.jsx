@@ -29,7 +29,7 @@ export default async function AdminAppLayout({ children }) {
           <div className="flex min-w-0 items-center gap-6">
             <Link
               href="/admin"
-              className="shrink-0 font-[family-name:var(--font-fraunces)] text-lg font-semibold tracking-tight"
+              className="font-display shrink-0 text-lg font-semibold tracking-tight"
             >
               Farwa desk
             </Link>

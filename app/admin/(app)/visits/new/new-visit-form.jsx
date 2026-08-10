@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState, useTransition } from 'react'
+import { useMemo, useRef, useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { formatPrice } from '../../../../../src/site-config.js'
 import { computeTotals, PAYMENT_MODES } from '../../../../../lib/pos/totals.js'
@@ -19,10 +19,6 @@ function newIdempotencyKey() {
   return `idem-${Date.now()}-${Math.random().toString(16).slice(2)}`
 }
 
-function lineKey() {
-  return `L${Date.now()}-${Math.random().toString(16).slice(2, 8)}`
-}
-
 /**
  * @param {{
  *   catalog: Array<{ id: number, name: string, category: string, price_pkr: number, from_price: boolean }>,
@@ -38,7 +34,11 @@ function lineKey() {
  */
 export default function NewVisitForm({ catalog, prefill = null }) {
   const router = useRouter()
-  const [pending, startTransition] = useTransition()
+  const [searchPending, startSearchTransition] = useTransition()
+  const [clientPending, startClientTransition] = useTransition()
+  const [dealPending, startDealTransition] = useTransition()
+  const [savePending, startSaveTransition] = useTransition()
+  const idempotencyKeyRef = useRef(null)
 
   const [phoneQuery, setPhoneQuery] = useState(prefill?.phone || '')
   const [client, setClient] = useState(prefill?.client || null)
@@ -48,18 +48,33 @@ export default function NewVisitForm({ catalog, prefill = null }) {
   )
   const [searchHits, setSearchHits] = useState([])
 
-  const [lines, setLines] = useState(() =>
-    (prefill?.lines || []).map((l) => ({
+  const [lines, setLines] = useState(() => {
+    const seed = prefill?.lines || []
+    return seed.map((l, i) => ({
       ...l,
-      key: lineKey(),
+      key: `L${i + 1}`,
       final_price_pkr:
         l.final_price_pkr === undefined || l.final_price_pkr === null
           ? l.is_from_price
             ? ''
             : l.unit_price_pkr
           : l.final_price_pkr,
-    })),
-  )
+    }))
+  })
+  const lineSeq = useRef((prefill?.lines || []).length)
+
+  function nextLineKey() {
+    lineSeq.current += 1
+    return `L${lineSeq.current}`
+  }
+
+  function getIdempotencyKey() {
+    if (!idempotencyKeyRef.current) {
+      idempotencyKeyRef.current = newIdempotencyKey()
+    }
+    return idempotencyKeyRef.current
+  }
+
   const [catalogPick, setCatalogPick] = useState('')
   const [customName, setCustomName] = useState('')
   const [customPrice, setCustomPrice] = useState('')
@@ -74,7 +89,6 @@ export default function NewVisitForm({ catalog, prefill = null }) {
   const [notes, setNotes] = useState(prefill?.notes || '')
   const [appointmentId] = useState(prefill?.appointment_id || null)
 
-  const [idempotencyKey] = useState(newIdempotencyKey)
   const [formError, setFormError] = useState('')
   const [saved, setSaved] = useState(null)
   const [receiptText, setReceiptText] = useState('')
@@ -120,7 +134,7 @@ export default function NewVisitForm({ catalog, prefill = null }) {
     e.preventDefault()
     setClientMsg('')
     setSearchHits([])
-    startTransition(async () => {
+    startSearchTransition(async () => {
       const res = await searchClientsByPhone(phoneQuery)
       if (!res.ok) {
         setClientMsg(res.error)
@@ -144,7 +158,7 @@ export default function NewVisitForm({ catalog, prefill = null }) {
   function onCreateClient(e) {
     e.preventDefault()
     setClientMsg('')
-    startTransition(async () => {
+    startClientTransition(async () => {
       const res = await createClientRecord({
         name: createName,
         phone: phoneQuery,
@@ -167,7 +181,7 @@ export default function NewVisitForm({ catalog, prefill = null }) {
     setLines((prev) => [
       ...prev,
       {
-        key: lineKey(),
+        key: nextLineKey(),
         catalog_service_id: svc.id,
         name: svc.name,
         category: svc.category,
@@ -188,7 +202,7 @@ export default function NewVisitForm({ catalog, prefill = null }) {
     setLines((prev) => [
       ...prev,
       {
-        key: lineKey(),
+        key: nextLineKey(),
         catalog_service_id: null,
         name,
         category: 'Custom',
@@ -213,7 +227,7 @@ export default function NewVisitForm({ catalog, prefill = null }) {
   }
 
   function onApplyDeal() {
-    startTransition(async () => {
+    startDealTransition(async () => {
       const res = await suggestDealAction({ lines })
       if (!res.ok || !res.suggestion) {
         setDealHint(null)
@@ -240,7 +254,7 @@ export default function NewVisitForm({ catalog, prefill = null }) {
       setFormError('Select or create a client first.')
       return
     }
-    startTransition(async () => {
+    startSaveTransition(async () => {
       const payloadLines = lines.map((l) => ({
         catalog_service_id: l.catalog_service_id,
         name: l.name,
@@ -264,7 +278,7 @@ export default function NewVisitForm({ catalog, prefill = null }) {
         amount_paid_pkr:
           amountPaid === '' ? undefined : Number(amountPaid),
         notes,
-        idempotency_key: idempotencyKey,
+        idempotency_key: getIdempotencyKey(),
         appointment_id: appointmentId || undefined,
       })
 
@@ -351,10 +365,10 @@ export default function NewVisitForm({ catalog, prefill = null }) {
           />
           <button
             type="submit"
-            disabled={pending}
+            disabled={searchPending}
             className="rounded-sm border border-ink/20 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink disabled:opacity-60"
           >
-            Search
+            {searchPending ? 'Searching…' : 'Search'}
           </button>
         </form>
         {clientMsg && <p className="text-sm text-ink/65">{clientMsg}</p>}
@@ -413,10 +427,10 @@ export default function NewVisitForm({ catalog, prefill = null }) {
             </label>
             <button
               type="submit"
-              disabled={pending}
+              disabled={clientPending}
               className="rounded-sm bg-ink px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white disabled:opacity-60"
             >
-              Create client
+              {clientPending ? 'Creating…' : 'Create client'}
             </button>
           </form>
         )}
@@ -596,10 +610,10 @@ export default function NewVisitForm({ catalog, prefill = null }) {
           <button
             type="button"
             onClick={onApplyDeal}
-            disabled={pending || lines.length === 0}
+            disabled={dealPending || lines.length === 0}
             className="rounded-sm border border-ink/20 px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink disabled:opacity-40"
           >
-            Apply deal
+            {dealPending ? 'Applying…' : 'Apply deal'}
           </button>
         </div>
         {dealHint && <p className="text-sm text-ink/65">{dealHint}</p>}
@@ -704,10 +718,10 @@ export default function NewVisitForm({ catalog, prefill = null }) {
         <button
           type="button"
           onClick={onSave}
-          disabled={pending || !client || lines.length === 0}
+          disabled={savePending || !client || lines.length === 0}
           className="mt-3 inline-flex w-full items-center justify-center rounded-sm bg-ink px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-white disabled:opacity-50 sm:w-auto"
         >
-          {pending ? 'Saving…' : 'Save visit'}
+          {savePending ? 'Saving…' : 'Save visit'}
         </button>
       </div>
     </div>
