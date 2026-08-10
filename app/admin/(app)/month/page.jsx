@@ -145,7 +145,7 @@ export default async function AdminMonthPage({ searchParams }) {
                   <th className="py-2 font-semibold">Collected</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-ink/8">
+              <tbody className="divide-y divide-ink/10">
                 {days.map((d) => (
                   <tr
                     key={d.ymd}
