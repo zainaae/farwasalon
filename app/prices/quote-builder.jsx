@@ -80,6 +80,13 @@ function QuoteBuilderInner() {
     note,
   })
 
+  /* Hair quote path asks length + density — gate Send until both are set so
+     WhatsApp never goes out incomplete. Look-only works (party/signature) stay open. */
+  const needsLength = work.asks.includes('length')
+  const needsDensity = work.asks.includes('density')
+  const sendReady =
+    (!needsLength || Boolean(length)) && (!needsDensity || Boolean(density))
+
   const pill = (active) =>
     `tap-safe tab-pill ${active ? 'tab-pill-active' : ''}`
 
@@ -196,9 +203,25 @@ function QuoteBuilderInner() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3 pt-1">
-          <WaCta href={waHref} from="prices-quote-builder" className="tap-safe btn-primary">
-            Send for a quote <ArrowUpRight className="w-3.5 h-3.5" />
-          </WaCta>
+          {sendReady ? (
+            <WaCta href={waHref} from="prices-quote-builder" className="tap-safe btn-primary">
+              Send for a quote <ArrowUpRight className="w-3.5 h-3.5" />
+            </WaCta>
+          ) : (
+            <button
+              type="button"
+              disabled
+              aria-disabled="true"
+              className="tap-safe btn-primary opacity-40 cursor-not-allowed"
+            >
+              Send for a quote <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
+          )}
+          {!sendReady && (needsLength || needsDensity) && (
+            <p className="text-xs font-[family-name:var(--font-inter)] text-stone">
+              Pick length and density first
+            </p>
+          )}
         </div>
       </div>
     </section>
