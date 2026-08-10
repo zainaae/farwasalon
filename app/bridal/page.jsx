@@ -140,16 +140,6 @@ export default function BridalLandingPage() {
         </section>
 
         <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
-          <p className="mb-8 text-sm font-[family-name:var(--font-inter)] text-stone">
-            Prefer a trial first?{' '}
-            <Link href={trialHref} className="tap-safe link-underline text-ink hover:text-stone font-medium">
-              Book Bridal Trial (from Rs 8,000)
-            </Link>
-            {' · '}
-            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe link-underline text-ink hover:text-stone font-medium">
-              Directions
-            </a>
-          </p>
           <section className="mb-14" aria-labelledby="event-taxonomy-heading">
             <h2 id="event-taxonomy-heading" className="section-title mb-3">
               Event looks → Farwa packages
@@ -197,6 +187,18 @@ export default function BridalLandingPage() {
               </table>
             </div>
           </section>
+
+          {/* After taxonomy so Prefer-a-trial clears the ~844 mobile fold (hero + sticky). */}
+          <p className="mb-8 text-sm font-[family-name:var(--font-inter)] text-stone">
+            Prefer a trial first?{' '}
+            <Link href={trialHref} className="tap-safe link-underline text-ink hover:text-stone font-medium">
+              Book Bridal Trial (from Rs 8,000)
+            </Link>
+            {' · '}
+            <a href={MAPS_LINK} target="_blank" rel="noreferrer" className="tap-safe link-underline text-ink hover:text-stone font-medium">
+              Directions
+            </a>
+          </p>
 
           <section className="flow-loose" aria-labelledby="packages-heading">
             <h2 id="packages-heading" className="section-title mb-4">

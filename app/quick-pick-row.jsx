@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import ArrowUpRight from './components/icon-sprite.jsx'
-import { SERVICES, formatPrice, track } from '../src/data.js'
+import { SERVICES, formatPrice, track, categoryMarketingFromPrice } from '../src/data.js'
 
 /* Six shortcuts — eight made fold 2 a spreadsheet. Full menu stays one tap away
    via the header “All” link (do not add a 7th “View all” grid orphan). */
@@ -22,18 +22,11 @@ function minPriceFor(category) {
   return prices.length ? Math.min(...prices) : null
 }
 
-function maxPriceFor(category) {
-  const list = SERVICES[category]
-  if (!Array.isArray(list)) return null
-  const prices = list.map((s) => s.pricePkr).filter((p) => typeof p === 'number')
-  return prices.length ? Math.max(...prices) : null
-}
-
 export default function QuickPickRow() {
   const items = QUICK_PICK_CATEGORIES.filter((c) => SERVICES[c]?.length).map((c) => {
     /* Bridal marketing leads with the Full Package ceiling, not the trial floor. */
     if (c === 'Bridal') {
-      const ceiling = maxPriceFor(c)
+      const ceiling = categoryMarketingFromPrice(c)
       return {
         category: c,
         priceLabel: ceiling != null ? `Package ${formatPrice(ceiling)}` : null,

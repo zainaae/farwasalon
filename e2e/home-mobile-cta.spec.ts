@@ -53,6 +53,34 @@ test.describe('Home — mobile CTA bar', () => {
     await expect(page.getByRole('link', { name: 'Call the salon' })).toBeVisible()
   })
 
+  test('gallery hero has no zero-size btn-loud Book trap @390', async ({ page }) => {
+    await page.goto('/gallery')
+    await page.evaluate(() => window.scrollTo(0, 0))
+    const hero = page.locator('main .title-stack').first().locator('..')
+    await expect(hero.getByRole('link', { name: /Book an Appointment/i }).first()).toBeVisible()
+
+    const loud = await page.evaluate(() => {
+      const vh = window.innerHeight
+      return [...document.querySelectorAll('main a.btn-loud')].map((el) => {
+        const r = el.getBoundingClientRect()
+        const s = getComputedStyle(el)
+        return {
+          display: s.display,
+          w: Math.round(r.width),
+          h: Math.round(r.height),
+          inFold: r.top < vh && r.bottom > 0 && r.width > 0 && r.height > 0,
+          text: (el.textContent || '').replace(/\s+/g, ' ').trim().slice(0, 40),
+        }
+      })
+    })
+    /* Desktop loud Book must be display:none on mobile — not inline-flex at 0×0. */
+    const headerLoud = loud.filter((x) => x.text === 'Book an Appointment')
+    expect(headerLoud.length).toBeGreaterThanOrEqual(1)
+    expect(headerLoud[0].display).toBe('none')
+    expect(headerLoud[0].w).toBe(0)
+    expect(loud.filter((x) => x.inFold)).toHaveLength(0)
+  })
+
   test('footer Book Online links point to /book', async ({ page }) => {
     await page.goto('/')
     const bookLinks = page.locator('footer a[href="/book"], footer a[href^="/book?"]')

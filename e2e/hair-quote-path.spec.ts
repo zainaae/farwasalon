@@ -22,11 +22,18 @@ test.describe('Hair quote path', () => {
     await expect(colourPill).toHaveAttribute('aria-pressed', 'true')
     await expect(quote.getByText(/from Rs 4,000/i).first()).toBeVisible()
 
+    /* Gate: Send stays disabled until length + density are both set. */
+    await expect(quote.getByRole('button', { name: /Send for a quote/i })).toBeDisabled()
+    await expect(quote.getByText(/Pick length and density first/i)).toBeVisible()
+
     await quote.getByRole('button', { name: 'Long', exact: true }).click()
+    await expect(quote.getByRole('button', { name: /Send for a quote/i })).toBeDisabled()
+
     await quote.getByRole('button', { name: 'Thick', exact: true }).click()
     await quote.locator('#quote-note').fill('roots only')
 
     const send = quote.getByRole('link', { name: /Send for a quote/i })
+    await expect(send).toBeVisible()
     const href = await send.getAttribute('href')
     expect(href).toBeTruthy()
     const decoded = decodeURIComponent(href!)

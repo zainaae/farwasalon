@@ -5,7 +5,7 @@ import ArrowUpRight from '../components/icon-sprite.jsx'
 import WaCta from '../components/wa-cta.jsx'
 import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
-import { SERVICES, CAT_META, CAT_SLUGS, track, formatPrice } from '../../src/data.js'
+import { SERVICES, CAT_META, CAT_SLUGS, track, formatPrice, categoryMarketingFromPrice } from '../../src/data.js'
 import { AREAS_HUB_HREF, getClientFacingAreaLinks } from '../../lib/location-links.js'
 import LiveAvailability from './live-availability'
 import PageCloseCta from '../components/page-close-cta.jsx'
@@ -32,8 +32,7 @@ function MenuRow({ cat }) {
   const meta = getCatMeta(cat)
   const services = SERVICES[cat] || []
   const count = services.length
-  const prices = services.map(s => s.pricePkr).filter(Boolean)
-  const minPrice = prices.length ? Math.min(...prices) : null
+  const fromPrice = categoryMarketingFromPrice(cat)
   const href = `/services/${CAT_SLUGS[cat]}`
 
   return (
@@ -80,10 +79,10 @@ function MenuRow({ cat }) {
         {count} services
       </p>
       <span className="col-start-3 row-start-1 row-span-2 md:col-start-4 md:row-start-1 md:row-span-1 text-right shrink-0">
-        {minPrice && (
+        {fromPrice && (
           <>
             <span className="block text-[10px] tracking-[0.18em] uppercase font-[family-name:var(--font-inter)] text-stone">from</span>
-            <span className="block font-[family-name:var(--font-fraunces)] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight tabular-nums">{formatPrice(minPrice)}</span>
+            <span className="block font-[family-name:var(--font-fraunces)] font-bold text-ink text-sm sm:text-base md:text-lg leading-tight tabular-nums">{formatPrice(fromPrice)}</span>
           </>
         )}
         <span className="mt-1.5 inline-flex items-center gap-1 text-[10px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-stone opacity-0 group-hover:opacity-100 transition-opacity duration-200">

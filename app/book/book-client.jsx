@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown, CalendarCheck } from 'lucide-react'
-import { SERVICES, ALL_SERVICES, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track, WA_NUMBER } from '../../src/data.js'
+import { SERVICES, ALL_SERVICES, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track, WA_NUMBER, categoryMarketingFromPrice } from '../../src/data.js'
 import WaCta from '../components/wa-cta.jsx'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { BOOKING_WINDOW_DAYS } from '../../lib/booking-date-rules.js'
@@ -720,8 +720,8 @@ export default function BookClient() {
                           <p className="text-stone text-[10px] font-[family-name:var(--font-inter)] mt-1">
                             {services.length} services
                             {(() => {
-                              const prices = services.map((s) => s.pricePkr).filter(Boolean)
-                              return prices.length ? ` · from ${formatPrice(Math.min(...prices))}` : ''
+                              const from = categoryMarketingFromPrice(cat)
+                              return from != null ? ` · from ${formatPrice(from)}` : ''
                             })()}
                           </p>
                         </button>
