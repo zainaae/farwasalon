@@ -185,20 +185,28 @@ export default function AzadiSalePage() {
                 14% off.<br />No asterisk.
               </h1>
 
-              <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-[family-name:var(--font-inter)] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 3 }}>
+              <p
+                className="azadi-in text-[color:var(--azadi-deep)]/75 text-sm md:text-base font-[family-name:var(--font-inter)] font-medium leading-snug max-w-lg mb-4"
+                style={{ '--i': 3 }}
+              >
+                Freedom Deal — Azadi / Independence Day salon offer in PECHS, Karachi
+                (5–14 August 2026).
+              </p>
+
+              <p className="azadi-in text-[color:var(--azadi-deep)]/85 text-base md:text-lg font-[family-name:var(--font-inter)] font-light leading-relaxed max-w-lg mb-4" style={{ '--i': 4 }}>
                 Once your visit reaches Rs 1,400, the whole bill is 14% less — 5 to 14
                 August. Not &ldquo;up to&rdquo; 14%. Not a package someone else chose for you.
                 Book what you actually came in for.
               </p>
 
-              <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-[family-name:var(--font-inter)] font-light max-w-lg mb-8" style={{ '--i': 4 }}>
+              <p className="azadi-in text-[color:var(--azadi-deep)]/65 text-sm font-[family-name:var(--font-inter)] font-light max-w-lg mb-8" style={{ '--i': 5 }}>
                 Our rates have been printed on this website since {LAUNCH_MONTH} — the day we
                 launched. We didn&rsquo;t raise them in July to discount them in August — scroll the{' '}
                 <Link href="/prices" className="underline underline-offset-2 hover:no-underline">price list</Link>{' '}
                 and check.
               </p>
 
-              <div className="azadi-in flex flex-wrap items-center gap-3" style={{ '--i': 5 }}>
+              <div className="azadi-in flex flex-wrap items-center gap-3" style={{ '--i': 6 }}>
                 <Link href="/book" className="tap-safe azadi-btn">
                   Build your combo online <ArrowUpRight className="w-3.5 h-3.5" aria-hidden="true" />
                 </Link>
