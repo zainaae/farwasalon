@@ -873,6 +873,11 @@
 }
 
 /* ── Display fonts ── */
+/* Family-only utility for admin headings — avoids Tailwind arbitrary
+   font-[family-name:var(--font-…)] so SSR/client class strings stay boring. */
+.font-display {
+  font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
+}
 .display-hero {
   font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
   font-weight: 700;

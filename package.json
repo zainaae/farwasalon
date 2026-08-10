@@ -22,10 +22,16 @@
     "verify": "npm run lint && npm run test && npm run build",
     "verify:full": "npm run verify && npm run test:e2e",
     "ping:indexnow": "node scripts/ping-indexnow.mjs",
+    "pos:sync-catalog": "node scripts/sync-pos-catalog.mjs",
+    "pos:sync-catalog:dry": "node scripts/sync-pos-catalog.mjs --dry-run",
+    "pos:import-bookings": "node scripts/import-online-bookings.mjs",
+    "pos:import-bookings:dry": "node scripts/import-online-bookings.mjs --dry-run",
     "qa:workflow": "node scripts/qa-workflow-run.mjs",
     "test:coverage": "node ./node_modules/vitest/vitest.mjs run --coverage"
   },
   "dependencies": {
+    "@supabase/ssr": "^0.12.4",
+    "@supabase/supabase-js": "^2.112.2",
     "framer-motion": "^12.43.0",
     "googleapis": "^171.4.0",
     "lucide-react": "^1.28.0",
