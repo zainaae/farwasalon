@@ -143,12 +143,25 @@ export default function ClientShell({ children }) {
   }, [])
 
   const pathname = usePathname()
+  /* Admin CRM/POS has its own shell — no marketing nav, footer, or sticky CTAs. */
+  const isAdmin = pathname.startsWith('/admin')
   const isHome = pathname === '/'
-  const hideSticky = pathname.startsWith('/book')
-  const useMobileCtaBar = shouldShowMobileCtaBar(pathname)
+  const hideSticky = pathname.startsWith('/book') || isAdmin
+  const useMobileCtaBar = !isAdmin && shouldShowMobileCtaBar(pathname)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
 
   const stickyHidden = hideSticky || mobileNavOpen
+
+  if (isAdmin) {
+    return (
+      <LazyMotion features={loadDomAnimation} strict>
+        <MotionConfig reducedMotion="user">
+          <ScrollToTop />
+          {children}
+        </MotionConfig>
+      </LazyMotion>
+    )
+  }
 
   return (
     <LazyMotion features={loadDomAnimation} strict>
