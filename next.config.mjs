@@ -23,7 +23,8 @@ const contentSecurityPolicy = [
      the moment NEXT_PUBLIC_META_PIXEL_ID is set in Vercel the pixel injects a
      script from that host, and without these entries CSP blocks it silently —
      no error, no events, and nothing obvious to debug. */
-  "connect-src 'self' https://plausible.io https://wa.me https://connect.facebook.net https://www.facebook.com",
+  /* *.supabase.co — staff auth for /admin (anon key + Auth REST). */
+  "connect-src 'self' https://plausible.io https://wa.me https://connect.facebook.net https://www.facebook.com https://*.supabase.co wss://*.supabase.co",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'self'",
