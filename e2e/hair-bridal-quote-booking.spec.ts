@@ -36,6 +36,18 @@ test.describe('Hair and bridal quote booking', () => {
     await expect(chip).not.toContainText(/from Rs 8,000/i)
   })
 
+  test('/bridal Prefer-a-trial clears the 844 mobile fold', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.goto('/bridal')
+    await expect(page.getByRole('heading', { level: 1, name: /Bridal makeup/i })).toBeVisible()
+
+    const trial = page.getByRole('link', { name: /Book Bridal Trial \(from Rs 8,000\)/i }).first()
+    await expect(trial).toBeAttached()
+    const top = await trial.evaluate((el) => el.getBoundingClientRect().top)
+    /* Must sit clearly below first viewport (was ~10px under fold before taxonomy). */
+    expect(top).toBeGreaterThan(844)
+  })
+
   test('/bridal Full Package Book → fromPrice language + can advance', async ({ page }) => {
     const serviceId = getServiceIdByName('Full Bridal Package')
     expect(serviceId).toBeTruthy()
