@@ -20,6 +20,22 @@ test.describe('Hair and bridal quote booking', () => {
     await expect(bridal).not.toContainText(/From Rs 8,000/i)
   })
 
+  test('/services Bridal row leads from Full Package, not trial', async ({ page }) => {
+    await page.goto('/services')
+    const bridal = page.getByRole('link', { name: /Bridal/i }).filter({ hasText: /from/i }).first()
+    await expect(bridal).toBeVisible()
+    await expect(bridal).toContainText(/Rs 25,000/)
+    await expect(bridal).not.toContainText(/Rs 8,000/)
+  })
+
+  test('/book Bridal category chip leads from Full Package, not trial', async ({ page }) => {
+    await page.goto('/book')
+    const chip = page.getByRole('button', { name: /Bridal/i }).filter({ hasText: /from/i })
+    await expect(chip).toBeVisible()
+    await expect(chip).toContainText(/from Rs 25,000/i)
+    await expect(chip).not.toContainText(/from Rs 8,000/i)
+  })
+
   test('/bridal Full Package Book → fromPrice language + can advance', async ({ page }) => {
     const serviceId = getServiceIdByName('Full Bridal Package')
     expect(serviceId).toBeTruthy()

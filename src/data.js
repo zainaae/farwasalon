@@ -270,6 +270,21 @@ export function getServiceIdByName(name) {
   return ALL_SERVICES.find((s) => s.name === name)?.id ?? null
 }
 
+/**
+ * Marketing "from" on category cards/chips. Bridal leads with Full Package
+ * (~25k), not Trial (~8k) — trial stays bookable as a secondary SKU on the menu.
+ */
+export function categoryMarketingFromPrice(category) {
+  const list = SERVICES[category]
+  if (!Array.isArray(list) || list.length === 0) return null
+  if (category === 'Bridal') {
+    const full = list.find((s) => s.name === 'Full Bridal Package')
+    if (full?.pricePkr != null) return full.pricePkr
+  }
+  const prices = list.map((s) => s.pricePkr).filter((p) => typeof p === 'number')
+  return prices.length ? Math.min(...prices) : null
+}
+
 /** Optional add-on service ids shown during booking confirm step */
 export const SERVICE_ADDON_IDS = {
   1: [2],       // Eyebrow Threading → Upper Lip

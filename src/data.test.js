@@ -10,6 +10,7 @@ import {
   filterServiceCategories,
   getDefaultServiceIdForCategory,
   getServiceIdByName,
+  categoryMarketingFromPrice,
 } from './data.js'
 import { BLOG_POSTS } from './blog-data.js'
 import { formatServicePrice } from './data.js'
@@ -278,5 +279,21 @@ describe('hair and bridal prices are marked as starting prices', () => {
     expect(formatServicePrice(SERVICES['Threading'][0])).toBe('Rs 200')
     expect(formatServicePrice(null)).toBeNull()
     expect(formatServicePrice({ pricePkr: null })).toBeNull()
+  })
+})
+
+describe('categoryMarketingFromPrice', () => {
+  it('Bridal leads with Full Package, not trial min', () => {
+    expect(categoryMarketingFromPrice('Bridal')).toBe(25000)
+    expect(Math.min(...SERVICES.Bridal.map((s) => s.pricePkr))).toBe(8000)
+  })
+
+  it('other categories still use the cheapest printed rate', () => {
+    expect(categoryMarketingFromPrice('Threading')).toBe(
+      Math.min(...SERVICES.Threading.map((s) => s.pricePkr)),
+    )
+    expect(categoryMarketingFromPrice('Hair')).toBe(
+      Math.min(...SERVICES.Hair.map((s) => s.pricePkr)),
+    )
   })
 })
