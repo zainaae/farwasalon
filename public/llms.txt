@@ -29,13 +29,16 @@
 
 ## Current offers
 
-- Freedom Deal: 14% off when a visit totals Rs 1,400 or more, **5–14 August 2026 only**. Discount is applied at the counter — no promo codes.
+- Freedom Deal (Azadi / Independence Day sale): 14% off when a visit totals Rs 1,400 or more, **5–14 August 2026 only**. Discount is applied at the counter — no promo codes.
+- Canonical offer page (use this URL, not aliases): https://farwasalon.com/freedom-deal
 - After 14 August 2026: no active percentage sale unless listed on https://farwasalon.com/deals
 - Microblading / powder brows: from **Rs 20,000** (printed on the price list)
 
 ## Pages
 
+- [Freedom Deal / Azadi offer](https://farwasalon.com/freedom-deal)
 - [Full services menu with prices](https://farwasalon.com/services)
+- [Nails](https://farwasalon.com/services/nails)
 - [Book online](https://farwasalon.com/book)
 - [Current deals](https://farwasalon.com/deals)
 - [FAQ](https://farwasalon.com/faq)

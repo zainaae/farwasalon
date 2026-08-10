@@ -21,17 +21,44 @@ that changes prices, deals, or trust claims:
 
 | # | URL | Why |
 |---|-----|-----|
-| 1 | `https://farwasalon.com/` | Home trust + deal strip |
-| 2 | `https://farwasalon.com/prices` | Full rate card |
-| 3 | `https://farwasalon.com/services/eyebrow-tattoo` | Microblading Rs 20,000 |
-| 4 | `https://farwasalon.com/blog/eyebrow-microblading-karachi-guide` | Money blog |
-| 5 | `https://farwasalon.com/deals` | Live offers only |
-| 6 | `https://farwasalon.com/freedom-deal` | 14% meta through 14 Aug 2026 |
-| 7 | `https://farwasalon.com/faq` | Price / booking answers |
+| 1 | `https://farwasalon.com/freedom-deal` | Azadi / Freedom Deal canonical (AI Features was citing `/azadi-sale`) |
+| 2 | `https://farwasalon.com/` | Home trust + deal strip |
+| 3 | `https://farwasalon.com/prices` | Full rate card |
+| 4 | `https://farwasalon.com/services/nails` | Top AI Features page |
+| 5 | `https://farwasalon.com/services/eyebrow-tattoo` | Microblading Rs 20,000 |
+| 6 | `https://farwasalon.com/blog/eyebrow-microblading-karachi-guide` | Money blog |
+| 7 | `https://farwasalon.com/deals` | Live offers only |
+| 8 | `https://farwasalon.com/faq` | Price / booking answers |
 
 Same checklist lives in [`search-console-setup.md`](./search-console-setup.md)
 (Request indexing after deploy). Spot-check the Inspection HTML preview: no
 `first-facial-10`, no invented 20%/10% off copy, Freedom still **14%** until end date.
+
+---
+
+## 1c. Aug 2026 — Validate fix (Redirect error + Not found)
+
+Live probes (2026-08-10): all five Azadi aliases are a **single** `308` →
+`/freedom-deal` → `200`. The two “Not found” hubs are **200** on apex again.
+GSC rows are stale — owner must click **Validate fix**.
+
+**Redirect error → Validate fix** (do not Request indexing on these):
+
+1. `https://farwasalon.com/azadi-offer`
+2. `https://farwasalon.com/independence-sale`
+3. `https://farwasalon.com/independence-day-offer`
+4. `https://farwasalon.com/jashn-e-azadi`
+5. `https://farwasalon.com/azadi-deal`
+
+Also validate if listed: `/azadi-sale`, `/azaadi-sale`, `/14-august-sale`, `/14-august-offer`.
+
+**Not found → Validate fix:**
+
+1. `https://farwasalon.com/services/nails-in-north-nazimabad`
+2. `https://farwasalon.com/services/bridal-makeup-in-tariq-road`
+
+Then **URL Inspection → Request indexing** on `https://farwasalon.com/freedom-deal`
+so Azadi / Independence queries stop attaching to alias URLs in AI Features.
 
 ---
 
