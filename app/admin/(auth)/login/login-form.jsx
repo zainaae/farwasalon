@@ -77,7 +77,7 @@ export default function AdminLoginPage() {
       <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-stone/80">
         Farwa staff
       </p>
-      <h1 className="mt-3 font-[family-name:var(--font-fraunces)] text-3xl font-semibold tracking-tight text-ink">
+      <h1 className="font-display mt-3 text-3xl font-semibold tracking-tight text-ink">
         Sign in
       </h1>
       <p className="mt-2 text-sm leading-relaxed text-ink/70">
