@@ -197,19 +197,16 @@ export const BLOG_SLUGS = BLOG_POSTS.map((p) => p.slug)
 export const BLOG_ROUTES = BLOG_SLUGS.map((slug) => `/blog/${slug}`)
 
 export const LOCATION_SAMPLE_SLUGS = [
-  'threading-in-pechs-karachi',
-  'bridal-makeup-in-pechs-karachi',
-  'facials-in-pechs-karachi',
-  'threading-in-gulshan',
-  'bridal-makeup-in-clifton-karachi',
-  'bridal-makeup-in-dha',
-  'threading-in-dha',
-  'threading-in-bahadurabad',
-  'waxing-in-tariq-road',
-  'hair-in-dha',
+  'pechs-karachi',
+  'tariq-road',
+  'bahadurabad',
+  'gulshan',
 ]
 
-export const LOCATION_ROUTES = LOCATION_SAMPLE_SLUGS.map((slug) => `/services/${slug}`)
+export const LOCATION_ROUTES = [
+  '/areas',
+  ...LOCATION_SAMPLE_SLUGS.map((slug) => `/areas/${slug}`),
+]
 
 export const SITEMAP_COUNTS = {
   static: getStaticSitemapEntries().length,
@@ -223,7 +220,7 @@ export const SITEMAP_COUNTS = {
     getLocationSitemapEntries().length,
   neighborhoods: NEIGHBORHOODS.length,
   topServices: TOP_SERVICES.length,
-  locationFormula: '18 priority -in- hubs (legacy best-* → 301)',
+  locationFormula: '/areas hub + 4 kept area hubs (60 service×area + 6 retired areas → 301)',
 }
 
 export const NAV_FOOTER_MATRIX = {

@@ -19,12 +19,12 @@ Generated 2026-07-30 from the deployed sitemaps. 62 URLs total
 | **Done** | `/deals` | noindex + omitted from sitemap + in nav |
 | **Done** | Ratings | 4.5★ / 35 reviews sitewide |
 | **Partly** | Home → blog links | 7 of 29 posts linked — OK for now |
-| **Owner-blocked** | ~70 area / `*-in-*` hubs | Still **200**. Do **not** mass-301 until owner names 3–4 keepers **with real route + parking**. Recommended candidates only (not decided): PECHS, Tariq Road, Bahadurabad, Gulshan |
-| **Still open** | ~69 meta cutoffs | Mostly area hubs — wait for keep/redirect decision |
+| **Done** | Area doorway 301s | 60 `*-in-*` → category; 6 thin `/areas` → `/areas`; keep PECHS, Tariq Road, Bahadurabad, Gulshan + `/areas` hub; sitemap-locations **5** |
+| **Clears with 301s** | Meta cutoffs on retired hubs | Surviving kept-hub metas budgeted |
 | **Still open** | `/prices` date | Still “updated 31 July 2026” — do **not** bump without a real printed-menu review |
 | **Shipped / N/A** | Small copy (facials count, engagement duration, bridal “from”, phone display, titles) | Engagement `~3h`→`~2h 30m` on `/bridal`; privacy phone spacing; longest non-area titles trimmed. Facials already “11”; home bridal already “from”; featured+grid review repeat is intentional, not a data duplicate |
 
-**Area 301s:** WAITING on owner keep list + route/parking. Engineering must not invent parking or pick keepers.
+**Area 301s:** SHIPPED on auditor keepers (PECHS / Tariq Road / Bahadurabad / Gulshan).
 
 ---
 
@@ -231,44 +231,48 @@ deploying absolute apex destinations; do not delete these redirects.
 
 ---
 
-## 5. BLOCKED ON OWNER — mass 301 of ~70 area/location pages (do not ship yet)
+## 5. SHIPPED — mass 301 of doorway area/location pages (30 Oct 2026)
 
-**Status:** **owner-blocked.** Do **not** mass-301 until the owner (1) picks
-3–4 keepers and (2) supplies **real route + parking** for each. Do not invent
-parking or choose keepers in Cursor. WIP on `fix/area-doorway-redirects` (if
-any) must stay unmerged.
+**Status:** shipped on auditor-recommended keepers (owner did not pick a custom
+list). Branch `fix/area-doorway-redirects`.
 
-**Auditor (30 Oct 2026 rechecks ~15:45 and ~17:06 UTC):** all ~70 area/location
-URLs still return **200**. Biggest open indexation item.
+**Before:** ~70 live URLs — 60 `/services/{service}-in-{area}` SKUs + 10
+`/areas/{slug}` hubs — all returning **200**, listed in
+`sitemap-locations.xml` (70 entries).
 
-**Recommended keep candidates (not decided):** PECHS, Tariq Road, Bahadurabad,
-Gulshan — GSC triage hints only.
+**After:**
 
-### What exists today
+### Keep (indexed + in sitemap)
 
-About **60–70** live `/services/{service}-in-{area}` hubs (6 services × ~10
-neighbourhoods) plus related area surfaces. They still earn some local
-impressions. An earlier 2026-07-30 retirement of near-duplicates was reversed
-after Performance data showed page-one rankings.
+| URL | Notes |
+|-----|--------|
+| `/areas` | New hub — kept catchments + “we serve greater Karachi from PECHS” |
+| `/areas/pechs-karachi` | Highest priority — salon location |
+| `/areas/tariq-road` | Kept hub |
+| `/areas/bahadurabad` | Kept hub |
+| `/areas/gulshan` | Gulshan-e-Iqbal |
 
-### Recommended redirect plan (after owner keep list + parking)
+`sitemap-locations.xml` = **5** URLs (hub + 4 kept). `LAST_SERVICE_UPDATE` /
+`/prices` “updated 31 July” unchanged.
 
-1. Export GSC **Pages** + **Performance** for `/services/*-in-*` and `/areas/*`.
-2. Keep hubs the owner named (with real route/parking copy).
-3. For the rest only, 301 to the matching service category or `/areas` hub.
-4. After any 301 batch: GSC **Validate fix** on Redirect / Soft 404 rows; do not
-   Request indexing on the old URLs.
+### Redirect (301)
 
-### Owner action required
+| Pattern | Count | Destination |
+|---------|------:|-------------|
+| `/services/{service}-in-{area}` | 60 | Parent category (`/services/threading`, `/services/bridal`, `/services/facials`, `/services/hair`, `/services/nails`, `/services/rica-wax`) |
+| Legacy `/services/best-{service}-{area}` | 60 | Same parent categories (no hop through retired `-in-` landers) |
+| Non-kept `/areas/{slug}` (dha, clifton-karachi, saddar, north-nazimabad, shahrah-e-faisal, korangi) | 6 | `/areas` |
 
-- [ ] Name 3–4 keepers
-- [ ] Provide real route + parking notes for each keeper
-- [ ] Approve engineering to ship the 301s
+Meta cutoffs on retired SKUs clear via redirect. Kept hub + major category
+metas already budgeted; trivial kept-hub description polish only.
 
-Until that checklist is done, **leave the ~70 hubs live**. Meta cutoffs (~69)
-mostly clear with the redirects — wait.
+### Post-deploy
 
----
+- GSC **Validate fix** on Redirect / Soft 404 rows for old URLs — do **not**
+  Request indexing on redirected URLs.
+- Internal chrome/blog/bridal/home links updated to `/areas/*` + category pages
+  (avoid redirect chains).
+
 
 ## 6. Oct 2026 crawl — Freedom Deal retirement (eng)
 
@@ -288,3 +292,23 @@ intentional: `PRICES_LAST_VERIFIED` was bumped to 2026-10-30 for freshness-test
 hygiene / targeted waxing-floor corrections, **not** a full line-by-line menu
 re-verify. Do **not** bump sitemap `/prices` lastmod or the page eyebrow until
 the owner completes a real printed-menu pass against the floor list.
+
+---
+
+## 7. SEO watch status — run 4 (30 Oct 2026)
+
+Automated crawl / SERP spot-check. Update after each watch run.
+
+| ID | Item | Status | Notes |
+|----|------|--------|-------|
+| **NEW** | Waxing FAQ / FAQPage JSON-LD claimed “Individual area pricing starts from Rs 600” on waxing hubs while titles/meta use **From Rs 150** (Lower Lip Rica Hot Wax) | **Fixed** | `CAT_FAQS['Rica Wax']` full-body Q&A now splits body (from Rs 600) vs face hot wax (from Rs 150). Feeds `/services/waxing-in-*`, `/services/rica-wax`, `/services/honey-wax` (shared FAQ slice), and FAQPage JSON-LD. |
+| F1 | *(prior crawl item)* | Holding | — |
+| F2 | *(prior crawl item)* | Holding | — |
+| #418 | *(prior crawl item)* | Holding | — |
+| Reviews | GBP / on-site review sync | Holding | — |
+| **O1** | Mass 301 of ~70 area/location pages | **Owner-blocked** | ~70 locs still **200**; await keeper list + real route/parking (§5). No mass 301s in eng until approved. |
+| **O2** | Meta description cutoffs | **Open** | Mostly area hubs; trivial polish on keepers only until redirect plan ships. |
+| **O3** | `/prices` “updated” date | **Untouched** | No fake bump — see §6 Prices date honesty. |
+| **O4** | `/deals` noindex + home blog count | **Intentional** | `/deals` stays noindex until a real offer; do not re-index. Home showing 7 blogs is OK for now. |
+
+**Cache / external checks:** Google’s cached HTML may still show old **Rs 600** waxing FAQ floors or stale **4.6·19** rating snippets until the owner **Request indexing** on money URLs (§1b). For live SERP/cache probes, use WebSearch **extended mode** — do not treat cache as source of truth after deploy.
