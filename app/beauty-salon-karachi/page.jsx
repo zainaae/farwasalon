@@ -223,8 +223,12 @@ export default function BeautySalonKarachiPage() {
                 Facials near me
               </Link>
               {' · '}
-              <Link href="/services/threading-in-pechs-karachi" className="link-underline hover:text-ink font-medium">
-                Threading in PECHS
+              <Link href="/services/threading" className="link-underline hover:text-ink font-medium">
+                Threading
+              </Link>
+              {' · '}
+              <Link href="/areas/pechs-karachi" className="link-underline hover:text-ink font-medium">
+                PECHS studio
               </Link>
             </p>
           </section>
