@@ -73,6 +73,13 @@ export function getHeadlineDeal(now = new Date()) {
   return getActiveDeals(now).find((d) => d.accent) ?? getUpcomingDeals(now).find((d) => d.accent) ?? null
 }
 
+/** Same gate as /deals robots + title: indexable only while a live or teased
+ *  offer exists. Sitemap and IndexNow must follow this — never list /deals
+ *  while the page is noindex. */
+export function hasDealOffers(now = new Date()) {
+  return getActiveDeals(now).length > 0 || getUpcomingDeals(now).length > 0
+}
+
 /** True while validFrom…validUntil (inclusive) covers today. */
 export function isDealActive(deal, now = new Date()) {
   if (!deal) return false

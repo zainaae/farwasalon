@@ -212,22 +212,30 @@ deploying absolute apex destinations; do not delete these redirects.
 
 ---
 
-## 5. BLOCKED ON OWNER — mass 301 of 60 location SKUs (do not ship yet)
+## 5. BLOCKED ON OWNER — mass 301 of ~70 area/location pages (do not ship yet)
 
 **Status:** engineering recommendation only. **Do not mass-301** until the owner
 checks Search Console impressions for the location hubs.
 
+**Auditor (30 Oct 2026 re-crawl ~15:45 UTC):** all ~70 area/location URLs still
+return **200**. This remains the **biggest open indexation item**, blocked on a
+GSC impressions check — not an engineering ship-now task.
+
+Meta description rewrites across the ~69 location hubs mostly clear once those
+301s ship; do not batch-rewrite metas first.
+
 ### What exists today
 
-About **60** live `/services/{service}-in-{area}` hubs (6 services × ~10
-neighbourhoods), e.g. `waxing-in-tariq-road`, `facials-in-clifton`. They still
-earn some local impressions. An earlier 2026-07-30 retirement of near-duplicates
-was reversed after Performance data showed page-one rankings.
+About **60–70** live `/services/{service}-in-{area}` hubs (6 services × ~10
+neighbourhoods) plus related area surfaces, e.g. `waxing-in-tariq-road`,
+`facials-in-clifton`. They still earn some local impressions. An earlier
+2026-07-30 retirement of near-duplicates was reversed after Performance data
+showed page-one rankings.
 
 ### Recommended redirect plan (after GSC review)
 
 1. Export GSC **Pages** + **Performance** for the last 28–90 days filtered to
-   `/services/*-in-*`.
+   `/services/*-in-*` (and `/areas/*` if listed).
 2. Keep hubs with meaningful impressions/clicks (especially PECHS + top areas).
 3. For thin/zero-impression hubs only, 301 to the matching service category
    (`/services/waxing` → use the primary category slug such as `/services/rica-hot-wax`
@@ -243,7 +251,7 @@ was reversed after Performance data showed page-one rankings.
 - [ ] Mark keep vs redirect candidates
 - [ ] Approve engineering to ship the 301s
 
-Until that checklist is done, **leave the 60 hubs live**.
+Until that checklist is done, **leave the ~70 hubs live**.
 
 ---
 
@@ -253,3 +261,15 @@ Until that checklist is done, **leave the 60 hubs live**.
 and `llms.txt`. Re-request indexing is not needed on `/freedom-deal`; use
 **Validate fix** under "Page with redirect" after production deploy clears the
 stale prerender (home/prices/llms must show zero "freedom" in HTML).
+
+`/deals` is **noindex** while no live/teased offers exist; sitemap + IndexNow
+omit it under the same `hasDealOffers` gate and re-include it when a real deal
+is published again.
+
+### Prices date honesty (30 Oct 2026)
+
+`/prices` still shows **updated 31 July 2026** (`LAST_SERVICE_UPDATE`). That is
+intentional: `PRICES_LAST_VERIFIED` was bumped to 2026-10-30 for freshness-test
+hygiene / targeted waxing-floor corrections, **not** a full line-by-line menu
+re-verify. Do **not** bump sitemap `/prices` lastmod or the page eyebrow until
+the owner completes a real printed-menu pass against the floor list.
