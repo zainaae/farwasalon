@@ -4,8 +4,9 @@ import WaCta from '../../components/wa-cta.jsx'
 import PageCloseCta from '../../components/page-close-cta.jsx'
 import { notFound } from 'next/navigation'
 import { MapPin, Clock, Car } from 'lucide-react'
-import { NEIGHBORHOODS, TOP_SERVICES } from '../../../src/location-seo.js'
+import { NEIGHBORHOODS, TOP_SERVICES, KEPT_AREA_SLUGS } from '../../../src/location-seo.js'
 import { AREA_CONTENT } from '../../../src/area-content.js'
+import { AREAS_HUB_HREF } from '../../../lib/location-links.js'
 import { CAT_SLUGS, SERVICES, formatPrice, YEARS_ACTIVE, MAPS_LINK, WA_DEFAULT } from '../../../src/data.js'
 import JsonLd from '../../json-ld'
 import { pageSocialMeta } from '../../../lib/page-metadata.js'
@@ -32,7 +33,10 @@ function Fact({ icon, label, value }) {
 }
 
 export function generateStaticParams() {
-  return NEIGHBORHOODS.filter((n) => AREA_CONTENT[n.slug]).map((n) => ({ area: n.slug }))
+  const kept = new Set(KEPT_AREA_SLUGS)
+  return NEIGHBORHOODS.filter((n) => kept.has(n.slug) && AREA_CONTENT[n.slug]).map((n) => ({
+    area: n.slug,
+  }))
 }
 
 export async function generateMetadata({ params }) {
