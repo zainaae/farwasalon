@@ -90,7 +90,7 @@ QA_WRITE=1 BASE_URL=https://farwasalon.com npm run qa:workflow
 
 - [ ] `/beauty-salon-karachi` hub loads
 - [ ] Sample location URLs (10 in dataset) — H1, book CTA, breadcrumbs
-- [ ] `/sitemap-locations.xml` — **120** URLs (6 × 10 × 2)
+- [ ] `/sitemap-locations.xml` — **5** URLs (`/areas` + 4 kept hubs)
 
 ## 7. APIs (workflow runner)
 

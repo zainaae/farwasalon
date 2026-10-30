@@ -1,4 +1,8 @@
-import { getBestLocationRedirects } from './src/location-seo.js'
+import {
+  getBestLocationRedirects,
+  getServiceAreaRedirects,
+  getRetiredAreaRedirects,
+} from './src/location-seo.js'
 import { toCanonicalUrl } from './lib/canonical-origin.js'
 
 /** @type {import('next').NextConfig} */

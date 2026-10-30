@@ -173,7 +173,7 @@ export const BLOG_POSTS = [
       { type: 'h2', text: 'Why PECHS Is a Practical “Near Me” for Central Karachi' },
       {
         type: 'p',
-        text: 'Plot 165/G-1, Saima Terrace is minutes from Tariq Road and Bahadurabad, and an easy drive from Gulshan, DHA, Clifton, Saddar, and Shahrah-e-Faisal offices. If you are comparing [threading in PECHS](/services/threading-in-pechs-karachi) with a listing closer to home, weigh hygiene and published rates — a ten-minute further drive beats a double-dipped stick and a surprise bill.',
+        text: 'Plot 165/G-1, Saima Terrace is minutes from Tariq Road and Bahadurabad, and an easy drive from Gulshan, DHA, Clifton, Saddar, and Shahrah-e-Faisal offices. If you are comparing [threading](/services/threading) near [PECHS](/areas/pechs-karachi) with a listing closer to home, weigh hygiene and published rates — a ten-minute further drive beats a double-dipped stick and a surprise bill.',
       },
 
       { type: 'h2', text: 'What You Pay (Printed, Not Negotiated)' },
@@ -238,7 +238,7 @@ export const BLOG_POSTS = [
       { type: 'h2', text: 'Which Facial If You Are Booking Nearby' },
       {
         type: 'p',
-        text: 'Congested or oily skin: start with cleansing, not a heavy cream facial. Dull or uneven tone: HD or Janssen whitening. Sensitive skin: ask for the herbal / organic option (from Rs 1,600). Our [facials in PECHS](/services/facials-in-pechs-karachi) page lists the local landing detail; the full compare lives in the [gold vs whitening guide](/blog/gold-facial-vs-whitening-facial) and the [acne facial guide](/blog/best-facial-for-acne-oily-skin-karachi).',
+        text: 'Congested or oily skin: start with cleansing, not a heavy cream facial. Dull or uneven tone: HD or Janssen whitening. Sensitive skin: ask for the herbal / organic option (from Rs 1,600). Our [facials](/services/facials) menu and [PECHS area guide](/areas/pechs-karachi) cover the local detail; the full compare lives in the [gold vs whitening guide](/blog/gold-facial-vs-whitening-facial) and the [acne facial guide](/blog/best-facial-for-acne-oily-skin-karachi).',
       },
 
       { type: 'h2', text: 'Why Drive to PECHS Instead of the Closest Parlour' },
@@ -925,7 +925,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Yes. We offer makeup services for mothers, sisters, and bridal party members as well. These can be booked alongside your bridal package at discounted rates. Contact us for family package pricing.' },
 
       { type: 'h2', text: 'Ready to Start Planning?' },
-      { type: 'p', text: 'Every bride\'s journey is different, and we love helping you find the perfect look. WhatsApp us at +92 322 278 2254 or [book a Bridal Trial online](/book). Browse [bridal makeup in PECHS](/services/bridal-makeup-in-pechs-karachi) and the full [Bridal services](/services/bridal) menu — packages from Rs 8,000, printed and ready.' },
+      { type: 'p', text: 'Every bride\'s journey is different, and we love helping you find the perfect look. WhatsApp us at +92 322 278 2254 or [book a Bridal Trial online](/book). Browse the [PECHS studio](/areas/pechs-karachi) guide and the full [Bridal services](/services/bridal) menu — packages from Rs 8,000, printed and ready.' },
     ],
   },
   {

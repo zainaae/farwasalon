@@ -184,7 +184,7 @@ export default function BeautySalonKarachiPage() {
               given that journey.
             </p>
             <ul className="flex flex-wrap gap-2">
-              {NEIGHBORHOODS.filter((n) => AREA_CONTENT[n.slug]).map((n) => (
+              {getKeptNeighborhoods().map((n) => (
                 <li key={n.slug}>
                   <Link href={`/areas/${n.slug}`} className="tab-pill hover:border-ink hover:text-ink">
                     {n.name}
@@ -192,6 +192,11 @@ export default function BeautySalonKarachiPage() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href={AREAS_HUB_HREF} className="tab-pill hover:border-ink hover:text-ink">
+                  All areas →
+                </Link>
+              </li>}
             </ul>
             <p className="mt-8 pt-6 border-t border-border-soft text-xs text-stone font-[family-name:var(--font-inter)]">
               <Link href="/" className="link-underline hover:text-ink font-medium">
