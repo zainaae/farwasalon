@@ -197,7 +197,7 @@ export const CAT_FAQS = {
   ],
   'Rica Wax': [
     { q: 'What is the difference between Rica Wax and Rica Hot Wax?', a: 'Rica Wax (strip wax) is a premium Italian formula used with cloth strips — ideal for large body areas like arms, legs, and back. Rica Hot Wax is stripless/peel and applied directly — best for small, sensitive areas like face and underarms.' },
-    { q: 'How much does full body Rica wax cost?', a: 'Full Body Rica Wax at Farwa Beauty Salon costs Rs 4,000 (~60 min). This includes arms, legs, underarms, and other body areas. Individual area pricing starts from Rs 600.' },
+    { q: 'How much does full body Rica wax cost?', a: 'Full Body Rica Wax at Farwa Beauty Salon costs Rs 4,000 (~60 min). This includes arms, legs, underarms, and other body areas. Single Rica body areas start from Rs 600; Rica hot wax for lips and other small face areas starts from Rs 150 — every line is on /prices.' },
     { q: 'Can I get Rica wax during pregnancy?', a: 'Rica wax is generally safe during pregnancy as it\'s gentle and doesn\'t contain harsh chemicals. However, skin may be more sensitive during pregnancy — please let our team know so we can adjust pressure and temperature accordingly.' },
     { q: 'How do I book Rica vs honey wax?', a: 'Pick the service that matches your skin on farwasalon.com/book, or WhatsApp +92 322 2782254 with the areas you want done. We publish every rate on /prices — no surprise quotes after you are in the chair.' },
     { q: 'What hygiene standards do you follow for waxing?', a: 'Single-use applicators, no double-dipping into client-facing pots, fresh strips, and sanitised stations between guests. Ask us to walk you through the setup anytime.' },
