@@ -45,7 +45,7 @@ export const GOOGLE_GBP_STATS = {
   rating: 4.6,
   reviewCount: 19,
   /** YYYY-MM-DD the two figures above were last checked against Google Maps. */
-  lastVerified: '2026-07-31',
+  lastVerified: '2026-10-30',
 }
 
 /**

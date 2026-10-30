@@ -41,7 +41,7 @@ const HAIR_DEPENDENT = { fromPrice: true }
 
 /** ISO date the printed menu in SERVICES was last checked against the floor price list.
  *  Bump in the same commit that changes any pricePkr. Enforced by src/prices-freshness.test.js. */
-export const PRICES_LAST_VERIFIED = '2026-08-07'
+export const PRICES_LAST_VERIFIED = '2026-10-30'
 
 export const SERVICES = {
 

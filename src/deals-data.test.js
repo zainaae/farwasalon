@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { DEALS, getActiveDeals, getUpcomingDeals, getHeadlineDeal, formatDealRange, isDealEnded, isDealActive, isDealUpcoming } from './deals-data.js'
+import { DEALS, getActiveDeals, getUpcomingDeals, getHeadlineDeal, formatDealRange, isDealEnded, isDealActive, isDealUpcoming, buildDealStripModel } from './deals-data.js'
 
 describe('deals data', () => {
   it('every deal has the required fields and valid dates', () => {
@@ -68,6 +68,23 @@ describe('Freedom Deal lifecycle', () => {
 
   it('formats the range for banner copy', () => {
     expect(formatDealRange(deal)).toBe('5–14 August')
+  })
+
+  it('deal strip model is null after the campaign — never "Now on"', () => {
+    const after = at('2026-08-15')
+    expect(getHeadlineDeal(after)).toBeNull()
+    expect(buildDealStripModel(getHeadlineDeal(after))).toBeNull()
+
+    const during = at('2026-08-10')
+    const headline = getHeadlineDeal(during)
+    const model = buildDealStripModel(headline, {
+      live: true,
+      range: formatDealRange(headline),
+    })
+    expect(model).not.toBeNull()
+    expect(model.live).toBe(true)
+    expect(model.blurb).toMatch(/Freedom Deal/)
+    expect(model.pct).toBe('14')
   })
 })
 
