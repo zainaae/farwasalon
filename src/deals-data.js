@@ -116,3 +116,30 @@ export function formatDealRange(deal) {
     ? `${fmt(deal.validFrom, false)}–${fmt(deal.validUntil)}`
     : `${fmt(deal.validFrom)} – ${fmt(deal.validUntil)}`
 }
+
+/**
+ * Props for the sitewide deal strip. Returns null when there is no headline
+ * deal — callers must not render "Now on" copy in that case.
+ *
+ * @param {object|null} deal — from getHeadlineDeal(now)
+ * @param {{ live: boolean, range: string }} opts
+ */
+export function buildDealStripModel(deal, { live, range } = {}) {
+  if (!deal) return null
+  const pct = deal.title.match(/(\d+)\s*%/)?.[1] ?? null
+  const href = deal.id === 'freedom-deal-2026' ? '/freedom-deal' : deal.href || '/deals'
+  const blurb =
+    deal.id === 'freedom-deal-2026'
+      ? 'Freedom Deal — 14% off when your visit hits Rs 1,400'
+      : deal.title
+  return {
+    dealId: deal.id,
+    image: deal.image || null,
+    imageAlt: deal.imageAlt || null,
+    href,
+    live: Boolean(live),
+    range: range || formatDealRange(deal),
+    pct,
+    blurb,
+  }
+}

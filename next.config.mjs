@@ -67,10 +67,12 @@ const nextConfig = {
        crawler on www for one hop (next.config runs before proxy.js), which
        Search Console reports as Redirect error for aliases like
        /independence-sale and legacy /services/best-*. */
+    { source: '/azadi', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
     { source: '/azadi-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
     { source: '/azadi-deal', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
     { source: '/azaadi-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
     { source: '/azadi-offer', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
+    { source: '/freedom', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
     { source: '/jashn-e-azadi', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
     { source: '/independence-day-offer', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
     { source: '/independence-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },

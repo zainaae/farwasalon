@@ -218,35 +218,23 @@ Post weekly to keep the listing active and visible. Google Posts appear directly
 
 ---
 
-## 5b. Freedom Deal + trust scrub (owner ops — do this week)
+## 5b. Freedom Deal + trust scrub (owner ops — overdue since 15 Aug 2026)
 
 Engineering cannot log into GBP or WhatsApp as the owner. Complete this checklist
-in Google Business Profile and on the salon phone.
+in Google Business Profile and on the salon phone. **Still required as of Oct 2026**
+if any Freedom / fake-% posts remain live on channels.
 
 ### Scrub stale posts / offers
 
 Delete or unpublish any Google Post, WhatsApp Status, Channel post, or print
 flyer that still says:
 
+- Freedom Deal / Azadi / **14%** / “Now on” (campaign ended **14 Aug 2026**)
 - Microblading at **Rs 15,000** (live price is **Rs 20,000**)
 - **20% off** / **10% off** / “10% code” / first-facial promo codes
 - Any deal not listed on [farwasalon.com/deals](https://farwasalon.com/deals)
 
-### One clean Freedom post (live through 14 Aug 2026)
-
-```
-📍 Farwa Beauty Salon · PECHS Block 3
-
-Freedom Deal — 14% off
-
-Any visit that totals Rs 1,400 or more gets 14% off at the counter.
-Combine any services. No promo code. Ends 14 August 2026.
-
-📞 +92 322 278 2254
-🌐 farwasalon.com/freedom-deal
-```
-
-CTA button → Website → `https://farwasalon.com/freedom-deal` (or Book → `/book`).
+Do **not** post a new Freedom Deal — the website no longer claims it is live.
 
 ### NAP / hours + site stats
 
@@ -262,7 +250,7 @@ count, `lastVerified`) so the website matches Maps — see
 
 | Until | Honour |
 |-------|--------|
-| Through **14 Aug 2026** | Freedom Deal: **14%** at the counter when the basket is **Rs 1,400+**. No codes. |
+| Through **14 Aug 2026** | Freedom Deal: **14%** at the counter when the basket was **Rs 1,400+**. No codes. |
 | From **15 Aug 2026** | Printed / website price list only. Do not mention Freedom, 14%, or old 20%/10% language. |
 
 WhatsApp morning confirms + evening review asks: [`whatsapp-business-setup.md`](./whatsapp-business-setup.md) §5a / §5b.

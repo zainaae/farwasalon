@@ -37,6 +37,7 @@ export async function generateMetadata() {
       title: { absolute: ENDED_TITLE },
       description: ENDED_DESCRIPTION,
       alternates: { canonical: '/freedom-deal' },
+      robots: { index: false, follow: true },
       ...pageSocialMeta({
         title: ENDED_TITLE,
         description: ENDED_DESCRIPTION,
