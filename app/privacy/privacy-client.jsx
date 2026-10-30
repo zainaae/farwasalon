@@ -75,14 +75,14 @@ export default function PrivacyClient() {
             <div>
               <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">Your rights</h2>
               <p className="text-body text-sm">
-                You can ask us to correct or delete booking details we hold. Message the salon on WhatsApp at +92 322 2782254 with your name, phone, and (if relevant) Booking ID — we will handle the request from the sheet. Clearing this site&apos;s data in your browser removes the local confirmation/cancel copy on that device only.
+                You can ask us to correct or delete booking details we hold. Message the salon on WhatsApp at +92 322 278 2254 with your name, phone, and (if relevant) Booking ID — we will handle the request from the sheet. Clearing this site&apos;s data in your browser removes the local confirmation/cancel copy on that device only.
               </p>
             </div>
 
             <div>
               <h2 className="font-[family-name:var(--font-syne)] font-bold text-base text-ink mb-2">Contact</h2>
               <p className="text-body text-sm">
-                For privacy questions, WhatsApp +92 322 2782254 or visit us in PECHS, Karachi.
+                For privacy questions, WhatsApp +92 322 278 2254 or visit us in PECHS, Karachi.
               </p>
             </div>
           </div>

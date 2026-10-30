@@ -14,7 +14,7 @@ import {
   buildFaqPageSchema,
   getAggregateRating,
 } from '../../lib/business-schema.js'
-import { CAT_SLUGS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice, formatServicePrice, WA_DEFAULT } from '../../src/data.js'
+import { CAT_SLUGS, SERVICES, YEARS_ACTIVE, MAPS_LINK, getServiceIdByName, formatPrice, formatServicePrice, formatDuration, WA_DEFAULT } from '../../src/data.js'
 import { CAT_FAQS } from '../../src/cat-seo-content.js'
 
 const title = 'Bridal Makeup Karachi — Full Package from Rs 25,000 | Farwa'
@@ -213,7 +213,7 @@ export default function BridalLandingPage() {
                   <h3 className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink uppercase mb-1">{pkg.name}</h3>
                   <p className="text-stone text-xs font-[family-name:var(--font-inter)] mb-2">
                     {formatServicePrice(pkg)}
-                    {pkg.durationMinutes ? ` · ~${Math.round(pkg.durationMinutes / 60)}h` : ''}
+                    {pkg.durationMinutes ? ` · ~${formatDuration(pkg.durationMinutes)}` : ''}
                   </p>
                   {pkg.desc && <p className="text-body text-sm mb-3">{pkg.desc}</p>}
                   {Array.isArray(pkg.includes) && pkg.includes.length > 0 && (
