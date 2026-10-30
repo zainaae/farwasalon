@@ -36,10 +36,10 @@ test('areas hub lists kept catchments', async ({ page }) => {
   const res = await page.goto('/areas')
   expect(res?.status()).toBe(200)
   await expect(page.getByRole('heading', { level: 1 })).toContainText(/Areas we serve/i)
-  await expect(page.getByRole('link', { name: /PECHS/i })).toBeVisible()
-  await expect(page.getByRole('link', { name: /Tariq Road/i })).toBeVisible()
-  await expect(page.getByRole('link', { name: /Bahadurabad/i })).toBeVisible()
-  await expect(page.getByRole('link', { name: /Gulshan/i })).toBeVisible()
+  await expect(page.locator('main a[href="/areas/pechs-karachi"]')).toBeVisible()
+  await expect(page.locator('main a[href="/areas/tariq-road"]')).toBeVisible()
+  await expect(page.locator('main a[href="/areas/bahadurabad"]')).toBeVisible()
+  await expect(page.locator('main a[href="/areas/gulshan"]')).toBeVisible()
 })
 
 test('area pages state different drive times from each other', async ({ page }) => {
