@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { DEALS, getActiveDeals, getUpcomingDeals, getHeadlineDeal, formatDealRange, isDealEnded, isDealActive, isDealUpcoming, buildDealStripModel } from './deals-data.js'
+import { DEALS, getActiveDeals, getUpcomingDeals, getHeadlineDeal, formatDealRange, isDealEnded, isDealActive, isDealUpcoming, buildDealStripModel, hasDealOffers } from './deals-data.js'
 
 describe('deals data', () => {
   it('every deal has the required fields and valid dates', () => {
@@ -101,6 +101,13 @@ describe('deals page after a campaign ends', () => {
     const after = getActiveDeals(new Date('2026-08-15T12:00:00Z'))
     expect(after.some((d) => d.id === 'freedom-deal-2026')).toBe(false)
     expect(after.length).toBe(0)
+  })
+
+  it('hasDealOffers matches live/tease windows used for robots + sitemap', () => {
+    expect(hasDealOffers(new Date('2026-07-30T12:00:00Z'))).toBe(true)
+    expect(hasDealOffers(new Date('2026-08-10T12:00:00Z'))).toBe(true)
+    expect(hasDealOffers(new Date('2026-08-15T12:00:00Z'))).toBe(false)
+    expect(hasDealOffers(new Date('2026-10-30T12:00:00Z'))).toBe(false)
   })
 })
 

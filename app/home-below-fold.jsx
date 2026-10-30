@@ -892,6 +892,8 @@ function FounderNote() {
    whole problem. The eight sections already carry `.cv-auto`
    (content-visibility: auto), so offscreen ones cost nothing to render. */
 function LatestGuides() {
+  /* Curated money + weak-inbound guides — not all 29 posts. Keep /deals here
+     as a standing offers entry even when the grid is empty/noindex. */
   const guides = [
     {
       href: '/blog/salon-price-list-karachi-2026',
@@ -902,6 +904,31 @@ function LatestGuides() {
       href: '/blog/eyebrow-microblading-karachi-guide',
       title: 'Eyebrow microblading guide',
       blurb: 'Cost, healing, and what Rs 20,000 includes in PECHS.',
+    },
+    {
+      href: '/blog/best-bridal-makeup-packages-karachi-2026',
+      title: 'Bridal makeup packages 2026',
+      blurb: 'Trial, mehndi, engagement, and full-day floors.',
+    },
+    {
+      href: '/blog/manicure-pedicure-price-list-karachi',
+      title: 'Manicure & pedicure prices',
+      blurb: 'Printed nail rates — classic through gel.',
+    },
+    {
+      href: '/blog/haircut-blowdry-hair-colour-cost-karachi',
+      title: 'Haircut, blowdry & colour',
+      blurb: 'What the from-prices mean for length and density.',
+    },
+    {
+      href: '/blog/rica-wax-vs-honey-wax-karachi',
+      title: 'Rica wax vs honey wax',
+      blurb: 'Which wax for face and body in Karachi humidity.',
+    },
+    {
+      href: '/blog/deep-cleansing-vs-facial-karachi',
+      title: 'Deep cleansing vs facial',
+      blurb: 'When to book extraction before a cream facial.',
     },
     {
       href: '/deals',
@@ -918,10 +945,10 @@ function LatestGuides() {
             Latest guides
           </h2>
           <p className="text-body text-sm md:text-[15px] max-w-xl mt-2">
-            Practical PECHS notes — prices, brows, and whatever offer is actually live.
+            Practical PECHS notes — prices, brows, bridal, nails, and whatever offer is actually live.
           </p>
         </div>
-        <ul className="grid sm:grid-cols-3 gap-6 max-w-4xl">
+        <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl">
           {guides.map((g) => (
             <li key={g.href}>
               <Link
@@ -941,6 +968,14 @@ function LatestGuides() {
             </li>
           ))}
         </ul>
+        <p className="mt-8">
+          <Link
+            href="/blog"
+            className="tap-safe inline-flex items-center gap-1 min-h-[44px] text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-plum-deep hover:text-ink transition-colors"
+          >
+            View all guides <ChevronRight className="w-3.5 h-3.5" />
+          </Link>
+        </p>
       </div>
     </section>
   )

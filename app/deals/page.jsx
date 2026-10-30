@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { connection } from 'next/server'
 import WaCta from '../components/wa-cta.jsx'
 import PageCloseCta from '../components/page-close-cta.jsx'
-import { getActiveDeals, getUpcomingDeals, getHeadlineDeal, isDealActive, formatDealRange } from '../../src/deals-data.js'
+import { getActiveDeals, getUpcomingDeals, getHeadlineDeal, isDealActive, formatDealRange, hasDealOffers } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import { SITE_ORIGIN, SALON_ID } from '../../lib/business-schema.js'
@@ -20,7 +20,7 @@ const EMPTY_DESCRIPTION =
 
 export async function generateMetadata() {
   await connection()
-  const hasOffers = getActiveDeals().length > 0 || getUpcomingDeals().length > 0
+  const hasOffers = hasDealOffers()
   const title = hasOffers ? LIVE_TITLE : EMPTY_TITLE
   const description = hasOffers ? LIVE_DESCRIPTION : EMPTY_DESCRIPTION
   return {
