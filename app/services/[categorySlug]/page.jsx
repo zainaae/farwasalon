@@ -78,7 +78,7 @@ export async function generateMetadata({ params }) {
   const title = seo?.title
     ? `${seo.title} | Farwa`
     : `${category} PECHS Karachi${priceHint} | Farwa`
-  /* Location pages have appended "★ 4.6 Google" to their description since
+  /* Location pages have appended "★ {rating} Google" to their description since
      launch (see the descTail above); the plain category pages never did — so
      the highest-impression service pages on the site shipped the weakest
      snippets. /services/eyebrow-tattoo is 241 impressions at 1.7% CTR. Appended

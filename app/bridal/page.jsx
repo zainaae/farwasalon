@@ -50,7 +50,7 @@ const BRIDAL_FAQS = [
   ...(CAT_FAQS.Bridal || []),
   {
     q: 'Do you travel for bridal, or is it studio-only?',
-    a: 'We are a women-only PECHS studio (one address). The Full Bridal Package includes event presence / on-site touch-ups by arrangement — WhatsApp your venue when you book. We do not operate as a rotating at-home parlour for daily services.',
+    a: 'We are a women-only PECHS studio (one address) and we do not offer home services. The Full Bridal Package can include wedding-venue day-of presence / touch-ups by arrangement — WhatsApp your venue when you book. That is venue support, not a home parlour visit.',
   },
 ]
 

@@ -13,19 +13,19 @@ advertises. The headline figures live in `GOOGLE_GBP_STATS` in the same file:
 
 ```js
 export const GOOGLE_GBP_STATS = {
-  rating: 4.6,
-  reviewCount: 19,
-  lastVerified: '2026-07-31',
+  rating: 4.5,
+  reviewCount: 35,
+  lastVerified: '2026-10-30',
 }
 ```
 
-Those two numbers feed **everything** — the `aggregateRating` structured data on
-all 127 pages, the homepage meta description, the "★ 4.6 on Google" appended to
-all 13 category descriptions, and the stars on the homepage. Nothing reads them
-from Google.
+Those two numbers feed **visible** copy — homepage meta, category descriptions,
+proof strip, OG/Twitter cards, and `llms.txt`. Do **not** emit self-serving
+`aggregateRating` JSON-LD for rich results (Google ineligible). Nothing reads
+the totals from Google automatically.
 
-So a review drive can take the salon from 19 to 50 on Google while the website
-keeps telling searchers 19. Undercounting yourself is the failure mode here, and
+So a review drive can take the salon from 35 to 50 on Google while the website
+keeps telling searchers 35. Undercounting yourself is the failure mode here, and
 it happens silently.
 
 ### Updating them

@@ -1,11 +1,13 @@
 import { ImageResponse } from 'next/og'
+import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
 
-export const alt = 'Farwa Beauty Salon — PECHS Karachi · 4.6★ · printed prices · book online'
+export const alt = `Farwa Beauty Salon — PECHS Karachi · ${GOOGLE_GBP_STATS.rating}★ · printed prices · book online`
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 /** Twitter card — same art as opengraph-image (no stock photography). */
 export default function TwitterImage() {
+  const ratingLine = `${GOOGLE_GBP_STATS.rating}★ · ${GOOGLE_GBP_STATS.reviewCount} Google reviews`
   return new ImageResponse(
     (
       <div
@@ -39,7 +41,7 @@ export default function TwitterImage() {
         </div>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 40 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontFamily: 'system-ui, sans-serif' }}>
-            <div style={{ fontSize: 28, fontWeight: 600 }}>4.6★ · 19 Google reviews</div>
+            <div style={{ fontSize: 28, fontWeight: 600 }}>{ratingLine}</div>
             <div style={{ fontSize: 22, opacity: 0.85 }}>102 printed prices · live online booking</div>
           </div>
           <div
