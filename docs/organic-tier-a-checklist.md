@@ -21,7 +21,7 @@ Do **not** restore the pruned thin location matrix. Grow hubs only with real uni
 
 `Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400 · Mon–Sat 11–7 · +92 322 278 2254`
 
-Women-only PECHS **studio** — one branch; not an at-home parlour for daily services.
+Women-only PECHS **studio** — one branch; no home services / at-home visits.
 
 ## Directory claim list (same NAP everywhere)
 

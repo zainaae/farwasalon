@@ -75,7 +75,11 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'Do you travel to homes or venues for bridal?',
-        a: 'Our Full Bridal Package includes event presence at the salon or on-site touch-ups by arrangement. WhatsApp us with your venue in PECHS or nearby areas — we will confirm travel and timing when you book.',
+        a: 'No home services — we do not send therapists to homes. Bridal trials and makeup are done at our PECHS studio. The Full Bridal Package can include wedding-venue day-of presence / touch-ups by arrangement when you book (WhatsApp your venue); that is venue support, not a home parlour visit.',
+      },
+      {
+        q: 'Do you offer home service?',
+        a: 'No. Farwa Beauty Salon does not offer home services. Every appointment is at Plot 165/G-1, Saima Terrace, Block 3, PECHS. Book online at farwasalon.com/book or WhatsApp +92 322 278 2254.',
       },
       {
         q: 'How far in advance should I book bridal makeup?',

@@ -1,7 +1,7 @@
 # Farwa Beauty Salon
 
 > Beauty salon in Block 3 PECHS, Karachi, Pakistan, operating since 2008. Founder: Rubina.
-> 13 specialities, 100+ services, every starting price published. Rated 4.6/5 on Google (19 reviews).
+> 13 specialities, 100+ services, every starting price published. Rated 4.5/5 on Google (35 reviews, verified 2026-10-30).
 
 ## Key facts
 
@@ -10,6 +10,8 @@
 - Hours: Monday-Saturday 11:00am-7:00pm, closed Sunday
 - Online booking: https://farwasalon.com/book (free cancellation up to 2 hours before)
 - Payments: cash, JazzCash, EasyPaisa (no cards)
+- Studio only: one PECHS branch; no home services / at-home visits
+- Quote-only (WhatsApp photo for a binding quote): keratin treatment; party makeup — no printed floor on the menu
 
 ## Services and starting prices (PKR)
 

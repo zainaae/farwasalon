@@ -373,7 +373,7 @@ Pre-fill the Q&A section with common questions. Log in with the business account
 **A:** Absolutely! We highly recommend a Bridal Trial session (PKR 8,000) so we can perfect your look before the big day. Book your trial at least 2–4 weeks before your wedding date by calling 0322-278-2254.
 
 ### Q9: Do you offer home service?
-**A:** Currently, we offer services at our salon in PECHS Block 3. For bridal services, home service may be available for an additional fee — please contact us at 0322-278-2254 to discuss your requirements.
+**A:** No. Farwa does not offer home services. Every appointment is at our studio in Block 3 PECHS (Plot 165/G-1, Saima Terrace). Call 0322-278-2254 or book at farwasalon.com/book.
 
 ### Q10: Is parking available near the salon?
 **A:** Yes, there is convenient street parking available near our salon in PECHS Block 3. The area is easily accessible from Shahrah-e-Quaideen and other main roads.

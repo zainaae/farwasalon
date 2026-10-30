@@ -42,8 +42,8 @@
  * the check-in is scheduled rather than remembered.
  */
 export const GOOGLE_GBP_STATS = {
-  rating: 4.6,
-  reviewCount: 19,
+  rating: 4.5,
+  reviewCount: 35,
   /** YYYY-MM-DD the two figures above were last checked against Google Maps. */
   lastVerified: '2026-10-30',
 }

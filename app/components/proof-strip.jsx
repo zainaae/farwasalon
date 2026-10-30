@@ -27,9 +27,9 @@ const SERVICE_COUNT = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
  * elevation as everything else.
  *
  * No row of stars here. StarRating draws five filled ones, and five filled
- * stars beside "4.6" claims a rating this salon does not have. The glyph in
- * "4.6★" carries the meaning without overstating it, which matters more than
- * decoration on the one strip whose whole job is to be believed.
+ * stars beside a non-5.0 aggregate overstates the listing. The glyph in
+ * "{rating}★" carries the meaning without overstating it, which matters more
+ * than decoration on the one strip whose whole job is to be believed.
  */
 export default function ProofStrip() {
   const items = [
@@ -37,7 +37,7 @@ export default function ProofStrip() {
       key: 'rating',
       lead: `${GOOGLE_GBP_STATS.rating}★`,
       /* Count lives in the reviews section — here the glyph is enough and
-         avoids restating "19 Google reviews" under the hero. */
+         avoids restating "{n} Google reviews" under the hero. */
       label: null,
       href: GOOGLE_REVIEW_LINK,
       ariaLabel: `${GOOGLE_GBP_STATS.rating} stars from ${GOOGLE_GBP_STATS.reviewCount} Google reviews`,

@@ -683,7 +683,7 @@ function TestimonialsPreview({ placesEnabled }) {
           </div>
           <div className="reviews-rating-row shrink-0 self-start sm:self-auto">
             {/* Text only — StarRating fills five stars and would claim a perfect
-                rating next to the honest 4.6★ aggregate. Per-review cards keep
+                rating next to the honest Google aggregate. Per-review cards keep
                 their own stars. */}
             <span className="text-stone text-[10px] sm:text-[11px] font-[family-name:var(--font-inter)] leading-snug whitespace-nowrap">
               {ratingLabel}
