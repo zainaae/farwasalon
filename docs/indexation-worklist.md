@@ -306,7 +306,7 @@ Automated crawl / SERP spot-check. Update after each watch run.
 | F2 | *(prior crawl item)* | Holding | — |
 | #418 | *(prior crawl item)* | Holding | — |
 | Reviews | GBP / on-site review sync | Holding | — |
-| **O1** | Mass 301 of ~70 area/location pages | **Owner-blocked** | ~70 locs still **200**; await keeper list + real route/parking (§5). No mass 301s in eng until approved. |
+| **O1** | Mass 301 of ~70 area/location pages | **Done** | Shipped: keep 4 hubs + `/areas`; 60+6 redirects (§5). |
 | **O2** | Meta description cutoffs | **Open** | Mostly area hubs; trivial polish on keepers only until redirect plan ships. |
 | **O3** | `/prices` “updated” date | **Untouched** | No fake bump — see §6 Prices date honesty. |
 | **O4** | `/deals` noindex + home blog count | **Intentional** | `/deals` stays noindex until a real offer; do not re-index. Home showing 7 blogs is OK for now. |
