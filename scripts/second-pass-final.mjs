@@ -3,7 +3,7 @@ import { chromium } from '@playwright/test'
 const BASE = 'http://localhost:3000'
 const routes = [
   '/', '/book', '/bridal', '/prices', '/services', '/services/facials',
-  '/services/threading', '/services/bridal-makeup-in-pechs-karachi',
+  '/services/threading', '/areas/pechs-karachi', '/areas',
   '/gallery', '/contact', '/about', '/faq', '/blog',
   '/blog/salon-price-list-karachi-2026', '/beauty-salon-karachi', '/privacy',
 ]

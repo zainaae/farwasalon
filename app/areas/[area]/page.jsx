@@ -4,8 +4,9 @@ import WaCta from '../../components/wa-cta.jsx'
 import PageCloseCta from '../../components/page-close-cta.jsx'
 import { notFound } from 'next/navigation'
 import { MapPin, Clock, Car } from 'lucide-react'
-import { NEIGHBORHOODS, TOP_SERVICES } from '../../../src/location-seo.js'
+import { NEIGHBORHOODS, TOP_SERVICES, KEPT_AREA_SLUGS } from '../../../src/location-seo.js'
 import { AREA_CONTENT } from '../../../src/area-content.js'
+import { AREAS_HUB_HREF } from '../../../lib/location-links.js'
 import { CAT_SLUGS, SERVICES, formatPrice, YEARS_ACTIVE, MAPS_LINK, WA_DEFAULT } from '../../../src/data.js'
 import JsonLd from '../../json-ld'
 import { pageSocialMeta } from '../../../lib/page-metadata.js'
@@ -32,14 +33,17 @@ function Fact({ icon, label, value }) {
 }
 
 export function generateStaticParams() {
-  return NEIGHBORHOODS.filter((n) => AREA_CONTENT[n.slug]).map((n) => ({ area: n.slug }))
+  const kept = new Set(KEPT_AREA_SLUGS)
+  return NEIGHBORHOODS.filter((n) => kept.has(n.slug) && AREA_CONTENT[n.slug]).map((n) => ({
+    area: n.slug,
+  }))
 }
 
 export async function generateMetadata({ params }) {
   const { area: slug } = await params
   const area = areaFor(slug)
   const content = AREA_CONTENT[slug]
-  if (!area || !content) return {}
+  if (!area || !content || !KEPT_AREA_SLUGS.includes(slug)) return {}
   /* These shipped with a bare `title` string, so the root template appended
      " | Farwa Beauty Salon" and every one of the ten ran 76-77 chars — Google
      truncates around 60. `absolute` is what the rest of the site uses. The
@@ -48,13 +52,13 @@ export async function generateMetadata({ params }) {
      being cut off. Both now match the convention in
      app/services/[categorySlug]/page.jsx. */
   const title = `Beauty Salon for ${area.name} | Farwa PECHS`
-  const descHead = `Coming from ${area.name}? Farwa Beauty Salon is ${content.driveTime} away, `
-  const descTail = ` Women-only studio in Block 3 PECHS, 102 services from Rs 100.`
+  const descHead = `From ${area.name}: Farwa is ${content.driveTime} away. `
+  const descTail = ` Women-only PECHS studio · 102 services from Rs 100.`
   const routeBudget = 155 - descHead.length - descTail.length
   const route =
     content.route.length <= routeBudget
       ? `${content.route}.`
-      : `${content.route.slice(0, Math.max(0, routeBudget - 1)).replace(/[\s,;—-]+\S*$/, '')}….`
+      : `${content.route.slice(0, Math.max(0, routeBudget - 1)).replace(/[\s,;—-]+\S*$/, '')}.`
 
   return {
     title: { absolute: title },
@@ -73,7 +77,7 @@ export default async function AreaPage({ params }) {
   const { area: slug } = await params
   const area = areaFor(slug)
   const content = AREA_CONTENT[slug]
-  if (!area || !content) notFound()
+  if (!area || !content || !KEPT_AREA_SLUGS.includes(slug)) notFound()
 
   /* The salon does not move. This page describes the journey to one address —
      it never implies a branch, a service area, or an at-home visit, because
@@ -94,7 +98,7 @@ export default async function AreaPage({ params }) {
       <BreadcrumbJsonLd
         items={[
           { name: 'Home', item: `${SITE_ORIGIN}/` },
-          { name: 'Areas', item: `${SITE_ORIGIN}/beauty-salon-karachi` },
+          { name: 'Areas', item: `${SITE_ORIGIN}${AREAS_HUB_HREF}` },
           { name: area.name, item: `${SITE_ORIGIN}/areas/${slug}` },
         ]}
       />
@@ -104,7 +108,7 @@ export default async function AreaPage({ params }) {
           <ol className="flex flex-wrap items-center gap-2 text-stone text-[11px] font-[family-name:var(--font-inter)]">
             <li><Link href="/" className="link-underline hover:text-ink">Home</Link></li>
             <li aria-hidden="true">/</li>
-            <li><Link href="/beauty-salon-karachi" className="link-underline hover:text-ink">Areas</Link></li>
+            <li><Link href={AREAS_HUB_HREF} className="link-underline hover:text-ink">Areas</Link></li>
             <li aria-hidden="true">/</li>
             <li className="text-ink">{area.name}</li>
           </ol>
@@ -224,7 +228,9 @@ export default async function AreaPage({ params }) {
             Other areas we see clients from
           </h2>
           <ul className="flex flex-wrap gap-x-4 gap-y-1">
-            {NEIGHBORHOODS.filter((n) => AREA_CONTENT[n.slug] && n.slug !== slug).map((n) => (
+            {NEIGHBORHOODS.filter(
+              (n) => KEPT_AREA_SLUGS.includes(n.slug) && AREA_CONTENT[n.slug] && n.slug !== slug,
+            ).map((n) => (
               <li key={n.slug}>
                 <Link
                   href={`/areas/${n.slug}`}

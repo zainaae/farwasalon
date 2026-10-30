@@ -134,7 +134,7 @@ export const AREA_CONTENT = {
   'pechs-karachi': {
     distanceKm: 'you are here',
     driveTime: 'walking distance for much of the block',
-    route: 'Plot 165/G-1, Saima Terrace, Block 3',
+    route: 'Plot 165/G-1, Saima Terrace, Block 3 — near Tariq Road & Jheel Park',
     gettingHere:
       'This is home. The salon has been at Plot 165/G-1, Saima Terrace in Block 3 since it outgrew Rubina’s house, and PECHS clients are the reason it did. A good number of the faces we see monthly have been coming since 2008.',
     worthTheTrip:

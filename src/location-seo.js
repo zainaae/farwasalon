@@ -89,34 +89,34 @@ export const TOP_SERVICES = [
 ]
 
 /**
- * Curated local landing pages (54 hubs).
+ * Area hubs that stay indexed with real route/drive content.
+ * Auditor recommendation (owner did not pick): PECHS + Tariq Road +
+ * Bahadurabad + Gulshan. Everything else 301s to /areas.
+ */
+export const KEPT_AREA_SLUGS = [
+  'pechs-karachi',
+  'tariq-road',
+  'bahadurabad',
+  'gulshan',
+]
+
+/**
+ * Full historic service × neighbourhood matrix (60). Used only to emit 301s —
+ * these landers are no longer generated or sitemapped.
  *
- * These were retired on 2026-07-30 on the theory that Google was folding them:
- * pages sharing a service measured 84-91% identical, and Search Console's
- * "Alternative page with proper canonical: 48" matched 54 minus the 6 kept
- * exactly. That arithmetic was a coincidence and the conclusion was wrong.
- *
- * The Performance export for 2026-07-14..28 shows these pages earning 321
- * impressions (13.5% of the site) and 12 clicks (19.7%) at an average position
- * of 6.4, with 37 of 38 on page one. The six PECHS hubs kept in their place
- * earned 36 impressions and zero clicks. Restored on 2026-07-31.
- *
- * The near-duplicate risk is real and unresolved — it is simply outweighed by
- * measured page-one rankings. Differentiate them if you want to reduce it; do
- * not delete them again without query data showing they have stopped earning.
- *
- * Derived from the full service x neighbourhood matrix rather than hand-listed.
- * The hand-maintained list had drifted to 54 of the 60 combinations, and all six
- * it omitted were live in Google's index and earning — nails-in-korangi at
- * position 2.5, waxing-in-shahrah-e-faisal at 1.7 — so they were serving 404s
- * to six clicks' worth of traffic. Every neighbourhood carries a unique blurb,
- * so there is no combination that cannot be generated honestly.
- *
- * Growth rule: a new neighbourhood needs a unique blurb before it is added to
- * NEIGHBORHOODS; the matrix does the rest.
- */export const PRIORITY_LOCATION_SLUGS = TOP_SERVICES.flatMap((svc) =>
+ * Decision 30 Oct 2026: mass-redirect doorway SKUs to parent category pages;
+ * keep four /areas hubs instead. See docs/indexation-worklist.md §5.
+ */
+export const SERVICE_AREA_MATRIX_SLUGS = TOP_SERVICES.flatMap((svc) =>
   NEIGHBORHOODS.map((loc) => `${svc.slug}-in-${loc.slug}`),
 )
+
+/** @deprecated Empty — service×area landers retired. Prefer KEPT_AREA_SLUGS. */
+export const PRIORITY_LOCATION_SLUGS = []
+
+export function categoryPathForTopService(svc) {
+  return `/services/${CAT_SLUGS[svc.category] || 'services'}`
+}
 
 export function parseLocationSlug(slug) {
   const inMatch = slug.match(/^(.+)-in-(.+)$/)
@@ -151,34 +151,54 @@ export function parseLocationSlug(slug) {
   return null
 }
 
-/** Crawlable location landers — priority hubs only. */
+/** Crawlable location landers — none after the doorway retirement. */
 export function getAllLocationServiceSlugs() {
   return [...PRIORITY_LOCATION_SLUGS]
 }
 
 /**
- * Permanent redirects for legacy `best-*` matrix URLs.
- * Priority hubs → matching `-in-*`; everything else → the service category page
- * (non-priority `-in-*` landers are no longer generated).
+ * Permanent redirects for every historic `/services/{service}-in-{area}` SKU
+ * → parent category page (threading, bridal, facials, hair, nails, rica-wax).
+ */
+export function getServiceAreaRedirects() {
+  return SERVICE_AREA_MATRIX_SLUGS.map((slug) => {
+    const parsed = parseLocationSlug(slug)
+    const dest = parsed ? categoryPathForTopService(parsed.service) : '/services'
+    return {
+      source: `/services/${slug}`,
+      destination: toCanonicalUrl(dest),
+      permanent: true,
+    }
+  })
+}
+
+/**
+ * Permanent redirects for legacy `best-*` matrix URLs → parent category pages
+ * (same destinations as the retired `-in-*` SKUs — no hop through a lander).
  */
 export function getBestLocationRedirects() {
-  const prioritySet = new Set(PRIORITY_LOCATION_SLUGS)
   const redirects = []
   for (const svc of TOP_SERVICES) {
-    const categorySlug = CAT_SLUGS[svc.category] || 'services'
+    const dest = categoryPathForTopService(svc)
     for (const loc of NEIGHBORHOODS) {
-      const inSlug = `${svc.slug}-in-${loc.slug}`
-      const path = prioritySet.has(inSlug)
-        ? `/services/${inSlug}`
-        : `/services/${categorySlug}`
       redirects.push({
         source: `/services/best-${svc.slug}-${loc.slug}`,
-        /* Absolute so www + next.config do not chain through a relative hop
-           before proxy.js can send the crawler to the apex host. */
-        destination: toCanonicalUrl(path),
+        destination: toCanonicalUrl(dest),
         permanent: true,
       })
     }
   }
   return redirects
+}
+
+/**
+ * Non-kept `/areas/{slug}` hubs → `/areas` (kept hubs stay live).
+ */
+export function getRetiredAreaRedirects() {
+  const kept = new Set(KEPT_AREA_SLUGS)
+  return NEIGHBORHOODS.filter((n) => !kept.has(n.slug)).map((n) => ({
+    source: `/areas/${n.slug}`,
+    destination: toCanonicalUrl('/areas'),
+    permanent: true,
+  }))
 }

@@ -1,26 +1,18 @@
 import { expect, type Page } from '@playwright/test'
 import { CAT_SLUGS } from '../src/data.js'
 import { BLOG_POSTS } from '../src/blog-data.js'
-import { getPriorityLocationLinks } from '../lib/location-links.js'
+import { getKeptNeighborhoods } from '../lib/location-links.js'
 
 export const ALL_CATEGORY_SLUGS = Object.values(CAT_SLUGS)
 export const BLOG_SLUGS = BLOG_POSTS.map((post) => post.slug)
 
-/** Ten representative location landing pages — diverse services and neighborhoods. */
-export const SAMPLE_LOCATION_LINKS = getPriorityLocationLinks().filter(({ slug }) =>
-  [
-    'threading-in-pechs-karachi',
-    'bridal-makeup-in-pechs-karachi',
-    'facials-in-pechs-karachi',
-    'threading-in-gulshan',
-    'bridal-makeup-in-clifton-karachi',
-    'bridal-makeup-in-dha',
-    'threading-in-dha',
-    'threading-in-bahadurabad',
-    'waxing-in-tariq-road',
-    'hair-in-dha',
-  ].includes(slug),
-)
+/** Kept /areas hubs — service×area landers are 301'd away. */
+export const SAMPLE_LOCATION_LINKS = getKeptNeighborhoods()
+  .filter((n): n is NonNullable<typeof n> => Boolean(n))
+  .map((n) => ({
+    slug: n.slug,
+    href: `/areas/${n.slug}`,
+  }))
 
 /**
  * Next 16 / React 19 can briefly keep a hidden duplicate of the route in the DOM

@@ -223,7 +223,7 @@ export default function SiteFooter() {
               </a>
               {' · '}
               <Link
-                href={AREAS_HUB_HREF}
+                href="/beauty-salon-karachi"
                 className="link-underline hover:text-ink transition-colors"
               >
                 Beauty salon in Karachi

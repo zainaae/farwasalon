@@ -2,8 +2,8 @@ import Link from 'next/link'
 import ArrowUpRight from '../components/icon-sprite.jsx'
 import WaCta from '../components/wa-cta.jsx'
 import PageCloseCta from '../components/page-close-cta.jsx'
-import { NEIGHBORHOODS } from '../../src/location-seo.js'
 import { AREA_CONTENT } from '../../src/area-content.js'
+import { getKeptNeighborhoods, AREAS_HUB_HREF } from '../../lib/location-links.js'
 import { MapPin, Clock, Phone } from 'lucide-react'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import {
@@ -184,7 +184,7 @@ export default function BeautySalonKarachiPage() {
               given that journey.
             </p>
             <ul className="flex flex-wrap gap-2">
-              {NEIGHBORHOODS.filter((n) => AREA_CONTENT[n.slug]).map((n) => (
+              {getKeptNeighborhoods().map((n) => (
                 <li key={n.slug}>
                   <Link href={`/areas/${n.slug}`} className="tab-pill hover:border-ink hover:text-ink">
                     {n.name}
@@ -192,6 +192,11 @@ export default function BeautySalonKarachiPage() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href={AREAS_HUB_HREF} className="tab-pill hover:border-ink hover:text-ink">
+                  All areas →
+                </Link>
+              </li>
             </ul>
             <p className="mt-8 pt-6 border-t border-border-soft text-xs text-stone font-[family-name:var(--font-inter)]">
               <Link href="/" className="link-underline hover:text-ink font-medium">
@@ -218,8 +223,12 @@ export default function BeautySalonKarachiPage() {
                 Facials near me
               </Link>
               {' · '}
-              <Link href="/services/threading-in-pechs-karachi" className="link-underline hover:text-ink font-medium">
-                Threading in PECHS
+              <Link href="/services/threading" className="link-underline hover:text-ink font-medium">
+                Threading
+              </Link>
+              {' · '}
+              <Link href="/areas/pechs-karachi" className="link-underline hover:text-ink font-medium">
+                PECHS studio
               </Link>
             </p>
           </section>

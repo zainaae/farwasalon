@@ -193,7 +193,7 @@ Neighborhoods: PECHS, Gulshan, Clifton, Bahadurabad, DHA, Tariq Road, Shahrah-e-
 | `sitemap-static.xml` | 12 |
 | `sitemap-services.xml` | 13 |
 | `sitemap-blog.xml` | 8 |
-| `sitemap-locations.xml` | 120 |
+| `sitemap-locations.xml` | 5 |
 | `sitemap.xml` | index of 4 child sitemaps |
 
 Also: `/blog/rss.xml`

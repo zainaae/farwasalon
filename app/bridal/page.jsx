@@ -19,7 +19,7 @@ import { CAT_FAQS } from '../../src/cat-seo-content.js'
 
 const title = 'Bridal Makeup Karachi — Full Package from Rs 25,000 | Farwa'
 const description =
-  'Bridal makeup in PECHS, Karachi — Full Bridal Package from Rs 25,000 (hair, makeup, draping, touch-ups, event presence). Trials and event looks available. Book online.'
+  'PECHS studio, Karachi — Full Bridal Package from Rs 25,000 (hair, makeup, draping, touch-ups, event presence). Trials and event looks available. Book online.'
 
 export const metadata = {
   title: { absolute: title },
@@ -278,7 +278,7 @@ export default function BridalLandingPage() {
                 pages that actually differ. */}
             <ul className="flex flex-wrap gap-x-4 gap-y-1">
               {[
-                ['Bridal in PECHS', '/services/bridal-makeup-in-pechs-karachi'],
+                ['PECHS studio', '/areas/pechs-karachi'],
                 ['Bridal packages & prices', '/services/bridal'],
                 ['Near Tariq Road', '/blog/salon-near-tariq-road-pechs'],
                 ['Bridal timeline', '/blog/bridal-beauty-timeline'],
@@ -388,7 +388,7 @@ export default function BridalLandingPage() {
             {' · '}
             <Link href="/book" className="link-underline hover:text-ink font-medium">Book online</Link>
             {' · '}
-            <Link href="/services/bridal-makeup-in-pechs-karachi" className="link-underline hover:text-ink font-medium">
+            <Link href="/areas/pechs-karachi" className="link-underline hover:text-ink font-medium">
               Bridal makeup in PECHS
             </Link>
           </p>

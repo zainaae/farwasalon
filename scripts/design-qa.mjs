@@ -14,7 +14,7 @@ const routes = [
   '/services',
   '/services/facials',
   '/services/threading',
-  '/services/bridal-makeup-in-pechs-karachi',
+  '/areas/pechs-karachi',
   '/gallery',
   '/contact',
   '/about',

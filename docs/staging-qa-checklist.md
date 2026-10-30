@@ -74,8 +74,8 @@ Documented skip: `e2e/newsletter-modal.spec.ts` (`exit-intent mouseleave opens m
 
 ## 6. Manual — location pages
 
-- [ ] `/sitemap-locations.xml` returns ~120 URLs (6 services × 10 neighborhoods × 2 patterns)
-- [ ] Sample: `/services/threading-in-gulshan` — H1, book CTA, breadcrumbs
+- [ ] `/sitemap-locations.xml` returns 5 URLs (`/areas` + pechs / tariq-road / bahadurabad / gulshan)
+- [ ] Sample: `/areas/gulshan` — H1, book CTA, breadcrumbs; `/services/threading-in-gulshan` → 301 to `/services/threading`
 - [ ] Build log: no per-page data fetches (static `generateStaticParams`)
 
 ## 7. Post-deploy smoke
