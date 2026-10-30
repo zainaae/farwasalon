@@ -40,7 +40,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Ask on WhatsApp and we will send recent looks in the style you want — soft glam, smoky, or full glam.' },
 
       { type: 'h2', text: 'Get Your Quote' },
-      { type: 'p', text: 'WhatsApp +92 322 2782254 with your date and reference look. For everything with a fixed price, the [full price list](/prices) is already printed — as always.' },
+      { type: 'p', text: 'WhatsApp +92 322 278 2254 with your date and reference look. For everything with a fixed price, the [full price list](/prices) is already printed — as always.' },
     ],
   },
   {
@@ -78,7 +78,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Frizz and styling time: keratin. Breakage, dryness, or damage: protein or Wellaplex, printed on our menu from Rs 2,000. Unsure? Send a photo — we will tell you honestly, including when the cheaper printed option is the right one.' },
 
       { type: 'h2', text: 'Get Your Keratin Quote' },
-      { type: 'p', text: 'WhatsApp +92 322 2782254 with a photo of your hair down. Fixed-price services stay printed on the [full price list](/prices); hair and hair treatments publish quote floors; keratin is quoted per head because that is the only honest way to price it.' },
+      { type: 'p', text: 'WhatsApp +92 322 278 2254 with a photo of your hair down. Fixed-price services stay printed on the [full price list](/prices); hair and hair treatments publish quote floors; keratin is quoted per head because that is the only honest way to price it.' },
     ],
   },
   {
@@ -142,7 +142,7 @@ export const BLOG_POSTS = [
       { type: 'h3', text: 'Q: Can I book mehndi and engagement on different days?' },
       {
         type: 'p',
-        text: 'A: Yes — book each event online at farwasalon.com/book or WhatsApp +92 322 2782254 with dates. Peak season (October–March) fills fast; lock both early.',
+        text: 'A: Yes — book each event online at farwasalon.com/book or WhatsApp +92 322 278 2254 with dates. Peak season (October–March) fills fast; lock both early.',
       },
 
       { type: 'h2', text: 'Book Your Pre-Wedding Look' },
@@ -185,7 +185,7 @@ export const BLOG_POSTS = [
       { type: 'h2', text: 'Walk-In vs Booked Slot' },
       {
         type: 'p',
-        text: 'Quick brow tidy-ups often work as walk-ins Mon–Sat 11am–7pm. Lunch breaks and pre-event days fill up — book online if you cannot wait. Same-day WhatsApp (+92 322 2782254) works when there is a gap on the floor.',
+        text: 'Quick brow tidy-ups often work as walk-ins Mon–Sat 11am–7pm. Lunch breaks and pre-event days fill up — book online if you cannot wait. Same-day WhatsApp (+92 322 278 2254) works when there is a gap on the floor.',
       },
 
       { type: 'h2', text: 'Frequently Asked Questions' },
@@ -267,7 +267,7 @@ export const BLOG_POSTS = [
       { type: 'h3', text: 'Q: Can I book a facial online today?' },
       {
         type: 'p',
-        text: 'A: Yes — farwasalon.com/book shows live slots Mon–Sat 11am–7pm. WhatsApp +92 322 2782254 if you need help choosing a protocol.',
+        text: 'A: Yes — farwasalon.com/book shows live slots Mon–Sat 11am–7pm. WhatsApp +92 322 278 2254 if you need help choosing a protocol.',
       },
       { type: 'h3', text: 'Q: Where is Farwa if I searched facials near Tariq Road?' },
       {
@@ -321,7 +321,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Farwa Beauty Salon, Plot 165/G-1, Saima Terrace, Block 3 PECHS, Karachi 75400 — a short hop from Tariq Road and Bahadurabad. See beauty salon Karachi for area links and directions on the contact page.' },
 
       { type: 'h2', text: 'Come See the Checklist in Action' },
-      { type: 'p', text: 'Every point above is how we run our own floor at Plot 165/G-1, Saima Terrace, Block 3 PECHS — Mon–Sat 11am–7pm. Browse the [full price list](/prices) (threading from Rs 100), the [services menu](/services), or [book online](/book) in under a minute. Prefer WhatsApp? +92 322 2782254. Bring your sharpest questions; we like clients who check.' },
+      { type: 'p', text: 'Every point above is how we run our own floor at Plot 165/G-1, Saima Terrace, Block 3 PECHS — Mon–Sat 11am–7pm. Browse the [full price list](/prices) (threading from Rs 100), the [services menu](/services), or [book online](/book) in under a minute. Prefer WhatsApp? +92 322 278 2254. Bring your sharpest questions; we like clients who check.' },
     ],
   },
   {
@@ -363,7 +363,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Not meaningfully — hair removal results last the same three to four weeks. Sweat can irritate freshly waxed skin, so book waxing for a day you can stay cool afterwards.' },
 
       { type: 'h2', text: 'Book Your Monsoon Reset' },
-      { type: 'p', text: 'Book online at farwasalon.com/book or WhatsApp +92 322 2782254 — and if you are not sure which treatment your hair needs, come in for a consultation and we will tell you honestly.' },
+      { type: 'p', text: 'Book online at farwasalon.com/book or WhatsApp +92 322 278 2254 — and if you are not sure which treatment your hair needs, come in for a consultation and we will tell you honestly.' },
     ],
   },
   {
@@ -408,7 +408,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Rica, booked two to three days before the event — its lower redness matters when photos are involved. Brides on our [bridal packages](/services/bridal) get Rica by default in the final week.' },
 
       { type: 'h2', text: 'Try Both and Decide' },
-      { type: 'p', text: 'Book either [Rica wax](/services/rica-wax), [honey wax](/services/honey-wax), or [Rica hot wax](/services/rica-hot-wax) at [farwasalon.com/book](/book) — or WhatsApp +92 322 2782254. Tell us it is your first Rica session and we will start with a small area so you can feel the difference before committing to full body. Full rates stay on the [price list](/prices).' },
+      { type: 'p', text: 'Book either [Rica wax](/services/rica-wax), [honey wax](/services/honey-wax), or [Rica hot wax](/services/rica-hot-wax) at [farwasalon.com/book](/book) — or WhatsApp +92 322 278 2254. Tell us it is your first Rica session and we will start with a small area so you can feel the difference before committing to full body. Full rates stay on the [price list](/prices).' },
     ],
   },
   {
@@ -446,7 +446,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Not on active breakouts. Once skin is calm, bleach evens tone safely — we always check your skin first and will tell you honestly if today is not the day for it.' },
 
       { type: 'h2', text: 'Get an Honest Skin Assessment' },
-      { type: 'p', text: 'Book at farwasalon.com/book or WhatsApp +92 322 2782254. If what you booked is not what your skin needs on the day, we will switch you to the right treatment — never upsell an inflamed face.' },
+      { type: 'p', text: 'Book at farwasalon.com/book or WhatsApp +92 322 278 2254. If what you booked is not what your skin needs on the day, we will switch you to the right treatment — never upsell an inflamed face.' },
     ],
   },
   {
@@ -484,7 +484,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Seasonal shedding is real and humidity-related breakage adds to it — see our [monsoon hair guide](/blog/monsoon-hair-skin-care-karachi). A bond treatment before peak humidity prevents most of the seasonal spike.' },
 
       { type: 'h2', text: 'Start With a Consultation' },
-      { type: 'p', text: 'Book at farwasalon.com/book or WhatsApp +92 322 2782254. We will look at your hair, tell you whether it is breakage or shedding, and recommend a plan — including a doctor referral if that is what your scalp actually needs.' },
+      { type: 'p', text: 'Book at farwasalon.com/book or WhatsApp +92 322 278 2254. We will look at your hair, tell you whether it is breakage or shedding, and recommend a plan — including a doctor referral if that is what your scalp actually needs.' },
     ],
   },
   {
@@ -551,7 +551,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: We accept cash, JazzCash, and EasyPaisa at the salon. Every price is in PKR.' },
 
       { type: 'h2', text: 'See the Full Menu' },
-      { type: 'p', text: 'Every individual service and its exact rate is published on our [complete price list](/prices), with the guided menu at [services](/services) — thirteen specialities, one hundred plus services. Ready to book? Use [online booking](/book) (live slots) or WhatsApp +92 322 2782254 — your quote matches the printed list.' },
+      { type: 'p', text: 'Every individual service and its exact rate is published on our [complete price list](/prices), with the guided menu at [services](/services) — thirteen specialities, one hundred plus services. Ready to book? Use [online booking](/book) (live slots) or WhatsApp +92 322 278 2254 — your quote matches the printed list.' },
     ],
   },
   {
@@ -591,7 +591,7 @@ export const BLOG_POSTS = [
       { type: 'h3', text: 'Q: What if I do not like the shape?' },
       { type: 'p', text: 'A: The shape is agreed at the mapping stage — you approve the drawn outline in the mirror before any pigment is placed. Nothing is permanent until you say yes to the map.' },
       { type: 'h3', text: 'Q: How do I book a consultation in PECHS?' },
-      { type: 'p', text: 'A: Book online at farwasalon.com/book or WhatsApp +92 322 2782254. Consultations take fifteen minutes and there is no obligation to book the procedure the same day.' },
+      { type: 'p', text: 'A: Book online at farwasalon.com/book or WhatsApp +92 322 278 2254. Consultations take fifteen minutes and there is no obligation to book the procedure the same day.' },
 
       { type: 'h2', text: 'Book a Brow Consultation' },
       { type: 'p', text: 'See our full [eyebrow tattoo services](/services/eyebrow-tattoo) with printed prices, or start with a threading appointment and talk to us in the chair. Semi-permanent brows are an 18-month decision — make it with a salon that has been shaping Karachi\'s brows since 2008.' },
@@ -651,10 +651,10 @@ export const BLOG_POSTS = [
       { type: 'h3', text: 'Q: What if I have sensitive skin and am worried about reactions?' },
       { type: 'p', text: 'A: That is exactly why we start six months early. We patch-test every new product and introduce treatments gradually. By the time your wedding arrives, your skin knows and loves every product we are using.' },
       { type: 'h3', text: 'Q: Do you offer packages that cover the entire bridal timeline?' },
-      { type: 'p', text: 'A: Yes. Our [bridal packages](/services/bridal) can be customised to cover everything from your first facial consultation through to the walima day. WhatsApp us at +92 322 2782254 to discuss a personalised plan.' },
+      { type: 'p', text: 'A: Yes. Our [bridal packages](/services/bridal) can be customised to cover everything from your first facial consultation through to the walima day. WhatsApp us at +92 322 278 2254 to discuss a personalised plan.' },
 
       { type: 'h2', text: 'Book Your Bridal Consultation' },
-      { type: 'p', text: 'Every bride\'s journey is different. WhatsApp us at +92 322 2782254 to start planning your personalised bridal beauty timeline. We\'ll guide you every step of the way.' },
+      { type: 'p', text: 'Every bride\'s journey is different. WhatsApp us at +92 322 278 2254 to start planning your personalised bridal beauty timeline. We\'ll guide you every step of the way.' },
     ],
   },
   {
@@ -715,7 +715,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Look for a gel or fluid-based SPF 50 with a matte finish. Brands like La Roche-Posay, Neutrogena Ultra Sheer, and local derma-grade options work well. Your aesthetician at Farwa can recommend a specific product during your consultation.' },
 
       { type: 'h2', text: 'Get a Summer Skin Assessment' },
-      { type: 'p', text: 'Not sure what your skin needs? Book a consultation at our PECHS studio. We\'ll build a summer routine that actually works for Karachi weather. WhatsApp us at +92 322 2782254.' },
+      { type: 'p', text: 'Not sure what your skin needs? Book a consultation at our PECHS studio. We\'ll build a summer routine that actually works for Karachi weather. WhatsApp us at +92 322 278 2254.' },
     ],
   },
   {
@@ -784,7 +784,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Both can cause ingrown hairs, but proper aftercare minimises the risk. Exfoliating two to three days after treatment and moisturising regularly is the best prevention for both methods.' },
 
       { type: 'h2', text: 'Try Both and Decide' },
-      { type: 'p', text: 'Everyone\'s skin responds differently. Book [eyebrow threading from Rs 200](/services/threading) or waxing on [farwasalon.com/book](/book) — we\'ll guide you based on your skin type. Prefer WhatsApp? +92 322 2782254. Compare every PKR rate on the [salon price list](/prices).' },
+      { type: 'p', text: 'Everyone\'s skin responds differently. Book [eyebrow threading from Rs 200](/services/threading) or waxing on [farwasalon.com/book](/book) — we\'ll guide you based on your skin type. Prefer WhatsApp? +92 322 278 2254. Compare every PKR rate on the [salon price list](/prices).' },
     ],
   },
   {
@@ -850,7 +850,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Dark polish does not chip faster, but chips are more visible against dark colours. Nudes, pinks, and sheer shades are more forgiving because minor chips blend with your natural nail colour. For maximum durability with dark shades, the capping technique is essential.' },
 
       { type: 'h2', text: 'Book Your Next Manicure' },
-      { type: 'p', text: 'Book your next manicure at Farwa Beauty Salon, PECHS. WhatsApp us at +92 322 2782254.' },
+      { type: 'p', text: 'Book your next manicure at Farwa Beauty Salon, PECHS. WhatsApp us at +92 322 278 2254.' },
     ],
   },
   {
@@ -925,7 +925,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Yes. We offer makeup services for mothers, sisters, and bridal party members as well. These can be booked alongside your bridal package at discounted rates. Contact us for family package pricing.' },
 
       { type: 'h2', text: 'Ready to Start Planning?' },
-      { type: 'p', text: 'Every bride\'s journey is different, and we love helping you find the perfect look. WhatsApp us at +92 322 2782254 or [book a Bridal Trial online](/book). Browse [bridal makeup in PECHS](/services/bridal-makeup-in-pechs-karachi) and the full [Bridal services](/services/bridal) menu — packages from Rs 8,000, printed and ready.' },
+      { type: 'p', text: 'Every bride\'s journey is different, and we love helping you find the perfect look. WhatsApp us at +92 322 278 2254 or [book a Bridal Trial online](/book). Browse [bridal makeup in PECHS](/services/bridal-makeup-in-pechs-karachi) and the full [Bridal services](/services/bridal) menu — packages from Rs 8,000, printed and ready.' },
     ],
   },
   {
@@ -967,7 +967,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Start with the Herbal Organic Facial at Rs 1,600 and see how your skin responds before going near a cosmeceutical course. Tell us if you use a prescription retinoid — that changes the recommendation entirely.' },
 
       { type: 'h2', text: 'Book a Facial' },
-      { type: 'p', text: 'All eleven facials with their prices are on the [facials menu](/services/facials). [Book online](/book) or WhatsApp +92 322 2782254 — tell us what you are trying to fix rather than which facial you want, and we will point you at the cheapest one that does it.' },
+      { type: 'p', text: 'All eleven facials with their prices are on the [facials menu](/services/facials). [Book online](/book) or WhatsApp +92 322 278 2254 — tell us what you are trying to fix rather than which facial you want, and we will point you at the cheapest one that does it.' },
     ],
   },
   {
@@ -1034,7 +1034,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Keratin smoothing reduces frizz and loosens curl pattern but does not make hair bone-straight like permanent straightening (rebonding). If you want to keep some natural wave or volume, keratin is an excellent option. If you want completely straight hair, discuss rebonding or Japanese straightening with your stylist.' },
 
       { type: 'h2', text: 'Book Your Hair Consultation' },
-      { type: 'p', text: 'Every head of hair is different, and cookie-cutter solutions rarely work. WhatsApp us at +92 322 2782254 to book a hair assessment at our PECHS studio. Check out our full [Hair & Hair Treatments menu](/services/hair-treatments) for all services and pricing.' },
+      { type: 'p', text: 'Every head of hair is different, and cookie-cutter solutions rarely work. WhatsApp us at +92 322 278 2254 to book a hair assessment at our PECHS studio. Check out our full [Hair & Hair Treatments menu](/services/hair-treatments) for all services and pricing.' },
     ],
   },
   {
@@ -1103,7 +1103,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Of course. Many first-timers feel more comfortable with a friend. You can even book services together and make it a girls\' day. We have seating in the waiting area for companions, and our studio atmosphere is welcoming for groups.' },
 
       { type: 'h2', text: 'Book Your First Appointment' },
-      { type: 'p', text: 'Everyone was a first-timer once, and we love welcoming new faces. WhatsApp us at +92 322 2782254 to book your first visit at Farwa Beauty Salon, PECHS, Karachi. Browse our services — from [threading](/services/threading) and [facials](/services/facials) to [bridal packages](/services/bridal), we have something for everyone.' },
+      { type: 'p', text: 'Everyone was a first-timer once, and we love welcoming new faces. WhatsApp us at +92 322 278 2254 to book your first visit at Farwa Beauty Salon, PECHS, Karachi. Browse our services — from [threading](/services/threading) and [facials](/services/facials) to [bridal packages](/services/bridal), we have something for everyone.' },
     ],
   },
 ]

@@ -34,7 +34,7 @@ export const FAQ_GROUPS = [
     items: [
       {
         q: 'How do I book an appointment?',
-        a: 'Book online at farwasalon.com/book — pick your service, date, and time. You can also message us on WhatsApp at +92 322 2782254 if you prefer.',
+        a: 'Book online at farwasalon.com/book — pick your service, date, and time. You can also message us on WhatsApp at +92 322 278 2254 if you prefer.',
       },
       {
         q: 'Do you accept walk-ins?',
@@ -134,7 +134,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'Do you include a microblading touch-up, and how much is it?',
-        a: 'A light touch-up is recommended 6–8 weeks after your first session to perfect strokes that heal unevenly. Touch-ups are booked separately — WhatsApp us at +92 322 2782254 for the current touch-up rate and available dates.',
+        a: 'A light touch-up is recommended 6–8 weeks after your first session to perfect strokes that heal unevenly. Touch-ups are booked separately — WhatsApp us at +92 322 278 2254 for the current touch-up rate and available dates.',
       },
       {
         q: 'What is the microblading healing and aftercare timeline?',
@@ -167,7 +167,7 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'Do you offer HydraFacial or keratin treatments?',
-        a: 'HydraFacial machines, no. Keratin smoothing, yes — it is quoted per head because the price honestly depends on hair length and density; WhatsApp a photo of your hair to +92 322 2782254 for a binding quote in minutes. Facials stay printed from a Normal Facial (Rs 1,400) to Janssen Whitening (Rs 5,500). Protein / Wellaplex / hair-fall treatments print from Rs 2,000 as quote floors — length and density can adjust the final before we start. See farwasalon.com/prices for the full list.',
+        a: 'HydraFacial machines, no. Keratin smoothing, yes — it is quoted per head because the price honestly depends on hair length and density; WhatsApp a photo of your hair to +92 322 278 2254 for a binding quote in minutes. Facials stay printed from a Normal Facial (Rs 1,400) to Janssen Whitening (Rs 5,500). Protein / Wellaplex / hair-fall treatments print from Rs 2,000 as quote floors — length and density can adjust the final before we start. See farwasalon.com/prices for the full list.',
       },
     ],
   },
@@ -188,11 +188,11 @@ export const FAQ_GROUPS = [
       },
       {
         q: 'How much is party makeup at Farwa?',
-        a: 'Party makeup is one of only two services we quote per person — the price honestly depends on the look (soft glam vs full glam), lashes, and whether hair styling is included. WhatsApp +92 322 2782254 with your event date for an exact quote in minutes; it is confirmed before you book and never changes at the counter.',
+        a: 'Party makeup is one of only two services we quote per person — the price honestly depends on the look (soft glam vs full glam), lashes, and whether hair styling is included. WhatsApp +92 322 278 2254 with your event date for an exact quote in minutes; it is confirmed before you book and never changes at the counter.',
       },
       {
         q: 'How much is keratin treatment at Farwa?',
-        a: 'Keratin is quoted per head because the price depends on hair length and density. WhatsApp a photo of your hair to +92 322 2782254 for a binding quote in minutes. Repair treatments print as floors on farwasalon.com/prices (protein from Rs 2,000, Wellaplex from Rs 3,000) — we confirm the final for your hair before starting.',
+        a: 'Keratin is quoted per head because the price depends on hair length and density. WhatsApp a photo of your hair to +92 322 278 2254 for a binding quote in minutes. Repair treatments print as floors on farwasalon.com/prices (protein from Rs 2,000, Wellaplex from Rs 3,000) — we confirm the final for your hair before starting.',
       },
       {
         q: 'Why do you publish all your prices online?',
@@ -217,6 +217,6 @@ export const PRICES_PAGE_FAQS = [
   },
   {
     q: 'How do I book after checking the price list?',
-    a: 'Open farwasalon.com/book, pick the service (threading from Rs 100, facials from Rs 1,400, bridal from Rs 8,000), choose a live slot, and confirm — or WhatsApp +92 322 2782254 if you need a custom combination.',
+    a: 'Open farwasalon.com/book, pick the service (threading from Rs 100, facials from Rs 1,400, bridal from Rs 8,000), choose a live slot, and confirm — or WhatsApp +92 322 278 2254 if you need a custom combination.',
   },
 ]

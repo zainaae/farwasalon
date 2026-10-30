@@ -26,7 +26,7 @@ export const GROWTH_POSTS = [
       { type: 'p', text: 'If you want one visit instead of three: book a combined appointment ten days out for facial plus threading, then a short nails-and-hair slot on Chand Raat. Our booking system handles combined services and adjusts the time slot automatically, so nothing overlaps. Full rates for everything are on the [price list](/prices) — no Eid surcharge, ever.' },
 
       { type: 'h2', text: 'Booking Around the Rush' },
-      { type: 'p', text: 'Slots for the last three days before Eid usually go a week ahead. Book online at farwasalon.com/book where you can see live availability, rather than calling and hoping. If nothing suits, WhatsApp us at +92 322 2782254 and we will tell you honestly what is left instead of taking a booking we cannot honour.' },
+      { type: 'p', text: 'Slots for the last three days before Eid usually go a week ahead. Book online at farwasalon.com/book where you can see live availability, rather than calling and hoping. If nothing suits, WhatsApp us at +92 322 278 2254 and we will tell you honestly what is left instead of taking a booking we cannot honour.' },
 
       { type: 'h2', text: 'Frequently Asked Questions' },
       { type: 'h3', text: 'Q: When should I book my salon appointment before Eid in Karachi?' },
@@ -87,7 +87,7 @@ export const GROWTH_POSTS = [
       { type: 'h3', text: 'Q: Is Farwa a women-only salon?' },
       { type: 'p', text: 'A: Yes — a women-only studio at Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400. One PECHS address — we do not run at-home parlour visits.' },
       { type: 'h2', text: 'Book Face Bleach in PECHS' },
-      { type: 'p', text: 'Open [bleach & polish](/services/bleach-polish), [book online](/book), or WhatsApp +92 322 2782254. Mon–Sat 11–7.' },
+      { type: 'p', text: 'Open [bleach & polish](/services/bleach-polish), [book online](/book), or WhatsApp +92 322 278 2254. Mon–Sat 11–7.' },
     ],
   },
   {
@@ -133,7 +133,7 @@ export const GROWTH_POSTS = [
       { type: 'h3', text: 'Q: Will it help before bridal makeup?' },
       { type: 'p', text: 'A: Genuinely yes, and it is one of the few things we recommend close to the day. Foundation sits noticeably better on freshly polished skin. Book it two days before, not the morning of — the [bridal timeline](/blog/bridal-beauty-timeline) has the full sequence.' },
       { type: 'h2', text: 'Book Your Glow' },
-      { type: 'p', text: '[Book online](/book) or WhatsApp +92 322 2782254 — Plot 165/G-1, Saima Terrace, Block 3, PECHS.' },
+      { type: 'p', text: '[Book online](/book) or WhatsApp +92 322 278 2254 — Plot 165/G-1, Saima Terrace, Block 3, PECHS.' },
     ],
   },
   {
@@ -176,7 +176,7 @@ export const GROWTH_POSTS = [
       { type: 'h3', text: 'Q: How much is a full body massage in Karachi?' },
       { type: 'p', text: 'A: At Farwa Beauty Salon, Full Body Massage is Rs 2,500 for about 40 minutes. Area massages start at Rs 700.' },
       { type: 'h3', text: 'Q: Can I combine massage with a facial?' },
-      { type: 'p', text: 'A: Yes — book both online or WhatsApp +92 322 2782254 and we schedule the longer service first.' },
+      { type: 'p', text: 'A: Yes — book both online or WhatsApp +92 322 278 2254 and we schedule the longer service first.' },
       { type: 'h3', text: 'Q: Is it a women-only salon?' },
       { type: 'p', text: 'A: Yes. Farwa is a women-only beauty salon in PECHS.' },
       { type: 'h3', text: 'Q: Is the massage therapeutic or relaxing?' },
@@ -188,7 +188,7 @@ export const GROWTH_POSTS = [
       { type: 'h3', text: 'Q: How soon before an event?' },
       { type: 'p', text: 'A: A day ahead is ideal. Oil takes a wash to come fully out of hair, and some clients feel slightly loose or sleepy for a few hours afterwards — pleasant on a quiet evening, less useful an hour before a mehndi.' },
       { type: 'h2', text: 'Book Massage Online' },
-      { type: 'p', text: '[Book](/book) · WhatsApp +92 322 2782254 · rates on [/prices](/prices). Mon–Sat 11–7.' },
+      { type: 'p', text: '[Book](/book) · WhatsApp +92 322 278 2254 · rates on [/prices](/prices). Mon–Sat 11–7.' },
     ],
   },
   {
@@ -249,7 +249,7 @@ export const GROWTH_POSTS = [
       { type: 'h3', text: 'Q: Is the equipment sterilised between clients?' },
       { type: 'p', text: 'A: Yes. Tools are sterilised between every client and files are single-use. Feet especially — this is the one service where shortcuts cause actual infections, and you are welcome to watch the tools come out of the pouch.' },
       { type: 'h2', text: 'Book Nails in PECHS' },
-      { type: 'p', text: '[Book online](/book) or WhatsApp +92 322 2782254. Women-only studio near Tariq Road.' },
+      { type: 'p', text: '[Book online](/book) or WhatsApp +92 322 278 2254. Women-only studio near Tariq Road.' },
     ],
   },
   {
@@ -301,7 +301,7 @@ export const GROWTH_POSTS = [
       { type: 'h3', text: 'Q: Do you cover greys fully?' },
       { type: 'p', text: 'A: Yes, with a standard full colour. Resistant grey at the temples occasionally needs a second pass, which we do in the same appointment at no extra charge — it is part of doing the job properly, not an upsell.' },
       { type: 'h2', text: 'Book Hair in PECHS' },
-      { type: 'p', text: '[Book](/book) · [/prices](/prices) · WhatsApp +92 322 2782254.' },
+      { type: 'p', text: '[Book](/book) · [/prices](/prices) · WhatsApp +92 322 278 2254.' },
     ],
   },
   {
@@ -351,7 +351,7 @@ export const GROWTH_POSTS = [
       { type: 'h3', text: 'Q: Do you offer HydraFacial in Karachi?' },
       { type: 'p', text: 'A: No. Choose from Normal through Janssen on farwasalon.com/prices.' },
       { type: 'h2', text: 'Book a Whitening Facial' },
-      { type: 'p', text: '[Facials](/services/facials) · [book](/book) · WhatsApp +92 322 2782254.' },
+      { type: 'p', text: '[Facials](/services/facials) · [book](/book) · WhatsApp +92 322 278 2254.' },
     ],
   },
   {
@@ -411,7 +411,7 @@ export const GROWTH_POSTS = [
       { type: 'h3', text: 'Q: Can I wear makeup afterwards?' },
       { type: 'p', text: 'A: Better not to for the rest of the day. Pores are open and clean, and covering them straight away undoes part of what you paid for. If it is unavoidable, book the cleansing two days before the event, not the morning of.' },
       { type: 'h2', text: 'Book Deep Cleansing' },
-      { type: 'p', text: '[Cleansing menu](/services/cleansing) · [book](/book) · WhatsApp +92 322 2782254.' },
+      { type: 'p', text: '[Cleansing menu](/services/cleansing) · [book](/book) · WhatsApp +92 322 278 2254.' },
     ],
   },
   {
@@ -457,7 +457,7 @@ export const GROWTH_POSTS = [
       { type: 'h3', text: 'Q: Is there a men section?' },
       { type: 'p', text: 'A: No. Farwa is women-only, and it has been since 2008. That is a deliberate choice about what the room feels like, not a gap we intend to fill.' },
       { type: 'h2', text: 'Visit or Book' },
-      { type: 'p', text: '[Beauty salon Karachi](/beauty-salon-karachi) · [book](/book) · WhatsApp +92 322 2782254 · Mon–Sat 11–7.' },
+      { type: 'p', text: '[Beauty salon Karachi](/beauty-salon-karachi) · [book](/book) · WhatsApp +92 322 278 2254 · Mon–Sat 11–7.' },
     ],
   },
 ]

@@ -376,6 +376,7 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
     { label: 'Home',         href: '/', wideOnly: false },
     { label: 'Services',     href: '/services', wideOnly: false },
     { label: 'Prices',       href: '/prices', wideOnly: false },
+    { label: 'Bridal',       href: '/bridal', wideOnly: false },
     { label: 'Book',         href: '/book', wideOnly: false, hideOnDesktop: true },
     /* Gallery / About stay reachable but not primary conversion paths vs Book. */
     { label: 'Gallery',      href: '/gallery', wideOnly: true },

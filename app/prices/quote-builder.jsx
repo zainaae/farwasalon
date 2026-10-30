@@ -91,7 +91,7 @@ function QuoteBuilderInner() {
     `tap-safe tab-pill ${active ? 'tab-pill-active' : ''}`
 
   return (
-    <section id="quote" className="mb-12 panel-soft p-5 md:p-7 shadow-soft max-w-3xl" aria-labelledby="quote-heading">
+    <section className="mb-12 panel-soft p-5 md:p-7 shadow-soft max-w-3xl" aria-labelledby="quote-heading">
       <p className="text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)] text-plum mb-2">
         Quote
       </p>
@@ -229,15 +229,19 @@ function QuoteBuilderInner() {
 }
 
 export default function QuoteBuilder() {
+  /* Stable #quote outside Suspense — fallback + inner both used to set id="quote",
+     which left two nodes and broke e2e (strict mode). */
   return (
-    <Suspense fallback={
-      <section id="quote" className="mb-12 panel-soft p-5 md:p-7 shadow-soft max-w-3xl" aria-labelledby="quote-heading">
-        <h2 id="quote-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl">
-          Get a quote
-        </h2>
-      </section>
-    }>
-      <QuoteBuilderInner />
-    </Suspense>
+    <div id="quote">
+      <Suspense fallback={
+        <section className="mb-12 panel-soft p-5 md:p-7 shadow-soft max-w-3xl" aria-busy="true" aria-labelledby="quote-heading">
+          <h2 id="quote-heading" className="font-[family-name:var(--font-syne)] font-semibold text-ink text-xl md:text-2xl">
+            Get a quote
+          </h2>
+        </section>
+      }>
+        <QuoteBuilderInner />
+      </Suspense>
+    </div>
   )
 }

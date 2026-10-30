@@ -16,8 +16,9 @@ test.describe('Hair and bridal quote booking', () => {
     const bridal = page.getByRole('link', { name: /Book Bridal/i })
     await expect(bridal).toBeVisible()
     await expect(bridal).toHaveAttribute('href', /\/book\?category=Bridal/)
-    await expect(bridal).toContainText(/Package Rs 25,000/i)
+    await expect(bridal).toContainText(/from Rs 25,000/i)
     await expect(bridal).not.toContainText(/From Rs 8,000/i)
+    await expect(bridal).toHaveAttribute('aria-label', /Book Bridal — from Rs 25,000/i)
   })
 
   test('/services Bridal row leads from Full Package, not trial', async ({ page }) => {

@@ -127,7 +127,8 @@ export function formatDealRange(deal) {
 export function buildDealStripModel(deal, { live, range } = {}) {
   if (!deal) return null
   const pct = deal.title.match(/(\d+)\s*%/)?.[1] ?? null
-  const href = deal.id === 'freedom-deal-2026' ? '/freedom-deal' : deal.href || '/deals'
+  /* Ended Freedom Deal URL permanently redirects to /deals; keep strip CTA there. */
+  const href = deal.href || '/deals'
   const blurb =
     deal.id === 'freedom-deal-2026'
       ? 'Freedom Deal — 14% off when your visit hits Rs 1,400'

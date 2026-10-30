@@ -151,7 +151,9 @@ export default async function AreaPage({ params }) {
           </h2>
           <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 max-w-2xl mb-4">
             {TOP_SERVICES.map((svc) => {
-              const list = SERVICES[svc.category] ?? []
+              /* Waxing lists Rica + honey + Rica hot so the floor is Rs 150. */
+              const keys = svc.categories?.length ? svc.categories : [svc.category]
+              const list = keys.flatMap((k) => SERVICES[k] ?? [])
               const prices = list.map((s) => s.pricePkr).filter(Boolean)
               const floor = prices.length ? formatPrice(Math.min(...prices)) : null
               return (
