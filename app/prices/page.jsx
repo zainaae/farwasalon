@@ -33,6 +33,8 @@ export const metadata = {
   }),
 }
 
+export const dynamic = 'force-dynamic'
+
 const UPDATED = formatListDate(LAST_SERVICE_UPDATE)
 
 /* The "updated" eyebrow must agree with the sitemap <lastmod> for the menu.

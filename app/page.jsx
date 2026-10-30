@@ -23,6 +23,10 @@ export const metadata = {
   ...pageSocialMeta({ title, description, path: '/', imageAlt: 'Farwa Beauty Salon — PECHS Karachi' }),
 }
 
+/* DealStrip uses connection(); keep the route request-time so an expired
+   campaign can never ship as a month-old prerender (Age: multi-day HIT). */
+export const dynamic = 'force-dynamic'
+
 export default function HomePage() {
   return (
     <>
