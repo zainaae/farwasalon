@@ -1,43 +1,45 @@
 import Link from 'next/link'
 import ArrowUpRight from '../components/icon-sprite.jsx'
 import Image from 'next/image'
+import { connection } from 'next/server'
 import WaCta from '../components/wa-cta.jsx'
 import PageCloseCta from '../components/page-close-cta.jsx'
-import { getActiveDeals, getUpcomingDeals, getHeadlineDeal, isDealActive, isDealUpcoming, formatDealRange, DEALS } from '../../src/deals-data.js'
+import { getActiveDeals, getUpcomingDeals, getHeadlineDeal, isDealActive, formatDealRange } from '../../src/deals-data.js'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 import JsonLd from '../json-ld'
 import { SITE_ORIGIN, SALON_ID } from '../../lib/business-schema.js'
 import { WA_DEFAULT } from '../../src/data.js'
 
-const title = 'Salon Deals Karachi — Real Offers, Real Prices | Farwa'
-const description =
+const LIVE_TITLE = 'Salon Deals Karachi — Current Offers | Farwa'
+const LIVE_DESCRIPTION =
   'Current deals at Farwa Beauty Salon, PECHS Karachi — genuine offers with printed prices and honest validity dates. No fake urgency, no call-to-ask pricing.'
 
-const FREEDOM = DEALS.find((d) => d.id === 'freedom-deal-2026')
+const EMPTY_TITLE = 'Salon Deals Karachi — Check Back Soon | Farwa'
+const EMPTY_DESCRIPTION =
+  'No active percentage sale at Farwa Beauty Salon right now. Printed rates on the price list still apply — we only list deals we can honour at the counter.'
 
 export async function generateMetadata() {
-  /* While Freedom is live or teased, OG can show the campaign art. After it
-     ends, keep the same /deals title but drop the 14% poster so shares and
-     crawlers do not treat an expired Azadi sale as current. */
-  const freedomVisible = isDealActive(FREEDOM) || isDealUpcoming(FREEDOM)
+  await connection()
+  const hasOffers = getActiveDeals().length > 0 || getUpcomingDeals().length > 0
+  const title = hasOffers ? LIVE_TITLE : EMPTY_TITLE
+  const description = hasOffers ? LIVE_DESCRIPTION : EMPTY_DESCRIPTION
   return {
     title: { absolute: title },
     description,
     alternates: { canonical: '/deals' },
+    ...(hasOffers ? {} : { robots: { index: false, follow: true } }),
     ...pageSocialMeta({
       title,
       description,
       path: '/deals',
-      image: freedomVisible ? '/freedom-deal-og-14pc.jpg' : undefined,
-      imageAlt: freedomVisible
-        ? 'Freedom Deal — 14% off when your visit totals Rs 1,400 or more, 5–14 August 2026'
-        : 'Salon deals at Farwa Beauty Salon, PECHS Karachi',
+      imageAlt: 'Salon deals at Farwa Beauty Salon, PECHS Karachi',
     }),
   }
 }
 
-// Render on demand daily so expired deals drop off without a redeploy.
-export const revalidate = 86400
+/* Request-time so empty-state noindex and expired deals cannot bake into a
+   multi-day prerender the way Freedom Deal did on /. */
+export const dynamic = 'force-dynamic'
 
 function buildDealsSchema(deals) {
   return {
@@ -57,26 +59,36 @@ function buildDealsSchema(deals) {
   }
 }
 
-export default function DealsPage() {
+export default async function DealsPage() {
+  await connection()
   const live = getActiveDeals()
   const upcoming = getUpcomingDeals()
-  // Announced-but-not-open offers appear too, clearly labelled — never claimable early.
   const deals = [...upcoming, ...live]
   const headline = getHeadlineDeal()
-  const freedomLive = headline?.id === 'freedom-deal-2026' && isDealActive(headline)
+  const headlineLive = headline ? isDealActive(headline) : false
   return (
     <main id="main" className="page-content">
-      <JsonLd data={buildDealsSchema(deals)} />
+      {deals.length > 0 ? <JsonLd data={buildDealsSchema(deals)} /> : null}
       <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
         <div className="title-stack mb-3 max-w-3xl border-l-2 border-plum pl-5 lg:pl-6">
-          <p className="eyebrow text-plum">— Current offers</p>
+          <p className="eyebrow text-plum">— {deals.length ? 'Current offers' : 'Offers'}</p>
           <h1 className="display-page text-ink">
-            Salon deals in Karachi
+            {deals.length ? 'Salon deals in Karachi' : 'No active deals right now'}
           </h1>
           <p className="text-body md:text-lg leading-relaxed">
-            We do deals differently: few, real, and printed — with the same transparent
-            PKR pricing as our <Link href="/prices" className="link-underline text-ink font-medium">full price list</Link>.
-            If a deal is listed here, it is honoured at the counter, no conditions invented on arrival.
+            {deals.length ? (
+              <>
+                We do deals differently: few, real, and printed — with the same transparent
+                PKR pricing as our <Link href="/prices" className="link-underline text-ink font-medium">full price list</Link>.
+                If a deal is listed here, it is honoured at the counter, no conditions invented on arrival.
+              </>
+            ) : (
+              <>
+                When we run a real offer, it appears here with dates — not as a code in your inbox.
+                Until then, every starting price stays on the{' '}
+                <Link href="/prices" className="link-underline text-ink font-medium">printed price list</Link>.
+              </>
+            )}
           </p>
         </div>
         <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-2xl mb-6 leading-relaxed">
@@ -109,11 +121,11 @@ export default function DealsPage() {
         {deals.length === 0 ? (
           <div className="panel-soft p-6 md:p-8 max-w-3xl mb-4">
             <p className="font-[family-name:var(--font-syne)] font-semibold text-ink text-lg mb-2">
-              No active deals right now
+              Check back when we announce one
             </p>
             <p className="text-body text-sm max-w-xl mb-5">
-              Every starting price stays published on the site. When we run a real offer,
-              it appears here with dates — not as a code in your inbox.
+              Every starting price stays published on the site. Seasonal offers appear here with an
+              end date when they are real — never as theatre off an unlisted base rate.
             </p>
             <Link href="/prices" className="tap-safe btn-primary !py-2.5 !px-5 inline-flex items-center gap-2">
               See the price list <ArrowUpRight className="w-3.5 h-3.5" />
@@ -122,8 +134,8 @@ export default function DealsPage() {
         ) : (
         <div className="grid gap-6 max-w-3xl">
           {deals.map((d) => {
-            const primaryHref = freedomLive && d.id === 'freedom-deal-2026' ? '/freedom-deal' : '/book'
-            const primaryLabel = freedomLive && d.id === 'freedom-deal-2026' ? 'See Freedom Deal' : 'Book online'
+            const primaryHref = '/book'
+            const primaryLabel = headlineLive && d.id === headline?.id ? 'See the offer' : 'Book online'
             return (
             <section key={d.id} className="panel-soft p-6 md:p-7 shadow-soft" aria-labelledby={`deal-${d.id}`}>
               <p className="text-[10px] tracking-[0.24em] uppercase font-[family-name:var(--font-inter)] text-accent-gold-deep mb-2">

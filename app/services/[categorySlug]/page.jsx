@@ -23,7 +23,10 @@ export async function generateMetadata({ params }) {
   const locationData = parseLocationSlug(categorySlug)
   if (locationData) {
     const { service, location, prefix } = locationData
-    const catServices = SERVICES[service.category] || []
+    /* Waxing hubs span Rica / honey / Rica hot — floor is face wax Rs 150,
+       not Rica body Rs 600. Match LocationServicePage categoryKeys logic. */
+    const categoryKeys = service.categories?.length ? service.categories : [service.category]
+    const catServices = categoryKeys.flatMap((k) => SERVICES[k] || [])
     const locPrices = catServices.map((s) => s.pricePkr).filter(Boolean)
     const locMin = locPrices.length ? Math.min(...locPrices) : 100
     const priceFloor = formatPrice(locMin)

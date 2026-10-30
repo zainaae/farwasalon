@@ -205,4 +205,51 @@ deploying absolute apex destinations; do not delete these redirects.
     https://farwasalon.com/14-august-sale
     https://farwasalon.com/14-august-offer
     https://farwasalon.com/blog/full-body-wax-honey-vs-rica-karachi
+    https://farwasalon.com/freedom-deal
+    https://farwasalon.com/azadi
+    https://farwasalon.com/freedom
     /* plus legacy /services/best-{service}-{neighborhood} → canonical -in- hubs */
+
+---
+
+## 5. BLOCKED ON OWNER — mass 301 of 60 location SKUs (do not ship yet)
+
+**Status:** engineering recommendation only. **Do not mass-301** until the owner
+checks Search Console impressions for the location hubs.
+
+### What exists today
+
+About **60** live `/services/{service}-in-{area}` hubs (6 services × ~10
+neighbourhoods), e.g. `waxing-in-tariq-road`, `facials-in-clifton`. They still
+earn some local impressions. An earlier 2026-07-30 retirement of near-duplicates
+was reversed after Performance data showed page-one rankings.
+
+### Recommended redirect plan (after GSC review)
+
+1. Export GSC **Pages** + **Performance** for the last 28–90 days filtered to
+   `/services/*-in-*`.
+2. Keep hubs with meaningful impressions/clicks (especially PECHS + top areas).
+3. For thin/zero-impression hubs only, 301 to the matching service category
+   (`/services/waxing` → use the primary category slug such as `/services/rica-hot-wax`
+   or a dedicated `/services` waxing path — confirm canonical per service before shipping).
+4. Prefer consolidating onto category pages + `/areas/{slug}` rather than
+   inventing new doorway URLs.
+5. After any 301 batch: GSC **Validate fix** on Redirect / Soft 404 rows; do not
+   Request indexing on the old URLs.
+
+### Owner action required
+
+- [ ] Download GSC impression/click list for all `*-in-*` location hubs
+- [ ] Mark keep vs redirect candidates
+- [ ] Approve engineering to ship the 301s
+
+Until that checklist is done, **leave the 60 hubs live**.
+
+---
+
+## 6. Oct 2026 crawl — Freedom Deal retirement (eng)
+
+`/freedom-deal` and Azadi aliases now **301 → `/deals`**. Dropped from sitemap
+and `llms.txt`. Re-request indexing is not needed on `/freedom-deal`; use
+**Validate fix** under "Page with redirect" after production deploy clears the
+stale prerender (home/prices/llms must show zero "freedom" in HTML).

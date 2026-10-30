@@ -891,6 +891,61 @@ function FounderNote() {
    client components server-render unless you opt out. The opt-out was the
    whole problem. The eight sections already carry `.cv-auto`
    (content-visibility: auto), so offscreen ones cost nothing to render. */
+function LatestGuides() {
+  const guides = [
+    {
+      href: '/blog/salon-price-list-karachi-2026',
+      title: 'Salon price list Karachi 2026',
+      blurb: 'How to read every printed floor on the menu.',
+    },
+    {
+      href: '/blog/eyebrow-microblading-karachi-guide',
+      title: 'Eyebrow microblading guide',
+      blurb: 'Cost, healing, and what Rs 20,000 includes in PECHS.',
+    },
+    {
+      href: '/deals',
+      title: 'Current salon deals',
+      blurb: 'Only real offers with end dates — or the empty list when none are live.',
+    },
+  ]
+  return (
+    <section className="cv-auto bg-white border-b border-border-soft py-12 md:py-16" aria-labelledby="latest-guides">
+      <div className="section-shell">
+        <div className="title-stack mb-6 max-w-2xl">
+          <p className="eyebrow text-plum">— From the studio</p>
+          <h2 id="latest-guides" className="display-section text-ink">
+            Latest guides
+          </h2>
+          <p className="text-body text-sm md:text-[15px] max-w-xl mt-2">
+            Practical PECHS notes — prices, brows, and whatever offer is actually live.
+          </p>
+        </div>
+        <ul className="grid sm:grid-cols-3 gap-6 max-w-4xl">
+          {guides.map((g) => (
+            <li key={g.href}>
+              <Link
+                href={g.href}
+                className="group block tap-safe min-h-[44px]"
+              >
+                <p className="font-[family-name:var(--font-syne)] font-semibold text-ink text-base group-hover:text-plum transition-colors">
+                  {g.title}
+                </p>
+                <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mt-1.5 leading-relaxed">
+                  {g.blurb}
+                </p>
+                <span className="inline-flex items-center gap-1 mt-3 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-plum-deep">
+                  Read <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
 export default function HomeBelowFold({ placesEnabled = false }) {
   return (
     <>
@@ -901,6 +956,7 @@ export default function HomeBelowFold({ placesEnabled = false }) {
       <StatsStrip />
       <WordmarkDivider />
       <FeaturedServices />
+      <LatestGuides />
       <HardNumbersBand />
       <SalonLocalBlock />
       <FounderNote />

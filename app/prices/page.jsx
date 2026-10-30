@@ -133,6 +133,10 @@ export default function PricesPage() {
           <Link href="/blog/salon-price-list-karachi-2026" className="link-underline hover:text-ink text-ink font-medium">
             Salon Price List Karachi 2026 guide
           </Link>
+          {' · '}
+          <Link href="/blog/eyebrow-microblading-karachi-guide" className="link-underline hover:text-ink text-ink font-medium">
+            Microblading guide
+          </Link>
         </p>
 
         <QuoteBuilder />

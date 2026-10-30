@@ -55,30 +55,21 @@ const nextConfig = {
   },
   trailingSlash: false,
   redirects: async () => [
-    /* /azadi-sale shipped first and was submitted to IndexNow; the campaign is
-       branded Freedom Deal to match the poster, so the old URL redirects
-       rather than 404s. Both spellings people might type land in the right
-       place. */
-    /* Campaign name aliases. All 301 to the single canonical page rather than
-       existing as separate pages: five near-identical pages competing for the
-       same query is keyword cannibalisation, and Google treats thin
-       location/name variants of one offer as doorway pages. Redirects capture
-       typed traffic, printed URLs and any inbound link with none of that risk. */
-    /* Destinations are absolute apex URLs. Relative Location on www keeps the
-       crawler on www for one hop (next.config runs before proxy.js), which
-       Search Console reports as Redirect error for aliases like
-       /independence-sale and legacy /services/best-*. */
-    { source: '/azadi', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
-    { source: '/azadi-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
-    { source: '/azadi-deal', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
-    { source: '/azaadi-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
-    { source: '/azadi-offer', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
-    { source: '/freedom', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
-    { source: '/jashn-e-azadi', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
-    { source: '/independence-day-offer', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
-    { source: '/independence-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
-    { source: '/14-august-sale', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
-    { source: '/14-august-offer', destination: toCanonicalUrl('/freedom-deal'), permanent: true },
+    /* Freedom Deal (5–14 Aug 2026) has ended. Canonical /freedom-deal and every
+       Azadi alias 301 to /deals so crawlers stop indexing an ended offer page.
+       Absolute apex destinations avoid www → relative Location redirect errors. */
+    { source: '/freedom-deal', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/azadi', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/azadi-sale', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/azadi-deal', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/azaadi-sale', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/azadi-offer', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/freedom', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/jashn-e-azadi', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/independence-day-offer', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/independence-sale', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/14-august-sale', destination: toCanonicalUrl('/deals'), permanent: true },
+    { source: '/14-august-offer', destination: toCanonicalUrl('/deals'), permanent: true },
     {
       /* Retired: a 151-word post competing with the substantial Rica-vs-honey
          guide for the same query. Its full-body angle was absorbed there, so

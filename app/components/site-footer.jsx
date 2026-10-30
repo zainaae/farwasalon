@@ -5,7 +5,7 @@ import ArrowUpRight from './icon-sprite.jsx'
 import WaCta from './wa-cta.jsx'
 import Image from 'next/image'
 import { MessageCircle, Star } from 'lucide-react'
-import { WA_DEFAULT, IG_LINK, MAPS_LINK, CAT_SLUGS } from '../../src/site-config.js'
+import { WA_DEFAULT, IG_LINK, MAPS_LINK, CAT_SLUGS, FOUNDING_YEAR, YEARS_ACTIVE } from '../../src/site-config.js'
 import { SALON_ADDRESS_LINES } from '../../lib/business-schema.js'
 import { AREAS_HUB_HREF, getFooterAreaLinks } from '../../lib/location-links.js'
 import {
@@ -233,7 +233,7 @@ export default function SiteFooter() {
           <div className="border-t border-border-soft pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
             <div className="flex items-center gap-3 flex-wrap">
               <p className="text-stone text-[11px] font-[family-name:var(--font-inter)]">
-                © {new Date().getFullYear()} Farwa Beauty Salon. All rights reserved.
+                © {FOUNDING_YEAR + YEARS_ACTIVE} Farwa Beauty Salon. All rights reserved.
               </p>
               <span className="text-[#e4ddd7] hidden sm:inline">·</span>
               <UrduSignature className="sm:hidden text-stone/70 text-[13px]" />
