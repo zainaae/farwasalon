@@ -599,7 +599,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'bridal-beauty-timeline',
-    title: 'Complete Bridal Beauty Timeline — When to Start Prep Before Your Wedding',
+    title: 'Bridal Beauty Timeline — When to Start Prep',
     description: 'A month-by-month beauty preparation guide for Karachi brides, from skincare routines to the final bridal trial.',
     featuredImage: '/bridal.jpg',
     date: '2026-05-10',
@@ -930,7 +930,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'gold-facial-vs-whitening-facial',
-    title: 'Gold Facial vs Whitening Facial in Karachi — and Why We Do Not Do Gold',
+    title: 'Gold vs Whitening Facial Karachi — Why No Gold',
     description: 'Gold facials are on nearly every Karachi salon menu. They are not on ours, and this is the honest reason why — plus which of our whitening facials actually does what you wanted the gold one for.',
     featuredImage: '/glow.jpg',
     date: '2026-05-08',
@@ -972,7 +972,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'complete-guide-hair-treatments-karachi',
-    title: 'Complete Guide to Hair Treatments in Karachi — From Keratin to Protein',
+    title: 'Hair Treatments Karachi — Keratin to Protein',
     description: 'Everything you need to know about professional hair treatments in Karachi — protein from Rs 2,000, Wellaplex from Rs 3,000, hair-fall and dandruff protocols, plus how keratin is quoted.',
     featuredImage: '/hairtreatment.jpg',
     date: '2026-05-03',
@@ -1039,7 +1039,7 @@ export const BLOG_POSTS = [
   },
   {
     slug: 'prepare-first-salon-visit-tips',
-    title: 'How to Prepare for Your First Salon Visit — Tips for New Clients',
+    title: 'First Salon Visit Tips — What to Expect',
     description: 'First time visiting a beauty salon? Here\'s what to expect, how to communicate your needs, and tips to make the most of your experience.',
     featuredImage: '/massage.jpg',
     date: '2026-04-25',

@@ -9,6 +9,25 @@ Generated 2026-07-30 from the deployed sitemaps. 62 URLs total
 
 ---
 
+## Status — auditor recheck 30 Oct 2026 (~17:06 UTC)
+
+| Status | Item | Notes |
+|--------|------|-------|
+| **Done** | Freedom Deal scrub | 0 “Freedom” in live HTML; `/freedom-deal` → `/deals` |
+| **Done** | Hydration error | Cleared on recheck |
+| **Done** | Waxing floor | From Rs 150 (hot-wax face floor) |
+| **Done** | `/deals` | noindex + omitted from sitemap + in nav |
+| **Done** | Ratings | 4.5★ / 35 reviews sitewide |
+| **Partly** | Home → blog links | 7 of 29 posts linked — OK for now |
+| **Owner-blocked** | ~70 area / `*-in-*` hubs | Still **200**. Do **not** mass-301 until owner names 3–4 keepers **with real route + parking**. Recommended candidates only (not decided): PECHS, Tariq Road, Bahadurabad, Gulshan |
+| **Still open** | ~69 meta cutoffs | Mostly area hubs — wait for keep/redirect decision |
+| **Still open** | `/prices` date | Still “updated 31 July 2026” — do **not** bump without a real printed-menu review |
+| **Shipped / N/A** | Small copy (facials count, engagement duration, bridal “from”, phone display, titles) | Engagement `~3h`→`~2h 30m` on `/bridal`; privacy phone spacing; longest non-area titles trimmed. Facials already “11”; home bridal already “from”; featured+grid review repeat is intentional, not a data duplicate |
+
+**Area 301s:** WAITING on owner keep list + route/parking. Engineering must not invent parking or pick keepers.
+
+---
+
 ## 1b. Money URLs — GSC re-request after trust/copy deploys (owner)
 
 Engineering can ping IndexNow (`npm run ping:indexnow` / CI on `master`).
@@ -214,44 +233,40 @@ deploying absolute apex destinations; do not delete these redirects.
 
 ## 5. BLOCKED ON OWNER — mass 301 of ~70 area/location pages (do not ship yet)
 
-**Status:** engineering recommendation only. **Do not mass-301** until the owner
-checks Search Console impressions for the location hubs.
+**Status:** **owner-blocked.** Do **not** mass-301 until the owner (1) picks
+3–4 keepers and (2) supplies **real route + parking** for each. Do not invent
+parking or choose keepers in Cursor. WIP on `fix/area-doorway-redirects` (if
+any) must stay unmerged.
 
-**Auditor (30 Oct 2026 re-crawl ~15:45 UTC):** all ~70 area/location URLs still
-return **200**. This remains the **biggest open indexation item**, blocked on a
-GSC impressions check — not an engineering ship-now task.
+**Auditor (30 Oct 2026 rechecks ~15:45 and ~17:06 UTC):** all ~70 area/location
+URLs still return **200**. Biggest open indexation item.
 
-Meta description rewrites across the ~69 location hubs mostly clear once those
-301s ship; do not batch-rewrite metas first.
+**Recommended keep candidates (not decided):** PECHS, Tariq Road, Bahadurabad,
+Gulshan — GSC triage hints only.
 
 ### What exists today
 
 About **60–70** live `/services/{service}-in-{area}` hubs (6 services × ~10
-neighbourhoods) plus related area surfaces, e.g. `waxing-in-tariq-road`,
-`facials-in-clifton`. They still earn some local impressions. An earlier
-2026-07-30 retirement of near-duplicates was reversed after Performance data
-showed page-one rankings.
+neighbourhoods) plus related area surfaces. They still earn some local
+impressions. An earlier 2026-07-30 retirement of near-duplicates was reversed
+after Performance data showed page-one rankings.
 
-### Recommended redirect plan (after GSC review)
+### Recommended redirect plan (after owner keep list + parking)
 
-1. Export GSC **Pages** + **Performance** for the last 28–90 days filtered to
-   `/services/*-in-*` (and `/areas/*` if listed).
-2. Keep hubs with meaningful impressions/clicks (especially PECHS + top areas).
-3. For thin/zero-impression hubs only, 301 to the matching service category
-   (`/services/waxing` → use the primary category slug such as `/services/rica-hot-wax`
-   or a dedicated `/services` waxing path — confirm canonical per service before shipping).
-4. Prefer consolidating onto category pages + `/areas/{slug}` rather than
-   inventing new doorway URLs.
-5. After any 301 batch: GSC **Validate fix** on Redirect / Soft 404 rows; do not
+1. Export GSC **Pages** + **Performance** for `/services/*-in-*` and `/areas/*`.
+2. Keep hubs the owner named (with real route/parking copy).
+3. For the rest only, 301 to the matching service category or `/areas` hub.
+4. After any 301 batch: GSC **Validate fix** on Redirect / Soft 404 rows; do not
    Request indexing on the old URLs.
 
 ### Owner action required
 
-- [ ] Download GSC impression/click list for all `*-in-*` location hubs
-- [ ] Mark keep vs redirect candidates
+- [ ] Name 3–4 keepers
+- [ ] Provide real route + parking notes for each keeper
 - [ ] Approve engineering to ship the 301s
 
-Until that checklist is done, **leave the ~70 hubs live**.
+Until that checklist is done, **leave the ~70 hubs live**. Meta cutoffs (~69)
+mostly clear with the redirects — wait.
 
 ---
 

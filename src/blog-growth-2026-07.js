@@ -254,7 +254,7 @@ export const GROWTH_POSTS = [
   },
   {
     slug: 'haircut-blowdry-hair-colour-cost-karachi',
-    title: 'Haircut, Blowdry & Colour Cost in Karachi — Printed Rates',
+    title: 'Haircut, Blowdry & Colour Cost Karachi',
     description:
       'Haircut & blowdry from Rs 2,000, hair colour from Rs 4,000, blowdry from Rs 1,500, bridal hair from Rs 8,000 at Farwa PECHS — published Karachi hair salon rates.',
     featuredImage: '/hairtreatment.jpg',
