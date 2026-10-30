@@ -87,7 +87,7 @@ Lightweight pointers (not a full enterprise CMDB).
 
 | Topic | Approach |
 |-------|----------|
-| **Primary** | **Vercel** connected to GitHub — pushes to the production branch deploy or produce preview deployments. **No** deploy secrets stored in this repo. |
+| **Primary** | **Vercel** connected to GitHub — pushes to the production branch deploy or produce preview deployments. **No** deploy secrets stored in this repo. **Note:** Production currently tracks `master` (repo default is `main`); after merging to `main`, fast-forward `master` to `main` so Production picks up the ship until Production Branch is switched to `main` in the Vercel dashboard. |
 | **Promotion** | Use Vercel dashboard: verify **Preview** URL → **Promote to Production** when [RELEASE_CHECKLIST.md](./RELEASE_CHECKLIST.md) is satisfied. |
 | **Optional workflow** | A `deploy.yml` is **not** required; document-only unless the team later adds OIDC / Vercel integration with approved tokens. |
 
