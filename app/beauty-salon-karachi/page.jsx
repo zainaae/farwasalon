@@ -196,7 +196,7 @@ export default function BeautySalonKarachiPage() {
                 <Link href={AREAS_HUB_HREF} className="tab-pill hover:border-ink hover:text-ink">
                   All areas →
                 </Link>
-              </li>}
+              </li>
             </ul>
             <p className="mt-8 pt-6 border-t border-border-soft text-xs text-stone font-[family-name:var(--font-inter)]">
               <Link href="/" className="link-underline hover:text-ink font-medium">
