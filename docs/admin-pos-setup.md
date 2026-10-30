@@ -54,7 +54,7 @@ values (
 );
 ```
 
-3. Open `/admin/login`, sign in with that email/password → land on **Today** stub.
+3. Open `/admin/login`, sign in with that email/password → land on **Today** (day KPIs + visit list).
 
 Auth alone is not enough: a normal Supabase user without a `staff_profiles` row is signed out and sent back to login with `not_staff`.
 
@@ -87,7 +87,7 @@ npm run pos:sync-catalog:dry
 npm run pos:sync-catalog
 ```
 
-Settings UI “Sync catalog” is deferred until `/admin/settings` exists (Foundation shell has Today + login only).
+Settings UI “Sync catalog” is deferred until `/admin/settings` exists — until then run `npm run pos:sync-catalog` from a machine with service-role env.
 
 ## Slice 2 — Clients + visits POS
 
