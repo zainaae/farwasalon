@@ -7,9 +7,12 @@ export const ALL_CATEGORY_SLUGS = Object.values(CAT_SLUGS)
 export const BLOG_SLUGS = BLOG_POSTS.map((post) => post.slug)
 
 /** Kept /areas hubs — service×area landers are 301'd away. */
-export const SAMPLE_LOCATION_LINKS = getKeptNeighborhoods().flatMap((n) =>
-  n ? [{ slug: n.slug, href: /areas/ as const }] : [],
-)
+export const SAMPLE_LOCATION_LINKS = getKeptNeighborhoods()
+  .filter((n): n is NonNullable<typeof n> => Boolean(n))
+  .map((n) => ({
+    slug: n.slug,
+    href: `/areas/${n.slug}`,
+  }))
 
 /**
  * Next 16 / React 19 can briefly keep a hidden duplicate of the route in the DOM
