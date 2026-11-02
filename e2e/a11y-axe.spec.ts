@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 import { visibleMain } from './helpers'
+import { MOBILE_AXE_PAGES, MOBILE_PORTRAIT } from './viewports'
 
 const A11Y_PAGES = [
   { path: '/', name: 'home' },
@@ -13,35 +14,56 @@ const A11Y_PAGES = [
   { path: '/blog/threading-vs-waxing', name: 'blog article' },
 ]
 
+async function settleForAxe(page: import('@playwright/test').Page) {
+  await expect(visibleMain(page)).toBeVisible()
+
+  // Scroll through the page so whileInView animations fire and settle.
+  // Without this, axe scans elements mid-fade (diluted computed colors →
+  // phantom color-contrast failures) and skips below-fold text entirely.
+  await page.evaluate(async () => {
+    const step = window.innerHeight / 2
+    for (let y = 0; y <= document.body.scrollHeight; y += step) {
+      window.scrollTo(0, y)
+      await new Promise((r) => setTimeout(r, 120))
+    }
+    window.scrollTo(0, 0)
+  })
+  await page.waitForTimeout(800)
+}
+
+async function expectNoSeriousAxe(page: import('@playwright/test').Page) {
+  const results = await new AxeBuilder({ page })
+    .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+    .analyze()
+
+  const serious = results.violations.filter(
+    (v) => v.impact === 'critical' || v.impact === 'serious',
+  )
+
+  expect(
+    serious,
+    serious.map((v) => `${v.id}: ${v.help} (${v.nodes.length} nodes)`).join('\n'),
+  ).toEqual([])
+}
+
 for (const { path, name } of A11Y_PAGES) {
   test(`accessibility — ${name} has no serious axe violations`, async ({ page }) => {
     await page.goto(path, { waitUntil: 'domcontentloaded' })
-    await expect(visibleMain(page)).toBeVisible()
-
-    // Scroll through the page so whileInView animations fire and settle.
-    // Without this, axe scans elements mid-fade (diluted computed colors →
-    // phantom color-contrast failures) and skips below-fold text entirely.
-    await page.evaluate(async () => {
-      const step = window.innerHeight / 2
-      for (let y = 0; y <= document.body.scrollHeight; y += step) {
-        window.scrollTo(0, y)
-        await new Promise((r) => setTimeout(r, 120))
-      }
-      window.scrollTo(0, 0)
-    })
-    await page.waitForTimeout(800)
-
-    const results = await new AxeBuilder({ page })
-      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
-      .analyze()
-
-    const serious = results.violations.filter(
-      (v) => v.impact === 'critical' || v.impact === 'serious',
-    )
-
-    expect(
-      serious,
-      serious.map((v) => `${v.id}: ${v.help} (${v.nodes.length} nodes)`).join('\n'),
-    ).toEqual([])
+    await settleForAxe(page)
+    await expectNoSeriousAxe(page)
   })
 }
+
+test.describe(`accessibility mobile ${MOBILE_PORTRAIT.label}`, () => {
+  test.use({
+    viewport: { width: MOBILE_PORTRAIT.width, height: MOBILE_PORTRAIT.height },
+  })
+
+  for (const { path, name } of MOBILE_AXE_PAGES) {
+    test(`mobile axe — ${name} has no serious violations`, async ({ page }) => {
+      await page.goto(path, { waitUntil: 'domcontentloaded' })
+      await settleForAxe(page)
+      await expectNoSeriousAxe(page)
+    })
+  }
+})

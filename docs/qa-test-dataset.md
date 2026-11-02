@@ -219,8 +219,16 @@ Also: `/blog/rss.xml`
 
 ## Viewport breakpoints (Playwright)
 
-320×568, 375×812, 390×844, 768×1024, 1024×768, 1280×800  
+Source of truth: `e2e/viewports.ts`.
+
+**Overflow matrix:** 320×568, 375×812, 390×844, **414×896**, 768×1024, 1024×768, 1280×800  
 Also tested at ~125% zoom (narrower layout width).
+
+**Core pages (full matrix):** `/`, `/services`, `/services/threading`, `/book`, `/gallery`  
+**Extended pages (320 / 390 / 768 / 1280 × zoom):** `/prices`, `/bridal`, `/deals`, `/blog`, `/services/waxing-in-pechs-karachi`  
+**DPR smoke:** `/` and `/prices` at 390 with `deviceScaleFactor` 1 and 2.
+
+**Design QA:** `npm run qa:design` — 375 / 414 / 390@2x / 1280 heuristic + screenshots; exits non-zero on overflow-x or duplicate sticky CTAs.
 
 ---
 

@@ -27,6 +27,7 @@
     "pos:import-bookings": "node scripts/import-online-bookings.mjs",
     "pos:import-bookings:dry": "node scripts/import-online-bookings.mjs --dry-run",
     "qa:workflow": "node scripts/qa-workflow-run.mjs",
+    "qa:design": "node scripts/design-qa.mjs",
     "test:coverage": "node ./node_modules/vitest/vitest.mjs run --coverage"
   },
   "dependencies": {

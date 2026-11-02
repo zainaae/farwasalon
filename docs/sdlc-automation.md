@@ -76,7 +76,7 @@ Lightweight pointers (not a full enterprise CMDB).
 | Layer | Tool | Scope |
 |-------|------|--------|
 | Unit / smoke | Vitest + jsdom + RTL | Booking rules (durations, slots, cancel tokens, date rules), schema, SEO helpers, sanitisation, rate limiting — **185 tests across 19 files** |
-| End-to-end | Playwright | 15 specs in `e2e/` — book flow, mobile nav, responsive overflow, location pages, footer links, newsletter |
+| End-to-end | Playwright | Specs in `e2e/` — book flow, mobile nav, responsive overflow (shared `viewports.ts` + DPR smoke), mobile axe, location pages, footer links; local `npm run qa:design` for heuristic screenshots |
 | Accessibility | `@axe-core/playwright` | `e2e/a11y-axe.spec.ts` |
 
 **Gate:** `npm run test` and `npm run test:e2e` pass locally and in CI.

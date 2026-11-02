@@ -521,12 +521,12 @@ export function StickyMobileCTA({ hidden = false }) {
       >
         <div className="sticky-cta-enter pointer-events-auto mx-3.5 flex flex-col rounded-sm bg-ink/[0.94] backdrop-blur-md shadow-soft border border-white/[0.08] min-w-0 max-w-[calc(100vw-1.75rem)] overflow-hidden">
           {showSlotHint && (
-            <p className="px-3 pt-1.5 pb-0 text-center text-[8px] tracking-[0.12em] uppercase text-white/40 font-[family-name:var(--font-inter)] leading-none">
+            <p className="px-3 pt-1.5 pb-0 text-center text-[8px] tracking-[0.12em] uppercase text-white/70 font-[family-name:var(--font-inter)] leading-none">
               <span
                 className={`inline-block w-1 h-1 rounded-full mr-1.5 align-middle ${slot.open ? 'bg-[#9cd48c]' : 'bg-[var(--accent-gold)]'}`}
                 aria-hidden="true"
               />
-              Next slot <span className="text-white/70 font-medium">{slot.label}</span>
+              Next slot <span className="text-white font-medium">{slot.label}</span>
             </p>
           )}
           <div className="flex items-stretch gap-0.5 p-1">
