@@ -111,7 +111,10 @@ test.describe('Booking entry paths', () => {
     await page.setViewportSize({ width: 390, height: 844 })
     await page.goto('/')
     const nails = page.getByRole('link', { name: /Book Nails/i })
-    await nails.scrollIntoViewIfNeeded()
+    await expect(nails).toHaveAttribute('href', /\/book\?category=Nails/)
+    /* Sticky mobile CTA sits over the bottom of the viewport; center the chip
+       so the click hits Quick Pick, not the fixed Book bar. */
+    await nails.evaluate((el) => el.scrollIntoView({ block: 'center', inline: 'nearest' }))
     await nails.click()
     await expect(page).toHaveURL(/\/book\?category=Nails/)
     await expect(page.getByText('— Choose services')).toBeVisible()
