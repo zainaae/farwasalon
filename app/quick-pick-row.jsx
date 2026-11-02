@@ -29,7 +29,7 @@ export default function QuickPickRow() {
       const ceiling = categoryMarketingFromPrice(c)
       return {
         category: c,
-        priceLabel: ceiling != null ? `from ${formatPrice(ceiling)}` : null,
+        priceLabel: ceiling != null ? `From ${formatPrice(ceiling)}` : null,
         ariaPrice: ceiling != null ? `from ${formatPrice(ceiling)}` : '',
       }
     }

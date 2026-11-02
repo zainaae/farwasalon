@@ -200,14 +200,14 @@ export default function PricesPage() {
                     <span className="shrink-0 ml-2 inline-flex flex-col items-end gap-0.5 sm:flex-row sm:items-center sm:gap-x-2.5">
                       <Link
                         href={`/book?service=${encodeURIComponent(s.name)}&category=${encodeURIComponent(cat)}`}
-                        className="tap-safe text-[10px] tracking-[0.14em] uppercase font-semibold text-plum hover:text-ink"
+                        className="tap-safe inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-[10px] tracking-[0.14em] uppercase font-semibold text-plum hover:text-ink"
                       >
                         Book
                       </Link>
                       {isHairQuoteService(s) && (
                         <Link
                           href={hairQuotePath(s.id)}
-                          className="tap-safe text-[10px] tracking-[0.14em] uppercase text-stone hover:text-ink font-normal"
+                          className="tap-safe inline-flex min-h-[44px] items-center justify-center px-1 text-[10px] tracking-[0.14em] uppercase text-stone hover:text-ink font-normal"
                         >
                           Get quote
                         </Link>

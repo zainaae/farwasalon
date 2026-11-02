@@ -747,20 +747,26 @@
   }
   @media (max-width: 767px) {
     html {
-      scroll-padding-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+      scroll-padding-bottom: calc(7rem + env(safe-area-inset-bottom, 0px));
     }
     /* Mid-page loud CTAs need clearance above the fixed Call/WA/Book bar */
     .sticky-midband-cta {
-      margin-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+      margin-bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px));
     }
     .page-content nav[aria-label="Price list categories"] {
-      scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+      scroll-margin-bottom: calc(7rem + env(safe-area-inset-bottom, 0px));
     }
     .page-content [id^="prices-"],
     .page-content #quote {
       /* 4.25rem, not 5.75rem: the sticky element is a single ~65px pill row now. */
       scroll-margin-top: calc(3.375rem + env(safe-area-inset-top, 0px) + 4.25rem);
-      scroll-margin-bottom: calc(6.25rem + env(safe-area-inset-bottom, 0px));
+      scroll-margin-bottom: calc(7rem + env(safe-area-inset-bottom, 0px));
+    }
+    /* Headings / sections clear the sticky bar when scrolled into view */
+    .page-content h2,
+    .page-content h3,
+    .page-content section[aria-labelledby] {
+      scroll-margin-bottom: calc(7rem + env(safe-area-inset-bottom, 0px));
     }
   }
   .input-field {
