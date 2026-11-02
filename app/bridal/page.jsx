@@ -154,7 +154,7 @@ export default function BridalLandingPage() {
                   <div className="min-w-0">
                     <p className="text-ink font-medium font-[family-name:var(--font-syne)] text-sm">{row.event}</p>
                     <p className="text-stone text-xs font-[family-name:var(--font-inter)] mt-0.5 leading-snug">{row.look}</p>
-                    <p className="text-stone/80 text-[11px] font-[family-name:var(--font-inter)] mt-1">{row.mapsTo}</p>
+                    <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] mt-1">{row.mapsTo}</p>
                   </div>
                   <p className="shrink-0 text-ink font-[family-name:var(--font-fraunces)] font-bold text-sm tabular-nums pt-0.5">
                     from {formatPrice(row.price)}

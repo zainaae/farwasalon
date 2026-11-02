@@ -107,10 +107,14 @@ QA_WRITE=1 BASE_URL=https://farwasalon.com npm run qa:workflow
 
 ## 8. Responsive / a11y (e2e viewports)
 
-Check at **320, 375, 390, 768, 1024, 1280** px on `/`, `/services`, `/services/threading`, `/book`, `/gallery`:
+Constants live in `e2e/viewports.ts`. Check at **320, 375, 390, 414, 768, 1024, 1280** px:
 
-- [ ] No horizontal overflow
+- [ ] Core routes (`/`, `/services`, `/services/threading`, `/book`, `/gallery`) — no horizontal overflow (+ ~125% zoom)
+- [ ] Extended: `/prices`, `/bridal`, `/deals`, `/blog`, waxing PECHS hub — no overflow at 320/390/768/1280
+- [ ] DPR smoke: `/` + `/prices` @ 390 with 1× and 2× device scale
 - [ ] `#main` visible; mobile nav usable (`e2e/mobile-nav.spec.ts`)
+- [ ] Desktop + mobile axe on money pages (`e2e/a11y-axe.spec.ts`)
+- [ ] Optional local: `npm run qa:design` (server on `:3000`) — fails on overflow / stickyCount > 1
 
 ## 9. Footer / nav matrix
 

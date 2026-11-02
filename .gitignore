@@ -36,6 +36,9 @@ dist-ssr
 playwright-report/
 test-results/
 
+# Design QA screenshots / heuristic report
+qa-shots/
+
 # Vite (legacy)
 .vite/
 

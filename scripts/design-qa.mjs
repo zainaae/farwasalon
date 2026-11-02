@@ -11,10 +11,11 @@ const routes = [
   '/book',
   '/bridal',
   '/prices',
+  '/deals',
   '/services',
   '/services/facials',
   '/services/threading',
-  '/services/bridal-makeup-in-pechs-karachi',
+  '/services/waxing-in-pechs-karachi',
   '/gallery',
   '/contact',
   '/about',
@@ -24,9 +25,12 @@ const routes = [
   '/beauty-salon-karachi',
 ]
 
+/** Aligned with e2e/viewports.ts — 375 / 414 / 1280 + one DPR-2 mobile pass. */
 const viewports = [
-  { name: 'm375', width: 375, height: 812 },
-  { name: 'd1280', width: 1280, height: 800 },
+  { name: 'm375', width: 375, height: 812, deviceScaleFactor: 1 },
+  { name: 'm414', width: 414, height: 896, deviceScaleFactor: 1 },
+  { name: 'm390-dpr2', width: 390, height: 844, deviceScaleFactor: 2 },
+  { name: 'd1280', width: 1280, height: 800, deviceScaleFactor: 1 },
 ]
 
 function issuesFromPage(info) {
@@ -36,9 +40,16 @@ function issuesFromPage(info) {
   }
   if (info.stickyCount > 1) issues.push(`sticky navs=${info.stickyCount}`)
   if (info.hasSeoDump) issues.push('possible SEO area dump text')
-  if (info.tinyTaps?.length) issues.push(`tiny taps: ${info.tinyTaps.slice(0, 5).join('; ')}`)
   if (info.h1Count !== 1) issues.push(`h1 count=${info.h1Count}`)
   return issues
+}
+
+function warnFromPage(info) {
+  const warnings = []
+  if (info.tinyTaps?.length) {
+    warnings.push(`tiny taps: ${info.tinyTaps.slice(0, 5).join('; ')}`)
+  }
+  return warnings
 }
 
 async function probe(page) {
@@ -76,7 +87,7 @@ const browser = await chromium.launch({ headless: true })
 for (const vp of viewports) {
   const context = await browser.newContext({
     viewport: { width: vp.width, height: vp.height },
-    deviceScaleFactor: 1,
+    deviceScaleFactor: vp.deviceScaleFactor ?? 1,
   })
   const page = await context.newPage()
   for (const route of routes) {
@@ -88,8 +99,10 @@ for (const vp of viewports) {
       await page.screenshot({ path: path.join(OUT, file), fullPage: false })
       const info = await probe(page)
       const issues = issuesFromPage(info)
-      report.push({ vp: vp.name, route, file, ...info, issues })
-      console.log(`${vp.name} ${route} → ${issues.length ? issues.join(' | ') : 'ok'}`)
+      const warnings = warnFromPage(info)
+      report.push({ vp: vp.name, route, file, ...info, issues, warnings })
+      const warnNote = warnings.length ? ` (warn: ${warnings.join(' | ')})` : ''
+      console.log(`${vp.name} ${route} → ${issues.length ? issues.join(' | ') : 'ok'}${warnNote}`)
 
       if (route === '/book' && vp.name === 'm375') {
         const next = page.getByRole('button', { name: /continue|next/i }).first()
@@ -100,7 +113,7 @@ for (const vp of viewports) {
         }
       }
     } catch (e) {
-      report.push({ vp: vp.name, route, error: String(e.message || e), issues: ['nav-error'] })
+      report.push({ vp: vp.name, route, error: String(e.message || e), issues: ['nav-error'], warnings: [] })
       console.log(`${vp.name} ${route} → ERROR ${e.message}`)
     }
   }
@@ -110,6 +123,12 @@ await browser.close()
 
 fs.writeFileSync(path.join(OUT, 'report.json'), JSON.stringify(report, null, 2))
 const bad = report.filter((r) => (r.issues && r.issues.length) || r.error)
+const warned = report.filter((r) => r.warnings?.length)
 console.log('\n=== SUMMARY ===')
-console.log(`routes=${report.length} withIssues=${bad.length}`)
-bad.forEach((r) => console.log(`${r.vp} ${r.route}: ${(r.issues || [r.error]).join(' | ')}`))
+console.log(`routes=${report.length} withIssues=${bad.length} withWarnings=${warned.length}`)
+bad.forEach((r) => console.log(`FAIL ${r.vp} ${r.route}: ${(r.issues || [r.error]).join(' | ')}`))
+warned.forEach((r) => console.log(`WARN ${r.vp} ${r.route}: ${r.warnings.join(' | ')}`))
+
+if (bad.length) {
+  process.exitCode = 1
+}

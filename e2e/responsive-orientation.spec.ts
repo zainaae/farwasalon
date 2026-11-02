@@ -1,37 +1,12 @@
 import { test, expect, type Page } from '@playwright/test'
-import { visibleMain } from './helpers'
+import { assertNoHorizontalOverflow, visibleMain } from './helpers'
+import {
+  DESKTOP_VIEWPORTS,
+  LANDSCAPE_MOBILE,
+  PORTRAIT_MOBILE,
+} from './viewports'
 
 const PAGES = ['/', '/book', '/services', '/services/threading', '/gallery', '/contact'] as const
-
-const LANDSCAPE_MOBILE = [
-  { width: 844, height: 390, label: '844×390' },
-  { width: 667, height: 375, label: '667×375' },
-] as const
-
-const PORTRAIT_MOBILE = [
-  { width: 390, height: 844, label: '390×844' },
-  { width: 375, height: 667, label: '375×667' },
-] as const
-
-const DESKTOP = [
-  { width: 1280, height: 800, label: '1280×800' },
-  { width: 1920, height: 1080, label: '1920×1080' },
-] as const
-
-async function assertNoHorizontalOverflow(page: Page) {
-  const metrics = await page.evaluate(() => {
-    const doc = document.documentElement
-    const body = document.body
-    return {
-      scrollWidth: Math.max(doc.scrollWidth, body.scrollWidth),
-      clientWidth: doc.clientWidth,
-    }
-  })
-  expect(
-    metrics.scrollWidth,
-    `scrollWidth ${metrics.scrollWidth} should fit clientWidth ${metrics.clientWidth}`,
-  ).toBeLessThanOrEqual(metrics.clientWidth + 1)
-}
 
 async function gotoAndSettle(page: Page, path: string) {
   await page.goto(path, { waitUntil: 'load' })
@@ -46,6 +21,7 @@ async function gotoAndSettle(page: Page, path: string) {
 for (const viewport of LANDSCAPE_MOBILE) {
   test.describe(`landscape mobile ${viewport.label}`, () => {
     test.use({ viewport: { width: viewport.width, height: viewport.height } })
+
 
     for (const path of PAGES) {
       test(`${path} has no horizontal overflow`, async ({ page }) => {
@@ -108,7 +84,7 @@ for (const viewport of PORTRAIT_MOBILE) {
   })
 }
 
-for (const viewport of DESKTOP) {
+for (const viewport of DESKTOP_VIEWPORTS) {
   test.describe(`desktop ${viewport.label}`, () => {
     test.use({ viewport: { width: viewport.width, height: viewport.height } })
 
