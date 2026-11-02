@@ -11,11 +11,15 @@ Generated 2026-07-30 from the deployed sitemaps. 62 URLs total
 
 ## Status — auditor recheck 30 Oct 2026 (~17:06 UTC)
 
+> **Nov 2026:** Re-pasted SEO watch runs **3–4** (30 Oct) are **historical** — several
+> findings were fixed in later deploys (see §7). Live prod tip **`d671140`** (PR **#99**).
+
 | Status | Item | Notes |
 |--------|------|-------|
 | **Done** | Freedom Deal scrub | 0 “Freedom” in live HTML; `/freedom-deal` → `/deals` |
 | **Done** | Hydration error | Cleared on recheck |
 | **Done** | Waxing floor | From Rs 150 (hot-wax face floor) |
+| **Done** | Waxing FAQ / FAQPage Rs 600 mismatch | **Fixed (#99)** — bad “Individual area pricing starts from Rs 600” absent on live waxing hubs (verified Nov 2026 curl) |
 | **Done** | `/deals` | noindex + omitted from sitemap + in nav |
 | **Done** | Ratings | 4.5★ / 35 reviews sitewide |
 | **Partly** | Home → blog links | 7 of 29 posts linked — OK for now |
@@ -295,9 +299,13 @@ the owner completes a real printed-menu pass against the floor list.
 
 Automated crawl / SERP spot-check. Update after each watch run.
 
+**Historical snapshot:** Runs 3–4 below reflect the **30 Oct 2026** crawl. Do not treat
+re-pasted watch exports as current prod without a fresh probe — waxing FAQ (#99),
+Freedom/hydration/deals, and ratings shipped after run 4.
+
 | ID | Item | Status | Notes |
 |----|------|--------|-------|
-| **NEW** | Waxing FAQ / FAQPage JSON-LD claimed “Individual area pricing starts from Rs 600” on waxing hubs while titles/meta use **From Rs 150** (Lower Lip Rica Hot Wax) | **Fixed** | `CAT_FAQS['Rica Wax']` full-body Q&A now splits body (from Rs 600) vs face hot wax (from Rs 150). Feeds `/services/waxing-in-*`, `/services/rica-wax`, `/services/honey-wax` (shared FAQ slice), and FAQPage JSON-LD. |
+| **NEW** | Waxing FAQ / FAQPage JSON-LD claimed “Individual area pricing starts from Rs 600” on waxing hubs while titles/meta use **From Rs 150** (Lower Lip Rica Hot Wax) | **Fixed (#99)** | Shipped **`d671140`**. `CAT_FAQS['Rica Wax']` full-body Q&A splits body vs face hot wax (from Rs 150). Feeds `/services/waxing-in-*`, `/services/rica-wax`, `/services/honey-wax` + FAQPage JSON-LD. Live Nov 2026: bad string absent on PECHS waxing hub, `rica-wax`, `honey-wax`. |
 | F1 | *(prior crawl item)* | Holding | — |
 | F2 | *(prior crawl item)* | Holding | — |
 | #418 | *(prior crawl item)* | Holding | — |
