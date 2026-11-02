@@ -121,7 +121,7 @@ export default function BridalLandingPage() {
 
               {/* One loud Book + one secondary on the fold; sticky already has Call/WA/Book.
                   Trial + Directions live below the hero / in Visit Us — not competing here. */}
-              <div className="cta-cluster mb-0">
+              <div className="cta-cluster sticky-midband-cta mb-0">
                 <Link
                   href={fullPackageHref}
                   className="btn-loud btn-loud--light tap-safe w-full sm:w-auto"

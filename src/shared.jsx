@@ -379,11 +379,11 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
     { label: 'Deals',        href: '/deals', wideOnly: false },
     { label: 'Bridal',       href: '/bridal', wideOnly: false },
     { label: 'Book',         href: '/book', wideOnly: false, hideOnDesktop: true },
-    /* Gallery / About stay reachable but not primary conversion paths vs Book. */
+    /* Secondary links: Gallery/Blog from lg; About/FAQ only from xl so 1280 nav breathes. */
     { label: 'Gallery',      href: '/gallery', wideOnly: true },
     { label: 'Blog',         href: '/blog', wideOnly: true },
-    { label: 'About',        href: '/about', wideOnly: true },
-    { label: 'FAQ',          href: '/faq', wideOnly: true },
+    { label: 'About',        href: '/about', xlOnly: true },
+    { label: 'FAQ',          href: '/faq', xlOnly: true },
     { label: 'Contact',      href: '/contact', wideOnly: false },
   ]
 
@@ -406,14 +406,15 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
           className="hidden md:flex items-center justify-center gap-x-2 md:gap-x-3 lg:gap-x-4 min-w-0 max-w-[min(100%,42rem)] justify-self-center self-center h-11 px-1"
           aria-label="Main navigation"
         >
-          {navLinks.map(({ label, href, wideOnly, hideOnDesktop }) => {
+          {navLinks.map(({ label, href, wideOnly, xlOnly, hideOnDesktop }) => {
             const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
             return (
               <Link key={href} href={href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`nav-link shrink-0 h-11 min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.18em] uppercase font-medium font-[family-name:var(--font-inter)] transition-colors duration-200 whitespace-nowrap
+                className={`nav-link shrink-0 h-11 min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.16em] lg:tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] transition-colors duration-200 whitespace-nowrap
                 ${hideOnDesktop ? 'md:hidden' : ''}
                 ${wideOnly ? 'hidden lg:inline-flex' : ''}
+                ${xlOnly ? 'hidden xl:inline-flex' : ''}
                 ${isActive ? `nav-link--active ${light ? 'nav-link--on-light text-ink' : 'nav-link--on-dark text-white'}` : (light ? 'text-ink/60 hover:text-ink' : 'text-white/65 hover:text-white')}`}>
                 {label}
               </Link>
@@ -512,7 +513,7 @@ export function StickyMobileCTA({ hidden = false }) {
     <>
       <div
         aria-hidden
-        className={`md:hidden shrink-0 ${showSlotHint ? 'h-[calc(7rem+env(safe-area-inset-bottom,0px))]' : 'h-[calc(5.5rem+env(safe-area-inset-bottom,0px))]'}`}
+        className={`md:hidden shrink-0 ${showSlotHint ? 'h-[calc(7.75rem+env(safe-area-inset-bottom,0px))]' : 'h-[calc(6.25rem+env(safe-area-inset-bottom,0px))]'}`}
       />
       <nav
         className="fixed z-50 left-0 right-0 md:hidden max-w-[100vw] pointer-events-none"
