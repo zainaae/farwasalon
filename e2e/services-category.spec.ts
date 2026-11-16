@@ -28,7 +28,14 @@ test.describe('Services pages', () => {
     const html = await page.content()
     expect(html).toMatch(/"@type"\s*:\s*"(Offer|AggregateOffer)"/)
     expect(html).toMatch(/SpeakableSpecification/)
+    expect(html).toMatch(/"@type"\s*:\s*"ImageObject"/)
+    expect(html).toMatch(/primaryImageOfPage/)
     expect(html).toContain('service-category-title')
+    await expect(page.locator('#category-hero-image')).toBeVisible()
+    await expect(page.locator('#category-hero-image')).toHaveAttribute(
+      'alt',
+      /Threading at Farwa Beauty Salon, PECHS Karachi/i,
+    )
 
     await expect(visibleMain(page)).toBeVisible()
   })

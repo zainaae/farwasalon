@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
 import { SERVICES, CAT_META, CAT_SLUGS, track, formatPrice, categoryMarketingFromPrice } from '../../src/data.js'
 import { AREAS_HUB_HREF, getClientFacingAreaLinks } from '../../lib/location-links.js'
+import { categoryImageCaption } from '../../lib/category-image-caption.js'
 import LiveAvailability from './live-availability'
 import PageCloseCta from '../components/page-close-cta.jsx'
 
@@ -55,7 +56,7 @@ function MenuRow({ cat }) {
         <span className="relative block w-full h-full overflow-hidden">
           <Image
             src={meta.img}
-            alt=""
+            alt={categoryImageCaption(cat)}
             fill
             sizes="72px"
             quality={60}

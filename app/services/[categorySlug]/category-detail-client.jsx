@@ -6,6 +6,7 @@ import WaCta from '../../components/wa-cta.jsx'
 import { useRouter } from 'next/navigation'
 import { m } from 'framer-motion'
 import { ChevronLeft } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ServiceModal, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
@@ -16,6 +17,7 @@ import JsonLd, { BreadcrumbJsonLd } from '../../json-ld.jsx'
 import { buildCategoryOffersSchema } from '../../../lib/service-schema.js'
 import { SITE_ORIGIN, buildSpeakableSchema, buildFaqPageSchema } from '../../../lib/business-schema.js'
 import { AREAS_HUB_HREF, getClientFacingAreaLinksForCategory } from '../../../lib/location-links.js'
+import { categoryImageCaption } from '../../../lib/category-image-caption.js'
 import { WA_DEFAULT, MAPS_LINK } from '../../../src/site-config.js'
 import PageCloseCta from '../../components/page-close-cta.jsx'
 
@@ -67,6 +69,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
     .filter((cat) => CAT_SLUGS[cat])
     .slice(0, 4)
   const pageBlocks = CAT_PAGE_BLOCKS[category] || []
+  const categoryHeroAlt = category ? categoryImageCaption(category) : ''
 
   if (!category) {
     return (
@@ -104,12 +107,26 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
             data={buildSpeakableSchema({
               pageUrl: `${SITE_ORIGIN}/services/${slug}`,
               cssSelectors: ['#service-category-title', '#service-category-desc'],
+              primaryImagePath: meta.img,
+              primaryImageDescription: categoryHeroAlt,
             })}
           />
           {faqs.length > 0 && (() => {
             const faqSchema = buildFaqPageSchema(faqs)
             return faqSchema ? <JsonLd data={faqSchema} /> : null
           })()}
+
+          <figure className="relative w-full aspect-[5/3] sm:aspect-[16/9] max-h-[min(22rem,42vh)] overflow-hidden mb-6 lg:mb-8 border border-border-soft bg-mist">
+            <Image
+              id="category-hero-image"
+              src={meta.img}
+              alt={categoryHeroAlt}
+              fill
+              sizes="(max-width: 1024px) 100vw, 896px"
+              quality={60}
+              className="object-cover"
+            />
+          </figure>
 
           <nav aria-label="Breadcrumb" className="mb-5 lg:mb-8">
             <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-[family-name:var(--font-inter)]">

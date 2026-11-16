@@ -128,6 +128,10 @@ export const CAT_FAQS = {
     { q: 'Do you offer HydraFacial?', a: 'No — we do not use HydraFacial machines. Our facial menu runs from Normal Facial (Rs 1,400) through HD Whitening (Rs 3,000) to Janssen Whitening Facial (Rs 5,500) with German cosmeceuticals. See farwasalon.com/prices for every option.' },
   ],
   'Threading': [
+    {
+      q: 'How much does eyebrow threading cost in Karachi?',
+      a: 'Walk-in brow threading in Karachi often runs roughly Rs 150–400 at neighbourhood parlours; mall salons can charge more for bundled facials. At Farwa in PECHS published floors are: from Rs 100 (lip / chin), eyebrow threading Rs 200, full face Rs 1,200 — see farwasalon.com/prices. Final quote is never a surprise after you sit down.',
+    },
     { q: 'Is threading better than waxing for eyebrows?', a: 'For eyebrows, threading offers superior precision — individual hairs can be targeted without affecting surrounding skin. It\'s the gold standard for brow shaping and ideal for sensitive or acne-prone skin.' },
     { q: 'How long does eyebrow threading take?', a: 'Eyebrow threading at Farwa takes about 10 minutes. A Full Face Threading session takes approximately 25 minutes.' },
     { q: 'Does threading hurt more than waxing?', a: 'Threading involves a brief, sharp sensation but no heat or chemicals touch your skin. Most clients find it less irritating than waxing, especially for facial areas. Any redness typically fades within 30 minutes.' },
