@@ -5,7 +5,7 @@ export const NEIGHBORHOODS = [
   {
     slug: 'pechs-karachi',
     name: 'PECHS, Karachi',
-    detail: 'Our home salon is in PECHS — visit us for all services.',
+    detail: 'Our PECHS studio is here — visit us for all services.',
     blurb:
       'We are at Plot 165/G-1, Saima Terrace, Block 3 PECHS — minutes from Tariq Road and Jheel Park. Same studio since 2008: printed PKR prices, online booking, and a calm women-only floor for threading, facials, bridal, wax, and hair.',
   },

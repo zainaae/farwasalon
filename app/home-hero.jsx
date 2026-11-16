@@ -113,7 +113,7 @@ export default function HomeHero() {
             id="hero-answer"
             className="hero-lcp text-white/90 text-[15px] sm:text-base md:text-lg font-normal leading-snug mb-0 md:mb-9 max-w-lg font-[family-name:var(--font-inter)] tracking-[-0.01em] drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)]"
           >
-            Women-only PECHS studio with Rubina since 2008 — bridal from Rs&nbsp;8,000,
+            Women-only PECHS studio with Rubina since 2008 — bridal trial from Rs&nbsp;8,000,
             threading from Rs&nbsp;100; studio visits only, no home service.
           </p>
 
