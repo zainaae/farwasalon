@@ -9,6 +9,8 @@ import { IgIcon } from '../../src/shared.jsx'
 import LiveAvailability from '../services/live-availability.jsx'
 import { WA_DEFAULT, MAPS_LINK, IG_LINK, SERVICES, waLinkBooking, track, PREFERRED_TIME_OPTIONS } from '../../src/data.js'
 import PageCloseCta from '../components/page-close-cta.jsx'
+import TrustSignalsBar from '../components/trust-signals-bar.jsx'
+import { PAYMENT_ACCEPTED } from '../../lib/business-schema.js'
 
 export default function ContactClient() {
   const [name,    setName]    = useState('')
@@ -47,6 +49,7 @@ export default function ContactClient() {
 
   return (
     <main id="main" className="page-content pb-[calc(7.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">
+      <TrustSignalsBar />
 
       <section className="bg-white py-14 md:py-20 border-b border-border-soft">
         <div className="section-shell">
@@ -130,6 +133,20 @@ export default function ContactClient() {
                   <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)] mt-1">Closed Sunday</p>
                   <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] mt-2">
                     Book online · WhatsApp · walk-ins when free. Minutes from Tariq Road.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-9 h-9 border border-border-soft flex items-center justify-center shrink-0">
+                  <Check className="w-3.5 h-3.5 text-stone" />
+                </div>
+                <div>
+                  <p className="font-[family-name:var(--font-syne)] font-bold text-sm text-ink mb-0.5">Payment</p>
+                  <p className="text-stone text-sm font-light font-[family-name:var(--font-inter)]">
+                    {PAYMENT_ACCEPTED.join(' · ')}
+                  </p>
+                  <p className="text-stone text-[11px] font-[family-name:var(--font-inter)] mt-0.5">
+                    PKR at the counter — no card machine, no online prepay
                   </p>
                 </div>
               </div>

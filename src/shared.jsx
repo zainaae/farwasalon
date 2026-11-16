@@ -421,7 +421,20 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
             )
           })}
         </nav>
-        <div className="justify-self-end flex items-center gap-2 sm:gap-3 shrink-0 min-w-0 h-11">
+        <div className="justify-self-end flex items-center gap-1.5 sm:gap-2 shrink-0 min-w-0 h-11">
+          {/* Vanity-style IG in chrome — owned @farwasalon, not a plugin. */}
+          <a
+            href={IG_LINK}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => track('InstagramIntent', { from: 'navbar' })}
+            aria-label="Farwa Beauty Salon on Instagram"
+            className={`tap-safe hidden sm:inline-flex items-center justify-center min-h-[44px] min-w-[44px] h-11 w-11 rounded-sm transition-colors ${
+              light ? 'text-ink/70 hover:text-ink' : 'text-white/75 hover:text-white'
+            }`}
+          >
+            <IgIcon className="w-4 h-4" />
+          </a>
           <Link href="/book"
             className={`hidden md:inline-flex items-center justify-center gap-1.5 h-11 min-h-[44px] text-[11px] lg:text-[12px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] leading-none px-4 lg:px-5 rounded-sm border transition-colors duration-300 whitespace-nowrap active:scale-[0.98] ${
               light
@@ -463,6 +476,18 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
                 className="tap-safe inline-flex items-center min-h-[44px] text-[11px] tracking-[0.18em] uppercase text-stone hover:text-ink font-[family-name:var(--font-inter)] mt-2 border-t border-border-soft pt-3"
               >
                 Visit Us · Directions
+              </a>
+              <a
+                href={IG_LINK}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => {
+                  track('InstagramIntent', { from: 'mobile-nav' })
+                  setMenuOpen(false)
+                }}
+                className="tap-safe inline-flex items-center gap-2 min-h-[44px] text-[11px] tracking-[0.18em] uppercase text-stone hover:text-ink font-[family-name:var(--font-inter)]"
+              >
+                <IgIcon className="w-3.5 h-3.5" /> Instagram
               </a>
               <Link href="/book" onClick={() => setMenuOpen(false)}
                 className="tap-safe inline-flex items-center justify-center min-h-[44px] bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] px-5 py-3 w-full sm:w-fit mt-3">
