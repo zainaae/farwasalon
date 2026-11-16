@@ -45,7 +45,9 @@ for (const path of PAGES) {
 
 test('the two known collapse sites render with their spaces intact', async ({ page }) => {
   await page.goto('/', { waitUntil: 'domcontentloaded' })
-  expect(await page.locator('#main').innerText()).toMatch(/For over \d+ years in/)
+  /* StatsStrip about block interpolates FOUNDING_YEAR / ALL_SERVICES.length —
+     spaces after those expressions must survive (use {' '}, not a bare space). */
+  expect(await page.locator('#main').innerText()).toMatch(/Rubina founded it in \d{4}; \d+ services/)
 
   await page.goto('/prices', { waitUntil: 'domcontentloaded' })
   expect(await page.locator('#main').innerText()).toMatch(/remaining \d+ are hair/)
