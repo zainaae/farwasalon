@@ -199,9 +199,17 @@ Photos dramatically impact GBP performance. Upload 25+ photos across these categ
 ### Photo Optimization
 - **Resolution:** Minimum 720×720px, ideally 1200×900px
 - **Format:** JPEG, under 5MB per image
-- **Geotagging:** Add GPS coordinates (24.8797532, 67.0584185) to photo EXIF data before uploading. Use a tool like [GeoImgr](https://www.geoimgr.com/) or ExifTool.
-- **File naming:** Use descriptive, keyword-rich names (not IMG_20240101.jpg)
+- **Geotagging:** Only for photos actually taken at the PECHS studio — optional GPS (24.8797532, 67.0584185). Do not fake geotags on stock or unrelated images.
+- **File naming:** Use descriptive names (e.g. `farwa-pechs-storefront-01.jpg`, not `IMG_20240101.jpg`)
 - **Upload frequency:** Add 2–3 new photos per week to keep the listing fresh
+
+### Lens / visual search (owner follow-up)
+Google Lens and Circle to Search often surface **GBP photos** before website images. Prioritise:
+1. Clear **exterior / signboard** shots of Saima Terrace (match what people photograph on the street)
+2. **Bridal finished looks** and **nail craft** (high visual search intent)
+3. Interior service stations (threading, wax, facial) with the space recognisable
+4. Keep website + GBP NAP identical so entity matching stays clean
+5. After uploads, check Google Search Console → **Enhancements / Images** and Maps photo insights when available
 
 ---
 

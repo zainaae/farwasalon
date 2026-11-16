@@ -304,7 +304,7 @@ export const GALLERY_SHOWCASE_ITEMS = [
   {
     src: SALON_OWNED.nailsPoster,
     label: 'Manicure & pedicure',
-    alt: 'Nail services at Farwa Beauty Salon',
+    alt: 'Manicure and pedicure nail craft at Farwa Beauty Salon, Block 3 PECHS Karachi',
     video: SALON_OWNED.nailsVideo,
   },
 ]
@@ -348,6 +348,7 @@ export const GALLERY_PHOTOS = [
   {
     src: SALON_OWNED.nailsPoster,
     label: 'Nail craft',
+    alt: 'Close-up nail craft and pedicure finish at Farwa Beauty Salon PECHS',
     video: SALON_OWNED.nailsVideo,
   },
 ]

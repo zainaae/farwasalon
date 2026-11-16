@@ -122,7 +122,7 @@ export function SmoothyGallery({ photos }) {
         {photos.map((p, i) => (
           <figure key={i} className="relative shrink-0 overflow-hidden bg-[#0d0609]"
             style={{ width: 'clamp(260px,36vw,420px)', height: 'clamp(340px,50vw,560px)' }}>
-            <Image src={p.src} alt={p.label} loading="lazy" draggable={false}
+            <Image src={p.src} alt={p.alt || p.label} loading="lazy" draggable={false}
               width={420} height={560} sizes="clamp(260px, 36vw, 420px)"
               className="w-full h-full object-cover select-none" />
             <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-ink/70 via-ink/30 to-transparent">
