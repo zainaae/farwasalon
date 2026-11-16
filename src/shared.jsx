@@ -627,7 +627,10 @@ export function LazyVideo({ src, poster, className, autoPlay, playing = true, ..
   return (
     <video
       ref={ref}
-      poster={visible ? poster : undefined}
+      /* Always paint the poster — waiting until IntersectionObserver fires left
+         a mist-empty tile on gallery first paint (esp. mobile). Sources still
+         attach only when visible so we don't download video off-screen. */
+      poster={poster}
       preload={visible ? 'metadata' : 'none'}
       muted
       loop

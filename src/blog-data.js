@@ -925,7 +925,7 @@ export const BLOG_POSTS = [
       { type: 'p', text: 'A: Yes. We offer makeup services for mothers, sisters, and bridal party members as well. These can be booked alongside your bridal package at discounted rates. Contact us for family package pricing.' },
 
       { type: 'h2', text: 'Ready to Start Planning?' },
-      { type: 'p', text: 'Every bride\'s journey is different, and we love helping you find the perfect look. WhatsApp us at +92 322 278 2254 or [book a Bridal Trial online](/book). Browse [bridal makeup in PECHS](/services/bridal-makeup-in-pechs-karachi) and the full [Bridal services](/services/bridal) menu — packages from Rs 8,000, printed and ready.' },
+      { type: 'p', text: 'Every bride\'s journey is different, and we love helping you find the perfect look. WhatsApp us at +92 322 278 2254 or [book a Bridal Trial online](/book). Browse [bridal makeup in PECHS](/services/bridal-makeup-in-pechs-karachi) and the full [Bridal services](/services/bridal) menu — Bridal Trial from Rs 8,000, printed and ready.' },
     ],
   },
   {

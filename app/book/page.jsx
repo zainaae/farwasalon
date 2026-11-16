@@ -64,6 +64,14 @@ export default function BookPage() {
               a working path to booking that does not depend on JavaScript. */}
           <div className="min-h-[960px] md:min-h-[770px]">
             <p className="text-body" aria-live="polite">Loading the live slot picker…</p>
+            {/* Skeleton mirrors step-1 category accordion so the page never looks empty
+                on a slow mobile connection while the client chunk hydrates. */}
+            <div className="mt-6 max-w-xl space-y-3" aria-hidden="true">
+              <div className="h-12 rounded-sm bg-mist animate-pulse" />
+              <div className="h-12 rounded-sm bg-mist/80 animate-pulse" />
+              <div className="h-12 rounded-sm bg-mist/60 animate-pulse" />
+              <div className="h-12 rounded-sm bg-mist/40 animate-pulse" />
+            </div>
             <div className="mt-8 max-w-2xl">
               <p className="text-body">
                 Every service is bookable online with a real slot — {SERVICE_COUNT} of them, from Rs 100.
@@ -75,19 +83,23 @@ export default function BookPage() {
                 and nothing to pay online — you settle at the counter, at the printed rate.
               </p>
               <p className="text-body mt-4">
-                If the picker does not load, or you would rather just ask,{' '}
+                If the picker does not load, or you would rather just ask, use WhatsApp or call — both work without waiting for the live calendar.
+              </p>
+              <div className="mt-5 flex flex-col sm:flex-row flex-wrap gap-3">
                 <WaCta
                   href={`https://wa.me/${WA_NUMBER}`}
                   from="book-fallback"
-                  className="link-underline text-ink font-medium"
+                  className="tap-safe btn-secondary inline-flex items-center justify-center min-h-[44px] px-5"
                 >
-                  message us on WhatsApp
-                </WaCta>{' '}
-                or call{' '}
-                <a href="tel:+923222782254" className="link-underline text-ink font-medium">
-                  {SALON_PHONE_DISPLAY}
-                </a>. Walk-ins are welcome when we have room.
-              </p>
+                  Message us on WhatsApp
+                </WaCta>
+                <a
+                  href="tel:+923222782254"
+                  className="tap-safe btn-secondary inline-flex items-center justify-center min-h-[44px] px-5"
+                >
+                  Call {SALON_PHONE_DISPLAY}
+                </a>
+              </div>
               <p className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm">
                 <Link href="/prices" className="tap-safe link-underline text-stone hover:text-ink">
                   Full price list

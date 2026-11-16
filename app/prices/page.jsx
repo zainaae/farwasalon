@@ -21,7 +21,7 @@ import { hairQuotePath, isHairQuoteCategory, isHairQuoteService } from '../../li
 
 const title = 'Salon Price List Karachi 2026 — From Rs 100 | Farwa'
 const description =
-  'Full published price list — PECHS Karachi. Threading from Rs 100, facials from Rs 1,400, bridal from Rs 8,000. Every rate on the page. No hidden charges.'
+  'Full published price list — PECHS Karachi. Threading from Rs 100, facials from Rs 1,400, bridal trial from Rs 8,000. Every rate on the page. No hidden charges.'
 
 export const metadata = {
   title: { absolute: title },

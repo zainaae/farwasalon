@@ -54,14 +54,14 @@ export default function SiteFooter() {
                 Avoid twin ink buttons ~230px apart on home (and other closes). */}
             <Link
               href="/book"
-              className="tap-safe link-underline inline-flex items-center gap-1.5 text-ink text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] hover:text-plum-deep transition-colors"
+              className="tap-safe link-underline inline-flex items-center gap-1.5 min-h-[44px] text-ink text-[11px] tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] hover:text-plum-deep transition-colors"
             >
               {CTA_PRIMARY_LABEL} <ArrowUpRight className="w-3.5 h-3.5" />
             </Link>
             <WaCta
               href={WA_DEFAULT}
               from="footer-hint"
-              className="text-stone text-[10px] font-[family-name:var(--font-inter)] tracking-wide hover:text-ink transition-colors"
+              className="tap-safe inline-flex items-center min-h-[44px] text-stone text-[11px] font-[family-name:var(--font-inter)] tracking-wide hover:text-ink transition-colors"
             >
               {CTA_WHATSAPP_HINT}
             </WaCta>
@@ -228,14 +228,14 @@ export default function SiteFooter() {
                 href={MAPS_LINK}
                 target="_blank"
                 rel="noreferrer"
-                className="link-underline hover:text-ink transition-colors"
+                className="tap-safe link-underline inline-flex items-center min-h-[44px] hover:text-ink transition-colors"
               >
                 Directions on Google Maps
               </a>
               {' · '}
               <Link
                 href={AREAS_HUB_HREF}
-                className="link-underline hover:text-ink transition-colors"
+                className="tap-safe link-underline inline-flex items-center min-h-[44px] hover:text-ink transition-colors"
               >
                 Beauty salon in Karachi
               </Link>

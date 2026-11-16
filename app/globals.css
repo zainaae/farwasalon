@@ -1301,10 +1301,17 @@ video[aria-hidden="true"] { pointer-events: none; }
 /* ── Touch target floor (WCAG 2.5.5; holds at browser zoom-out) ── */
 .tap-safe {
   min-height: 44px;
+  box-sizing: border-box;
 }
+/* Inline text links only got min-height before — without flex + min-width the
+   hit box stayed ~17–21px tall / narrow on footer WA, FAQ chips, and short
+   nav labels (qa:design tiny-tap warnings). */
+a.tap-safe,
 button.tap-safe,
 [role="button"].tap-safe,
 [role="tab"].tap-safe {
+  display: inline-flex;
+  align-items: center;
   min-width: 44px;
 }
 
