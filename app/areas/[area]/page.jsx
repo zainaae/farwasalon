@@ -240,7 +240,7 @@ export default async function AreaPage({ params }) {
 
       <PageCloseCta
         eyebrow={`— Coming from ${area.name}`}
-        title="Book a visit at the PECHS studio"
+        title="Book an Appointment at the PECHS studio"
         body={`${content.driveTime} from ${area.name}. Live slots online, or WhatsApp if you prefer.`}
         waHref={WA_DEFAULT}
         waFrom="area-close"

@@ -79,7 +79,7 @@ function StatsStrip() {
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-5 mt-2 border-t border-border-soft">
             <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-[family-name:var(--font-inter)] group w-fit pt-4">
-              <span className="link-underline">Book a visit</span>
+              <span className="link-underline">Book an Appointment</span>
               <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
             </Link>
             <Link href="/about" className="tap-safe text-stone hover:text-ink text-[11px] tracking-wide font-[family-name:var(--font-inter)] transition-colors pt-4">

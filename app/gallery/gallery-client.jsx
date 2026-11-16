@@ -23,12 +23,12 @@ export default function GalleryClient() {
           <div className="title-stack max-w-xl border-l-2 border-plum pl-5 lg:pl-6">
             <p className="hero-fade-up eyebrow text-plum">— Gallery</p>
             <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
-              What we do
+              Studio work
             </h1>
             <p id="gallery-lede" className="hero-fade-up text-body" style={{ animationDelay: '0.15s' }}>
               Owned studio craft from Farwa Beauty Salon in Block 3 PECHS, Karachi —
               nails and detail work on camera today. Visit the women-only studio for
-              the full portfolio, or book a slot below.
+              bridal, skin, and more — or book a slot below.
             </p>
           </div>
           {/* Never put Tailwind `hidden` on the same node as `.btn-loud` —
@@ -57,7 +57,7 @@ export default function GalleryClient() {
       {showcase.length > 0 && (
         <section className="section-shell mb-16 md:mb-20 lg:mb-24" aria-labelledby="gallery-showcase-heading">
           <h2 id="gallery-showcase-heading" className="section-title mb-8 md:mb-10 max-w-xl">
-            Services we offer
+            Recent work
           </h2>
           {showcase.length === 1 ? (
             <div className="max-w-3xl">
@@ -127,7 +127,7 @@ export default function GalleryClient() {
 
       <PageCloseCta
         eyebrow="— Ready when you are"
-        title="Book a visit at the PECHS studio"
+        title="Book an Appointment at the PECHS studio"
         body="See the work in person — live slots online, or WhatsApp if you prefer."
         bookHref="/book"
         waHref={WA_DEFAULT}

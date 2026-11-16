@@ -70,12 +70,12 @@ test.describe('Booking entry paths', () => {
     await expect(page.getByText('— Pick a date')).toBeVisible()
   })
 
-  test('/contact LiveAvailability Book appointment → /book (desktop)', async ({ page }) => {
+  test('/contact LiveAvailability Book an Appointment → /book (desktop)', async ({ page }) => {
     await page.setViewportSize({ width: 1280, height: 800 })
     await page.goto('/contact')
     /* Widget hides on slots error; mockSlotsApi keeps it visible when free > 0.
-       Scope to main — footer also has a "Book appointment" link. */
-    const liveBook = visibleMain(page).getByRole('link', { name: /^Book appointment$/i })
+       Scope to main — footer also has a "Book an Appointment" link. */
+    const liveBook = visibleMain(page).getByRole('link', { name: /^Book an Appointment$/i })
     await expect(liveBook).toBeVisible({ timeout: 15_000 })
     await expect(liveBook).toHaveAttribute('href', '/book')
     await liveBook.click()
