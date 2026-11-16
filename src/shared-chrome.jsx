@@ -2,7 +2,7 @@
 
 /** Lightweight chrome bits shared by Navbar / Footer without pulling the full shell. */
 
-export const CTA_PRIMARY_LABEL = 'Book appointment'
+export const CTA_PRIMARY_LABEL = 'Book an Appointment'
 export const CTA_WHATSAPP_HINT = 'Or message us on WhatsApp'
 
 export function IgIcon({ className = '' }) {

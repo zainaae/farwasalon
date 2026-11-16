@@ -9,6 +9,20 @@ Generated 2026-07-30 from the deployed sitemaps. 62 URLs total
 
 ---
 
+## Owner next (Nov 2026) — do these by hand
+
+Engineering cannot complete these. Site utility already leads local peers; **Maps review mass + owned photos** are the remaining trust gap.
+
+| # | Action | How |
+|---|--------|-----|
+| 1 | Ask happy clients for Google reviews | Share `https://farwasalon.com/review` (QR at desk). See [`manual-google-reviews.md`](./manual-google-reviews.md) — then bump `GOOGLE_GBP_STATS` when Maps totals change. |
+| 2 | Shoot & upload owned photos | Bridal, storefront, threading/wax — [`salon-photography-guide.md`](./salon-photography-guide.md). Gallery is thin vs Vanity/Areeba. |
+| 3 | GSC Request indexing | Money list in §1b (start `/`, `/prices`, `/bridal`). |
+| 4 | Area hubs | Name 3–4 keepers **with real route + parking** before any mass 301. Do not invent. |
+| 5 | Optional | Reclaim `g.page/farwasalon/review` in GBP if printed materials still use it. |
+
+---
+
 ## Status — auditor recheck 30 Oct 2026 (~17:06 UTC)
 
 > **Nov 2026:** Re-pasted SEO watch runs **3–4** (30 Oct) are **historical** — several
@@ -42,16 +56,25 @@ that changes prices, deals, or trust claims:
 2. **URL Inspection** → paste one URL → wait for result → **Request indexing**
 3. Work the money list first (quota ~10/day):
 
+### Priority now (Nov 2026)
+
 | # | URL | Why |
 |---|-----|-----|
-| 1 | `https://farwasalon.com/freedom-deal` | Azadi / Freedom Deal canonical (AI Features was citing `/azadi-sale`) |
-| 2 | `https://farwasalon.com/` | Home trust + deal strip |
-| 3 | `https://farwasalon.com/prices` | Full rate card |
-| 4 | `https://farwasalon.com/services/nails` | Top AI Features page |
-| 5 | `https://farwasalon.com/services/eyebrow-tattoo` | Microblading Rs 20,000 |
-| 6 | `https://farwasalon.com/blog/eyebrow-microblading-karachi-guide` | Money blog |
-| 7 | `https://farwasalon.com/deals` | Live offers only |
-| 8 | `https://farwasalon.com/faq` | Price / booking answers |
+| 1 | `https://farwasalon.com/` | Home trust + bridal trial wording |
+| 2 | `https://farwasalon.com/prices` | Full rate card |
+| 3 | `https://farwasalon.com/bridal` | Bridal packages + trial floor |
+| 4 | `https://farwasalon.com/book` | Live booking conversion |
+| 5 | `https://farwasalon.com/gallery` | Studio work / proof |
+
+### Also when quota allows
+
+| # | URL | Why |
+|---|-----|-----|
+| 6 | `https://farwasalon.com/services/waxing-in-pechs-karachi` | Waxing floor Rs 150 |
+| 7 | `https://farwasalon.com/services/nails` | Top AI Features page |
+| 8 | `https://farwasalon.com/services/eyebrow-tattoo` | Microblading Rs 20,000 |
+| 9 | `https://farwasalon.com/faq` | Price / booking answers |
+| 10 | `https://farwasalon.com/freedom-deal` | Canonical → `/deals` (validate redirect, don’t prioritize if already OK) |
 
 Same checklist lives in [`search-console-setup.md`](./search-console-setup.md)
 (Request indexing after deploy). Spot-check the Inspection HTML preview: no

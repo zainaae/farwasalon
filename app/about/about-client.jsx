@@ -156,7 +156,7 @@ export default function AboutClient() {
 
       <PageCloseCta
         eyebrow="— Come experience it"
-        title="Book a visit at the PECHS studio"
+        title="Book an Appointment at the PECHS studio"
         body="Founder-led standards since 2008 — book online or WhatsApp when you are ready."
         waFrom="about-close"
       />

@@ -49,7 +49,7 @@ review text, not to avoid this step.
 
 ## Add or update reviews
 
-1. Open [Farwa on Google](https://g.page/farwasalon/review) (sign in if Google asks).
+1. Open the live review form via [farwasalon.com/review](https://farwasalon.com/review) (redirects to Google’s writereview URL). Do **not** rely on the old `g.page/farwasalon/review` vanity — it can land on Search instead of the form.
 2. Copy **only 4★ or 5★** reviews: reviewer name, stars, text, and “X months ago” if shown.
 3. Edit `src/google-reviews-data.js` and add an object to `GOOGLE_REVIEWS`:
 
@@ -59,7 +59,7 @@ review text, not to avoid this step.
   rating: 5,
   text: 'Paste the review text exactly as on Google.',
   relativeTime: '3 months ago',
-  sourceUrl: 'https://g.page/farwasalon/review',
+  sourceUrl: 'https://farwasalon.com/review',
 },
 ```
 
