@@ -6,7 +6,7 @@ import WaCta from './wa-cta.jsx'
 import Image from 'next/image'
 import { MessageCircle, Star } from 'lucide-react'
 import { WA_DEFAULT, IG_LINK, MAPS_LINK, CAT_SLUGS, FOUNDING_YEAR, YEARS_ACTIVE } from '../../src/site-config.js'
-import { SALON_ADDRESS_LINES } from '../../lib/business-schema.js'
+import { SALON_ADDRESS_LINES, GOOGLE_REVIEW_LINK } from '../../lib/business-schema.js'
 import { GOOGLE_GBP_STATS } from '../../src/google-reviews-data.js'
 import { AREAS_HUB_HREF, getFooterAreaLinks } from '../../lib/location-links.js'
 import {
@@ -186,7 +186,7 @@ export default function SiteFooter() {
                 </li>
                 <li>
                   <a
-                    href="https://g.page/farwasalon/review"
+                    href={GOOGLE_REVIEW_LINK}
                     target="_blank"
                     rel="noreferrer"
                     className="link-underline tap-safe !inline-flex items-center gap-2 min-h-[44px] text-stone text-xs leading-snug font-[family-name:var(--font-inter)] hover:text-ink"
