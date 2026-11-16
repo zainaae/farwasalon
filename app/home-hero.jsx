@@ -21,8 +21,8 @@ export default function HomeHero() {
         fill
         priority
         fetchPriority="high"
-        quality={60}
-        sizes="(max-width: 768px) 100vw, 100vw"
+        quality={55}
+        sizes="100vw"
         /* Focal point moves right as the viewport widens. The copy occupies the
            left of the frame; from md up she sits in the right third. */
         className="hero-lcp object-cover scale-[1.01] pointer-events-none object-[58%_28%] md:object-[72%_26%]"

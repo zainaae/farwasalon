@@ -89,8 +89,10 @@ export default function BridalLandingPage() {
             alt="Bridal makeup and styling at Farwa Beauty Salon, Block 3 PECHS Karachi — Full Package from Rs 25,000"
             fill
             priority
+            fetchPriority="high"
             sizes="100vw"
-            className="object-cover object-[50%_28%] md:object-[55%_30%] pointer-events-none"
+            quality={55}
+            className="hero-lcp object-cover object-[50%_28%] md:object-[55%_30%] pointer-events-none"
           />
           <div
             className="absolute inset-0 z-[1]"
@@ -114,7 +116,7 @@ export default function BridalLandingPage() {
             <div className="max-w-screen-xl mx-auto w-full min-w-0">
               <div className="title-stack mb-6 max-w-2xl">
                 <p className="eyebrow eyebrow--on-dark">— Bridal · Full Package from Rs 25,000</p>
-                <h1 id="bridal-headline" className="display-page text-white">
+                <h1 id="bridal-headline" className="hero-lcp display-page text-white">
                   Bridal makeup in PECHS, Karachi
                 </h1>
                 <p id="bridal-lede" className="text-lead text-white/80">
