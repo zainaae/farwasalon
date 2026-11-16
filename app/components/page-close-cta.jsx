@@ -11,7 +11,7 @@ import { WA_NUMBER } from '../../src/data.js'
 export default function PageCloseCta({
   eyebrow = '— Visit us in PECHS',
   title = 'Book online in under a minute',
-  body = 'No prepayment. Cancel free up to 2 hours before. Or message us on WhatsApp — whichever is easier for you.',
+  body = 'No prepayment. Cancel free up to 2 hours before. Cash, JazzCash, or EasyPaisa at the counter. Or message us on WhatsApp — whichever is easier for you.',
   bookHref = '/book',
   bookLabel = 'Book an Appointment',
   waHref,

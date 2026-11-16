@@ -766,15 +766,20 @@ function TestimonialsPreview({ placesEnabled }) {
         />
 
         <m.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-          className="reviews-cta-row pt-8 sm:pt-10 border-t border-border-soft flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3">
-          <a href={GOOGLE_REVIEW_LINK} target="_blank" rel="noreferrer"
-            className="tap-safe reviews-cta-btn inline-flex items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-5 sm:px-6 py-3 hover:bg-plum transition-colors duration-300">
-            Write a Google review <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
-          </a>
-          <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
-            className="tap-safe reviews-cta-btn inline-flex items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-5 sm:px-6 py-3 bg-white">
-            Follow on Facebook <ArrowUpRight className="w-3 h-3 shrink-0" />
-          </a>
+          className="reviews-cta-row pt-8 sm:pt-10 border-t border-border-soft flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-md leading-relaxed">
+            {ratingLabel} on Maps. Happy with your visit? A short Google review is the trust signal peers win on — and ours stays honest to the live listing.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+            <a href={GOOGLE_REVIEW_LINK} target="_blank" rel="noreferrer"
+              className="tap-safe reviews-cta-btn inline-flex items-center justify-center gap-1.5 bg-ink text-white text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] px-5 sm:px-6 py-3 hover:bg-plum transition-colors duration-300">
+              Write a Google review <ArrowUpRight className="w-3.5 h-3.5 shrink-0" />
+            </a>
+            <a href="https://www.facebook.com/farwasalon" target="_blank" rel="noreferrer"
+              className="tap-safe reviews-cta-btn inline-flex items-center justify-center gap-1.5 text-stone text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] hover:text-ink transition-colors border border-border-soft hover:border-ink/30 px-5 sm:px-6 py-3 bg-white">
+              Follow on Facebook <ArrowUpRight className="w-3 h-3 shrink-0" />
+            </a>
+          </div>
         </m.div>
       </div>
     </section>

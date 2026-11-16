@@ -6,6 +6,7 @@ import { SmoothyGallery } from '../../src/shared.jsx'
 import { WA_DEFAULT, GALLERY_PHOTOS, GALLERY_SHOWCASE_ITEMS } from '../../src/data.js'
 import WorkShowcaseCard from './work-showcase-card.jsx'
 import PageCloseCta from '../components/page-close-cta.jsx'
+import TrustSignalsBar from '../components/trust-signals-bar.jsx'
 
 export default function GalleryClient() {
   const showcase = GALLERY_SHOWCASE_ITEMS
@@ -17,6 +18,7 @@ export default function GalleryClient() {
 
   return (
     <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
+      <TrustSignalsBar />
 
       <div className="section-shell section-pad">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border-soft pb-10 md:pb-12">

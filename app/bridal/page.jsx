@@ -2,6 +2,7 @@ import Link from 'next/link'
 import ArrowUpRight from '../components/icon-sprite.jsx'
 import Image from 'next/image'
 import PageCloseCta from '../components/page-close-cta.jsx'
+import TrustSignalsBar from '../components/trust-signals-bar.jsx'
 import { Clock, MapPin, Phone } from 'lucide-react'
 import JsonLd from '../json-ld'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
@@ -145,6 +146,8 @@ export default function BridalLandingPage() {
             </div>
           </div>
         </section>
+
+        <TrustSignalsBar />
 
         <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
           <section className="mb-14" aria-labelledby="event-taxonomy-heading">

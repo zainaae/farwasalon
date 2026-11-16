@@ -7,6 +7,7 @@ import { m, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Clock, Check, Loader2, ChevronDown, CalendarCheck } from 'lucide-react'
 import { SERVICES, ALL_SERVICES, formatPrice, formatServicePrice, formatDuration, PHONE_RE, getAddonsForService, track, WA_NUMBER, categoryMarketingFromPrice } from '../../src/data.js'
 import WaCta from '../components/wa-cta.jsx'
+import TrustSignalsBar from '../components/trust-signals-bar.jsx'
 import { isDateBlocked, getBlockedReason } from '../../lib/blocked-dates.js'
 import { BOOKING_WINDOW_DAYS } from '../../lib/booking-date-rules.js'
 import { toLocalDateString, salonTodayString } from '../../lib/date-local.js'
@@ -521,6 +522,7 @@ export default function BookClient() {
 
   return (
     <main id="main" className="page-content overflow-x-clip">
+      <TrustSignalsBar />
       {/* No max-w-full here. .section-shell is max-width:80rem, and the
           utility's max-width:100% beat it — so the conversion page ran its
           shell to the full viewport and started content at x=40 while every

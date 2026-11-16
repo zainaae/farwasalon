@@ -35,10 +35,10 @@ export default function ProofStrip() {
   const items = [
     {
       key: 'rating',
+      /* Areeba-style Google badge: rating + exact count (never "n+"). Links to
+         the real writereview / Maps path via /review. */
       lead: `${GOOGLE_GBP_STATS.rating}★`,
-      /* Count lives in the reviews section — here the glyph is enough and
-         avoids restating "{n} Google reviews" under the hero. */
-      label: null,
+      label: `${GOOGLE_GBP_STATS.reviewCount} Google reviews`,
       href: GOOGLE_REVIEW_LINK,
       ariaLabel: `${GOOGLE_GBP_STATS.rating} stars from ${GOOGLE_GBP_STATS.reviewCount} Google reviews`,
     },

@@ -7,6 +7,7 @@ import { SALON_PHONE_DISPLAY } from '../../lib/business-schema.js'
 /* Counted, never typed — same derivation the proof strip and stats use. */
 const SERVICE_COUNT = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 import BookClient from './book-client'
+import TrustSignalsBar from '../components/trust-signals-bar.jsx'
 import { pageSocialMeta } from '../../lib/page-metadata.js'
 
 const title = 'Book Online — Beauty Salon PECHS Karachi | Farwa'
@@ -44,6 +45,7 @@ export default function BookPage() {
   return (
     <Suspense fallback={
       <main id="main" className="page-content overflow-x-clip">
+        <TrustSignalsBar />
         {/* Matches book-client.jsx: no max-w-full, or the fallback renders at
             a different gutter than the page it is holding space for. */}
         <div className="section-shell section-pad min-h-0 min-w-0 overflow-x-clip pb-[max(1.5rem,env(safe-area-inset-bottom,0px))]">
