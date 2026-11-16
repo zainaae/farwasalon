@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 40 }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontFamily: 'system-ui, sans-serif' }}>
             <div style={{ fontSize: 28, fontWeight: 600 }}>{ratingLine}</div>
-            <div style={{ fontSize: 22, opacity: 0.85 }}>{count} printed prices · live online booking</div>
+            <div style={{ fontSize: 22, opacity: 0.85 }}>{`${count} printed prices · live online booking`}</div>
           </div>
           <div
             style={{
