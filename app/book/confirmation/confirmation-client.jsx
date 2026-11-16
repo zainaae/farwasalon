@@ -11,7 +11,7 @@ import {
   readBookingRecord,
   isBookingStorageDurable,
 } from '../../../lib/booking-storage.js'
-import { WA_NUMBER } from '../../../src/site-config.js'
+import { WA_NUMBER, GOOGLE_REVIEW_LINK } from '../../../src/site-config.js'
 import { CANCELLATION_MIN_HOURS } from '../../../lib/booking-duration.js'
 
 function formatDateNice(dateStr) {
@@ -363,7 +363,7 @@ function ConfirmationContent() {
 
           <div className="mt-8 pt-6 border-t border-border-soft">
             <a
-              href="https://g.page/farwasalon/review"
+              href={GOOGLE_REVIEW_LINK}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 text-stone text-xs font-[family-name:var(--font-inter)] hover:text-ink transition-colors"

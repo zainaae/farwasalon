@@ -1,7 +1,8 @@
 /* ─── Config ─────────────────────────────────────────────────── */
 export const WA_NUMBER  = '923222782254'
 export const MAPS_LINK  = 'https://www.google.com/maps/place/Farwa+beauty+salon/@24.8797532,67.0584185,17z/data=!3m1!4b1!4m6!3m5!1s0x3eb33f2832975c79:0xe55ba4a44d34a210!8m2!3d24.8797532!4d67.0584185!16s%2Fg%2F11hdrwg03n'
-export const GOOGLE_REVIEW_LINK = 'https://g.page/farwasalon/review'
+/** /review 307 → Google writereview (g.page vanity currently dumps to Search). */
+export const GOOGLE_REVIEW_LINK = 'https://farwasalon.com/review'
 export const SALON_LAT  = 24.8797532
 export const SALON_LNG  = 67.0584185
 export const IG_LINK    = 'https://www.instagram.com/farwasalon/'

@@ -78,7 +78,7 @@ Thank you, Rubina Appa, for your outstanding work! Highly recommended`,
     // Was stored as the string '6 Mar 2025' — already absolute, just retyped
     // as ISO so it can be compared and formatted rather than only printed.
     postedAt: '2025-03-06',
-    sourceUrl: 'https://g.page/farwasalon/review',
+    sourceUrl: 'https://farwasalon.com/review',
   },
   {
     name: 'Shehla Nadeem',
@@ -92,7 +92,7 @@ Thank you, Rubina Appa, for your outstanding work! Highly recommended`,
       "Google rounds to the week, so the true date is 2025-12-05..2025-12-12 — " +
       'December 2025 either way, which is why this is month precision. ' +
       'Replace with the exact day from the GBP listing when someone next opens it.',
-    sourceUrl: 'https://g.page/farwasalon/review',
+    sourceUrl: 'https://farwasalon.com/review',
   },
   {
     name: 'Sumera Abbas',
@@ -103,7 +103,7 @@ Thank you, Rubina Appa, for your outstanding work! Highly recommended`,
       "Google showed '27 weeks ago' when this review was copied into the repo " +
       'on 2026-06-16 (commit 9e00069), same as the Shehla Nadeem entry above. ' +
       'See that entry for the full working.',
-    sourceUrl: 'https://g.page/farwasalon/review',
+    sourceUrl: 'https://farwasalon.com/review',
   },
 ]
 
