@@ -25,10 +25,10 @@ export default function GalleryClient() {
             <h1 className="hero-rise display-page text-ink" style={{ animationDuration: '0.9s' }}>
               What we do
             </h1>
-            <p className="hero-fade-up text-body" style={{ animationDelay: '0.15s' }}>
-              Owned studio craft from our PECHS chair — nails and detail work
-              on camera today. Visit in person for the full portfolio, or book a
-              slot below.
+            <p id="gallery-lede" className="hero-fade-up text-body" style={{ animationDelay: '0.15s' }}>
+              Owned studio craft from Farwa Beauty Salon in Block 3 PECHS, Karachi —
+              nails and detail work on camera today. Visit the women-only studio for
+              the full portfolio, or book a slot below.
             </p>
           </div>
           {/* Never put Tailwind `hidden` on the same node as `.btn-loud` —

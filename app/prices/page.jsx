@@ -6,7 +6,9 @@ import { pageSocialMeta } from '../../lib/page-metadata.js'
 import { LAST_SERVICE_UPDATE } from '../../lib/sitemap-data.js'
 import JsonLd from '../json-ld'
 import {
+  SITE_ORIGIN,
   buildFaqPageSchema,
+  buildSpeakableSchema,
   getAggregateRating,
   SERVICE_BOUNDARIES,
 } from '../../lib/business-schema.js'
@@ -58,20 +60,27 @@ export default function PricesPage() {
     <main id="main" className="page-content">
       {faqSchema && <JsonLd data={faqSchema} />}
       <JsonLd data={buildPriceListSchema()} />
+      <JsonLd
+        data={buildSpeakableSchema({
+          pageUrl: `${SITE_ORIGIN}/prices`,
+          cssSelectors: ['#prices-headline', '#prices-lede', '#prices-facts'],
+        })}
+      />
       <div className="section-shell pt-14 md:pt-[4.5rem] pb-8 md:pb-10 min-h-0">
         <div className="title-stack mb-3 max-w-2xl border-l-2 border-plum pl-5 lg:pl-6">
           <p className="eyebrow text-plum">— Price list · updated {UPDATED}</p>
           <p className="numeral-hero text-ink mb-2" aria-hidden="true">
             {menu.total}
           </p>
-          <h1 className="display-page text-ink">
+          <h1 id="prices-headline" className="display-page text-ink">
             Printed prices — every service on the menu
           </h1>
-          <p className="text-body md:text-lg leading-relaxed">
+          <p id="prices-lede" className="text-body md:text-lg leading-relaxed">
             This is the full published price list for Farwa Beauty Salon in Block 3 PECHS, Karachi:
             all <strong className="font-medium text-ink">{menu.total} services</strong> across{' '}
             {menu.categories} categories, and <strong className="font-medium text-ink">every one of
             them carries a printed price</strong> in Pakistani Rupees. No hidden quotes.
+            Women-only studio; no home service; keratin and party makeup are WhatsApp quote-only.
           </p>
         </div>
         <p className="text-body text-sm max-w-2xl mb-3 leading-relaxed">
@@ -80,8 +89,8 @@ export default function PricesPage() {
           &ldquo;from&rdquo;, because length and density genuinely change the work; that figure is
           a floor and it is confirmed with you before anything starts.
         </p>
-        <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-2xl mb-6 leading-relaxed">
-          {YEARS_ACTIVE}+ years · women-only studio · {rating.ratingValue}★ · {rating.reviewCount} Google reviews · cash, JazzCash, EasyPaisa · Mon–Sat 11–7
+        <p id="prices-facts" className="text-stone text-sm font-[family-name:var(--font-inter)] font-light max-w-2xl mb-6 leading-relaxed">
+          {YEARS_ACTIVE}+ years · women-only studio · {rating.ratingValue}★ · {rating.reviewCount} Google reviews · cash, JazzCash, EasyPaisa · Mon–Sat 11–7 · Plot 165/G-1, Saima Terrace, Block 3 PECHS
         </p>
 
         {/* Mobile sticky already is Call / WhatsApp / Book — stacking the same

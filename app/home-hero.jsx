@@ -17,7 +17,7 @@ export default function HomeHero() {
     <section className="relative w-full h-[100svh] min-h-[560px] max-h-[1100px] overflow-hidden bg-[var(--hero-ground)]">
       <Image
         src={HERO_POSTER}
-        alt="Bridal makeup and beauty styling at Farwa Beauty Salon in PECHS Karachi"
+        alt="Bridal makeup look at Farwa Beauty Salon in Block 3 PECHS, Karachi — women-only studio since 2008"
         fill
         priority
         fetchPriority="high"
@@ -110,9 +110,11 @@ export default function HomeHero() {
           </h1>
 
           <p
-            className="hero-lcp text-white/90 text-[15px] sm:text-base md:text-lg font-normal leading-snug mb-0 md:mb-9 max-w-md font-[family-name:var(--font-inter)] tracking-[-0.01em] drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)]"
+            id="hero-answer"
+            className="hero-lcp text-white/90 text-[15px] sm:text-base md:text-lg font-normal leading-snug mb-0 md:mb-9 max-w-lg font-[family-name:var(--font-inter)] tracking-[-0.01em] drop-shadow-[0_1px_12px_rgba(0,0,0,0.55)]"
           >
-            Bridal, hair &amp; skin with Rubina since 2008.
+            Women-only PECHS studio with Rubina since 2008 — bridal from Rs&nbsp;8,000,
+            threading from Rs&nbsp;100; studio visits only, no home service.
           </p>
 
           {/* Mobile sticky bar already is Call / WhatsApp / Book — stacking the

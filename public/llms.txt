@@ -1,17 +1,30 @@
 # Farwa Beauty Salon
 
-> Beauty salon in Block 3 PECHS, Karachi, Pakistan, operating since 2008. Founder: Rubina.
-> 13 specialities, 100+ services, every starting price published. Rated 4.5/5 on Google (35 reviews, verified 2026-10-30).
+> Women-only beauty salon in Block 3 PECHS, Karachi, Pakistan, founded by Rubina in 2008.
+> 13 specialities, 102 services, every starting price published. Rated 4.5/5 on Google (35 reviews, verified 2026-10-30).
+> Studio visits only — one PECHS branch; no home services / at-home visits.
 
 ## Key facts
 
+- Legal / trading name: Farwa Beauty Salon
+- Founder: Rubina (lead beautician)
 - Address: Plot 165/G-1, Saima Terrace, Block 3, PECHS, Karachi 75400, Pakistan
-- Phone / WhatsApp: +92 322 278 2254
+- Phone / WhatsApp: +92 322 278 2254 (https://wa.me/923222782254)
 - Hours: Monday-Saturday 11:00am-7:00pm, closed Sunday
 - Online booking: https://farwasalon.com/book (free cancellation up to 2 hours before)
 - Payments: cash, JazzCash, EasyPaisa (no cards)
-- Studio only: one PECHS branch; no home services / at-home visits
+- Clientele: women only — no men's services
 - Quote-only (WhatsApp photo for a binding quote): keratin treatment; party makeup — no printed floor on the menu
+- Not offered: HydraFacial, laser hair removal, home parlour visits, other branches
+
+## Profiles (sameAs)
+
+- Website: https://farwasalon.com/
+- Google Maps: https://www.google.com/maps/place/Farwa+beauty+salon/@24.8797532,67.0584185,17z
+- Google reviews: https://g.page/farwasalon/review
+- Instagram: https://www.instagram.com/farwasalon/
+- Facebook: https://www.facebook.com/farwasalon
+- WhatsApp: https://wa.me/923222782254
 
 ## Services and starting prices (PKR)
 
@@ -27,19 +40,24 @@
 - Manicure / pedicure / nail art: from Rs 300 — https://farwasalon.com/services/nails
 - Massage: from Rs 700 — https://farwasalon.com/services/massage
 - Eyebrow tattoo / microblading: from Rs 20,000 — https://farwasalon.com/services/eyebrow-tattoo
-- Bridal makeup (engagement/mehndi/nikkah/reception): from Rs 8,000 per event, full package ~Rs 25,000 — https://farwasalon.com/services/bridal
+- Bridal makeup (engagement/mehndi/nikkah/reception): Bridal Trial from Rs 8,000; Mehndi from Rs 10,000; Engagement from Rs 12,000; Full Bridal Package from Rs 25,000 — https://farwasalon.com/bridal
 
 ## Current offers
 
-- No active percentage sale as of 30 October 2026. Check https://farwasalon.com/deals for anything live.
+- No active percentage sale as of 16 November 2026. Check https://farwasalon.com/deals for anything live.
+- No Freedom Deal / Azadi campaign is live (ended 14 August 2026).
 - Microblading / powder brows: from **Rs 20,000** (printed on the price list)
 
 ## Pages
 
+- [Full published price list](https://farwasalon.com/prices)
+- [Bridal makeup](https://farwasalon.com/bridal)
 - [Current deals](https://farwasalon.com/deals)
-- [Full services menu with prices](https://farwasalon.com/services)
+- [Full services menu](https://farwasalon.com/services)
+- [Work gallery](https://farwasalon.com/gallery)
 - [Nails](https://farwasalon.com/services/nails)
 - [Book online](https://farwasalon.com/book)
 - [FAQ](https://farwasalon.com/faq)
+- [About / founder Rubina](https://farwasalon.com/about)
 - [Blog: guides and price lists](https://farwasalon.com/blog)
 - [Contact and directions](https://farwasalon.com/contact)

@@ -71,8 +71,11 @@ function StatsStrip() {
               A beauty studio with {YEARS_ACTIVE} years of care
             </h2>
           </div>
-          <p className="text-body max-w-xl mt-5">
-            For over {YEARS_ACTIVE}{' '}years in PECHS Block 3 — Rubina&apos;s chair, printed PKR on every service, and the same standard whether you book ten minutes or a bridal day.
+          <p id="about-this-studio" className="text-body max-w-xl mt-5">
+            Farwa Beauty Salon is a women-only studio at Plot 165/G-1, Saima Terrace, Block 3 PECHS,
+            Karachi — open Mon–Sat 11–7, closed Sunday. Rubina founded it in {FOUNDING_YEAR};{' '}
+            {ALL_SERVICES.length} services carry printed PKR prices (threading from Rs&nbsp;100).
+            Appointments are in-studio only — no home visits.
           </p>
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-5 mt-2 border-t border-border-soft">
             <Link href="/book" className="tap-safe inline-flex items-center gap-2 text-ink text-sm font-medium font-[family-name:var(--font-inter)] group w-fit pt-4">
@@ -93,7 +96,7 @@ function StatsStrip() {
         >
           <Image
             src="/facial.jpg"
-            alt="Facial treatment at Farwa Beauty Salon, PECHS"
+            alt="Facial skincare treatment at Farwa Beauty Salon, Block 3 PECHS Karachi"
             fill
             quality={55}
             sizes="(max-width: 767px) 100vw, 40vw"

@@ -33,7 +33,10 @@ export default function HomePage() {
       <JsonLd
         data={buildSpeakableSchema({
           pageUrl: `${SITE_ORIGIN}/`,
-          cssSelectors: ['#hero-headline', '#hero-lede'],
+          cssSelectors: ['#hero-headline', '#hero-lede', '#hero-answer', '#about-this-studio'],
+          primaryImagePath: '/bridal2.jpg',
+          primaryImageDescription:
+            'Bridal makeup and beauty styling at Farwa Beauty Salon in PECHS, Karachi',
         })}
       />
       <main id="main" className="overflow-x-clip max-w-full min-w-0">

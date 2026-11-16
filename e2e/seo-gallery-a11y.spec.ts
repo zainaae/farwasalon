@@ -40,7 +40,7 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
     await expect(page.getByRole('heading', { name: /Services we offer/i })).toBeVisible()
     /* Owned-only gallery: nail craft from SALON_OWNED. No stock bridal/threading
        tiles; copy may claim ownership for what is actually on camera. */
-    await expect(page.getByText(/Owned studio craft from our PECHS chair/i)).toBeVisible()
+    await expect(page.getByText(/Owned studio craft from Farwa Beauty Salon in Block 3 PECHS/i)).toBeVisible()
     await expect(page.getByText(/not stock before-and-afters/i)).toHaveCount(0)
     await expect(page.getByText(/real clients go up on\s+our Instagram/i)).toHaveCount(0)
     // Quieter luxury routes Book to /book (Link), not the WhatsApp sheet button.

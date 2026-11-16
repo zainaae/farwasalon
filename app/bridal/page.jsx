@@ -73,6 +73,9 @@ export default function BridalLandingPage() {
         data={buildSpeakableSchema({
           pageUrl: `${SITE_ORIGIN}/bridal`,
           cssSelectors: ['#bridal-headline', '#bridal-lede'],
+          primaryImagePath: '/bridal.jpg',
+          primaryImageDescription:
+            'Bridal makeup and styling at Farwa Beauty Salon in Block 3 PECHS, Karachi. Women-only studio; Full Bridal Package from Rs 25,000.',
         })}
       />
       {faqSchema && <JsonLd data={faqSchema} />}
@@ -81,7 +84,7 @@ export default function BridalLandingPage() {
         <section className="relative w-full min-h-[min(88svh,820px)] max-h-[920px] overflow-hidden bg-[#0d0609]">
           <Image
             src="/bridal.jpg"
-            alt="Bridal makeup at Farwa Beauty Salon, PECHS Karachi"
+            alt="Bridal makeup and styling at Farwa Beauty Salon, Block 3 PECHS Karachi — Full Package from Rs 25,000"
             fill
             priority
             sizes="100vw"
