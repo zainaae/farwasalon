@@ -1,17 +1,20 @@
 import { ImageResponse } from 'next/og'
 import { GOOGLE_GBP_STATS } from '../src/google-reviews-data.js'
-import { getMenuStats } from '../lib/service-schema.js'
+import { SERVICES } from '../src/data.js'
 
-const menu = getMenuStats()
+/* Counted from the menu — do not import lib/service-schema here (heavier graph
+   than an OG edge render needs). Avoid ★: Satori dynamic-font fetch for that
+   glyph has 400'd in CI and aborts prerender. */
+const SERVICE_COUNT = Object.values(SERVICES).reduce((n, list) => n + list.length, 0)
 
-export const alt = `Farwa Beauty Salon — PECHS Karachi · ${GOOGLE_GBP_STATS.rating}★ · ${menu.total} printed prices · book online`
+export const alt = `Farwa Beauty Salon — PECHS Karachi · ${GOOGLE_GBP_STATS.rating}/5 · ${SERVICE_COUNT} printed prices · book online`
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 /** Default OG card — plum ground + type. No stock photography. */
 export default function OpenGraphImage() {
-  const ratingLine = `${GOOGLE_GBP_STATS.rating}★ · ${GOOGLE_GBP_STATS.reviewCount} Google reviews`
-  const count = String(menu.total)
+  const ratingLine = `${GOOGLE_GBP_STATS.rating}/5 · ${GOOGLE_GBP_STATS.reviewCount} Google reviews`
+  const count = String(SERVICE_COUNT)
   return new ImageResponse(
     (
       <div
