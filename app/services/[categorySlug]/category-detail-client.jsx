@@ -6,7 +6,6 @@ import WaCta from '../../components/wa-cta.jsx'
 import { useRouter } from 'next/navigation'
 import { m } from 'framer-motion'
 import { ChevronLeft } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { ServiceModal, formatPrice, formatServicePrice, formatDuration, CAT_SLUGS } from '../../../src/shared.jsx'
 import { SERVICES, CAT_META, slugToCategory } from '../../../src/data.js'
@@ -49,7 +48,7 @@ function ServiceJsonLd({ category, services }) {
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 }
 
-export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }) {
+export default function CategoryDetailClient({ categorySlug, relatedBlogs = [], heroBanner = null }) {
   const category = slugToCategory(categorySlug)
   const [modal, setModal] = useState(null)
   const router   = useRouter()
@@ -116,17 +115,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
             return faqSchema ? <JsonLd data={faqSchema} /> : null
           })()}
 
-          <figure className="relative w-full aspect-[5/3] sm:aspect-[16/9] max-h-[min(22rem,42vh)] overflow-hidden mb-6 lg:mb-8 border border-border-soft bg-mist">
-            <Image
-              id="category-hero-image"
-              src={meta.img}
-              alt={categoryHeroAlt}
-              fill
-              sizes="(max-width: 1024px) 100vw, 896px"
-              quality={60}
-              className="object-cover"
-            />
-          </figure>
+          {heroBanner}
 
           <nav aria-label="Breadcrumb" className="mb-5 lg:mb-8">
             <ol className="flex flex-wrap items-center gap-x-1 gap-y-1 text-[11px] text-stone font-[family-name:var(--font-inter)]">
@@ -153,7 +142,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [] }
                 <p className="eyebrow text-plum">
                   — {services.length} services{minPrice != null ? ` · from ${formatPrice(minPrice)}` : ''}
                 </p>
-                <h1 id="service-category-title" className="display-page text-ink">{pageH1}</h1>
+                <h1 id="service-category-title" className="hero-lcp display-page text-ink">{pageH1}</h1>
                 <p id="service-category-desc" className="text-body max-w-prose leading-[1.7]">{meta.desc}</p>
                 <div className="cta-cluster mt-5">
                   <Link href={`/book?category=${encodeURIComponent(category)}`} className="tap-safe btn-primary">

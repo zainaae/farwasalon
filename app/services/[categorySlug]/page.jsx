@@ -3,6 +3,7 @@ import { CAT_SLUGS, CAT_META, SERVICES, slugToCategory, formatPrice } from '../.
 import { CAT_SEO } from '../../../src/cat-seo-content.js'
 import { parseLocationSlug, getAllLocationServiceSlugs } from '../../../src/location-seo.js'
 import CategoryDetailClient from './category-detail-client'
+import CategoryHeroBanner from './category-hero-banner'
 import { getRelatedBlogPostsForCategory } from '../../../src/blog-data.js'
 import LocationServicePage from './location-service-page'
 import LocationServiceSchema from './location-service-schema'
@@ -126,6 +127,7 @@ export default async function CategoryPage({ params }) {
     <CategoryDetailClient
       categorySlug={categorySlug}
       relatedBlogs={category ? getRelatedBlogPostsForCategory(category, 3) : []}
+      heroBanner={<CategoryHeroBanner category={category} />}
     />
   )
 }

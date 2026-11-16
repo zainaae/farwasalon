@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import HomeHero from './home-hero'
 import DealStrip from './components/deal-strip'
 import ProofStrip from './components/proof-strip'
@@ -49,7 +50,9 @@ export default function HomePage() {
         <ProofStrip />
         {/* White pause — proof + deal + quick-pick were reading as one jungled stack. */}
         <div className="h-3 sm:h-4 bg-white" aria-hidden="true" />
-        <DealStrip />
+        <Suspense fallback={null}>
+          <DealStrip />
+        </Suspense>
         <div className="h-3 sm:h-4 bg-white" aria-hidden="true" />
         <HomeBelowFold placesEnabled={isGooglePlacesConfigured()} />
       </main>
