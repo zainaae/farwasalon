@@ -958,7 +958,7 @@ export default function BookClient() {
                       <WaCta
                         href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hi Farwa — I need help finding an available time.')}`}
                         from="book-slots-empty"
-                        className="text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] underline underline-offset-2"
+                        className="tap-safe inline-flex items-center justify-center min-h-[44px] px-4 text-ink text-[11px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] underline underline-offset-2"
                       >
                         WhatsApp the salon
                       </WaCta>

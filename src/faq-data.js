@@ -221,6 +221,6 @@ export const PRICES_PAGE_FAQS = [
   },
   {
     q: 'How do I book after checking the price list?',
-    a: 'Open farwasalon.com/book, pick the service (threading from Rs 100, facials from Rs 1,400, bridal from Rs 8,000), choose a live slot, and confirm — or WhatsApp +92 322 278 2254 if you need a custom combination.',
+    a: 'Open farwasalon.com/book, pick the service (threading from Rs 100, facials from Rs 1,400, bridal trial from Rs 8,000), choose a live slot, and confirm — or WhatsApp +92 322 278 2254 if you need a custom combination.',
   },
 ]

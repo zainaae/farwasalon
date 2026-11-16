@@ -252,5 +252,11 @@ video[aria-hidden="true"] { pointer-events: none; }
   .tap-safe {
     min-height: 44px;
     min-width: 44px;
+    box-sizing: border-box;
+  }
+  a.tap-safe,
+  button.tap-safe {
+    display: inline-flex;
+    align-items: center;
   }
 }
