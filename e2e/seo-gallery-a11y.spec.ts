@@ -32,6 +32,19 @@ test.describe('Blog, SEO feeds, gallery, accessibility', () => {
       const xml = await res.text()
       expect(xml).toMatch(/urlset/i)
     }
+
+    const staticXml = await (await request.get('/sitemap-static.xml')).text()
+    expect(staticXml).toContain('<image:image>')
+    expect(staticXml).toMatch(/bridal2\.jpg|bridal\.jpg|pedicure\.jpg/)
+  })
+
+  test('/llms.txt is plain text and linked facts', async ({ request }) => {
+    const res = await request.get('/llms.txt')
+    expect(res.ok()).toBeTruthy()
+    expect(res.headers()['content-type']).toMatch(/text\/plain/i)
+    const body = await res.text()
+    expect(body).toMatch(/Farwa Beauty Salon/i)
+    expect(body).toMatch(/verified 2026-10-30/i)
   })
 
   test('/gallery work showcase renders', async ({ page }) => {

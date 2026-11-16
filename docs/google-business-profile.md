@@ -211,6 +211,8 @@ Google Lens and Circle to Search often surface **GBP photos** before website ima
 4. Keep website + GBP NAP identical so entity matching stays clean
 5. After uploads, check Google Search Console → **Enhancements / Images** and Maps photo insights when available
 
+**Engineering (Wave 1, Nov 2026):** Category pages, home, `/bridal`, and `/gallery` now ship real `<Image>` heroes, photo-based OG/Twitter where set, `ImageObject` / `primaryImageOfPage` JSON-LD, and static + service image sitemap nodes. **Owner still must upload** the 25+ GBP photos above — the site cannot push to the profile.
+
 ---
 
 ## 5. Google Posts Strategy

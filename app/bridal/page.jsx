@@ -29,7 +29,9 @@ export const metadata = {
     title,
     description,
     path: '/bridal',
-    imageAlt: 'Bridal makeup in PECHS Karachi — Farwa Beauty Salon',
+    image: '/bridal.jpg',
+    imageAlt:
+      'Bridal makeup and styling at Farwa Beauty Salon, Block 3 PECHS Karachi — Full Package from Rs 25,000',
   }),
 }
 

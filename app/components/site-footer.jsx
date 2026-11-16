@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { MessageCircle, Star } from 'lucide-react'
 import { WA_DEFAULT, IG_LINK, MAPS_LINK, CAT_SLUGS, FOUNDING_YEAR, YEARS_ACTIVE } from '../../src/site-config.js'
 import { SALON_ADDRESS_LINES } from '../../lib/business-schema.js'
+import { GOOGLE_GBP_STATS } from '../../src/google-reviews-data.js'
 import { AREAS_HUB_HREF, getFooterAreaLinks } from '../../lib/location-links.js'
 import {
   UrduSignature,
@@ -122,6 +123,16 @@ export default function SiteFooter() {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <a
+                    href="/llms.txt"
+                    rel="alternate"
+                    type="text/plain"
+                    className="link-underline tap-safe inline-flex items-center min-h-[44px] text-stone text-xs font-[family-name:var(--font-inter)] hover:text-ink transition-colors"
+                  >
+                    Summary for AI
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
@@ -257,6 +268,14 @@ export default function SiteFooter() {
               <span className="text-[#e4ddd7]">·</span>
               <p className="text-stone text-[11px] font-[family-name:var(--font-inter)]">
                 {SALON_ADDRESS_LINES[0]} · Est. 2008
+                {GOOGLE_GBP_STATS.lastVerified ? (
+                  <>
+                    {' · '}
+                    <span className="text-stone/90">
+                      Google rating verified {GOOGLE_GBP_STATS.lastVerified}
+                    </span>
+                  </>
+                ) : null}
               </p>
             </div>
           </div>

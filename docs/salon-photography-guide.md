@@ -39,8 +39,8 @@ What people Circle-to-Search or Lens near you: the **Saima Terrace storefront**,
 1. Real **HTML `<img>`** (or Next `<Image>`), not CSS-only backgrounds for portfolio heroes
 2. **Descriptive alt** in plain language (service + place) — no keyword stuffing
 3. A short **caption or nearby sentence** that names the service and PECHS / Farwa
-4. Listed in the **image sitemap** when the page is a service hub (already wired for category pages)
-5. Uploaded to **Google Business Profile** as well — Lens often resolves to Maps photos before the website
+4. Listed in the **image sitemap** — service categories, home, `/bridal`, and `/gallery` (engineering Wave 1, Nov 2026)
+5. Uploaded to **Google Business Profile** as well — Lens often resolves to Maps photos before the website (**owner still must upload**; the site cannot push to GBP)
 
 Do **not** fake EXIF/GPS on web assets or spam geotags on unrelated stock. If a photo was taken in the PECHS studio, optional real coordinates (24.8797532, 67.0584185) on the **GBP upload** are fine; website SEO does not depend on EXIF.
 

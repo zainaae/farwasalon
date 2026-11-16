@@ -23,14 +23,13 @@ const inter = Inter({
 
 const fraunces = Fraunces({
   subsets: ['latin'],
-  /* Soft optical serif for brand display. Numerals + letterpress craft depend
-     on this face actually loading — swap + preload so mid-range PK mobile
-     still gets Fraunces after LCP (stock bridal still is no longer the OG LCP). */
+  /* Display face for hero H1 — optional keeps the bridal LCP image primary;
+     fallback metrics via adjustFontFallback when Fraunces is not ready in time. */
   weight: ['400', '600', '700'],
   style: ['normal', 'italic'],
   variable: '--font-fraunces',
-  display: 'swap',
-  preload: true,
+  display: 'optional',
+  preload: false,
   adjustFontFallback: true,
 })
 
@@ -81,6 +80,7 @@ export const metadata = {
   alternates: {
     canonical: '/',
     languages: { 'en-pk': '/' },
+    types: { 'text/plain': '/llms.txt' },
   },
   verification: {
     google: 'RU3jY_9wI_1x4XXWI13vu6TI2UHxOHCqqVmFSpR42YY',

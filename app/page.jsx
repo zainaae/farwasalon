@@ -20,12 +20,17 @@ export const metadata = {
   title: { absolute: title },
   description,
   alternates: { canonical: '/' },
-  ...pageSocialMeta({ title, description, path: '/', imageAlt: 'Farwa Beauty Salon — PECHS Karachi' }),
+  ...pageSocialMeta({
+    title,
+    description,
+    path: '/',
+    image: '/bridal2.jpg',
+    imageAlt: 'Bridal makeup look at Farwa Beauty Salon in Block 3 PECHS, Karachi',
+  }),
 }
 
-/* DealStrip uses connection(); keep the route request-time so an expired
-   campaign can never ship as a month-old prerender (Age: multi-day HIT). */
-export const dynamic = 'force-dynamic'
+/* DealStrip opts into request-time rendering via connection() — no force-dynamic
+   on the whole route so the static shell can cache; only the deal band re-evaluates. */
 
 export default function HomePage() {
   return (
