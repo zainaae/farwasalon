@@ -956,21 +956,23 @@ function LatestGuides() {
             Practical PECHS notes — prices, brows, bridal, nails, and whatever offer is actually live.
           </p>
         </div>
-        <ul className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl">
+        {/* 2-up until xl — 4 equal columns at ~1100px squeezed titles into
+            blurb lines (tap-safe forcing inline-flex made it worse). */}
+        <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-x-8 gap-y-8 max-w-5xl">
           {guides.map((g) => (
-            <li key={g.href}>
+            <li key={g.href} className="min-w-0">
               <Link
                 href={g.href}
-                className="group block tap-safe min-h-[44px]"
+                className="group flex flex-col items-start tap-safe min-h-[44px] h-full min-w-0"
               >
-                <p className="font-[family-name:var(--font-syne)] font-semibold text-ink text-base group-hover:text-plum transition-colors">
+                <p className="font-[family-name:var(--font-syne)] font-semibold text-ink text-base leading-snug group-hover:text-plum transition-colors text-balance">
                   {g.title}
                 </p>
-                <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mt-1.5 leading-relaxed">
+                <p className="text-stone text-sm font-[family-name:var(--font-inter)] font-light mt-2 leading-relaxed">
                   {g.blurb}
                 </p>
-                <span className="inline-flex items-center gap-1 mt-3 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-plum-deep">
-                  Read <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                <span className="inline-flex items-center gap-1 mt-auto pt-3 text-[11px] tracking-[0.14em] uppercase font-[family-name:var(--font-inter)] text-plum-deep">
+                  Read <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
                 </span>
               </Link>
             </li>
