@@ -57,7 +57,7 @@ export default function PricesPage() {
      grows — which is exactly how "102" got out of step once already. */
   const menu = getMenuStats()
   return (
-    <main id="main" className="page-content">
+    <main id="main" className="page-content sticky-cta-clear">
       {faqSchema && <JsonLd data={faqSchema} />}
       <JsonLd data={buildPriceListSchema()} />
       <JsonLd

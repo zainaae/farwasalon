@@ -82,9 +82,11 @@ export default function BridalLandingPage() {
         })}
       />
       {faqSchema && <JsonLd data={faqSchema} />}
-      <main id="main" className="page-content">
+      <main id="main" className="page-content sticky-cta-clear">
         {/* Full-bleed bridal plane — title-stack sits on the media, not above a cropped inset. */}
-        <section className="relative w-full min-h-[min(88svh,820px)] max-h-[920px] overflow-hidden bg-[#0d0609]">
+        {/* Mobile: fill the svh so TrustSignalsBar starts on fold 2 — at 88svh the
+            bar peeked under sticky Call/WA/Book. Desktop keeps the shorter plane. */}
+        <section className="relative w-full min-h-[100svh] md:min-h-[min(88svh,820px)] max-h-[920px] overflow-hidden bg-[#0d0609]">
           <Image
             src="/bridal.jpg"
             alt="Bridal makeup and styling at Farwa Beauty Salon, Block 3 PECHS Karachi — Full Package from Rs 25,000"
@@ -112,8 +114,8 @@ export default function BridalLandingPage() {
               mixBlendMode: 'overlay',
             }}
           />
-          {/* Mobile: clear sticky Call/WA/Book chrome. Desktop keeps tighter pad. */}
-          <div className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-5 md:px-10 pb-[max(6.75rem,env(safe-area-inset-bottom,0px)+5.5rem)] sm:pb-12 md:pb-14 pt-24">
+          {/* Mobile: clear sticky Call/WA/Book chrome (two stacked CTAs need ~8rem). */}
+          <div className="absolute inset-x-0 bottom-0 z-10 px-4 sm:px-5 md:px-10 pb-[max(8rem,env(safe-area-inset-bottom,0px)+6.5rem)] sm:pb-12 md:pb-14 pt-24">
             <div className="max-w-screen-xl mx-auto w-full min-w-0">
               <div className="title-stack mb-6 max-w-2xl">
                 <p className="eyebrow eyebrow--on-dark">— Bridal · Full Package from Rs 25,000</p>
@@ -129,7 +131,7 @@ export default function BridalLandingPage() {
 
               {/* One loud Book + one secondary on the fold; sticky already has Call/WA/Book.
                   Trial + Directions live below the hero / in Visit Us — not competing here. */}
-              <div className="cta-cluster sticky-midband-cta mb-0">
+              <div className="cta-cluster">
                 <Link
                   href={fullPackageHref}
                   className="btn-loud btn-loud--light tap-safe w-full sm:w-auto"

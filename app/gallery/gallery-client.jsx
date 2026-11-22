@@ -17,7 +17,7 @@ export default function GalleryClient() {
   const showStrip = stripPhotos.length > 1
 
   return (
-    <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
+    <main id="main" className="page-content sticky-cta-clear overflow-x-clip max-w-full min-w-0">
       <TrustSignalsBar />
 
       <div className="section-shell section-pad">

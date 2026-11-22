@@ -379,12 +379,13 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
     { label: 'Deals',        href: '/deals', wideOnly: false },
     { label: 'Bridal',       href: '/bridal', wideOnly: false },
     { label: 'Book',         href: '/book', wideOnly: false, hideOnDesktop: true },
-    /* Secondary links: Gallery/Blog from lg; About/FAQ only from xl so 1280 nav breathes. */
+    /* Secondary: Gallery/Blog from lg; About/FAQ from xl; Contact from 2xl —
+       IG + Book in the right cluster (#112) crowded Contact into the icon at 1280. */
     { label: 'Gallery',      href: '/gallery', wideOnly: true },
     { label: 'Blog',         href: '/blog', wideOnly: true },
     { label: 'About',        href: '/about', xlOnly: true },
     { label: 'FAQ',          href: '/faq', xlOnly: true },
-    { label: 'Contact',      href: '/contact', wideOnly: false },
+    { label: 'Contact',      href: '/contact', xxlOnly: true },
   ]
 
   /* Always keep a 1px border slot so scroll color-swap never changes bar height. */
@@ -406,22 +407,29 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
           className="hidden md:flex items-center justify-center gap-x-2 md:gap-x-3 lg:gap-x-4 min-w-0 max-w-[min(100%,42rem)] justify-self-center self-center h-11 px-1"
           aria-label="Main navigation"
         >
-          {navLinks.map(({ label, href, wideOnly, xlOnly, hideOnDesktop }) => {
+          {navLinks.map(({ label, href, wideOnly, xlOnly, xxlOnly, hideOnDesktop }) => {
             const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href)
+            /* Display gates must own `display` — a base inline-flex fights `hidden`. */
+            const displayCls = hideOnDesktop
+              ? 'inline-flex md:hidden'
+              : wideOnly
+                ? 'hidden lg:inline-flex'
+                : xlOnly
+                  ? 'hidden xl:inline-flex'
+                  : xxlOnly
+                    ? 'hidden 2xl:inline-flex'
+                    : 'inline-flex'
             return (
               <Link key={href} href={href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`nav-link shrink-0 h-11 min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.16em] lg:tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] transition-colors duration-200 whitespace-nowrap
-                ${hideOnDesktop ? 'md:hidden' : ''}
-                ${wideOnly ? 'hidden lg:inline-flex' : ''}
-                ${xlOnly ? 'hidden xl:inline-flex' : ''}
+                className={`nav-link ${displayCls} shrink-0 h-11 min-h-[44px] px-1 text-[10px] md:text-[11px] lg:text-[12px] tracking-[0.16em] lg:tracking-[0.14em] uppercase font-medium font-[family-name:var(--font-inter)] transition-colors duration-200 whitespace-nowrap
                 ${isActive ? `nav-link--active ${light ? 'nav-link--on-light text-ink' : 'nav-link--on-dark text-white'}` : (light ? 'text-ink/60 hover:text-ink' : 'text-white/65 hover:text-white')}`}>
                 {label}
               </Link>
             )
           })}
         </nav>
-        <div className="justify-self-end flex items-center gap-1.5 sm:gap-2 shrink-0 min-w-0 h-11">
+        <div className="justify-self-end flex items-center gap-1 sm:gap-1.5 shrink-0 min-w-0 h-11">
           {/* Vanity-style IG in chrome — owned @farwasalon, not a plugin. */}
           <a
             href={IG_LINK}
@@ -436,13 +444,14 @@ export function Navbar({ transparent = false, onMobileOpenChange }) {
             <IgIcon className="w-4 h-4" />
           </a>
           <Link href="/book"
-            className={`hidden md:inline-flex items-center justify-center gap-1.5 h-11 min-h-[44px] text-[11px] lg:text-[12px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] leading-none px-4 lg:px-5 rounded-sm border transition-colors duration-300 whitespace-nowrap active:scale-[0.98] ${
+            className={`hidden md:inline-flex items-center justify-center gap-1.5 h-11 min-h-[44px] text-[11px] lg:text-[12px] tracking-[0.14em] uppercase font-semibold font-[family-name:var(--font-inter)] leading-none px-3.5 lg:px-4 xl:px-5 rounded-sm border transition-colors duration-300 whitespace-nowrap active:scale-[0.98] ${
               light
                 ? 'bg-ink text-white border-ink hover:bg-stone hover:border-stone'
                 : 'bg-transparent text-white border-white/70 hover:bg-white hover:text-ink hover:border-white'
             }`}>
-            <span className="lg:hidden">Book</span>
-            <span className="hidden lg:inline">Book an Appointment</span>
+            {/* Long label only from xl — at 1280 the right cluster already holds IG + Book. */}
+            <span className="xl:hidden">Book</span>
+            <span className="hidden xl:inline">Book an Appointment</span>
           </Link>
           <button
             type="button"

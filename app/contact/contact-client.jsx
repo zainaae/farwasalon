@@ -48,7 +48,7 @@ export default function ContactClient() {
   }
 
   return (
-    <main id="main" className="page-content pb-[calc(7.5rem+env(safe-area-inset-bottom,0px))] md:pb-0">
+    <main id="main" className="page-content sticky-cta-clear">
       <TrustSignalsBar />
 
       <section className="bg-white py-14 md:py-20 border-b border-border-soft">

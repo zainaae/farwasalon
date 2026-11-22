@@ -98,7 +98,7 @@ export default function ServicesClient() {
   const areaLinks = getClientFacingAreaLinks()
 
   return (
-    <main id="main" className="page-content overflow-x-clip max-w-full min-w-0">
+    <main id="main" className="page-content sticky-cta-clear overflow-x-clip max-w-full min-w-0">
       <div className="section-shell section-pad min-h-0">
         {/* One column for the whole page, centred. The menu was already
             constrained to max-w-4xl for a good reason (see below) but the
@@ -109,6 +109,8 @@ export default function ServicesClient() {
             everything means one left edge, one rule length, and margins that
             read as margins. */}
         <div className="max-w-4xl mx-auto">
+        {/* sticky-fold-clear wraps intro + availability so “The Face” clears Call/WA/Book. */}
+        <div className="sticky-fold-clear">
         <div className="mb-10 md:mb-14 border-b border-border-soft pb-8">
           {/* CSS entrances — framer's initial{opacity:0} kept this header
               invisible until hydration, making the intro paragraph a ~5.5s
@@ -166,6 +168,7 @@ export default function ServicesClient() {
         </div>
 
         <LiveAvailability />
+        </div>
 
         {/* The chapters below are real h2s now, so this stand-in is gone —
             it existed only because the visible chapter labels were spans.

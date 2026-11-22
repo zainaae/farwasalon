@@ -713,6 +713,22 @@
   @media (min-width: 768px) {
     .page-content { padding-top: calc(3.5rem + env(safe-area-inset-top, 0px)); }
   }
+  /* Money pages with StickyMobileCTA: keep last CTAs / trust strips scrollable
+     above the fixed Call/WA/Book bar (spacer after footer alone was not enough
+     when fold content sat in the sticky band). */
+  @media (max-width: 767px) {
+    .page-content.sticky-cta-clear {
+      padding-bottom: calc(7.5rem + env(safe-area-inset-bottom, 0px));
+    }
+    /* Intro stacks: fill to the bottom of the fold so the next chapter
+       (e.g. services “The Face”) starts below Call/WA/Book, not under it.
+       7.5rem ≈ page-content top pad + section-pad before this block. */
+    .sticky-fold-clear {
+      box-sizing: border-box;
+      min-height: calc(100svh - 7.5rem - env(safe-area-inset-top, 0px));
+      padding-bottom: calc(5.75rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
   /* The /prices jump nav is sticky on MOBILE ONLY, which is where a 9,000px
      price list actually needs a skim rail and where .tab-scroller is already
      a one-row horizontal scroller.
@@ -1051,10 +1067,11 @@
 }
 .link-underline:hover::after { width: 100%; }
 
-/* Navbar links — flex-centered so label baseline matches logo + Book CTA */
+/* Navbar links — flex-centered so label baseline matches logo + Book CTA.
+   Do NOT set display here: Tailwind `hidden` / `lg:inline-flex` / `xl:inline-flex`
+   / `2xl:inline-flex` must win, or Contact/About/FAQ never hide at mid widths. */
 .nav-link {
   position: relative;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 1;

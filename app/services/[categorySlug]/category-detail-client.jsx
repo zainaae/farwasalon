@@ -81,7 +81,7 @@ export default function CategoryDetailClient({ categorySlug, relatedBlogs = [], 
   }
 
   return (
-    <main id="main" className="page-content">
+    <main id="main" className="page-content sticky-cta-clear">
       <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
         {/* Quoti element rhythm, Farwa skin: sticky title/CTA rail + scrolling
             menu column. The old max-w-3xl (no mx-auto) amputated ~430px of
