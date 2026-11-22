@@ -14,7 +14,7 @@ const SERVICE_COUNT  = Object.values(SERVICES).reduce((a, v) => a + v.length, 0)
 
 export default function AboutClient() {
   return (
-    <main id="main" className="page-content">
+    <main id="main" className="page-content sticky-cta-clear">
 
       <section className="bg-white py-16 md:py-20 border-b border-border-soft">
         <div className="section-shell">

@@ -67,7 +67,7 @@ export default async function DealsPage() {
   const headline = getHeadlineDeal()
   const headlineLive = headline ? isDealActive(headline) : false
   return (
-    <main id="main" className="page-content">
+    <main id="main" className="page-content sticky-cta-clear">
       {deals.length > 0 ? <JsonLd data={buildDealsSchema(deals)} /> : null}
       <div className="section-shell pt-14 md:pt-[4.5rem] pb-10 md:pb-12 min-h-0">
         <div className="title-stack mb-3 max-w-3xl border-l-2 border-plum pl-5 lg:pl-6">
