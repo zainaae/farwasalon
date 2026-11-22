@@ -1320,10 +1320,13 @@ video[aria-hidden="true"] { pointer-events: none; }
   min-height: 44px;
   box-sizing: border-box;
 }
-/* Inline text links only got min-height before — without flex + min-width the
-   hit box stayed ~17–21px tall / narrow on footer WA, FAQ chips, and short
-   nav labels (qa:design tiny-tap warnings). */
-a.tap-safe,
+/* Buttons/tabs get an explicit flex hit-box. Do NOT force display on every
+   `a.tap-safe` — that overrode `block` / stacked card links (Latest Guides
+   titles + blurbs rendered side-by-side and overlapped). Callers that need
+   the short-link flex treatment already set `inline-flex items-center`. */
+a.tap-safe {
+  min-width: 44px;
+}
 button.tap-safe,
 [role="button"].tap-safe,
 [role="tab"].tap-safe {
