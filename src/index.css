@@ -254,7 +254,7 @@ video[aria-hidden="true"] { pointer-events: none; }
     min-width: 44px;
     box-sizing: border-box;
   }
-  a.tap-safe,
+  /* Match globals.css — don't force a.tap-safe to inline-flex (breaks card stacks). */
   button.tap-safe {
     display: inline-flex;
     align-items: center;
